@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caroline Butler — Operations Dashboard | Norris Utilities</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f8f9ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────────────── */
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    min-height: 280px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 40px 80px;
+  }
+
+  /* Ghost Phoenix Watermark */
+  .header::before {
+    content: '🦅';
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    font-size: 380px;
+    opacity: 0.07;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    transform: scaleX(-1);
+  }
+
+  /* Infrastructure Silhouette SVG */
+  .infra-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+
+  .header-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .wordmark {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .header-title {
+    font-size: clamp(26px, 5vw, 42px);
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.1;
+  }
+
+  .header-subtitle {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 50px;
+    padding: 8px 20px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 30px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+
+  .header-meta-item {
+    color: rgba(255,255,255,0.80);
+    font-size: 13px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header-meta-item span {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  /* ─── CHEVRON DIVIDER ─────────────────────────────────────── */
+  .chevron-divider {
+    width: 100%;
+    height: 60px;
+    background: #f8f9ff;
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+    margin-top: -1px;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* ─── MAIN CONTENT ────────────────────────────────────────── */
+  .main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+  }
+
+  /* ─── STATS ROW ───────────────────────────────────────────── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .stat-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.08);
+    padding: 20px 18px;
+    border-top: 4px solid #0000FF;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,255,0.14);
+  }
+
+  .stat-card.cyan { border-top-color: #06D0FF; }
+  .stat-card.green { border-top-color: #22c55e; }
+  .stat-card.amber { border-top-color: #f59e0b; }
+  .stat-card.red { border-top-color: #ef4444; }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #6b7280;
+  }
+
+  .stat-value {
+    font-size: 32px;
+    font-weight: 900;
+    color: #0000FF;
+    line-height: 1;
+  }
+
+  .stat-card.cyan .stat-value { color: #06D0FF; }
+  .stat-card.green .stat-value { color: #22c55e; }
+  .stat-card.amber .stat-value { color: #f59e0b; }
+  .stat-card.red .stat-value { color: #ef4444; }
+
+  .stat-sub {
+    font-size: 12px;
+    color: #9ca3af;
+    font-weight: 400;
+  }
+
+  /* ─── SECTION HEADERS ─────────────────────────────────────── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #0000FF;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, #0000FF30, transparent);
+  }
+
+  /* ─── X SEPARATOR ─────────────────────────────────────────── */
+  .x-separator {
+    text-align: center;
+    color: #06D0FF;
+    font-size: 20px;
+    opacity: 0.4;
+    letter-spacing: 18px;
+    margin: 28px 0;
+    user-select: none;
+  }
+
+  /* ─── GRID LAYOUT ─────────────────────────────────────────── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .grid-3 { grid-template-columns: 1fr; }
+    .header { padding: 28px 20px 70px; }
+    .main { padding: 16px 14px 50px; }
+  }
+
+  /* ─── CARDS ───────────────────────────────────────────────── */
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.08);
+    padding: 24px;
+    border-left: 4px solid #0000FF;
+  }
+
+  .card.cyan-border { border-left-color: #06D0FF; }
+  .card.green-border { border-left-color: #22c55e; }
+  .card.amber-border { border-left-color: #f59e0b; }
+  .card.full { border-left: none; border-top: 4px solid #0000FF; }
+  .card.full.cyan-top { border-top-color: #06D0FF; }
+
+  /* ─── TASK BOARD ──────────────────────────────────────────── */
+  .task-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  @media (max-width: 800px) {
+    .task-columns { grid-template-columns: 1fr; }
+  }
+
+  .task-col {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.08);
+    overflow: hidden;
+  }
+
+  .task-col-header {
+    padding: 14px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .task-col-header.todo { background: linear-gradient(90deg, #6b7280, #9ca3af); }
+  .task-col-header.inprogress { background: linear-gradient(90deg, #0000FF, #06D0FF); }
+  .task-col-header.done { background: linear-gradient(90deg, #059669, #22c55e); }
+
+  .col-count {
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  .task-list {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .task-item {
+    background: #f8f9ff;
+    border-radius: 8px;
+    padding: 12px 14px;
+    border-left: 3px solid #0000FF;
+    cursor: pointer;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+
+  .task-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,255,0.12);
+    transform: translateX(3px);
+  }
+
+  .task-item.priority-high { border-left-color: #ef4444; }
+  .task-item.priority-med { border-left-color: #f59e0b; }
+  .task-item.priority-low { border-left-color: #06D0FF; }
+  .task-item.done-item { border-left-color: #22c55e; opacity: 0.75; }
+
+  .task-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+
+  .task-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .task-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-admin { background: #ede9fe; color: #7c3aed; }
+  .tag-customer { background: #dbeafe; color: #1d4ed8; }
+  .tag-ops { background: #dcfce7; color: #15803d; }
+  .tag-billing { background: #fef3c7; color: #b45309; }
+  .tag-urgent { background: #fee2e2; color: #dc2626; }
+  .tag-comms { background: #e0f2fe; color: #0369a1; }
+
+  .task-due {
+    font-size: 10px;
+    color: #9ca3af;
+    font-weight: 400;
+    margin-left: auto;
+  }
+
+  /* ─── TIER 1 ACTIONS ──────────────────────────────────────── */
+  .tier1-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .action-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 14px rgba(0,0,255,0.07);
+    border-top: 3px solid #06D0FF;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 22px rgba(0,0,255,0.13);
+  }
+
+  .action-icon {
+    font-size: 26px;
+    line-height: 1;
+  }
+
+  .action-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+
+  .action-desc {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .action-btn {
+    display: inline-block;
+    margin-top: 6px;
+    background: linear-gradient(90deg, #0000FF, #06D0FF);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: opacity 0.2s;
+  }
+
+  .action-btn:hover { opacity: 0.85; }
+
+  /* ─── CUSTOMER QUEUE TABLE ────────────────────────────────── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.08);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 13px;
+  }
+
+  thead {
+    background: linear-gradient(90deg, #0000FF, #06D0FF);
+  }
+
+  thead th {
+    padding: 13px 16px;
+    text-align: left;
+    color: #fff;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: #f8f9ff; }
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody td {
+    padding: 12px 16px;
+    color: #1a1a2e;
+    vertical-align: middle;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .badge-new { background: #dbeafe; color: #1d4ed8; }
+  .badge-pending { background: #fef3c7; color: #b45309; }
+  .badge-review { background: #ede9fe; color: #7c3aed; }
+  .badge-urgent { background: #fee2e2; color: #dc2626; }
+  .badge-resolved { background: #dcfce7; color: #15803d; }
+  .badge-info { background: #e0f2fe; color: #0369a1; }
+
+  .review-btn {
+    background: transparent;
+    border: 1.5px solid #0000FF;
+    color: #0000FF;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .review-btn:hover {
+    background: #0000FF;
+    color: #fff;
+  }
+
+  .flag-icon { font-size: 16px; }
+
+  /* ─── PRIORITY DOT ────────────────────────────────────────── */
+  .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .dot-red { background: #ef4444; }
+  .dot-amber { background: #f59e0b; }
+  .dot-green { background: #22c55e; }
+  .dot-blue { background: #0000FF; }
+
+  /* ─── WELCOME BANNER ──────────────────────────────────────── */
+  .welcome-banner {
+    background: linear-gradient(135deg, #0000FF08, #06D0FF12);
+    border: 1px solid #06D0FF40;
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .welcome-text {
+    font-size: 15px;
+    color: #1a1a2e;
+  }
+
+  .welcome-text strong {
+    color: #0000FF;
+    font-weight: 900;
+  }
+
+  .timestamp {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 300;
+  }
+
+  .live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: pulse 1.8s infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  /* ─── FOOTER ──────────────────────────────────────────────── */
+  .footer {
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    padding: 28px 40px;
+    text-align: center;
+    color: rgba(255,255,255,0.75);
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    margin-top: 40px;
+  }
+
+  .footer strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .footer-divider {
+    color: rgba(255,255,255,0.3);
+    margin: 0 8px;
+  }
+
+  /* ─── NOTE BOX ────────────────────────────────────────────── */
+  .note-box {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #92400e;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .note-box strong { color: #b45309; }
+
+  /* ─── PROGRESS BAR ────────────────────────────────────────── */
+  .progress-wrap {
+    margin-top: 6px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #6b7280;
+    margin-bottom: 5px;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #0000FF, #06D0FF);
+  }
+
+  .mb-6 { margin-bottom: 24px; }
+  .mb-8 { margin-bottom: 32px; }
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────────────────────────── -->
+<header class="header">
+
+  <!-- Infrastructure SVG Silhouette -->
+  <svg class="infra-overlay" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Power Towers -->
+    <g fill="white">
+      <rect x="60" y="30" width="3" height="90"/>
+      <rect x="40" y="40" width="43" height="3"/>
+      <rect x="50" y="58" width="23" height="2"/>
+      <line x1="40" y1="40" x2="61.5" y2="120" stroke="white" stroke-width="1.5"/>
+      <line x1="83" y1="40" x2="61.5" y2="120" stroke="white" stroke-width="1.5"/>
+      <line x1="50" y1="60" x2="61.5" y2="120" stroke="white" stroke-width="1"/>
+      <line x1="73" y1="60" x2="61.5" y2="120" stroke="white" stroke-width="1"/>
+
+      <rect x="240" y="20" width="3" height="100"/>
+      <rect x="220" y="32" width="43" height="3"/>
+      <rect x="230" y="52" width="23" height="2"/>
+      <line x1="220" y1="32" x2="241.5" y2="120" stroke="white" stroke-width="1.5"/>
+      <line x1="263" y1="32" x2="241.5" y2="120" stroke="white" stroke-width="1.5"/>
+      <line x1="230" y1="54" x2="241.5" y2="120" stroke="white" stroke-width="1"/>
+      <line x1="253" y1="54" x2="241.5" y2="120" stroke="white" stroke-width="1"/>
+
+      <!-- Wires between towers -->
+      <path d="M63 41 Q152 55 240 33" stroke="white" stroke-width="1" fill="none"/>
+      <path d="M63 60 Q152 72 240 54" stroke="white" stroke-width="0.8" fill="none"/>
+
+      <!-- Right side towers -->
+      <rect x="900" y="25" width="3" height="95"/>
+      <rect x="880" y="38" width="43" height="3"/>
+      <rect x="890" y="56" width="23" height="2"/>
+      <line x1="880" y1="38" x2="901.5" y2="120" stroke="white" stroke-width="1.5"/>
+      <line x1="923" y1="38" x2="901.5" y2="120" stroke="white" stroke-width="1.5"/>
+
+      <rect x="1100" y="18" width="3" height="102"/>
+      <rect x="1080" y="30" width="43" height="3"/>
+      <rect x="1090" y="50" width="23" height="2"/>
+      <line x1="1080" y1="30" x2="1101.5" y2="120" stroke="white" stroke-width="1.5"/>
+      <line x1="1123" y1="30" x2="1101.5" y2="120" stroke="white" stroke-width="1.5"/>
+
+      <path d="M903 38 Q1001 52 1100 30" stroke="white" stroke-width="1" fill="none"/>
+      <path d="M903 56 Q1001 68 1100 50" stroke="white" stroke-width="0.8" fill="none"/>
+
+      <!-- Horizon line / substation suggestion -->
+      <rect x="0" y="100" width="1200" height="2" fill="white" opacity="0.5"/>
+      <rect x="480" y="70" width="40" height="50"/>
+      <rect x="488" y="62" width="24" height="10"/>
+      <rect x="560" y="80" width="30" height="40"/>
+      <rect x="566" y="72" width="18" height="10"/>
+    </g>
+  </svg>
+
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="wordmark">Norris Utilities LLC — Internal Operations</div>
+        <div class="header-title">Caroline Butler<br>Operations Dashboard</div>
+        <div class="header-subtitle">Task Board · Tier 1 Authority · Customer Queue for Aaron Review</div>
+        <div class="header-meta">
+          <div class="header-meta-item">📍 <span>Birmingham, AL</span></div>
+          <div class="header-meta-item">👤 <span>CB Access Level: Tier 1 — Ops Specialist</span></div>
+          <div class="header-meta-item">📅 <span id="currentDate"></span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end;">
+        <div class="header-badge">🔴 Live Dashboard</div>
+        <div style="color:rgba(255,255,255,0.7);font-size:11px;text-align:right;font-weight:300;">A Legacy of Commitment®</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── CHEVRON DIVIDER ─────────────────────────────────────── -->
+<div class="chevron-divider"></div>
+
+<!-- ─── MAIN ───────────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- Welcome Banner -->
+  <div class="welcome-banner">
+    <div>
+      <div class="welcome-text"><span class="live-dot"></span>Good morning, <strong>Caroline</strong> — Here's your operational snapshot for today.</div>
+      <div class="timestamp" style="margin-top:4px;" id="liveTime"></div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:11px;color:#6b7280;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Escalation Contact</div>
+      <div style="font-size:13px;color:#0000FF;font-weight:700;margin-top:3px;">Aaron C. Norris</div>
+      <div style="font-size:12px;color:#6b7280;">205-500-1343 · acnorris@norrisutilities.com</div>
+    </div>
+  </div>
+
+  <!-- ─── STATS ROW ──────────────────────────────────────────── -->
+  <div class="stats-row mb-8">
+    <div class="stat-card">
+      <div class="stat-label">Active Tasks</div>
+      <div class="stat-value">14</div>
+      <div class="stat-sub">Across all columns</div>
+    </div>
+    <div class="stat-card amber">
+      <div class="stat-label">In Progress</div>
+      <div class="stat-value">6</div>
+      <div class="stat-sub">Assigned to CB</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-label">Completed Today</div>
+      <div class="stat-value">4</div>
+      <div class="stat-sub">Since 8:00 AM</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-label">Overdue</div>
+      <div class="stat-value">2</div>
+      <div class="stat-sub">Needs immediate action</div>
+    </div>
+    <div class="stat-card cyan">
+      <div class="stat-label">Customer Queue</div>
+      <div class="stat-value">9</div>
+      <div class="stat-sub">Pending Aaron review</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Tier 1 Resolved</div>
+      <div class="stat-value">7</div>
+      <div class="stat-sub">CB independent actions</div>
+    </div>
+  </div>
+
+  <!-- ─── X SEPARATOR ───────────────────────────────────────── -->
+  <div class="x-separator">× × ×</div>
+
+  <!-- ─── SECTION 1: TASK BOARD ────────────────────────────── -->
+  <div class="section-header mb-6">
+    <div class="section-title">📋 CB's Task Board</div>
