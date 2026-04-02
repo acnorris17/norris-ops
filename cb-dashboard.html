@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  var t = sessionStorage.getItem('nu_auth');
+  if(!t || Date.now() - parseInt(t) > 28800000) {
+    sessionStorage.removeItem('nu_auth');
+    window.location.href = '/norris-ops/login.html';
+  }
+})();
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caroline Butler — Operations Dashboard | Norris Utilities</title>
@@ -664,6 +674,7 @@
   <a href="mission-control.html">Mission Control</a>
   <a href="shipping-docs/">Shipping Docs</a>
   <a href="storefront/">Storefront</a>
+<a href="#" onclick="sessionStorage.removeItem('nu_auth');window.location.href='/norris-ops/login.html';return false;" style="margin-left:auto;background:rgba(255,68,68,0.2);color:#ff6666;">Log Out</a>
 </nav>
 
 
