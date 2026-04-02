@@ -649,8 +649,23 @@
   .mb-6 { margin-bottom: 24px; }
   .mb-8 { margin-bottom: 32px; }
 </style>
+<style>
+.sticky-nav{position:sticky;top:0;z-index:1000;background:rgba(0,0,80,0.95);backdrop-filter:blur(8px);display:flex;justify-content:center;gap:0;border-bottom:2px solid #06D0FF}
+.sticky-nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 20px;transition:background .2s,color .2s}
+.sticky-nav a:hover,.sticky-nav a.active{background:rgba(6,208,255,0.15);color:#06D0FF}
+@media(max-width:768px){.sticky-nav{flex-wrap:wrap}.sticky-nav a{padding:10px 14px;font-size:11px}}
+</style>
 </head>
 <body>
+<nav class="sticky-nav">
+  <a href="index.html">Home</a>
+  <a href="shipping-log.html">Shipping Log</a>
+  <a href="po-tracker.html">PO Tracker</a>
+  <a href="mission-control.html">Mission Control</a>
+  <a href="shipping-docs/">Shipping Docs</a>
+  <a href="storefront/">Storefront</a>
+</nav>
+
 
 <!-- ─── HEADER ─────────────────────────────────────────────── -->
 <header class="header">

@@ -46,8 +46,23 @@ table.items tbody td.qty { text-align: center; font-weight: 900; font-size: 22px
 .footer-tag { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #aaa; }
 @media print { @page { margin: 0.4in; size: letter; } }
 </style>
+<style>
+.sticky-nav{position:sticky;top:0;z-index:1000;background:rgba(0,0,80,0.95);backdrop-filter:blur(8px);display:flex;justify-content:center;gap:0;border-bottom:2px solid #06D0FF}
+.sticky-nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 20px;transition:background .2s,color .2s}
+.sticky-nav a:hover,.sticky-nav a.active{background:rgba(6,208,255,0.15);color:#06D0FF}
+@media(max-width:768px){.sticky-nav{flex-wrap:wrap}.sticky-nav a{padding:10px 14px;font-size:11px}}
+</style>
 </head>
 <body>
+<nav class="sticky-nav">
+  <a href="../index.html">Home</a>
+  <a href="../shipping-log.html">Shipping Log</a>
+  <a href="../po-tracker.html">PO Tracker</a>
+  <a href="../mission-control.html">Mission Control</a>
+  <a href="../shipping-docs/" class="active">Shipping Docs</a>
+  <a href="../storefront/">Storefront</a>
+</nav>
+
 
 <div class="header">
   <div class="header-logo">
@@ -90,7 +105,7 @@ table.items tbody td.qty { text-align: center; font-weight: 900; font-size: 22px
   <tbody>
     <tr>
       <td><div class="sku">NU-BC-2851</div></td>
-      <td><div class="pname">FlexPro Armor® 2-Man Bucket Cover</div><div class="pdesc">Collapsible 3 Panel Rigid Design. Size: 28" × 51". Hand Made in the USA.</div></td>
+      <td><div class="pname">FlexPro Armor 2-Man Bucket Cover</div><div class="pdesc">Collapsible 3 Panel Rigid Design. Size: 28" × 51". Hand Made in the USA.</div></td>
       <td class="qty">2</td>
     </tr>
   </tbody>
