@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Domain Setup — Norris Utilities®</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:#f8f9fc;color:#1a1a2e}
+.sticky-nav{position:sticky;top:0;z-index:1000;background:rgba(0,0,80,0.95);backdrop-filter:blur(8px);display:flex;justify-content:center;gap:0;border-bottom:2px solid #06D0FF}
+.sticky-nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 20px;transition:background .2s,color .2s}
+.sticky-nav a:hover{background:rgba(6,208,255,0.15);color:#06D0FF}
+.container{max-width:800px;margin:0 auto;padding:48px 24px 80px}
+h1{font-size:28px;font-weight:900;margin-bottom:8px;color:#0000FF}
+.subtitle{font-size:14px;color:#666;margin-bottom:40px}
+h2{font-size:16px;font-weight:700;color:#1a1a2e;margin:32px 0 12px;letter-spacing:0.5px}
+h2 .step{display:inline-block;background:linear-gradient(135deg,#0000FF,#06D0FF);color:#fff;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:13px;margin-right:10px}
+.card{background:#fff;border:1px solid #e0e2e8;border-radius:12px;padding:24px;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th{text-align:left;padding:10px 12px;background:#f0f1f5;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#666}
+td{padding:10px 12px;border-top:1px solid #eee}
+code{background:#f0f1f5;padding:2px 8px;border-radius:4px;font-size:13px;color:#0000FF}
+.note{background:#fffbe6;border:1px solid #f0e68c;border-radius:8px;padding:16px;font-size:13px;margin-top:24px;line-height:1.6}
+.note strong{color:#b8860b}
+.check{color:#06D0FF;font-weight:700}
+.footer{background:linear-gradient(135deg,#0000FF 0%,#0033CC 40%,#06D0FF 100%);padding:40px 32px;text-align:center}
+.footer-text{color:rgba(255,255,255,0.6);font-size:11px;letter-spacing:1px}
+@media(max-width:600px){.container{padding:32px 16px 60px}h1{font-size:22px}.sticky-nav{flex-wrap:wrap}.sticky-nav a{padding:10px 14px;font-size:11px}}
+</style>
+</head>
+<body>
+<nav class="sticky-nav">
+  <a href="index.html">Home</a>
+  <a href="shipping-log.html">Shipping Log</a>
+  <a href="po-tracker.html">PO Tracker</a>
+  <a href="mission-control.html">Mission Control</a>
+  <a href="shipping-docs/">Shipping Docs</a>
+  <a href="storefront/">Storefront</a>
+</nav>
+<div class="container">
+  <h1>Custom Domain Setup</h1>
+  <p class="subtitle">Connect <code>ops.norrisutilities.com</code> to this portal</p>
+  <div class="card">
+    <h2><span class="step">1</span>DNS Records (at your domain registrar)</h2>
+    <p style="font-size:14px;color:#666;margin-bottom:12px">Add this record for <code>ops.norrisutilities.com</code>:</p>
+    <table>
+      <tr><th>Type</th><th>Host / Name</th><th>Value / Target</th><th>TTL</th></tr>
+      <tr><td><code>CNAME</code></td><td><code>ops</code></td><td><code>acnorris17.github.io</code></td><td>3600</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2><span class="step">2</span>GitHub Pages Settings</h2>
+    <ol style="font-size:14px;line-height:2;padding-left:20px">
+      <li>Go to <strong>github.com/acnorris17/norris-ops</strong> &rarr; Settings &rarr; Pages</li>
+      <li>Under <strong>Custom domain</strong>, enter <code>ops.norrisutilities.com</code></li>
+      <li>Click <strong>Save</strong></li>
+      <li>Check <strong>Enforce HTTPS</strong> (may take a few minutes to become available)</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h2><span class="step">3</span>Verify</h2>
+    <p style="font-size:14px;line-height:1.8">After DNS propagation (usually 5&ndash;30 minutes):</p>
+    <ul style="font-size:14px;line-height:2;padding-left:20px">
+      <li><span class="check">&#10003;</span> <code>https://ops.norrisutilities.com</code> loads the portal</li>
+      <li><span class="check">&#10003;</span> HTTPS padlock shows in browser</li>
+      <li><span class="check">&#10003;</span> <code>acnorris17.github.io/norris-ops/</code> redirects to custom domain</li>
+    </ul>
+  </div>
+  <div class="note">
+    <strong>Note:</strong> The <code>CNAME</code> file in the repo root tells GitHub Pages which custom domain to use. Do not delete it or the custom domain will disconnect.
+  </div>
+</div>
+<footer class="footer">
+  <p class="footer-text">&copy; 2026 Norris Utilities LLC &mdash; Internal Operations</p>
+</footer>
+</body>
+</html>
