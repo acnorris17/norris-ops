@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-(function(){
-  var t = sessionStorage.getItem('nu_auth');
-  if(!t || Date.now() - parseInt(t) > 28800000) {
-    sessionStorage.removeItem('nu_auth');
-    window.location.href = '/norris-ops/login.html';
-  }
-})();
-</script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FlexPro Armor Bucket Covers — Norris Utilities, LLC</title>
@@ -535,24 +525,8 @@
       .why-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
-<style>
-.sticky-nav{position:sticky;top:0;z-index:1000;background:rgba(0,0,80,0.95);backdrop-filter:blur(8px);display:flex;justify-content:center;gap:0;border-bottom:2px solid #06D0FF}
-.sticky-nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 20px;transition:background .2s,color .2s}
-.sticky-nav a:hover,.sticky-nav a.active{background:rgba(6,208,255,0.15);color:#06D0FF}
-@media(max-width:768px){.sticky-nav{flex-wrap:wrap}.sticky-nav a{padding:10px 14px;font-size:11px}}
-</style>
 </head>
 <body>
-<nav class="sticky-nav">
-  <a href="../index.html">Home</a>
-  <a href="../shipping-log.html">Shipping Log</a>
-  <a href="../po-tracker.html">PO Tracker</a>
-  <a href="../mission-control.html">Mission Control</a>
-  <a href="../shipping-docs/">Shipping Docs</a>
-  <a href="../storefront/" class="active">Storefront</a>
-<a href="#" onclick="sessionStorage.removeItem('nu_auth');window.location.href='/norris-ops/login.html';return false;" style="margin-left:auto;background:rgba(255,68,68,0.2);color:#ff6666;">Log Out</a>
-</nav>
-
 
 <!-- ============================================================
      SITE HEADER / HERO

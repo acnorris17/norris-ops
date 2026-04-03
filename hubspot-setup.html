@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-(function(){
-  var t = sessionStorage.getItem('nu_auth');
-  if(!t || Date.now() - parseInt(t) > 28800000) {
-    sessionStorage.removeItem('nu_auth');
-    window.location.href = '/norris-ops/login.html';
-  }
-})();
-</script>
+
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

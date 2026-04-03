@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-(function(){
-  var t = sessionStorage.getItem('nu_auth');
-  if(!t || Date.now() - parseInt(t) > 28800000) {
-    sessionStorage.removeItem('nu_auth');
-    window.location.href = '/norris-ops/login.html';
-  }
-})();
-</script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shipping Log — Norris Utilities</title>
+  <title>Shipping Log — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap');
+
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -39,60 +31,29 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Sticky Nav */
-    .sticky-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(0,0,80,0.97);
-      backdrop-filter: blur(12px);
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      border-bottom: 2px solid var(--nu-cyan);
-    }
-    .sticky-nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 14px 22px;
-      transition: background 0.2s, color 0.2s;
-    }
-    .sticky-nav a:hover, .sticky-nav a.active {
-      background: rgba(6,208,255,0.15);
-      color: var(--nu-cyan);
-    }
-    @media (max-width: 768px) {
-      .sticky-nav { flex-wrap: wrap; }
-      .sticky-nav a { padding: 10px 14px; font-size: 11px; }
-    }
-
-    /* Header */
     .nu-header {
       position: relative;
       background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
-      padding: 50px 40px 70px;
+      padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
-      min-height: 260px;
+      min-height: 280px;
     }
-
-    /* Power Tower SVG Overlay */
     .nu-header::before {
       content: '';
       position: absolute;
-      inset: 0;
-      opacity: 0.10;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='260' viewBox='0 0 400 260'%3E%3Cg stroke='%23ffffff' stroke-width='1.5' fill='none'%3E%3Cline x1='40' y1='260' x2='80' y2='20'/%3E%3Cline x1='120' y1='260' x2='80' y2='20'/%3E%3Cline x1='40' y1='260' x2='120' y2='260'/%3E%3Cline x1='50' y1='200' x2='110' y2='200'/%3E%3Cline x1='55' y1='150' x2='105' y2='150'/%3E%3Cline x1='62' y1='100' x2='98' y2='100'/%3E%3Cline x1='68' y1='60' x2='92' y2='60'/%3E%3Cline x1='40' y1='260' x2='110' y2='200'/%3E%3Cline x1='120' y1='260' x2='50' y2='200'/%3E%3Cline x1='50' y1='200' x2='105' y2='150'/%3E%3Cline x1='110' y1='200' x2='55' y2='150'/%3E%3Cline x1='280' y1='260' x2='320' y2='20'/%3E%3Cline x1='360' y1='260' x2='320' y2='20'/%3E%3Cline x1='280' y1='260' x2='360' y2='260'/%3E%3Cline x1='290' y1='200' x2='350' y2='200'/%3E%3Cline x1='295' y1='150' x2='345' y2='150'/%3E%3Cline x1='302' y1='100' x2='338' y2='100'/%3E%3Cline x1='308' y1='60' x2='332' y2='60'/%3E%3Cline x1='280' y1='260' x2='350' y2='200'/%3E%3Cline x1='360' y1='260' x2='290' y2='200'/%3E%3Cline x1='290' y1='200' x2='345' y2='150'/%3E%3Cline x1='350' y1='200' x2='295' y2='150'/%3E%3Cpath d='M92 60 Q200 80 308 60' stroke-dasharray='4,3'/%3E%3Cpath d='M98 100 Q200 118 302 100' stroke-dasharray='4,3'/%3E%3C/g%3E%3C/svg%3E");
-      background-repeat: repeat-x;
-      background-size: 400px 260px;
-      background-position: center bottom;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
       z-index: 1;
+      opacity: 0.6;
     }
-
     .nu-header::after {
       content: '';
       position: absolute;
@@ -103,23 +64,40 @@
     }
     .nu-header * { position: relative; z-index: 2; }
 
-    .nu-logo {
-      max-width: 280px;
-      height: auto;
-      margin: 0 auto 12px;
-      filter: drop-shadow(0 2px 20px rgba(0,0,0,0.3));
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
-
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
     .nu-tagline {
       font-family: var(--font-primary);
       font-style: italic;
       font-weight: 300;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: rgba(255,255,255,0.9);
       letter-spacing: 0.05em;
     }
 
-    /* V-Chevron Transition */
     .nu-chevron {
       position: relative;
       height: 50px;
@@ -132,7 +110,6 @@
       display: block;
     }
 
-    /* Main Content */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
@@ -149,53 +126,49 @@
     }
     .nu-content-area > * { position: relative; z-index: 1; }
 
-    .content-wrapper {
-      max-width: 1500px;
-      margin: 0 auto;
-      padding: 50px 40px;
-    }
-
-    /* Page Header */
+    /* ══ PAGE HEADER ══ */
     .page-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
     .page-header h1 {
       font-weight: 900;
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--nu-dark-text);
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
-    .page-header h1 .icon { font-size: 2.4rem; }
-    .page-header h1 span { color: var(--nu-blue); }
-    .page-subtitle {
-      font-size: 0.9rem;
-      color: #888;
-      font-weight: 600;
+    .page-header h1 .icon {
+      font-size: 2.2rem;
+    }
+    .page-header h1 span {
+      color: var(--nu-blue);
     }
 
-    /* Rule Banner */
+    /* ══ RULE BANNER ══ */
     .rule-banner {
       background: linear-gradient(135deg, #FFF3CD 0%, #FFF8E1 100%);
-      border-left: 6px solid var(--nu-accent-gold);
-      border-radius: 0 10px 10px 0;
-      padding: 20px 28px;
+      border-left: 5px solid var(--nu-accent-gold);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 24px;
       margin-bottom: 32px;
       display: flex;
       align-items: flex-start;
-      gap: 16px;
-      box-shadow: 0 2px 12px rgba(201,168,76,0.15);
+      gap: 14px;
     }
-    .rule-banner .rule-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .rule-banner .rule-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
     .rule-banner .rule-text {
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #664D03;
       line-height: 1.5;
     }
@@ -203,37 +176,32 @@
       font-weight: 400;
       font-style: italic;
       display: block;
-      margin-top: 6px;
+      margin-top: 4px;
       color: #856404;
     }
 
-    /* Stats Row */
+    /* ══ STATS ROW ══ */
     .stats-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 16px;
       margin-bottom: 32px;
     }
     .stat-card {
       background: var(--nu-light-gray);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 20px 24px;
       text-align: center;
       border: 1px solid var(--nu-medium-gray);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .stat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,255,0.08);
     }
     .stat-card .stat-value {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 900;
       color: var(--nu-blue);
       line-height: 1.2;
     }
     .stat-card .stat-label {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -244,13 +212,13 @@
     .stat-card.success .stat-value { color: #059669; }
     .stat-card.flag .stat-value { color: #DC2626; }
 
-    /* Table */
+    /* ══ TABLE CONTAINER ══ */
     .table-wrapper {
       overflow-x: auto;
-      border-radius: 12px;
+      border-radius: 10px;
       border: 1px solid var(--nu-medium-gray);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      margin-bottom: 36px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 32px;
     }
     table {
       width: 100%;
@@ -264,7 +232,7 @@
       padding: 14px 12px;
       text-align: left;
       font-weight: 700;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       white-space: nowrap;
@@ -272,8 +240,9 @@
       top: 0;
       z-index: 5;
     }
-    thead th:first-child { border-radius: 11px 0 0 0; }
-    thead th:last-child { border-radius: 0 11px 0 0; }
+    thead th:first-child { border-radius: 9px 0 0 0; }
+    thead th:last-child { border-radius: 0 9px 0 0; }
+
     tbody tr {
       border-bottom: 1px solid var(--nu-medium-gray);
       transition: background 0.15s ease;
@@ -281,6 +250,7 @@
     tbody tr:hover { background: rgba(0, 0, 255, 0.03); }
     tbody tr:nth-child(even) { background: var(--nu-light-gray); }
     tbody tr:nth-child(even):hover { background: rgba(0, 0, 255, 0.05); }
+
     tbody td {
       padding: 12px;
       vertical-align: middle;
@@ -298,23 +268,35 @@
     }
     tbody td.center { text-align: center; }
 
-    /* Status Badges */
+    /* ══ STATUS BADGES ══ */
     .status {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 14px;
+      padding: 4px 12px;
       border-radius: 20px;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       white-space: nowrap;
     }
-    .status-shipped { background: #D1FAE5; color: #065F46; }
-    .status-pending { background: #FEF3C7; color: #92400E; }
-    .status-processing { background: #DBEAFE; color: #1E40AF; }
-    .status-invoiced { background: #E0E7FF; color: #3730A3; }
+    .status-shipped {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    .status-pending {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+    .status-processing {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+    .status-invoiced {
+      background: #E0E7FF;
+      color: #3730A3;
+    }
     .status-dot {
       width: 7px;
       height: 7px;
@@ -326,33 +308,37 @@
     .status-processing .status-dot { background: #2563EB; }
     .status-invoiced .status-dot { background: #4F46E5; }
 
-    /* CC Flag */
+    /* ══ CC FLAG ══ */
     .cc-flag {
       display: inline-flex;
       align-items: center;
       gap: 4px;
       background: #FEE2E2;
       color: #991B1B;
-      padding: 4px 10px;
+      padding: 3px 10px;
       border-radius: 14px;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.02em;
     }
-    .cc-flag::before { content: '\26A0'; font-size: 0.7rem; }
+    .cc-flag::before {
+      content: '⚠';
+      font-size: 0.7rem;
+    }
+
     .payment-net { color: #059669; font-weight: 600; }
     .payment-cc { color: #DC2626; font-weight: 600; }
 
-    /* Legend */
+    /* ══ LEGEND ══ */
     .legend {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       padding: 20px 24px;
       background: var(--nu-light-gray);
-      border-radius: 12px;
+      border-radius: 10px;
       border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 36px;
+      margin-bottom: 32px;
     }
     .legend-title {
       width: 100%;
@@ -371,19 +357,19 @@
       color: #555;
     }
 
-    /* Workflow Cards */
+    /* ══ NOTES SECTION ══ */
     .workflow-notes {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
     }
     .workflow-card {
       background: var(--nu-white);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 24px;
       border: 1px solid var(--nu-medium-gray);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
     .workflow-card h3 {
       font-weight: 900;
@@ -391,328 +377,299 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--nu-blue);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .workflow-card ol, .workflow-card ul {
+    .workflow-card ol,
+    .workflow-card ul {
       padding-left: 20px;
       font-size: 0.85rem;
       line-height: 1.9;
       color: #555;
     }
-    .workflow-card li { margin-bottom: 3px; }
+    .workflow-card li { margin-bottom: 2px; }
 
-    /* Timestamp */
+    /* ══ TIMESTAMP ══ */
     .timestamp {
       text-align: center;
       font-size: 0.78rem;
       color: #999;
-      padding: 16px 0;
+      padding: 12px 0;
       font-style: italic;
     }
 
-    /* Footer */
+    /* ══ FOOTER ══ */
     .nu-footer {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 50%, var(--nu-blue) 100%);
-      color: rgba(255,255,255,0.85);
-      padding: 50px 40px;
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
       text-align: center;
-    }
-    .nu-footer-logo {
-      max-width: 200px;
-      height: auto;
-      margin: 0 auto 16px;
-      opacity: 0.9;
+      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
       font-style: italic;
       font-weight: 300;
       font-size: 1.1rem;
       color: var(--nu-cyan);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .nu-footer-contact {
       font-size: 0.9rem;
-      line-height: 1.9;
+      line-height: 1.8;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
     }
     .nu-footer-contact a:hover { text-decoration: underline; }
-    .nu-footer-copy {
-      margin-top: 20px;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.5);
-    }
 
+    /* ══ RESPONSIVE ══ */
     @media (max-width: 768px) {
       .nu-header { padding: 40px 20px 60px; min-height: 200px; }
-      .nu-logo { max-width: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .content-wrapper { padding: 30px 20px; }
       .page-header { flex-direction: column; align-items: flex-start; }
       .page-header h1 { font-size: 1.5rem; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
       .workflow-notes { grid-template-columns: 1fr; }
     }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      thead th { background: #1a1a3e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .table-wrapper { box-shadow: none; }
+      table { min-width: unset; font-size: 0.7rem; }
+    }
   </style>
 </head>
 <body>
 
-<nav class="sticky-nav">
-  <a href="index.html">Home</a>
-  <a href="shipping-log.html" class="active">Shipping Log</a>
-  <a href="po-tracker.html">PO Tracker</a>
-  <a href="mission-control.html">Mission Control</a>
-  <a href="cb-onboarding.html">CB Guide</a>
-  <a href="storefront/">Storefront</a>
-<a href="#" onclick="sessionStorage.removeItem('nu_auth');window.location.href='/norris-ops/login.html';return false;" style="margin-left:auto;background:rgba(255,68,68,0.2);color:#ff6666;">Log Out</a>
-</nav>
-
-<header class="nu-header">
-  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100'%3E%3Ctext x='200' y='55' text-anchor='middle' font-family='Arial Black, sans-serif' font-weight='900' font-size='42' fill='white' letter-spacing='8'%3ENORMIS%3C/text%3E%3Ctext x='200' y='82' text-anchor='middle' font-family='Arial, sans-serif' font-weight='700' font-size='18' fill='white' letter-spacing='12'%3EUTILITIES%3C/text%3E%3C/svg%3E" alt="Norris Utilities" class="nu-logo">
-  <div class="nu-tagline">A Legacy of Commitment&reg;</div>
-</header>
-
-<div class="nu-chevron">
-  <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
-  </svg>
-</div>
-
-<main class="nu-content-area">
-  <div class="content-wrapper">
-
-    <div class="page-header">
-      <h1><span class="icon">📦</span> <span>Shipping</span> Log</h1>
-      <div class="page-subtitle">Norris Utilities &mdash; Fulfillment Tracker &bull; Week of March 30, 2026</div>
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
     </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
 
-    <div class="rule-banner">
-      <div class="rule-icon">🚨</div>
-      <div class="rule-text">
-        Nothing is invoiced in QuickBooks until tracking number AND shipping cost are captured.
-        <em>Every order must have confirmed carrier tracking and actual freight cost before QB invoice creation.</em>
-      </div>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-value">6</div>
-        <div class="stat-label">This Week's Orders</div>
-      </div>
-      <div class="stat-card success">
-        <div class="stat-value">3</div>
-        <div class="stat-label">Shipped</div>
-      </div>
-      <div class="stat-card warning">
-        <div class="stat-value">2</div>
-        <div class="stat-label">Processing</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">1</div>
-        <div class="stat-label">Pending Pickup</div>
-      </div>
-      <div class="stat-card flag">
-        <div class="stat-value">2</div>
-        <div class="stat-label">CC + 4% Flag</div>
-      </div>
-    </div>
-
-    <div class="legend">
-      <div class="legend-title">Status Key</div>
-      <div class="legend-item">
-        <span class="status status-shipped"><span class="status-dot"></span>Shipped</span>
-        Tracking confirmed, in transit or delivered
-      </div>
-      <div class="legend-item">
-        <span class="status status-processing"><span class="status-dot"></span>Processing</span>
-        Order received, preparing for shipment
-      </div>
-      <div class="legend-item">
-        <span class="status status-pending"><span class="status-dot"></span>Pending</span>
-        Awaiting pickup or carrier confirmation
-      </div>
-      <div class="legend-item">
-        <span class="status status-invoiced"><span class="status-dot"></span>Invoiced</span>
-        QB invoice created (tracking + cost confirmed)
-      </div>
-      <div class="legend-item">
-        <span class="cc-flag">CC +4%</span>
-        Credit card surcharge applied
-      </div>
-    </div>
-
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Order Date</th>
-            <th>SD#</th>
-            <th>Customer</th>
-            <th>Product</th>
-            <th>Qty</th>
-            <th>Ship To</th>
-            <th>Tracking #</th>
-            <th>Carrier</th>
-            <th>Ship Cost</th>
-            <th>Payment Method</th>
-            <th>QB Invoice #</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="mono">03/30/2026</td>
-            <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2026-0330A</td>
-            <td style="font-weight:700;">Huntsville Utilities</td>
-            <td>FlexPro Armor BC-2851 (2-Man, 28"x51")</td>
-            <td class="center">4</td>
-            <td>Huntsville, AL 35801</td>
-            <td class="mono">1Z999AA10234567891</td>
-            <td>UPS Ground</td>
-            <td class="currency">$89.00</td>
-            <td><span class="payment-net">Net 30</span></td>
-            <td class="mono" style="font-weight:700; color:#059669;">INV-2026-0401</td>
-            <td><span class="status status-shipped"><span class="status-dot"></span>Shipped</span></td>
-          </tr>
-          <tr>
-            <td class="mono">03/30/2026</td>
-            <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2026-0330B</td>
-            <td style="font-weight:700;">TVA - Knoxville</td>
-            <td>FlexPro Armor BC-2834 (1.5-Man, 28"x34")</td>
-            <td class="center">10</td>
-            <td>Knoxville, TN 37902</td>
-            <td class="mono">1Z999AA10234567892</td>
-            <td>FedEx Ground</td>
-            <td class="currency">$156.00</td>
-            <td><span class="payment-net">Net 30</span></td>
-            <td class="mono" style="font-weight:700; color:#059669;">INV-2026-0402</td>
-            <td><span class="status status-shipped"><span class="status-dot"></span>Shipped</span></td>
-          </tr>
-          <tr>
-            <td class="mono">03/31/2026</td>
-            <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2026-0331A</td>
-            <td style="font-weight:700;">EPB Chattanooga</td>
-            <td>FlexPro Armor BC-2851-C (2-Man Combo)</td>
-            <td class="center">6</td>
-            <td>Chattanooga, TN 37402</td>
-            <td class="mono">1Z999AA10234567893</td>
-            <td>UPS Ground</td>
-            <td class="currency">$112.00</td>
-            <td>
-              <span class="payment-cc">Credit Card</span>
-              <span class="cc-flag">CC +4%</span>
-            </td>
-            <td class="mono" style="font-weight:700; color:#059669;">INV-2026-0403</td>
-            <td><span class="status status-invoiced"><span class="status-dot"></span>Invoiced</span></td>
-          </tr>
-          <tr>
-            <td class="mono">04/01/2026</td>
-            <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2026-0401A</td>
-            <td style="font-weight:700;">Decatur Utilities</td>
-            <td>FlexPro Armor BC-2834 (1.5-Man, 28"x34")</td>
-            <td class="center">8</td>
-            <td>Decatur, AL 35601</td>
-            <td style="color:#999; font-style:italic;">Awaiting pickup scan</td>
-            <td>FedEx Ground</td>
-            <td style="color:#999; font-style:italic; text-align:right;">Pending</td>
-            <td><span class="payment-net">Net 30</span></td>
-            <td style="color:#999; font-style:italic;">Blocked</td>
-            <td><span class="status status-processing"><span class="status-dot"></span>Processing</span></td>
-          </tr>
-          <tr>
-            <td class="mono">04/01/2026</td>
-            <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2026-0401B</td>
-            <td style="font-weight:700;">Florence Electric</td>
-            <td>FlexPro Armor BC-2851 (2-Man, 28"x51")</td>
-            <td class="center">3</td>
-            <td>Florence, AL 35630</td>
-            <td style="color:#999; font-style:italic;">Label created</td>
-            <td>UPS Ground</td>
-            <td style="color:#999; font-style:italic; text-align:right;">Pending</td>
-            <td>
-              <span class="payment-cc">Credit Card</span>
-              <span class="cc-flag">CC +4%</span>
-            </td>
-            <td style="color:#999; font-style:italic;">Blocked</td>
-            <td><span class="status status-processing"><span class="status-dot"></span>Processing</span></td>
-          </tr>
-          <tr>
-            <td class="mono">04/02/2026</td>
-            <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2026-0402A</td>
-            <td style="font-weight:700;">Sheffield Utilities</td>
-            <td>FlexPro Armor BC-2834 (1.5-Man, 28"x34")</td>
-            <td class="center">5</td>
-            <td>Sheffield, AL 35660</td>
-            <td style="color:#999; font-style:italic;">Pending carrier assignment</td>
-            <td style="color:#999; font-style:italic;">TBD</td>
-            <td style="color:#999; font-style:italic; text-align:right;">Pending</td>
-            <td><span class="payment-net">Net 30</span></td>
-            <td style="color:#999; font-style:italic;">Blocked</td>
-            <td><span class="status status-pending"><span class="status-dot"></span>Pending</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="workflow-notes">
-      <div class="workflow-card">
-        <h3>📋 Order-to-Invoice Workflow</h3>
-        <ol>
-          <li>Order received &mdash; assign SD# and enter in Shipping Log</li>
-          <li>Product pulled and packed at warehouse</li>
-          <li>Carrier scheduled &mdash; update Carrier column</li>
-          <li>Package scanned &mdash; enter Tracking # immediately</li>
-          <li>Shipping invoice received &mdash; enter Ship Cost</li>
-          <li>Only after Steps 4 + 5 complete &rarr; create QB Invoice</li>
-          <li>Enter QB Invoice # and update Status to Invoiced</li>
-        </ol>
-      </div>
-      <div class="workflow-card">
-        <h3>💳 Payment Method Rules</h3>
-        <ul>
-          <li><strong>Net 30</strong> &mdash; Standard terms for established utility accounts</li>
-          <li><strong>Credit Card</strong> &mdash; Always apply <strong>+4% processing surcharge</strong></li>
-          <li>CC surcharge must be itemized on QB invoice as separate line</li>
-          <li>Flag all CC orders visually with CC +4% badge</li>
-          <li>Prepaid orders &mdash; mark as "Prepaid" and note payment date</li>
-        </ul>
-      </div>
-      <div class="workflow-card">
-        <h3>📦 Shipping Cost Formula</h3>
-        <ul>
-          <li><strong>Customer Cost = ROUNDUP(ROUNDUP(RegCost, 0) x 1.10, 0)</strong></li>
-          <li>Round the carrier's regular cost up to the nearest dollar first</li>
-          <li>Multiply by 1.10 (10% handling markup)</li>
-          <li>Round result up to the nearest dollar</li>
-          <li>Example: Carrier charges $42.37 &rarr; $43 &rarr; $47.30 &rarr; <strong>$48.00 billed</strong></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="timestamp">
-      Shipping Log updated April 2, 2026 &mdash; Norris Utilities Operations
-    </div>
-
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
   </div>
-</main>
 
-<footer class="nu-footer">
-  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100'%3E%3Ctext x='200' y='55' text-anchor='middle' font-family='Arial Black, sans-serif' font-weight='900' font-size='36' fill='%2306D0FF' letter-spacing='6'%3ENORMIS%3C/text%3E%3Ctext x='200' y='82' text-anchor='middle' font-family='Arial, sans-serif' font-weight='700' font-size='14' fill='%2306D0FF' letter-spacing='10'%3EUTILITIES%3C/text%3E%3C/svg%3E" alt="Norris Utilities" class="nu-footer-logo">
-  <div class="nu-footer-tagline">A Legacy of Commitment&reg;</div>
-  <div class="nu-footer-contact">
-    Aaron C. Norris | Founder &amp; CEO<br>
-    Norris Utilities, LLC<br>
-    <a href="tel:2055001343">205-500-1343</a> |
-    <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
-    <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
-  </div>
-  <div class="nu-footer-copy">&copy; 2026 Norris Utilities, LLC. All rights reserved.</div>
-</footer>
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 60px 40px;">
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1><span class="icon">📊</span> <span>Shipping</span> Log</h1>
+        <div style="font-size: 0.85rem; color: #888; font-weight: 600;">
+          Norris Utilities® — Fulfillment Tracker
+        </div>
+      </div>
+
+      <!-- RULE BANNER -->
+      <div class="rule-banner">
+        <div class="rule-icon">🚨</div>
+        <div class="rule-text">
+          Nothing is invoiced in QuickBooks until tracking number AND shipping cost are captured.
+          <em>Every order must have confirmed carrier tracking and actual freight cost before QB invoice creation.</em>
+        </div>
+      </div>
+
+      <!-- STATS ROW -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Today's Orders</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-value">1</div>
+          <div class="stat-label">Shipped</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-value">1</div>
+          <div class="stat-label">Processing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">1</div>
+          <div class="stat-label">Pending Pickup</div>
+        </div>
+        <div class="stat-card flag">
+          <div class="stat-value">1</div>
+          <div class="stat-label">CC + 4% Flag</div>
+        </div>
+      </div>
+
+      <!-- LEGEND -->
+      <div class="legend">
+        <div class="legend-title">Status Key</div>
+        <div class="legend-item">
+          <span class="status status-shipped"><span class="status-dot"></span>Shipped</span>
+          Tracking confirmed, in transit or delivered
+        </div>
+        <div class="legend-item">
+          <span class="status status-processing"><span class="status-dot"></span>Processing</span>
+          Order received, preparing for shipment
+        </div>
+        <div class="legend-item">
+          <span class="status status-pending"><span class="status-dot"></span>Pending</span>
+          Awaiting pickup or carrier confirmation
+        </div>
+        <div class="legend-item">
+          <span class="status status-invoiced"><span class="status-dot"></span>Invoiced</span>
+          QB invoice created (tracking + cost confirmed)
+        </div>
+        <div class="legend-item">
+          <span class="cc-flag">CC +4%</span>
+          Credit card surcharge applied
+        </div>
+      </div>
+
+      <!-- SHIPPING LOG TABLE -->
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Order Date</th>
+              <th>SD#</th>
+              <th>Customer</th>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Ship To</th>
+              <th>Tracking #</th>
+              <th>Carrier</th>
+              <th>Ship Cost</th>
+              <th>Billed Customer</th>
+              <th>Payment Method</th>
+              <th>QB Invoice #</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ORDER 1 — Shipped, Net 30 -->
+            <tr>
+              <td class="mono">06/19/2025</td>
+              <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2025-0619A</td>
+              <td style="font-weight:700;">Sheffield Utilities</td>
+              <td>FlexPro Armor — NU-BC-2851 (2-Man, 28"×51")</td>
+              <td class="center">2</td>
+              <td>Sheffield, AL 35660</td>
+              <td class="mono">1Z999AA10123456784</td>
+              <td>UPS Ground</td>
+              <td class="currency">$47.00</td>
+              <td class="currency">$52.00</td>
+              <td><span class="payment-net">Net 30</span></td>
+              <td class="mono" style="font-weight:700; color:#059669;">INV-1247</td>
+              <td><span class="status status-shipped"><span class="status-dot"></span>Shipped</span></td>
+            </tr>
+            <!-- ORDER 2 — Processing, CC +4% -->
+            <tr>
+              <td class="mono">06/19/2025</td>
+              <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2025-0619B</td>
+              <td style="font-weight:700;">EPB Chattanooga</td>
+              <td>FlexPro Armor — NU-BC-2851-C (2-Man Combo)</td>
+              <td class="center">4</td>
+              <td>Chattanooga, TN 37402</td>
+              <td style="color:#999; font-style:italic;">Awaiting pickup scan</td>
+              <td>FedEx Ground</td>
+              <td style="color:#999; font-style:italic; text-align:right;">Pending</td>
+              <td style="color:#999; font-style:italic; text-align:right;">Pending</td>
+              <td>
+                <span class="payment-cc">Credit Card</span>
+                <span class="cc-flag">CC +4%</span>
+              </td>
+              <td style="color:#999; font-style:italic;">Blocked — no tracking</td>
+              <td><span class="status status-processing"><span class="status-dot"></span>Processing</span></td>
+            </tr>
+            <!-- ORDER 3 — Pending, Net 30 -->
+            <tr>
+              <td class="mono">06/19/2025</td>
+              <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2025-0619C</td>
+              <td style="font-weight:700;">Gridco</td>
+              <td>FlexPro Armor — NU-BC-2834 (1.5-Man, 28"×34")</td>
+              <td class="center">6</td>
+              <td>Decatur, AL 35601</td>
+              <td style="color:#999; font-style:italic;">Pending carrier assignment</td>
+              <td style="color:#999; font-style:italic;">TBD by warehouse</td>
+              <td style="color:#999; font-style:italic; text-align:right;">Pending</td>
+              <td style="color:#999; font-style:italic; text-align:right;">Pending</td>
+              <td><span class="payment-net">Net 30</span></td>
+              <td style="color:#999; font-style:italic;">Blocked — no tracking</td>
+              <td><span class="status status-pending"><span class="status-dot"></span>Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- WORKFLOW NOTES -->
+      <div class="workflow-notes">
+        <div class="workflow-card">
+          <h3>📋 Order-to-Invoice Workflow</h3>
+          <ol>
+            <li>Order received — assign SD# and enter in Shipping Log</li>
+            <li>Product pulled and packed at warehouse</li>
+            <li>Carrier scheduled — update Carrier column</li>
+            <li>Package scanned — enter Tracking # immediately</li>
+            <li>Shipping invoice received — enter Ship Cost</li>
+            <li>Calculate Billed Customer using formula: <strong>ROUNDUP(ROUNDUP(RegCost, 0) × 1.10, 0)</strong></li>
+            <li>Only after Steps 4 + 5 complete → create QB Invoice</li>
+            <li>Enter QB Invoice # and update Status to Invoiced</li>
+          </ol>
+        </div>
+        <div class="workflow-card">
+          <h3>💳 Payment Method Rules</h3>
+          <ul>
+            <li><strong>Net 30</strong> — Standard terms for established utility accounts</li>
+            <li><strong>Credit Card</strong> — Always apply <strong>+4% processing surcharge</strong></li>
+            <li>CC surcharge must be itemized on QB invoice as separate line</li>
+            <li>Flag all CC orders visually with ⚠ CC +4% badge</li>
+            <li>Prepaid orders — mark as "Prepaid" and note payment date</li>
+          </ul>
+        </div>
+        <div class="workflow-card">
+          <h3>📦 Shipping Cost Formula</h3>
+          <ul>
+            <li><strong>Customer Cost = ROUNDUP(ROUNDUP(RegCost, 0) × 1.10, 0)</strong></li>
+            <li>Round the carrier's regular cost up to the nearest dollar first</li>
+            <li>Multiply by 1.10 (10% handling markup)</li>
+            <li>Round result up to the nearest dollar</li>
+            <li>Example: Carrier charges $42.37 → $43 → $47.30 → <strong>$48.00 billed</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIMESTAMP -->
+      <div class="timestamp">
+        Shipping Log generated June 19, 2025 — Norris Utilities® Operations
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris | Founder &amp; CEO<br>
+      Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
 
 </body>
 </html>
