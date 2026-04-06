@@ -90,14 +90,15 @@ tr:hover{background:#f8f9ff}
 
 /* ===== QUICK LINKS ===== */
 .quick-links{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
-.ql-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:#fff;border:1px solid #eee;border-radius:10px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#0a0e5c;text-decoration:none;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.ql-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,51,204,0.12);border-color:#06D0FF;color:#0033cc}
-.ql-btn .ql-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ql-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:#fff;border:1px solid #eee;border-left:3px solid #0033cc;border-radius:10px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#0a0e5c;text-decoration:none;transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.ql-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,51,204,0.12);border-color:#06D0FF;border-left-color:#06D0FF;color:#0033cc}
+.ql-btn .ql-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 
 /* ===== PAGE LINKS BAR ===== */
-.page-links{display:flex;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(10,14,92,0.8);border-top:1px solid rgba(6,208,255,0.15)}
-.page-links a{color:rgba(255,255,255,0.5);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:10px 14px;text-decoration:none;transition:color .2s}
+.page-links{display:flex;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(10,14,92,0.8);border-top:1px solid rgba(6,208,255,0.15);align-items:center}
+.page-links a{color:rgba(255,255,255,0.7);font-size:12px;font-weight:600;letter-spacing:0.5px;padding:10px 14px;text-decoration:none;transition:color .2s}
 .page-links a:hover{color:#06D0FF}
+.page-links .sep{color:rgba(255,255,255,0.25);font-size:10px;user-select:none}
 
 /* ===== TOOL GRID ===== */
 .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -217,19 +218,22 @@ tr:hover{background:#f8f9ff}
   <button data-tab="docs">Docs</button>
 </nav>
 <div class="page-links">
-  <a href="shipping-log.html" target="_blank">Shipping Log</a>
-  <a href="po-tracker.html" target="_blank">PO Tracker</a>
-  <a href="calendar.html" target="_blank">Calendar</a>
-  <a href="cb-dashboard.html" target="_blank">CB Dashboard</a>
-  <a href="cb-onboarding.html" target="_blank">CB Onboarding</a>
-  <a href="journal.html" target="_blank">Journal</a>
-  <a href="team.html" target="_blank">Team</a>
-  <a href="mission-control.html" target="_blank">Mission Control</a>
-  <a href="website/storefront.html" target="_blank">FlexPro Armor Storefront</a>
-  <a href="website/about.html" target="_blank">About Page</a>
-  <a href="website/index.html" target="_blank">Website Homepage</a>
-  <a href="shipping-docs/" target="_blank">Shipping Docs</a>
-  <a href="msp-orders.html" target="_blank" style="color:#06D0FF">MSP Rope Orders</a>
+  <a href="shipping-log.html" target="_blank">Shipping Log</a><span class="sep">&middot;</span>
+  <a href="po-tracker.html" target="_blank">PO Tracker</a><span class="sep">&middot;</span>
+  <a href="calendar.html" target="_blank">Calendar</a><span class="sep">&middot;</span>
+  <a href="cb-dashboard.html" target="_blank">CB Dashboard</a><span class="sep">&middot;</span>
+  <a href="cb-onboarding.html" target="_blank">CB Onboarding</a><span class="sep">&middot;</span>
+  <a href="journal.html" target="_blank">Journal</a><span class="sep">&middot;</span>
+  <a href="team.html" target="_blank">Team</a><span class="sep">&middot;</span>
+  <a href="mission-control.html" target="_blank">Mission Control</a><span class="sep">&middot;</span>
+  <a href="website/storefront.html" target="_blank">FlexPro Armor Storefront</a><span class="sep">&middot;</span>
+  <a href="website/about.html" target="_blank">About Page</a><span class="sep">&middot;</span>
+  <a href="website/index.html" target="_blank">Website Homepage</a><span class="sep">&middot;</span>
+  <a href="shipping-docs/" target="_blank">Shipping Docs</a><span class="sep">&middot;</span>
+  <a href="msp-orders.html" target="_blank" style="color:#06D0FF">MSP Rope Orders</a><span class="sep">&middot;</span>
+  <a href="/internal/email_dashboard.html" target="_blank">Email Dashboard</a><span class="sep">&middot;</span>
+  <a href="/internal/samson_dashboard.html" target="_blank">Samson Dashboard</a><span class="sep">&middot;</span>
+  <a href="team-live.html" target="_blank" style="color:#06D0FF">AI Team</a><span class="sep">&middot;</span>
   <a href="aaron.html" target="_blank">AC</a>
 </div>
 
@@ -247,37 +251,28 @@ tr:hover{background:#f8f9ff}
     <a href="https://app.qbo.intuit.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#2ca01c;color:#fff">📗</span>QuickBooks</a>
     <a href="https://drive.google.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#4285f4;color:#fff">📁</span>Google Drive</a>
     <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6b4c14;color:#fff">📦</span>UPS Shipping Log</a>
-    <a href="#" onclick="alert('Aaron: paste the full Google Sheets URL here');return false" class="ql-btn" style="border-style:dashed"><span class="ql-icon" style="background:#0033cc;color:#fff">💲</span>Pricing Tools <span style="font-size:10px;color:#cc0000;font-weight:700">(URL needed)</span></a>
+    <a href="/tools/pricing-calculator.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0033cc;color:#fff">💲</span>Pricing Tools</a>
     <a href="https://web.telegram.org" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0088cc;color:#fff">💬</span>Telegram</a>
-  </div>
-
-  <!-- Google Drive -->
-  <div class="sec-title"><span class="blue">Google</span> <span class="dark">Drive</span></div>
-  <div class="card" style="padding:16px;margin-bottom:32px">
-    <div style="border-radius:10px;overflow:hidden;border:1px solid #eee">
-      <iframe src="https://drive.google.com/embeddedfolderview?id=root#list" width="100%" height="300" frameborder="0" style="display:block;background:#fff" loading="lazy"></iframe>
-    </div>
-    <div style="text-align:center;margin-top:12px">
-      <a href="https://drive.google.com" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-decoration:none">Open Full Google Drive ↗</a>
-    </div>
+    <a href="/internal/email_dashboard.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#cc3333;color:#fff">📬</span>Email Scanner</a>
+    <a href="/internal/samson_dashboard.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6600cc;color:#fff">🧵</span>Samson Tracker</a>
   </div>
 
   <!-- Quick Stats -->
   <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-number">5</div>
+    <div class="stat-card" style="border-top-color:#0033cc">
+      <div class="stat-number" style="color:#0033cc">5</div>
       <div class="stat-label">Uninvoiced Orders</div>
     </div>
     <div class="stat-card" style="border-top-color:#cc0000">
       <div class="stat-number" style="color:#cc0000">3</div>
       <div class="stat-label">Overdue Follow-Ups</div>
     </div>
-    <div class="stat-card" style="border-top-color:#00aa44">
-      <div class="stat-number" style="color:#00aa44">$685K+</div>
+    <div class="stat-card" style="border-top-color:#00802b">
+      <div class="stat-number" style="color:#00802b">$685K+</div>
       <div class="stat-label">Active Pipeline</div>
     </div>
-    <div class="stat-card" style="border-top-color:#ffaa00">
-      <div class="stat-number" style="color:#ffaa00">6</div>
+    <div class="stat-card" style="border-top-color:#b38600">
+      <div class="stat-number" style="color:#b38600">6</div>
       <div class="stat-label">Skylift Trucks Inbound</div>
     </div>
   </div>
@@ -865,6 +860,7 @@ tr:hover{background:#f8f9ff}
     <a href="internal/agent_calendar.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0088cc,#00bbee)">📅</div><div><h4>Calendar &amp; Timeline</h4><p>Agent schedule and project timeline</p></div></a>
     <a href="internal/shipping_doc_v7.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">📑</div><div><h4>Shipping Doc Template</h4><p>Branded shipping document generator</p></div></a>
     <a href="internal/video_breakdown.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">🎬</div><div><h4>Video Breakdown</h4><p>Video content analysis tool</p></div></a>
+    <a href="team-live.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">🛞</div><div><h4>AI Team &mdash; Live</h4><p>All 13 agents on OneWheels &mdash; live status</p></div></a>
   </div>
 </div>
 

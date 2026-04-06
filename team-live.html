@@ -4,149 +4,213 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Norris Utilities&reg; AI Team &mdash; All on OneWheels</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   NORRIS UTILITIES® AI TEAM — ONEWHEEL DASHBOARD
+   ============================================================ */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Lato',sans-serif;background:#0a0e2a;color:#fff;min-height:100vh;overflow-x:hidden}
+body{font-family:'Lato',sans-serif;background:#070b1a;color:#fff;min-height:100vh;overflow-x:hidden}
 
 /* ===== LOGIN ===== */
 .login-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%)}
 .login-overlay.hidden{display:none}
-.login-box{background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.login-box{background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;overflow:hidden}
 .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)}
 .login-title{font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px}
 .login-sub{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px}
-.login-input{width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s}
+.login-input{width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s;color:#1a1a1a}
 .login-input:focus{border-color:#0033cc}
-.login-btn{width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer}
-.login-err{color:#cc0000;font-size:12px;margin-top:10px;min-height:18px}
+.login-btn{width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:transform .15s}
+.login-btn:hover{transform:translateY(-2px)}
+.login-err{color:#cc0000;font-size:12px;margin-top:10px;min-height:18px;font-weight:700}
 
 /* ===== HEADER ===== */
-.header{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:40px 24px 60px;text-align:center;overflow:hidden}
-.header h1{font-weight:900;font-size:28px;color:#fff;letter-spacing:2px}
-.header .tagline{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.85);font-size:15px;margin-top:6px}
-.header .count{color:#06D0FF;font-size:14px;font-weight:700;margin-top:10px;letter-spacing:1px}
-.chevron-wrap{margin-top:-1px;line-height:0}
+.header{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:48px 24px 64px;text-align:center;overflow:hidden}
+.header::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23fff' stroke-width='.3' opacity='.08'%3E%3Cpath d='M0 30h60M30 0v60'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.header-content{position:relative;z-index:2}
+.header h1{font-weight:900;font-size:clamp(22px,4vw,36px);letter-spacing:3px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+.header .tagline{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,.85);font-size:15px;margin-top:8px;letter-spacing:1px}
+.header .motto{color:#06D0FF;font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;margin-top:14px}
+.header .status-summary{color:rgba(255,255,255,.7);font-size:14px;margin-top:10px;font-weight:600}
+.header .status-summary span{color:#06D0FF;font-weight:900}
+.chevron-wrap{margin-top:-1px;line-height:0;position:relative;z-index:5}
 .chevron-wrap svg{display:block;width:100%}
 
 /* ===== STATUS BAR ===== */
-.status-bar{display:flex;justify-content:center;align-items:center;gap:32px;padding:16px;background:rgba(0,51,204,0.15);border-bottom:1px solid rgba(6,208,255,0.2);flex-wrap:wrap}
-.status-bar .stat{font-size:14px;font-weight:700;letter-spacing:0.5px}
-.status-bar .stat span{color:#06D0FF}
-.dot-active{display:inline-block;width:8px;height:8px;border-radius:50%;background:#00cc44;margin-right:6px;animation:pulse 2s infinite}
-.dot-idle{display:inline-block;width:8px;height:8px;border-radius:50%;background:#b38600;margin-right:6px}
-.dot-down{display:inline-block;width:8px;height:8px;border-radius:50%;background:#cc0000;margin-right:6px;animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.status-bar{display:flex;justify-content:center;align-items:center;gap:32px;padding:14px 16px;background:rgba(10,14,92,.6);backdrop-filter:blur(10px);border-bottom:1px solid rgba(6,208,255,.15);flex-wrap:wrap;position:sticky;top:0;z-index:100}
+.sbar-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;letter-spacing:.5px}
+.sbar-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.sbar-dot.green{background:#00cc44;box-shadow:0 0 8px #00cc44;animation:dotPulse 2s infinite}
+.sbar-dot.yellow{background:#dda600;box-shadow:0 0 6px #dda600}
+.sbar-dot.red{background:#cc0000;box-shadow:0 0 8px #cc0000;animation:dotPulse 1s infinite}
+@keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.5}}
+.sbar-time{color:rgba(255,255,255,.4);font-size:12px;font-weight:400}
 
 /* ===== SCENE ===== */
-.scene{position:relative;min-height:500px;background:linear-gradient(180deg,#0d1230 0%,#1a1040 30%,#2a1845 50%,#3d2050 65%,#1a1a3a 80%,#222 85%,#333 100%);overflow:hidden;padding:40px 20px 100px}
+.scene-wrap{position:relative;width:100%;overflow:hidden}
 
-/* Dawn sky */
-.scene::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,#0d1230 0%,#1a1040 20%,#2a1845 40%,rgba(255,120,50,0.08) 70%,rgba(255,180,80,0.05) 100%);pointer-events:none}
+/* Sky layers */
+.sky{position:absolute;top:0;left:0;right:0;height:55%;pointer-events:none}
+.sky-dawn{position:absolute;inset:0;background:linear-gradient(180deg,#070b1a 0%,#0d1535 25%,#1a1848 40%,#2d1a45 55%,#4a2040 68%,#8a3a30 80%,#cc6630 90%,#eea050 100%)}
+.stars{position:absolute;top:0;left:0;right:0;height:50%}
+.star{position:absolute;background:#fff;border-radius:50%}
 
-/* Stars */
-.stars{position:absolute;top:0;left:0;right:0;height:45%;pointer-events:none;overflow:hidden}
-.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s infinite}
-@keyframes twinkle{0%,100%{opacity:0.3}50%{opacity:1}}
+/* Background cityscape */
+.bg-city{position:absolute;bottom:18%;left:0;right:0;height:30%;pointer-events:none;opacity:.12}
+.bg-building{position:absolute;bottom:0;background:#1a2040;border-radius:2px 2px 0 0}
+.bg-crane{position:absolute;bottom:0}
 
-/* Road */
-.road{position:absolute;bottom:0;left:0;right:0;height:100px;background:linear-gradient(180deg,#2a2a2a,#1a1a1a);border-top:3px solid #444}
-.road::before{content:'';position:absolute;top:45px;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#0033cc 0px,#0033cc 40px,transparent 40px,transparent 80px)}
-.road::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0033cc,#06D0FF);opacity:0.6}
+/* Ground/Road */
+.ground{position:absolute;bottom:0;left:0;right:0;height:22%;background:linear-gradient(180deg,#1a1a2a 0%,#151520 30%,#111118 100%)}
+.road{position:absolute;bottom:5%;left:0;right:0;height:12%;background:#1c1c28;border-top:2px solid rgba(0,51,204,.4);border-bottom:2px solid rgba(0,51,204,.2)}
+.road::before{content:'';position:absolute;top:48%;left:0;right:0;height:2px;background:repeating-linear-gradient(90deg,rgba(6,208,255,.35) 0,rgba(6,208,255,.35) 30px,transparent 30px,transparent 70px)}
+.road-glow{position:absolute;bottom:5%;left:0;right:0;height:12%;background:linear-gradient(90deg,transparent,rgba(0,51,204,.06) 20%,rgba(6,208,255,.04) 50%,rgba(0,51,204,.06) 80%,transparent);pointer-events:none}
 
-/* ===== CHARACTER GRID ===== */
-.team-grid{position:relative;z-index:10;display:flex;flex-wrap:wrap;justify-content:center;gap:16px;padding-bottom:80px}
+/* ===== CHARACTER TRACK ===== */
+.char-track{position:relative;z-index:10;display:flex;align-items:flex-end;justify-content:center;flex-wrap:wrap;gap:8px;padding:60px 10px 0;min-height:600px}
 
-/* ===== CHARACTER ===== */
-.agent{position:relative;width:130px;text-align:center;cursor:pointer;transition:transform .3s}
-.agent:hover{transform:scale(1.08)}
-.agent:hover .bubble{opacity:1;transform:translateY(0);max-height:200px;padding:10px 14px}
+/* ===== CHARACTER CONTAINER ===== */
+.char{position:relative;width:120px;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform .2s}
+.char:hover{transform:scale(1.06)}
+.char.leader{width:150px}
+.char.human{width:135px}
 
-/* Status aura */
-.agent .aura{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:80px;height:80px;border-radius:50%;filter:blur(20px);opacity:0.4;pointer-events:none;z-index:0}
-.agent[data-status="active"] .aura{background:#00cc44;animation:auraPulse 2s infinite}
-.agent[data-status="idle"] .aura{background:#b38600;opacity:0.2}
-.agent[data-status="down"] .aura{background:#cc0000;animation:auraPulse 1s infinite}
-@keyframes auraPulse{0%,100%{opacity:0.4;transform:translateX(-50%) scale(1)}50%{opacity:0.7;transform:translateX(-50%) scale(1.2)}}
+/* Name plate */
+.char-name{font-size:10px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#06D0FF;text-align:center;margin-bottom:2px;white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.char-role{font-size:8px;color:rgba(255,255,255,.45);letter-spacing:.5px;margin-bottom:6px;text-align:center}
+.char.leader .char-name{font-size:12px;color:#fff}
+.char.human .char-name{color:#fff;font-size:11px}
 
-/* Name */
-.agent-name{font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#06D0FF;margin-bottom:4px;white-space:nowrap}
-.agent-role{font-size:9px;color:rgba(255,255,255,0.5);margin-bottom:8px}
+/* Status ring glow under the OneWheel */
+.status-glow{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:70px;height:12px;border-radius:50%;filter:blur(8px);opacity:.7;pointer-events:none}
+.char[data-status="active"] .status-glow{background:#00cc44;animation:glowPulse 2s infinite}
+.char[data-status="idle"] .status-glow{background:#dda600;opacity:.4}
+.char[data-status="down"] .status-glow{background:#cc0000;animation:glowPulse 1s infinite}
+.char.human .status-glow{background:#0033cc;opacity:.5}
+@keyframes glowPulse{0%,100%{opacity:.7;transform:translateX(-50%) scaleX(1)}50%{opacity:1;transform:translateX(-50%) scaleX(1.3)}}
 
-/* Body container */
-.body-wrap{position:relative;z-index:2;height:90px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+/* Ride animation */
+.ride-group{animation:rideBounce 1s ease-in-out infinite}
+.char[data-status="idle"] .ride-group{animation-duration:2s}
+.char[data-status="down"] .ride-group{animation:none;transform:rotate(18deg) translateX(6px)}
+@keyframes rideBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
-/* Character body — each is unique via inline styles */
-.char-body{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;position:relative;z-index:2}
+/* Down alert */
+.down-x{position:absolute;top:5px;right:8px;font-size:22px;font-weight:900;color:#ff3333;animation:downBob .5s infinite;text-shadow:0 0 10px #ff0000;z-index:20}
+@keyframes downBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
-/* Accessory above head */
-.accessory{font-size:14px;margin-bottom:2px;height:18px;line-height:18px}
+/* Motion lines */
+.motion-lines{position:absolute;left:-10px;top:40%;opacity:0;pointer-events:none}
+.char[data-status="active"] .motion-lines{opacity:.5;animation:motionSlide 1.2s linear infinite}
+.ml{display:block;width:14px;height:2px;background:#06D0FF;border-radius:1px;margin:3px 0;opacity:.6}
+.ml:nth-child(2){width:10px;opacity:.4}
+.ml:nth-child(3){width:7px;opacity:.25}
+@keyframes motionSlide{0%{opacity:.5;transform:translateX(0)}100%{opacity:0;transform:translateX(-18px)}}
 
-/* OneWheel */
-.onewheel{position:relative;width:40px;height:22px;margin-top:-2px;z-index:2}
-.ow-board{position:absolute;top:0;left:2px;right:2px;height:8px;background:linear-gradient(90deg,#222,#333);border-radius:4px;z-index:2}
-.ow-wheel{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:conic-gradient(#444 0deg,#666 90deg,#444 180deg,#666 270deg,#444 360deg);border:2px solid #555;z-index:1}
-.agent[data-status="active"] .ow-wheel{animation:spin 0.8s linear infinite}
-.agent[data-status="idle"] .ow-wheel{animation:spin 3s linear infinite}
-.agent[data-status="down"] .ow-wheel{animation:none}
-@keyframes spin{from{transform:translateX(-50%) rotate(0deg)}to{transform:translateX(-50%) rotate(360deg)}}
+/* ===== INFO CARD (hover/tap) ===== */
+.info-card{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(10px);background:#fff;color:#1a1a1a;border-radius:12px;padding:0;width:220px;opacity:0;pointer-events:none;transition:all .25s;z-index:200;box-shadow:0 8px 30px rgba(0,0,0,.5);overflow:hidden}
+.char:hover .info-card,.char.tapped .info-card{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.info-card::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:8px solid transparent;border-top-color:#fff}
+.ic-header{background:linear-gradient(135deg,#0a0e5c,#0033cc);padding:12px 16px;color:#fff}
+.ic-header h3{font-size:14px;font-weight:900;letter-spacing:.5px}
+.ic-header .ic-role{font-size:11px;color:#06D0FF;font-weight:600}
+.ic-body{padding:12px 16px}
+.ic-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;border-bottom:1px solid #f0f0f0}
+.ic-row:last-child{border:none}
+.ic-label{color:#888;font-weight:600}
+.ic-val{font-weight:700;color:#0a0e5c;text-align:right;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ic-msg{font-size:11px;color:#444;padding:8px 0 0;line-height:1.5;font-weight:600;border-top:1px solid #f0f0f0;margin-top:4px}
+.ic-status{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+.ic-status.active{background:#00cc44}
+.ic-status.idle{background:#dda600}
+.ic-status.down{background:#cc0000}
 
-/* Riding bounce */
-.agent[data-status="active"] .body-wrap{animation:ride 0.6s ease-in-out infinite}
-.agent[data-status="idle"] .body-wrap{animation:ride 1.5s ease-in-out infinite}
-@keyframes ride{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+/* ===== ONEWHEEL SVG ===== */
+.ow-svg{width:80px;height:42px;margin-top:-2px}
+.char.leader .ow-svg{width:92px;height:48px}
+.char[data-status="active"] .ow-tire{animation:wheelSpin 1s linear infinite}
+.char[data-status="idle"] .ow-tire{animation:wheelSpin 4s linear infinite}
+@keyframes wheelSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-/* Down state — tipped over */
-.agent[data-status="down"] .body-wrap{transform:rotate(25deg) translateX(8px)}
-.agent[data-status="down"] .onewheel{transform:rotate(70deg)}
-.down-alert{position:absolute;top:-5px;right:5px;font-size:18px;animation:alertBounce 0.5s infinite;z-index:20}
-@keyframes alertBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+/* ===== CHARACTER SVG ===== */
+.char-svg{width:80px;height:110px;overflow:visible}
+.char.leader .char-svg{width:100px;height:130px}
+.char.human .char-svg{width:90px;height:120px}
 
-/* Motion lines for active agents */
-.motion-lines{position:absolute;left:-20px;top:50%;transform:translateY(-50%);opacity:0;pointer-events:none}
-.agent[data-status="active"] .motion-lines{opacity:0.5;animation:motionFade 1s infinite}
-.motion-lines span{display:block;width:12px;height:2px;background:#06D0FF;margin:3px 0;border-radius:1px}
-@keyframes motionFade{0%{opacity:0.5;transform:translateY(-50%) translateX(0)}100%{opacity:0;transform:translateY(-50%) translateX(-15px)}}
+/* Arm swing */
+.arm-swing{transform-origin:50% 10%;animation:armPump 1.2s ease-in-out infinite}
+.char[data-status="idle"] .arm-swing{animation-duration:3s}
+.char[data-status="down"] .arm-swing{animation:none}
+@keyframes armPump{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(8deg)}}
 
-/* Speech bubble */
-.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%) translateY(8px);background:rgba(255,255,255,0.95);color:#1a1a1a;font-size:10px;font-weight:600;line-height:1.4;padding:0;border-radius:8px;white-space:nowrap;max-height:0;opacity:0;overflow:hidden;transition:all .3s;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.3);pointer-events:none}
-.bubble::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(255,255,255,0.95)}
-.bubble .b-name{font-weight:900;color:#0033cc;font-size:11px;margin-bottom:4px}
-.bubble .b-msg{color:#444;margin-bottom:3px}
-.bubble .b-time{color:#888;font-size:9px}
-.bubble .b-next{color:#0033cc;font-size:9px}
+/* Legacy flame flicker */
+.flame-hair{animation:flameFlicker .4s ease-in-out infinite alternate}
+@keyframes flameFlicker{0%{transform:scaleY(1) scaleX(1);opacity:.9}100%{transform:scaleY(1.12) scaleX(.92);opacity:1}}
 
-/* Sparks for V4 builder */
-@keyframes spark{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-20px) scale(0.3)}}
-.spark{position:absolute;width:3px;height:3px;background:#ffaa00;border-radius:50%;pointer-events:none}
+/* n8n wobble */
+.char.n8n-char .ride-group{animation:wobbleRide .8s ease-in-out infinite}
+@keyframes wobbleRide{0%,100%{transform:translateY(0) rotate(-3deg)}25%{transform:translateY(-4px) rotate(2deg)}50%{transform:translateY(-2px) rotate(-2deg)}75%{transform:translateY(-5px) rotate(3deg)}}
 
-/* ===== LEADER ===== */
-.agent.leader{width:160px}
-.agent.leader .char-body{width:56px;height:56px;font-size:28px}
-.agent.leader .agent-name{font-size:13px;color:#fff}
-.agent.leader .onewheel{width:48px}
+/* Spark particles for V4 */
+.sparks{position:absolute;top:15px;right:5px;pointer-events:none}
+.spark{position:absolute;width:3px;height:3px;background:#ffaa00;border-radius:50%;animation:sparkFly 1s infinite}
+.spark:nth-child(1){animation-delay:0s;--sx:-8px;--sy:-15px}
+.spark:nth-child(2){animation-delay:.2s;--sx:5px;--sy:-20px}
+.spark:nth-child(3){animation-delay:.5s;--sx:-3px;--sy:-12px}
+.spark:nth-child(4){animation-delay:.7s;--sx:8px;--sy:-18px}
+@keyframes sparkFly{0%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--sx),var(--sy));opacity:0}}
+
+/* Envelope trail for Email Scout */
+.env-trail{position:absolute;top:30px;left:-15px;pointer-events:none}
+.env-trail span{position:absolute;font-size:10px;animation:envFly 2s linear infinite}
+.env-trail span:nth-child(1){animation-delay:0s}
+.env-trail span:nth-child(2){animation-delay:.7s;top:8px}
+.env-trail span:nth-child(3){animation-delay:1.4s;top:-5px}
+@keyframes envFly{0%{transform:translateX(0);opacity:.8}100%{transform:translateX(-35px);opacity:0}}
+
+/* Sound waves for Voice Decoder */
+.sound-waves{position:absolute;top:20px;left:50%;transform:translateX(-50%);pointer-events:none}
+.sw-ring{position:absolute;width:20px;height:20px;border:1px solid rgba(6,208,255,.4);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);animation:swExpand 2s ease-out infinite}
+.sw-ring:nth-child(2){animation-delay:.6s}
+.sw-ring:nth-child(3){animation-delay:1.2s}
+@keyframes swExpand{0%{width:10px;height:10px;opacity:.8}100%{width:50px;height:50px;opacity:0}}
+
+/* Cloud float for Backup */
+.cloud-float{animation:cloudBob 3s ease-in-out infinite}
+@keyframes cloudBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
 /* ===== FOOTER ===== */
-.footer{background:linear-gradient(135deg,#0a0e5c,#001144);padding:40px 24px;text-align:center}
-.footer-quote{font-family:'Lato',sans-serif;font-size:15px;color:rgba(255,255,255,0.6);font-weight:400;font-style:italic;max-width:600px;margin:0 auto 16px}
-.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:16px;letter-spacing:1px}
-.footer-copy{color:rgba(255,255,255,0.3);font-size:11px;margin-top:8px}
+.footer{background:linear-gradient(135deg,#0a0e5c,#001144);padding:48px 24px;text-align:center;border-top:1px solid rgba(6,208,255,.1)}
+.footer-quote{font-size:16px;color:rgba(255,255,255,.5);font-style:italic;max-width:650px;margin:0 auto 20px;line-height:1.6}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:18px;letter-spacing:1px}
+.footer-copy{color:rgba(255,255,255,.25);font-size:11px;margin-top:12px}
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  .header h1{font-size:20px}
-  .team-grid{gap:10px}
-  .agent{width:110px}
-  .agent.leader{width:130px}
-  .status-bar{gap:16px}
-  .status-bar .stat{font-size:12px}
+@media(max-width:900px){
+  .char-track{gap:4px;padding-top:40px}
+  .char{width:100px}
+  .char.leader{width:125px}
+  .char.human{width:115px}
+  .char-svg{width:65px;height:90px}
+  .char.leader .char-svg{width:80px;height:105px}
+  .ow-svg{width:65px;height:36px}
 }
-@media(max-width:480px){
-  .agent{width:100px}
-  .char-body{width:38px;height:38px;font-size:18px}
-  .agent-name{font-size:9px}
+@media(max-width:600px){
+  .char-track{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:30px 8px 0;min-height:auto}
+  .char,.char.leader,.char.human{width:100%}
+  .char-svg{width:55px;height:80px}
+  .char.leader .char-svg,.char.human .char-svg{width:62px;height:90px}
+  .ow-svg,.char.leader .ow-svg{width:58px;height:32px}
+  .info-card{width:180px;left:auto;right:auto;transform:translateX(-50%) translateY(10px)}
+  .char:hover .info-card,.char.tapped .info-card{transform:translateX(-50%) translateY(0)}
+  .status-bar{gap:14px;padding:10px}
+  .sbar-item{font-size:11px}
+  .scene-wrap{min-height:auto}
+}
+@media(max-width:400px){
+  .char-track{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -154,7 +218,7 @@ body{font-family:'Lato',sans-serif;background:#0a0e2a;color:#fff;min-height:100v
 
 <!-- ===== LOGIN ===== -->
 <div class="login-overlay" id="loginOverlay">
-  <div class="login-box" style="position:relative">
+  <div class="login-box">
     <div class="login-title">Norris Utilities&reg; AI Team</div>
     <div class="login-sub">A Legacy of Commitment&reg;</div>
     <input type="password" class="login-input" id="loginInput" placeholder="Enter portal password" autocomplete="off" autofocus>
@@ -163,39 +227,52 @@ body{font-family:'Lato',sans-serif;background:#0a0e2a;color:#fff;min-height:100v
   </div>
 </div>
 
-<!-- ===== HEADER ===== -->
 <div id="mainContent" style="display:none">
 
+<!-- ===== HEADER ===== -->
 <div class="header">
-  <h1>The Norris Utilities&reg; AI Team</h1>
-  <div class="tagline">A Legacy of Commitment&reg; &mdash; Powered by Legacy</div>
-  <div class="count" id="agentCount">13 agents. All on OneWheels. All working for you.</div>
+  <div class="header-content">
+    <h1>THE NORRIS UTILITIES&reg; AI TEAM</h1>
+    <div class="tagline">A Legacy of Commitment&reg; &mdash; Powered by Legacy</div>
+    <div class="motto">WORK HARD. RIDE HARD. BUILD THE LEGACY.</div>
+    <div class="status-summary" id="statusSummary">
+      <span>15</span> team members. <span id="hdrActive">0</span> active. <span id="hdrIdle">0</span> idle. <span id="hdrDown">0</span> down.
+    </div>
+  </div>
 </div>
-<div class="chevron-wrap">
-  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="0,0 547,0 547,60 0,0" fill="#06D0FF" opacity="0.15"/>
-    <polygon points="0,0 547,60 1440,0" fill="#0a0e2a"/>
-  </svg>
-</div>
+<div class="chevron-wrap"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 547,0 547,60 0,0" fill="#06D0FF" opacity=".12"/><polygon points="0,0 547,60 1440,0" fill="#070b1a"/></svg></div>
 
 <!-- ===== STATUS BAR ===== -->
 <div class="status-bar" id="statusBar">
-  <div class="stat"><span class="dot-active"></span><span id="activeNum">0</span> Active</div>
-  <div class="stat"><span class="dot-idle"></span><span id="idleNum">0</span> Idle</div>
-  <div class="stat"><span class="dot-down"></span><span id="downNum">0</span> Down</div>
-  <div class="stat">Last updated: <span id="lastUpdated">loading...</span></div>
+  <div class="sbar-item"><div class="sbar-dot green"></div><span id="sActive">0</span>&nbsp;Active</div>
+  <div class="sbar-item"><div class="sbar-dot yellow"></div><span id="sIdle">0</span>&nbsp;Idle</div>
+  <div class="sbar-item"><div class="sbar-dot red"></div><span id="sDown">0</span>&nbsp;Down</div>
+  <div class="sbar-item sbar-time">Updated: <span id="sTime">loading...</span></div>
 </div>
 
 <!-- ===== SCENE ===== -->
-<div class="scene">
-  <div class="stars" id="stars"></div>
+<div class="scene-wrap">
+  <!-- Sky -->
+  <div class="sky">
+    <div class="sky-dawn"></div>
+    <div class="stars" id="stars"></div>
+  </div>
+
+  <!-- Background cityscape -->
+  <div class="bg-city" id="bgCity"></div>
+
+  <!-- Ground + Road -->
+  <div class="ground"></div>
   <div class="road"></div>
-  <div class="team-grid" id="teamGrid"></div>
+  <div class="road-glow"></div>
+
+  <!-- Character track -->
+  <div class="char-track" id="charTrack"></div>
 </div>
 
 <!-- ===== FOOTER ===== -->
 <div class="footer">
-  <div class="footer-quote">"Built by Aaron C. Norris &mdash; because one man with the right team can outwork anyone."</div>
+  <div class="footer-quote">&ldquo;Built by Aaron C. Norris &mdash; because one man with the right team can outwork anyone.&rdquo;</div>
   <div class="footer-tagline">A Legacy of Commitment&reg;</div>
   <div class="footer-copy">&copy; 2026 Norris Utilities, LLC &bull; Birmingham, Alabama &bull; 205-500-1343</div>
 </div>
@@ -203,229 +280,527 @@ body{font-family:'Lato',sans-serif;background:#0a0e2a;color:#fff;min-height:100v
 </div><!-- /mainContent -->
 
 <script>
-// ===== LOGIN =====
+// ================================================================
+// LOGIN
+// ================================================================
 (function(){
   const PW='legacy2026';
-  if(sessionStorage.getItem('nu_auth')==='1'){
-    document.getElementById('loginOverlay').classList.add('hidden');
-    document.getElementById('mainContent').style.display='block';
-    init();
-    return;
-  }
-  document.getElementById('loginBtn').addEventListener('click',tryLogin);
-  document.getElementById('loginInput').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin()});
+  if(sessionStorage.getItem('nu_auth')==='1'){show();return}
+  document.getElementById('loginBtn').onclick=tryLogin;
+  document.getElementById('loginInput').onkeydown=function(e){if(e.key==='Enter')tryLogin()};
   function tryLogin(){
-    const v=document.getElementById('loginInput').value.trim();
-    if(v===PW){
-      sessionStorage.setItem('nu_auth','1');
-      document.getElementById('loginOverlay').classList.add('hidden');
-      document.getElementById('mainContent').style.display='block';
-      init();
-    }else{
-      document.getElementById('loginErr').textContent='Wrong password';
-      document.getElementById('loginInput').classList.add('error');
-      setTimeout(()=>document.getElementById('loginInput').classList.remove('error'),500);
-    }
+    if(document.getElementById('loginInput').value.trim()===PW){sessionStorage.setItem('nu_auth','1');show()}
+    else{document.getElementById('loginErr').textContent='Wrong password';document.getElementById('loginInput').style.borderColor='#cc0000';setTimeout(()=>{document.getElementById('loginInput').style.borderColor=''},600)}
   }
+  function show(){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('mainContent').style.display='';init()}
 })();
 
-// ===== CHARACTER DEFINITIONS =====
-const CHARS = {
+// ================================================================
+// SVG BUILDERS
+// ================================================================
+
+// ONEWHEEL — accurate GT-S style: one fat center tire, flat footpads each side, fender on top
+function svgOneWheel(w,h,accent){
+  accent=accent||'#0033cc';
+  const cx=w/2, cy=h*.52, tr=h*.38, fr=tr+3;
+  return `<svg class="ow-svg" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+  <!-- Footpads -->
+  <rect x="${cx-w*.48}" y="${cy-3}" width="${w*.36}" height="6" rx="2" fill="#222" stroke="#333" stroke-width=".5"/>
+  <rect x="${cx+w*.12}" y="${cy-3}" width="${w*.36}" height="6" rx="2" fill="#222" stroke="#333" stroke-width=".5"/>
+  <!-- Grip tape texture -->
+  <rect x="${cx-w*.46}" y="${cy-2}" width="${w*.33}" height="4" rx="1" fill="#2a2a2a" opacity=".6"/>
+  <rect x="${cx+w*.13}" y="${cy-2}" width="${w*.33}" height="4" rx="1" fill="#2a2a2a" opacity=".6"/>
+  <!-- Tire -->
+  <g class="ow-tire" style="transform-origin:${cx}px ${cy}px">
+    <circle cx="${cx}" cy="${cy}" r="${tr}" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+    <circle cx="${cx}" cy="${cy}" r="${tr-3}" fill="#222"/>
+    <!-- Tread marks -->
+    <g stroke="#333" stroke-width="1.2" opacity=".5">
+      <line x1="${cx}" y1="${cy-tr+1}" x2="${cx}" y2="${cy-tr+5}"/>
+      <line x1="${cx+tr-1}" y1="${cy}" x2="${cx+tr-5}" y2="${cy}"/>
+      <line x1="${cx}" y1="${cy+tr-1}" x2="${cx}" y2="${cy+tr-5}"/>
+      <line x1="${cx-tr+1}" y1="${cy}" x2="${cx-tr+5}" y2="${cy}"/>
+      <line x1="${cx+tr*.7}" y1="${cy-tr*.7}" x2="${cx+tr*.7-3}" y2="${cy-tr*.7+3}"/>
+      <line x1="${cx+tr*.7}" y1="${cy+tr*.7}" x2="${cx+tr*.7-3}" y2="${cy+tr*.7-3}"/>
+      <line x1="${cx-tr*.7}" y1="${cy+tr*.7}" x2="${cx-tr*.7+3}" y2="${cy+tr*.7-3}"/>
+      <line x1="${cx-tr*.7}" y1="${cy-tr*.7}" x2="${cx-tr*.7+3}" y2="${cy-tr*.7+3}"/>
+    </g>
+    <!-- Hub -->
+    <circle cx="${cx}" cy="${cy}" r="${tr*.3}" fill="#2a2a2a" stroke="#444" stroke-width="1"/>
+    <circle cx="${cx}" cy="${cy}" r="${tr*.12}" fill="#444"/>
+  </g>
+  <!-- Fender -->
+  <path d="M${cx-tr*.75},${cy-2} Q${cx},${cy-fr-2} ${cx+tr*.75},${cy-2}" fill="none" stroke="${accent}" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Fender accent line -->
+  <path d="M${cx-tr*.5},${cy-5} Q${cx},${cy-fr+1} ${cx+tr*.5},${cy-5}" fill="none" stroke="#06D0FF" stroke-width=".8" opacity=".6"/>
+  <!-- LED strip on rail -->
+  <rect x="${cx-w*.35}" y="${cy+1}" width="${w*.7}" height="1.5" rx=".75" fill="${accent}" opacity=".3"/>
+</svg>`;
+}
+
+// Generic character body builder
+function svgChar(opts){
+  const d=Object.assign({
+    w:80,h:110,
+    skinColor:'#ffcc99',headSize:16,
+    bodyColor:'#0033cc',bodyColor2:'#0055ff',
+    hairColor:'#333',hairStyle:'short',
+    hatColor:null,hatStyle:null,
+    accessoryLeft:null,accessoryRight:null,
+    vestColor:null,
+    badgeText:null,badgeColor:'#cc0000',
+    expression:'happy', // happy, sleepy, dizzy, confident, nervous
+    flameHair:false,
+    shirtIcon:null,
+  },opts);
+
+  const cx=d.w/2, headY=22, headR=d.headSize;
+  const bodyTop=headY+headR+2, bodyH=30, bodyW=28;
+  const legY=bodyTop+bodyH;
+
+  let hair='';
+  if(d.flameHair){
+    hair=`<g class="flame-hair" style="transform-origin:${cx}px ${headY-headR}px">
+      <ellipse cx="${cx}" cy="${headY-headR-4}" rx="10" ry="14" fill="#06D0FF" opacity=".7"/>
+      <ellipse cx="${cx-4}" cy="${headY-headR-8}" rx="5" ry="10" fill="#0088ff" opacity=".6"/>
+      <ellipse cx="${cx+5}" cy="${headY-headR-6}" rx="4" ry="8" fill="#00ccff" opacity=".5"/>
+    </g>`;
+  } else if(d.hairStyle==='short'){
+    hair=`<ellipse cx="${cx}" cy="${headY-headR*.5}" rx="${headR+1}" ry="${headR*.6}" fill="${d.hairColor}"/>`;
+  } else if(d.hairStyle==='medium'){
+    hair=`<ellipse cx="${cx}" cy="${headY-headR*.4}" rx="${headR+2}" ry="${headR*.7}" fill="${d.hairColor}"/>
+           <ellipse cx="${cx+headR}" cy="${headY+2}" rx="4" ry="8" fill="${d.hairColor}"/>
+           <ellipse cx="${cx-headR}" cy="${headY+2}" rx="4" ry="8" fill="${d.hairColor}"/>`;
+  } else if(d.hairStyle==='wave'){
+    hair=`<path d="M${cx-headR-2},${headY-2} Q${cx-headR-4},${headY-headR} ${cx},${headY-headR-3} Q${cx+headR+4},${headY-headR} ${cx+headR+2},${headY-2} Q${cx+headR+5},${headY+8} ${cx+headR},${headY+12} L${cx-headR},${headY+12} Q${cx-headR-5},${headY+8} ${cx-headR-2},${headY-2}Z" fill="${d.hairColor}"/>`;
+  }
+
+  let hat='';
+  if(d.hatStyle==='hardhat'){
+    hat=`<ellipse cx="${cx}" cy="${headY-headR+2}" rx="${headR+5}" ry="6" fill="${d.hatColor}"/>
+         <rect x="${cx-headR-3}" y="${headY-headR-4}" width="${(headR+3)*2}" height="8" rx="4" fill="${d.hatColor}"/>
+         <rect x="${cx-headR-6}" y="${headY-headR+3}" width="${(headR+6)*2}" height="3" rx="1" fill="${d.hatColor}" opacity=".8"/>`;
+  } else if(d.hatStyle==='captain'){
+    hat=`<rect x="${cx-headR-3}" y="${headY-headR-2}" width="${(headR+3)*2}" height="10" rx="3" fill="${d.hatColor}"/>
+         <rect x="${cx-headR-5}" y="${headY-headR+6}" width="${(headR+5)*2}" height="3" rx="1" fill="#222"/>
+         <circle cx="${cx}" cy="${headY-headR+2}" r="3" fill="#daa520"/>`;
+  } else if(d.hatStyle==='cap'){
+    hat=`<ellipse cx="${cx}" cy="${headY-headR+2}" rx="${headR+3}" ry="5" fill="${d.hatColor}"/>
+         <rect x="${cx-2}" y="${headY-headR-3}" width="${headR+8}" height="4" rx="2" fill="${d.hatColor}"/>`;
+  } else if(d.hatStyle==='guard'){
+    hat=`<rect x="${cx-headR-1}" y="${headY-headR-4}" width="${(headR+1)*2}" height="12" rx="2" fill="${d.hatColor}"/>
+         <rect x="${cx-headR-3}" y="${headY-headR+6}" width="${(headR+3)*2}" height="3" rx="1" fill="#333"/>
+         <rect x="${cx-2}" y="${headY-headR-2}" width="4" height="6" rx="1" fill="#daa520"/>`;
+  } else if(d.hatStyle==='crown'){
+    hat=`<g>
+      <polygon points="${cx-10},${headY-headR-1} ${cx-8},${headY-headR-10} ${cx-4},${headY-headR-5} ${cx},${headY-headR-14} ${cx+4},${headY-headR-5} ${cx+8},${headY-headR-10} ${cx+10},${headY-headR-1}" fill="#daa520"/>
+      <rect x="${cx-10}" y="${headY-headR-2}" width="20" height="3" rx="1" fill="#daa520"/>
+      <circle cx="${cx}" cy="${headY-headR-10}" r="1.5" fill="#ff3333"/>
+    </g>`;
+  }
+
+  // Eyes
+  let eyes='';
+  if(d.expression==='happy'){
+    eyes=`<circle cx="${cx-5}" cy="${headY-2}" r="2" fill="#333"/><circle cx="${cx+5}" cy="${headY-2}" r="2" fill="#333"/>
+           <circle cx="${cx-4.3}" cy="${headY-2.8}" r=".7" fill="#fff"/>
+           <circle cx="${cx+5.7}" cy="${headY-2.8}" r=".7" fill="#fff"/>
+           <path d="M${cx-4},${headY+3} Q${cx},${headY+6} ${cx+4},${headY+3}" fill="none" stroke="#333" stroke-width="1" stroke-linecap="round"/>`;
+  } else if(d.expression==='confident'){
+    eyes=`<ellipse cx="${cx-5}" cy="${headY-2}" rx="2.5" ry="2" fill="#333"/><ellipse cx="${cx+5}" cy="${headY-2}" rx="2.5" ry="2" fill="#333"/>
+           <circle cx="${cx-4}" cy="${headY-2.5}" r=".8" fill="#fff"/>
+           <circle cx="${cx+6}" cy="${headY-2.5}" r=".8" fill="#fff"/>
+           <path d="M${cx-3},${headY+3} L${cx+3},${headY+3}" stroke="#333" stroke-width="1.2" stroke-linecap="round"/>`;
+  } else if(d.expression==='sleepy'){
+    eyes=`<line x1="${cx-7}" y1="${headY-2}" x2="${cx-3}" y2="${headY-2}" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+           <line x1="${cx+3}" y1="${headY-2}" x2="${cx+7}" y2="${headY-2}" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+           <ellipse cx="${cx}" cy="${headY+4}" rx="2" ry="1.5" fill="#333" opacity=".4"/>`;
+  } else if(d.expression==='dizzy'){
+    eyes=`<g><line x1="${cx-7}" y1="${headY-4}" x2="${cx-3}" y2="${headY}" stroke="#333" stroke-width="1.2"/>
+           <line x1="${cx-3}" y1="${headY-4}" x2="${cx-7}" y2="${headY}" stroke="#333" stroke-width="1.2"/>
+           <line x1="${cx+3}" y1="${headY-4}" x2="${cx+7}" y2="${headY}" stroke="#333" stroke-width="1.2"/>
+           <line x1="${cx+7}" y1="${headY-4}" x2="${cx+3}" y2="${headY}" stroke="#333" stroke-width="1.2"/></g>
+           <ellipse cx="${cx}" cy="${headY+4}" rx="3" ry="2" fill="#333" opacity=".3"/>`;
+  } else if(d.expression==='nervous'){
+    eyes=`<circle cx="${cx-5}" cy="${headY-2}" r="2.5" fill="#fff" stroke="#333" stroke-width=".8"/>
+           <circle cx="${cx+5}" cy="${headY-2}" r="2.5" fill="#fff" stroke="#333" stroke-width=".8"/>
+           <circle cx="${cx-4}" cy="${headY-1.5}" r="1.2" fill="#333"/>
+           <circle cx="${cx+6}" cy="${headY-1.5}" r="1.2" fill="#333"/>
+           <path d="M${cx-3},${headY+4} Q${cx},${headY+3} ${cx+3},${headY+4}" fill="none" stroke="#333" stroke-width=".8"/>`;
+  } else if(d.expression==='focused'){
+    eyes=`<rect x="${cx-7}" y="${headY-3.5}" width="4.5" height="3" rx="1" fill="#333"/>
+           <rect x="${cx+2.5}" y="${headY-3.5}" width="4.5" height="3" rx="1" fill="#333"/>
+           <circle cx="${cx-4.8}" cy="${headY-2.3}" r=".5" fill="#fff"/>
+           <circle cx="${cx+4.8}" cy="${headY-2.3}" r=".5" fill="#fff"/>
+           <line x1="${cx-3}" y1="${headY+3}" x2="${cx+3}" y2="${headY+2.5}" stroke="#333" stroke-width="1" stroke-linecap="round"/>`;
+  }
+
+  // Vest overlay
+  let vest='';
+  if(d.vestColor){
+    vest=`<rect x="${cx-bodyW/2+2}" y="${bodyTop+2}" width="${bodyW-4}" height="${bodyH-6}" rx="3" fill="${d.vestColor}" opacity=".9"/>
+           <line x1="${cx}" y1="${bodyTop+2}" x2="${cx}" y2="${bodyTop+bodyH-4}" stroke="#fff" stroke-width=".5" opacity=".3"/>`;
+  }
+
+  // Badge
+  let badge='';
+  if(d.badgeText){
+    badge=`<rect x="${cx-12}" y="${bodyTop+bodyH*.3}" width="24" height="8" rx="2" fill="${d.badgeColor}"/>
+            <text x="${cx}" y="${bodyTop+bodyH*.3+6}" text-anchor="middle" fill="#fff" font-size="5" font-weight="700" font-family="Lato,sans-serif">${d.badgeText}</text>`;
+  }
+
+  // Shirt icon
+  let shirtIcon='';
+  if(d.shirtIcon){
+    shirtIcon=`<text x="${cx}" y="${bodyTop+bodyH*.5+4}" text-anchor="middle" font-size="12">${d.shirtIcon}</text>`;
+  }
+
+  // Accessories in hands
+  let accL='', accR='';
+  if(d.accessoryLeft){
+    accL=`<g class="arm-swing"><text x="${cx-bodyW/2-8}" y="${bodyTop+bodyH*.6}" font-size="14">${d.accessoryLeft}</text></g>`;
+  }
+  if(d.accessoryRight){
+    accR=`<g class="arm-swing" style="animation-direction:reverse"><text x="${cx+bodyW/2+2}" y="${bodyTop+bodyH*.6}" font-size="14">${d.accessoryRight}</text></g>`;
+  }
+
+  return `<svg class="char-svg" viewBox="0 0 ${d.w} ${d.h}" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hair behind head -->
+  ${d.hairStyle==='wave'?hair:''}
+  <!-- Head -->
+  <circle cx="${cx}" cy="${headY}" r="${headR}" fill="${d.skinColor}"/>
+  <!-- Hair on top -->
+  ${d.hairStyle!=='wave'?hair:''}
+  ${d.flameHair?hair:''}
+  <!-- Hat -->
+  ${hat}
+  <!-- Face -->
+  ${eyes}
+  <!-- Body -->
+  <rect x="${cx-bodyW/2}" y="${bodyTop}" width="${bodyW}" height="${bodyH}" rx="6" fill="url(#bg_${opts._id||'x'})"/>
+  <defs><linearGradient id="bg_${opts._id||'x'}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${d.bodyColor}"/><stop offset="1" stop-color="${d.bodyColor2}"/></linearGradient></defs>
+  ${vest}
+  ${badge}
+  ${shirtIcon}
+  <!-- Arms -->
+  <g class="arm-swing">
+    <rect x="${cx-bodyW/2-6}" y="${bodyTop+4}" width="7" height="20" rx="3.5" fill="${d.skinColor}"/>
+  </g>
+  <g class="arm-swing" style="animation-direction:reverse;animation-delay:.3s">
+    <rect x="${cx+bodyW/2-1}" y="${bodyTop+4}" width="7" height="20" rx="3.5" fill="${d.skinColor}"/>
+  </g>
+  ${accL}${accR}
+  <!-- Legs -->
+  <rect x="${cx-8}" y="${legY}" width="7" height="16" rx="3" fill="#2a2a3a"/>
+  <rect x="${cx+1}" y="${legY}" width="7" height="16" rx="3" fill="#2a2a3a"/>
+  <!-- Shoes -->
+  <rect x="${cx-9}" y="${legY+13}" width="9" height="5" rx="2" fill="#1a1a1a"/>
+  <rect x="${cx+1}" y="${legY+13}" width="9" height="5" rx="2" fill="#1a1a1a"/>
+</svg>`;
+}
+
+// ================================================================
+// CHARACTER DEFINITIONS
+// ================================================================
+const AGENT_ORDER = [
+  'legacy','aaron','caroline','v4_builder','email_scout','rope_tracker',
+  'money_watcher','morning_herald','scribe','voice_decoder',
+  'ship_captain','note_reader','watchdog','n8n','backup'
+];
+
+const CHAR_DEFS = {
+  aaron: {
+    name:'Aaron C. Norris', role:'CEO & Founder', type:'human',
+    owAccent:'#0033cc',cls:'human',
+    svgOpts:{_id:'aaron',skinColor:'#e8b888',headSize:17,bodyColor:'#0033cc',bodyColor2:'#0044aa',
+      hairColor:'#3a2a1a',hairStyle:'short',hatStyle:null,expression:'confident',
+      accessoryRight:'📱',shirtIcon:'🔥',badgeText:null},
+  },
+  caroline: {
+    name:'Caroline Butler', role:'Operations', type:'human',
+    owAccent:'#0033cc',cls:'human',
+    svgOpts:{_id:'cb',skinColor:'#f5c5a3',headSize:15,bodyColor:'#1a4488',bodyColor2:'#2255aa',
+      hairColor:'#5a3520',hairStyle:'wave',expression:'happy',
+      accessoryLeft:'📋',accessoryRight:'📱',badgeText:'OPS',badgeColor:'#0033cc'},
+  },
   legacy: {
-    name:'Legacy', role:'Chief of Staff', emoji:'🔥',
-    bodyBg:'linear-gradient(135deg,#0033cc,#0055ff)', accent:'#06D0FF',
-    accessory:'👑', extraClass:'leader',
+    name:'Legacy', role:'Chief of Staff', type:'agent',
+    owAccent:'#06D0FF',cls:'leader',
+    svgOpts:{_id:'legacy',skinColor:'#aaccff',headSize:18,bodyColor:'#0033cc',bodyColor2:'#0055ff',
+      hairColor:'#06D0FF',hairStyle:'short',flameHair:true,hatStyle:'crown',expression:'confident',
+      accessoryRight:'📱',badgeText:null},
   },
   v4_builder: {
-    name:'Agent V4', role:'The Builder', emoji:'🔨',
-    bodyBg:'linear-gradient(135deg,#cc6600,#ff8800)', accent:'#ffaa00',
-    accessory:'⛑️', extraClass:'',
+    name:'Agent V4', role:'The Builder', type:'agent',
+    owAccent:'#ff8800',cls:'',
+    svgOpts:{_id:'v4',skinColor:'#ddb888',headSize:15,bodyColor:'#cc5500',bodyColor2:'#ff7700',
+      hairColor:'#333',hairStyle:'short',hatStyle:'hardhat',hatColor:'#ffcc00',
+      vestColor:'#ff8800',expression:'focused',accessoryRight:'🔨'},
   },
   email_scout: {
-    name:'Email Scout', role:'Email Scanner', emoji:'📬',
-    bodyBg:'linear-gradient(135deg,#cc3333,#ff4444)', accent:'#ff6666',
-    accessory:'🔍', extraClass:'',
+    name:'Email Scout', role:'Email Scanner', type:'agent',
+    owAccent:'#cc3333',cls:'',
+    svgOpts:{_id:'email',skinColor:'#ffcc99',headSize:14,bodyColor:'#cc2222',bodyColor2:'#ee3333',
+      hairColor:'#222',hairStyle:'short',expression:'focused',
+      accessoryLeft:'🔍'},
   },
   rope_tracker: {
-    name:'Rope Tracker', role:'Samson Scanner', emoji:'🧵',
-    bodyBg:'linear-gradient(135deg,#6600cc,#9933ff)', accent:'#aa55ff',
-    accessory:'🪢', extraClass:'',
+    name:'Rope Tracker', role:'Samson Scanner', type:'agent',
+    owAccent:'#8833cc',cls:'',
+    svgOpts:{_id:'rope',skinColor:'#ddb888',headSize:14,bodyColor:'#6600aa',bodyColor2:'#8833cc',
+      hairColor:'#222',hairStyle:'short',expression:'happy',
+      accessoryLeft:'🪢',accessoryRight:'📋'},
   },
   money_watcher: {
-    name:'Money Watcher', role:'A/P Scanner', emoji:'💰',
-    bodyBg:'linear-gradient(135deg,#008833,#00bb44)', accent:'#00dd66',
-    accessory:'🤑', extraClass:'',
+    name:'Money Watcher', role:'A/P Scanner', type:'agent',
+    owAccent:'#00aa44',cls:'',
+    svgOpts:{_id:'money',skinColor:'#ffcc99',headSize:14,bodyColor:'#006622',bodyColor2:'#009933',
+      hairColor:'#333',hairStyle:'short',expression:'focused',
+      accessoryRight:'🧮'},
   },
   morning_herald: {
-    name:'Morning Herald', role:'Morning Briefing', emoji:'📯',
-    bodyBg:'linear-gradient(135deg,#cc8800,#ffaa00)', accent:'#ffcc44',
-    accessory:'☀️', extraClass:'',
+    name:'Morning Herald', role:'Morning Briefing', type:'agent',
+    owAccent:'#dd8800',cls:'',
+    svgOpts:{_id:'herald',skinColor:'#e8c088',headSize:14,bodyColor:'#cc7700',bodyColor2:'#ee9900',
+      hairColor:'#444',hairStyle:'short',expression:'happy',
+      accessoryRight:'📯'},
   },
   scribe: {
-    name:'The Scribe', role:'Follow-up Drafter', emoji:'✍️',
-    bodyBg:'linear-gradient(135deg,#334455,#556677)', accent:'#88aacc',
-    accessory:'🪶', extraClass:'',
+    name:'The Scribe', role:'Follow-up Drafter', type:'agent',
+    owAccent:'#4466aa',cls:'',
+    svgOpts:{_id:'scribe',skinColor:'#ffcc99',headSize:14,bodyColor:'#334466',bodyColor2:'#445577',
+      hairColor:'#222',hairStyle:'medium',expression:'happy',
+      accessoryRight:'🪶'},
   },
   voice_decoder: {
-    name:'Voice Decoder', role:'Voice Router', emoji:'🎧',
-    bodyBg:'linear-gradient(135deg,#005588,#0088cc)', accent:'#00aaee',
-    accessory:'🎤', extraClass:'',
+    name:'Voice Decoder', role:'Voice Router', type:'agent',
+    owAccent:'#0088cc',cls:'',
+    svgOpts:{_id:'voice',skinColor:'#ddb888',headSize:14,bodyColor:'#005588',bodyColor2:'#0077aa',
+      hairColor:'#222',hairStyle:'short',expression:'focused',
+      accessoryLeft:'🎧',accessoryRight:'🎤'},
   },
   ship_captain: {
-    name:'Ship Captain', role:'Shipping Processor', emoji:'📦',
-    bodyBg:'linear-gradient(135deg,#003366,#005599)', accent:'#0088dd',
-    accessory:'🧢', extraClass:'',
+    name:'Ship Captain', role:'Shipping Processor', type:'agent',
+    owAccent:'#004488',cls:'',
+    svgOpts:{_id:'ship',skinColor:'#e8c088',headSize:14,bodyColor:'#003355',bodyColor2:'#005577',
+      hairColor:'#333',hairStyle:'short',hatStyle:'captain',hatColor:'#fff',expression:'confident',
+      accessoryRight:'📋'},
   },
   note_reader: {
-    name:'Note Reader', role:'reMarkable Scanner', emoji:'📝',
-    bodyBg:'linear-gradient(135deg,#555555,#777777)', accent:'#999',
-    accessory:'✏️', extraClass:'',
+    name:'Note Reader', role:'reMarkable Scanner', type:'agent',
+    owAccent:'#666',cls:'',
+    svgOpts:{_id:'note',skinColor:'#ffcc99',headSize:14,bodyColor:'#444',bodyColor2:'#666',
+      hairColor:'#333',hairStyle:'short',expression:'happy',
+      accessoryLeft:'📖',accessoryRight:'✏️'},
   },
   watchdog: {
-    name:'Watchdog', role:'Gateway Guard', emoji:'🛡️',
-    bodyBg:'linear-gradient(135deg,#880000,#cc0000)', accent:'#ff3333',
-    accessory:'🐕', extraClass:'',
+    name:'Watchdog', role:'Gateway Guard', type:'agent',
+    owAccent:'#cc0000',cls:'',
+    svgOpts:{_id:'wd',skinColor:'#ddb888',headSize:14,bodyColor:'#880000',bodyColor2:'#aa2222',
+      hairColor:'#222',hairStyle:'short',hatStyle:'guard',hatColor:'#1a1a44',expression:'confident',
+      accessoryLeft:'🛡️',accessoryRight:'🔦'},
   },
   backup: {
-    name:'The Backup', role:'iCloud Backup', emoji:'☁️',
-    bodyBg:'linear-gradient(135deg,#4488cc,#66aaee)', accent:'#88ccff',
-    accessory:'🔒', extraClass:'',
+    name:'The Backup', role:'iCloud Backup', type:'agent',
+    owAccent:'#4488cc',cls:'',
+    svgOpts:{_id:'bak',skinColor:'#ffcc99',headSize:14,bodyColor:'#3366aa',bodyColor2:'#4488cc',
+      hairColor:'#555',hairStyle:'short',expression:'happy',
+      accessoryRight:'🔒'},
   },
   n8n: {
-    name:'n8n', role:'The New Kid', emoji:'🌱',
-    bodyBg:'linear-gradient(135deg,#cc4488,#ee6699)', accent:'#ff88bb',
-    accessory:'🎓', extraClass:'',
+    name:'n8n', role:'The New Kid', type:'agent',
+    owAccent:'#cc4488',cls:'n8n-char',
+    svgOpts:{_id:'n8n',skinColor:'#ffcc99',headSize:13,bodyColor:'#aa3366',bodyColor2:'#cc4488',
+      hairColor:'#442200',hairStyle:'short',expression:'nervous',
+      badgeText:'TRAINEE',badgeColor:'#cc4488'},
   },
 };
 
-// Agent display order (Legacy first, Backup last)
-const ORDER = [
-  'legacy','v4_builder','email_scout','rope_tracker','money_watcher',
-  'morning_herald','scribe','voice_decoder','ship_captain','note_reader',
-  'watchdog','n8n','backup'
-];
+// ================================================================
+// BUILD A CHARACTER DOM ELEMENT
+// ================================================================
+function buildChar(key, agentData) {
+  const def = CHAR_DEFS[key];
+  if(!def) return null;
 
-// ===== BUILD CHARACTERS =====
-function buildCharacter(key, charDef, agentData) {
-  const status = agentData ? agentData.status : 'idle';
-  const msg = agentData ? agentData.message : 'Standing by';
-  const lastRun = agentData ? agentData.last_run : 'never';
-  const nextRun = agentData ? (agentData.next_run || '') : '';
-  const items = agentData ? (agentData.items || '') : '';
+  let status = 'active';
+  let msg = '', lastRun = '', nextRun = '', items = '';
 
-  const div = document.createElement('div');
-  div.className = 'agent' + (charDef.extraClass ? ' ' + charDef.extraClass : '');
-  div.dataset.status = status;
-  div.dataset.key = key;
+  if(def.type === 'human') {
+    status = 'active';
+    msg = key === 'aaron' ? 'Running the show' : 'Operations lead';
+    lastRun = 'Always on';
+  } else if(agentData) {
+    status = agentData.status || 'idle';
+    msg = agentData.message || '';
+    lastRun = agentData.last_run || 'never';
+    nextRun = agentData.next_run || '';
+    items = agentData.items || '';
+  }
 
-  div.innerHTML = `
-    <div class="aura"></div>
-    <div class="agent-name">${charDef.name}</div>
-    <div class="agent-role">${charDef.role}</div>
-    <div class="bubble">
-      <div class="b-name">${charDef.name} &mdash; ${charDef.role}</div>
-      <div class="b-msg">${escHtml(msg)}</div>
-      <div class="b-time">Last: ${escHtml(lastRun)}</div>
-      ${nextRun ? `<div class="b-next">Next: ${escHtml(nextRun)}</div>` : ''}
-      ${items ? `<div class="b-next">Items: ${items}</div>` : ''}
-    </div>
-    <div class="body-wrap">
-      <div class="accessory">${charDef.accessory}</div>
-      <div class="char-body" style="background:${charDef.bodyBg}">${charDef.emoji}</div>
-      <div class="onewheel">
-        <div class="ow-board"></div>
-        <div class="ow-wheel"></div>
+  // Adjust expression based on status
+  const opts = Object.assign({}, def.svgOpts);
+  if(status === 'idle' && def.type !== 'human') opts.expression = 'sleepy';
+  if(status === 'down') opts.expression = 'dizzy';
+
+  const el = document.createElement('div');
+  el.className = 'char' + (def.cls ? ' ' + def.cls : '');
+  el.dataset.status = status;
+  el.dataset.key = key;
+
+  // Extras per character
+  let extras = '';
+  if(key === 'v4_builder' && status === 'active'){
+    extras = '<div class="sparks"><div class="spark"></div><div class="spark"></div><div class="spark"></div><div class="spark"></div></div>';
+  }
+  if(key === 'email_scout' && status === 'active'){
+    extras = '<div class="env-trail"><span>✉</span><span>✉</span><span>✉</span></div>';
+  }
+  if(key === 'voice_decoder' && status === 'active'){
+    extras = '<div class="sound-waves"><div class="sw-ring"></div><div class="sw-ring"></div><div class="sw-ring"></div></div>';
+  }
+  if(key === 'backup'){
+    extras = '<div class="cloud-float" style="position:absolute;top:0;left:50%;transform:translateX(-50%);font-size:18px;opacity:.7">☁️</div>';
+  }
+
+  el.innerHTML = `
+    <div class="info-card">
+      <div class="ic-header">
+        <h3>${esc(def.name)}</h3>
+        <div class="ic-role">${esc(def.role)}</div>
+      </div>
+      <div class="ic-body">
+        <div class="ic-row"><span class="ic-label">Status</span><span class="ic-val"><span class="ic-status ${status}"></span>${status.toUpperCase()}</span></div>
+        <div class="ic-row"><span class="ic-label">Last Run</span><span class="ic-val">${esc(lastRun)}</span></div>
+        ${nextRun ? `<div class="ic-row"><span class="ic-label">Next Run</span><span class="ic-val">${esc(nextRun)}</span></div>` : ''}
+        ${items ? `<div class="ic-row"><span class="ic-label">Items</span><span class="ic-val">${items}</span></div>` : ''}
+        ${msg ? `<div class="ic-msg">${esc(msg)}</div>` : ''}
       </div>
     </div>
-    ${status === 'active' ? `<div class="motion-lines"><span></span><span></span><span></span></div>` : ''}
-    ${status === 'down' ? `<div class="down-alert">❗</div>` : ''}
+    <div class="char-name">${esc(def.name)}</div>
+    <div class="char-role">${esc(def.role)}</div>
+    <div class="ride-group" style="position:relative">
+      ${extras}
+      ${svgChar(opts)}
+      ${svgOneWheel(def.cls==='leader'?92:80, def.cls==='leader'?48:42, def.owAccent)}
+      <div class="status-glow"></div>
+    </div>
+    <div class="motion-lines"><div class="ml"></div><div class="ml"></div><div class="ml"></div></div>
+    ${status==='down'?'<div class="down-x">!</div>':''}
   `;
 
-  return div;
-}
-
-function escHtml(s) {
-  if (!s) return '';
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-// ===== STARS =====
-function generateStars() {
-  const container = document.getElementById('stars');
-  for (let i = 0; i < 60; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.top = Math.random() * 100 + '%';
-    star.style.animationDelay = (Math.random() * 3) + 's';
-    star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
-    container.appendChild(star);
-  }
-}
-
-// ===== LOAD DATA & RENDER =====
-async function loadStatus() {
-  try {
-    const resp = await fetch('data/team_status.json?t=' + Date.now());
-    if (!resp.ok) throw new Error('fetch failed');
-    return await resp.json();
-  } catch(e) {
-    console.warn('Could not load team_status.json, using defaults', e);
-    return null;
-  }
-}
-
-function render(data) {
-  const grid = document.getElementById('teamGrid');
-  grid.innerHTML = '';
-
-  const agents = data ? data.agents : {};
-  let active = 0, idle = 0, down = 0;
-
-  ORDER.forEach(key => {
-    const charDef = CHARS[key];
-    if (!charDef) return;
-    const agentData = agents[key] || null;
-    const el = buildCharacter(key, charDef, agentData);
-    grid.appendChild(el);
-
-    const st = agentData ? agentData.status : 'idle';
-    if (st === 'active') active++;
-    else if (st === 'down') down++;
-    else idle++;
+  // Mobile tap support
+  el.addEventListener('click', function(e){
+    document.querySelectorAll('.char.tapped').forEach(c => { if(c!==el) c.classList.remove('tapped') });
+    el.classList.toggle('tapped');
   });
 
-  document.getElementById('activeNum').textContent = active;
-  document.getElementById('idleNum').textContent = idle;
-  document.getElementById('downNum').textContent = down;
+  return el;
+}
 
-  const updated = data ? data.last_updated : 'unknown';
-  if (updated && updated !== 'unknown') {
-    try {
-      const d = new Date(updated);
-      document.getElementById('lastUpdated').textContent =
-        d.toLocaleString('en-US', {month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
-    } catch(e) {
-      document.getElementById('lastUpdated').textContent = updated;
-    }
+function esc(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):'';}
+
+// ================================================================
+// SCENE SETUP
+// ================================================================
+function generateStars(){
+  const c=document.getElementById('stars');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');s.className='star';
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;opacity:${Math.random()*.6+.2};animation:twinkle ${2+Math.random()*3}s ease-in-out infinite;animation-delay:${Math.random()*3}s`;
+    c.appendChild(s);
   }
-
-  document.getElementById('agentCount').textContent =
-    `${active + idle + down} agents. All on OneWheels. ${active} riding hard right now.`;
 }
 
-// ===== INIT =====
-async function init() {
+function generateCity(){
+  const c=document.getElementById('bgCity');
+  const buildings=[
+    {l:'2%',w:40,h:80},{l:'8%',w:30,h:120},{l:'14%',w:50,h:90},{l:'22%',w:35,h:140},
+    {l:'30%',w:25,h:70},{l:'40%',w:60,h:100},{l:'50%',w:30,h:130},{l:'58%',w:45,h:85},
+    {l:'66%',w:35,h:110},{l:'74%',w:50,h:95},{l:'82%',w:30,h:125},{l:'90%',w:40,h:75},
+  ];
+  buildings.forEach(b=>{
+    const d=document.createElement('div');d.className='bg-building';
+    d.style.cssText=`left:${b.l};width:${b.w}px;height:${b.h}px`;
+    // Windows
+    for(let y=8;y<b.h-10;y+=14){
+      for(let x=6;x<b.w-6;x+=10){
+        const w=document.createElement('div');
+        w.style.cssText=`position:absolute;left:${x}px;top:${y}px;width:5px;height:7px;background:rgba(255,200,80,${Math.random()>.5?.4:.08});border-radius:1px`;
+        d.appendChild(w);
+      }
+    }
+    c.appendChild(d);
+  });
+  // Crane
+  const crane=document.createElement('div');crane.className='bg-crane';
+  crane.style.cssText='left:35%;height:180px;width:2px;background:#2a2a40';
+  const arm=document.createElement('div');
+  arm.style.cssText='position:absolute;top:0;left:-30px;width:60px;height:2px;background:#2a2a40';
+  crane.appendChild(arm);
+  c.appendChild(crane);
+}
+
+// ================================================================
+// DATA LOAD + RENDER
+// ================================================================
+async function loadStatus(){
+  try{
+    const r=await fetch('data/team_status.json?t='+Date.now());
+    if(!r.ok) throw 0;
+    return await r.json();
+  }catch(e){return null}
+}
+
+function render(data){
+  const grid=document.getElementById('charTrack');
+  grid.innerHTML='';
+  const agents=data?data.agents:{};
+  let active=0,idle=0,down=0;
+
+  AGENT_ORDER.forEach(key=>{
+    const def=CHAR_DEFS[key];
+    if(!def) return;
+    const ad=agents[key]||null;
+    const el=buildChar(key,ad);
+    if(!el) return;
+    grid.appendChild(el);
+    const st=el.dataset.status;
+    if(st==='active')active++;else if(st==='down')down++;else idle++;
+  });
+
+  document.getElementById('sActive').textContent=active;
+  document.getElementById('sIdle').textContent=idle;
+  document.getElementById('sDown').textContent=down;
+  document.getElementById('hdrActive').textContent=active;
+  document.getElementById('hdrIdle').textContent=idle;
+  document.getElementById('hdrDown').textContent=down;
+
+  const ts=data?data.last_updated:'';
+  if(ts){
+    try{
+      const d=new Date(ts);
+      document.getElementById('sTime').textContent=d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
+    }catch(e){document.getElementById('sTime').textContent=ts}
+  }
+}
+
+// ================================================================
+// INIT
+// ================================================================
+async function init(){
   generateStars();
-  const data = await loadStatus();
+  generateCity();
+  const data=await loadStatus();
   render(data);
-
-  // Auto-refresh every 5 minutes
-  setInterval(async () => {
-    const fresh = await loadStatus();
-    if (fresh) render(fresh);
-  }, 300000);
+  // Refresh every 5 min
+  setInterval(async()=>{const d=await loadStatus();if(d)render(d)},300000);
 }
+
+// Star twinkle keyframes (injected for dynamic timing)
+const styleEl=document.createElement('style');
+styleEl.textContent='@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}';
+document.head.appendChild(styleEl);
 </script>
 </body>
 </html>
