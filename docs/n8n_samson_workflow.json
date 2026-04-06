@@ -1,0 +1,135 @@
+{
+  "name": "Samson Rope Invoice Alert",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * *"
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Daily 7 AM Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "filters": {
+          "sender": "samsonrope.com",
+          "readStatus": "unread",
+          "receivedAfter": "={{ $now.minus(1, 'day').toISO() }}"
+        },
+        "options": {
+          "maxResults": 20
+        }
+      },
+      "id": "gmail-check",
+      "name": "Check Gmail for Samson Emails",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [480, 300],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_WITH_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail - Aaron Norris"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "has-results",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": "0",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ]
+        }
+      },
+      "id": "if-found",
+      "name": "Any Emails Found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_WITH_TELEGRAM_CHAT_ID",
+        "text": "=\ud83d\udce8 <b>Samson Rope Emails (Last 24h)</b>\n\n{{ $input.all().map(item => '• ' + item.json.subject + '\\n  From: ' + item.json.from.emailAddress).join('\\n\\n') }}\n\n\ud83d\udccb {{ $input.all().length }} email(s) found",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "telegram-send",
+      "name": "Send Telegram Alert",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [960, 200],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_WITH_TELEGRAM_CREDENTIAL_ID",
+          "name": "Norris Utilities Bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily 7 AM Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check Gmail for Samson Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Gmail for Samson Emails": {
+      "main": [
+        [
+          {
+            "node": "Any Emails Found?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Any Emails Found?": {
+      "main": [
+        [
+          {
+            "node": "Send Telegram Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "norris-utilities"
+    }
+  ]
+}
