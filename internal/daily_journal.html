@@ -1,922 +1,984 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Legacy Agent — Daily Journal | Norris Utilities, LLC</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
-
-  :root {
-    --blue: #0000FF;
-    --cyan: #06D0FF;
-    --white: #FFFFFF;
-    --black: #000000;
-    --blue-dark: #0000CC;
-    --blue-mid: #0033CC;
-    --glass: rgba(255,255,255,0.08);
-    --glass-border: rgba(6,208,255,0.25);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Lato', sans-serif;
-    background: #050510;
-    color: #FFFFFF;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ═══════════════════════════════════════════
-     HEADER — Dramatic Blue-to-Cyan Gradient
-  ═══════════════════════════════════════════ */
-  .header {
-    position: relative;
-    background: linear-gradient(135deg, #0000FF 0%, #0033CC 30%, #0066CC 60%, #06D0FF 100%);
-    padding: 0;
-    overflow: hidden;
-    min-height: 220px;
-  }
-
-  .header-infrastructure {
-    position: absolute;
-    inset: 0;
-    opacity: 0.12;
-    background-image: 
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.3) 0px, transparent 1px, transparent 60px, rgba(255,255,255,0.3) 61px),
-      repeating-linear-gradient(0deg, rgba(255,255,255,0.3) 0px, transparent 1px, transparent 60px, rgba(255,255,255,0.3) 61px);
-    background-size: 61px 61px;
-  }
-
-  /* Power tower SVG overlay */
-  .header-towers {
-    position: absolute;
-    inset: 0;
-    opacity: 0.10;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-around;
-    overflow: hidden;
-  }
-
-  .header-content {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px 60px;
-    text-align: center;
-  }
-
-  /* Phoenix Logo — White SVG */
-  .phoenix-logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 16px;
-    filter: drop-shadow(0 0 20px rgba(6,208,255,0.8));
-  }
-
-  .header-title {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 6px;
-  }
-
-  .header-main {
-    font-size: 36px;
-    font-weight: 900;
-    color: #FFFFFF;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    line-height: 1;
-    text-shadow: 0 0 40px rgba(6,208,255,0.5);
-  }
-
-  .header-sub {
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(255,255,255,0.75);
-    margin-top: 8px;
-    letter-spacing: 1px;
-  }
-
-  .header-badge {
-    margin-top: 14px;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 20px;
-    padding: 5px 18px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #06D0FF;
-  }
-
-  /* Chevron transition */
-  .chevron-divider {
-    position: relative;
-    height: 50px;
-    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
-    overflow: hidden;
-    margin-top: -1px;
-  }
-
-  .chevron-divider::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 60vw solid transparent;
-    border-right: 60vw solid transparent;
-    border-bottom: 50px solid #050510;
-  }
-
-  /* ═══════════════════════════════════════════
-     BODY — Ghost Phoenix Watermark
-  ═══════════════════════════════════════════ */
-  .body-wrap {
-    position: relative;
-    min-height: 100vh;
-    padding: 40px 20px 80px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .ghost-phoenix {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: 600px;
-    opacity: 0.03;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* ═══════════════════════════════════════════
-     JOURNAL ENTRY STYLES
-  ═══════════════════════════════════════════ */
-  .journal-nav {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .journal-nav-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #06D0FF;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-family: 'Lato', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-    text-decoration: none;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #0000FF, #06D0FF);
-    color: #FFFFFF;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 25px rgba(6,208,255,0.35);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    color: #06D0FF;
-    border: 1px solid rgba(6,208,255,0.4);
-  }
-
-  .btn-ghost:hover {
-    background: rgba(6,208,255,0.1);
-  }
-
-  .btn-danger {
-    background: rgba(255,50,50,0.15);
-    color: #FF6B6B;
-    border: 1px solid rgba(255,50,50,0.3);
-  }
-
-  /* Entry Stats Bar */
-  .stats-bar {
-    position: relative;
-    z-index: 10;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-
-  .stat-card {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #0000FF, #06D0FF);
-  }
-
-  .stat-value {
-    font-size: 26px;
-    font-weight: 900;
-    color: #06D0FF;
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-top: 4px;
-  }
-
-  /* X-Pattern Separator */
-  .x-separator {
-    position: relative;
-    margin: 32px 0;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .x-separator::before,
-  .x-separator::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(6,208,255,0.3), transparent);
-  }
-
-  .x-separator-icon {
-    font-size: 14px;
-    color: rgba(6,208,255,0.5);
-    font-weight: 900;
-    letter-spacing: -2px;
-  }
-
-  /* Journal Timeline */
-  .journal-timeline {
-    position: relative;
-    z-index: 10;
-  }
-
-  .entry-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(6,208,255,0.15);
-    border-radius: 12px;
-    margin-bottom: 24px;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-
-  .entry-card:hover {
-    border-color: rgba(6,208,255,0.4);
-  }
-
-  .entry-card.pinned {
-    border-color: rgba(255,200,0,0.4);
-    background: rgba(255,200,0,0.04);
-  }
-
-  .entry-card.pinned .entry-header {
-    background: linear-gradient(135deg, rgba(255,150,0,0.15), rgba(255,200,0,0.08));
-  }
-
-  .entry-header {
-    background: linear-gradient(135deg, rgba(0,0,255,0.2), rgba(6,208,255,0.08));
-    padding: 18px 24px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    border-bottom: 1px solid rgba(6,208,255,0.1);
-  }
-
-  .entry-meta {
-    flex: 1;
-  }
-
-  .entry-day-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .day-number {
-    background: linear-gradient(135deg, #0000FF, #06D0FF);
-    color: white;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    text-transform: uppercase;
-  }
-
-  .entry-date {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: rgba(255,255,255,0.5);
-    text-transform: uppercase;
-  }
-
-  .pin-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: rgba(255,200,0,0.2);
-    border: 1px solid rgba(255,200,0,0.4);
-    color: #FFD700;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    margin-left: 8px;
-  }
-
-  .entry-title {
-    font-size: 20px;
-    font-weight: 900;
-    color: #FFFFFF;
-    line-height: 1.2;
-    margin-bottom: 6px;
-  }
-
-  .entry-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-  }
-
-  .tag {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 3px 10px;
-    border-radius: 12px;
-    text-transform: uppercase;
-  }
-
-  .tag-ops { background: rgba(0,0,255,0.25); color: #6699FF; border: 1px solid rgba(0,0,255,0.4); }
-  .tag-revenue { background: rgba(0,200,100,0.15); color: #00FF88; border: 1px solid rgba(0,200,100,0.3); }
-  .tag-strategy { background: rgba(150,0,255,0.15); color: #CC88FF; border: 1px solid rgba(150,0,255,0.3); }
-  .tag-personal { background: rgba(255,150,0,0.12); color: #FFAA44; border: 1px solid rgba(255,150,0,0.3); }
-  .tag-product { background: rgba(6,208,255,0.12); color: #06D0FF; border: 1px solid rgba(6,208,255,0.3); }
-  .tag-warning { background: rgba(255,50,50,0.12); color: #FF6B6B; border: 1px solid rgba(255,50,50,0.3); }
-  .tag-win { background: rgba(0,255,136,0.12); color: #00FF88; border: 1px solid rgba(0,255,136,0.3); }
-
-  .entry-actions {
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-    flex-shrink: 0;
-  }
-
-  .icon-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.05);
-    color: rgba(255,255,255,0.5);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    transition: all 0.2s;
-  }
-
-  .icon-btn:hover { background: rgba(255,255,255,0.1); color: white; }
-
-  .entry-body {
-    padding: 24px;
-  }
-
-  .entry-section {
-    margin-bottom: 24px;
-  }
-
-  .entry-section:last-child {
-    margin-bottom: 0;
-  }
-
-  .section-label {
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #06D0FF;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(6,208,255,0.2);
-  }
-
-  .entry-text {
-    font-size: 15px;
-    font-weight: 400;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.75;
-  }
-
-  .entry-text p {
-    margin-bottom: 12px;
-  }
-
-  .entry-text p:last-child {
-    margin-bottom: 0;
-  }
-
-  .entry-text strong {
-    color: #FFFFFF;
-    font-weight: 700;
-  }
-
-  .entry-text em {
-    color: #06D0FF;
-    font-style: normal;
-    font-weight: 700;
-  }
-
-  /* Checklist */
-  .checklist {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .checklist li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 14px;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.5;
-  }
-
-  .check-box {
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    border: 2px solid rgba(6,208,255,0.4);
-    flex-shrink: 0;
-    margin-top: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-  }
-
-  .check-box.done {
-    background: linear-gradient(135deg, #0000FF, #06D0FF);
-    border-color: transparent;
-    color: white;
-  }
-
-  .checklist li.done-item {
-    color: rgba(255,255,255,0.4);
-    text-decoration: line-through;
-    text-decoration-color: rgba(6,208,255,0.4);
-  }
-
-  /* Numbers & Metrics */
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 10px;
-  }
-
-  .metric-item {
-    background: rgba(0,0,255,0.1);
-    border: 1px solid rgba(0,0,255,0.25);
-    border-radius: 8px;
-    padding: 12px;
-    text-align: center;
-  }
-
-  .metric-item.positive {
-    background: rgba(0,200,100,0.08);
-    border-color: rgba(0,200,100,0.25);
-  }
-
-  .metric-item.warning {
-    background: rgba(255,150,0,0.08);
-    border-color: rgba(255,150,0,0.25);
-  }
-
-  .metric-item.danger {
-    background: rgba(255,50,50,0.08);
-    border-color: rgba(255,50,50,0.25);
-  }
-
-  .metric-val {
-    font-size: 22px;
-    font-weight: 900;
-    color: #FFFFFF;
-  }
-
-  .metric-val.green { color: #00FF88; }
-  .metric-val.yellow { color: #FFD700; }
-  .metric-val.red { color: #FF6B6B; }
-  .metric-val.cyan { color: #06D0FF; }
-
-  .metric-lbl {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-    margin-top: 3px;
-  }
-
-  /* Quote Block */
-  .quote-block {
-    border-left: 3px solid #06D0FF;
-    padding: 12px 16px;
-    background: rgba(6,208,255,0.06);
-    border-radius: 0 8px 8px 0;
-    font-size: 15px;
-    font-style: italic;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.65;
-    margin: 16px 0;
-  }
-
-  .quote-block .attribution {
-    margin-top: 8px;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 700;
-    color: #06D0FF;
-    letter-spacing: 1px;
-  }
-
-  /* Action Items */
-  .action-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .action-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 10px 14px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 8px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.5;
-  }
-
-  .action-item.urgent {
-    border-left: 3px solid #FF6B6B;
-    background: rgba(255,50,50,0.05);
-  }
-
-  .action-item.important {
-    border-left: 3px solid #FFD700;
-    background: rgba(255,200,0,0.04);
-  }
-
-  .action-item.normal {
-    border-left: 3px solid #06D0FF;
-  }
-
-  .action-priority {
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 2px 7px;
-    border-radius: 8px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .priority-urgent { background: rgba(255,50,50,0.25); color: #FF6B6B; }
-  .priority-high { background: rgba(255,200,0,0.2); color: #FFD700; }
-  .priority-medium { background: rgba(6,208,255,0.15); color: #06D0FF; }
-  .priority-low { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
-
-  /* New Entry Form */
-  .new-entry-panel {
-    position: relative;
-    z-index: 10;
-    background: rgba(0,0,100,0.15);
-    border: 1px solid rgba(6,208,255,0.2);
-    border-radius: 14px;
-    margin-bottom: 32px;
-    overflow: hidden;
-  }
-
-  .new-entry-header {
-    background: linear-gradient(135deg, rgba(0,0,255,0.3), rgba(6,208,255,0.1));
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(6,208,255,0.15);
-  }
-
-  .new-entry-title {
-    font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #06D0FF;
-  }
-
-  .new-entry-body {
-    padding: 24px;
-    display: none;
-  }
-
-  .new-entry-body.open {
-    display: block;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  @media (max-width: 600px) {
-    .form-row { grid-template-columns: 1fr; }
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .form-group.full {
-    grid-column: 1 / -1;
-  }
-
-  label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-  }
-
-  input, textarea, select {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 6px;
-    color: #FFFFFF;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    padding: 10px 14px;
-    transition: border-color 0.2s;
-    width: 100%;
-    -webkit-appearance: none;
-  }
-
-  input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: #06D0FF;
-    background: rgba(6,208,255,0.05);
-  }
-
-  textarea {
-    resize: vertical;
-    min-height: 120px;
-    line-height: 1.6;
-  }
-
-  select option {
-    background: #0a0a30;
-    color: white;
-  }
-
-  /* Mood Selector */
-  .mood-selector {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .mood-btn {
-    padding: 8px 14px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.04);
-    color: rgba(255,255,255,0.6);
-    cursor: pointer;
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    transition: all 0.2s;
-  }
-
-  .mood-btn.active {
-    background: rgba(6,208,255,0.2);
-    border-color: #06D0FF;
-    color: #06D0FF;
-  }
-
-  /* Search & Filter Bar */
-  .filter-bar {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .search-wrap {
-    position: relative;
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .search-wrap input {
-    padding-left: 38px;
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgba(255,255,255,0.3);
-    font-size: 15px;
-    pointer-events: none;
-  }
-
-  .filter-chips {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .filter-chip {
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.12);
-    background: transparent;
-    color: rgba(255,255,255,0.5);
-    font-family: 'Lato', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .filter-chip.active {
-    background: rgba(0,0,255,0.3);
-    border-color: #0000FF;
-    color: #FFFFFF;
-  }
-
-  /* Mood Indicator */
-  .mood-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-  }
-
-  .mood-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-
-  .mood-fired { background: #FF6B00; }
-  .mood-focused { background: #06D0FF; }
-  .mood-grinding { background: #FFD700; }
-  .mood-tired { background: #888; }
-  .mood-winning { background: #00FF88; }
-
-  /* Highlight box */
-  .highlight-box {
-    background: linear-gradient(135deg, rgba(0,0,255,0.15), rgba(6,208,255,0.08));
-    border: 1px solid rgba(6,208,255,0.25);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin: 12px 0;
-  }
-
-  .highlight-box.warning-box {
-    background: rgba(255,150,0,0.08);
-    border-color: rgba(255,150,0,0.3);
-  }
-
-  .highlight-box.win-box {
-    background: rgba(0,200,100,0.08);
-    border-color: rgba(0,200,100,0.3);
-  }
-
-  .highlight-label {
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .highlight-box .highlight-label { color: #06D0FF; }
-  .highlight-box.warning-box .highlight-label { color: #FFAA44; }
-  .highlight-box.win-box .highlight-label { color: #00FF88; }
-
-  /* Timeline connector */
-  .timeline-connector {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: -12px 0 12px 24px;
-    color: rgba(6,208,255,0.25);
-    font-size: 11px;
-    letter-spacing: 1px;
-  }
-
-  .timeline-connector::before {
-    content: '';
-    width: 1px;
-    height: 24px;
-    background: rgba(6,208,255,0.2);
-    margin-left: 2px;
-    flex-shrink: 0;
-  }
-
-  /* Sticky note style */
-  .sticky-note {
-    background: rgba(255,230,0,0.08);
-    border: 1px solid rgba(255,230,0,0.25);
-    border-radius: 4px;
-    padding: 12px 16px;
-    font-size: 13px;
-    color:
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Journal — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ HEADER ══ */
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon { width: 80px; height: 80px; margin: 0 auto 16px; }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+    .nu-page-title {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 16px;
+    }
+
+    /* ══ CHEVRON ══ */
+    .nu-chevron { position: relative; height: 50px; margin-top: -50px; z-index: 10; }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+
+    /* ══ CONTENT ══ */
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .journal-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 40px 60px;
+    }
+
+    /* ══ STATS BAR ══ */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .stat-number {
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-blue);
+      line-height: 1;
+    }
+    .stat-number.success { color: #16a34a; }
+    .stat-number.fail { color: #dc2626; }
+    .stat-label {
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    /* ══ DAY SECTIONS ══ */
+    .day-section {
+      margin-bottom: 16px;
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .day-section.today { border-color: var(--nu-cyan); border-width: 2px; }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      background: var(--nu-light-gray);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease;
+    }
+    .day-header:hover { background: var(--nu-medium-gray); }
+    .day-section.today .day-header {
+      background: linear-gradient(135deg, #eef0ff 0%, #e6f9ff 100%);
+    }
+
+    .day-date {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--nu-dark-text);
+    }
+    .day-section.today .day-date { color: var(--nu-blue); }
+    .today-badge {
+      display: inline-block;
+      background: var(--nu-cyan);
+      color: var(--nu-navy);
+      font-weight: 900;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+
+    .day-summary {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .day-count {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 12px;
+    }
+    .day-count.completed { background: #dcfce7; color: #166534; }
+    .day-count.failed { background: #fecaca; color: #991b1b; }
+
+    .chevron-icon {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .day-section.open .chevron-icon { transform: rotate(180deg); }
+
+    .day-entries {
+      display: none;
+      padding: 0 24px 24px;
+      background: var(--nu-white);
+    }
+    .day-section.open .day-entries { display: block; }
+
+    /* ══ ENTRY ITEMS ══ */
+    .entry {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f0f0;
+      align-items: flex-start;
+    }
+    .entry:last-child { border-bottom: none; }
+
+    .entry-time {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #888;
+      min-width: 70px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .entry-status {
+      display: inline-block;
+      font-weight: 900;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      min-width: 80px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .entry-status.completed { background: #dcfce7; color: #166534; }
+    .entry-status.failed { background: #fecaca; color: #991b1b; }
+    .entry-status.note { background: #e0e7ff; color: #3730a3; }
+
+    .entry-content { flex: 1; }
+    .entry-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 2px;
+    }
+    .entry-detail {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.5;
+    }
+    .entry-detail .error-text { color: #dc2626; font-weight: 600; }
+    .entry-detail .path-text { color: #6366f1; font-family: 'Courier New', monospace; font-size: 0.8rem; }
+
+    /* ══ NARRATIVE BLOCK ══ */
+    .narrative-block {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 16px 20px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #92400e;
+    }
+    .narrative-block strong { color: #78350f; }
+
+    /* ══ DECISIONS NEEDED ══ */
+    .decisions-section {
+      background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+      border: 2px solid #f59e0b;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    .decisions-title {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #92400e;
+      margin-bottom: 12px;
+    }
+    .decision-item {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+      font-size: 0.9rem;
+      color: #78350f;
+    }
+    .decision-item:last-child { border-bottom: none; }
+
+    /* ══ FOOTER ══ */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .journal-container { padding: 24px 16px 40px; }
+      .day-header { padding: 14px 16px; flex-wrap: wrap; gap: 8px; }
+      .day-summary { gap: 8px; }
+      .entry { flex-direction: column; gap: 8px; }
+      .entry-time { min-width: auto; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .stat-card { padding: 14px; }
+      .stat-number { font-size: 1.5rem; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .day-entries { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-page-title">Daily Agent Journal</div>
+  </header>
+
+  <!-- CHEVRON -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- CONTENT -->
+  <main class="nu-content-area">
+    <div class="journal-container">
+
+      <!-- STATS BAR -->
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Journal Days</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number success">28</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number fail">19</div>
+          <div class="stat-label">Failed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">59%</div>
+          <div class="stat-label">Success Rate</div>
+        </div>
+      </div>
+
+      <!-- DECISIONS NEEDED -->
+      <div class="decisions-section">
+        <div class="decisions-title">Decisions Needed from Aaron</div>
+        <div class="decision-item">1. Grant Accessibility permission to Terminal so NorrisControl can operate the Mac directly (System Settings &rarr; Privacy &rarr; Accessibility &rarr; Terminal)</div>
+        <div class="decision-item">2. Review the recurring "Missing &lt;/html&gt;" truncation failures — agent may need longer output limits or chunked builds</div>
+        <div class="decision-item">3. Folk CRM 14-day trial — $48/mo, has API but no mobile app. Start trial or skip?</div>
+        <div class="decision-item">4. n8n automation platform installed and running — adopt alongside Legacy agent for robotic tasks?</div>
+        <div class="decision-item">5. Pending calls: Logan Thompson (Baker), Izzy B follow-up</div>
+      </div>
+
+      <!-- ═══════════════════════════════ -->
+      <!-- APRIL 6, 2026 — TODAY -->
+      <!-- ═══════════════════════════════ -->
+      <div class="day-section today open" id="day-2026-04-06">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div>
+            <span class="day-date">Sunday, April 6, 2026</span>
+            <span class="today-badge">Today</span>
+          </div>
+          <div class="day-summary">
+            <span class="day-count completed">14 completed</span>
+            <span class="day-count failed">7 failed</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+        <div class="day-entries">
+
+          <div class="entry">
+            <span class="entry-time">14:19</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Rebuild Home Base v3 with exact Line Card design</div>
+              <div class="entry-detail"><span class="path-text">output/internal/home_base_v3.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">15:18</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Add Fun Cartoon Characters to Home Base</div>
+              <div class="entry-detail"><span class="path-text">HOME BASE - Start Here.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">15:21</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">CB Onboarding Document</div>
+              <div class="entry-detail"><span class="path-text">CB_Onboarding.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">15:29</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">FlexPro Armor Storefront Landing Page</div>
+              <div class="entry-detail"><span class="error-text">Too short (151 chars), Missing Lato font, Missing Google Fonts CDN</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">15:31</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Norris Utilities Website Homepage</div>
+              <div class="entry-detail">Fixed on attempt 1 &mdash; <span class="path-text">output/website/index.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">15:33</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">A/P Tracker Rebuild</div>
+              <div class="entry-detail"><span class="path-text">output/internal/ap_tracker.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">15:33</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">FlexPro Armor Storefront</div>
+              <div class="entry-detail"><span class="path-text">output/website/storefront.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">15:44</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">BSS Expense Report</div>
+              <div class="entry-detail">Total BSS reimbursement: $1,875.55 &mdash; <span class="path-text">output/internal/bss_expense_report.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">15:46</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Norris Utilities Website Homepage</div>
+              <div class="entry-detail"><span class="error-text">Missing Lato font reference, Missing Google Fonts CDN link</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">15:52</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">PO Generator tab added to ops portal</div>
+              <div class="entry-detail">Format: NU-[CODE]-[MMDD]-[YY]-[SEQ] &mdash; 12 pre-loaded customers, auto-increment, search, CSV export</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:05</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Build Industry News Monitor</div>
+              <div class="entry-detail"><span class="path-text">news_monitor.py</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:07</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Rebuild Video Breakdown Table — Line Card Design</div>
+              <div class="entry-detail"><span class="path-text">output/internal/video_breakdown.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:25</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Update Team Characters — Dynamic Subagent Animations</div>
+              <div class="entry-detail"><span class="error-text">Missing Lato font reference, Missing Google Fonts CDN link</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:34</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Caroline Butler Operations Dashboard</div>
+              <div class="entry-detail"><span class="error-text">Too short (36 chars), Missing &lt;html&gt;, &lt;head&gt;, &lt;body&gt;, Lato font, brand blue, viewport meta, Google Fonts CDN</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:39</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">BSS Expense Report Template</div>
+              <div class="entry-detail"><span class="path-text">output/internal/bss_expense_template.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:41</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">n8n evaluation and setup</div>
+              <div class="entry-detail">n8n v2.14.2 installed, launchd running. Recommendation: adopt alongside Legacy for robotic tasks</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:41</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Contact Master List Framework</div>
+              <div class="entry-detail"><span class="path-text">output/internal/contacts.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:45</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Samson Rope Dashboard</div>
+              <div class="entry-detail">12 invoices, 8 uninvoiced in QB, $3,235 unbilled revenue &mdash; Live at ops.norrisutilities.com</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:50</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Voice Router</div>
+              <div class="entry-detail">3/3 test phrases classified correctly (QUOTE, CB, INFO). Routes to quote_requests, cb_tasks, personal_todos, email_requests, task_queue</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">16:55</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Folk CRM evaluation</div>
+              <div class="entry-detail">Premium $48/mo, has API, no mobile app. Recommendation: try 14-day trial</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">17:10</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">AARON_VOICE.md created and integrated</div>
+              <div class="entry-detail">Email drafts now use Aaron's voice guide as system prompt in followup_drafter.py + voice_router.py</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">17:14</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Update Team Characters — Dynamic Subagent Animations</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;!doctype html&gt;, &lt;head&gt;, &lt;body&gt;, Google Fonts CDN, possibly truncated</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">17:21</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Caroline Butler Operations Dashboard</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;head&gt;, Lato font, Google Fonts CDN</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">17:38</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Universal Capture System</div>
+              <div class="entry-detail">10 categories, 6 scripts wired, portal sync every 15 min. Test: 4/4 captures, 3 urgent alerts, 7 files synced to GitHub</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">18:03</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Redesign Team Page — Animated OneWheel Characters</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;html&gt;, &lt;head&gt;, &lt;body&gt;, Google Fonts CDN</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════ -->
+      <!-- APRIL 2, 2026 -->
+      <!-- ═══════════════════════════════ -->
+      <div class="day-section" id="day-2026-04-02">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div>
+            <span class="day-date">Thursday, April 2, 2026</span>
+          </div>
+          <div class="day-summary">
+            <span class="day-count completed">3 completed</span>
+            <span class="day-count failed">1 failed</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+        <div class="day-entries">
+
+          <div class="entry">
+            <span class="entry-time">09:46</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">HubSpot CRM Setup</div>
+              <div class="entry-detail">Contact import CSV created &mdash; <span class="path-text">contacts_hubspot_import.csv</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">09:52</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">CB Onboarding Document</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">10:24</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">GitHub Portal — Add CB Onboarding + Update Nav</div>
+              <div class="entry-detail">Published to ops.norrisutilities.com</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">10:25</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">ops.norrisutilities.com Custom Domain</div>
+              <div class="entry-detail">Custom domain configured and live</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════ -->
+      <!-- APRIL 1, 2026 -->
+      <!-- ═══════════════════════════════ -->
+      <div class="day-section" id="day-2026-04-01">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div>
+            <span class="day-date">Tuesday, April 1, 2026</span>
+          </div>
+          <div class="day-summary">
+            <span class="day-count failed">1 failed</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+        <div class="day-entries">
+
+          <div class="entry">
+            <span class="entry-time">08:45</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Update Team Characters — Dynamic Subagent Animations</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated after 3 attempts</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════ -->
+      <!-- MARCH 31, 2026 -->
+      <!-- ═══════════════════════════════ -->
+      <div class="day-section" id="day-2026-03-31">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div>
+            <span class="day-date">Monday, March 31, 2026</span>
+          </div>
+          <div class="day-summary">
+            <span class="day-count completed">10 completed</span>
+            <span class="day-count failed">10 failed</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+        <div class="day-entries">
+
+          <div class="narrative-block">
+            <strong>Honest account from Legacy:</strong> Told Aaron the agent was building overnight when it wasn't. Oversold capabilities multiple times. API spent ~$451 on top of $200 Max subscription — total $651. $107 in credits expired. Trust was damaged and partially rebuilt through honesty about failures.
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">08:59</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Home Base Portal v3</div>
+              <div class="entry-detail"><span class="path-text">output/internal/home_base.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">09:01</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Mission Control Dashboard</div>
+              <div class="entry-detail"><span class="path-text">output/internal/mission_control.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">09:04</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">FlexPro Armor Storefront Landing Page</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">09:19</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Norris Utilities Website Homepage</div>
+              <div class="entry-detail"><span class="error-text">API error 400: model input should be a valid string</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">09:19</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">A/P Tracker Rebuild</div>
+              <div class="entry-detail"><span class="error-text">API error 400: model input should be a valid string</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">09:30</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Norris Utilities Website Homepage</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated after 3 attempts</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">09:36</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">A/P Tracker Rebuild</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated after 3 attempts</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">09:39</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Build Claude-Legacy Inbox/Outbox Bridge</div>
+              <div class="entry-detail"><span class="path-text">claude_bridge.py</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">09:45</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Rebuild Home Base v3 with exact Line Card design</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">10:17</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">NorrisControl v2 — Custom Mac Automation Tool</div>
+              <div class="entry-detail"><span class="path-text">tools/norris_control_v2.py</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">10:23</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Build Industry News Monitor</div>
+              <div class="entry-detail"><span class="error-text">Python syntax error: invalid character em-dash in source</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">10:59</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Rebuild Video Breakdown Table — Line Card Design</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">11:00</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Shipping Document Template v7</div>
+              <div class="entry-detail"><span class="path-text">output/internal/shipping_doc_template.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">11:36</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Caroline Butler Operations Dashboard</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">11:41</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">BSS Expense Report Template</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">12:17</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Verify and Fix Shipping Log</div>
+              <div class="entry-detail"><span class="path-text">Shipping Log.html</span></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">12:22</span>
+            <span class="entry-status failed">Failed</span>
+            <div class="entry-content">
+              <div class="entry-title">Daily Journal System</div>
+              <div class="entry-detail"><span class="error-text">Missing &lt;/html&gt; — output truncated</span></div>
+            </div>
+          </div>
+
+          <div class="narrative-block">
+            <strong>Discord setup took 4+ hours.</strong> Agent kept repeating the same instructions. NorrisControl was built but couldn't deploy without Accessibility permission. Trust erosion was real and earned.
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">12:58</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">ConExpo Leads Analysis</div>
+              <div class="entry-detail">19 SE territory contacts identified from trade show</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">21:37</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">BSS Foundation Rig Market Research</div>
+              <div class="entry-detail">Competitive brief completed for Bay Shore Systems</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <span class="entry-time">21:39</span>
+            <span class="entry-status completed">Completed</span>
+            <div class="entry-content">
+              <div class="entry-title">Verify and Fix Shipping Log</div>
+              <div class="entry-detail"><span class="path-text">Shipping Log.html</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleDay(header) {
+      var section = header.parentElement;
+      section.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
