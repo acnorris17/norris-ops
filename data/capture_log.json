@@ -22,5 +22,35 @@
     "category": "cb_task",
     "source": "voice_router",
     "summary": "{'task': 'Invoice Dominion Energy order', 'urgency': 'today'}"
+  },
+  {
+    "timestamp": "2026-04-06T18:48:06.524343",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Thayne Grove"
+  },
+  {
+    "timestamp": "2026-04-06T18:48:06.525824",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Andy Barron"
+  },
+  {
+    "timestamp": "2026-04-06T18:48:06.526447",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Jeff Fickel"
+  },
+  {
+    "timestamp": "2026-04-06T18:48:06.527007",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": ""
+  },
+  {
+    "timestamp": "2026-04-06T18:48:06.527550",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Richard Thornhill"
   }
 ]
