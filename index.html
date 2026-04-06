@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Norris Utilities&reg; &mdash; Operations Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@0;1&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET ===== */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -76,6 +76,10 @@ thead{background:linear-gradient(135deg,#0a0e5c,#0033cc);color:#fff}
 th{padding:14px 16px;text-align:left;font-weight:700;letter-spacing:0.5px;font-size:12px;text-transform:uppercase;white-space:nowrap}
 td{padding:12px 16px;border-bottom:1px solid #f0f0f0}
 tr:hover{background:#f8f9ff}
+th.sortable{cursor:pointer;user-select:none;position:relative;padding-right:24px}
+th.sortable::after{content:'\u2195';position:absolute;right:8px;opacity:0.5;font-size:10px}
+th.sortable.asc::after{content:'\u2191';opacity:1}
+th.sortable.desc::after{content:'\u2193';opacity:1}
 
 /* ===== BADGES ===== */
 .badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase}
@@ -117,19 +121,53 @@ tr:hover{background:#f8f9ff}
 .search-box{width:100%;max-width:500px;padding:12px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:15px;font-family:'Lato',sans-serif;margin-bottom:24px;outline:none;transition:border-color .2s}
 .search-box:focus{border-color:#0033cc}
 
-/* ===== CHECKLIST ===== */
+/* ===== INTERACTIVE CHECKLIST ===== */
 .checklist{list-style:none;padding:0}
 .checklist li{padding:12px 16px;border-bottom:1px solid #f0f0f0;font-size:15px;display:flex;align-items:flex-start;gap:10px}
 .checklist li:last-child{border-bottom:none}
 .check-icon{flex-shrink:0;width:22px;height:22px;border:2px solid #ccc;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .check-icon.checked{background:#00aa44;border-color:#00aa44;color:#fff}
-.check-icon.checked::after{content:'✓';font-size:14px;font-weight:700}
+.check-icon.checked::after{content:'\2713';font-size:14px;font-weight:700}
+.check-icon.disabled{background:#f0f0f0;border-color:#ddd;cursor:not-allowed;opacity:0.6}
+
+/* ===== INTERACTIVE CARDS ===== */
+.icard{background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,0.05);border:1px solid #eee;display:flex;align-items:center;gap:16px;transition:all .3s ease}
+.icard.completed{background:#f0faf0;border-color:#00aa44;opacity:0.85}
+.icard.blocked{background:#fef2f2;border-color:#cc0000;opacity:0.7}
+.icard .icard-check{flex-shrink:0;width:28px;height:28px;border:2px solid #ccc;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .25s;background:#fff}
+.icard .icard-check:hover{border-color:#0033cc;transform:scale(1.1)}
+.icard.completed .icard-check{background:#00aa44;border-color:#00aa44;color:#fff}
+.icard.blocked .icard-check{background:#f0f0f0;border-color:#ddd;cursor:not-allowed}
+.icard .icard-body{flex:1;min-width:0}
+.icard .icard-title{font-weight:700;font-size:15px;color:#1a1a1a;margin-bottom:4px}
+.icard .icard-meta{font-size:13px;color:#666}
+.icard .icard-undo{font-size:12px;color:#0033cc;cursor:pointer;margin-left:12px;text-decoration:underline;display:none}
+.icard.completed .icard-undo{display:inline}
+
+/* ===== FILTER BUTTONS ===== */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filter-btn{padding:8px 18px;border:2px solid #e0e0e0;border-radius:8px;background:#fff;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#666;cursor:pointer;transition:all .2s}
+.filter-btn:hover{border-color:#0033cc;color:#0033cc}
+.filter-btn.active{background:#0033cc;border-color:#0033cc;color:#fff}
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrap{background:#e8e8ec;border-radius:10px;height:28px;overflow:hidden;margin-bottom:20px;position:relative}
+.progress-fill{height:100%;background:linear-gradient(90deg,#0033cc,#06D0FF);border-radius:10px;transition:width .5s ease}
+.progress-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#1a1a1a;letter-spacing:0.5px}
+
+/* ===== QB SUMMARY BAR ===== */
+.qb-summary{background:linear-gradient(135deg,#f0f4ff,#e8f0ff);border:1px solid #ccd9ff;border-radius:10px;padding:14px 20px;margin-bottom:20px;font-size:14px;font-weight:700;color:#0033cc}
+
+/* ===== ADD TASK FORM ===== */
+.add-task-form{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:20px;padding:16px 20px;background:#f8f9fc;border-radius:10px;border:1px dashed #ccc}
+.add-task-form input{padding:10px 14px;border:2px solid #e0e0e0;border-radius:8px;font-family:'Lato',sans-serif;font-size:14px;flex:1;min-width:150px}
+.add-task-form input:focus{border-color:#0033cc;outline:none}
+.add-task-form button{padding:10px 24px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:8px;font-family:'Lato',sans-serif;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap}
 
 /* ===== PERMISSION BLOCKS ===== */
-.perm-block{padding:16px 20px;border-radius:10px;margin-bottom:12px;font-size:14px;font-weight:600}
-.perm-can{background:#e6f9ee;border-left:4px solid #00aa44;color:#00802b}
-.perm-review{background:#fff8e1;border-left:4px solid #ffaa00;color:#8a6d00}
-.perm-no{background:#fde8e8;border-left:4px solid #cc0000;color:#cc0000}
+.perm-can{background:#e6f9ee;border-left:4px solid #00aa44;color:#00802b;padding:16px 20px;border-radius:10px;margin-bottom:12px;font-size:14px;font-weight:600}
+.perm-review{background:#fff8e1;border-left:4px solid #ffaa00;color:#8a6d00;padding:16px 20px;border-radius:10px;margin-bottom:12px;font-size:14px;font-weight:600}
+.perm-no{background:#fde8e8;border-left:4px solid #cc0000;color:#cc0000;padding:16px 20px;border-radius:10px;margin-bottom:12px;font-size:14px;font-weight:600}
 
 /* ===== DEALS ===== */
 .deal-card{display:flex;align-items:center;gap:16px;padding:20px;background:#fff;border-radius:12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);border:1px solid #eee;transition:transform .15s}
@@ -151,6 +189,23 @@ tr:hover{background:#f8f9ff}
 /* ===== NOTE BOX ===== */
 .note-box{background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:#8a6d00}
 
+/* ===== COMPLETION COUNTER (fixed) ===== */
+.completion-counter{position:fixed;bottom:20px;right:20px;z-index:9000;background:#fff;border:2px solid #0033cc;border-radius:12px;padding:10px 16px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#0033cc;box-shadow:0 4px 20px rgba(0,0,0,0.12);cursor:pointer;transition:transform .2s}
+.completion-counter:hover{transform:scale(1.05)}
+.completion-counter .cc-detail{display:none;margin-top:8px;font-weight:400;font-size:12px;color:#666}
+.completion-counter.expanded .cc-detail{display:block}
+
+/* ===== CELEBRATION OVERLAY ===== */
+.celeb-layer{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}
+.fw-particle{position:absolute;width:6px;height:6px;border-radius:50%;pointer-events:none}
+.confetti-piece{position:absolute;top:-10px;pointer-events:none}
+.phoenix-rise{position:absolute;font-size:28px;pointer-events:none;filter:drop-shadow(0 0 8px #06D0FF)}
+.phoenix-text{position:absolute;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#06D0FF;white-space:nowrap;pointer-events:none;text-shadow:0 0 10px rgba(6,208,255,0.5)}
+.star-burst{position:absolute;font-size:24px;pointer-events:none}
+.done-badge{position:absolute;font-family:'Lato',sans-serif;font-size:14px;font-weight:900;color:#00aa44;pointer-events:none;white-space:nowrap}
+.level-up-text{position:absolute;font-family:'Press Start 2P',monospace;font-size:16px;color:#FFD700;pointer-events:none;text-shadow:0 0 10px rgba(255,215,0,0.8),2px 2px 0 #b38600;white-space:nowrap}
+.streak-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Lato',sans-serif;font-weight:900;font-size:32px;color:#ff6600;pointer-events:none;z-index:10000;text-shadow:0 0 20px rgba(255,102,0,0.5);white-space:nowrap}
+
 /* ===== FOOTER ===== */
 .footer{background:linear-gradient(135deg,#0a0e5c 0%,#001144 100%);padding:32px 24px;text-align:center}
 .footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:16px;letter-spacing:1px}
@@ -167,15 +222,21 @@ tr:hover{background:#f8f9ff}
   th,td{padding:10px 12px;font-size:12px}
   .stat-number{font-size:28px}
   .login-box{padding:36px 24px}
+  .icard{flex-wrap:wrap}
+  .streak-popup{font-size:22px}
+  .level-up-text{font-size:12px}
 }
 </style>
 </head>
 <body>
 
+<!-- CELEBRATION OVERLAY -->
+<div class="celeb-layer" id="celebLayer"></div>
+
 <!-- ==================== LOGIN GATE ==================== -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
-    <img src="logo-blue.png" alt="Norris Utilities® Phoenix Icon®" class="login-phoenix">
+    <img src="logo-blue.png" alt="Norris Utilities&reg; Phoenix Icon&reg;" class="login-phoenix">
     <div class="login-title">Norris Utilities&reg;</div>
     <div class="login-subtitle">A Legacy of Commitment&reg;</div>
     <input type="password" class="login-input" id="loginInput" placeholder="Enter portal password" autocomplete="off" autofocus>
@@ -234,7 +295,6 @@ tr:hover{background:#f8f9ff}
   <a href="/internal/email_dashboard.html" target="_blank">Email Dashboard</a><span class="sep">&middot;</span>
   <a href="/internal/samson_dashboard.html" target="_blank">Samson Dashboard</a><span class="sep">&middot;</span>
   <a href="team-live.html" target="_blank" style="color:#06D0FF">AI Team</a><span class="sep">&middot;</span>
-  <a href="/internal/remarkable_dashboard.html" target="_blank">reMarkable Notes</a><span class="sep">&middot;</span>
   <a href="aaron.html" target="_blank">AC</a>
 </div>
 
@@ -242,93 +302,40 @@ tr:hover{background:#f8f9ff}
 <!-- TAB 1: DASHBOARD                                                  -->
 <!-- ================================================================ -->
 <div class="tab-content active" id="tab-dashboard">
-
   <div id="greeting" style="font-size:24px;font-weight:900;margin-bottom:24px;color:#0a0e5c"></div>
-
-  <!-- Quick Links -->
   <div class="sec-title"><span class="blue">Quick</span> <span class="dark">Links</span></div>
   <div class="quick-links">
-    <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#ea4335;color:#fff">✉</span>Gmail</a>
-    <a href="https://app.qbo.intuit.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#2ca01c;color:#fff">📗</span>QuickBooks</a>
-    <a href="https://drive.google.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#4285f4;color:#fff">📁</span>Google Drive</a>
-    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6b4c14;color:#fff">📦</span>UPS Shipping Log</a>
-    <a href="/tools/pricing-calculator.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0033cc;color:#fff">💲</span>Pricing Tools</a>
-    <a href="https://web.telegram.org" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0088cc;color:#fff">💬</span>Telegram</a>
-    <a href="/internal/email_dashboard.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#cc3333;color:#fff">📬</span>Email Scanner</a>
-    <a href="/internal/samson_dashboard.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6600cc;color:#fff">🧵</span>Samson Tracker</a>
+    <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#ea4335;color:#fff">&#9993;</span>Gmail</a>
+    <a href="https://app.qbo.intuit.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#2ca01c;color:#fff">&#128215;</span>QuickBooks</a>
+    <a href="https://drive.google.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#4285f4;color:#fff">&#128193;</span>Google Drive</a>
+    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6b4c14;color:#fff">&#128230;</span>UPS Shipping Log</a>
+    <a href="/tools/pricing-calculator.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0033cc;color:#fff">&#128178;</span>Pricing Tools</a>
+    <a href="https://web.telegram.org" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0088cc;color:#fff">&#128172;</span>Telegram</a>
+    <a href="/internal/email_dashboard.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#cc3333;color:#fff">&#128236;</span>Email Scanner</a>
+    <a href="/internal/samson_dashboard.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6600cc;color:#fff">&#129525;</span>Samson Tracker</a>
   </div>
-
-  <!-- Quick Stats -->
   <div class="stats-grid">
-    <div class="stat-card" style="border-top-color:#0033cc">
-      <div class="stat-number" style="color:#0033cc">5</div>
-      <div class="stat-label">Uninvoiced Orders</div>
-    </div>
-    <div class="stat-card" style="border-top-color:#cc0000">
-      <div class="stat-number" style="color:#cc0000">3</div>
-      <div class="stat-label">Overdue Follow-Ups</div>
-    </div>
-    <div class="stat-card" style="border-top-color:#00802b">
-      <div class="stat-number" style="color:#00802b">$685K+</div>
-      <div class="stat-label">Active Pipeline</div>
-    </div>
-    <div class="stat-card" style="border-top-color:#b38600">
-      <div class="stat-number" style="color:#b38600">6</div>
-      <div class="stat-label">Skylift Trucks Inbound</div>
-    </div>
+    <div class="stat-card" style="border-top-color:#0033cc"><div class="stat-number" style="color:#0033cc">5</div><div class="stat-label">Uninvoiced Orders</div></div>
+    <div class="stat-card" style="border-top-color:#cc0000"><div class="stat-number" style="color:#cc0000">3</div><div class="stat-label">Overdue Follow-Ups</div></div>
+    <div class="stat-card" style="border-top-color:#00802b"><div class="stat-number" style="color:#00802b">$685K+</div><div class="stat-label">Active Pipeline</div></div>
+    <div class="stat-card" style="border-top-color:#b38600"><div class="stat-number" style="color:#b38600">6</div><div class="stat-label">Skylift Trucks Inbound</div></div>
   </div>
-
-  <!-- Critical Items -->
   <div class="sec-title"><span class="blue">Critical</span> <span class="dark">Items</span></div>
   <div class="card critical">
-    <h4 style="color:#cc0000;font-size:16px;margin-bottom:12px">⚠ REQUIRES IMMEDIATE ATTENTION</h4>
+    <h4 style="color:#cc0000;font-size:16px;margin-bottom:12px">&#9888; REQUIRES IMMEDIATE ATTENTION</h4>
     <ul style="list-style:none;padding:0;font-size:14px;line-height:2">
-      <li>🔴 <strong>5 uninvoiced shipments</strong> from March 20 &mdash; revenue sitting on the table</li>
-      <li>🔴 <strong>Alabama dealer license</strong> &mdash; application not yet started</li>
-      <li>🔴 <strong>EPB Chattanooga follow-up</strong> &mdash; Rick Sutherland, ~$185K SkyTruck47 quote from Dec 4, 2025</li>
-      <li>🔴 <strong>Terex OEM follow-up</strong> &mdash; Bill Kugler, $500K+ potential, still at prospect stage</li>
-      <li>🔴 <strong>BSS RCOO at Irby</strong> &mdash; Jared Lemoine, positive March 18 meeting needs follow-up</li>
+      <li>&#128308; <strong>5 uninvoiced shipments</strong> from March 20 &mdash; revenue sitting on the table</li>
+      <li>&#128308; <strong>Alabama dealer license</strong> &mdash; application not yet started</li>
+      <li>&#128308; <strong>EPB Chattanooga follow-up</strong> &mdash; Rick Sutherland, ~$185K SkyTruck47 quote from Dec 4, 2025</li>
+      <li>&#128308; <strong>Terex OEM follow-up</strong> &mdash; Bill Kugler, $500K+ potential, still at prospect stage</li>
+      <li>&#128308; <strong>BSS RCOO at Irby</strong> &mdash; Jared Lemoine, positive March 18 meeting needs follow-up</li>
     </ul>
   </div>
-
-  <!-- Active Deals -->
   <div class="sec-title"><span class="blue">Active</span> <span class="dark">Deals</span></div>
-
-  <div class="deal-card">
-    <div class="deal-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff">⚡</div>
-    <div class="deal-info">
-      <h4>EPB Chattanooga &mdash; SkyTruck47</h4>
-      <p>Rick Sutherland &bull; Quoted Dec 4, 2025 &bull; <span class="badge badge-red">OVERDUE</span></p>
-    </div>
-    <div class="deal-value">~$185K</div>
-  </div>
-
-  <div class="deal-card">
-    <div class="deal-icon" style="background:linear-gradient(135deg,#6600cc,#aa44ff);color:#fff">🏗</div>
-    <div class="deal-info">
-      <h4>Terex OEM Partnership</h4>
-      <p>Bill Kugler &bull; Prospect stage &bull; <span class="badge badge-yellow">NURTURING</span></p>
-    </div>
-    <div class="deal-value">$500K+</div>
-  </div>
-
-  <div class="deal-card">
-    <div class="deal-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66);color:#fff">🚚</div>
-    <div class="deal-info">
-      <h4>Skylift &mdash; 6 Trucks Arriving</h4>
-      <p>Darrell Pickle / Florence Electric &bull; Aaron&rsquo;s feedback influenced order &bull; <span class="badge badge-green">HOT LEAD</span></p>
-    </div>
-    <div class="deal-value">6 Units</div>
-  </div>
-
-  <div class="deal-card">
-    <div class="deal-icon" style="background:linear-gradient(135deg,#ff6600,#ffaa00);color:#fff">📋</div>
-    <div class="deal-info">
-      <h4>BSS RCOO at Irby</h4>
-      <p>Jared Lemoine &bull; Positive reception March 18 &bull; <span class="badge badge-blue">FOLLOW-UP</span></p>
-    </div>
-    <div class="deal-value">TBD</div>
-  </div>
+  <div class="deal-card"><div class="deal-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff">&#9889;</div><div class="deal-info"><h4>EPB Chattanooga &mdash; SkyTruck47</h4><p>Rick Sutherland &bull; Quoted Dec 4, 2025 &bull; <span class="badge badge-red">OVERDUE</span></p></div><div class="deal-value">~$185K</div></div>
+  <div class="deal-card"><div class="deal-icon" style="background:linear-gradient(135deg,#6600cc,#aa44ff);color:#fff">&#127959;</div><div class="deal-info"><h4>Terex OEM Partnership</h4><p>Bill Kugler &bull; Prospect stage &bull; <span class="badge badge-yellow">NURTURING</span></p></div><div class="deal-value">$500K+</div></div>
+  <div class="deal-card"><div class="deal-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66);color:#fff">&#128666;</div><div class="deal-info"><h4>Skylift &mdash; 6 Trucks Arriving</h4><p>Darrell Pickle / Florence Electric &bull; Aaron&rsquo;s feedback influenced order &bull; <span class="badge badge-green">HOT LEAD</span></p></div><div class="deal-value">6 Units</div></div>
+  <div class="deal-card"><div class="deal-icon" style="background:linear-gradient(135deg,#ff6600,#ffaa00);color:#fff">&#128203;</div><div class="deal-info"><h4>BSS RCOO at Irby</h4><p>Jared Lemoine &bull; Positive reception March 18 &bull; <span class="badge badge-blue">FOLLOW-UP</span></p></div><div class="deal-value">TBD</div></div>
 </div>
 
 <!-- ================================================================ -->
@@ -336,89 +343,28 @@ tr:hover{background:#f8f9ff}
 <!-- ================================================================ -->
 <div class="tab-content" id="tab-shipments">
   <div class="sec-title"><span class="blue">Shipments</span> <span class="dark">&amp; Invoicing &mdash; March 20, 2026</span></div>
-
   <div style="margin-bottom:24px">
-    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:8px;text-decoration:none;box-shadow:0 4px 16px rgba(0,51,204,0.3);transition:transform .15s,box-shadow .15s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(0,51,204,0.4)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 16px rgba(0,51,204,0.3)'">📦 Open UPS Shipping Log</a>
+    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:8px;text-decoration:none;box-shadow:0 4px 16px rgba(0,51,204,0.3)">&#128230; Open UPS Shipping Log</a>
   </div>
   <div style="margin-bottom:24px;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #eee">
     <iframe src="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533&amp;rm=minimal" width="100%" height="500" frameborder="0" style="display:block;background:#fff" loading="lazy"></iframe>
   </div>
-
-  <div class="note-box">
-    <strong>⚠ 2 orders BLOCKED</strong> &mdash; ARCH SKUs unconfirmed with Boss Products. Contact Troy Gongwer and Thayne Grove to resolve before invoicing.
+  <div class="note-box"><strong>&#9888; 2 orders BLOCKED</strong> &mdash; ARCH SKUs unconfirmed with Boss Products. Contact Troy Gongwer and Thayne Grove to resolve before invoicing.</div>
+  <div class="filter-bar" id="shipFilterBar">
+    <button class="filter-btn active" data-filter="all">Show All</button>
+    <button class="filter-btn" data-filter="pending">Show Pending</button>
+    <button class="filter-btn" data-filter="completed">Show Completed</button>
   </div>
-
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Customer</th>
-          <th>Company</th>
-          <th>Product(s)</th>
-          <th>SKU</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td><strong>Richard Thornhill</strong></td>
-          <td>LineTec Services</td>
-          <td>1&times; 2-Man Bucket Cover</td>
-          <td>NU-BC-2851</td>
-          <td><span class="badge badge-green">READY TO INVOICE</span></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td><strong>Coy Crosby</strong></td>
-          <td>Dominion Energy</td>
-          <td>6&times; 1.5-Man Bucket Cover</td>
-          <td>NU-BC-2834</td>
-          <td><span class="badge badge-green">READY TO INVOICE</span></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td><strong>Jimmy Benz</strong></td>
-          <td>SWEPCO/AEP</td>
-          <td>1&times; 2-Man Bucket Cover</td>
-          <td>NU-BC-2851 &bull; Truck #860377</td>
-          <td><span class="badge badge-green">READY TO INVOICE</span></td>
-        </tr>
-        <tr style="background:#fef2f2">
-          <td>4</td>
-          <td><strong>Darrell Pickle</strong></td>
-          <td>Florence Electric</td>
-          <td>1&times; BCB + 3&times; ARCH + 2&times; 1.5-Man</td>
-          <td>ARCH SKUs TBD</td>
-          <td><span class="badge badge-red">BLOCKED</span></td>
-        </tr>
-        <tr style="background:#fef2f2">
-          <td>5</td>
-          <td><strong>Sammy Myers</strong></td>
-          <td>AEP</td>
-          <td>2&times; ARCH + 1&times; Combo 1.5-Man</td>
-          <td>ARCH SKUs TBD</td>
-          <td><span class="badge badge-red">BLOCKED</span></td>
-        </tr>
-      </tbody>
-    </table>
+  <div id="shipmentCards">
+    <div class="icard" data-ship-id="1" data-status="ready"><div class="icard-check" onclick="NUPortal.toggleShipment(this)">&#10003;</div><div class="icard-body"><div class="icard-title">Richard Thornhill &mdash; LineTec Services</div><div class="icard-meta">1&times; 2-Man Bucket Cover &bull; SKU: NU-BC-2851 &bull; $275 &bull; <span class="badge badge-green">READY TO INVOICE</span></div></div><span class="icard-undo" onclick="NUPortal.undoShipment(this)">Undo</span></div>
+    <div class="icard" data-ship-id="2" data-status="ready"><div class="icard-check" onclick="NUPortal.toggleShipment(this)">&#10003;</div><div class="icard-body"><div class="icard-title">Coy Crosby &mdash; Dominion Energy</div><div class="icard-meta">6&times; 1.5-Man Bucket Cover &bull; SKU: NU-BC-2834 &bull; Contact Aaron for price &bull; <span class="badge badge-green">READY TO INVOICE</span></div></div><span class="icard-undo" onclick="NUPortal.undoShipment(this)">Undo</span></div>
+    <div class="icard" data-ship-id="3" data-status="ready"><div class="icard-check" onclick="NUPortal.toggleShipment(this)">&#10003;</div><div class="icard-body"><div class="icard-title">Jimmy Benz &mdash; SWEPCO/AEP</div><div class="icard-meta">1&times; 2-Man Bucket Cover &bull; SKU: NU-BC-2851 &bull; Truck #860377 &bull; $275 &bull; <span class="badge badge-green">READY TO INVOICE</span></div></div><span class="icard-undo" onclick="NUPortal.undoShipment(this)">Undo</span></div>
+    <div class="icard blocked" data-ship-id="4" data-status="blocked"><div class="icard-check disabled">&#9940;</div><div class="icard-body"><div class="icard-title">Darrell Pickle &mdash; Florence Electric</div><div class="icard-meta">1&times; BCB + 3&times; ARCH + 2&times; 1.5-Man &bull; <span class="badge badge-red">BLOCKED &mdash; ARCH SKUs unconfirmed</span></div></div></div>
+    <div class="icard blocked" data-ship-id="5" data-status="blocked"><div class="icard-check disabled">&#9940;</div><div class="icard-body"><div class="icard-title">Sammy Myers &mdash; AEP</div><div class="icard-meta">2&times; ARCH + 1&times; Combo 1.5-Man &bull; <span class="badge badge-red">BLOCKED &mdash; ARCH SKUs unconfirmed</span></div></div></div>
   </div>
-
-  <div class="card info" style="margin-top:16px">
-    <h4 style="color:#0033cc;margin-bottom:8px">FlexPro Armor&reg; Pricing Reference</h4>
-    <p style="font-size:14px;color:#444">All FlexPro Armor&reg; products invoiced at <strong>50% margin</strong>. Customer Price = Cost &divide; (1 - 0.50).</p>
-    <p style="font-size:13px;color:#888;margin-top:4px">Note: Margin % and cost data visible to Aaron only &mdash; not shared with Caroline or customers.</p>
-  </div>
-
+  <div class="card info" style="margin-top:16px"><h4 style="color:#0033cc;margin-bottom:8px">FlexPro Armor&reg; Pricing Reference</h4><p style="font-size:14px;color:#444">All FlexPro Armor&reg; products invoiced at <strong>50% margin</strong>. Customer Price = Cost &divide; (1 - 0.50).</p><p style="font-size:13px;color:#888;margin-top:4px">Note: Margin % and cost data visible to Aaron only &mdash; not shared with Caroline or customers.</p></div>
   <div class="sec-title" style="margin-top:40px"><span class="blue">Action</span> <span class="dark">Items</span></div>
-  <div class="card">
-    <ul style="list-style:none;padding:0;font-size:14px;line-height:2.2">
-      <li>1️⃣ <strong>Invoice orders 1-3 immediately</strong> &mdash; Richard Thornhill, Coy Crosby, Jimmy Benz</li>
-      <li>2️⃣ <strong>Contact Boss Products</strong> to confirm ARCH SKUs &mdash; CC Troy Gongwer AND Thayne Grove</li>
-      <li>3️⃣ <strong>Invoice orders 4-5</strong> once ARCH SKUs are confirmed</li>
-    </ul>
-  </div>
+  <div class="card"><ul style="list-style:none;padding:0;font-size:14px;line-height:2.2"><li>1&#65039;&#8419; <strong>Invoice orders 1-3 immediately</strong> &mdash; Richard Thornhill, Coy Crosby, Jimmy Benz</li><li>2&#65039;&#8419; <strong>Contact Boss Products</strong> to confirm ARCH SKUs &mdash; CC Troy Gongwer AND Thayne Grove</li><li>3&#65039;&#8419; <strong>Invoice orders 4-5</strong> once ARCH SKUs are confirmed</li></ul></div>
 </div>
 
 <!-- ================================================================ -->
@@ -426,59 +372,21 @@ tr:hover{background:#f8f9ff}
 <!-- ================================================================ -->
 <div class="tab-content" id="tab-ap">
   <div class="sec-title"><span class="blue">Accounts</span> <span class="dark">Payable</span></div>
-
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Vendor</th>
-          <th>Amount</th>
-          <th>Status</th>
-          <th>Details</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Boss Products</strong></td>
-          <td>$150.66 remaining</td>
-          <td><span class="badge badge-pending">PARTIAL PAID</span></td>
-          <td>Check #1123 ($20,928) mailed 3/20/26<br><span style="font-size:12px;color:#888">602 Maple Lane, Wakarusa, IN 46573</span></td>
-        </tr>
-        <tr>
-          <td><strong>Metro Marketing</strong><br><span style="font-size:12px;color:#888">MK Smith</span></td>
-          <td>$1,387.43</td>
-          <td><span class="badge badge-yellow">STATUS UNKNOWN</span></td>
-          <td>Needs verification<br><span style="font-size:12px;color:#888">2700 Samantha Dr, Dothan, AL 36303</span></td>
-        </tr>
-        <tr style="background:#f0faf0">
-          <td><strong>Samson Rope</strong></td>
-          <td>$14,100.16</td>
-          <td><span class="badge badge-paid">PAID</span></td>
-          <td>Checks written 3/20/26<br><span style="font-size:12px;color:#888">PO Box 536753, Pittsburgh, PA 15253-5909</span></td>
-        </tr>
-        <tr style="background:#f0f4ff">
-          <td><strong>Majors Law Firm</strong></td>
-          <td>&mdash;</td>
-          <td><span class="badge badge-settled">SETTLED</span></td>
-          <td>Retainer refunded. Matter closed.</td>
-        </tr>
-        <tr style="background:#f0faf0">
-          <td><strong>EUFMC</strong></td>
-          <td>$7,350.00</td>
-          <td><span class="badge badge-paid">PAID</span></td>
-          <td>Charged to credit card 3/19/26</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="filter-bar" id="apFilterBar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="overdue">Overdue</button>
+    <button class="filter-btn" data-filter="dueweek">Due This Week</button>
+    <button class="filter-btn" data-filter="paid">Paid</button>
   </div>
-
+  <div class="table-wrap"><table id="apTable"><thead><tr><th class="sortable" data-col="vendor">Vendor</th><th class="sortable" data-col="amount">Amount</th><th class="sortable" data-col="status">Status</th><th>Details</th></tr></thead><tbody>
+    <tr data-ap-status="partial" data-ap-amount="150.66"><td><strong>Boss Products</strong></td><td>$150.66 remaining</td><td><span class="badge badge-pending">PARTIAL PAID</span></td><td>Check #1123 ($20,928) mailed 3/20/26<br><span style="font-size:12px;color:#888">602 Maple Lane, Wakarusa, IN 46573</span></td></tr>
+    <tr data-ap-status="unknown" data-ap-amount="1387.43"><td><strong>Metro Marketing</strong><br><span style="font-size:12px;color:#888">MK Smith</span></td><td>$1,387.43</td><td><span class="badge badge-yellow">STATUS UNKNOWN</span></td><td>Needs verification<br><span style="font-size:12px;color:#888">2700 Samantha Dr, Dothan, AL 36303</span></td></tr>
+    <tr data-ap-status="paid" data-ap-amount="14100.16" style="background:#f0faf0"><td><strong>Samson Rope</strong></td><td>$14,100.16</td><td><span class="badge badge-paid">PAID</span></td><td>Checks written 3/20/26<br><span style="font-size:12px;color:#888">PO Box 536753, Pittsburgh, PA 15253-5909</span></td></tr>
+    <tr data-ap-status="settled" data-ap-amount="0" style="background:#f0f4ff"><td><strong>Majors Law Firm</strong></td><td>&mdash;</td><td><span class="badge badge-settled">SETTLED</span></td><td>Retainer refunded. Matter closed.</td></tr>
+    <tr data-ap-status="paid" data-ap-amount="7350" style="background:#f0faf0"><td><strong>EUFMC</strong></td><td>$7,350.00</td><td><span class="badge badge-paid">PAID</span></td><td>Charged to credit card 3/19/26</td></tr>
+  </tbody></table></div>
   <div class="sec-title" style="margin-top:40px"><span class="blue">Action</span> <span class="dark">Items</span></div>
-  <div class="card warning">
-    <ul style="list-style:none;padding:0;font-size:14px;line-height:2.2">
-      <li>⚠️ <strong>Metro Marketing ($1,387.43)</strong> &mdash; verify payment status with MK Smith</li>
-      <li>⚠️ <strong>Boss Products ($150.66)</strong> &mdash; small remaining balance, schedule payment</li>
-    </ul>
-  </div>
+  <div class="card warning"><ul style="list-style:none;padding:0;font-size:14px;line-height:2.2"><li>&#9888;&#65039; <strong>Metro Marketing ($1,387.43)</strong> &mdash; verify payment status with MK Smith</li><li>&#9888;&#65039; <strong>Boss Products ($150.66)</strong> &mdash; small remaining balance, schedule payment</li></ul></div>
 </div>
 
 <!-- ================================================================ -->
@@ -486,72 +394,24 @@ tr:hover{background:#f8f9ff}
 <!-- ================================================================ -->
 <div class="tab-content" id="tab-followups">
   <div class="sec-title"><span class="blue">Follow-Up</span> <span class="dark">Tracker</span></div>
-
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Contact</th>
-          <th>Company</th>
-          <th>Opportunity</th>
-          <th>Value</th>
-          <th>Last Action</th>
-          <th>Priority</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="background:#fef2f2">
-          <td><strong>Rick Sutherland</strong></td>
-          <td>EPB Chattanooga</td>
-          <td>SkyTruck47 quote</td>
-          <td style="font-weight:900;color:#0033cc">~$185K</td>
-          <td>Quoted Dec 4, 2025</td>
-          <td><span class="badge badge-red">OVERDUE</span></td>
-        </tr>
-        <tr style="background:#fef2f2">
-          <td><strong>Bill Kugler</strong></td>
-          <td>Terex</td>
-          <td>OEM partnership</td>
-          <td style="font-weight:900;color:#0033cc">$500K+</td>
-          <td>Prospect stage</td>
-          <td><span class="badge badge-red">OVERDUE</span></td>
-        </tr>
-        <tr style="background:#fff8e1">
-          <td><strong>Jared Lemoine</strong></td>
-          <td>Irby Construction</td>
-          <td>BSS RCOO presentation</td>
-          <td>&mdash;</td>
-          <td>Positive reception March 18</td>
-          <td><span class="badge badge-yellow">DUE THIS WEEK</span></td>
-        </tr>
-        <tr style="background:#f0faf0">
-          <td><strong>Darrell Pickle</strong></td>
-          <td>Florence Electric</td>
-          <td>6 Skylift trucks + FlexPro Armor&reg;</td>
-          <td>&mdash;</td>
-          <td>Aaron&rsquo;s feedback influenced order</td>
-          <td><span class="badge badge-green">HOT LEAD</span></td>
-        </tr>
-        <tr style="background:#fff8e1">
-          <td><strong>Izzy B Drilling</strong></td>
-          <td>BSS Drill Rigs</td>
-          <td>2 drill rig units</td>
-          <td>&mdash;</td>
-          <td>In discussion</td>
-          <td><span class="badge badge-yellow">DUE THIS WEEK</span></td>
-        </tr>
-        <tr style="background:#fff8e1">
-          <td><strong>Richard Baughn</strong></td>
-          <td>Baughn Construction</td>
-          <td>1 BSS drill rig unit</td>
-          <td>&mdash;</td>
-          <td>In discussion</td>
-          <td><span class="badge badge-yellow">DUE THIS WEEK</span></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="filter-bar" id="fuFilterBar">
+    <button class="filter-btn active" data-filter="all">Show All</button>
+    <button class="filter-btn" data-filter="overdue">Most Overdue First</button>
+    <button class="filter-btn" data-filter="alpha">Alphabetical</button>
+    <button class="filter-btn" data-filter="completed">Show Completed</button>
   </div>
-
+  <div id="followupCards">
+    <div class="icard" data-fu-id="fu1" data-fu-priority="1" data-fu-name="Rick Sutherland"><div class="icard-check" onclick="NUPortal.toggleFollowup(this)">&#10003;</div><div class="icard-body"><div class="icard-title">Rick Sutherland &mdash; EPB Chattanooga</div><div class="icard-meta">SkyTruck47 quote (~$185K) &bull; Quoted Dec 4, 2025 &bull; 123+ days waiting &bull; <span class="badge badge-red">OVERDUE</span></div></div><span class="icard-undo" onclick="NUPortal.undoFollowup(this)">Undo</span></div>
+    <div class="icard" data-fu-id="fu2" data-fu-priority="1" data-fu-name="Bill Kugler"><div class="icard-check" onclick="NUPortal.toggleFollowup(this)">&#10003;</div><div class="icard-body"><div class="icard-title">Bill Kugler &mdash; Terex</div><div class="icard-meta">OEM partnership ($500K+) &bull; Prospect stage &bull; <span class="badge badge-red">OVERDUE</span></div></div><span class="icard-undo" onclick="NUPortal.undoFollowup(this)">Undo</span></div>
+    <div class="icard" data-fu-id="fu3" data-fu-priority="2" data-fu-name="Jared Lemoine"><div class="icard-check" onclick="NUPortal.toggleFollowup(this)">&#10003;</div><div class="icard-body"><div class="icard-title">Jared Lemoine &mdash; Irby Construction</div><div class="icard-meta">BSS RCOO presentation &bull; Positive reception March 18 &bull; <span class="badge badge-yellow">DUE THIS WEEK</span></div></div><span class="icard-undo" onclick="NUPortal.undoFollowup(this)">Undo</span></div>
+    <div class="icard" data-fu-id="fu4" data-fu-priority="3" data-fu-name="Darrell Pickle"><div class="icard-check" onclick="NUPortal.toggleFollowup(this)">&#10003;</div><div class="icard-body"><div class="icard-title">Darrell Pickle &mdash; Florence Electric</div><div class="icard-meta">6 Skylift trucks + FlexPro Armor&reg; &bull; Aaron&rsquo;s feedback influenced order &bull; <span class="badge badge-green">HOT LEAD</span></div></div><span class="icard-undo" onclick="NUPortal.undoFollowup(this)">Undo</span></div>
+    <div class="icard" data-fu-id="fu5" data-fu-priority="2" data-fu-name="Izzy B Drilling"><div class="icard-check" onclick="NUPortal.toggleFollowup(this)">&#10003;</div><div class="icard-body"><div class="icard-title">Izzy B Drilling &mdash; BSS Drill Rigs</div><div class="icard-meta">2 drill rig units &bull; In discussion &bull; <span class="badge badge-yellow">DUE THIS WEEK</span></div></div><span class="icard-undo" onclick="NUPortal.undoFollowup(this)">Undo</span></div>
+    <div class="icard" data-fu-id="fu6" data-fu-priority="2" data-fu-name="Richard Baughn"><div class="icard-check" onclick="NUPortal.toggleFollowup(this)">&#10003;</div><div class="icard-body"><div class="icard-title">Richard Baughn &mdash; Baughn Construction</div><div class="icard-meta">1 BSS drill rig unit &bull; In discussion &bull; <span class="badge badge-yellow">DUE THIS WEEK</span></div></div><span class="icard-undo" onclick="NUPortal.undoFollowup(this)">Undo</span></div>
+  </div>
+  <div id="followupCompleted" style="margin-top:24px;display:none">
+    <div class="sec-title"><span class="blue">Completed</span> <span class="dark">Follow-Ups</span></div>
+    <div id="followupCompletedList"></div>
+  </div>
   <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px">
     <div style="display:flex;align-items:center;gap:6px;font-size:13px"><span class="badge badge-red">RED</span> = Overdue</div>
     <div style="display:flex;align-items:center;gap:6px;font-size:13px"><span class="badge badge-yellow">YELLOW</span> = Due This Week</div>
@@ -564,47 +424,37 @@ tr:hover{background:#f8f9ff}
 <!-- ================================================================ -->
 <div class="tab-content" id="tab-contacts">
   <div class="sec-title"><span class="blue">Contact</span> <span class="dark">Directory</span></div>
-
-  <input type="text" class="search-box" id="contactSearch" placeholder="Search contacts by name, company, email...">
-
-  <div class="table-wrap">
-    <table id="contactTable">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Title</th>
-          <th>Company</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th>Category</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Herb Minatre</strong></td><td>Owner</td><td>BSS (Bay Shore Systems)</td><td>&mdash;</td><td>Herb@bayshoresystems.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
-        <tr><td><strong>Andy Barron</strong></td><td>Primary Contact</td><td>BSS (Bay Shore Systems)</td><td>(208) 660-9438</td><td>abarron@bayshoresystems.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
-        <tr><td><strong>Troy Gongwer</strong></td><td>Owner</td><td>Boss Products</td><td>(574) 226-2099</td><td>tgongwer@bossproductsinc.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
-        <tr><td><strong>Thayne Grove</strong></td><td>Sales</td><td>Boss Products</td><td>(574) 970-0450 x105</td><td>tgrove@bossproductsinc.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
-        <tr><td><strong>Donna Poll</strong></td><td>Sales</td><td>Samson Rope</td><td>&mdash;</td><td>dpoll@samsonrope.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
-        <tr><td><strong>Sarah Daniels</strong></td><td>Sales</td><td>Samson Rope</td><td>&mdash;</td><td>sdaniels@samsonrope.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
-        <tr><td><strong>Andrew Jarmoszuk</strong></td><td>Management</td><td>Skylift</td><td>&mdash;</td><td>Andrew@skyliftus.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
-        <tr><td><strong>Dale Williams</strong></td><td>Sales</td><td>Skylift</td><td>&mdash;</td><td>DWilliams@skyliftus.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
-        <tr><td><strong>Nick Jarmoszuk Jr</strong></td><td>Management</td><td>Skylift</td><td>&mdash;</td><td>NJ@skyliftus.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
-        <tr><td><strong>Jared Lemoine</strong></td><td>Contact</td><td>Irby Construction</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
-        <tr><td><strong>Richard Thornhill</strong></td><td>Contact</td><td>LineTec Services</td><td>(318) 427-8846</td><td>rthornhill@ltspower.com</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
-        <tr><td><strong>AJ Morris</strong></td><td>Contact</td><td>Chain Electric</td><td>(601) 549-5409</td><td>ajmorris@bchain.com</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
-        <tr><td><strong>Michael Waldrep</strong></td><td>Contact</td><td>Sheffield Utilities</td><td>&mdash;</td><td>mwaldrep@sheffieldutilities.com</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
-        <tr><td><strong>Rick Sutherland</strong></td><td>Contact</td><td>EPB Chattanooga</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
-        <tr><td><strong>Coy Crosby</strong></td><td>Contact</td><td>Dominion Energy</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
-        <tr><td><strong>Jimmy Benz</strong></td><td>Contact</td><td>SWEPCO/AEP</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
-        <tr><td><strong>Sammy Myers</strong></td><td>Contact</td><td>AEP</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
-        <tr><td><strong>Darrell Pickle</strong></td><td>Contact</td><td>Florence Electric</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
-        <tr><td><strong>Bill Kugler</strong></td><td>Contact</td><td>Terex</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-yellow">PROSPECT</span></td></tr>
-        <tr><td><strong>MK Smith</strong></td><td>Marketing Contractor</td><td>Metro Marketing</td><td>&mdash;</td><td>office@metromarketingagency.com</td><td><span class="badge badge-gray">CONTRACTOR</span></td></tr>
-        <tr><td><strong>Patrick Lavette</strong></td><td>Banker</td><td>Renasant Bank</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-gray">FINANCIAL</span></td></tr>
-        <tr><td><strong>Caroline Butler</strong></td><td>Admin / Operations</td><td>Norris Utilities</td><td>&mdash;</td><td>cbutler@norrisutilities.com</td><td><span class="badge badge-blue">TEAM</span></td></tr>
-      </tbody>
-    </table>
+  <input type="text" class="search-box" id="contactSearch" placeholder="Search contacts by name, company, email, phone...">
+  <div class="filter-bar" id="contactSortBar" style="margin-bottom:16px">
+    <button class="filter-btn active" data-sort="default">Default</button>
+    <button class="filter-btn" data-sort="company">By Company</button>
+    <button class="filter-btn" data-sort="name">By Name</button>
+    <button class="filter-btn" data-sort="role">By Role</button>
   </div>
+  <div class="table-wrap"><table id="contactTable"><thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Phone</th><th>Email</th><th>Category</th></tr></thead><tbody>
+    <tr><td><strong>Herb Minatre</strong></td><td>Owner</td><td>BSS (Bay Shore Systems)</td><td>&mdash;</td><td>Herb@bayshoresystems.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
+    <tr><td><strong>Andy Barron</strong></td><td>Primary Contact</td><td>BSS (Bay Shore Systems)</td><td>(208) 660-9438</td><td>abarron@bayshoresystems.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
+    <tr><td><strong>Troy Gongwer</strong></td><td>Owner</td><td>Boss Products</td><td>(574) 226-2099</td><td>tgongwer@bossproductsinc.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
+    <tr><td><strong>Thayne Grove</strong></td><td>Sales</td><td>Boss Products</td><td>(574) 970-0450 x105</td><td>tgrove@bossproductsinc.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
+    <tr><td><strong>Donna Poll</strong></td><td>Sales</td><td>Samson Rope</td><td>&mdash;</td><td>dpoll@samsonrope.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
+    <tr><td><strong>Sarah Daniels</strong></td><td>Sales</td><td>Samson Rope</td><td>&mdash;</td><td>sdaniels@samsonrope.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
+    <tr><td><strong>Andrew Jarmoszuk</strong></td><td>Management</td><td>Skylift</td><td>&mdash;</td><td>Andrew@skyliftus.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
+    <tr><td><strong>Dale Williams</strong></td><td>Sales</td><td>Skylift</td><td>&mdash;</td><td>DWilliams@skyliftus.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
+    <tr><td><strong>Nick Jarmoszuk Jr</strong></td><td>Management</td><td>Skylift</td><td>&mdash;</td><td>NJ@skyliftus.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
+    <tr><td><strong>Jared Lemoine</strong></td><td>Contact</td><td>Irby Construction</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
+    <tr><td><strong>Richard Thornhill</strong></td><td>Contact</td><td>LineTec Services</td><td>(318) 427-8846</td><td>rthornhill@ltspower.com</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
+    <tr><td><strong>AJ Morris</strong></td><td>Contact</td><td>Chain Electric</td><td>(601) 549-5409</td><td>ajmorris@bchain.com</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
+    <tr><td><strong>Michael Waldrep</strong></td><td>Contact</td><td>Sheffield Utilities</td><td>&mdash;</td><td>mwaldrep@sheffieldutilities.com</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
+    <tr><td><strong>Rick Sutherland</strong></td><td>Contact</td><td>EPB Chattanooga</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
+    <tr><td><strong>Coy Crosby</strong></td><td>Contact</td><td>Dominion Energy</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
+    <tr><td><strong>Jimmy Benz</strong></td><td>Contact</td><td>SWEPCO/AEP</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
+    <tr><td><strong>Sammy Myers</strong></td><td>Contact</td><td>AEP</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
+    <tr><td><strong>Darrell Pickle</strong></td><td>Contact</td><td>Florence Electric</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
+    <tr><td><strong>Bill Kugler</strong></td><td>Contact</td><td>Terex</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-yellow">PROSPECT</span></td></tr>
+    <tr><td><strong>MK Smith</strong></td><td>Marketing Contractor</td><td>Metro Marketing</td><td>&mdash;</td><td>office@metromarketingagency.com</td><td><span class="badge badge-gray">CONTRACTOR</span></td></tr>
+    <tr><td><strong>Patrick Lavette</strong></td><td>Banker</td><td>Renasant Bank</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-gray">FINANCIAL</span></td></tr>
+    <tr><td><strong>Caroline Butler</strong></td><td>Admin / Operations</td><td>Norris Utilities</td><td>&mdash;</td><td>cbutler@norrisutilities.com</td><td><span class="badge badge-blue">TEAM</span></td></tr>
+  </tbody></table></div>
 </div>
 
 <!-- ================================================================ -->
@@ -612,82 +462,44 @@ tr:hover{background:#f8f9ff}
 <!-- ================================================================ -->
 <div class="tab-content" id="tab-caroline">
   <div class="sec-title"><span class="blue">CB</span> <span class="dark">&mdash; Operations</span></div>
-
+  <div style="margin-bottom:8px;font-size:14px;font-weight:700;color:#0033cc" id="cbProgressLabel">Daily Progress: 0/6</div>
+  <div class="progress-wrap"><div class="progress-fill" id="cbProgressFill" style="width:0%"></div><div class="progress-label" id="cbProgressText">0/6 &mdash; 0%</div></div>
   <div class="card" style="margin-bottom:32px">
     <h4 style="font-size:16px;color:#0033cc;margin-bottom:16px">Daily Checklist</h4>
     <ul class="checklist" id="cbChecklist">
-      <li><div class="check-icon" onclick="toggleCheck(this)"></div>Check inbox (office@norrisutilities.com and cbutler@norrisutilities.com)</li>
-      <li><div class="check-icon" onclick="toggleCheck(this)"></div>Check A/P tracker for new invoices &rarr; enter in QuickBooks</li>
-      <li><div class="check-icon" onclick="toggleCheck(this)"></div>Check shipment tracker for status updates</li>
-      <li><div class="check-icon" onclick="toggleCheck(this)"></div>Process approved orders</li>
+      <li data-cb-id="cb1"><div class="check-icon" onclick="NUPortal.toggleCB(this)"></div>Open ops portal</li>
+      <li data-cb-id="cb2"><div class="check-icon" onclick="NUPortal.toggleCB(this)"></div>Check Dashboard for critical items</li>
+      <li data-cb-id="cb3"><div class="check-icon" onclick="NUPortal.toggleCB(this)"></div>Check Shipments tab for uninvoiced orders</li>
+      <li data-cb-id="cb4"><div class="check-icon" onclick="NUPortal.toggleCB(this)"></div>Check Follow-Ups tab &mdash; ping Aaron if overdue</li>
+      <li data-cb-id="cb5"><div class="check-icon" onclick="NUPortal.toggleCB(this)"></div>Check email</li>
+      <li data-cb-id="cb6"><div class="check-icon" onclick="NUPortal.toggleCB(this)"></div>Process ready QB invoices</li>
     </ul>
   </div>
-
-  <div class="sec-title"><span class="blue">Responsibilities</span> <span class="dark">&amp; Permissions</span></div>
-
-  <div class="perm-can">
-    ✅ <strong>Can do independently:</strong> Internal tasks, QuickBooks data entry, A/R follow-up, filing, research, scheduling
+  <div class="sec-title"><span class="blue">QuickBooks</span> <span class="dark">To-Do</span></div>
+  <div class="qb-summary" id="qbSummary">&#128202; QB Status: Loading...</div>
+  <div class="filter-bar" id="qbFilterBar">
+    <button class="filter-btn active" data-filter="pending">Pending First</button>
+    <button class="filter-btn" data-filter="completed">Completed</button>
+    <button class="filter-btn" data-filter="all">All</button>
   </div>
-  <div class="perm-review">
-    ⚠️ <strong>Needs Aaron&rsquo;s review:</strong> ALL customer-facing communications &mdash; emails, quotes, responses
+  <div id="qbCards"></div>
+  <div class="add-task-form">
+    <input type="text" id="qbNewCustomer" placeholder="Customer name">
+    <input type="text" id="qbNewDesc" placeholder="Description (e.g., 1x 2-Man BC)">
+    <input type="text" id="qbNewAmount" placeholder="Amount (e.g., $275)">
+    <button onclick="NUPortal.addQBTask()">Add New QB Task</button>
   </div>
-  <div class="perm-no">
-    ❌ <strong>Cannot do:</strong> Pricing decisions, new quotes, vendor negotiations, any financial commitments
-  </div>
-
+  <div class="sec-title" style="margin-top:40px"><span class="blue">Responsibilities</span> <span class="dark">&amp; Permissions</span></div>
+  <div class="perm-can">&#9989; <strong>Can do independently:</strong> Internal tasks, QuickBooks data entry, A/R follow-up, filing, research, scheduling</div>
+  <div class="perm-review">&#9888;&#65039; <strong>Needs Aaron&rsquo;s review:</strong> ALL customer-facing communications &mdash; emails, quotes, responses</div>
+  <div class="perm-no">&#10060; <strong>Cannot do:</strong> Pricing decisions, new quotes, vendor negotiations, any financial commitments</div>
   <div class="sec-title" style="margin-top:40px"><span class="blue">Task</span> <span class="dark">Format</span></div>
-  <div class="card" style="background:#f8f9fc">
-    <p style="font-size:14px;color:#666;margin-bottom:12px">Every task must include these five elements:</p>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center">
-      <div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHAT</div>
-      <div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHO</div>
-      <div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHEN</div>
-      <div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHERE</div>
-      <div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHY</div>
-    </div>
-  </div>
-
+  <div class="card" style="background:#f8f9fc"><p style="font-size:14px;color:#666;margin-bottom:12px">Every task must include these five elements:</p><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center"><div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHAT</div><div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHO</div><div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHEN</div><div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHERE</div><div style="background:#0033cc;color:#fff;padding:10px 8px;border-radius:8px;font-size:12px;font-weight:700">WHY</div></div></div>
   <div class="sec-title" style="margin-top:40px"><span class="blue">Current</span> <span class="dark">Assignments</span></div>
-
-  <div class="task-entry">
-    <span class="task-num">1</span>
-    <strong>Invoice 3 ready shipments</strong><br>
-    <span style="font-size:13px;color:#666"><strong>What:</strong> Create and send invoices for Thornhill (LineTec), Crosby (Dominion), Benz (SWEPCO/AEP)<br>
-    <strong>Who:</strong> Caroline &rarr; Aaron reviews before sending<br>
-    <strong>When:</strong> ASAP &mdash; these shipped March 20<br>
-    <strong>Where:</strong> QuickBooks &rarr; email to customers<br>
-    <strong>Why:</strong> Revenue recognition &mdash; 17+ days uninvoiced</span>
-  </div>
-
-  <div class="task-entry">
-    <span class="task-num">2</span>
-    <strong>Verify Metro Marketing payment status</strong><br>
-    <span style="font-size:13px;color:#666"><strong>What:</strong> Check QB for $1,387.43 payment to MK Smith / Metro Marketing<br>
-    <strong>Who:</strong> Caroline<br>
-    <strong>When:</strong> This week<br>
-    <strong>Where:</strong> QuickBooks A/P<br>
-    <strong>Why:</strong> Status unknown &mdash; need to confirm if paid or outstanding</span>
-  </div>
-
-  <div class="task-entry">
-    <span class="task-num">3</span>
-    <strong>Schedule Boss Products remaining balance</strong><br>
-    <span style="font-size:13px;color:#666"><strong>What:</strong> Pay $150.66 remaining balance to Boss Products<br>
-    <strong>Who:</strong> Caroline &rarr; Aaron approves<br>
-    <strong>When:</strong> This week<br>
-    <strong>Where:</strong> Mail check to 602 Maple Lane, Wakarusa, IN 46573<br>
-    <strong>Why:</strong> Small remaining balance after $20,928 check cleared</span>
-  </div>
-
-  <div class="task-entry">
-    <span class="task-num">4</span>
-    <strong>Set up filing system for shipping documents</strong><br>
-    <span style="font-size:13px;color:#666"><strong>What:</strong> Organize BOLs, invoices, and tracking info for all March shipments<br>
-    <strong>Who:</strong> Caroline<br>
-    <strong>When:</strong> This week<br>
-    <strong>Where:</strong> Shared drive / QB attachments<br>
-    <strong>Why:</strong> Clean records for tax season and dispute resolution</span>
-  </div>
+  <div class="task-entry"><span class="task-num">1</span><strong>Invoice 3 ready shipments</strong><br><span style="font-size:13px;color:#666"><strong>What:</strong> Create and send invoices for Thornhill (LineTec), Crosby (Dominion), Benz (SWEPCO/AEP)<br><strong>Who:</strong> Caroline &rarr; Aaron reviews before sending<br><strong>When:</strong> ASAP &mdash; these shipped March 20<br><strong>Where:</strong> QuickBooks &rarr; email to customers<br><strong>Why:</strong> Revenue recognition &mdash; 17+ days uninvoiced</span></div>
+  <div class="task-entry"><span class="task-num">2</span><strong>Verify Metro Marketing payment status</strong><br><span style="font-size:13px;color:#666"><strong>What:</strong> Check QB for $1,387.43 payment to MK Smith / Metro Marketing<br><strong>Who:</strong> Caroline<br><strong>When:</strong> This week<br><strong>Where:</strong> QuickBooks A/P<br><strong>Why:</strong> Status unknown &mdash; need to confirm if paid or outstanding</span></div>
+  <div class="task-entry"><span class="task-num">3</span><strong>Schedule Boss Products remaining balance</strong><br><span style="font-size:13px;color:#666"><strong>What:</strong> Pay $150.66 remaining balance to Boss Products<br><strong>Who:</strong> Caroline &rarr; Aaron approves<br><strong>When:</strong> This week<br><strong>Where:</strong> Mail check to 602 Maple Lane, Wakarusa, IN 46573<br><strong>Why:</strong> Small remaining balance after $20,928 check cleared</span></div>
+  <div class="task-entry"><span class="task-num">4</span><strong>Set up filing system for shipping documents</strong><br><span style="font-size:13px;color:#666"><strong>What:</strong> Organize BOLs, invoices, and tracking info for all March shipments<br><strong>Who:</strong> Caroline<br><strong>When:</strong> This week<br><strong>Where:</strong> Shared drive / QB attachments<br><strong>Why:</strong> Clean records for tax season and dispute resolution</span></div>
 </div>
 
 <!-- ================================================================ -->
@@ -695,77 +507,15 @@ tr:hover{background:#f8f9ff}
 <!-- ================================================================ -->
 <div class="tab-content" id="tab-samson">
   <div class="sec-title"><span class="blue">Samson Rope</span> <span class="dark">&mdash; Invoice Tracker</span></div>
-
-  <div class="cc-rule">
-    📧 CC RULE: <span>ALWAYS CC both Donna Poll (dpoll@samsonrope.com) AND Sarah Daniels (sdaniels@samsonrope.com)</span> on every Samson communication
-  </div>
-
-  <div class="card info" style="margin-bottom:24px">
-    <strong>Payment Address:</strong> PO Box 536753, Pittsburgh, PA 15253-5909<br>
-    <span style="font-size:13px;color:#cc0000;font-weight:700">⚠ Do NOT mail to Ferndale, WA address</span>
-  </div>
-
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Samson Invoice #</th>
-          <th>Customer</th>
-          <th>Invoice Amount</th>
-          <th>Sell Price (30% margin)</th>
-          <th>Margin $</th>
-          <th>Payment Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>INV 322183</strong></td>
-          <td>Mississippi Power</td>
-          <td>$3,112.56</td>
-          <td>$4,446.51</td>
-          <td>$1,333.95</td>
-          <td><span class="badge badge-paid">PAID</span></td>
-        </tr>
-        <tr>
-          <td><strong>INV 322922</strong></td>
-          <td>Mississippi Power</td>
-          <td>$10,987.60</td>
-          <td>$15,696.57</td>
-          <td>$4,708.97</td>
-          <td><span class="badge badge-paid">PAID</span></td>
-        </tr>
-        <tr>
-          <td><strong>INV 318643</strong></td>
-          <td>&mdash;</td>
-          <td>$2,337.80</td>
-          <td>$3,339.71</td>
-          <td>$1,001.91</td>
-          <td><span class="badge badge-paid">PAID</span></td>
-        </tr>
-        <tr>
-          <td><strong>INV 318862</strong></td>
-          <td>&mdash;</td>
-          <td>$2,309.80</td>
-          <td>$3,299.71</td>
-          <td>$989.91</td>
-          <td><span class="badge badge-paid">PAID</span></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr style="background:#f0f4ff;font-weight:700">
-          <td colspan="2">TOTALS</td>
-          <td>$18,747.76</td>
-          <td>$26,782.50</td>
-          <td style="color:#00802b">$8,034.74</td>
-          <td></td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
-
-  <div class="note-box" style="margin-top:24px">
-    <strong>Note:</strong> Samson Rope pricing uses 30% margin. Sell Price = Cost &divide; (1 - 0.30). This data is for Aaron&rsquo;s eyes only &mdash; do not share margin details with customers or Caroline.
-  </div>
+  <div class="cc-rule">&#128231; CC RULE: <span>ALWAYS CC both Donna Poll (dpoll@samsonrope.com) AND Sarah Daniels (sdaniels@samsonrope.com)</span> on every Samson communication</div>
+  <div class="card info" style="margin-bottom:24px"><strong>Payment Address:</strong> PO Box 536753, Pittsburgh, PA 15253-5909<br><span style="font-size:13px;color:#cc0000;font-weight:700">&#9888; Do NOT mail to Ferndale, WA address</span></div>
+  <div class="table-wrap"><table><thead><tr><th>Samson Invoice #</th><th>Customer</th><th>Invoice Amount</th><th>Sell Price (30% margin)</th><th>Margin $</th><th>Payment Status</th></tr></thead><tbody>
+    <tr><td><strong>INV 322183</strong></td><td>Mississippi Power</td><td>$3,112.56</td><td>$4,446.51</td><td>$1,333.95</td><td><span class="badge badge-paid">PAID</span></td></tr>
+    <tr><td><strong>INV 322922</strong></td><td>Mississippi Power</td><td>$10,987.60</td><td>$15,696.57</td><td>$4,708.97</td><td><span class="badge badge-paid">PAID</span></td></tr>
+    <tr><td><strong>INV 318643</strong></td><td>&mdash;</td><td>$2,337.80</td><td>$3,339.71</td><td>$1,001.91</td><td><span class="badge badge-paid">PAID</span></td></tr>
+    <tr><td><strong>INV 318862</strong></td><td>&mdash;</td><td>$2,309.80</td><td>$3,299.71</td><td>$989.91</td><td><span class="badge badge-paid">PAID</span></td></tr>
+  </tbody><tfoot><tr style="background:#f0f4ff;font-weight:700"><td colspan="2">TOTALS</td><td>$18,747.76</td><td>$26,782.50</td><td style="color:#00802b">$8,034.74</td><td></td></tr></tfoot></table></div>
+  <div class="note-box" style="margin-top:24px"><strong>Note:</strong> Samson Rope pricing uses 30% margin. Sell Price = Cost &divide; (1 - 0.30). This data is for Aaron&rsquo;s eyes only &mdash; do not share margin details with customers or Caroline.</div>
 </div>
 
 <!-- ================================================================ -->
@@ -773,68 +523,9 @@ tr:hover{background:#f8f9ff}
 <!-- ================================================================ -->
 <div class="tab-content" id="tab-pogen">
   <div class="sec-title"><span class="blue">PO</span> <span class="dark">Generator</span></div>
-
-  <div class="card info" style="margin-bottom:24px">
-    <strong>PO Format:</strong> <code style="font-size:1.1rem;font-weight:900;color:#0033cc;background:#f0f0ff;padding:4px 12px;border-radius:4px;letter-spacing:0.05em">NU-[CODE]-[MMDD]-[YY]-[SEQ]</code>
-    <br><span style="font-size:13px;color:#666;margin-top:4px;display:inline-block">Example: NU-MSP-0406-26-001 = Norris Utilities, Mississippi Power, April 6 2026, first PO that day</span>
-  </div>
-
-  <!-- Generator Form -->
-  <div class="card" style="padding:28px;margin-bottom:32px">
-    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end">
-      <div style="flex:1;min-width:220px">
-        <label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Customer</label>
-        <select id="poCustomer" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem;color:#1a1a2e;background:#fff;cursor:pointer">
-          <option value="">Select customer...</option>
-        </select>
-      </div>
-      <div id="poCustomRow" style="display:none;flex:1;min-width:220px;gap:8px;align-items:flex-end">
-        <div style="flex:0 0 90px">
-          <label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Code (3 letters)</label>
-          <input type="text" id="poCustomCode" maxlength="3" placeholder="ABC" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem;text-transform:uppercase;text-align:center;font-weight:900;letter-spacing:0.1em">
-        </div>
-        <div style="flex:1">
-          <label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Company Name</label>
-          <input type="text" id="poCustomName" placeholder="Full company name" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem">
-        </div>
-      </div>
-      <div style="flex:0 0 160px">
-        <label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Date</label>
-        <input type="date" id="poDate" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem;color:#1a1a2e">
-      </div>
-      <div>
-        <button id="poGenBtn" style="padding:12px 32px;background:linear-gradient(135deg,#0000ff,#0033cc);color:#fff;border:none;border-radius:8px;font-family:'Lato',sans-serif;font-weight:900;font-size:0.9rem;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:transform .1s">GENERATE PO</button>
-      </div>
-    </div>
-    <div id="poResult"></div>
-  </div>
-
-  <!-- PO Log -->
-  <div class="card" style="padding:0;overflow:hidden">
-    <div style="padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:2px solid #e8e8ec">
-      <div style="font-weight:900;font-size:1rem;color:#1a1a2e;text-transform:uppercase;letter-spacing:0.05em">PO Log</div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <input type="text" id="poSearch" placeholder="Search POs..." style="padding:8px 14px;border:2px solid #e8e8ec;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.85rem;width:200px">
-        <button id="poExportBtn" style="padding:8px 16px;background:#f5f5f7;border:2px solid #e8e8ec;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;color:#555;letter-spacing:0.04em" title="Export CSV">CSV &#8595;</button>
-      </div>
-    </div>
-    <div class="table-wrap">
-      <table style="width:100%;border-collapse:collapse">
-        <thead>
-          <tr style="background:#f5f5f7">
-            <th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">PO Number</th>
-            <th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">Customer</th>
-            <th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">Date</th>
-            <th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">Notes</th>
-            <th style="padding:12px 16px;text-align:center;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec;width:50px">Copy</th>
-          </tr>
-        </thead>
-        <tbody id="poLogBody">
-          <tr><td colspan="5" style="text-align:center;color:#999;padding:24px">No POs generated yet</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <div class="card info" style="margin-bottom:24px"><strong>PO Format:</strong> <code style="font-size:1.1rem;font-weight:900;color:#0033cc;background:#f0f0ff;padding:4px 12px;border-radius:4px;letter-spacing:0.05em">NU-[CODE]-[MMDD]-[YY]-[SEQ]</code><br><span style="font-size:13px;color:#666;margin-top:4px;display:inline-block">Example: NU-MSP-0406-26-001 = Norris Utilities, Mississippi Power, April 6 2026, first PO that day</span></div>
+  <div class="card" style="padding:28px;margin-bottom:32px"><div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end"><div style="flex:1;min-width:220px"><label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Customer</label><select id="poCustomer" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem;color:#1a1a2e;background:#fff;cursor:pointer"><option value="">Select customer...</option></select></div><div id="poCustomRow" style="display:none;flex:1;min-width:220px;gap:8px;align-items:flex-end"><div style="flex:0 0 90px"><label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Code (3 letters)</label><input type="text" id="poCustomCode" maxlength="3" placeholder="ABC" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem;text-transform:uppercase;text-align:center;font-weight:900;letter-spacing:0.1em"></div><div style="flex:1"><label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Company Name</label><input type="text" id="poCustomName" placeholder="Full company name" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem"></div></div><div style="flex:0 0 160px"><label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Date</label><input type="date" id="poDate" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem;color:#1a1a2e"></div><div><button id="poGenBtn" style="padding:12px 32px;background:linear-gradient(135deg,#0000ff,#0033cc);color:#fff;border:none;border-radius:8px;font-family:'Lato',sans-serif;font-weight:900;font-size:0.9rem;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap">GENERATE PO</button></div></div><div id="poResult"></div></div>
+  <div class="card" style="padding:0;overflow:hidden"><div style="padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:2px solid #e8e8ec"><div style="font-weight:900;font-size:1rem;color:#1a1a2e;text-transform:uppercase;letter-spacing:0.05em">PO Log</div><div style="display:flex;gap:8px;align-items:center"><input type="text" id="poSearch" placeholder="Search POs..." style="padding:8px 14px;border:2px solid #e8e8ec;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.85rem;width:200px"><button id="poExportBtn" style="padding:8px 16px;background:#f5f5f7;border:2px solid #e8e8ec;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;color:#555;letter-spacing:0.04em" title="Export CSV">CSV &#8595;</button></div></div><div class="table-wrap"><table style="width:100%;border-collapse:collapse"><thead><tr style="background:#f5f5f7"><th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">PO Number</th><th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">Customer</th><th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">Date</th><th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">Notes</th><th style="padding:12px 16px;text-align:center;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec;width:50px">Copy</th></tr></thead><tbody id="poLogBody"><tr><td colspan="5" style="text-align:center;color:#999;padding:24px">No POs generated yet</td></tr></tbody></table></div></div>
 </div>
 
 <!-- ================================================================ -->
@@ -843,26 +534,25 @@ tr:hover{background:#f8f9ff}
 <div class="tab-content" id="tab-tools">
   <div class="sec-title"><span class="blue">All</span> <span class="dark">Tools &amp; Dashboards</span></div>
   <div class="tool-grid">
-    <a href="tools/pricing-calculator.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">💲</div><div><h4>Pricing Calculator</h4><p>All product margins, three-channel pricing, Ben&rsquo;s Formula</p></div></a>
-    <a href="internal/shipping_calculator.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">📦</div><div><h4>UPS Shipping Calculator</h4><p>Ben&rsquo;s Formula &mdash; ROUNDUP shipping costs</p></div></a>
-    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">📋</div><div><h4>UPS Shipping Log</h4><p>Google Sheets &mdash; live shipment tracking</p></div></a>
-    <a href="internal/home_base_v3.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">🏠</div><div><h4>Home Base Portal</h4><p>Central hub &mdash; links to all systems</p></div></a>
-    <a href="internal/mission_control_v2.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6600cc,#aa44ff)">🎯</div><div><h4>Mission Control</h4><p>Strategic overview and task management</p></div></a>
-    <a href="internal/cb_onboarding.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">📝</div><div><h4>CB Onboarding</h4><p>Caroline Butler operations guide</p></div></a>
-    <a href="internal/daily_journal.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#ff6600,#ffaa00)">📔</div><div><h4>Daily Journal</h4><p>Agent build log and daily entries</p></div></a>
-    <a href="internal/ap_tracker.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">💰</div><div><h4>A/P Tracker</h4><p>Accounts payable &mdash; vendor balances</p></div></a>
-    <a href="internal/bss_expense_report.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#008888,#00cccc)">📊</div><div><h4>BSS Expense Report</h4><p>Bay Shore Systems expense tracking</p></div></a>
-    <a href="msp-orders.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">🧵</div><div><h4>MSP Ordering Portal</h4><p>Mississippi Power rope order form</p></div></a>
-    <a href="internal/flexpro_store.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">🛒</div><div><h4>FlexPro Armor&reg; Store</h4><p>Product catalog and storefront</p></div></a>
-    <a href="website/index.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0a0e5c,#0033cc)">🌐</div><div><h4>Website Homepage</h4><p>Draft public website</p></div></a>
-    <a href="website/about.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0a0e5c,#0033cc)">📄</div><div><h4>About Page</h4><p>The Norris Legacy &mdash; three generations</p></div></a>
-    <a href="internal/contact_master_list.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#555,#888)">📇</div><div><h4>Contact Master List</h4><p>All vendors, customers, and contacts</p></div></a>
-    <a href="internal/po_tracker_dashboard.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#ff6600,#ffaa00)">📋</div><div><h4>PO Tracker</h4><p>Purchase order tracking dashboard</p></div></a>
-    <a href="internal/agent_calendar.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0088cc,#00bbee)">📅</div><div><h4>Calendar &amp; Timeline</h4><p>Agent schedule and project timeline</p></div></a>
-    <a href="internal/shipping_doc_v7.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">📑</div><div><h4>Shipping Doc Template</h4><p>Branded shipping document generator</p></div></a>
-    <a href="internal/video_breakdown.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">🎬</div><div><h4>Video Breakdown</h4><p>Video content analysis tool</p></div></a>
-    <a href="team-live.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">🛞</div><div><h4>AI Team &mdash; Live</h4><p>All 15 team members on OneWheels &mdash; live status</p></div></a>
-    <a href="internal/remarkable_dashboard.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#555,#888)">📝</div><div><h4>reMarkable Notes</h4><p>Scanned handwritten notes &mdash; categorized &amp; searchable</p></div></a>
+    <a href="tools/pricing-calculator.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">&#128178;</div><div><h4>Pricing Calculator</h4><p>All product margins, three-channel pricing, Ben&rsquo;s Formula</p></div></a>
+    <a href="internal/shipping_calculator.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">&#128230;</div><div><h4>UPS Shipping Calculator</h4><p>Ben&rsquo;s Formula &mdash; ROUNDUP shipping costs</p></div></a>
+    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">&#128203;</div><div><h4>UPS Shipping Log</h4><p>Google Sheets &mdash; live shipment tracking</p></div></a>
+    <a href="internal/home_base_v3.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">&#127968;</div><div><h4>Home Base Portal</h4><p>Central hub &mdash; links to all systems</p></div></a>
+    <a href="internal/mission_control_v2.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6600cc,#aa44ff)">&#127919;</div><div><h4>Mission Control</h4><p>Strategic overview and task management</p></div></a>
+    <a href="internal/cb_onboarding.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">&#128221;</div><div><h4>CB Onboarding</h4><p>Caroline Butler operations guide</p></div></a>
+    <a href="internal/daily_journal.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#ff6600,#ffaa00)">&#128212;</div><div><h4>Daily Journal</h4><p>Agent build log and daily entries</p></div></a>
+    <a href="internal/ap_tracker.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">&#128176;</div><div><h4>A/P Tracker</h4><p>Accounts payable &mdash; vendor balances</p></div></a>
+    <a href="internal/bss_expense_report.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#008888,#00cccc)">&#128202;</div><div><h4>BSS Expense Report</h4><p>Bay Shore Systems expense tracking</p></div></a>
+    <a href="msp-orders.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">&#129525;</div><div><h4>MSP Ordering Portal</h4><p>Mississippi Power rope order form</p></div></a>
+    <a href="internal/flexpro_store.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">&#128722;</div><div><h4>FlexPro Armor&reg; Store</h4><p>Product catalog and storefront</p></div></a>
+    <a href="website/index.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0a0e5c,#0033cc)">&#127760;</div><div><h4>Website Homepage</h4><p>Draft public website</p></div></a>
+    <a href="website/about.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0a0e5c,#0033cc)">&#128196;</div><div><h4>About Page</h4><p>The Norris Legacy &mdash; three generations</p></div></a>
+    <a href="internal/contact_master_list.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#555,#888)">&#128199;</div><div><h4>Contact Master List</h4><p>All vendors, customers, and contacts</p></div></a>
+    <a href="internal/po_tracker_dashboard.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#ff6600,#ffaa00)">&#128203;</div><div><h4>PO Tracker</h4><p>Purchase order tracking dashboard</p></div></a>
+    <a href="internal/agent_calendar.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0088cc,#00bbee)">&#128197;</div><div><h4>Calendar &amp; Timeline</h4><p>Agent schedule and project timeline</p></div></a>
+    <a href="internal/shipping_doc_v7.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">&#128209;</div><div><h4>Shipping Doc Template</h4><p>Branded shipping document generator</p></div></a>
+    <a href="internal/video_breakdown.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">&#127916;</div><div><h4>Video Breakdown</h4><p>Video content analysis tool</p></div></a>
+    <a href="team-live.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">&#128726;</div><div><h4>AI Team &mdash; Live</h4><p>All 13 agents on OneWheels &mdash; live status</p></div></a>
   </div>
 </div>
 
@@ -872,18 +562,16 @@ tr:hover{background:#f8f9ff}
 <div class="tab-content" id="tab-docs">
   <div class="sec-title"><span class="blue">Documents</span> <span class="dark">&amp; Resources</span></div>
   <div class="tool-grid">
-    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">📜</div><div><h4>Alabama Dealer License Guide <span class="doc-badge doc-soon">Coming Soon</span></h4><p>Application process, surety bond requirements</p></div></div>
-    <a href="internal/cb_onboarding.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">📗</div><div><h4>CB Operations Workbook <span class="doc-badge doc-live">Live</span></h4><p>Caroline Butler full onboarding guide</p></div></a>
-    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#0088cc,#00bbee)">✉️</div><div><h4>Email Templates for CB <span class="doc-badge doc-soon">Coming Soon</span></h4><p>Pre-approved customer communication templates</p></div></div>
-    <a href="internal/bss_expense_report.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#008888,#00cccc)">📊</div><div><h4>BSS Expense Report <span class="doc-badge doc-live">Live</span></h4><p>Bay Shore Systems expense tracker</p></div></a>
-    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">🛡️</div><div><h4>FlexPro Armor&reg; Product Specs <span class="doc-badge doc-soon">Coming Soon</span></h4><p>Full product specifications and fit guide</p></div></div>
-    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#6600cc,#aa44ff)">🧵</div><div><h4>Samson Rope Order Guide <span class="doc-badge doc-soon">Coming Soon</span></h4><p>SKU reference, ordering process, CC rules</p></div></div>
-    <a href="internal/shipping_doc_v7.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">🚚</div><div><h4>Shipping SOP <span class="doc-badge doc-live">Live</span></h4><p>Standard operating procedure for shipments</p></div></a>
-    <a href="internal/goodwill_donations_2025.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">🎁</div><div><h4>2025 Goodwill Donations <span class="doc-badge doc-live">Live</span></h4><p>Donation records with values</p></div></a>
+    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">&#128220;</div><div><h4>Alabama Dealer License Guide <span class="doc-badge doc-soon">Coming Soon</span></h4><p>Application process, surety bond requirements</p></div></div>
+    <a href="internal/cb_onboarding.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">&#128215;</div><div><h4>CB Operations Workbook <span class="doc-badge doc-live">Live</span></h4><p>Caroline Butler full onboarding guide</p></div></a>
+    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#0088cc,#00bbee)">&#9993;&#65039;</div><div><h4>Email Templates for CB <span class="doc-badge doc-soon">Coming Soon</span></h4><p>Pre-approved customer communication templates</p></div></div>
+    <a href="internal/bss_expense_report.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#008888,#00cccc)">&#128202;</div><div><h4>BSS Expense Report <span class="doc-badge doc-live">Live</span></h4><p>Bay Shore Systems expense tracker</p></div></a>
+    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">&#128737;&#65039;</div><div><h4>FlexPro Armor&reg; Product Specs <span class="doc-badge doc-soon">Coming Soon</span></h4><p>Full product specifications and fit guide</p></div></div>
+    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#6600cc,#aa44ff)">&#129525;</div><div><h4>Samson Rope Order Guide <span class="doc-badge doc-soon">Coming Soon</span></h4><p>SKU reference, ordering process, CC rules</p></div></div>
+    <a href="internal/shipping_doc_v7.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">&#128666;</div><div><h4>Shipping SOP <span class="doc-badge doc-live">Live</span></h4><p>Standard operating procedure for shipments</p></div></a>
+    <a href="internal/goodwill_donations_2025.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">&#127873;</div><div><h4>2025 Goodwill Donations <span class="doc-badge doc-live">Live</span></h4><p>Donation records with values</p></div></a>
   </div>
-  <div class="card" style="margin-top:24px;text-align:center;background:#f8f9fc;border-style:dashed">
-    <p style="font-size:14px;color:#888">📁 To add documents, place files in <code style="background:#eee;padding:2px 6px;border-radius:4px">~/norris-ops/docs/</code> and they&rsquo;ll be linked here.</p>
-  </div>
+  <div class="card" style="margin-top:24px;text-align:center;background:#f8f9fc;border-style:dashed"><p style="font-size:14px;color:#888">&#128193; To add documents, place files in <code style="background:#eee;padding:2px 6px;border-radius:4px">~/norris-ops/docs/</code> and they&rsquo;ll be linked here.</p></div>
 </div>
 
 <!-- ==================== FOOTER ==================== -->
@@ -894,245 +582,107 @@ tr:hover{background:#f8f9ff}
 
 </div><!-- end #portalContent -->
 
+<!-- Completion Counter -->
+<div class="completion-counter" id="completionCounter" onclick="this.classList.toggle('expanded')">
+  &#9989; <span id="ccCount">0</span> completed today
+  <div class="cc-detail" id="ccDetail">You've checked off 0 items today. Keep going!</div>
+</div>
+
 <!-- ==================== JAVASCRIPT ==================== -->
 <script>
-// === PASSWORD GATE ===
-(function(){
-  const overlay = document.getElementById('loginOverlay');
-  const portal = document.getElementById('portalContent');
-  const input = document.getElementById('loginInput');
-  const btn = document.getElementById('loginBtn');
-  const errEl = document.getElementById('loginError');
-  const KEY = 'nu_auth_2026';
+var NUPortal=(function(){'use strict';var isMobile=window.innerWidth<768,celebLayer=document.getElementById('celebLayer'),lastCelebType=-1,todayStr=new Date().toISOString().slice(0,10),streak=parseInt(localStorage.getItem('nu_streak')||'0',10),streakDate=localStorage.getItem('nu_streak_date')||'',todayCount=0;if(streakDate!==todayStr){streak=0;localStorage.setItem('nu_streak','0');localStorage.setItem('nu_streak_date',todayStr)}var sc=localStorage.getItem('nu_completed_'+todayStr);if(sc)todayCount=parseInt(sc,10);function saveTodayCount(){localStorage.setItem('nu_completed_'+todayStr,todayCount.toString());var c=document.getElementById('ccCount'),d=document.getElementById('ccDetail');if(c)c.textContent=todayCount;if(d)d.textContent="You've checked off "+todayCount+" items today. Keep going!"}function incrementCompleted(){todayCount++;streak++;localStorage.setItem('nu_streak',streak.toString());localStorage.setItem('nu_streak_date',todayStr);saveTodayCount()}function decrementCompleted(){if(todayCount>0)todayCount--;streak=0;localStorage.setItem('nu_streak','0');saveTodayCount()}
 
-  if(sessionStorage.getItem(KEY)==='granted'){
-    overlay.classList.add('hidden');
-    portal.style.display='block';
-  }
+var COLORS=['#0033cc','#06D0FF','#FFD700','#ffffff','#00aa44','#ff6600'],particleCount=isMobile?10:20,confettiCount=isMobile?25:50;function rr(a,b){return Math.random()*(b-a)+a}function rc(){return COLORS[Math.floor(Math.random()*COLORS.length)]}function gcp(el){var r=el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2}}
 
-  function attempt(){
-    if(input.value==='legacy2026'){
-      sessionStorage.setItem(KEY,'granted');
-      overlay.classList.add('hidden');
-      portal.style.display='block';
-    } else {
-      input.classList.add('error');
-      errEl.textContent='Access Denied.';
-      setTimeout(()=>{input.classList.remove('error')},500);
-    }
-  }
+function celebFireworks(pos){for(var i=0;i<particleCount;i++){var p=document.createElement('div');p.className='fw-particle';p.style.background=rc();p.style.left=pos.x+'px';p.style.top=pos.y+'px';var a=(Math.PI*2/particleCount)*i+rr(-0.2,0.2),dist=rr(40,120),dx=Math.cos(a)*dist,dy=Math.sin(a)*dist-30;p.style.transition='all 1.5s cubic-bezier(0.25,0.46,0.45,0.94)';p.style.opacity='1';celebLayer.appendChild(p);(function(el,ddx,ddy){requestAnimationFrame(function(){el.style.transform='translate('+ddx+'px,'+ddy+'px) scale(0.2)';el.style.opacity='0'})})(p,dx,dy);(function(el){setTimeout(function(){el.remove()},1600)})(p)}}
 
-  btn.addEventListener('click',attempt);
-  input.addEventListener('keydown',function(e){if(e.key==='Enter')attempt()});
-})();
+function celebConfetti(){for(var i=0;i<confettiCount;i++){var c=document.createElement('div');c.className='confetti-piece';var sz=rr(6,12);c.style.width=sz+'px';c.style.height=(Math.random()>0.5?sz:sz*0.4)+'px';c.style.borderRadius=Math.random()>0.5?'50%':'2px';c.style.background=rc();c.style.left=rr(0,window.innerWidth)+'px';c.style.opacity='1';c.style.transition='all '+rr(1.5,2.5)+'s cubic-bezier(0.25,0.46,0.45,0.94)';celebLayer.appendChild(c);(function(el){var ddx=rr(-60,60),ddy=rr(300,window.innerHeight+100),rot=rr(0,360);requestAnimationFrame(function(){el.style.transform='translate('+ddx+'px,'+ddy+'px) rotate('+rot+'deg)';el.style.opacity='0'})})(c);(function(el){setTimeout(function(){el.remove()},2500)})(c)}}
 
-// === DYNAMIC GREETING ===
-(function(){
-  const h=new Date().getHours();
-  let g='Good evening, Aaron';
-  if(h>=4&&h<12) g='Good morning, Aaron';
-  else if(h>=12&&h<17) g='Good afternoon, Aaron';
-  document.getElementById('greeting').textContent=g+' 👋';
+function celebPhoenix(pos){var ph=document.createElement('div');ph.className='phoenix-rise';ph.textContent='\uD83D\uDD25';ph.style.left=pos.x+'px';ph.style.top=pos.y+'px';ph.style.transition='all 1.5s ease-out';ph.style.opacity='1';celebLayer.appendChild(ph);var txt=document.createElement('div');txt.className='phoenix-text';txt.textContent='Legacy approved!';txt.style.left=(pos.x-60)+'px';txt.style.top=(pos.y-20)+'px';txt.style.transition='all 1.5s ease-out';txt.style.opacity='0';celebLayer.appendChild(txt);requestAnimationFrame(function(){ph.style.transform='translateY(-80px) scale(1.5)';ph.style.opacity='0';txt.style.opacity='1';txt.style.transform='translateY(-50px)'});setTimeout(function(){txt.style.opacity='0';setTimeout(function(){ph.remove();txt.remove()},500)},1200)}
 
-  // Header date
-  const now=new Date();
-  const opts={weekday:'long',year:'numeric',month:'long',day:'numeric'};
-  document.getElementById('headerDate').textContent=now.toLocaleDateString('en-US',opts);
-})();
+function celebStars(pos){var m=document.createElement('div');m.className='star-burst';m.textContent='\u2B50';m.style.left=pos.x+'px';m.style.top=pos.y+'px';m.style.transition='all 0.4s ease-out';m.style.opacity='1';celebLayer.appendChild(m);requestAnimationFrame(function(){m.style.transform='scale(2)';m.style.opacity='0'});for(var i=0;i<5;i++){var s=document.createElement('div');s.className='star-burst';s.textContent='\u2B50';s.style.fontSize='14px';s.style.left=pos.x+'px';s.style.top=pos.y+'px';s.style.transition='all 1s ease-out';s.style.opacity='1';celebLayer.appendChild(s);var a=(Math.PI*2/5)*i,dx=Math.cos(a)*60,dy=Math.sin(a)*60;(function(el,ddx,ddy){requestAnimationFrame(function(){el.style.transform='translate('+ddx+'px,'+ddy+'px) rotate(360deg) scale(0.3)';el.style.opacity='0'})})(s,dx,dy);(function(el){setTimeout(function(){el.remove()},1100)})(s)}setTimeout(function(){m.remove()},500)}
 
-// === PO GENERATOR LOGIC ===
-(function(){
-  const CUSTOMERS={
-    MSP:'Mississippi Power',IRB:'Irby Construction',DOM:'Dominion Energy',
-    LTC:'LineTec Services',FLO:'Florence Electric Dept',AEP:'AEP / Appalachian Power',
-    SWP:'SWEPCO',CHN:'Chain Electric',SHF:'Sheffield Utilities',
-    EPB:'EPB Chattanooga',GRD:'Gridco',TRX:'Terex'
-  };
+function celebCheckBoom(el){el.style.transition='all 0.3s cubic-bezier(0.68,-0.55,0.27,1.55)';el.style.transform='scale(2)';el.style.background='#0033cc';el.style.borderColor='#0033cc';el.style.boxShadow='0 0 20px rgba(0,51,204,0.6)';setTimeout(function(){el.style.transform='scale(1)';el.style.boxShadow='none'},400);var pos=gcp(el);var b=document.createElement('div');b.className='done-badge';b.textContent='\u2705 DONE!';b.style.left=(pos.x-30)+'px';b.style.top=pos.y+'px';b.style.transition='all 1s ease-out';b.style.opacity='1';celebLayer.appendChild(b);requestAnimationFrame(function(){b.style.transform='translateY(-50px)';b.style.opacity='0'});setTimeout(function(){b.remove()},1100)}
 
-  function getStore(){
-    try{return JSON.parse(localStorage.getItem('nu_po_log')||'[]');}
-    catch(e){return[];}
-  }
-  function saveStore(data){localStorage.setItem('nu_po_log',JSON.stringify(data));}
+function celebParty(){var pp=document.createElement('div');pp.style.cssText='position:fixed;left:-20px;top:40%;font-size:48px;z-index:10001;pointer-events:none;transition:all 0.5s ease-out';pp.textContent='\uD83C\uDF89';celebLayer.appendChild(pp);requestAnimationFrame(function(){pp.style.left='40px';pp.style.transform='rotate(30deg)'});var cnt=isMobile?12:25;for(var i=0;i<cnt;i++){var c=document.createElement('div');c.className='confetti-piece';c.style.width=rr(4,10)+'px';c.style.height=rr(4,10)+'px';c.style.borderRadius=Math.random()>0.5?'50%':'2px';c.style.background=rc();c.style.left='50px';c.style.top='40%';c.style.opacity='1';c.style.transition='all '+rr(0.8,1.5)+'s ease-out';celebLayer.appendChild(c);(function(el){var ddx=rr(40,300),ddy=rr(-200,200);requestAnimationFrame(function(){el.style.transform='translate('+ddx+'px,'+ddy+'px) rotate('+rr(0,720)+'deg)';el.style.opacity='0'})})(c);(function(el){setTimeout(function(){el.remove()},1600)})(c)}setTimeout(function(){pp.remove()},1000)}
 
-  function getNextSeq(code,dateStr){
-    const log=getStore();
-    const prefix='NU-'+code+'-'+dateStr+'-';
-    let max=0;
-    log.forEach(function(po){
-      if(po.number&&po.number.startsWith(prefix)){
-        const s=parseInt(po.number.split('-').pop(),10);
-        if(s>max)max=s;
-      }
-    });
-    return max+1;
-  }
+function celebLevelUp(pos){var t=document.createElement('div');t.className='level-up-text';t.textContent='LEVEL UP!';t.style.left=(pos.x-60)+'px';t.style.top=pos.y+'px';t.style.transition='all 1.2s ease-out';t.style.opacity='1';celebLayer.appendChild(t);var f=document.createElement('div');f.style.cssText='position:fixed;inset:0;background:rgba(255,215,0,0.15);pointer-events:none;z-index:9998;transition:opacity 0.3s';celebLayer.appendChild(f);setTimeout(function(){f.style.opacity='0'},100);setTimeout(function(){f.remove()},400);requestAnimationFrame(function(){t.style.transform='translateY(-70px) scale(1.3)';t.style.opacity='0'});setTimeout(function(){t.remove()},1300)}
 
-  function pad(n,len){return String(n).padStart(len,'0');}
+function showStreak(){if(streak<3)return;var msg,fires;if(streak>=10){msg='UNSTOPPABLE!';fires='\uD83D\uDD25\uD83D\uDD25\uD83D\uDD25'}else if(streak>=5){msg=streak+' STREAK!';fires='\uD83D\uDD25\uD83D\uDD25'}else{msg=streak+' IN A ROW!';fires='\uD83D\uDD25'}var el=document.createElement('div');el.className='streak-popup';el.textContent=fires+' '+msg;el.style.transition='all 1.5s ease-out';el.style.opacity='1';celebLayer.appendChild(el);requestAnimationFrame(function(){el.style.transform='translate(-50%,-50%) scale(1.3)';el.style.opacity='0'});setTimeout(function(){el.remove()},1600)}
 
-  function renderLog(filter){
-    var log=getStore().slice().reverse();
-    var tbody=document.getElementById('poLogBody');
-    if(!tbody)return;
-    var fq=(filter||'').toLowerCase();
-    var html='';
-    log.forEach(function(po,idx){
-      var realIdx=log.length-1-idx;
-      if(fq&&!(po.number||'').toLowerCase().includes(fq)&&!(po.customer||'').toLowerCase().includes(fq)&&!(po.notes||'').toLowerCase().includes(fq))return;
-      html+='<tr>'
-        +'<td style="font-weight:700;color:#0033cc;font-family:monospace;font-size:0.95rem">'+esc(po.number)+'</td>'
-        +'<td>'+esc(po.customer)+'</td>'
-        +'<td>'+esc(po.date)+'</td>'
-        +'<td><input type="text" value="'+escAttr(po.notes||'')+'" data-idx="'+realIdx+'" class="po-note-input" placeholder="What was this PO for?"></td>'
-        +'<td style="text-align:center"><button class="po-copy-btn" data-po="'+escAttr(po.number)+'" title="Copy">📋</button></td>'
-        +'</tr>';
-    });
-    if(!html)html='<tr><td colspan="5" style="text-align:center;color:#999;padding:24px">No POs generated yet</td></tr>';
-    tbody.innerHTML=html;
+var celebFns=[celebFireworks,celebConfetti,celebPhoenix,celebStars,null,celebParty,celebLevelUp];
+function celebrate(checkEl){var pos=gcp(checkEl);var type;do{type=Math.floor(Math.random()*7)}while(type===lastCelebType);lastCelebType=type;if(type===4)celebCheckBoom(checkEl);else if(type===1||type===5)celebFns[type]();else celebFns[type](pos);showStreak();incrementCompleted()}
 
-    tbody.querySelectorAll('.po-note-input').forEach(function(inp){
-      inp.addEventListener('change',function(){
-        var all=getStore();
-        var i=parseInt(this.dataset.idx,10);
-        if(all[i])all[i].notes=this.value;
-        saveStore(all);
-      });
-    });
-    tbody.querySelectorAll('.po-copy-btn').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        navigator.clipboard.writeText(this.dataset.po).then(function(){
-          btn.textContent='✅';setTimeout(function(){btn.textContent='📋';},1200);
-        });
-      });
-    });
-  }
+function celebDailyComplete(){var d=0;for(var i=0;i<7;i++){(function(idx){setTimeout(function(){var fp={x:rr(100,window.innerWidth-100),y:rr(100,window.innerHeight-200)};if(idx===4)celebConfetti();else if(idx===1||idx===5)celebFns[idx]();else celebFns[idx](fp)},d)})(i);d+=300}setTimeout(function(){var m=document.createElement('div');m.className='streak-popup';m.style.fontSize=isMobile?'18px':'28px';m.style.color='#FFD700';m.style.textShadow='0 0 30px rgba(255,215,0,0.8)';m.textContent="\uD83C\uDF89 DAILY CHECKLIST COMPLETE! You're a machine, CB! \uD83C\uDF89";m.style.transition='all 3s ease-out';m.style.opacity='1';celebLayer.appendChild(m);setTimeout(function(){m.style.opacity='0'},2000);setTimeout(function(){m.remove()},3200)},d+200)}
 
-  function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  function escAttr(s){return esc(s).replace(/"/g,'&quot;');}
+/* ── Shipments ── */
+function lss(){try{return JSON.parse(localStorage.getItem('nu_shipments')||'{}')}catch(e){return{}}}function sss(s){localStorage.setItem('nu_shipments',JSON.stringify(s))}
+function restoreShipments(){var st=lss();document.querySelectorAll('#shipmentCards .icard[data-ship-id]').forEach(function(c){var id=c.dataset.shipId;if(st[id]){c.classList.add('completed');var ch=c.querySelector('.icard-check');if(ch)ch.innerHTML='\u2705';var b=c.querySelector('.badge');if(b){b.className='badge badge-green';b.textContent='INVOICED'}}})}
+function toggleShipment(ch){var c=ch.closest('.icard');if(c.classList.contains('blocked')||c.classList.contains('completed'))return;c.classList.add('completed');ch.innerHTML='\u2705';var b=c.querySelector('.badge');if(b){b.className='badge badge-green';b.textContent='INVOICED'}var st=lss();st[c.dataset.shipId]=true;sss(st);celebrate(ch)}
+function undoShipment(u){var c=u.closest('.icard');c.classList.remove('completed');var ch=c.querySelector('.icard-check');if(ch)ch.innerHTML='\u2713';var b=c.querySelector('.badge');if(b){b.className='badge badge-green';b.textContent='READY TO INVOICE'}var st=lss();delete st[c.dataset.shipId];sss(st);decrementCompleted()}
 
-  window.addEventListener('DOMContentLoaded',function(){
-    var sel=document.getElementById('poCustomer');
-    var customRow=document.getElementById('poCustomRow');
-    var dateInput=document.getElementById('poDate');
-    var genBtn=document.getElementById('poGenBtn');
-    var resultDiv=document.getElementById('poResult');
-    var searchInput=document.getElementById('poSearch');
-    if(!sel)return;
+/* ── Follow-Ups ── */
+function lfs(){try{return JSON.parse(localStorage.getItem('nu_followups')||'{}')}catch(e){return{}}}function sfs(s){localStorage.setItem('nu_followups',JSON.stringify(s))}
+function ufs(){var cs=document.getElementById('followupCompleted'),cl=document.getElementById('followupCompletedList'),cards=document.querySelectorAll('#followupCards .icard[data-fu-id]'),hc=false;cl.innerHTML='';cards.forEach(function(c){if(c.classList.contains('completed')){hc=true;var cn=c.cloneNode(true);cn.querySelector('.icard-check').onclick=function(){};var u=cn.querySelector('.icard-undo');if(u)u.onclick=function(){NUPortal.undoFollowup(u)};cl.appendChild(cn);c.style.display='none'}else{c.style.display=''}});cs.style.display=hc?'block':'none'}
+function restoreFollowups(){var st=lfs();document.querySelectorAll('#followupCards .icard[data-fu-id]').forEach(function(c){if(st[c.dataset.fuId]){c.classList.add('completed');var ch=c.querySelector('.icard-check');if(ch)ch.innerHTML='\u2705'}});ufs()}
+function toggleFollowup(ch){var c=ch.closest('.icard');if(c.classList.contains('completed'))return;c.classList.add('completed');ch.innerHTML='\u2705';var st=lfs();st[c.dataset.fuId]=true;sfs(st);celebrate(ch);setTimeout(ufs,600)}
+function undoFollowup(u){var c=u.closest('.icard'),id=c.dataset.fuId;var orig=document.querySelector('#followupCards .icard[data-fu-id="'+id+'"]');if(orig){orig.classList.remove('completed');var ch=orig.querySelector('.icard-check');if(ch)ch.innerHTML='\u2713';orig.style.display=''}var st=lfs();delete st[id];sfs(st);decrementCompleted();ufs()}
 
-    // Populate dropdown
-    Object.keys(CUSTOMERS).sort(function(a,b){return CUSTOMERS[a].localeCompare(CUSTOMERS[b]);}).forEach(function(code){
-      var opt=document.createElement('option');
-      opt.value=code;opt.textContent=CUSTOMERS[code]+' ('+code+')';
-      sel.appendChild(opt);
-    });
-    var customOpt=document.createElement('option');
-    customOpt.value='__custom__';customOpt.textContent='+ Add New Customer...';
-    sel.appendChild(customOpt);
+/* ── CB Daily Checklist ── */
+function lcbs(){try{return JSON.parse(localStorage.getItem('nu_cb_'+todayStr)||'{}')}catch(e){return{}}}function scbs(s){localStorage.setItem('nu_cb_'+todayStr,JSON.stringify(s))}
+function restoreCB(){var st=lcbs();document.querySelectorAll('#cbChecklist li[data-cb-id]').forEach(function(li){if(st[li.dataset.cbId]){var ch=li.querySelector('.check-icon');if(ch)ch.classList.add('checked')}});ucbp()}
+function ucbp(){var total=document.querySelectorAll('#cbChecklist li[data-cb-id]').length,done=document.querySelectorAll('#cbChecklist .check-icon.checked').length,pct=total>0?Math.round((done/total)*100):0;var f=document.getElementById('cbProgressFill'),t=document.getElementById('cbProgressText'),l=document.getElementById('cbProgressLabel');if(f)f.style.width=pct+'%';if(t)t.textContent=done+'/'+total+' \u2014 '+pct+'%';if(l)l.textContent='Daily Progress: '+done+'/'+total;return{done:done,total:total}}
+function toggleCB(ch){var was=ch.classList.contains('checked');ch.classList.toggle('checked');var li=ch.closest('li'),st=lcbs();if(!was){st[li.dataset.cbId]=true;scbs(st);celebrate(ch);var p=ucbp();if(p.done===p.total)setTimeout(celebDailyComplete,800)}else{delete st[li.dataset.cbId];scbs(st);decrementCompleted();ucbp()}}
 
-    sel.addEventListener('change',function(){
-      customRow.style.display=sel.value==='__custom__'?'flex':'none';
-    });
+/* ── QB Invoice Tracker ── */
+var defQB=[{id:'qb1',customer:'Richard Thornhill / LineTec',desc:'1\u00d7 2-Man BC ($275)',amount:'$275',blocked:false,completed:false,dateAdded:'2026-04-06'},{id:'qb2',customer:'Coy Crosby / Dominion Energy',desc:'6\u00d7 1.5-Man BC (contact Aaron for price)',amount:'TBD',blocked:false,completed:false,dateAdded:'2026-04-06'},{id:'qb3',customer:'Jimmy Benz / SWEPCO',desc:'1\u00d7 2-Man BC ($275), Truck #860377',amount:'$275',blocked:false,completed:false,dateAdded:'2026-04-06'},{id:'qb4',customer:'Darrell Pickle / Florence Electric',desc:'BLOCKED (ARCH SKUs unconfirmed)',amount:'TBD',blocked:true,completed:false,dateAdded:'2026-04-06'},{id:'qb5',customer:'Sammy Myers / AEP',desc:'BLOCKED (ARCH SKUs unconfirmed)',amount:'TBD',blocked:true,completed:false,dateAdded:'2026-04-06'}];
+function lqi(){try{var s=localStorage.getItem('nu_qb_items');if(s)return JSON.parse(s)}catch(e){}return JSON.parse(JSON.stringify(defQB))}function sqi(i){localStorage.setItem('nu_qb_items',JSON.stringify(i))}
+function escH(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function renderQBCards(filter){var items=lqi(),ct=document.getElementById('qbCards');if(!ct)return;ct.innerHTML='';var pend=0,blk=0,comp=0;if(filter==='completed')items.sort(function(a,b){return(b.completed?1:0)-(a.completed?1:0)});else items.sort(function(a,b){return(a.completed?1:0)-(b.completed?1:0)});items.forEach(function(it){if(it.blocked)blk++;else if(it.completed)comp++;else pend++;if(filter==='completed'&&!it.completed)return;if(filter==='pending'&&it.completed)return;var card=document.createElement('div');card.className='icard'+(it.completed?' completed':'')+(it.blocked?' blocked':'');card.dataset.qbId=it.id;var chk=document.createElement('div');chk.className='icard-check'+(it.blocked?' disabled':'');if(it.blocked){chk.innerHTML='\u26D4';chk.title='Blocked'}else if(it.completed){chk.innerHTML='\u2705'}else{chk.innerHTML='\u2713';chk.title='Mark as completed';chk.onclick=(function(iid,cel){return function(){cqi(iid,cel)}})(it.id,chk)}var bd=document.createElement('div');bd.className='icard-body';bd.innerHTML='<div class="icard-title">Invoice '+escH(it.customer)+'</div><div class="icard-meta">'+escH(it.desc)+' \u2022 '+escH(it.amount)+(it.completedDate?' \u2022 Completed '+it.completedDate:'')+(it.blocked?' \u2022 <span class="badge badge-red">BLOCKED</span>':'')+(it.completed&&!it.blocked?' \u2022 <span class="badge badge-green">DONE</span>':'')+'</div>';card.appendChild(chk);card.appendChild(bd);if(it.completed&&!it.blocked){var u=document.createElement('span');u.className='icard-undo';u.style.display='inline';u.textContent='Undo';u.onclick=(function(iid){return function(){uqi(iid)}})(it.id);card.appendChild(u)}ct.appendChild(card)});var sm=document.getElementById('qbSummary');if(sm)sm.innerHTML='\uD83D\uDCCA QB Status: '+pend+' pending | '+blk+' blocked | '+comp+' completed'}
+function cqi(id,ch){var items=lqi();items.forEach(function(i){if(i.id===id&&!i.blocked){i.completed=true;i.completedDate=todayStr}});sqi(items);celebrate(ch);setTimeout(function(){renderQBCards(gqf())},400)}
+function uqi(id){var items=lqi();items.forEach(function(i){if(i.id===id){i.completed=false;delete i.completedDate}});sqi(items);decrementCompleted();renderQBCards(gqf())}
+function gqf(){var a=document.querySelector('#qbFilterBar .filter-btn.active');return a?a.dataset.filter:'pending'}
+function addQBTask(){var c=document.getElementById('qbNewCustomer'),d=document.getElementById('qbNewDesc'),a=document.getElementById('qbNewAmount');if(!c.value.trim()){c.focus();return}var items=lqi();items.push({id:'qb_'+Date.now(),customer:c.value.trim(),desc:d.value.trim()||'QB entry',amount:a.value.trim()||'TBD',blocked:false,completed:false,dateAdded:todayStr});sqi(items);c.value='';d.value='';a.value='';renderQBCards(gqf())}
 
-    // Default date = today
-    var now=new Date();
-    dateInput.value=now.getFullYear()+'-'+pad(now.getMonth()+1,2)+'-'+pad(now.getDate(),2);
+/* ── A/P Sort & Filter ── */
+function initAPSort(){var t=document.getElementById('apTable');if(!t)return;t.querySelectorAll('th.sortable').forEach(function(th){th.addEventListener('click',function(){var c=th.dataset.col,isA=th.classList.contains('asc');t.querySelectorAll('th.sortable').forEach(function(h){h.classList.remove('asc','desc')});th.classList.add(isA?'desc':'asc');sortAP(c,!isA)})})}
+function sortAP(col,asc){var tb=document.querySelector('#apTable tbody'),rows=Array.from(tb.querySelectorAll('tr'));rows.sort(function(a,b){if(col==='vendor')return asc?a.cells[0].textContent.trim().localeCompare(b.cells[0].textContent.trim()):b.cells[0].textContent.trim().localeCompare(a.cells[0].textContent.trim());if(col==='amount')return asc?(parseFloat(a.dataset.apAmount)||0)-(parseFloat(b.dataset.apAmount)||0):(parseFloat(b.dataset.apAmount)||0)-(parseFloat(a.dataset.apAmount)||0);if(col==='status')return asc?(a.dataset.apStatus||'').localeCompare(b.dataset.apStatus||''):(b.dataset.apStatus||'').localeCompare(a.dataset.apStatus||'');return 0});rows.forEach(function(r){tb.appendChild(r)})}
+function filterAPRows(f){document.querySelectorAll('#apTable tbody tr').forEach(function(r){var s=r.dataset.apStatus||'';if(f==='all')r.style.display='';else if(f==='paid')r.style.display=(s==='paid'||s==='settled')?'':'none';else if(f==='overdue')r.style.display=(s==='unknown'||s==='partial')?'':'none';else if(f==='dueweek')r.style.display=(s!=='paid'&&s!=='settled')?'':'none'})}
 
-    // Generate
-    genBtn.addEventListener('click',function(){
-      var code=sel.value;
-      if(code==='__custom__'){
-        code=document.getElementById('poCustomCode').value.toUpperCase().replace(/[^A-Z]/g,'').substring(0,3);
-        if(code.length!==3){alert('Enter a 3-letter customer code.');return;}
-      }
-      if(!code){alert('Select a customer.');return;}
+/* ── Contacts Sort ── */
+function sortContacts(m){var tb=document.querySelector('#contactTable tbody');if(!tb)return;var rows=Array.from(tb.querySelectorAll('tr'));rows.sort(function(a,b){if(m==='company')return a.cells[2].textContent.trim().localeCompare(b.cells[2].textContent.trim());if(m==='name')return a.cells[0].textContent.trim().localeCompare(b.cells[0].textContent.trim());if(m==='role')return a.cells[5].textContent.trim().localeCompare(b.cells[5].textContent.trim());return 0});rows.forEach(function(r){tb.appendChild(r)})}
 
-      var d=new Date(dateInput.value+'T12:00:00');
-      if(isNaN(d)){alert('Enter a valid date.');return;}
-      var dateStr=pad(d.getMonth()+1,2)+pad(d.getDate(),2)+'-'+String(d.getFullYear()).slice(-2);
-      var seq=getNextSeq(code,dateStr);
-      var poNum='NU-'+code+'-'+dateStr+'-'+pad(seq,3);
+/* ── Shipment Filter ── */
+function filterShipments(f){var st=lss();document.querySelectorAll('#shipmentCards .icard').forEach(function(c){var id=c.dataset.shipId,isC=st[id]||c.classList.contains('completed'),isB=c.classList.contains('blocked');if(f==='all')c.style.display='';else if(f==='pending')c.style.display=(!isC)?'':'none';else if(f==='completed')c.style.display=isC?'':'none'})}
 
-      var custName=CUSTOMERS[code]||document.getElementById('poCustomName').value||code;
+/* ── Follow-Up Sort ── */
+function sortFollowups(m){var ct=document.getElementById('followupCards'),cards=Array.from(ct.querySelectorAll('.icard'));if(m==='overdue')cards.sort(function(a,b){return(parseInt(a.dataset.fuPriority)||99)-(parseInt(b.dataset.fuPriority)||99)});else if(m==='alpha')cards.sort(function(a,b){return(a.dataset.fuName||'').localeCompare(b.dataset.fuName||'')});cards.forEach(function(c){ct.appendChild(c)});ufs()}
 
-      var log=getStore();
-      log.push({number:poNum,code:code,customer:custName,date:dateInput.value,notes:'',created:new Date().toISOString()});
-      saveStore(log);
+return{toggleShipment:toggleShipment,undoShipment:undoShipment,toggleFollowup:toggleFollowup,undoFollowup:undoFollowup,toggleCB:toggleCB,addQBTask:addQBTask,restoreShipments:restoreShipments,restoreFollowups:restoreFollowups,restoreCB:restoreCB,renderQBCards:renderQBCards,filterShipments:filterShipments,filterAPRows:filterAPRows,sortFollowups:sortFollowups,sortContacts:sortContacts,initAPSort:initAPSort,saveTodayCount:saveTodayCount}})();
 
-      navigator.clipboard.writeText(poNum).then(function(){
-        resultDiv.innerHTML='<div style="background:#e8f5e9;border:2px solid #00aa44;border-radius:10px;padding:20px;text-align:center;margin-top:16px">'
-          +'<div style="font-size:0.8rem;font-weight:700;color:#00aa44;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">PO Generated &amp; Copied to Clipboard</div>'
-          +'<div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc;letter-spacing:0.05em">'+esc(poNum)+'</div>'
-          +'<div style="font-size:0.85rem;color:#555;margin-top:8px">'+esc(custName)+' &mdash; '+dateInput.value+'</div>'
-          +'</div>';
-      }).catch(function(){
-        resultDiv.innerHTML='<div style="background:#fff3e0;border:2px solid #ff9900;border-radius:10px;padding:20px;text-align:center;margin-top:16px">'
-          +'<div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc">'+esc(poNum)+'</div>'
-          +'<div style="font-size:0.85rem;color:#cc6600;margin-top:8px">Copy manually (clipboard blocked)</div>'
-          +'</div>';
-      });
+/* === PASSWORD GATE === */
+(function(){var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026';if(sessionStorage.getItem(K)==='granted'){o.classList.add('hidden');p.style.display='block'}function a(){if(i.value==='legacy2026'){sessionStorage.setItem(K,'granted');o.classList.add('hidden');p.style.display='block'}else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
 
-      renderLog(searchInput?searchInput.value:'');
-    });
+/* === GREETING === */
+(function(){var h=new Date().getHours(),g='Good evening, Aaron';if(h>=4&&h<12)g='Good morning, Aaron';else if(h>=12&&h<17)g='Good afternoon, Aaron';document.getElementById('greeting').textContent=g+' \uD83D\uDC4B';var n=new Date();document.getElementById('headerDate').textContent=n.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})})();
 
-    // Search
-    if(searchInput){
-      searchInput.addEventListener('input',function(){renderLog(this.value);});
-    }
+/* === PO GENERATOR === */
+(function(){var CS={MSP:'Mississippi Power',IRB:'Irby Construction',DOM:'Dominion Energy',LTC:'LineTec Services',FLO:'Florence Electric Dept',AEP:'AEP / Appalachian Power',SWP:'SWEPCO',CHN:'Chain Electric',SHF:'Sheffield Utilities',EPB:'EPB Chattanooga',GRD:'Gridco',TRX:'Terex'};function gs(){try{return JSON.parse(localStorage.getItem('nu_po_log')||'[]')}catch(e){return[]}}function ss(d){localStorage.setItem('nu_po_log',JSON.stringify(d))}function gns(c,ds){var l=gs(),pf='NU-'+c+'-'+ds+'-',mx=0;l.forEach(function(p){if(p.number&&p.number.startsWith(pf)){var s=parseInt(p.number.split('-').pop(),10);if(s>mx)mx=s}});return mx+1}function pad(n,l){return String(n).padStart(l,'0')}function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}function escA(s){return esc(s).replace(/"/g,'&quot;')}function rl(f){var l=gs().slice().reverse(),tb=document.getElementById('poLogBody');if(!tb)return;var fq=(f||'').toLowerCase(),h='';l.forEach(function(po,i){var ri=l.length-1-i;if(fq&&!(po.number||'').toLowerCase().includes(fq)&&!(po.customer||'').toLowerCase().includes(fq)&&!(po.notes||'').toLowerCase().includes(fq))return;h+='<tr><td style="font-weight:700;color:#0033cc;font-family:monospace;font-size:0.95rem">'+esc(po.number)+'</td><td>'+esc(po.customer)+'</td><td>'+esc(po.date)+'</td><td><input type="text" value="'+escA(po.notes||'')+'" data-idx="'+ri+'" class="po-note-input" placeholder="What was this PO for?"></td><td style="text-align:center"><button class="po-copy-btn" data-po="'+escA(po.number)+'">📋</button></td></tr>'});if(!h)h='<tr><td colspan="5" style="text-align:center;color:#999;padding:24px">No POs generated yet</td></tr>';tb.innerHTML=h;tb.querySelectorAll('.po-note-input').forEach(function(inp){inp.addEventListener('change',function(){var a=gs(),ix=parseInt(this.dataset.idx,10);if(a[ix])a[ix].notes=this.value;ss(a)})});tb.querySelectorAll('.po-copy-btn').forEach(function(btn){btn.addEventListener('click',function(){var b=btn;navigator.clipboard.writeText(b.dataset.po).then(function(){b.textContent='\u2705';setTimeout(function(){b.textContent='📋'},1200)})})})}window.addEventListener('DOMContentLoaded',function(){var sel=document.getElementById('poCustomer'),cr=document.getElementById('poCustomRow'),di=document.getElementById('poDate'),gb=document.getElementById('poGenBtn'),rd=document.getElementById('poResult'),si=document.getElementById('poSearch');if(!sel)return;Object.keys(CS).sort(function(a,b){return CS[a].localeCompare(CS[b])}).forEach(function(c){var o=document.createElement('option');o.value=c;o.textContent=CS[c]+' ('+c+')';sel.appendChild(o)});var co=document.createElement('option');co.value='__custom__';co.textContent='+ Add New Customer...';sel.appendChild(co);sel.addEventListener('change',function(){cr.style.display=sel.value==='__custom__'?'flex':'none'});var now=new Date();di.value=now.getFullYear()+'-'+pad(now.getMonth()+1,2)+'-'+pad(now.getDate(),2);gb.addEventListener('click',function(){var c=sel.value;if(c==='__custom__'){c=document.getElementById('poCustomCode').value.toUpperCase().replace(/[^A-Z]/g,'').substring(0,3);if(c.length!==3){alert('Enter a 3-letter customer code.');return}}if(!c){alert('Select a customer.');return}var d=new Date(di.value+'T12:00:00');if(isNaN(d)){alert('Enter a valid date.');return}var ds=pad(d.getMonth()+1,2)+pad(d.getDate(),2)+'-'+String(d.getFullYear()).slice(-2),sq=gns(c,ds),pn='NU-'+c+'-'+ds+'-'+pad(sq,3),cn=CS[c]||document.getElementById('poCustomName').value||c,lg=gs();lg.push({number:pn,code:c,customer:cn,date:di.value,notes:'',created:new Date().toISOString()});ss(lg);navigator.clipboard.writeText(pn).then(function(){rd.innerHTML='<div style="background:#e8f5e9;border:2px solid #00aa44;border-radius:10px;padding:20px;text-align:center;margin-top:16px"><div style="font-size:0.8rem;font-weight:700;color:#00aa44;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">PO Generated &amp; Copied</div><div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc">'+esc(pn)+'</div><div style="font-size:0.85rem;color:#555;margin-top:8px">'+esc(cn)+' \u2014 '+di.value+'</div></div>'}).catch(function(){rd.innerHTML='<div style="background:#fff3e0;border:2px solid #ff9900;border-radius:10px;padding:20px;text-align:center;margin-top:16px"><div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc">'+esc(pn)+'</div><div style="font-size:0.85rem;color:#cc6600;margin-top:8px">Copy manually</div></div>'});rl(si?si.value:'')});if(si)si.addEventListener('input',function(){rl(this.value)});var eb=document.getElementById('poExportBtn');if(eb)eb.addEventListener('click',function(){var l=gs(),csv='PO Number,Customer,Date,Notes\n';l.forEach(function(p){csv+='"'+p.number+'","'+p.customer+'","'+p.date+'","'+(p.notes||'').replace(/"/g,'""')+'"\n'});var b=new Blob([csv],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='norris_po_log_'+new Date().toISOString().slice(0,10)+'.csv';a.click()});rl()})})();
 
-    // Export CSV
-    var expBtn=document.getElementById('poExportBtn');
-    if(expBtn){
-      expBtn.addEventListener('click',function(){
-        var log=getStore();
-        var csv='PO Number,Customer,Date,Notes\n';
-        log.forEach(function(po){
-          csv+='"'+po.number+'","'+po.customer+'","'+po.date+'","'+(po.notes||'').replace(/"/g,'""')+'"\n';
-        });
-        var blob=new Blob([csv],{type:'text/csv'});
-        var a=document.createElement('a');
-        a.href=URL.createObjectURL(blob);
-        a.download='norris_po_log_'+new Date().toISOString().slice(0,10)+'.csv';
-        a.click();
-      });
-    }
+/* === TAB NAVIGATION === */
+(function(){var bs=document.querySelectorAll('.tab-nav button'),ts=document.querySelectorAll('.tab-content');bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.remove('active')});ts.forEach(function(x){x.classList.remove('active')});b.classList.add('active');document.getElementById('tab-'+b.dataset.tab).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})})})})();
 
-    renderLog();
-  });
-})();
+/* === CONTACT SEARCH === */
+(function(){var s=document.getElementById('contactSearch');if(!s)return;s.addEventListener('input',function(){var q=this.value.toLowerCase();document.querySelectorAll('#contactTable tbody tr').forEach(function(r){r.style.display=r.textContent.toLowerCase().includes(q)?'':'none'})})})();
 
-// === TAB NAVIGATION ===
-(function(){
-  const btns=document.querySelectorAll('.tab-nav button');
-  const tabs=document.querySelectorAll('.tab-content');
-  btns.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      btns.forEach(b=>b.classList.remove('active'));
-      tabs.forEach(t=>t.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
-      window.scrollTo({top:0,behavior:'smooth'});
-    });
-  });
-})();
+/* === CONTACT SORT BUTTONS === */
+(function(){var b=document.getElementById('contactSortBar');if(!b)return;b.querySelectorAll('.filter-btn').forEach(function(btn){btn.addEventListener('click',function(){b.querySelectorAll('.filter-btn').forEach(function(x){x.classList.remove('active')});btn.classList.add('active');NUPortal.sortContacts(btn.dataset.sort)})})})();
 
-// === CONTACT SEARCH ===
-(function(){
-  const searchInput=document.getElementById('contactSearch');
-  if(!searchInput)return;
-  searchInput.addEventListener('input',function(){
-    const q=this.value.toLowerCase();
-    const rows=document.querySelectorAll('#contactTable tbody tr');
-    rows.forEach(row=>{
-      row.style.display=row.textContent.toLowerCase().includes(q)?'':'none';
-    });
-  });
-})();
+/* === FILTER BARS === */
+(function(){['shipFilterBar','apFilterBar','fuFilterBar','qbFilterBar'].forEach(function(id){var bar=document.getElementById(id);if(!bar)return;bar.querySelectorAll('.filter-btn').forEach(function(btn){btn.addEventListener('click',function(){bar.querySelectorAll('.filter-btn').forEach(function(x){x.classList.remove('active')});btn.classList.add('active');if(id==='shipFilterBar')NUPortal.filterShipments(btn.dataset.filter);else if(id==='apFilterBar')NUPortal.filterAPRows(btn.dataset.filter);else if(id==='fuFilterBar')NUPortal.sortFollowups(btn.dataset.filter);else if(id==='qbFilterBar')NUPortal.renderQBCards(btn.dataset.filter)})})})})();
 
-// === CHECKLIST TOGGLE ===
-function toggleCheck(el){
-  el.classList.toggle('checked');
-}
+/* === INIT === */
+window.addEventListener('DOMContentLoaded',function(){NUPortal.restoreShipments();NUPortal.restoreFollowups();NUPortal.restoreCB();NUPortal.renderQBCards('pending');NUPortal.initAPSort();NUPortal.saveTodayCount();var ld=localStorage.getItem('nu_cb_last_date'),td=new Date().toISOString().slice(0,10);if(ld&&ld!==td)localStorage.removeItem('nu_cb_'+ld);localStorage.setItem('nu_cb_last_date',td)});
 </script>
-
 </body>
 </html>

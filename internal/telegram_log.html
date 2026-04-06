@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telegram Log &mdash; Norris Utilities&reg;</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:100vh}
+
+.login-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%)}
+.login-overlay.hidden{display:none}
+.login-box{background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;overflow:hidden}
+.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)}
+.login-title{font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px}
+.login-sub{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px}
+.login-input{width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;outline:none}
+.login-input:focus{border-color:#0033cc}
+.login-btn{width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer}
+.login-err{color:#cc0000;font-size:12px;margin-top:10px;min-height:18px;font-weight:700}
+
+.header{background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:36px 24px 52px;text-align:center;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23fff' stroke-width='.3' opacity='.06'%3E%3Cpath d='M0 30h60M30 0v60'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.header h1{font-weight:900;font-size:26px;color:#fff;letter-spacing:2px;position:relative;z-index:2}
+.header p{color:rgba(255,255,255,.7);font-size:13px;margin-top:6px;position:relative;z-index:2}
+.chevron{margin-top:-1px;line-height:0}
+.chevron svg{display:block;width:100%}
+
+.stats-bar{display:flex;flex-wrap:wrap;gap:10px;max-width:1100px;margin:-28px auto 20px;padding:0 20px;position:relative;z-index:10}
+.stat-pill{flex:1;min-width:100px;background:#fff;border-radius:10px;padding:12px 14px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.05);border-top:3px solid #0033cc}
+.stat-pill .num{font-size:22px;font-weight:900;color:#0033cc}
+.stat-pill .label{font-size:10px;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
+
+.controls{max-width:1100px;margin:0 auto 16px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.search-input{flex:1;min-width:180px;padding:10px 16px;border:2px solid #e0e0e0;border-radius:8px;font-size:13px;font-family:'Lato',sans-serif;outline:none}
+.search-input:focus{border-color:#0033cc}
+.fbtn{padding:6px 14px;border:2px solid #e0e0e0;border-radius:6px;background:#fff;font-family:'Lato',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;color:#666}
+.fbtn:hover,.fbtn.on{background:#0033cc;color:#fff;border-color:#0033cc}
+
+.content{max-width:1100px;margin:0 auto;padding:0 20px 60px}
+
+.msg-card{background:#fff;border-radius:10px;margin-bottom:6px;border:1px solid #eee;border-left:4px solid #0033cc;overflow:hidden;transition:all .15s;box-shadow:0 1px 4px rgba(0,0,0,.03)}
+.msg-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.msg-card.cat-BUILD{border-left-color:#00802b}
+.msg-card.cat-FAILED{border-left-color:#cc0000}
+.msg-card.cat-EMAIL{border-left-color:#ea4335}
+.msg-card.cat-SAMSON{border-left-color:#6600cc}
+.msg-card.cat-AP{border-left-color:#008833}
+.msg-card.cat-BRIEF{border-left-color:#dd8800}
+.msg-card.cat-EOD{border-left-color:#334466}
+.msg-card.cat-WATCHDOG{border-left-color:#cc0000}
+.msg-card.cat-REMARKABLE{border-left-color:#555}
+.msg-card.cat-DRAFT{border-left-color:#4466aa}
+.msg-card.cat-VOICE{border-left-color:#0088cc}
+.msg-card.cat-INVOICE{border-left-color:#b38600}
+.msg-card.cat-SHIPPING{border-left-color:#003366}
+.msg-card.cat-SYSTEM{border-left-color:#0033cc}
+.msg-card.cat-FEEDBACK{border-left-color:#0088cc}
+.msg-card.cat-BACKUP{border-left-color:#4488cc}
+
+.msg-header{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;user-select:none}
+.msg-cat{font-size:10px;font-weight:900;letter-spacing:.5px;padding:3px 8px;border-radius:4px;background:#e8f0ff;color:#0033cc;text-transform:uppercase;white-space:nowrap}
+.msg-preview{flex:1;font-size:13px;font-weight:600;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.msg-time{font-size:11px;color:#aaa;white-space:nowrap;font-weight:600}
+.msg-source{font-size:10px;color:#bbb;white-space:nowrap}
+
+.msg-body{display:none;padding:0 16px 14px;font-size:12px;color:#444;line-height:1.6;border-top:1px solid #f0f0f0;white-space:pre-wrap;word-break:break-word;max-height:300px;overflow-y:auto;background:#fafafa}
+.msg-card.open .msg-body{display:block}
+
+.empty-msg{text-align:center;padding:40px;color:#aaa;font-size:15px}
+
+.footer{background:linear-gradient(135deg,#0a0e5c,#001144);padding:28px 24px;text-align:center}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:15px}
+.footer-copy{color:rgba(255,255,255,.3);font-size:11px;margin-top:6px}
+
+@media(max-width:600px){
+  .stats-bar{margin-top:-20px}
+  .stat-pill{min-width:45%;padding:10px}
+  .stat-pill .num{font-size:18px}
+  .controls{flex-direction:column}
+  .msg-header{flex-wrap:wrap;gap:6px}
+}
+</style>
+</head>
+<body>
+
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-title">Telegram Log</div>
+    <div class="login-sub">Norris Utilities&reg;</div>
+    <input type="password" class="login-input" id="loginInput" placeholder="Enter portal password" autocomplete="off" autofocus>
+    <button class="login-btn" id="loginBtn">ACCESS</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<div id="mainContent" style="display:none">
+
+<div class="header">
+  <h1>Telegram Message Log</h1>
+  <p>Every message sent by the AI team &mdash; searchable and filterable</p>
+</div>
+<div class="chevron"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 547,0 547,60 0,0" fill="#06D0FF" opacity=".12"/><polygon points="0,0 547,60 1440,0" fill="#f5f6fa"/></svg></div>
+
+<div class="stats-bar" id="statsBar">
+  <div class="stat-pill"><div class="num" id="sTotal">-</div><div class="label">Total</div></div>
+  <div class="stat-pill"><div class="num" id="sToday">-</div><div class="label">Today</div></div>
+  <div class="stat-pill"><div class="num" id="sCats">-</div><div class="label">Categories</div></div>
+</div>
+
+<div class="controls" id="controls">
+  <input type="text" class="search-input" id="searchInput" placeholder="Search messages...">
+  <button class="fbtn on" onclick="setFilter('ALL',this)">All</button>
+</div>
+
+<div class="content" id="content">
+  <div class="empty-msg">Loading...</div>
+</div>
+
+<div class="footer">
+  <div class="footer-tagline">A Legacy of Commitment&reg;</div>
+  <div class="footer-copy">&copy; 2026 Norris Utilities, LLC</div>
+</div>
+
+</div>
+
+<script>
+(function(){
+  const PW='legacy2026';
+  if(sessionStorage.getItem('nu_auth')==='1'){show();return}
+  document.getElementById('loginBtn').onclick=tryLogin;
+  document.getElementById('loginInput').onkeydown=function(e){if(e.key==='Enter')tryLogin()};
+  function tryLogin(){
+    if(document.getElementById('loginInput').value.trim()===PW){sessionStorage.setItem('nu_auth','1');show()}
+    else{document.getElementById('loginErr').textContent='Wrong password'}
+  }
+  function show(){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('mainContent').style.display='';init()}
+})();
+
+let MESSAGES=[];
+let FILTER='ALL';
+
+const CAT_COLORS={
+  BUILD:'#00802b',FAILED:'#cc0000',EMAIL:'#ea4335',SAMSON:'#6600cc',
+  AP:'#008833',BRIEF:'#dd8800',EOD:'#334466',WATCHDOG:'#cc0000',
+  REMARKABLE:'#555',DRAFT:'#4466aa',VOICE:'#0088cc',INVOICE:'#b38600',
+  SHIPPING:'#003366',SYSTEM:'#0033cc',FEEDBACK:'#0088cc',BACKUP:'#4488cc',
+};
+
+async function init(){
+  try{
+    const r=await fetch('/data/telegram_log.json?t='+Date.now());
+    if(!r.ok) throw 0;
+    const data=await r.json();
+    MESSAGES=(data.messages||[]).slice().reverse(); // newest first
+  }catch(e){
+    MESSAGES=[];
+  }
+  buildFilterButtons();
+  updateStats();
+  render();
+  document.getElementById('searchInput').addEventListener('input',render);
+}
+
+function buildFilterButtons(){
+  const cats=new Set();
+  MESSAGES.forEach(m=>cats.add((m.category||'').toUpperCase()));
+  const ctrl=document.getElementById('controls');
+  Array.from(cats).sort().forEach(cat=>{
+    if(!cat) return;
+    const btn=document.createElement('button');
+    btn.className='fbtn';
+    btn.textContent=cat;
+    btn.onclick=function(){setFilter(cat,this)};
+    ctrl.appendChild(btn);
+  });
+}
+
+function setFilter(f,btn){
+  FILTER=f;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  render();
+}
+
+function updateStats(){
+  document.getElementById('sTotal').textContent=MESSAGES.length;
+  const today=new Date().toISOString().substring(0,10);
+  document.getElementById('sToday').textContent=MESSAGES.filter(m=>(m.timestamp||'').startsWith(today)).length;
+  const cats=new Set();MESSAGES.forEach(m=>cats.add(m.category));
+  document.getElementById('sCats').textContent=cats.size;
+}
+
+function render(){
+  const q=(document.getElementById('searchInput').value||'').toLowerCase();
+  const el=document.getElementById('content');
+  el.innerHTML='';
+
+  let count=0;
+  MESSAGES.forEach((m,idx)=>{
+    const cat=(m.category||'').toUpperCase();
+    if(FILTER!=='ALL'&&cat!==FILTER) return;
+    const text=(m.message||'')+(m.category||'')+(m.source||'');
+    if(q&&!text.toLowerCase().includes(q)) return;
+    count++;
+    if(count>200) return; // limit rendering
+
+    const card=document.createElement('div');
+    card.className='msg-card cat-'+cat;
+
+    // Strip HTML tags for preview
+    const plain=(m.message||'').replace(/<[^>]+>/g,'').replace(/\n/g,' ').substring(0,120);
+
+    const ts=m.timestamp?formatTime(m.timestamp):'';
+
+    card.innerHTML=`
+      <div class="msg-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="msg-cat" style="background:${(CAT_COLORS[cat]||'#0033cc')}22;color:${CAT_COLORS[cat]||'#0033cc'}">${esc(cat)}</span>
+        <span class="msg-preview">${esc(plain)}</span>
+        <span class="msg-source">${esc(m.source||'')}</span>
+        <span class="msg-time">${esc(ts)}</span>
+      </div>
+      <div class="msg-body">${esc(m.message||'')}</div>
+    `;
+    el.appendChild(card);
+  });
+
+  if(count===0){
+    el.innerHTML='<div class="empty-msg">No messages found'+(MESSAGES.length===0?' — run scripts to populate the log':'')+'</div>';
+  }
+}
+
+function formatTime(ts){
+  try{
+    const d=new Date(ts);
+    return d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
+  }catch(e){return ts.substring(0,16)}
+}
+
+function esc(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):'';}
+</script>
+</body>
+</html>
