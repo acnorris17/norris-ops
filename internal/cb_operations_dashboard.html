@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations Dashboard — Caroline Butler — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    /* ══ ROOT VARIABLES ══ */
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --nu-accent-gold: #C9A84C;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* ══ BASE ══ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ HEADER — Power Tower Infrastructure Overlay ══ */
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 48px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+
+    .nu-header * { position: relative; z-index: 2; }
+
+    /* ══ LIVE DATE PILL ══ */
+    .nu-date-pill {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 6px 20px;
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ══ LOGO AREA ══ */
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+    }
+    .nu-phoenix-icon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .nu-page-title {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--nu-white);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      display: inline-block;
+      padding: 8px 28px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    /* ══ WHITE CHEVRON TRANSITION ══ */
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    /* ══ GHOST PHOENIX WATERMARK ══ */
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    /* ══ CONTENT LAYOUT ══ */
+    .cb-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 40px 60px;
+    }
+
+    /* ══ SECTION HEADERS ══ */
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .nu-section-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    /* ══ STATS ROW ══ */
+    .cb-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .cb-stat-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 24px 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cb-stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .cb-stat-number {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2.4rem;
+      color: var(--nu-blue);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .cb-stat-number.urgent {
+      color: #CC3300;
+    }
+    .cb-stat-number.good {
+      color: #28a745;
+    }
+    .cb-stat-label {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: #777;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ══ DASHBOARD GRID ══ */
+    .cb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .cb-panel {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .cb-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--nu-light-gray);
+    }
+    .cb-panel-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
+    }
+    .cb-panel-title svg {
+      width: 20px;
+      height: 20px;
+      vertical-align: -3px;
+      margin-right: 8px;
+    }
+    .cb-panel-count {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--nu-white);
+      background: var(--nu-blue);
+      border-radius: 12px;
+      padding: 2px 10px;
+      letter-spacing: 0.03em;
+    }
+    .cb-panel-count.alert {
+      background: #CC3300;
+    }
+
+    /* ══ TASK LIST ══ */
+    .cb-task {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+    }
+    .cb-task:last-child {
+      border-bottom: none;
+    }
+    .cb-task input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      margin-right: 12px;
+      margin-top: 2px;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      transition: all 0.15s ease;
+    }
+    .cb-task input[type="checkbox"]:checked {
+      background: var(--nu-blue);
+    }
+    .cb-task input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 5px;
+      width: 5px; height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .cb-task-content {
+      flex: 1;
+    }
+    .cb-task-text {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      line-height: 1.4;
+    }
+    .cb-task input[type="checkbox"]:checked + .cb-task-content .cb-task-text {
+      text-decoration: line-through;
+      color: #999;
+    }
+    .cb-task-meta {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 2px;
+    }
+    .cb-priority {
+      display: inline-block;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1px 8px;
+      border-radius: 3px;
+      margin-left: 8px;
+      vertical-align: 1px;
+    }
+    .cb-priority.high {
+      background: #FFECEC;
+      color: #CC3300;
+    }
+    .cb-priority.medium {
+      background: #FFF3E0;
+      color: #E67E22;
+    }
+    .cb-priority.normal {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    /* ══ SHIPPING TABLE ══ */
+    .cb-ship-row {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+    }
+    .cb-ship-row:last-child {
+      border-bottom: none;
+    }
+    .cb-ship-status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .cb-ship-status.pending { background: #E67E22; }
+    .cb-ship-status.shipped { background: #28a745; }
+    .cb-ship-status.delayed { background: #CC3300; }
+    .cb-ship-info {
+      flex: 1;
+    }
+    .cb-ship-customer {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+    }
+    .cb-ship-detail {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: #777;
+    }
+    .cb-ship-action {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: var(--nu-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      background: none;
+      border: 1px solid var(--nu-blue);
+      padding: 4px 12px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+    }
+    .cb-ship-action:hover {
+      background: var(--nu-blue);
+      color: var(--nu-white);
+    }
+
+    /* ══ INVOICE REMINDERS ══ */
+    .cb-invoice-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+    }
+    .cb-invoice-row:last-child {
+      border-bottom: none;
+    }
+    .cb-invoice-customer {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+    }
+    .cb-invoice-detail {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: #777;
+    }
+    .cb-invoice-amount {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      text-align: right;
+    }
+    .cb-days-overdue {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: #CC3300;
+    }
+
+    /* ══ INBOX MONITOR ══ */
+    .cb-inbox-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .cb-inbox-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .cb-inbox-dot.active {
+      background: #28a745;
+      box-shadow: 0 0 6px rgba(40, 167, 69, 0.4);
+      animation: pulse 2s infinite;
+    }
+    .cb-inbox-dot.idle {
+      background: #999;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .cb-inbox-label {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--nu-dark-text);
+    }
+    .cb-inbox-sublabel {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    /* ══ FULL-WIDTH PANEL ══ */
+    .cb-full-panel {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 40px;
+    }
+
+    /* ══ FOOTER ══ */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+    .nu-footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 900px) {
+      .cb-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cb-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .cb-container { padding: 24px 16px 40px; }
+      .cb-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .cb-stat-number { font-size: 1.8rem; }
+      .cb-panel { padding: 20px; }
+    }
+    @media (max-width: 480px) {
+      .cb-stats { grid-template-columns: 1fr; }
+      .nu-page-title { font-size: 0.9rem; padding: 6px 16px; }
+    }
+
+    /* ══ PRINT ══ */
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cb-panel, .cb-stat-card, .cb-full-panel { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-page-title">Operations Dashboard &mdash; Caroline Butler</div>
+    <div class="nu-date-pill" id="datePill"></div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div class="cb-container">
+
+      <!-- STATS ROW -->
+      <div class="cb-stats">
+        <div class="cb-stat-card">
+          <div class="cb-stat-number" id="taskCount">7</div>
+          <div class="cb-stat-label">Open Tasks</div>
+        </div>
+        <div class="cb-stat-card">
+          <div class="cb-stat-number urgent" id="shipCount">3</div>
+          <div class="cb-stat-label">Shipments to Process</div>
+        </div>
+        <div class="cb-stat-card">
+          <div class="cb-stat-number" id="invoiceCount">4</div>
+          <div class="cb-stat-label">Invoice Reminders</div>
+        </div>
+        <div class="cb-stat-card">
+          <div class="cb-stat-number good">Active</div>
+          <div class="cb-stat-label">Inbox Monitor</div>
+        </div>
+      </div>
+
+      <!-- TOP GRID: TASKS + SHIPPING -->
+      <div class="cb-grid">
+
+        <!-- TASK LIST -->
+        <div class="cb-panel">
+          <div class="cb-panel-header">
+            <div class="cb-panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              My Tasks
+            </div>
+            <span class="cb-panel-count" id="taskBadge">7 open</span>
+          </div>
+
+          <div class="cb-task">
+            <input type="checkbox" id="t1" onchange="updateCounts()">
+            <div class="cb-task-content">
+              <div class="cb-task-text">Send FlexPro Armor order confirmation to Sheffield Utilities<span class="cb-priority high">High</span></div>
+              <div class="cb-task-meta">Michael Waldrep &bull; Order placed Apr 4</div>
+            </div>
+          </div>
+
+          <div class="cb-task">
+            <input type="checkbox" id="t2" onchange="updateCounts()">
+            <div class="cb-task-content">
+              <div class="cb-task-text">Follow up on Samson Rope quote for EPB Chattanooga<span class="cb-priority high">High</span></div>
+              <div class="cb-task-meta">Rick Sutherland &bull; Quote sent Mar 31</div>
+            </div>
+          </div>
+
+          <div class="cb-task">
+            <input type="checkbox" id="t3" onchange="updateCounts()">
+            <div class="cb-task-content">
+              <div class="cb-task-text">File updated W-9 from Bay Shore Systems<span class="cb-priority medium">Medium</span></div>
+              <div class="cb-task-meta">Herb Minatre &bull; Received via email Apr 3</div>
+            </div>
+          </div>
+
+          <div class="cb-task">
+            <input type="checkbox" id="t4" onchange="updateCounts()">
+            <div class="cb-task-content">
+              <div class="cb-task-text">Update customer contact list &mdash; Irby transition to Jared Lemoine<span class="cb-priority medium">Medium</span></div>
+              <div class="cb-task-meta">Gary Wiggs &amp; Scott Argyle retired</div>
+            </div>
+          </div>
+
+          <div class="cb-task">
+            <input type="checkbox" id="t5" onchange="updateCounts()">
+            <div class="cb-task-content">
+              <div class="cb-task-text">Email Donna Poll &amp; Sarah Daniels re: Samson inventory restock ETA<span class="cb-priority normal">Normal</span></div>
+              <div class="cb-task-meta">CC both on all Samson communications</div>
+            </div>
+          </div>
+
+          <div class="cb-task">
+            <input type="checkbox" id="t6" onchange="updateCounts()">
+            <div class="cb-task-content">
+              <div class="cb-task-text">Scan and file BOSS Products invoice from Troy Gongwer<span class="cb-priority normal">Normal</span></div>
+              <div class="cb-task-meta">CC Thayne Grove on any reply</div>
+            </div>
+          </div>
+
+          <div class="cb-task">
+            <input type="checkbox" id="t7" onchange="updateCounts()">
+            <div class="cb-task-content">
+              <div class="cb-task-text">Confirm Renasant Bank deposit cleared for Gridco payment<span class="cb-priority normal">Normal</span></div>
+              <div class="cb-task-meta">Patrick Lavette &bull; Shon Cunningham</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SHIPPING NOTIFICATIONS -->
+        <div class="cb-panel">
+          <div class="cb-panel-header">
+            <div class="cb-panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              Shipping Notifications
+            </div>
+            <span class="cb-panel-count alert" id="shipBadge">3 pending</span>
+          </div>
+
+          <div class="cb-ship-row">
+            <div class="cb-ship-status pending"></div>
+            <div class="cb-ship-info">
+              <div class="cb-ship-customer">Gridco &mdash; Shon Cunningham</div>
+              <div class="cb-ship-detail">FlexPro Armor 2-Man (NU-BC-2851) &times; 4 &bull; Awaiting pickup</div>
+            </div>
+            <button class="cb-ship-action" onclick="markShipped(this)">Send Notice</button>
+          </div>
+
+          <div class="cb-ship-row">
+            <div class="cb-ship-status delayed"></div>
+            <div class="cb-ship-info">
+              <div class="cb-ship-customer">EPB Chattanooga &mdash; Rick Sutherland</div>
+              <div class="cb-ship-detail">Samson Rope order &bull; Carrier delayed &mdash; update customer</div>
+            </div>
+            <button class="cb-ship-action" onclick="markShipped(this)">Send Update</button>
+          </div>
+
+          <div class="cb-ship-row">
+            <div class="cb-ship-status pending"></div>
+            <div class="cb-ship-info">
+              <div class="cb-ship-customer">Sheffield Utilities &mdash; Michael Waldrep</div>
+              <div class="cb-ship-detail">FlexPro Armor 1.5-Man Combo (NU-BC-2834-C) &times; 2 &bull; Label printed</div>
+            </div>
+            <button class="cb-ship-action" onclick="markShipped(this)">Send Notice</button>
+          </div>
+
+          <div style="margin-top: 24px; padding-top: 16px; border-top: 2px solid var(--nu-light-gray);">
+            <div class="cb-panel-title" style="font-size: 0.95rem; margin-bottom: 12px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;vertical-align:-3px;margin-right:6px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Recently Shipped
+            </div>
+            <div class="cb-ship-row">
+              <div class="cb-ship-status shipped"></div>
+              <div class="cb-ship-info">
+                <div class="cb-ship-customer">Irby Construction &mdash; Jared Lemoine</div>
+                <div class="cb-ship-detail">FlexPro Armor 2-Man Combo (NU-BC-2851-C) &times; 6 &bull; Delivered Apr 2</div>
+              </div>
+            </div>
+            <div class="cb-ship-row">
+              <div class="cb-ship-status shipped"></div>
+              <div class="cb-ship-info">
+                <div class="cb-ship-customer">BSS Field Rep &mdash; Andy Barron</div>
+                <div class="cb-ship-detail">Samson Rope samples &bull; Delivered Mar 28</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM GRID: INVOICES + INBOX -->
+      <div class="cb-grid">
+
+        <!-- INVOICE REMINDERS -->
+        <div class="cb-panel">
+          <div class="cb-panel-header">
+            <div class="cb-panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Invoice Reminders to Send
+            </div>
+            <span class="cb-panel-count">4 due</span>
+          </div>
+
+          <div class="cb-invoice-row">
+            <div>
+              <div class="cb-invoice-customer">Gridco</div>
+              <div class="cb-invoice-detail">INV-2024-0389 &bull; FlexPro Armor order &bull; Net 30</div>
+            </div>
+            <div>
+              <div class="cb-invoice-amount">$4,280.00</div>
+              <div class="cb-days-overdue">7 days overdue</div>
+            </div>
+          </div>
+
+          <div class="cb-invoice-row">
+            <div>
+              <div class="cb-invoice-customer">EPB Chattanooga</div>
+              <div class="cb-invoice-detail">INV-2024-0392 &bull; Samson Rope &bull; Net 30</div>
+            </div>
+            <div>
+              <div class="cb-invoice-amount">$2,640.00</div>
+              <div class="cb-days-overdue">3 days overdue</div>
+            </div>
+          </div>
+
+          <div class="cb-invoice-row">
+            <div>
+              <div class="cb-invoice-customer">Sheffield Utilities</div>
+              <div class="cb-invoice-detail">INV-2024-0395 &bull; FlexPro Armor Combos &bull; Net 30</div>
+            </div>
+            <div>
+              <div class="cb-invoice-amount">$1,850.00</div>
+              <div class="cb-invoice-detail" style="text-align:right;">Due Apr 10</div>
+            </div>
+          </div>
+
+          <div class="cb-invoice-row">
+            <div>
+              <div class="cb-invoice-customer">Irby Construction</div>
+              <div class="cb-invoice-detail">INV-2024-0398 &bull; FlexPro Armor Combos &bull; Net 30</div>
+            </div>
+            <div>
+              <div class="cb-invoice-amount">$6,120.00</div>
+              <div class="cb-invoice-detail" style="text-align:right;">Due Apr 15</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INBOX MONITORING -->
+        <div class="cb-panel">
+          <div class="cb-panel-header">
+            <div class="cb-panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Inbox Monitoring
+            </div>
+          </div>
+
+          <div class="cb-inbox-status">
+            <div class="cb-inbox-dot active"></div>
+            <div>
+              <div class="cb-inbox-label">acnorris@norrisutilities.com</div>
+              <div class="cb-inbox-sublabel">Monitoring active &bull; Last checked: just now</div>
+            </div>
+          </div>
+
+          <div class="cb-inbox-status">
+            <div class="cb-inbox-dot active"></div>
+            <div>
+              <div class="cb-inbox-label">orders@norrisutilities.com</div>
+              <div class="cb-inbox-sublabel">Monitoring active &bull; 2 unread messages</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; padding-top: 16px; border-top: 2px solid var(--nu-light-gray);">
+            <div class="cb-panel-title" style="font-size: 0.95rem; margin-bottom: 12px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;vertical-align:-3px;margin-right:6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Flagged for Aaron&rsquo;s Review
+            </div>
+            <div style="padding: 10px 0; border-bottom: 1px solid var(--nu-light-gray);">
+              <div style="font-weight:700; font-size:0.9rem; color:var(--nu-dark-text);">Skylift Pricing Update</div>
+              <div style="font-size:0.82rem; color:#777;">From: Andrew Jarmoszuk &bull; Received Apr 5 &bull; New model year pricing attached</div>
+            </div>
+            <div style="padding: 10px 0; border-bottom: 1px solid var(--nu-light-gray);">
+              <div style="font-weight:700; font-size:0.9rem; color:var(--nu-dark-text);">BSS Territory Expansion Inquiry</div>
+              <div style="font-size:0.82rem; color:#777;">From: Herb Minatre &bull; Received Apr 4 &bull; Potential new territory discussion</div>
+            </div>
+            <div style="padding: 10px 0;">
+              <div style="font-weight:700; font-size:0.9rem; color:var(--nu-dark-text);">BOSS Products New Catalog</div>
+              <div style="font-size:0.82rem; color:#777;">From: Troy Gongwer &bull; Received Apr 3 &bull; 2026 product catalog PDF</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK REFERENCE -->
+      <div class="cb-full-panel">
+        <div class="cb-panel-header">
+          <div class="cb-panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;vertical-align:-3px;margin-right:8px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Quick Reference &mdash; Key Contact Rules
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+          <div style="background: var(--nu-light-gray); border-radius: 6px; padding: 16px;">
+            <div style="font-weight: 700; font-size: 0.9rem; color: var(--nu-blue); margin-bottom: 6px;">BOSS Products</div>
+            <div style="font-size: 0.85rem; color: var(--nu-body-text);">Always CC <strong>both</strong> Troy Gongwer and Thayne Grove on every email.</div>
+          </div>
+          <div style="background: var(--nu-light-gray); border-radius: 6px; padding: 16px;">
+            <div style="font-weight: 700; font-size: 0.9rem; color: var(--nu-blue); margin-bottom: 6px;">Samson Rope</div>
+            <div style="font-size: 0.85rem; color: var(--nu-body-text);">Always CC <strong>both</strong> Donna Poll and Sarah Daniels on every email.</div>
+          </div>
+          <div style="background: var(--nu-light-gray); border-radius: 6px; padding: 16px;">
+            <div style="font-weight: 700; font-size: 0.9rem; color: var(--nu-blue); margin-bottom: 6px;">Irby Construction</div>
+            <div style="font-size: 0.85rem; color: var(--nu-body-text);">Primary contact is now <strong>Jared Lemoine</strong>. Gary Wiggs and Scott Argyle have retired.</div>
+          </div>
+          <div style="background: var(--nu-light-gray); border-radius: 6px; padding: 16px;">
+            <div style="font-weight: 700; font-size: 0.9rem; color: var(--nu-blue); margin-bottom: 6px;">Customer-Facing Emails</div>
+            <div style="font-size: 0.85rem; color: var(--nu-body-text);">All customer-facing communications need <strong>Aaron&rsquo;s review</strong> before sending.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+  <script>
+    // Live date
+    (function() {
+      var d = new Date();
+      var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('datePill').textContent = days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    })();
+
+    // Update stat counts when tasks are checked
+    function updateCounts() {
+      var checks = document.querySelectorAll('.cb-task input[type="checkbox"]');
+      var open = 0;
+      for (var i = 0; i < checks.length; i++) {
+        if (!checks[i].checked) open++;
+      }
+      document.getElementById('taskCount').textContent = open;
+      document.getElementById('taskBadge').textContent = open + ' open';
+    }
+
+    // Mark shipment as sent
+    function markShipped(btn) {
+      var row = btn.closest('.cb-ship-row');
+      var dot = row.querySelector('.cb-ship-status');
+      dot.className = 'cb-ship-status shipped';
+      btn.textContent = 'Sent';
+      btn.disabled = true;
+      btn.style.background = '#28a745';
+      btn.style.color = '#fff';
+      btn.style.borderColor = '#28a745';
+      btn.style.cursor = 'default';
+
+      // Update count
+      var pending = document.querySelectorAll('.cb-ship-status.pending, .cb-ship-status.delayed').length;
+      document.getElementById('shipCount').textContent = pending;
+      document.getElementById('shipBadge').textContent = pending + ' pending';
+      if (pending === 0) {
+        document.getElementById('shipCount').className = 'cb-stat-number good';
+      }
+    }
+  </script>
+
+</body>
+</html>
