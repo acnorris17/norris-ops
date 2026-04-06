@@ -7,7 +7,39 @@
     "phoenix_watermark_opacity": "7%",
     "section_header_style": "first word #0033cc, rest #1a1a1a"
   },
-  "task_history": [],
+  "task_history": [
+    {
+      "task_id": 24,
+      "title": "Redesign Team Page \u2014 Animated OneWheel Characters",
+      "type": "html",
+      "attempts": 4,
+      "model_used": "CLI",
+      "output_size": 362,
+      "validation_passed": false,
+      "date": "2026-04-06",
+      "time": "18:03:31",
+      "errors": [
+        "Missing <html",
+        "Missing <head",
+        "Missing <body"
+      ]
+    },
+    {
+      "task_id": 10,
+      "title": "Daily Journal System",
+      "type": "html",
+      "attempts": 4,
+      "model_used": "CLI",
+      "output_size": 294,
+      "validation_passed": false,
+      "date": "2026-04-06",
+      "time": "18:14:58",
+      "errors": [
+        "Missing Lato font reference",
+        "Missing Google Fonts CDN link"
+      ]
+    }
+  ],
   "failure_patterns": [
     {
       "pattern": "CLI returns conversational text instead of raw HTML",
@@ -16,6 +48,31 @@
     {
       "pattern": "Short outputs (<200 chars) usually mean CLI gave explanation instead of code",
       "fix": "Retry with explicit instruction: 'Output MUST be the complete file starting with <!DOCTYPE html>. Do NOT explain anything.'"
+    },
+    {
+      "pattern": "Missing <html",
+      "fix": "",
+      "date_added": "2026-04-06"
+    },
+    {
+      "pattern": "Missing <head",
+      "fix": "",
+      "date_added": "2026-04-06"
+    },
+    {
+      "pattern": "Missing <body",
+      "fix": "",
+      "date_added": "2026-04-06"
+    },
+    {
+      "pattern": "Missing Google Fonts CDN link",
+      "fix": "",
+      "date_added": "2026-04-06"
+    },
+    {
+      "pattern": "Missing Lato font reference",
+      "fix": "",
+      "date_added": "2026-04-06"
     }
   ],
   "aaron_feedback": [

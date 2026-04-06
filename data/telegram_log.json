@@ -6,7 +6,21 @@
       "source": "eod_recap.py",
       "message": "\ud83c\udf19 EOD \u2014 <b>EOD Recap \u2014 Monday, April 6, 2026</b>\n\n\u2705 <b>DONE TODAY:</b>\n  \u2022 Rebuild Home Base v3 with exact Line Card design\n  \u2022 Add Fun Cartoon Characters to Home Base\n  \u2022 CB Onboarding Document\n  \u2022 (fix attempt 1): Norris Utilities Website Homepage\n  \u2022 A/P Tracker Rebuild\n  \u2022 FlexPro Armor Storefront\n  \u2022 BSS Expense Report\n  \u2022 PO Generator tab added to ops portal\n  \u2022 Build Industry News Monitor\n  \u2022 Rebuild Video Breakdown Table \u2014 Line Card Design\n  \u2022 BSS Expense Report Template\n  \u2022 n8n evaluation and setup\n  \u2022 Contact Master List Framework\n  \u2022 Samson Rope Dashboard\n  \u2022 Voice Router\n  \u2022 Folk CRM evaluation\n  \u2022 AARON_VOICE.md created and integrated into followup_drafter.py + voice_router.py\n  \u2022 Universal Capture System\n\n\ud83d\udcb0 <b>REVENUE STATUS:</b>\n  \u2022 5 FlexPro Armor orders STILL UNINVOICED (March 20)\n  \ud83e\uddf5 Samson: 8 unpaid invoices, $3,235.31 unbilled to customers\n\n\ud83d\udd14 <b>DEALS STATUS:</b>\n  \u2744\ufe0f Skylift PO ($1.09M) \u2014 no activity in 7 days\n  \u2744\ufe0f EPB / Rick Sutherland (~$185K) \u2014 no activity in 7 days\n  \u2744\ufe0f Terex / Bill Kugler ($500K+) \u2014 no activity in 7 days\n  \u2744\ufe0f Sheffield / Waldrep \u2014 no activity in 7 days\n  \u2744\ufe0f Irby / Jared Lemoine \u2014 no activity in 7 days\n\n\ud83d\udc40 <b>NEEDS YOUR REVIEW:</b>\n  \u2022 Agent task failed: FlexPro Armor Storefront Landing Page\n  \u2022 Agent task failed: Norris Utilities Website Homepage\n  \u2022 Agent task failed: Update Team Characters \u2014 Dynamic Subagent Animatio\n  \u2022 2 tasks in failed state \u2014 run --retry-failed when ready\n\n\ud83d\udd1c <b>QUEUED FOR TONIGHT:</b>\n  \u2022 Daily Journal System\n  \u2022 Website About Page\n\nHave a great evening. \ud83e\udd1d",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-06T18:03:31.524458",
+      "category": "FAILED",
+      "source": "agent_runner_v4.py",
+      "message": "\u274c FAILED \u2014 <b>Task 24 FAILED</b>\nRedesign Team Page \u2014 Animated OneWheel Characters\n3 fix attempts exhausted\nErrors: Missing <html; Missing <head; Missing <body",
+      "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-06T18:14:58.822379",
+      "category": "FAILED",
+      "source": "agent_runner_v4.py",
+      "message": "\u274c FAILED \u2014 <b>Task 10 FAILED</b>\nDaily Journal System\n3 fix attempts exhausted\nErrors: Missing Lato font reference; Missing Google Fonts CDN link",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-06T18:00:01.176009"
+  "last_updated": "2026-04-06T18:14:58.822403"
 }
