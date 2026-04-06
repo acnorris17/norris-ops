@@ -1,0 +1,132 @@
+{
+  "drafts": [
+    {
+      "samson_invoice": "#314425",
+      "samson_cost": 2264.72,
+      "customer": "UNKNOWN \u2014 Aaron to identify",
+      "customer_matched": false,
+      "customer_price": 3235.31,
+      "margin_dollars": 970.59,
+      "margin_pct": "30%",
+      "items": "Account Past Due",
+      "po_number": "1351",
+      "sales_order": "G56842",
+      "status": "draft",
+      "created": "2026-04-06",
+      "source_thread": "19be17886e5f71aa"
+    },
+    {
+      "samson_invoice": "#314712",
+      "samson_cost": 0.0,
+      "customer": "UNKNOWN \u2014 Aaron to identify",
+      "customer_matched": false,
+      "customer_price": 0.0,
+      "margin_dollars": 0.0,
+      "margin_pct": "30%",
+      "items": "Invoice #314712",
+      "po_number": "",
+      "sales_order": "",
+      "status": "draft",
+      "created": "2026-04-06",
+      "source_thread": ""
+    },
+    {
+      "samson_invoice": "#305108",
+      "samson_cost": 0.0,
+      "customer": "UNKNOWN \u2014 Aaron to identify",
+      "customer_matched": false,
+      "customer_price": 0.0,
+      "margin_dollars": 0.0,
+      "margin_pct": "30%",
+      "items": "Invoice #305108",
+      "po_number": "",
+      "sales_order": "",
+      "status": "draft",
+      "created": "2026-04-06",
+      "source_thread": ""
+    },
+    {
+      "samson_invoice": "#299446",
+      "samson_cost": 0.0,
+      "customer": "UNKNOWN \u2014 Aaron to identify",
+      "customer_matched": false,
+      "customer_price": 0.0,
+      "margin_dollars": 0.0,
+      "margin_pct": "30%",
+      "items": "Invoice #299446",
+      "po_number": "",
+      "sales_order": "",
+      "status": "draft",
+      "created": "2026-04-06",
+      "source_thread": ""
+    },
+    {
+      "samson_invoice": "#300190",
+      "samson_cost": 0.0,
+      "customer": "UNKNOWN \u2014 Aaron to identify",
+      "customer_matched": false,
+      "customer_price": 0.0,
+      "margin_dollars": 0.0,
+      "margin_pct": "30%",
+      "items": "Invoice #300190",
+      "po_number": "",
+      "sales_order": "",
+      "status": "draft",
+      "created": "2026-04-06",
+      "source_thread": ""
+    },
+    {
+      "samson_invoice": "#309447",
+      "samson_cost": 0.0,
+      "customer": "UNKNOWN \u2014 Aaron to identify",
+      "customer_matched": false,
+      "customer_price": 0.0,
+      "margin_dollars": 0.0,
+      "margin_pct": "30%",
+      "items": "Invoice #309447",
+      "po_number": "",
+      "sales_order": "",
+      "status": "draft",
+      "created": "2026-04-06",
+      "source_thread": ""
+    },
+    {
+      "samson_invoice": "#285480",
+      "samson_cost": 0.0,
+      "customer": "UNKNOWN \u2014 Aaron to identify",
+      "customer_matched": false,
+      "customer_price": 0.0,
+      "margin_dollars": 0.0,
+      "margin_pct": "30%",
+      "items": "Automatic reply: Invoice #285480",
+      "po_number": "",
+      "sales_order": "",
+      "status": "draft",
+      "created": "2026-04-06",
+      "source_thread": ""
+    },
+    {
+      "samson_invoice": "#299787",
+      "samson_cost": 0.0,
+      "customer": "UNKNOWN \u2014 Aaron to identify",
+      "customer_matched": false,
+      "customer_price": 0.0,
+      "margin_dollars": 0.0,
+      "margin_pct": "30%",
+      "items": "Invoice #299787",
+      "po_number": "",
+      "sales_order": "",
+      "status": "draft",
+      "created": "2026-04-06",
+      "source_thread": ""
+    }
+  ],
+  "last_run": "2026-04-06 21:52 UTC",
+  "history": [
+    {
+      "time": "2026-04-06 21:52 UTC",
+      "new_drafts": 8,
+      "total_drafts": 8
+    }
+  ]
+}

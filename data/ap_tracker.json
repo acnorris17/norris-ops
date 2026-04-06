@@ -1,0 +1,90 @@
+{
+  "invoices": [
+    {
+      "email_id": "19d62eb894d640ec",
+      "vendor": "FACTS Management Company",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-04-15",
+      "email_date": "2026-04-06 08:11",
+      "subject": "INVOICE: Briarwood Christian School (Due 4/15/2026)",
+      "from": "FACTS Management Company <noreply@factsmgt.com>",
+      "status": "open",
+      "added": "2026-04-06T15:08:34.988421"
+    },
+    {
+      "email_id": "19d543c396dac119",
+      "vendor": "Boss Products",
+      "invoice_number": "6651",
+      "amount": 0.0,
+      "due_date": "2026-05-03",
+      "email_date": "2026-04-03 11:45",
+      "subject": "Invoice 6651",
+      "from": "Thayne Grove <tgrove@bossproductsinc.com>",
+      "status": "open",
+      "added": "2026-04-06T15:08:35.490207"
+    },
+    {
+      "email_id": "19d5378498f312be",
+      "vendor": "FACTS Management Company",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-04-15",
+      "email_date": "2026-04-03 08:11",
+      "subject": "INVOICE: Briarwood Christian School (Due 4/15/2026)",
+      "from": "FACTS Management Company <noreply@factsmgt.com>",
+      "status": "open",
+      "added": "2026-04-06T15:08:36.033733"
+    },
+    {
+      "email_id": "19d4ed1597c1263a",
+      "vendor": "Peggy Keller",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-05-02",
+      "email_date": "2026-04-02 10:30",
+      "subject": "Tax Statement 2025",
+      "from": "Peggy Keller <peggy@avpc.org>",
+      "status": "open",
+      "added": "2026-04-06T15:08:36.505899"
+    },
+    {
+      "email_id": "19d4c79b6ed055bb",
+      "vendor": "Google Payments",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-05-01",
+      "email_date": "2026-04-01 23:35",
+      "subject": "Google Workspace: Your invoice is available for norrisutilities.com",
+      "from": "Google Payments <payments-noreply@google.com>",
+      "status": "open",
+      "added": "2026-04-06T15:08:37.244086"
+    },
+    {
+      "email_id": "19d4c28d8ddf5312",
+      "vendor": "Gusto",
+      "invoice_number": "",
+      "amount": 29.7,
+      "due_date": "2026-05-01",
+      "email_date": "2026-04-01 22:07",
+      "subject": "Norris Utilities, LLC's March 2026 invoice has been paid",
+      "from": "Gusto <gustonoreply@gusto.com>",
+      "status": "open",
+      "added": "2026-04-06T15:08:37.767445"
+    },
+    {
+      "email_id": "19d4a51aca006cea",
+      "vendor": "LS Admin",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-05-01",
+      "email_date": "2026-04-01 13:32",
+      "subject": "Your email was not received by staff Re: 2025 Statement for Taxes",
+      "from": "LS Admin <lsadmin@bcsk12.org>",
+      "status": "open",
+      "added": "2026-04-06T15:08:38.286475"
+    }
+  ],
+  "last_scan": "2026-04-06T15:08:38.286833",
+  "scan_count": 1
+}

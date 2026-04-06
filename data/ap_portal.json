@@ -1,0 +1,57 @@
+{
+  "last_updated": "2026-04-06T15:08:38.287589",
+  "total_outstanding": 29.7,
+  "overdue_count": 0,
+  "due_soon_count": 0,
+  "invoices": [
+    {
+      "vendor": "FACTS Management Company",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-04-15",
+      "status": "open"
+    },
+    {
+      "vendor": "Boss Products",
+      "invoice_number": "6651",
+      "amount": 0.0,
+      "due_date": "2026-05-03",
+      "status": "open"
+    },
+    {
+      "vendor": "FACTS Management Company",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-04-15",
+      "status": "open"
+    },
+    {
+      "vendor": "Peggy Keller",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-05-02",
+      "status": "open"
+    },
+    {
+      "vendor": "Google Payments",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-05-01",
+      "status": "open"
+    },
+    {
+      "vendor": "Gusto",
+      "invoice_number": "",
+      "amount": 29.7,
+      "due_date": "2026-05-01",
+      "status": "open"
+    },
+    {
+      "vendor": "LS Admin",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-05-01",
+      "status": "open"
+    }
+  ]
+}

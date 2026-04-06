@@ -1,0 +1,12 @@
+[
+  {
+    "timestamp": "2026-04-06T17:08:10.380496",
+    "transcription": "Send Rick Sutherland a follow-up on the EPB bucket cover quote from two weeks ago",
+    "recipient": "Rick Sutherland",
+    "company": "EPB Chattanooga",
+    "topic": "Follow-up on bucket cover quote from two weeks ago",
+    "tone": "professional",
+    "voice_guide_loaded": true,
+    "status": "pending_review"
+  }
+]

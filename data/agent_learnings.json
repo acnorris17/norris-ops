@@ -1,0 +1,28 @@
+{
+  "build_preferences": {
+    "always_include_lato_font": true,
+    "always_include_viewport_meta": true,
+    "preferred_gradient": "#0a0e5c to #0033cc to #0066ee to #00aaff to #06D0FF",
+    "chevron_apex_position": "38% from left",
+    "phoenix_watermark_opacity": "7%",
+    "section_header_style": "first word #0033cc, rest #1a1a1a"
+  },
+  "task_history": [],
+  "failure_patterns": [
+    {
+      "pattern": "CLI returns conversational text instead of raw HTML",
+      "fix": "Add stronger prompt: 'Return ONLY raw code. No explanations, no markdown fences, no commentary.'"
+    },
+    {
+      "pattern": "Short outputs (<200 chars) usually mean CLI gave explanation instead of code",
+      "fix": "Retry with explicit instruction: 'Output MUST be the complete file starting with <!DOCTYPE html>. Do NOT explain anything.'"
+    }
+  ],
+  "aaron_feedback": [
+    {
+      "text": "Task 14 looked good but the footer text was too small",
+      "date": "2026-04-06",
+      "time": "17:08:47"
+    }
+  ]
+}
