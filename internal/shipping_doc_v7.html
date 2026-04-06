@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norris Utilities — Shipping Document v7</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f0f4ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+    padding: 0 0 60px 0;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    min-height: 260px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 48px 80px 48px;
+  }
+
+  /* Ghost Phoenix */
+  .phoenix-watermark {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 320px;
+    line-height: 1;
+    opacity: 0.07;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  /* Infrastructure Silhouette SVG */
+  .infra-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.10;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .doc-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .header h1 {
+    font-size: 38px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+
+  .header h1 span {
+    color: #b8f4ff;
+  }
+
+  .header .tagline {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 2px;
+    margin-top: 8px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 28px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+
+  .header-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .header-meta-item .label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .header-meta-item .value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ─── CHEVRON DIVIDER ─── */
+  .chevron-divider {
+    width: 100%;
+    height: 58px;
+    background: #f0f4ff;
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+    margin-top: -1px;
+  }
+
+  /* ─── MAIN CONTAINER ─── */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ─── STATUS STRIP ─── */
+  .status-strip {
+    display: flex;
+    gap: 14px;
+    margin: 30px 0 10px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border-radius: 50px;
+    padding: 8px 20px;
+    box-shadow: 0 3px 14px rgba(0,0,255,0.10);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-blue  { background: #0000FF; }
+  .dot-cyan  { background: #06D0FF; }
+  .dot-green { background: #00C853; }
+  .dot-amber { background: #FFB300; }
+
+  /* ─── X SEPARATOR ─── */
+  .x-separator {
+    text-align: center;
+    color: #06D0FF;
+    font-size: 20px;
+    opacity: 0.45;
+    letter-spacing: 22px;
+    margin: 28px 0;
+  }
+
+  /* ─── SECTION TITLE ─── */
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #0000FF;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #0000FF22, transparent);
+    border-radius: 2px;
+  }
+
+  /* ─── CARD ─── */
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,255,0.08);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+
+  .card-accent-blue  { border-left: 4px solid #0000FF; }
+  .card-accent-cyan  { border-left: 4px solid #06D0FF; }
+
+  /* ─── TWO-COL GRID ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* ─── FIELD BLOCK ─── */
+  .field-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+
+  .field-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  .field-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    border-bottom: 1.5px solid #e8ecff;
+    padding-bottom: 6px;
+    min-height: 30px;
+  }
+
+  .field-value.blue { color: #0000FF; }
+  .field-value.cyan { color: #06D0FF; }
+
+  /* ─── PRODUCT TABLE ─── */
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .product-table thead tr {
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    color: #fff;
+  }
+
+  .product-table thead th {
+    padding: 13px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .product-table thead th:first-child { border-radius: 8px 0 0 0; }
+  .product-table thead th:last-child  { border-radius: 0 8px 0 0; text-align: right; }
+
+  .product-table tbody tr {
+    border-bottom: 1px solid #f0f4ff;
+    transition: background 0.15s;
+  }
+
+  .product-table tbody tr:hover { background: #f8f9ff; }
+  .product-table tbody tr:last-child { border-bottom: none; }
+
+  .product-table tbody td {
+    padding: 13px 14px;
+    vertical-align: middle;
+  }
+
+  .product-table tbody td:last-child { text-align: right; font-weight: 700; }
+
+  .product-table tfoot tr {
+    background: #f0f4ff;
+  }
+
+  .product-table tfoot td {
+    padding: 12px 14px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .product-table tfoot .total-label { color: #888; }
+  .product-table tfoot .total-value { text-align: right; color: #0000FF; font-size: 15px; }
+
+  .item-code {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #0000FF;
+    background: #e8f0ff;
+    border-radius: 4px;
+    padding: 2px 7px;
+    margin-bottom: 3px;
+  }
+
+  .item-name {
+    font-weight: 700;
+    color: #1a1a2e;
+    font-size: 13px;
+  }
+
+  .item-desc {
+    font-size: 11px;
+    font-weight: 300;
+    color: #888;
+  }
+
+  /* ─── CARRIER BLOCK ─── */
+  .carrier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .carrier-opt {
+    border: 2px solid #e0e7ff;
+    border-radius: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .carrier-opt.selected {
+    border-color: #0000FF;
+    background: #f0f4ff;
+  }
+
+  .carrier-opt .carrier-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+  }
+
+  .carrier-opt .carrier-eta {
+    font-size: 11px;
+    font-weight: 400;
+    color: #888;
+  }
+
+  .carrier-opt .carrier-rate {
+    font-size: 14px;
+    font-weight: 900;
+    color: #0000FF;
+    margin-top: 6px;
+  }
+
+  .carrier-check {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0000FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 11px;
+    display: none;
+  }
+
+  .carrier-opt.selected .carrier-check { display: flex; }
+
+  /* ─── SIGNATURE BLOCK ─── */
+  .sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 8px;
+  }
+
+  .sig-box {
+    border-top: 2px solid #1a1a2e;
+    padding-top: 8px;
+    margin-top: 50px;
+  }
+
+  .sig-box .sig-name { font-size: 12px; font-weight: 700; color: #1a1a2e; }
+  .sig-box .sig-title { font-size: 11px; font-weight: 300; color: #888; margin-top: 2px; }
+
+  /* ─── TRACKING STRIP ─── */
+  .tracking-strip {
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    border-radius: 12px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .tracking-strip .trk-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .tracking-strip .trk-number {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 3px;
+  }
+
+  .tracking-strip .trk-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .trk-pulse {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #00E676;
+    animation: pulse 1.4s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(0,230,118,0.6); }
+    50%      { box-shadow: 0 0 0 6px rgba(0,230,118,0); }
+  }
+
+  /* ─── PROGRESS TRACKER ─── */
+  .progress-track {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    margin: 24px 0 8px 0;
+  }
+
+  .progress-track::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #e0e7ff;
+    z-index: 0;
+  }
+
+  .progress-fill {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, #0000FF, #06D0FF);
+    z-index: 1;
+    border-radius: 2px;
+  }
+
+  .prog-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+    flex: 1;
+  }
+
+  .prog-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    border: 3px solid #e0e7ff;
+    background: #fff;
+    color: #ccc;
+    transition: all 0.3s;
+  }
+
+  .prog-step.done .prog-circle {
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    border-color: #0000FF;
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(0,0,255,0.25);
+  }
+
+  .prog-step.active .prog-circle {
+    background: #fff;
+    border-color: #06D0FF;
+    color: #0000FF;
+    box-shadow: 0 0 0 4px rgba(6,208,255,0.2);
+  }
+
+  .prog-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #aaa;
+    text-align: center;
+  }
+
+  .prog-step.done .prog-label,
+  .prog-step.active .prog-label { color: #0000FF; }
+
+  /* ─── NOTES AREA ─── */
+  .notes-area {
+    background: #f8f9ff;
+    border: 1.5px dashed #c0ccff;
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 80px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #888;
+    font-style: italic;
+    margin-top: 10px;
+    line-height: 1.7;
+  }
+
+  /* ─── PRINT BUTTON ─── */
+  .print-btn {
+    display: block;
+    margin: 12px auto 0 auto;
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 50px;
+    padding: 13px 40px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(0,0,255,0.25);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .print-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* ─── FOOTER ─── */
+  .doc-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 0 24px;
+  }
+
+  .doc-footer .footer-brand {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #0000FF;
+    margin-bottom: 4px;
+  }
+
+  .doc-footer .footer-contact {
+    font-size: 11px;
+    font-weight: 300;
+    color: #888;
+    line-height: 1.8;
+  }
+
+  .doc-footer .footer-tagline {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #06D0FF;
+    margin-top: 6px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 720px) {
+    .header { padding: 32px 24px 70px 24px; min-height: 220px; }
+    .header h1 { font-size: 26px; letter-spacing: 1.5px; }
+    .phoenix-watermark { font-size: 200px; right: -20px; }
+    .two-col, .three-col, .carrier-grid, .sig-row { grid-template-columns: 1fr; }
+    .header-meta { gap: 16px; }
+    .tracking-strip { flex-direction: column; text-align: center; }
+    .prog-label { font-size: 8px; }
+    .card { padding: 20px 18px; }
+    .product-table { font-size: 12px; }
+    .product-table thead th,
+    .product-table tbody td { padding: 10px 8px; }
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .print-btn { display: none; }
+    .card { box-shadow: none; border: 1px solid #e0e7ff; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .product-table thead tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .tracking-strip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════ -->
+<div class="header">
+
+  <!-- Ghost Phoenix Watermark -->
+  <div class="phoenix-watermark" aria-hidden="true">🦅</div>
+
+  <!-- Infrastructure Silhouette SVG -->
+  <svg class="infra-overlay" viewBox="0 0 1000 90" preserveAspectRatio="none" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Tower 1 -->
+    <polygon points="80,90 86,60 100,20 114,60 120,90"/>
+    <line x1="70" y1="55" x2="130" y2="55" stroke="white" stroke-width="2"/>
+    <line x1="75" y1="38" x2="125" y2="38" stroke="white" stroke-width="2"/>
+    <line x1="70" y1="55" x2="80" y2="90" stroke="white" stroke-width="1.5"/>
+    <line x1="130" y1="55" x2="120" y2="90" stroke="white" stroke-width="1.5"/>
+    <!-- Tower 2 -->
+    <polygon points="320,90 326,60 340,20 354,60 360,90"/>
+    <line x1="310" y1="55" x2="370" y2="55" stroke="white" stroke-width="2"/>
+    <line x1="315" y1="38" x2="365" y2="38" stroke="white" stroke-width="2"/>
+    <!-- Tower 3 -->
+    <polygon points="560,90 566,60 580,20 594,60 600,90"/>
+    <line x1="550" y1="55" x2="610" y2="55" stroke="white" stroke-width="2"/>
+    <line x1="555" y1="38" x2="605" y2="38" stroke="white" stroke-width="2"/>
+    <!-- Tower 4 -->
+    <polygon points="800,90 806,60 820,20 834,60 840,90"/>
+    <line x1="790" y1="55" x2="850" y2="55" stroke="white" stroke-width="2"/>
+    <line x1="795" y1="38" x2="845" y2="38" stroke="white" stroke-width="2"/>
+    <!-- Power Lines -->
+    <path d="M120,38 Q200,48 310,38" stroke="white" stroke-width="1.5" fill="none"/>
+    <path d="M120,55 Q200,65 310,55" stroke="white" stroke-width="1.5" fill="none"/>
+    <path d="M365,38 Q460,48 550,38" stroke="white" stroke-width="1.5" fill="none"/>
+    <path d="M365,55 Q460,65 550,55" stroke="white" stroke-width="1.5" fill="none"/>
+    <path d="M610,38 Q700,48 790,38" stroke="white" stroke-width="1.5" fill="none"/>
+    <path d="M610,55 Q700,65 790,55" stroke="white" stroke-width="1.5" fill="none"/>
+    <path d="M845,38 Q920,48 1000,38" stroke="white" stroke-width="1.5" fill="none"/>
+    <path d="M845,55 Q920,65 1000,55" stroke="white" stroke-width="1.5" fill="none"/>
+  </svg>
+
+  <div class="header-content">
+    <div class="doc-badge">Shipping Document · SD-v7 · 2025</div>
+    <h1>NORRIS <span>UTILITIES</span></h1>
+    <div class="tagline">A Legacy of Commitment® &nbsp;·&nbsp; Shipping &amp; Logistics Document</div>
+    <div class="header-meta">
+      <div class="header-meta-item">
+        <span class="label">Document No.</span>
+        <span class="value">SD-2025-0742</span>
+      </div>
+      <div class="header-meta-item">
+        <span class="label">Issue Date</span>
+        <span class="value">July 14, 2025</span>
+      </div>
+      <div class="header-meta-item">
+        <span class="label">Ship Date</span>
+        <span class="value">July 16, 2025</span>
+      </div>
+      <div class="header-meta-item">
+        <span class="label">Priority</span>
+        <span class="value">● Expedited</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- White Chevron Divider -->
+<div class="chevron-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════════════ -->
+<div class="container">
+
+  <!-- Status Badges -->
+  <div class="status-strip">
+    <div class="status-badge"><div class="status-dot dot-green"></div> Order Confirmed</div>
+    <div class="status-badge"><div class="status-dot dot-blue"></div> Processing</div>
+    <div class="status-badge"><div class="status-dot dot-cyan"></div> Ready to Ship</div>
+    <div class="status-badge"><div class="status-dot dot-amber"></div> Awaiting Carrier Pickup</div>
+  </div>
+
+  <!-- Shipment Progress -->
+  <div class="card card-accent-blue" style="margin-top:24px;">
+    <div class="section-title">Shipment Progress</div>
+    <div class="progress-track">
+      <div class="progress-fill"></div>
+      <div class="prog-step done">
+        <div class="prog-circle">✓</div>
+        <div class="prog-label">Order<br>Received</div>
+      </div>
+      <div class="prog-step done">
+        <div class="prog-circle">✓</div>
+        <div class="prog-label">Order<br>Confirmed</div>
+      </div>
+      <div class="prog-step done">
+        <div class="prog-circle">✓</div>
+        <div class="prog-label">Packed &amp;<br>Staged</div>
+      </div>
+      <div class="prog-step active">
+        <div class="prog-circle">→</div>
+        <div class="prog-label">Carrier<br>Pickup</div>
+      </div>
+      <div class="prog-step">
+        <div class="prog-circle">5</div>
+        <div class="prog-label">In<br>Transit</div>
+      </div>
+      <div class="prog-step">
+        <div class="prog-circle">6</div>
+        <div class="prog-label">Delivered</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tracking Strip -->
+  <div class="tracking-strip">
+    <div>
+      <div class="trk-label">Tracking Number</div>
+      <div class="trk-number">NU-1Z9A8F00421820672</div>
+    </div>
+    <div class="trk-status">
+      <div class="trk-pulse"></div>
+      Ready for Pickup
+    </div>
+  </div>
+
+  <div class="x-separator" aria-hidden="true">× × ×</div>
+
+  <!-- FROM / TO -->
+  <div class="two-col">
+    <div class="card card-accent-blue">
+      <div class="section-title">Ship From</div>
+      <div class="field-block">
+        <div class="field-label">Company</div>
+        <div class="field-value blue">Norris Utilities LLC</div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">Contact</div>
+        <div class="field-value">Aaron C. Norris, Founder &amp; CEO</div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">Address</div>
+        <div class="field-value">1200 Logistics Parkway, Suite 100<br>Birmingham, AL 35203</div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">Phone</div>
+        <div class="field-value">205-500-1343</div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">Email</div>
+        <div class="field-value">acnorris@norrisutilities.com</div>
+      </div>
+    </div>
+
+    <div class="card card-accent-cyan">
+      <div class="section-title">Ship To</div>
+      <div class="field-block">
+        <div class="field-label">Company / Recipient</div>
+        <div class="field-value cyan">Gulf Coast Power Solutions Inc.</div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">Attn</div>
+        <div class="field-value">James T. Hargrove, Procurement Dir.</div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">Address</div>
+        <div class="field-value">8840 Industrial Blvd, Building C<br>Mobile, AL 36603</div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">Phone</div>
+        <div class="field-value">251-774-8820</div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">Email</div>
+        <div class="field-value">j.hargrove@gcpowersolutions.com</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="x-separator

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control | Norris Utilities®</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            color: #333;
+            line-height: 1.6;
+            background: #F8F9FA;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #0000FF 0%, #000033 100%);
+            color: white;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" opacity="0.1"><line x1="0" y1="50" x2="1200" y2="50" stroke="white" stroke-width="2"/><line x1="100" y1="0" x2="100" y2="400" stroke="white" stroke-width="2"/><line x1="300" y1="0" x2="300" y2="400" stroke="white" stroke-width="2"/><line x1="500" y1="0" x2="500" y2="400" stroke="white" stroke-width="2"/><line x1="700" y1="0" x2="700" y2="400" stroke="white" stroke-width="2"/><line x1="900" y1="0" x2="900" y2="400" stroke="white" stroke-width="2"/><line x1="1100" y1="0" x2="1100" y2="400" stroke="white" stroke-width="2"/><line x1="0" y1="150" x2="1200" y2="150" stroke="white" stroke-width="3"/><line x1="0" y1="250" x2="1200" y2="250" stroke="white" stroke-width="2"/><line x1="0" y1="350" x2="1200" y2="350" stroke="white" stroke-width="2"/></svg>');
+            opacity: 0.15;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .chevron-transition {
+            background: #fff;
+            text-align: center;
+            margin-top: -2px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .status-bar {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .status-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #06D0FF;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #0000FF;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0000FF;
+        }
+        
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .badge-pending {
+            background: #E6F3FF;
+            color: #0000FF;
+        }
+        
+        .badge-running {
+            background: #FFF3CD;
+            color: #856404;
+        }
+        
+        .badge-done {
+            background: #D4EDDA;
+            color: #155724;
+        }
+        
+        .badge-failed {
+            background: #F8D7DA;
+            color: #721C24;
+        }
+        
+        .task-list {
+            list-style: none;
+        }
+        
+        .task-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #F0F0F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .task-item:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-marker {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #06D0FF;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+        
+        .timeline-content {
+            flex: 1;
+        }
+        
+        .timeline-time {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+        
+        .journal {
+            background: #F8F9FA;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .journal-entry {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #0000FF;
+        }
+        
+        .journal-entry:last-child {
+            margin-bottom: 0;
+        }
+        
+        .journal-time {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #0000FF 0%, #000033 100%);
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-tagline {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .status-bar {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metric-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Norris Utilities® Mission Control</div>
+            <div class="tagline">Legacy Autonomous Build Engine Dashboard</div>
+        </div>
+    </header>
+    
+    <div class="chevron-transition">
+        <svg viewBox="0 0 1200 60" style="display:block;width:100%;">
+            <polygon points="0,0 600,60 1200,0" fill="#0000FF"/>
+        </svg>
+    </div>
+    
+    <div class="container">
+        <div class="status-bar">
+            <div class="status-indicator">
+                <div class="status-light"></div>
+                <div>
+                    <strong>Agent Status:</strong> Active
+                    <br>
+                    <small>Last Run: 2 minutes ago</small>
+                </div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-value">94%</div>
+                <div class="metric-label">Completion Rate</div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-value">27</div>
+                <div class="metric-label">Tasks Today</div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-value">3</div>
+                <div class="metric-label">In Queue</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Active Tasks</h2>
+                    <span class="badge badge-running">2 Running</span>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <span>Generate FlexPro Armor® Quote</span>
+                        <span class="badge badge-running">Running</span>
+                    </li>
+                    <li class="task-item">
+                        <span>Update Customer Database</span>
+                        <span class="badge badge-running">Running</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Queued Tasks</h2>
+                    <span class="badge badge-pending">3 Pending</span>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <span>Process EPB Order Request</span>
+                        <span class="badge badge-pending">Pending</span>
+                    </li>
+                    <li class="task-item">
+                        <span>Generate Monthly Report</span>
+                        <span class="badge badge-pending">Pending</span>
+                    </li>
+                    <li class="task-item">
+                        <span>Update Samson Rope Inventory</span>
+                        <span class="badge badge-pending">Pending</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Completed Today</h2>
+                    <span class="badge badge-done">22 Done</span>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <span>Sheffield Utilities Invoice</span>
+                        <span class="badge badge-done">Done</span>
+                    </li>
+                    <li class="task-item">
+                        <span>Skylift Equipment Catalog Update</span>
+                        <span class="badge badge-done">Done</span>
+                    </li>
+                    <li class="task-item">
+                        <span>Renasant Bank Report</span>
+                        <span class="badge badge-done">Done</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <h2 class="card-title" style="margin-bottom: 1.5rem;">Recent Activity Timeline</h2>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-time">10:45 AM</div>
+                    <div>Completed FlexPro Armor® NU-BC2851 quote for Gridco</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-time">10:30 AM</div>
+                    <div>Updated Terex equipment pricing with 12% margin</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-time">9:15 AM</div>
+                    <div>Generated shipping quote using Ben's formula for Irby Construction</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-time">8:45 AM</div>
+                    <div>Processed Bay Shore Systems inventory update</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-time">8:00 AM</div>
+                    <div>Daily system startup and health check completed</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="journal">
+            <h2 class="card-title" style="margin-bottom: 1.5rem;">Today's Journal Entries</h2>
+            <div class="journal-entry">
+                <div class="journal-time">10:52 AM - Customer Success</div>
+                <div>Successfully generated complex multi-item quote for EPB Chattanooga including FlexPro Armor® combo units and Samson rope. Applied correct margin formulas: 50% on bucket covers, 30% on rope products. Rick Sutherland confirmed receipt.</div>
+            </div>
+            <div class="journal-entry">
+                <div class="journal-time">9:30 AM - Process Improvement</div>
+                <div>Optimized quote generation workflow to automatically include Hand Made in the USA notation on all FlexPro Armor® products. This ensures brand consistency across all customer communications.</div>
+            </div>
+            <div class="journal-entry">
+                <div class="journal-time">8:15 AM - System Note</div>
+                <div>Initiated daily operations. All systems functioning normally. Queue contains 27 tasks scheduled for today, with priority given to time-sensitive customer quotes and order confirmations.</div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-tagline">A Legacy of Commitment®</div>
+            <div class="contact-info">
+                Aaron C. Norris | Founder & CEO<br>
+                Norris Utilities, LLC<br>
+                205-500-1343<br>
+                acnorris@norrisutilities.com<br>
+                130 Inverness Plaza #210, Birmingham, AL 35242
+            </div>
+            <div class="copyright">
+                © 2024 Norris Utilities, LLC. All rights reserved.<br>
+                Norris Utilities®, FlexPro Armor®, and Phoenix Icon® are registered trademarks.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norris Utilities — Contact Master List</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f0f2ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    min-height: 260px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 40px 40px 80px;
+  }
+
+  /* Ghost phoenix watermark */
+  .phoenix-watermark {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 320px;
+    opacity: 0.07;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    filter: brightness(10);
+  }
+
+  /* Power tower silhouette */
+  .tower-silhouette {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+  }
+
+  .header-eyebrow {
+    color: rgba(255,255,255,0.75);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .header-logo {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .header-logo span {
+    color: #06D0FF;
+  }
+
+  .header-tagline {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 2px;
+    margin-top: 6px;
+  }
+
+  .header-tool-title {
+    margin-top: 18px;
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-tool-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 24px;
+    background: #06D0FF;
+    border-radius: 2px;
+  }
+
+  .header-meta {
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 400;
+  }
+
+  /* Chevron divider */
+  .chevron-divider {
+    width: 100%;
+    height: 60px;
+    background: #f0f2ff;
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+    margin-top: -2px;
+  }
+
+  /* ── MAIN WRAPPER ── */
+  .main-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin: -30px auto 30px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .stat-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.10);
+    padding: 20px 18px;
+    text-align: center;
+    border-top: 4px solid #0000FF;
+    transition: transform 0.2s;
+  }
+
+  .stat-card:hover { transform: translateY(-3px); }
+  .stat-card.cyan { border-top-color: #06D0FF; }
+
+  .stat-number {
+    font-size: 32px;
+    font-weight: 900;
+    color: #0000FF;
+    line-height: 1;
+  }
+
+  .stat-card.cyan .stat-number { color: #06D0FF; }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #666;
+    margin-top: 6px;
+  }
+
+  /* ── X SEPARATOR ── */
+  .x-separator {
+    text-align: center;
+    color: #06D0FF;
+    font-size: 20px;
+    opacity: 0.45;
+    letter-spacing: 18px;
+    margin: 28px 0;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0000FF;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 16px;
+    background: linear-gradient(180deg, #0000FF, #06D0FF);
+    border-radius: 2px;
+  }
+
+  /* ── CONTROLS ── */
+  .controls-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 16px;
+    border: 2px solid #e0e4ff;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: #1a1a2e;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fff;
+  }
+
+  .search-box:focus { border-color: #0000FF; }
+
+  .filter-btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 2px solid #e0e4ff;
+    background: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: #0000FF;
+    color: #0000FF;
+    background: #f0f2ff;
+  }
+
+  .filter-btn.active { background: #0000FF; color: #fff; border-color: #0000FF; }
+
+  .add-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .add-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* ── TABLE CARD ── */
+  .table-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,255,0.08);
+    overflow: hidden;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+  }
+
+  thead tr {
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+  }
+
+  thead th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+    white-space: nowrap;
+  }
+
+  thead th:first-child { padding-left: 20px; }
+
+  tbody tr {
+    border-bottom: 1px solid #f0f2ff;
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: #f8f9ff; }
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody td {
+    padding: 14px 16px;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+
+  tbody td:first-child { padding-left: 20px; }
+
+  .contact-name {
+    font-weight: 700;
+    color: #1a1a2e;
+    font-size: 14px;
+  }
+
+  .contact-role {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .company-name {
+    font-weight: 700;
+    color: #0000FF;
+    font-size: 13px;
+  }
+
+  .company-type {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 2px;
+  }
+
+  /* Tier badges */
+  .tier-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .tier-strategic {
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    color: #fff;
+  }
+
+  .tier-partner {
+    background: #e8f4ff;
+    color: #0050cc;
+    border: 1px solid #b3d4ff;
+  }
+
+  .tier-prospect {
+    background: #fff3e0;
+    color: #e65100;
+    border: 1px solid #ffcc80;
+  }
+
+  .tier-vendor {
+    background: #e8ffe8;
+    color: #1b5e20;
+    border: 1px solid #a5d6a7;
+  }
+
+  .tier-dormant {
+    background: #f5f5f5;
+    color: #757575;
+    border: 1px solid #ddd;
+  }
+
+  /* Status dot */
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  .dot-green { background: #22c55e; }
+  .dot-yellow { background: #f59e0b; }
+  .dot-red { background: #ef4444; }
+  .dot-gray { background: #9ca3af; }
+
+  .last-contact {
+    font-size: 12px;
+    color: #555;
+  }
+
+  .days-ago {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 2px;
+  }
+
+  /* Next action badge */
+  .action-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .action-call { background: #eff6ff; color: #1d4ed8; border-left: 3px solid #1d4ed8; }
+  .action-email { background: #f0fdf4; color: #15803d; border-left: 3px solid #15803d; }
+  .action-meeting { background: #fdf4ff; color: #7e22ce; border-left: 3px solid #7e22ce; }
+  .action-proposal { background: #fff7ed; color: #c2410c; border-left: 3px solid #c2410c; }
+  .action-followup { background: #fefce8; color: #854d0e; border-left: 3px solid #854d0e; }
+  .action-nurture { background: #f1f5f9; color: #475569; border-left: 3px solid #475569; }
+
+  .action-due {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 3px;
+  }
+
+  .action-due.overdue { color: #ef4444; font-weight: 700; }
+
+  /* Contact icons cell */
+  .contact-icons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .icon-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid #e0e4ff;
+    background: #f8f9ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .icon-btn:hover { background: #0000FF; border-color: #0000FF; }
+
+  /* Priority indicator */
+  .priority-bar {
+    display: flex;
+    gap: 2px;
+  }
+
+  .priority-pip {
+    width: 8px;
+    height: 12px;
+    border-radius: 2px;
+    background: #e0e4ff;
+  }
+
+  .priority-pip.filled { background: #0000FF; }
+  .priority-pip.filled.high { background: linear-gradient(135deg, #0000FF, #06D0FF); }
+
+  /* ── DETAIL PANEL / QUICK VIEW ── */
+  .detail-panel {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,255,0.08);
+    padding: 28px;
+    border-left: 4px solid #06D0FF;
+    margin-top: 24px;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 16px;
+  }
+
+  .detail-item label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 4px;
+  }
+
+  .detail-item p {
+    font-size: 14px;
+    color: #1a1a2e;
+    font-weight: 400;
+  }
+
+  /* ── LEGEND ── */
+  .legend-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,255,0.08);
+    padding: 24px;
+    margin-top: 24px;
+  }
+
+  .legend-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    color: #fff;
+    text-align: center;
+    padding: 28px 20px;
+    margin-top: 50px;
+  }
+
+  .footer-logo {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .footer-tagline {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 4px;
+  }
+
+  .footer-contact {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 10px;
+  }
+
+  .footer-contact a { color: #fff; text-decoration: none; }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 12px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header { padding: 28px 20px 70px; }
+    .main-wrapper { padding: 0 14px 40px; }
+    .stats-bar { margin-top: -20px; grid-template-columns: repeat(2, 1fr); }
+    .controls-row { flex-direction: column; align-items: stretch; }
+    .search-box { width: 100%; }
+    .filter-btn, .add-btn { width: 100%; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .stat-number { font-size: 26px; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; }
+    .add-btn, .controls-row, .icon-btn { display: none; }
+    .table-card { box-shadow: none; border: 1px solid #ddd; }
+  }
+
+  /* ── HIGHLIGHT ROW ── */
+  .row-highlight { background: linear-gradient(90deg, rgba(0,0,255,0.04) 0%, transparent 100%) !important; }
+
+  .updated-label {
+    font-size: 11px;
+    color: #aaa;
+    font-style: italic;
+    margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+<header class="header">
+
+  <!-- Ghost Phoenix Watermark -->
+  <div class="phoenix-watermark" aria-hidden="true">🔥</div>
+
+  <!-- Power Tower Silhouette SVG -->
+  <svg class="tower-silhouette" viewBox="0 0 1400 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="white">
+      <!-- Tower 1 -->
+      <polygon points="120,90 130,20 140,90"/>
+      <polygon points="100,55 160,55 155,60 105,60"/>
+      <polygon points="110,40 150,40 148,45 112,45"/>
+      <rect x="128" y="20" width="4" height="8"/>
+      <line x1="100" y1="55" x2="80" y2="90" stroke="white" stroke-width="1.5"/>
+      <line x1="160" y1="55" x2="180" y2="90" stroke="white" stroke-width="1.5"/>
+      <line x1="110" y1="40" x2="80" y2="90" stroke="white" stroke-width="1"/>
+      <line x1="150" y1="40" x2="180" y2="90" stroke="white" stroke-width="1"/>
+
+      <!-- Tower 2 -->
+      <polygon points="400,90 410,15 420,90"/>
+      <polygon points="380,50 440,50 435,55 385,55"/>
+      <polygon points="390,35 430,35 428,40 392,40"/>
+      <rect x="408" y="15" width="4" height="8"/>
+      <line x1="380" y1="50" x2="355" y2="90" stroke="white" stroke-width="1.5"/>
+      <line x1="440" y1="50" x2="465" y2="90" stroke="white" stroke-width="1.5"/>
+      <line x1="390" y1="35" x2="355" y2="90" stroke="white" stroke-width="1"/>
+      <line x1="430" y1="35" x2="465" y2="90" stroke="white" stroke-width="1"/>
+
+      <!-- Power lines between tower 1 and 2 -->
+      <path d="M160,55 Q280,70 380,50" fill="none" stroke="white" stroke-width="1"/>
+      <path d="M150,40 Q280,58 390,35" fill="none" stroke="white" stroke-width="0.8"/>
+
+      <!-- Tower 3 -->
+      <polygon points="700,90 712,18 724,90"/>
+      <polygon points="678,52 746,52 742,57 682,57"/>
+      <polygon points="688,37 736,37 734,42 690,42"/>
+      <rect x="710" y="18" width="4" height="10"/>
+      <line x1="678" y1="52" x2="648" y2="90" stroke="white" stroke-width="1.5"/>
+      <line x1="746" y1="52" x2="776" y2="90" stroke="white" stroke-width="1.5"/>
+      <line x1="688" y1="37" x2="648" y2="90" stroke="white" stroke-width="1"/>
+      <line x1="736" y1="37" x2="776" y2="90" stroke="white" stroke-width="1"/>
+
+      <!-- Power lines 2 to 3 -->
+      <path d="M440,50 Q570,65 678,52" fill="none" stroke="white" stroke-width="1"/>
+      <path d="M430,35 Q570,52 688,37" fill="none" stroke="white" stroke-width="0.8"/>
+
+      <!-- Tower 4 -->
+      <polygon points="1000,90 1012,20 1024,90"/>
+      <polygon points="978,54 1046,54 1042,59 982,59"/>
+      <polygon points="988,39 1036,39 1034,44 990,44"/>
+      <rect x="1010" y="20" width="4" height="8"/>
+      <line x1="978" y1="54" x2="948" y2="90" stroke="white" stroke-width="1.5"/>
+      <line x1="1046" y1="54" x2="1076" y2="90" stroke="white" stroke-width="1.5"/>
+      <line x1="988" y1="39" x2="948" y2="90" stroke="white" stroke-width="1"/>
+      <line x1="1036" y1="39" x2="1076" y2="90" stroke="white" stroke-width="1"/>
+
+      <!-- Power lines 3 to 4 -->
+      <path d="M746,52 Q872,67 978,54" fill="none" stroke="white" stroke-width="1"/>
+      <path d="M736,37 Q872,54 988,39" fill="none" stroke="white" stroke-width="0.8"/>
+
+      <!-- Tower 5 -->
+      <polygon points="1280,90 1290,22 1300,90"/>
+      <polygon points="1258,56 1322,56 1318,61 1262,61"/>
+      <polygon points="1268,41 1312,41 1310,46 1270,46"/>
+      <rect x="1288" y="22" width="4" height="8"/>
+      <line x1="1258" y1="56" x2="1228" y2="90" stroke="white" stroke-width="1.5"/>
+      <line x1="1322" y1="56" x2="1352" y2="90" stroke="white" stroke-width="1.5"/>
+
+      <!-- Power lines 4 to 5 -->
+      <path d="M1046,54 Q1162,69 1258,56" fill="none" stroke="white" stroke-width="1"/>
+      <path d="M1036,39 Q1162,56 1268,41" fill="none" stroke="white" stroke-width="0.8"/>
+    </g>
+  </svg>
+
+  <div class="header-content">
+    <div class="header-eyebrow">Norris Utilities LLC — Internal Operations</div>
+    <div class="header-logo">Norris <span>Utilities</span></div>
+    <div class="header-tagline">A Legacy of Commitment®</div>
+    <div class="header-tool-title">Contact Master List — CRM Framework</div>
+    <div class="header-meta">Aaron C. Norris, Founder & CEO &nbsp;|&nbsp; Confidential Business Record &nbsp;|&nbsp; v1.0</div>
+  </div>
+</header>
+
+<!-- Chevron Divider -->
+<div class="chevron-divider"></div>
+
+<!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
+<main class="main-wrapper">
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-number">42</div>
+      <div class="stat-label">Total Contacts</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">8</div>
+      <div class="stat-label">Strategic</div>
+    </div>
+    <div class="stat-card cyan">
+      <div class="stat-number">14</div>
+      <div class="stat-label">Active Partners</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">11</div>
+      <div class="stat-label">Hot Prospects</div>
+    </div>
+    <div class="stat-card cyan">
+      <div class="stat-number">7</div>
+      <div class="stat-label">Actions Due</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Overdue</div>
+    </div>
+  </div>
+
+  <!-- Section Header -->
+  <div class="section-header">
+    <div class="section-title">All Contacts</div>
+    <div class="updated-label">Last updated: June 26, 2025 — 09:14 AM CDT</div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls-row">
+    <input type="text" class="search-box" placeholder="🔍  Search contacts, companies, roles…" id="searchInput" oninput="filterTable()">
+    <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
+    <button class="filter-btn" onclick="setFilter(this,'Strategic')">Strategic</button>
+    <button class="filter-btn" onclick="setFilter(this,'Partner')">Partners</button>
+    <button class="filter-btn" onclick="setFilter(this,'Prospect')">Prospects</button>
+    <button class="filter-btn" onclick="setFilter(this,'Vendor')">Vendors</button>
+    <button class="filter-btn" onclick="setFilter(this,'Dormant')">Dormant</button>
+    <button class="add-btn">+ Add Contact</button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-card">
+    <div class="table-scroll">
+      <table id="contactTable">
+        <thead>
+          <tr>
+            <th>Contact</th>
+            <th>Company</th>
+            <th>Relationship Tier</th>
+            <th>Priority</th>
+            <th>Last Contact</th>
+            <th>Next Action</th>
+            <th>Reach</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- Row 1 - Strategic -->
+          <tr class="row-highlight" data-tier="Strategic">
+            <td>
+              <div class="contact-name">Marcus T. Williams</div>
+              <div class="contact-role">VP of Operations</div>
+            </td>
+            <td>
+              <div class="company-name">Alabama Power Co.</div>
+              <div class="company-type">Utility / IOC</div>
+            </td>
+            <td><span class="tier-badge tier-strategic">⭐ Strategic</span></td>
+            <td>
+              <div class="priority-bar">
+                <div class="priority-pip filled high"></div>
+                <div class="priority-pip filled high"></div>
+                <div class="priority-pip filled high"></div>
+              </div>
+            </td>
+            <td>
+              <div class="last-contact"><span class="status-dot dot-green"></span>Jun 20, 2025</div>
+              <div class="days-ago">6 days ago</div>
+            </td>
+            <td>
+              <div class="action-badge action-meeting">📅 Schedule Site Tour</div>
+              <div class="action-due">Due: Jul 1, 2025</div>
+            </td>
+            <td>
+              <div class="contact-icons">
+                <a href="tel:+12055551234" class="icon-btn" title="Call">📞</a>
+                <a href="mailto:m.williams@alpco.com" class="icon-btn" title="Email">✉️</a>
+                <span class="icon-btn" title="Notes">📝</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 2 - Strategic -->
+          <tr data-tier="Strategic">
+            <td>
+              <div class="contact-name">Donna R. Simmons</div>
+              <div class

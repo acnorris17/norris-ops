@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw Video Breakdown — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ══ ROOT VARIABLES ══ */
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --nu-accent-gold: #C9A84C;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      --status-green: #00C853;
+      --status-amber: #FFB300;
+      --status-red: #FF3D00;
+      --dark-surface: #0A0A1A;
+      --dark-card: #111128;
+      --dark-card-border: #1E1E3E;
+      --dark-text-primary: #E8E8F0;
+      --dark-text-secondary: #9999BB;
+    }
+
+    /* ══ BASE ══ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--dark-text-primary);
+      background: var(--dark-surface);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ HEADER — Power Tower Infrastructure Overlay ══ */
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: var(--font-primary);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    /* ══ DOCUMENT TITLE BAR ══ */
+    .doc-title-bar {
+      background: linear-gradient(135deg, #0D0D2B 0%, #1A1A4E 100%);
+      border-bottom: 2px solid var(--nu-cyan);
+      padding: 28px 40px;
+      text-align: center;
+    }
+    .doc-title-bar h1 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--nu-white);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .doc-title-bar .doc-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--nu-cyan);
+      letter-spacing: 0.04em;
+    }
+    .doc-title-bar .doc-date {
+      font-size: 0.8rem;
+      color: var(--dark-text-secondary);
+      margin-top: 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ══ WHITE CHEVRON TRANSITION (adapted for dark) ══ */
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    /* ══ CONTENT AREA ══ */
+    .nu-content-area {
+      position: relative;
+      background: var(--dark-surface);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,0,255,0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 40px 60px;
+    }
+
+    /* ══ SECTION HEADERS ══ */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      margin-top: 56px;
+    }
+    .section-header:first-child {
+      margin-top: 0;
+    }
+    .section-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.4rem;
+    }
+    .section-icon.green { background: rgba(0,200,83,0.15); border: 1px solid rgba(0,200,83,0.3); }
+    .section-icon.amber { background: rgba(255,179,0,0.15); border: 1px solid rgba(255,179,0,0.3); }
+    .section-icon.red { background: rgba(255,61,0,0.15); border: 1px solid rgba(255,61,0,0.3); }
+    .section-icon.blue { background: rgba(0,0,255,0.15); border: 1px solid rgba(0,0,255,0.3); }
+
+    .section-header h2 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.35rem;
+      color: var(--nu-white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .section-header h2 span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: var(--dark-text-secondary);
+      text-transform: none;
+      letter-spacing: 0;
+      margin-top: 2px;
+    }
+
+    /* ══ TABLES ══ */
+    .breakdown-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      margin-bottom: 16px;
+    }
+    .breakdown-table thead th {
+      background: linear-gradient(135deg, #1A1A3E 0%, #2A2A5E 100%);
+      color: var(--nu-cyan);
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 20px;
+      text-align: left;
+      border-bottom: 2px solid var(--nu-blue);
+    }
+    .breakdown-table thead th:first-child { padding-left: 24px; }
+    .breakdown-table tbody tr {
+      transition: background 0.2s ease;
+    }
+    .breakdown-table tbody tr:nth-child(odd) {
+      background: var(--dark-card);
+    }
+    .breakdown-table tbody tr:nth-child(even) {
+      background: rgba(17,17,40,0.6);
+    }
+    .breakdown-table tbody tr:hover {
+      background: rgba(0,0,255,0.08);
+    }
+    .breakdown-table tbody td {
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      color: var(--dark-text-primary);
+      border-bottom: 1px solid var(--dark-card-border);
+      vertical-align: top;
+    }
+    .breakdown-table tbody td:first-child {
+      padding-left: 24px;
+      font-weight: 700;
+      color: var(--nu-white);
+    }
+    .breakdown-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ══ STATUS INDICATORS ══ */
+    .status-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0,200,83,0.15);
+      color: var(--status-green);
+      font-weight: 900;
+      font-size: 0.85rem;
+      animation: pulseGreen 2.5s ease-in-out infinite;
+    }
+    @keyframes pulseGreen {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,200,83,0.3); }
+      50% { box-shadow: 0 0 0 6px rgba(0,200,83,0); }
+    }
+
+    .status-progress {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .progress-bar-wrap {
+      width: 80px;
+      height: 8px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s ease;
+      position: relative;
+    }
+    .progress-bar-fill.high {
+      background: linear-gradient(90deg, var(--status-green), #00E676);
+      animation: shimmer 2s ease-in-out infinite;
+    }
+    .progress-bar-fill.mid {
+      background: linear-gradient(90deg, var(--status-amber), #FFC107);
+      animation: shimmer 2.5s ease-in-out infinite;
+    }
+    .progress-bar-fill.low {
+      background: linear-gradient(90deg, var(--status-red), #FF6E40);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .progress-pct {
+      font-size: 0.75rem;
+      font-weight: 700;
+      min-width: 32px;
+    }
+    .progress-pct.high { color: var(--status-green); }
+    .progress-pct.mid { color: var(--status-amber); }
+    .progress-pct.low { color: var(--status-red); }
+
+    .status-x {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,61,0,0.15);
+      color: var(--status-red);
+      font-weight: 900;
+      font-size: 0.85rem;
+    }
+
+    /* ══ NOT REAL LIST ══ */
+    .not-real-list {
+      list-style: none;
+      padding: 0;
+    }
+    .not-real-list li {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-card-border);
+      border-left: 4px solid var(--status-red);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px 16px 20px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .not-real-list li:hover {
+      background: rgba(255,61,0,0.04);
+      border-left-color: #FF6E40;
+    }
+    .not-real-list .claim-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .not-real-list .claim-title {
+      font-weight: 700;
+      color: var(--nu-white);
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .not-real-list .claim-detail {
+      font-size: 0.85rem;
+      color: var(--dark-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ══ AUTOMATIONS GRID ══ */
+    .auto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .auto-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-card-border);
+      border-radius: 12px;
+      padding: 20px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .auto-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      border-color: var(--nu-blue);
+    }
+    .auto-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--nu-blue), #0033CC);
+      color: var(--nu-white);
+      font-weight: 900;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .auto-info {
+      flex: 1;
+    }
+    .auto-title {
+      font-weight: 700;
+      color: var(--nu-white);
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .auto-desc {
+      font-size: 0.82rem;
+      color: var(--dark-text-secondary);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
+    /* ══ STATUS BADGES ══ */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .badge-live {
+      background: rgba(0,200,83,0.15);
+      color: var(--status-green);
+      border: 1px solid rgba(0,200,83,0.3);
+    }
+    .badge-live::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--status-green);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .badge-building {
+      background: rgba(255,179,0,0.15);
+      color: var(--status-amber);
+      border: 1px solid rgba(255,179,0,0.3);
+    }
+    .badge-building::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--status-amber);
+      animation: blink 2s ease-in-out infinite;
+    }
+    .badge-planned {
+      background: rgba(0,0,255,0.12);
+      color: #6666FF;
+      border: 1px solid rgba(0,0,255,0.25);
+    }
+    .badge-planned::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #6666FF;
+      animation: blink 2.5s ease-in-out infinite;
+    }
+    .badge-blocked {
+      background: rgba(255,61,0,0.12);
+      color: var(--status-red);
+      border: 1px solid rgba(255,61,0,0.25);
+    }
+
+    /* ══ SUMMARY STATS ══ */
+    .stats-bar {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .stat-card {
+      flex: 1;
+      min-width: 160px;
+      background: var(--dark-card);
+      border: 1px solid var(--dark-card-border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-number.green { color: var(--status-green); }
+    .stat-number.amber { color: var(--status-amber); }
+    .stat-number.red { color: var(--status-red); }
+    .stat-number.blue { color: var(--nu-cyan); }
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dark-text-secondary);
+    }
+
+    /* ══ DIVIDER ══ */
+    .section-divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--dark-card-border), var(--nu-blue), var(--dark-card-border), transparent);
+      margin: 48px 0 0;
+    }
+
+    /* ══ FOOTER ══ */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+    .nu-footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .content-wrapper { padding: 32px 16px 48px; }
+      .doc-title-bar { padding: 20px 16px; }
+      .doc-title-bar h1 { font-size: 1.2rem; }
+      .breakdown-table { font-size: 0.85rem; }
+      .breakdown-table thead th { padding: 10px 12px; font-size: 0.68rem; }
+      .breakdown-table tbody td { padding: 10px 12px; font-size: 0.82rem; }
+      .breakdown-table thead th:first-child,
+      .breakdown-table tbody td:first-child { padding-left: 12px; }
+      .auto-grid { grid-template-columns: 1fr; }
+      .stats-bar { flex-direction: column; }
+      .section-header h2 { font-size: 1.1rem; }
+      .nu-footer { padding: 30px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .breakdown-table th:nth-child(3),
+      .breakdown-table td:nth-child(3) {
+        display: none;
+      }
+    }
+
+    /* ══ PRINT ══ */
+    @media print {
+      body { background: #fff; color: #000; }
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .dark-card, .breakdown-table tbody tr { background: #fff !important; }
+      .auto-card:hover { transform: none; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <!-- CHEVRON -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="#0A0A1A"/>
+    </svg>
+  </div>
+
+  <!-- DOCUMENT TITLE -->
+  <div class="doc-title-bar">
+    <h1>OpenClaw Video Breakdown</h1>
+    <div class="doc-subtitle">What's Real for Norris Utilities®</div>
+    <div class="doc-date">Internal Briefing Document &mdash; June 2025</div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div class="content-wrapper">
+
+      <!-- SUMMARY STATS -->
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="stat-number green">7</div>
+          <div class="stat-label">Live &amp; Working</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number amber">4</div>
+          <div class="stat-label">In Progress</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number red">3</div>
+          <div class="stat-label">Not Real Yet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number blue">10</div>
+          <div class="stat-label">Total Automations</div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- SECTION 1: WHAT'S REAL AND WORKING NOW -->
+      <!-- ══════════════════════════════════════ -->
+      <div class="section-header">
+        <div class="section-icon green">&#10003;</div>
+        <h2>What's Real and Working Now<span>Systems confirmed operational and delivering value today</span></h2>
+      </div>
+
+      <table class="breakdown-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Status</th>
+            <th>What It Actually Does</th>
+            <th>Where It Lives</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Claude AI Agent with Brand Memory</td>
+            <td><span class="status-check">&#10003;</span></td>
+            <td>Custom-prompted Claude project carries full Norris Utilities® brand voice, pricing rules, SKU catalog, contact database, and email formatting standards between every conversation</td>
+            <td>Claude Projects</td>
+          </tr>
+          <tr>
+            <td>Branded HTML Page Generation</td>
+            <td><span class="status-check">&#10003;</span></td>
+            <td>Generates self-contained, mobile-responsive HTML pages using the exact Line Card design system — gradient headers, chevron transitions, Phoenix Icon® watermarks, proper trademark usage</td>
+            <td>Claude &rarr; HTML files</td>
+          </tr>
+          <tr>
+            <td>FlexPro Armor Pricing Engine</td>
+            <td><span class="status-check">&#10003;</span></td>
+            <td>Calculates retail from cost at 50% margin, applies 3-tier channel pricing (Direct / Dealer 30% off / Distributor 40% off), runs Ben's shipping formula: ROUNDUP(ROUNDUP(RegCost,0) &times; 1.10, 0)</td>
+            <td>Agent context rules</td>
+          </tr>
+          <tr>
+            <td>Email Composition in Aaron's Voice</td>
+            <td><span class="status-check">&#10003;</span></td>
+            <td>Writes customer and vendor emails matching Aaron's exact style — em dash greeting, indented paragraphs, bullet formatting, proper sign-off, no filler words, no emojis</td>
+            <td>Claude Projects</td>
+          </tr>
+          <tr>
+            <td>Competitor SKU Translation</td>
+            <td><span class="status-check">&#10003;</span></td>
+            <td>Automatically maps competitor sizing to Norris SKUs — their "24x48" becomes NU-BC-2851 (28"&times;51"), their "24x34" becomes NU-BC-2834 (28"&times;34")</td>
+            <td>Agent context rules</td>
+          </tr>
+          <tr>
+            <td>Contact &amp; Relationship Database</td>
+            <td><span class="status-check">&#10003;</span></td>
+            <td>Stores key contacts with context: Patrick Lavette at Renasant Bank, Rick Sutherland at EPB Chattanooga, Jared Lemoine replacing Gary Wiggs at Irby Construction, CC rules for Samson and BOSS</td>
+            <td>Agent context rules</td>
+          </tr>
+          <tr>
+            <td>Trademark Compliance Enforcement</td>
+            <td><span class="status-check">&#10003;</span></td>
+            <td>Every output enforces registered marks — Norris Utilities® (always), A Legacy of Commitment® (Reg. 7,678,007), Phoenix Icon® (Reg. 7,678,003/005). FlexPro Armor never gets ® because it is not registered</td>
+            <td>Agent context rules</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr class="section-divider">
+
+      <!-- ════════════════════════════════════════════ -->
+      <!-- SECTION 2: WHAT'S REAL BUT NOT FULLY WORKING -->
+      <!-- ════════════════════════════════════════════ -->
+      <div class="section-header">
+        <div class="section-icon amber">&#9881;</div>
+        <h2>What's Real But Not Fully Working Yet<span>Concepts proven, implementation partially complete or needs refinement</span></h2>
+      </div>
+
+      <table class="breakdown-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Progress</th>
+            <th>What's Working / What's Not</th>
+            <th>Next Step</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Automated Quote PDF Generation</td>
+            <td>
+              <div class="status-progress">
+                <div class="progress-bar-wrap"><div class="progress-bar-fill high" style="width:75%"></div></div>
+                <span class="progress-pct high">75%</span>
+              </div>
+            </td>
+            <td>HTML quotes generate perfectly with full branding. Missing: automatic conversion to PDF and email attachment without manual steps</td>
+            <td>Connect to PDF conversion API or browser print-to-PDF workflow</td>
+          </tr>
+          <tr>
+            <td>CRM Integration / Deal Tracking</td>
+            <td>
+              <div class="status-progress">
+                <div class="progress-bar-wrap"><div class="progress-bar-fill mid" style="width:40%"></div></div>
+                <span class="progress-pct mid">40%</span>
+              </div>
+            </td>
+            <td>Contact data and deal context exist in agent memory. Missing: structured pipeline view, deal stages, automated follow-up triggers</td>
+            <td>Define pipeline stages and build tracking spreadsheet or integrate lightweight CRM</td>
+          </tr>
+          <tr>
+            <td>Inventory / SKU Management System</td>
+            <td>
+              <div class="status-progress">
+                <div class="progress-bar-wrap"><div class="progress-bar-fill mid" style="width:50%"></div></div>
+                <span class="progress-pct mid">50%</span>
+              </div>
+            </td>
+            <td>SKU naming convention and pricing tiers are defined. Missing: live stock counts, reorder alerts, integration with supplier catalogs</td>
+            <td>Build master inventory sheet with stock levels and connect to ordering workflow</td>
+          </tr>
+          <tr>
+            <td>Multi-Page Website / Digital Line Card</td>
+            <td>
+              <div class="status-progress">
+                <div class="progress-bar-wrap"><div class="progress-bar-fill mid" style="width:60%"></div></div>
+                <span class="progress-pct mid">60%</span>
+              </div>
+            </td>
+            <td>Individual branded pages generate well. Missing: navigation between pages, consistent site structure, hosting with custom domain, contact form integration</td>
+            <td>Define site map, build nav component, select hosting platform</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr class="section-divider">
+
+      <!-- ════════════════════════════════════ -->
+      <!-- SECTION 3: WHAT'S NOT REAL / MISLEADING -->
+      <!-- ════════════════════════════════════ -->
+      <div class="section-header">
+        <div class="section-icon red">&#10007;</div>
+        <h2>What's Not Real / Misleading<span>Claims that overstate current capability — honest assessment</span></h2>
+      </div>
+
+      <ul class="not-real-list">
+        <li>
+          <div class="claim-icon"><span class="status-x">&#10007;</span></div>
+          <div>
+            <div class="claim-title">"AI answers your phone and handles customer calls"</div>
+            <div class="claim-detail">There is no voice AI answering calls for Norris Utilities®. The agent is text-based inside Claude Projects. Phone calls still go to Aaron directly at 205-500-1343. Voice AI integration would require a separate platform like Bland.ai or Vapi, plus significant setup and testing.</div>
+          </div>
+        </li>
+        <li>
+          <div class="claim-icon"><span class="status-x">&#10007;</span></div>
+          <div>
+            <div class="claim-title">"Automated email sending and follow-up sequences"</div>
+            <div class="claim-detail">The agent composes emails in Aaron's voice — but it does not send them automatically. Every email requires Aaron to copy, paste, review, and hit send manually. True automated sending would require integration with an email API (SendGrid, Gmail API) and a scheduling system.</div>
+          </div>
+        </li>
+        <li>
+          <div class="claim-icon"><span class="status-x">&#10007;</span></div>
+          <div>
+            <div class="claim-title">"Real-time data sync with suppliers and customers"</div>
+            <div class="claim-detail">The agent has no live connections to external systems. It cannot pull real-time pricing from Samson Rope, check Skylift inventory, or see Bay Shore delivery schedules. All data is static, loaded through the context document, and must be manually updated when prices or contacts change.</div>
+          </div>
+        </li>
+      </ul>
+
+      <hr class="section-divider">
+
+      <!-- ════════════════════════════════ -->
+      <!-- SECTION 4: YOUR 10 AUTOMATIONS -->
+      <!-- ════════════════════════════════ -->
+      <div class="section-header">
+        <div class="section-icon blue">&#9889;</div>
+        <h2>Your 10 Automations<span>The complete automation roadmap for Norris Utilities® operations</span></h2>
+      </div>
+
+      <div class="auto-grid">
+
+        <div class="auto-card">
+          <div class="auto-number">1</div>
+          <div class="auto-info">
+            <div class="auto-title">Brand-Aware AI Agent</div>
+            <div class="auto-desc">Claude project loaded with full Norris Utilities® context — voice, pricing, contacts, trademarks, design system. Every output on-brand from the first word.</div>
+            <span class="badge badge-live">Live</span>
+          </div>
+        </div>
+
+        <div class="auto-card">
+          <div class="auto-number">2</div>
+          <div class="auto-info">
+            <div class="auto-title">Email Drafting Engine</div>
+            <div class="auto-desc">Generates customer, vendor, and follow-up emails in Aaron's exact voice with proper formatting, greeting style, and sign-off conventions.</div>
+            <span class="badge badge-live">Live</span>
+          </div>
+        </div>
+
+        <div class="auto-card">
+          <div class="auto-number">3</div>
+          <div class="auto-info">
+            <div class="auto-title">Pricing Calculator</div>
+            <div class="auto-desc">Instant margin-based pricing across all product lines — FlexPro Armor at 50%, Samson Rope at 30%, equipment at 12-15%. Includes 3-tier channel pricing and shipping markup.</div>
+            <span class="badge badge-live">Live</span>
+          </div>
+        </div>
+
+        <div class="auto-card">
+          <div class="auto-number">4</div>
+          <div class="auto-info">
+            <div class="auto-title">HTML Quote &amp; Proposal Builder</div>
+            <div class="auto-desc">Generates branded, mobile-responsive quote pages with line items, pricing, terms, and full Line Card design language. Ready for PDF conversion.</div>
+            <span class="badge badge-live">Live</span>
+          </div>
+        </div>
+
+        <div class="auto-card">
+          <div class="auto-number">5</div>
+          <div class="auto-info">
+            <div class="auto-title">Branded Page Generator</div>
+            <div class="auto-desc">Creates any marketing page, product sheet, or internal document using the master CSS framework — consistent branding across every digital touchpoint.</div>
+            <span class="badge badge-live">Live</span>
+          </div>
+        </div>
+
+        <div class="auto-card">
+          <div class="auto-number">6</div>
+          <div class="auto-info">
+            <div class="auto-title">Competitor Intelligence Translator</div>
+            <div class="auto-desc">Maps competitor product sizes and SKUs to Norris Utilities® equivalents. Enables instant response when a customer references a competitor part number.</div>
+            <span class="badge badge-live">Live</span>
+          </div>
+        </div>
+
+        <div class="auto-card">
+          <div class="auto-number">7</div>
+          <div class="auto-info">
+            <div class="auto-title">Trademark &amp; Compliance Guard</div>
+            <div class="auto-desc">Enforces registered trademark symbols on every output. Prevents incorrect usage of ® on unregistered marks. Catches "FlexPro Armor Guard" and corrects to "FlexPro Armor."</div>
+            <span class="badge badge-live">Live</span>
+          </div>
+        </div>
+
+        <div class="auto-card">
+          <div class="auto-number">8</div>
+          <div class="auto-info">
+            <div class="auto-title">Automated PDF Quote Delivery</div>
+            <div class="auto-desc">Convert HTML quotes to PDF and attach to outbound emails without manual copy-paste. Requires PDF API integration and email send connection.</div>
+            <span class="badge badge-building">Building</span>
+          </div>
+        </div>
+
+        <div class="auto-card">
+          <div class="auto-number">9</div>
+          <div class="auto-info">
+            <div class="auto-title">Deal Pipeline &amp; Follow-Up Tracker</div>
+            <div class="auto-desc">Structured pipeline with deal stages, automated reminders, and follow-up scheduling. Move beyond memory-based tracking to a repeatable system.</div>
+            <span class="badge badge-building">Building</span>
+          </div>
+        </div>
+
+        <div class="auto-card">
+          <div class="auto-number">10</div>
+          <div class="auto-info">
+            <div class="auto-title">Digital Storefront &amp; Line Card Website</div>
+            <div class="auto-desc">Multi-page hosted website with product catalog, contact forms, and the full Norris Utilities® Line Card experience — navigable, searchable, customer-facing.</div>
+            <span class="badge badge-planned">Planned</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris | Founder &amp; CEO<br>
+      Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a><br>
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>

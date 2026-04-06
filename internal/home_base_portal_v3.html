@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norris Utilities — Home Base Portal v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f0f4ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  /* ───── HEADER ───── */
+  .site-header {
+    position: relative;
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    min-height: 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 48px 24px 80px;
+  }
+
+  /* Ghost Phoenix */
+  .ghost-phoenix {
+    position: absolute;
+    top: 50%;
+    right: 4%;
+    transform: translateY(-50%);
+    font-size: 340px;
+    line-height: 1;
+    opacity: 0.07;
+    pointer-events: none;
+    user-select: none;
+    filter: blur(1px);
+  }
+
+  /* Power Tower Silhouette */
+  .tower-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .header-logo {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
+  .header-sub {
+    font-size: clamp(13px, 2vw, 18px);
+    font-weight: 300;
+    color: rgba(255,255,255,0.88);
+    letter-spacing: 2px;
+    margin-top: 6px;
+  }
+
+  .header-portal-title {
+    margin-top: 16px;
+    font-size: clamp(14px, 2.5vw, 20px);
+    font-weight: 700;
+    color: #06D0FF;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.18);
+    display: inline-block;
+    padding: 6px 24px;
+    border-radius: 4px;
+    border: 1px solid rgba(6,208,255,0.4);
+  }
+
+  .header-meta {
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1px;
+  }
+
+  /* ───── CHEVRON DIVIDER ───── */
+  .chevron-divider {
+    width: 100%;
+    height: 64px;
+    background: #f0f4ff;
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+    margin-top: -1px;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* ───── LAYOUT ───── */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ───── QUICK STATS ───── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+  }
+
+  .stat-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.08);
+    padding: 22px 20px;
+    border-top: 4px solid #0000FF;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stat-card:nth-child(even) { border-top-color: #06D0FF; }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,255,0.14); }
+
+  .stat-card .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0000FF;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+
+  .stat-card .stat-value {
+    font-size: 32px;
+    font-weight: 900;
+    color: #1a1a2e;
+    line-height: 1;
+  }
+
+  .stat-card .stat-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  .stat-card .stat-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 38px;
+    opacity: 0.08;
+  }
+
+  /* ───── X-SEPARATOR ───── */
+  .x-separator {
+    text-align: center;
+    color: #06D0FF;
+    font-size: 20px;
+    opacity: 0.5;
+    letter-spacing: 18px;
+    margin: 28px 0 20px;
+    user-select: none;
+  }
+
+  /* ───── SECTION HEADERS ───── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .section-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0000FF;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .section-header .section-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #0000FF 0%, #06D0FF 60%, transparent 100%);
+    border-radius: 2px;
+  }
+
+  /* ───── DASHBOARD GRID ───── */
+  .dash-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .dash-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ───── CARDS ───── */
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.08);
+    padding: 24px;
+    border-left: 4px solid #0000FF;
+  }
+
+  .card.accent-cyan { border-left-color: #06D0FF; }
+  .card.full-width { grid-column: 1 / -1; }
+
+  /* ───── ACTIVE JOBS TABLE ───── */
+  .jobs-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .jobs-table thead tr { background: linear-gradient(135deg, #0000FF, #06D0FF); }
+  .jobs-table thead th {
+    padding: 11px 14px;
+    text-align: left;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  .jobs-table tbody tr { border-bottom: 1px solid #eef0ff; transition: background 0.15s; }
+  .jobs-table tbody tr:hover { background: #f8f9ff; }
+  .jobs-table tbody td { padding: 11px 14px; vertical-align: middle; }
+  .jobs-table tbody tr:nth-child(even) { background: #f8f9ff; }
+  .jobs-table tbody tr:nth-child(even):hover { background: #eef0ff; }
+
+  /* ───── STATUS BADGES ───── */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-active   { background: #e6ffe6; color: #006600; border: 1px solid #99cc99; }
+  .badge-pending  { background: #fff8e1; color: #b37400; border: 1px solid #ffcc66; }
+  .badge-complete { background: #e6f0ff; color: #0000cc; border: 1px solid #99aaff; }
+  .badge-urgent   { background: #ffe6e6; color: #cc0000; border: 1px solid #ff9999; }
+  .badge-review   { background: #f3e6ff; color: #6600cc; border: 1px solid #cc99ff; }
+
+  /* ───── PRIORITY ACTIONS ───── */
+  .action-list { list-style: none; }
+  .action-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eef0ff;
+  }
+  .action-list li:last-child { border-bottom: none; }
+  .action-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .action-text .action-title { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+  .action-text .action-desc  { font-size: 12px; font-weight: 300; color: #666; margin-top: 2px; }
+  .action-due {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0000FF;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  /* ───── KPI MINI BARS ───── */
+  .kpi-item { margin-bottom: 14px; }
+  .kpi-item:last-child { margin-bottom: 0; }
+  .kpi-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 5px;
+  }
+  .kpi-label-row span:last-child { color: #0000FF; }
+  .kpi-bar-bg { height: 8px; background: #eef0ff; border-radius: 4px; overflow: hidden; }
+  .kpi-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #0000FF, #06D0FF);
+    transition: width 1s ease;
+  }
+
+  /* ───── REVENUE TRACKER ───── */
+  .rev-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eef0ff;
+    font-size: 13px;
+  }
+  .rev-row:last-child { border-bottom: none; }
+  .rev-month { font-weight: 700; width: 36px; color: #1a1a2e; font-size: 12px; text-transform: uppercase; }
+  .rev-bar-wrap { flex: 1; height: 18px; background: #eef0ff; border-radius: 4px; overflow: hidden; }
+  .rev-bar {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #0000FF, #06D0FF);
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 40px;
+    transition: width 1s ease;
+  }
+  .rev-amount { width: 80px; text-align: right; font-weight: 700; color: #0000FF; font-size: 12px; }
+
+  /* ───── QUICK LINKS ───── */
+  .quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .quick-link-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 12px;
+    background: #fff;
+    border: 2px solid #eef0ff;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: #1a1a2e;
+  }
+  .quick-link-btn:hover {
+    border-color: #0000FF;
+    background: #f0f4ff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,255,0.12);
+  }
+  .quick-link-btn .ql-icon { font-size: 26px; }
+  .quick-link-btn .ql-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #0000FF; text-align: center; }
+
+  /* ───── NOTIFICATIONS ───── */
+  .notif-item {
+    display: flex;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid #eef0ff;
+    align-items: flex-start;
+  }
+  .notif-item:last-child { border-bottom: none; }
+  .notif-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .notif-dot.blue { background: #0000FF; }
+  .notif-dot.cyan { background: #06D0FF; }
+  .notif-dot.green { background: #00cc66; }
+  .notif-dot.orange { background: #ff9900; }
+  .notif-dot.red { background: #cc0000; }
+  .notif-text { font-size: 12.5px; color: #1a1a2e; line-height: 1.4; }
+  .notif-text strong { font-weight: 700; }
+  .notif-time { margin-left: auto; font-size: 11px; color: #999; white-space: nowrap; padding-top: 2px; }
+
+  /* ───── CREW ROSTER ───── */
+  .crew-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .crew-card {
+    background: #f8f9ff;
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid #eef0ff;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .crew-card:hover { border-color: #0000FF; background: #fff; box-shadow: 0 4px 14px rgba(0,0,255,0.08); }
+  .crew-avatar {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 18px; font-weight: 900;
+    margin: 0 auto 8px;
+  }
+  .crew-name { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+  .crew-role { font-size: 11px; font-weight: 300; color: #666; margin-top: 2px; }
+  .crew-status { margin-top: 6px; }
+
+  /* ───── FOOTER ───── */
+  .site-footer {
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .site-footer strong { font-weight: 900; letter-spacing: 2px; }
+  .site-footer p { margin-top: 4px; opacity: 0.8; font-weight: 300; }
+
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 600px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .quick-links { grid-template-columns: repeat(3, 1fr); }
+    .jobs-table { font-size: 11px; }
+    .jobs-table thead th, .jobs-table tbody td { padding: 8px 8px; }
+    .ghost-phoenix { font-size: 180px; }
+  }
+
+  /* ───── LIVE CLOCK ───── */
+  #live-clock {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+    font-weight: 300;
+    margin-top: 4px;
+  }
+
+  /* ───── SCROLL ANIMATION ───── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.5s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.2s; opacity: 0; }
+  .delay-3 { animation-delay: 0.3s; opacity: 0; }
+  .delay-4 { animation-delay: 0.4s; opacity: 0; }
+  .delay-5 { animation-delay: 0.5s; opacity: 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════ -->
+<header class="site-header">
+
+  <!-- Ghost Phoenix -->
+  <div class="ghost-phoenix" aria-hidden="true">🦅</div>
+
+  <!-- Power Tower SVG Overlay -->
+  <svg class="tower-overlay" viewBox="0 0 1400 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <!-- Tower 1 -->
+    <g fill="white">
+      <polygon points="180,120 195,60 205,60 220,120" />
+      <polygon points="185,90 215,90 212,82 188,82" />
+      <polygon points="170,62 230,62 228,55 172,55" />
+      <line x1="200" y1="55" x2="200" y2="0" stroke="white" stroke-width="2"/>
+      <line x1="200" y1="30" x2="160" y2="55" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="30" x2="240" y2="55" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="15" x2="155" y2="40" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="15" x2="245" y2="40" stroke="white" stroke-width="1.5"/>
+      <rect x="197" y="0" width="6" height="8"/>
+    </g>
+    <!-- Tower 2 -->
+    <g fill="white" transform="translate(420,0)">
+      <polygon points="180,120 195,60 205,60 220,120" />
+      <polygon points="185,90 215,90 212,82 188,82" />
+      <polygon points="170,62 230,62 228,55 172,55" />
+      <line x1="200" y1="55" x2="200" y2="0" stroke="white" stroke-width="2"/>
+      <line x1="200" y1="30" x2="160" y2="55" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="30" x2="240" y2="55" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="15" x2="155" y2="40" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="15" x2="245" y2="40" stroke="white" stroke-width="1.5"/>
+      <rect x="197" y="0" width="6" height="8"/>
+    </g>
+    <!-- Tower 3 -->
+    <g fill="white" transform="translate(760,0)">
+      <polygon points="180,120 195,60 205,60 220,120" />
+      <polygon points="185,90 215,90 212,82 188,82" />
+      <polygon points="170,62 230,62 228,55 172,55" />
+      <line x1="200" y1="55" x2="200" y2="0" stroke="white" stroke-width="2"/>
+      <line x1="200" y1="30" x2="160" y2="55" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="30" x2="240" y2="55" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="15" x2="155" y2="40" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="15" x2="245" y2="40" stroke="white" stroke-width="1.5"/>
+      <rect x="197" y="0" width="6" height="8"/>
+    </g>
+    <!-- Tower 4 -->
+    <g fill="white" transform="translate(1080,0)">
+      <polygon points="180,120 195,60 205,60 220,120" />
+      <polygon points="185,90 215,90 212,82 188,82" />
+      <polygon points="170,62 230,62 228,55 172,55" />
+      <line x1="200" y1="55" x2="200" y2="0" stroke="white" stroke-width="2"/>
+      <line x1="200" y1="30" x2="160" y2="55" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="30" x2="240" y2="55" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="15" x2="155" y2="40" stroke="white" stroke-width="1.5"/>
+      <line x1="200" y1="15" x2="245" y2="40" stroke="white" stroke-width="1.5"/>
+      <rect x="197" y="0" width="6" height="8"/>
+    </g>
+    <!-- Power lines connecting towers -->
+    <path d="M200,30 Q380,50 620,30" stroke="white" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M200,15 Q380,35 620,15" stroke="white" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M620,30 Q810,50 960,30" stroke="white" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M620,15 Q810,35 960,15" stroke="white" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M960,30 Q1120,50 1280,30" stroke="white" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M960,15 Q1120,35 1280,15" stroke="white" stroke-width="1" fill="none" opacity="0.6"/>
+  </svg>
+
+  <!-- Header Content -->
+  <div class="header-content">
+    <div class="header-badge">Operational Command Center</div>
+    <div class="header-logo">NORRIS UTILITIES</div>
+    <div class="header-sub">A Legacy of Commitment®</div>
+    <div class="header-portal-title">⚡ Home Base Portal v3</div>
+    <div id="live-clock"></div>
+    <div class="header-meta">Aaron C. Norris — Founder &amp; CEO &nbsp;|&nbsp; Birmingham, AL &nbsp;|&nbsp; Est. November 9, 2021</div>
+  </div>
+</header>
+
+<!-- Chevron Divider -->
+<div class="chevron-divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════════ -->
+<div class="container">
+
+  <!-- ── QUICK STATS ── -->
+  <div class="stats-grid fade-up delay-1">
+    <div class="stat-card">
+      <div class="stat-label">Active Jobs</div>
+      <div class="stat-value">14</div>
+      <div class="stat-sub">↑ 3 from last week</div>
+      <div class="stat-icon">🔧</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">MTD Revenue</div>
+      <div class="stat-value">$84K</div>
+      <div class="stat-sub">Target: $100K</div>
+      <div class="stat-icon">💰</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Crew On-Site</div>
+      <div class="stat-value">8</div>
+      <div class="stat-sub">2 crews deployed</div>
+      <div class="stat-icon">👷</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Open Bids</div>
+      <div class="stat-value">6</div>
+      <div class="stat-sub">$220K pipeline</div>
+      <div class="stat-icon">📋</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Compliance</div>
+      <div class="stat-value">100%</div>
+      <div class="stat-sub">All certs current</div>
+      <div class="stat-icon">✅</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Safety Days</div>
+      <div class="stat-value">247</div>
+      <div class="stat-sub">Zero incidents YTD</div>
+      <div class="stat-icon">🛡️</div>
+    </div>
+  </div>
+
+  <!-- X-SEPARATOR -->
+  <div class="x-separator fade-up delay-2">× × × × ×</div>
+
+  <!-- ── QUICK LINKS ── -->
+  <div class="fade-up delay-2">
+    <div class="section-header">
+      <h2>⚡ Quick Access</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="quick-links">
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">📁</span>
+        <span class="ql-label">Job Files</span>
+      </a>
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">📊</span>
+        <span class="ql-label">Financials</span>
+      </a>
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">📝</span>
+        <span class="ql-label">Bid Builder</span>
+      </a>
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">🗓️</span>
+        <span class="ql-label">Schedule</span>
+      </a>
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">🧾</span>
+        <span class="ql-label">Invoices</span>
+      </a>
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">📦</span>
+        <span class="ql-label">Inventory</span>
+      </a>
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">🛡️</span>
+        <span class="ql-label">Safety Docs</span>
+      </a>
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">📡</span>
+        <span class="ql-label">Line Card</span>
+      </a>
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">🤝</span>
+        <span class="ql-label">Vendors</span>
+      </a>
+      <a class="quick-link-btn" href="#">
+        <span class="ql-icon">🎓</span>

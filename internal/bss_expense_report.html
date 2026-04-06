@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSS Expense Report — Aaron C. Norris | Norris Utilities</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ HEADER ══ */
+    .report-header {
+      position: relative;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 35%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
+      padding: 40px 48px;
+      overflow: hidden;
+    }
+    .report-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px);
+      background-size: 40px 40px, 40px 40px, 60px 60px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .report-header * { position: relative; z-index: 2; }
+    .header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .header-left .company-name {
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--nu-white);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+    .header-left .doc-title {
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .header-right {
+      text-align: right;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+    .header-right strong { color: var(--nu-white); font-weight: 700; }
+
+    /* ══ CHEVRON ══ */
+    .chevron { position: relative; height: 40px; margin-top: -40px; z-index: 10; }
+    .chevron svg { width: 100%; height: 40px; display: block; }
+
+    /* ══ CONTENT ══ */
+    .content { max-width: 860px; margin: 0 auto; padding: 40px 32px; }
+
+    /* ══ SUMMARY BAR ══ */
+    .summary-bar {
+      display: flex;
+      gap: 0;
+      margin-bottom: 36px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .summary-item {
+      flex: 1;
+      padding: 20px 16px;
+      text-align: center;
+      background: var(--nu-white);
+      border-right: 1px solid var(--nu-medium-gray);
+    }
+    .summary-item:last-child { border-right: none; }
+    .summary-item.highlight {
+      background: var(--nu-navy);
+      color: var(--nu-white);
+    }
+    .summary-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .summary-item.highlight .summary-label { color: rgba(255,255,255,0.6); }
+    .summary-value {
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-dark-text);
+    }
+    .summary-item.highlight .summary-value { color: var(--nu-cyan); }
+
+    /* ══ GROUP ══ */
+    .group {
+      margin-bottom: 32px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .group-header {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .group-header.bss { background: linear-gradient(135deg, var(--nu-blue), #0033cc); }
+    .group-header.nu { background: linear-gradient(135deg, #444, #666); }
+    .group-header.pending { background: linear-gradient(135deg, #cc6600, #ff9933); }
+    .group-title {
+      color: var(--nu-white);
+      font-weight: 900;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .group-total {
+      color: var(--nu-white);
+      font-weight: 900;
+      font-size: 1.2rem;
+    }
+    .group-subtitle {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.75rem;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    /* ══ TABLE ══ */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--nu-white);
+    }
+    thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      background: var(--nu-light-gray);
+      border-bottom: 2px solid var(--nu-medium-gray);
+    }
+    thead th:last-child { text-align: right; }
+    tbody td {
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    tbody td:last-child {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    .category-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .cat-meals { background: #e8f5e9; color: #2e7d32; }
+    .cat-travel { background: #e3f2fd; color: #1565c0; }
+    .cat-fuel { background: #fff3e0; color: #e65100; }
+    .cat-misc { background: #f3e5f5; color: #7b1fa2; }
+    .cat-lodging { background: #fce4ec; color: #c62828; }
+
+    .row-subtotal td {
+      font-weight: 900;
+      background: var(--nu-light-gray);
+      border-top: 2px solid var(--nu-medium-gray);
+      border-bottom: none;
+    }
+
+    /* ══ PENDING ══ */
+    .pending-note {
+      padding: 16px 24px;
+      background: #fff8e1;
+      border-left: 4px solid #ff9900;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .pending-note strong { color: #cc6600; }
+
+    /* ══ NOT-BSS NOTE ══ */
+    .not-bss-note {
+      padding: 12px 24px;
+      background: #f5f5f5;
+      font-size: 0.8rem;
+      color: #888;
+      font-style: italic;
+    }
+
+    /* ══ SIGNATURE ══ */
+    .signature-area {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--nu-medium-gray);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .sig-block label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    .sig-line {
+      border-bottom: 1px solid var(--nu-body-text);
+      height: 32px;
+      margin-bottom: 4px;
+    }
+    .sig-hint {
+      font-size: 0.75rem;
+      color: #aaa;
+    }
+
+    /* ══ FOOTER ══ */
+    .report-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #001133 100%);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 10px;
+    }
+    .footer-info {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    /* ══ PRINT ══ */
+    @media print {
+      body { font-size: 11pt; }
+      .report-header { padding: 24px 32px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .content { padding: 24px; }
+      .group-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .summary-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .summary-item.highlight { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .category-tag { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .report-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .chevron { display: none; }
+      .signature-area { page-break-inside: avoid; }
+    }
+
+    @media (max-width: 640px) {
+      .report-header { padding: 24px 16px; }
+      .header-flex { flex-direction: column; }
+      .header-right { text-align: left; }
+      .content { padding: 20px 12px; }
+      .summary-bar { flex-direction: column; }
+      .summary-item { border-right: none; border-bottom: 1px solid var(--nu-medium-gray); }
+      .signature-area { grid-template-columns: 1fr; }
+      thead th, tbody td { padding: 8px 10px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+  <header class="report-header">
+    <div class="header-flex">
+      <div class="header-left">
+        <div class="company-name">Norris Utilities</div>
+        <div class="doc-title">BSS Expense Report</div>
+      </div>
+      <div class="header-right">
+        <strong>Bill To:</strong> Bay Shore Systems, Inc.<br>
+        14206 N. Ohio Street<br>
+        Rathdrum, ID 83858<br>
+        Attn: Herb Minatre / Andy Barron<br><br>
+        <strong>From:</strong> Aaron C. Norris<br>
+        Norris Utilities, LLC<br>
+        130 Inverness Plaza #210<br>
+        Birmingham, AL 35242
+      </div>
+    </div>
+  </header>
+
+  <div class="chevron">
+    <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+      <polygon points="0,0 456,40 1200,0 1200,40 0,40" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <div class="content">
+
+    <!-- ══ SUMMARY ══ -->
+    <div class="summary-bar">
+      <div class="summary-item">
+        <div class="summary-label">Group 1 (Card 1057)</div>
+        <div class="summary-value">$1,807.26</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Group 2 (Card 7745)</div>
+        <div class="summary-value">$68.29</div>
+      </div>
+      <div class="summary-item highlight">
+        <div class="summary-label">Total BSS Reimbursement</div>
+        <div class="summary-value">$1,875.55</div>
+      </div>
+    </div>
+
+    <!-- ══ GROUP 1 ══ -->
+    <div class="group">
+      <div class="group-header bss">
+        <div>
+          <div class="group-title">Group 1 &mdash; BSS Owes Aaron</div>
+          <div class="group-subtitle">Personal Card ending 1057</div>
+        </div>
+        <div class="group-total">$1,807.26</div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3/2/2026</td>
+            <td>LAS Farmers Market RC</td>
+            <td><span class="category-tag cat-meals">Meals</span></td>
+            <td>$20.34</td>
+          </tr>
+          <tr>
+            <td>3/3/2026</td>
+            <td>Restaurant, Las Vegas</td>
+            <td><span class="category-tag cat-meals">Meals</span></td>
+            <td>$88.04</td>
+          </tr>
+          <tr>
+            <td>3/2&ndash;8/2026</td>
+            <td>Enterprise + Chase Travel &mdash; flights + rental car</td>
+            <td><span class="category-tag cat-travel">Travel</span></td>
+            <td>$1,699.40</td>
+          </tr>
+          <tr class="row-subtotal">
+            <td colspan="3">Group 1 Subtotal</td>
+            <td>$1,807.26</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ══ GROUP 2 ══ -->
+    <div class="group">
+      <div class="group-header bss">
+        <div>
+          <div class="group-title">Group 2 &mdash; BSS Owes Aaron</div>
+          <div class="group-subtitle">NU Card ending 7745</div>
+        </div>
+        <div class="group-total">$68.29</div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2/16/2026</td>
+            <td>Funky's Pizza, Oxford, MS</td>
+            <td><span class="category-tag cat-meals">Meals</span></td>
+            <td>$15.00</td>
+          </tr>
+          <tr>
+            <td>2/20/2026</td>
+            <td>Circle K &mdash; gas</td>
+            <td><span class="category-tag cat-fuel">Fuel</span></td>
+            <td>$49.31</td>
+          </tr>
+          <tr>
+            <td>2/20/2026</td>
+            <td>Circle K &mdash; snacks</td>
+            <td><span class="category-tag cat-misc">Misc</span></td>
+            <td>$3.98</td>
+          </tr>
+          <tr class="row-subtotal">
+            <td colspan="3">Group 2 Subtotal</td>
+            <td>$68.29</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ══ GROUP 3 (NOT BSS) ══ -->
+    <div class="group">
+      <div class="group-header nu">
+        <div>
+          <div class="group-title">Group 3 &mdash; NU Owes Aaron</div>
+          <div class="group-subtitle">Apple Card &mdash; NOT a BSS expense</div>
+        </div>
+        <div class="group-total">~$3,134.46</div>
+      </div>
+      <div class="not-bss-note">
+        This group is an internal Norris Utilities reimbursement and is not included in the BSS total. Tracked here for Aaron's records only.
+      </div>
+    </div>
+
+    <!-- ══ PENDING ══ -->
+    <div class="group">
+      <div class="group-header pending">
+        <div>
+          <div class="group-title">Pending &mdash; Card &amp; Amount Unknown</div>
+        </div>
+      </div>
+      <div class="pending-note">
+        <strong>DoubleTree by Hilton, Las Vegas</strong><br>
+        Stay: March 2&ndash;8, 2026<br>
+        Card charged and exact amount to be confirmed. Will be added to the appropriate group once the statement posts.
+      </div>
+    </div>
+
+    <!-- ══ TOTALS ══ -->
+    <div class="group" style="margin-top:40px;">
+      <table>
+        <tbody>
+          <tr>
+            <td style="font-weight:400; color:#888;">Group 1 &mdash; Personal Card 1057</td>
+            <td>$1,807.26</td>
+          </tr>
+          <tr>
+            <td style="font-weight:400; color:#888;">Group 2 &mdash; NU Card 7745</td>
+            <td>$68.29</td>
+          </tr>
+          <tr class="row-subtotal">
+            <td style="font-size:1.1rem; color:var(--nu-dark-text);">Total BSS Reimbursement Due to Aaron C. Norris</td>
+            <td style="font-size:1.3rem; color:var(--nu-blue);">$1,875.55</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ══ SIGNATURE ══ -->
+    <div class="signature-area">
+      <div class="sig-block">
+        <label>Submitted By</label>
+        <div class="sig-line"></div>
+        <div class="sig-hint">Aaron C. Norris &nbsp;&mdash;&nbsp; Date: ___/___/______</div>
+      </div>
+      <div class="sig-block">
+        <label>Approved By</label>
+        <div class="sig-line"></div>
+        <div class="sig-hint">BSS Authorized Signature &nbsp;&mdash;&nbsp; Date: ___/___/______</div>
+      </div>
+    </div>
+
+    <!-- ══ REMIT ══ -->
+    <div style="margin-top:40px; padding:20px; background:var(--nu-light-gray); border-radius:8px; font-size:0.85rem; color:#666;">
+      <strong style="color:var(--nu-dark-text);">Remit Payment To:</strong><br>
+      Aaron C. Norris / Norris Utilities, LLC<br>
+      130 Inverness Plaza #210<br>
+      Birmingham, AL 35242<br>
+      <span style="color:var(--nu-blue); font-weight:700;">acnorris@norrisutilities.com</span> &nbsp;|&nbsp; 205-500-1343
+    </div>
+
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="report-footer">
+    <div class="footer-tagline">A Legacy of Commitment&reg;</div>
+    <div class="footer-info">
+      Norris Utilities&reg;, LLC &mdash; Birmingham, Alabama<br>
+      205-500-1343 &nbsp;|&nbsp; acnorris@norrisutilities.com
+    </div>
+  </footer>
+
+</body>
+</html>

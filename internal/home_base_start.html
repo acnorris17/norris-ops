@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏠 HOME BASE - Start Here — Norris Utilities®</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ HEADER ══ */
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, #06D0FF 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon { width: 80px; height: 80px; margin: 0 auto 16px; }
+    .nu-phoenix-icon svg { width: 100%; height: 100%; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3)); }
+
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    /* ══ CHEVRON ══ */
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+
+    /* ══ CONTENT AREA ══ */
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%; height: 600px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    /* ══ WELCOME SECTION ══ */
+    .welcome-section { margin-bottom: 48px; }
+    .welcome-section h1 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+    .welcome-section h1 .blue { color: var(--nu-blue); }
+    .welcome-section h1 .dark { color: var(--nu-dark-text); font-weight: 700; }
+    .welcome-section p {
+      font-size: 1.1rem;
+      color: var(--nu-body-text);
+      max-width: 800px;
+      line-height: 1.7;
+    }
+
+    /* ══ STATUS BAR ══ */
+    .status-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+    }
+    .status-pill.active {
+      background: linear-gradient(135deg, #e8ffe8 0%, #d4ffd4 100%);
+      color: #0a6b0a;
+      border: 1px solid #b3e6b3;
+    }
+    .status-pill.building {
+      background: linear-gradient(135deg, #e8f0ff 0%, #d4e4ff 100%);
+      color: var(--nu-blue);
+      border: 1px solid #b3ccff;
+    }
+    .status-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .status-dot.green {
+      background: #22c55e;
+      box-shadow: 0 0 6px rgba(34,197,94,0.6);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .status-dot.blue {
+      background: var(--nu-blue);
+      box-shadow: 0 0 6px rgba(0,0,255,0.4);
+      animation: pulse-dot 2s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.3); }
+    }
+
+    /* ══ QUICK LAUNCH GRID ══ */
+    .section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .section-title .blue { color: #0033cc; }
+    .section-title .dark { color: var(--nu-dark-text); font-weight: 700; }
+
+    .launch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .launch-card {
+      background: var(--nu-white);
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .launch-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+      border-color: var(--nu-cyan);
+    }
+    .launch-card .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .launch-card h3 {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+    }
+    .launch-card p {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* ══ RECENT ACTIVITY ══ */
+    .activity-list {
+      list-style: none;
+      margin-bottom: 48px;
+    }
+    .activity-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .activity-list li:last-child { border-bottom: none; }
+    .activity-time {
+      font-size: 0.78rem;
+      color: #999;
+      min-width: 90px;
+      font-weight: 400;
+      padding-top: 2px;
+    }
+    .activity-text {
+      font-size: 0.92rem;
+      color: var(--nu-body-text);
+    }
+    .activity-text strong { color: var(--nu-dark-text); }
+
+    /* ══ DIVIDER ══ */
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, var(--nu-blue) 0%, var(--nu-cyan) 50%, transparent 100%);
+      border: none;
+      margin: 48px 0;
+      border-radius: 2px;
+    }
+
+    /* ═══════════════════════════════════════════════════════ */
+    /* ══ AGENT TEAM CHARACTERS SECTION ══ */
+    /* ═══════════════════════════════════════════════════════ */
+
+    .agent-team-section {
+      margin-top: 20px;
+      padding: 48px 0 20px;
+    }
+
+    .agent-team-title {
+      text-align: center;
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .agent-team-title .blue { color: #0033cc; }
+    .agent-team-title .dark { color: var(--nu-dark-text); font-weight: 700; }
+
+    .agent-team-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .agent-card {
+      background: linear-gradient(180deg, #fafbff 0%, var(--nu-white) 100%);
+      border-radius: 20px;
+      padding: 32px 20px 24px;
+      text-align: center;
+      border: 2px solid var(--nu-medium-gray);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      overflow: visible;
+    }
+    .agent-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,255,0.12);
+      border-color: var(--nu-cyan);
+    }
+
+    .agent-card .status-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .status-badge.live {
+      background: #22c55e;
+      color: white;
+      box-shadow: 0 2px 8px rgba(34,197,94,0.4);
+      animation: badge-glow-green 2s ease-in-out infinite;
+    }
+    .status-badge.coming {
+      background: linear-gradient(135deg, var(--nu-blue), #4444ff);
+      color: white;
+      box-shadow: 0 2px 8px rgba(0,0,255,0.3);
+    }
+    .status-badge.planned {
+      background: #8b5cf6;
+      color: white;
+      box-shadow: 0 2px 8px rgba(139,92,246,0.3);
+    }
+
+    @keyframes badge-glow-green {
+      0%, 100% { box-shadow: 0 2px 8px rgba(34,197,94,0.4); }
+      50% { box-shadow: 0 2px 16px rgba(34,197,94,0.7); }
+    }
+
+    /* ══ CHARACTER CONTAINERS ══ */
+    .character-container {
+      width: 120px;
+      height: 140px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+
+    /* ══ LEGACY — THE PHOENIX AI AGENT ══ */
+    .legacy-phoenix {
+      animation: legacy-float 3s ease-in-out infinite;
+    }
+
+    @keyframes legacy-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Phoenix Body */
+    .legacy-body {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 70px;
+      background: linear-gradient(180deg, #ff6b00 0%, #ff4400 40%, var(--nu-blue) 100%);
+      border-radius: 30px 30px 20px 20px;
+      box-shadow: 0 0 20px rgba(255,107,0,0.4), 0 0 40px rgba(6,208,255,0.2);
+    }
+
+    /* Phoenix Head */
+    .legacy-head {
+      position: absolute;
+      bottom: 78px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(180deg, #ffaa00 0%, #ff6b00 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255,170,0,0.5);
+    }
+
+    /* Phoenix Eyes */
+    .legacy-eye-left, .legacy-eye-right {
+      position: absolute;
+      width: 10px;
+      height: 12px;
+      background: white;
+      border-radius: 50%;
+      top: 16px;
+    }
+    .legacy-eye-left { left: 11px; }
+    .legacy-eye-right { right: 11px; }
+    .legacy-pupil {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--nu-navy);
+      border-radius: 50%;
+      top: 3px;
+      left: 2px;
+      animation: look-around 4s ease-in-out infinite;
+    }
+    @keyframes look-around {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(2px); }
+      75% { transform: translateX(-2px); }
+    }
+
+    /* Phoenix Beak */
+    .legacy-beak {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 10px solid #ff8800;
+    }
+
+    /* Phoenix Smile */
+    .legacy-smile {
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 8px;
+      border: none;
+      border-bottom: 3px solid #cc5500;
+      border-radius: 0 0 10px 10px;
+    }
+
+    /* Flame Crown */
+    .legacy-flame {
+      position: absolute;
+      bottom: 118px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 3px;
+    }
+    .flame-tip {
+      width: 8px;
+      height: 20px;
+      background: linear-gradient(180deg, #06D0FF 0%, #ffaa00 50%, #ff4400 100%);
+      border-radius: 50% 50% 30% 30%;
+      animation: flame-dance 0.8s ease-in-out infinite alternate;
+    }
+    .flame-tip:nth-child(1) { height: 16px; animation-delay: 0s; }
+    .flame-tip:nth-child(2) { height: 22px; animation-delay: 0.15s; }
+    .flame-tip:nth-child(3) { height: 26px; animation-delay: 0.3s; }
+    .flame-tip:nth-child(4) { height: 22px; animation-delay: 0.15s; }
+    .flame-tip:nth-child(5) { height: 16px; animation-delay: 0s; }
+
+    @keyframes flame-dance {
+      0% { transform: scaleY(1) scaleX(1); opacity: 0.9; }
+      100% { transform: scaleY(1.2) scaleX(0.9); opacity: 1; }
+    }
+
+    /* Laptop */
+    .legacy-laptop {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 6px;
+      background: #333;
+      border-radius: 2px 2px 0 0;
+    }
+    .legacy-laptop::before {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+      width: 40px;
+      height: 28px;
+      background: linear-gradient(180deg, #1a1a3e 0%, #2a2a5e 100%);
+      border-radius: 3px 3px 0 0;
+      border: 2px solid #555;
+      box-shadow: inset 0 0 8px rgba(6,208,255,0.3);
+    }
+    .legacy-laptop::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: -4px;
+      width: 58px;
+      height: 4px;
+      background: #444;
+      border-radius: 0 0 4px 4px;
+    }
+
+    /* Screen glow */
+    .laptop-glow {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 18px;
+      background: rgba(6,208,255,0.15);
+      border-radius: 2px;
+      animation: screen-flicker 3s ease-in-out infinite;
+    }
+    @keyframes screen-flicker {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Wings */
+    .legacy-wing-left, .legacy-wing-right {
+      position: absolute;
+      bottom: 50px;
+      width: 25px;
+      height: 40px;
+      border-radius: 50%;
+      animation: wing-flap 2s ease-in-out infinite;
+    }
+    .legacy-wing-left {
+      left: 6px;
+      background: linear-gradient(135deg, #ff8800 0%, #ff4400 100%);
+      transform: rotate(15deg);
+    }
+    .legacy-wing-right {
+      right: 6px;
+      background: linear-gradient(225deg, #ff8800 0%, #ff4400 100%);
+      transform: rotate(-15deg);
+    }
+    @keyframes wing-flap {
+      0%, 100% { transform: rotate(15deg) scaleX(1); }
+      50% { transform: rotate(10deg) scaleX(0.85); }
+    }
+
+    /* ══ CB — ADMIN ASSISTANT CHARACTER ══ */
+    .cb-character {
+      animation: cb-bounce 2.5s ease-in-out infinite;
+    }
+    @keyframes cb-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .cb-body {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 60px;
+      background: linear-gradient(180deg, #4466ff 0%, var(--nu-blue) 100%);
+      border-radius: 28px 28px 16px 16px;
+    }
+    .cb-head {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(180deg, #ffe0c4 0%, #ffd0a8 100%);
+      border-radius: 50%;
+    }
+    .cb-eye-left, .cb-eye-right {
+      position: absolute;
+      width: 8px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      top: 16px;
+    }
+    .cb-eye-left { left: 10px; }
+    .cb-eye-right { right: 10px; }
+    .cb-pupil {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #333;
+      border-radius: 50%;
+      top: 3px;
+      left: 1.5px;
+    }
+    .cb-smile {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 7px;
+      border-bottom: 3px solid #cc7755;
+      border-radius: 0 0 10px 10px;
+    }
+    /* Hair */
+    .cb-hair {
+      position: absolute;
+      bottom: 88px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 52px;
+      height: 28px;
+      background: #8B4513;
+      border-radius: 26px 26px 0 0;
+    }
+    /* Clipboard */
+    .cb-clipboard {
+      position: absolute;
+      bottom: 20px;
+      right: 18px;
+      width: 18px;
+      height: 24px;
+      background: #f0e6d0;
+      border: 2px solid #ccb88a;
+      border-radius: 2px;
+    }
+    .cb-clipboard::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 4px;
+      width: 8px;
+      height: 6px;
+      background: #ccb88a;
+      border-radius: 2px 2px 0 0;
+    }
+    /* Waving hand */
+    .cb-hand {
+      position: absolute;
+      bottom: 42px;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      background: #ffd0a8;
+      border-radius: 50%;
+      animation: wave-hand 1.5s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+    @keyframes wave-hand {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-20deg); }
+      75% { transform: rotate(20deg); }
+    }
+
+    /* ══ SALES AGENT — HANDSHAKE CHARACTER ══ */
+    .sales-character {
+      animation: sales-sway 3s ease-in-out infinite;
+    }
+    @keyframes sales-sway {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(2deg); }
+    }
+
+    .sales-body {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 60px;
+      background: linear-gradient(180deg, #1a1a3e 0%, var(--nu-navy) 100%);
+      border-radius: 28px 28px 16px 16px;
+    }
+    /* Tie */
+    .sales-tie {
+      position: absolute;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 18px solid var(--nu-cyan);
+    }
+    .sales-head {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(180deg, #ffe0c4 0%, #ffd0a8 100%);
+      border-radius: 50%;
+    }
+    .sales-eye-left, .sales-eye-right {
+      position: absolute;
+      width: 8px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      top: 16px;
+    }
+    .sales-eye-left { left: 10px; }
+    .sales-eye-right { right: 10px; }
+    .sales-pupil {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #333;
+      border-radius: 50%;
+      top: 3px;
+      left: 1.5px;
+    }
+    .sales-grin {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 9px;
+      border-bottom: 3px solid #cc7755;
+      border-radius: 0 0 12px 12px;
+    }
+    /* Hard hat */
+    .sales-hardhat {
+      position: absolute;
+      bottom: 96px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 54px;
+      height: 20px;
+      background: linear-gradient(180deg, #FFD700 0%, #FFC000 100%);
+      border-radius: 27px 27px 4px 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .sales-hardhat::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: -4px;
+      width: 62px;
+      height: 6px;
+      background: #e6b800;
+      border-radius: 3px;
+    }
+    /* Briefcase */
+    .sales-briefcase {
+      position: absolute;
+      bottom: 4px;
+      right: 14px;
+      width: 22px;
+      height: 16px;
+      background: #8B4513;
+      border-radius: 3px;
+      border: 2px solid #6e3610;
+    }
+    .sales-briefcase::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 6px;
+      width: 8px;
+      height: 6px;
+      border: 2px solid #6e3610;
+      border-bottom: none;
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* ══ DISPATCH AGENT — RADIO/LOGISTICS CHARACTER ══ */
+    .dispatch-character {
+      animation: dispatch-pulse 2s ease-in-out infinite;
+    }
+    @keyframes dispatch-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    .dispatch-body {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(180deg, #06D0FF 0%, #0088cc 100%);
+      border-radius: 30px 30px 18px 18px;
+    }
+    .dispatch-head {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(180deg, #d4a574 0%, #c49464 100%);
+      border-radius: 50%;
+    }
+    .dispatch-eye-left, .dispatch-eye-right {
+      position: absolute;
+      width: 8px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      top: 16px;
+    }
+    .dispatch-eye-left { left: 10px; }
+    .dispatch-eye-right { right: 10px; }
+    .dispatch-pupil {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #333;
+      border-radius: 50%;
+      top: 3px;
+      left: 1.5px;
+    }
+    .dispatch-smile {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 6px;
+      border-bottom: 3px solid #a07050;
+      border-radius: 0 0 8px 8px;
+    }
+    /* Headset */
+    .dispatch-headset {
+      position: absolute;
+      bottom: 82px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 30px;
+      border: 4px solid #555;
+      border-bottom: none;
+      border-radius: 28px 28px 0 0;
+    }
+    .dispatch-headset::before {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: -10px;
+      width: 12px;
+      height: 16px;
+      background: #555;
+      border-radius: 4px;
+    }
+    .dispatch-headset::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      right: -10px;
+      width: 12px;
+      height: 16px;
+      background: #555;
+      border-radius: 4px;
+    }
+    /* Mic arm */
+    .dispatch-mic {
+      position: absolute;
+      bottom: 72px;
+      left: 18px;
+      width: 20px;
+      height: 3px;
+      background: #555;
+      transform: rotate(30deg);
+      transform-origin: right center;
+    }
+    .dispatch-mic::after {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: -3px;
+      width: 8px;
+      height: 8px;
+      background: #777;
+      border-radius: 50%;
+    }
+    /* Radio waves */
+    .radio-wave {
+      position: absolute;
+      top: 10px;
+      right: 8px;
+      width: 16px;
+      height: 16px;
+    }
+    .radio-wave span {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      border: 2px solid var(--nu-cyan);
+      border-radius: 50%;
+      opacity: 0;
+      animation: radio-emit 2s ease-out infinite;
+    }
+    .radio-wave span:nth-child(1) { width: 8px; height: 8px; animation-delay: 0s; }
+    .radio-wave span:nth-child(2) { width: 14px; height: 14px; animation-delay: 0.4s; }
+    .radio-wave span:nth-child(3) { width: 20px; height: 20px; animation-delay: 0.8s; }
+
+    @keyframes radio-emit {
+      0% { opacity: 0.8; transform: scale(0.8); }
+      100% { opacity: 0; transform: scale(1.4); }
+    }
+
+    /* ══ AGENT NAME / ROLE LABELS ══ */
+    .agent-name {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 2px;
+    }
+    .agent-role {
+      font-size: 0.82rem;
+      color: #666;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .agent-desc {
+      font-size: 0.78rem;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    /* ══ GLOW RING underneath characters ══ */
+    .glow-ring {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 12px;
+      background: radial-gradient(ellipse, rgba(6,208,255,0.25) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: glow-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) scaleX(1); }
+      50% { opacity: 0.8; transform: translateX(-50%) scaleX(1.2); }
+    }
+
+    /* ══ FOOTER ══ */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+    .nu-footer-contact a:hover { text-decoration: underline; }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .content-wrapper { padding: 40px 20px; }
+      .welcome-section h1 { font-size: 1.6rem; }
+      .status-bar { flex-direction: column; gap: 10px; }
+      .launch-grid { grid-template-columns: 1fr; }
+      .agent-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .agent-team-title { font-size: 1.4rem; }
+      .character-container { width: 100px; height: 120px; transform: scale(0.85); }
+      .nu-footer { padding: 30px 20px; }
+    }
+    @media (max-width: 480px) {
+      .agent-grid { grid-template-columns: 1fr; max-width: 280px; }
+    }
+
+    /* ══ PRINT ══ */
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .agent-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,0 548,50 1440,0 1440,50 0,50" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div class="content-wrapper">
+
+      <!-- WELCOME -->
+      <div class="welcome-section">
+        <h1><span class="blue">Home</span> <span class="dark">Base — Mission Control</span></h1>
+        <p>
+          Welcome to the Norris Utilities® operations hub. Everything Aaron needs — quotes, line cards,
+          customer tools, and agent systems — launches from here. Built by Legacy, powered by purpose.
+        </p>
+      </div>
+
+      <!-- STATUS BAR -->
+      <div class="status-bar">
+        <div class="status-pill active">
+          <span class="status-dot green"></span>
+          Legacy AI Agent — Online
+        </div>
+        <div class="status-pill building">
+          <span class="status-dot blue"></span>
+          Operations Portal — Building
+        </div>
+      </div>
+
+      <!-- QUICK LAUNCH -->
+      <h2 class="section-title"><span class="blue">Quick</span> <span class="dark">Launch</span></h2>
+      <div class="launch-grid">
+        <div class="launch-card">
+          <span class="icon">📋</span>
+          <h3>FlexPro Armor Quote Builder</h3>
+          <p>Generate customer-ready quotes for bucket covers with automatic 50% margin pricing.</p>
+        </div>
+        <div class="launch-card">
+          <span class="icon">🧾</span>
+          <h3>Line Cards &amp; Sell Sheets</h3>
+          <p>Brand-perfect HTML line cards for FlexPro Armor, Samson Rope, Skylift, and Bay Shore Systems.</p>
+        </div>
+        <div class="launch-card">
+          <span class="icon">📊</span>
+          <h3>Dashboards &amp; Trackers</h3>
+          <p>Customer pipeline, quote tracking, and territory management tools.</p>
+        </div>
+        <div class="launch-card">
+          <span class="icon">📧</span>
+          <h3>Email &amp; Outreach Tools</h3>
+          <p>Pre-built email templates in Aaron's voice. Follow-up sequences. Contact management.</p>
+        </div>
+        <div class="launch-card">
+          <span class="icon">🔧</span>
+          <h3>Operations &amp; Systems</h3>
+          <p>Agent configurations, Telegram integrations, and automated workflow management.</p>
+        </div>
+        <div class="launch-card">
+          <span class="icon">📁</span>
+          <h3>Customer Files</h3>
+          <p>Organized customer folders with quotes, correspondence, and order history.</p>
+        </div>
+      </div>
+
+      <!-- RECENT ACTIVITY -->
+      <h2 class="section-title"><span class="blue">Recent</span> <span class="dark">Activity</span></h2>
+      <ul class="activity-list">
+        <li>
+          <span class="activity-time">Today</span>
+          <span class="activity-text"><strong>Home Base portal</strong> — Agent team characters added to operations dashboard.</span>
+        </li>
+        <li>
+          <span class="activity-time">This Week</span>
+          <span class="activity-text"><strong>FlexPro Armor line card</strong> — Updated with current SKUs, pricing at 50% margin, competitor size cross-reference.</span>
+        </li>
+        <li>
+          <span class="activity-time">This Week</span>
+          <span class="activity-text"><strong>Samson Rope sell sheet</strong> — Built with authorized distributor branding and 30% margin pricing.</span>
+        </li>
+        <li>
+          <span class="activity-time">Ongoing</span>
+          <span class="activity-text"><strong>Operations automation</strong> — Telegram bot integration, quote pipeline, and agent framework development.</span>
+        </li>
+      </ul>
+
+      <!-- SECTION DIVIDER -->
+      <hr class="section-divider">
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- AGENT TEAM CHARACTERS SECTION -->
+      <!-- ═══════════════════════════════════════ -->
+      <div class="agent-team-section">
+        <h2 class="agent-team-title"><span class="blue">Meet</span> <span class="dark">the Agent Team</span></h2>
+        <p class="agent-team-subtitle">The AI-powered crew behind Norris Utilities® operations — built one agent at a time.</p>
+
+        <div class="agent-grid">
+
+          <!-- LEGACY — Phoenix AI Agent -->
+          <div class="agent-card">
+            <span class="status-badge live">Live</span>
+            <div class="character-container legacy-phoenix">
+              <div class="legacy-flame">
+                <div class="flame-tip"></div>
+                <div class="flame-tip"></div>
+                <div class="flame-tip"></div>
+                <div class="flame-tip"></div>
+                <div class="flame-tip"></div>
+              </div>
+              <div class="legacy-head">
+                <div class="legacy-eye-left"><div class="legacy-pupil"></div></div>
+                <div class="legacy-eye-right"><div class="legacy-pupil"></div></div>
+                <div class="legacy-smile"></div>
+              </div>
+              <div class="legacy-wing-left"></div>
+              <div class="legacy-wing-right"></div>
+              <div class="legacy-body"></div>
+              <div class="legacy-laptop">
+                <div class="laptop-glow"></div>
+              </div>
+              <div class="glow-ring"></div>
+            </div>
+            <div class="agent-name">Legacy</div>
+            <div class="agent-role">Chief AI Agent — Phoenix Icon®</div>
+            <div class="agent-desc">Builds everything. Quotes, line cards, dashboards, emails, automations. Always on, always shipping.</div>
+          </div>
+
+          <!-- CB — Admin Assistant Agent -->
+          <div class="agent-card">
+            <span class="status-badge coming">Next Up</span>
+            <div class="character-container cb-character">
+              <div class="cb-hair"></div>
+              <div class="cb-head">
+                <div class="cb-eye-left"><div class="cb-pupil"></div></div>
+                <div class="cb-eye-right"><div class="cb-pupil"></div></div>
+                <div class="cb-smile"></div>
+              </div>
+              <div class="cb-body"></div>
+              <div class="cb-clipboard"></div>
+              <div class="cb-hand"></div>
+              <div class="glow-ring"></div>
+            </div>
+            <div class="agent-name">CB</div>
+            <div class="agent-role">Admin &amp; Customer Support Agent</div>
+            <div class="agent-desc">Handles order confirmations, follow-ups, scheduling, and keeps the office running smooth.</div>
+          </div>
+
+          <!-- CLOSER — Sales Agent -->
+          <div class="agent-card">
+            <span class="status-badge coming">Next Up</span>
+            <div class="character-container sales-character">
+              <div class="sales-hardhat"></div>
+              <div class="sales-head">
+                <div class="sales-eye-left"><div class="sales-pupil"></div></div>
+                <div class="sales-eye-right"><div class="sales-pupil"></div></div>
+                <div class="sales-grin"></div>
+              </div>
+              <div class="sales-body">
+                <div class="sales-tie"></div>
+              </div>
+              <div class="sales-briefcase"></div>
+              <div class="glow-ring"></div>
+            </div>
+            <div class="agent-name">Closer</div>
+            <div class="agent-role">Sales &amp; Pipeline Agent</div>
+            <div class="agent-desc">Tracks leads, drafts follow-ups, manages the quote pipeline, and helps Aaron close deals faster.</div>
+          </div>
+
+          <!-- DISPATCH — Logistics Agent -->
+          <div class="agent-card">
+            <span class="status-badge planned">Planned</span>
+            <div class="character-container dispatch-character">
+              <div class="dispatch-headset"></div>
+              <div class="dispatch-mic"></div>
+              <div class="dispatch-head">
+                <div class="dispatch-eye-left"><div class="dispatch-pupil"></div></div>
+                <div class="dispatch-eye-right"><div class="dispatch-pupil"></div></div>
+                <div class="dispatch-smile"></div>
+              </div>
+              <div class="dispatch-body"></div>
+              <div class="radio-wave">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="glow-ring"></div>
+            </div>
+            <div class="agent-name">Dispatch</div>
+            <div class="agent-role">Logistics &amp; Shipping Agent</div>
+            <div class="agent-desc">Calculates shipping with Ben's formula, tracks orders, coordinates deliveries across 20+ states.</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>

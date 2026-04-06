@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norris Utilities — A/P Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f0f2ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 40px 20px 80px;
+  }
+
+  /* Ghost Phoenix Watermark */
+  .phoenix-watermark {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 340px;
+    line-height: 1;
+    opacity: 0.07;
+    color: white;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Power Tower SVG Overlay */
+  .tower-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .header-eyebrow {
+    color: rgba(255,255,255,0.75);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .header-wordmark {
+    color: #ffffff;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .header-tagline {
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .header-tool-title {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 30px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 24px;
+    margin-top: 6px;
+  }
+
+  /* ─── CHEVRON DIVIDER ─── */
+  .chevron-divider {
+    width: 100%;
+    height: 60px;
+    background: #f0f2ff;
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+    margin-top: -1px;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* ─── MAIN CONTAINER ─── */
+  .main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+  }
+
+  /* ─── STATS ROW ─── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.08);
+    padding: 20px 18px;
+    border-left: 4px solid #0000FF;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card.cyan { border-left-color: #06D0FF; }
+  .stat-card.danger { border-left-color: #FF3B3B; }
+  .stat-card.warning { border-left-color: #FF9500; }
+  .stat-card.success { border-left-color: #34C759; }
+
+  .stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1a1a2e;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-value.blue { color: #0000FF; }
+  .stat-value.danger { color: #FF3B3B; }
+  .stat-value.warning { color: #FF9500; }
+  .stat-value.success { color: #34C759; }
+
+  .stat-sub {
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 300;
+  }
+
+  /* ─── AGING ANALYSIS ─── */
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #0000FF;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, #0000FF33, transparent);
+  }
+
+  .aging-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .aging-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,255,0.07);
+    padding: 14px 16px;
+    text-align: center;
+  }
+
+  .aging-badge {
+    display: inline-block;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    margin-bottom: 8px;
+  }
+
+  .badge-current  { background: #e6f9ed; color: #34C759; }
+  .badge-1-30     { background: #fff7e6; color: #FF9500; }
+  .badge-31-60    { background: #fff0e6; color: #FF6200; }
+  .badge-61-90    { background: #ffe6e6; color: #FF3B3B; }
+  .badge-90plus   { background: #2a0000; color: #FF3B3B; }
+
+  .aging-amount {
+    font-size: 20px;
+    font-weight: 900;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+  }
+
+  .aging-count {
+    font-size: 11px;
+    color: #aaa;
+  }
+
+  .aging-bar-wrap {
+    height: 5px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .aging-bar {
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  /* ─── X-SEPARATOR ─── */
+  .x-separator {
+    text-align: center;
+    color: #06D0FF;
+    font-size: 20px;
+    opacity: 0.45;
+    letter-spacing: 18px;
+    margin: 24px 0;
+  }
+
+  /* ─── TOOLBAR ─── */
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1.5px solid #e0e4ff;
+    border-radius: 8px;
+    padding: 0 12px;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+    max-width: 320px;
+    box-shadow: 0 2px 8px rgba(0,0,255,0.05);
+  }
+
+  .search-wrap input {
+    border: none;
+    outline: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    color: #1a1a2e;
+    padding: 9px 0;
+    background: transparent;
+    flex: 1;
+  }
+
+  .search-icon { color: #0000FF; font-size: 15px; }
+
+  .filter-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: white;
+    border: 1.5px solid #e0e4ff;
+    border-radius: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #888;
+    padding: 6px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: #0000FF;
+    border-color: #0000FF;
+    color: white;
+  }
+
+  .btn-add {
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: white;
+    padding: 9px 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,255,0.25);
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-add:hover { opacity: 0.88; }
+
+  /* ─── TABLE ─── */
+  .table-wrap {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,255,0.08);
+    overflow: hidden;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+  }
+
+  thead tr {
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+  }
+
+  thead th {
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 14px 16px;
+    text-align: left;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  thead th:hover { background: rgba(255,255,255,0.12); }
+
+  thead th .sort-arrow { margin-left: 4px; opacity: 0.6; font-size: 9px; }
+
+  tbody tr {
+    border-bottom: 1px solid #f0f2ff;
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: #f7f8ff; }
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody td {
+    padding: 13px 16px;
+    font-size: 13px;
+    color: #1a1a2e;
+    white-space: nowrap;
+  }
+
+  .td-vendor {
+    font-weight: 700;
+    color: #0000FF;
+  }
+
+  .td-invoice {
+    font-family: monospace;
+    font-size: 12px;
+    color: #555;
+    background: #f8f9ff;
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+
+  .td-amount {
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .td-date { color: #666; font-size: 12px; }
+
+  .td-overdue { color: #FF3B3B; font-weight: 700; }
+  .td-due-soon { color: #FF9500; font-weight: 700; }
+
+  /* Status Badges */
+  .status-badge {
+    display: inline-block;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 3px 11px;
+  }
+
+  .status-paid      { background: #e6f9ed; color: #34C759; }
+  .status-pending   { background: #e8eaff; color: #0000FF; }
+  .status-overdue   { background: #ffe6e6; color: #FF3B3B; }
+  .status-disputed  { background: #fff0e6; color: #FF6200; }
+  .status-scheduled { background: #e6f8ff; color: #06D0FF; }
+  .status-partial   { background: #fffbe6; color: #c48d00; }
+
+  /* Aging pill inside table */
+  .aging-pill {
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 9px;
+  }
+
+  .ap-current { background: #e6f9ed; color: #34C759; }
+  .ap-1-30    { background: #fff7e6; color: #FF9500; }
+  .ap-31-60   { background: #fff0e6; color: #FF6200; }
+  .ap-61-90   { background: #ffe6e6; color: #FF3B3B; }
+  .ap-90plus  { background: #2a0000; color: #ff6b6b; }
+
+  /* Action Buttons */
+  .action-btn {
+    background: none;
+    border: 1.5px solid #e0e4ff;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #0000FF;
+    padding: 4px 10px;
+    cursor: pointer;
+    margin-right: 4px;
+    transition: all 0.15s;
+  }
+
+  .action-btn:hover {
+    background: #0000FF;
+    color: white;
+    border-color: #0000FF;
+  }
+
+  .action-btn.danger:hover {
+    background: #FF3B3B;
+    border-color: #FF3B3B;
+    color: white;
+  }
+
+  /* ─── TABLE FOOTER ─── */
+  .table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-top: 1px solid #f0f2ff;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .table-footer-info {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .table-footer-total {
+    font-size: 14px;
+    font-weight: 900;
+    color: #0000FF;
+  }
+
+  /* ─── FOOTER ─── */
+  .page-footer {
+    text-align: center;
+    padding: 32px 20px;
+    border-top: 1px solid #e0e4ff;
+    margin-top: 40px;
+  }
+
+  .page-footer-logo {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #0000FF;
+    margin-bottom: 4px;
+  }
+
+  .page-footer-tag {
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+
+  .page-footer-contact {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .page-footer-contact a { color: #0000FF; text-decoration: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .aging-row { grid-template-columns: repeat(2, 1fr); }
+    .toolbar { flex-direction: column; align-items: stretch; }
+    .search-wrap { max-width: 100%; }
+    .filter-group { justify-content: center; }
+    .btn-add { text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .aging-row { grid-template-columns: 1fr 1fr; }
+    .header-wordmark { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<div class="header">
+  <!-- Ghost Phoenix -->
+  <div class="phoenix-watermark">🔥</div>
+
+  <!-- Power Tower SVG Overlay -->
+  <svg class="tower-overlay" viewBox="0 0 1400 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+    <g fill="white">
+      <!-- Tower 1 -->
+      <polygon points="120,120 130,60 145,60 155,120"/>
+      <polygon points="125,90 150,90 152,95 123,95"/>
+      <polygon points="127,75 148,75 150,80 125,80"/>
+      <line x1="80" y1="65" x2="130" y2="65" stroke="white" stroke-width="2"/>
+      <line x1="155" y1="65" x2="200" y2="65" stroke="white" stroke-width="2"/>
+      <line x1="90" y1="75" x2="127" y2="75" stroke="white" stroke-width="1.5"/>
+      <line x1="148" y1="75" x2="195" y2="75" stroke="white" stroke-width="1.5"/>
+      <!-- Tower 2 -->
+      <polygon points="400,120 410,50 425,50 435,120"/>
+      <polygon points="405,85 430,85 432,90 403,90"/>
+      <polygon points="407,68 428,68 430,73 405,73"/>
+      <line x1="360" y1="55" x2="410" y2="55" stroke="white" stroke-width="2"/>
+      <line x1="435" y1="55" x2="480" y2="55" stroke="white" stroke-width="2"/>
+      <line x1="368" y1="68" x2="407" y2="68" stroke="white" stroke-width="1.5"/>
+      <line x1="428" y1="68" x2="472" y2="68" stroke="white" stroke-width="1.5"/>
+      <!-- Tower 3 -->
+      <polygon points="700,120 710,45 725,45 735,120"/>
+      <polygon points="705,80 730,80 732,85 703,85"/>
+      <polygon points="707,62 728,62 730,67 705,67"/>
+      <line x1="650" y1="50" x2="710" y2="50" stroke="white" stroke-width="2"/>
+      <line x1="735" y1="50" x2="790" y2="50" stroke="white" stroke-width="2"/>
+      <line x1="655" y1="62" x2="707" y2="62" stroke="white" stroke-width="1.5"/>
+      <line x1="728" y1="62" x2="785" y2="62" stroke="white" stroke-width="1.5"/>
+      <!-- Tower 4 -->
+      <polygon points="1000,120 1010,55 1025,55 1035,120"/>
+      <polygon points="1005,88 1030,88 1032,93 1003,93"/>
+      <polygon points="1007,70 1028,70 1030,75 1005,75"/>
+      <line x1="960" y1="60" x2="1010" y2="60" stroke="white" stroke-width="2"/>
+      <line x1="1035" y1="60" x2="1080" y2="60" stroke="white" stroke-width="2"/>
+      <!-- Tower 5 -->
+      <polygon points="1280,120 1290,48 1305,48 1315,120"/>
+      <polygon points="1285,82 1310,82 1312,87 1283,87"/>
+      <polygon points="1287,65 1308,65 1310,70 1285,70"/>
+      <line x1="1240" y1="53" x2="1290" y2="53" stroke="white" stroke-width="2"/>
+      <line x1="1315" y1="53" x2="1360" y2="53" stroke="white" stroke-width="2"/>
+      <!-- Wire connections between towers -->
+      <path d="M200,65 Q300,80 360,55" stroke="white" stroke-width="1.5" fill="none"/>
+      <path d="M480,55 Q590,75 650,50" stroke="white" stroke-width="1.5" fill="none"/>
+      <path d="M790,50 Q895,72 960,60" stroke="white" stroke-width="1.5" fill="none"/>
+      <path d="M1080,60 Q1180,75 1240,53" stroke="white" stroke-width="1.5" fill="none"/>
+    </g>
+  </svg>
+
+  <div class="header-content">
+    <div class="header-eyebrow">Norris Utilities LLC — Internal Finance Tools</div>
+    <div class="header-wordmark">NORRIS UTILITIES</div>
+    <div class="header-tagline">A Legacy of Commitment®</div>
+    <div class="header-tool-title">⚡ Accounts Payable Tracker</div>
+  </div>
+</div>
+
+<!-- Chevron Divider -->
+<div class="chevron-divider"></div>
+
+<!-- ─── MAIN ─── -->
+<div class="main">
+
+  <!-- STATS ROW -->
+  <div class="section-title">Financial Summary</div>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Total Outstanding</div>
+      <div class="stat-value blue">$187,420</div>
+      <div class="stat-sub">18 open invoices</div>
+    </div>
+    <div class="stat-card danger">
+      <div class="stat-label">Overdue Balance</div>
+      <div class="stat-value danger">$34,850</div>
+      <div class="stat-sub">5 overdue invoices</div>
+    </div>
+    <div class="stat-card warning">
+      <div class="stat-label">Due Within 7 Days</div>
+      <div class="stat-value warning">$42,300</div>
+      <div class="stat-sub">4 invoices due soon</div>
+    </div>
+    <div class="stat-card success">
+      <div class="stat-label">Paid This Month</div>
+      <div class="stat-value success">$93,715</div>
+      <div class="stat-sub">11 invoices cleared</div>
+    </div>
+    <div class="stat-card cyan">
+      <div class="stat-label">Total Vendors</div>
+      <div class="stat-value">12</div>
+      <div class="stat-sub">Active relationships</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Avg. Invoice Value</div>
+      <div class="stat-value">$10,412</div>
+      <div class="stat-sub">YTD average</div>
+    </div>
+  </div>
+
+  <!-- X-SEPARATOR -->
+  <div class="x-separator">× × ×</div>
+
+  <!-- AGING ANALYSIS -->
+  <div class="section-title">Aging Analysis</div>
+  <div class="aging-row">
+    <div class="aging-card">
+      <div class="aging-badge badge-current">Current</div>
+      <div class="aging-amount">$62,450</div>
+      <div class="aging-count">6 invoices · Not yet due</div>
+      <div class="aging-bar-wrap">
+        <div class="aging-bar" style="width:33%; background:#34C759;"></div>
+      </div>
+    </div>
+    <div class="aging-card">
+      <div class="aging-badge badge-1-30">1 – 30 Days</div>
+      <div class="aging-amount">$47,820</div>
+      <div class="aging-count">4 invoices · Approaching</div>
+      <div class="aging-bar-wrap">
+        <div class="aging-bar" style="width:26%; background:#FF9500;"></div>
+      </div>
+    </div>
+    <div class="aging-card">
+      <div class="aging-badge badge-31-60">31 – 60 Days</div>
+      <div class="aging-amount">$28,300</div>
+      <div class="aging-count">3 invoices · Late</div>
+      <div class="aging-bar-wrap">
+        <div class="aging-bar" style="width:15%; background:#FF6200;"></div>
+      </div>
+    </div>
+    <div class="aging-card">
+      <div class="aging-badge badge-61-90">61 – 90 Days</div>
+      <div class="aging-amount">$21,150</div>
+      <div class="aging-count">3 invoices · Critical</div>
+      <div class="aging-bar-wrap">
+        <div class="aging-bar" style="width:11%; background:#FF3B3B;"></div>
+      </div>
+    </div>
+    <div class="aging-card">
+      <div class="aging-badge badge-90plus">90+ Days</div>
+      <div class="aging-amount">$13,700</div>
+      <div class="aging-count">2 invoices · Delinquent</div>
+      <div class="aging-bar-wrap">
+        <div class="aging-bar" style="width:7%; background:#cc0000;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- X-SEPARATOR -->
+  <div class="x-separator">× × ×</div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search vendor, invoice, or amount…">
+    </div>
+    <div class="filter-group">
+      <button class="filter-btn active" onclick="filterTable(this,'ALL')">All</button>
+      <button class="filter-btn" onclick="filterTable(this,'PENDING')">Pending</button>
+      <button class="filter-btn" onclick="filterTable(this,'OVERDUE')">Overdue</button>
+      <button class="filter-btn" onclick="filterTable(this,'PAID')">Paid</button>
+      <button class="filter-btn" onclick="filterTable(this,'DISPUTED')">Disputed</button>
+    </div>
+    <button class="btn-add">＋ Add Invoice</button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table id="apTable">
+        <thead>
+          <tr>
+            <th>Vendor <span class="sort-arrow">↕</span></th>
+            <th>Invoice # <span class="sort-arrow">↕</span></th>
+            <th>Category <span class="sort-arrow">↕</span></th>
+            <th>Invoice Date <span class="sort-arrow">↕</span></th>
+            <th>Due Date <span class="sort-arrow">↕</span></th>
+            <th>Days Aging <span class="sort-arrow">↕</span></th>
+            <th style="text-align:right">Amount <span class="sort-arrow">↕</span></th>
+            <th style="text-align:right">Balance Due <span class="sort-arrow">↕</span></th>
+            <th>Status</th>
+            <th>Aging Bucket</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- Row 1 -->
+          <tr data-status="OVERDUE">
+            <td class="td-vendor">Wesco International</td>
+            <td><span class="td-invoice">INV-2024-0081</span></td>
+            <td>Electrical Materials</td>
+            <td class="td-date">2024-04-10</td>
+            <td class="td-date td-overdue">2024-05-10</td>
+            <td class="td-overdue">97 days</td>
+            <td class="td-amount">$18,400.00</td>
+            <td class="td-amount td-overdue">$18,400.00</td>
+            <td><span class="status-badge status-overdue">Overdue</span></td>
+            <td><span class="aging-pill ap-90plus">90+ Days</span></td>
+            <td>
+              <button class="action-btn">Pay</button>
+              <button class="action-btn danger">Flag</button>
+            </td>
+          </tr>
+
+          <!-- Row 2 -->
+          <tr data-status="OVERDUE">
+            <td class="td-vendor">HD Supply Solutions</td>
+            <td>

@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CB Onboarding Document — Norris Utilities®</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ HEADER ══ */
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, #06D0FF 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 300px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 6px 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      margin-bottom: 24px;
+    }
+
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .nu-header-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 16px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .nu-header-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      margin-top: 8px;
+    }
+
+    /* ══ CHEVRON ══ */
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    /* ══ CONTENT AREA ══ */
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      height: 65%;
+      background: radial-gradient(circle, rgba(0,0,255,0.018) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .nu-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+    }
+
+    /* ══ TABLE OF CONTENTS ══ */
+    .toc {
+      background: var(--nu-light-gray);
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 56px;
+      border-left: 4px solid var(--nu-blue);
+    }
+    .toc-title {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .toc ol {
+      list-style: none;
+      counter-reset: toc-counter;
+      padding: 0;
+    }
+    .toc li {
+      counter-increment: toc-counter;
+      margin-bottom: 8px;
+    }
+    .toc li a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--nu-body-text);
+      font-weight: 400;
+      font-size: 0.95rem;
+      padding: 6px 0;
+      transition: color 0.2s;
+    }
+    .toc li a:hover { color: var(--nu-blue); }
+    .toc li a::before {
+      content: counter(toc-counter);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-right: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ══ SECTION HEADERS ══ */
+    .nu-section {
+      margin-bottom: 56px;
+    }
+    .nu-section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--nu-medium-gray);
+    }
+    .nu-section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033cc 100%);
+      color: var(--nu-white);
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: 1.2rem;
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      line-height: 1.3;
+    }
+    .nu-section-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    /* ══ CARDS ══ */
+    .nu-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nu-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+    }
+    .nu-card h3 {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 12px;
+    }
+    .nu-card p, .nu-card li {
+      font-size: 0.92rem;
+      color: var(--nu-body-text);
+      line-height: 1.7;
+    }
+
+    /* ══ STEP LIST ══ */
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .step-item:last-child { border-bottom: none; }
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #0a0e5c, #0033cc);
+      color: var(--nu-white);
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 0.85rem;
+      margin-right: 16px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .step-content h4 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .step-content p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ══ INFO BOX ══ */
+    .info-box {
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .info-box p {
+      font-size: 0.9rem;
+      color: var(--nu-dark-text);
+    }
+    .info-box strong {
+      color: var(--nu-blue);
+    }
+
+    /* ══ WARNING BOX ══ */
+    .warning-box {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+      border-left: 4px solid #cc0000;
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .warning-box .warning-title {
+      font-weight: 900;
+      font-size: 0.95rem;
+      color: #cc0000;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .warning-box p, .warning-box li {
+      font-size: 0.9rem;
+      color: #4a1a1a;
+      line-height: 1.7;
+    }
+    .warning-box ul {
+      margin: 8px 0 0 20px;
+    }
+
+    /* ══ CONTACTS TABLE ══ */
+    .contacts-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    .contacts-table thead th {
+      background: linear-gradient(135deg, #0a0e5c, #0033cc);
+      color: var(--nu-white);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 12px 16px;
+      text-align: left;
+    }
+    .contacts-table thead th:first-child { border-radius: 8px 0 0 0; }
+    .contacts-table thead th:last-child { border-radius: 0 8px 0 0; }
+    .contacts-table tbody td {
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      color: var(--nu-body-text);
+    }
+    .contacts-table tbody tr:nth-child(even) td {
+      background: var(--nu-light-gray);
+    }
+    .contacts-table tbody tr:hover td {
+      background: #e8f0ff;
+    }
+    .contacts-table a {
+      color: var(--nu-blue);
+      text-decoration: none;
+    }
+    .contacts-table a:hover { text-decoration: underline; }
+
+    /* ══ FOLDER TREE ══ */
+    .folder-tree {
+      font-family: 'Lato', monospace;
+      font-size: 0.88rem;
+      line-height: 2;
+      padding: 20px 24px;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+    .folder-tree .folder {
+      color: var(--nu-cyan);
+      font-weight: 700;
+    }
+    .folder-tree .file {
+      color: #aaa;
+      font-weight: 400;
+    }
+    .folder-tree .indent { margin-left: 24px; }
+    .folder-tree .indent2 { margin-left: 48px; }
+
+    /* ══ BADGE PILL ══ */
+    .badge-pill {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+    .badge-pill.cyan {
+      background: var(--nu-cyan);
+      color: var(--nu-navy);
+    }
+    .badge-pill.red {
+      background: #cc0000;
+      color: var(--nu-white);
+    }
+
+    /* ══ CHECKLIST ══ */
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      padding: 8px 0;
+      font-size: 0.92rem;
+    }
+    .checklist li::before {
+      content: '☐';
+      font-size: 1.1rem;
+      margin-right: 12px;
+      color: var(--nu-blue);
+      flex-shrink: 0;
+    }
+
+    /* ══ FOOTER ══ */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 48px 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--nu-cyan);
+      margin-bottom: 16px;
+    }
+    .nu-footer-contact {
+      font-size: 0.88rem;
+      line-height: 2;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+    .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-legal {
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 240px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .nu-header-title { font-size: 1.4rem; }
+      .nu-container { padding: 40px 20px 60px; }
+      .nu-section-title { font-size: 1.2rem; }
+      .contacts-table { font-size: 0.8rem; }
+      .contacts-table thead th, .contacts-table tbody td { padding: 8px 10px; }
+      .step-item { flex-direction: column; }
+      .step-number { margin-bottom: 8px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-header-badge">Internal Document — Confidential</div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-header-title">CB Onboarding &amp; Operations Guide</div>
+    <div class="nu-header-subtitle">Caroline Butler — Administrative Operations Reference</div>
+  </header>
+
+  <!-- CHEVRON -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <!-- CONTENT -->
+  <main class="nu-content-area">
+    <div class="nu-container">
+
+      <!-- Welcome -->
+      <div class="nu-card" style="margin-bottom: 40px; border-left: 4px solid var(--nu-cyan);">
+        <h3 style="color: var(--nu-blue); font-size: 1.1rem;">Welcome, Caroline</h3>
+        <p>This document is your single reference for every operational process at Norris Utilities®. It covers the portal, shipping workflow, QuickBooks invoicing, file organization, key contacts, and boundaries on what requires Aaron's approval before action. Keep this bookmarked — it will be updated as processes evolve.</p>
+      </div>
+
+      <!-- TABLE OF CONTENTS -->
+      <nav class="toc">
+        <div class="toc-title">Table of Contents</div>
+        <ol>
+          <li><a href="#section-1">Norris Ops Portal — URL &amp; How to Use It</a></li>
+          <li><a href="#section-2">Shipping Workflow — Step by Step</a></li>
+          <li><a href="#section-3">QuickBooks Invoice Process</a></li>
+          <li><a href="#section-4">Google Drive Folder Structure</a></li>
+          <li><a href="#section-5">Key Contacts Reference</a></li>
+          <li><a href="#section-6">What CB Never Does Without Aaron's Approval</a></li>
+        </ol>
+      </nav>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- SECTION 1: PORTAL -->
+      <!-- ═══════════════════════════════════════ -->
+      <section class="nu-section" id="section-1">
+        <div class="nu-section-header">
+          <div class="nu-section-number">1</div>
+          <h2 class="nu-section-title">Norris Ops <span>Portal — URL &amp; How to Use It</span></h2>
+        </div>
+
+        <div class="nu-card">
+          <h3>Portal Access</h3>
+          <p><strong>URL:</strong> <a href="https://acnorris17.github.io/norris-ops/" style="color: var(--nu-blue); font-weight: 700;">https://acnorris17.github.io/norris-ops/</a></p>
+          <p style="margin-top: 8px;">Bookmark this link. It loads directly in any browser — no login required. The portal is hosted on GitHub Pages and updates automatically when Aaron pushes changes.</p>
+        </div>
+
+        <div class="nu-card">
+          <h3>What the Portal Contains</h3>
+          <ul style="margin: 8px 0 0 20px;">
+            <li>FlexPro Armor pricing sheets and customer-facing quote documents</li>
+            <li>Samson Rope product catalog and pricing with margin calculations</li>
+            <li>Shipping Document (SD) templates for order fulfillment</li>
+            <li>Sales tracking dashboards and pipeline reports</li>
+            <li>Brand assets, line cards, and customer-ready marketing collateral</li>
+          </ul>
+        </div>
+
+        <div class="nu-card">
+          <h3>How to Use It Day-to-Day</h3>
+          <ul style="margin: 8px 0 0 20px;">
+            <li><strong>Looking up a price?</strong> Navigate to the relevant product section. All prices reflect current margin targets (FlexPro Armor at 50%, Samson at 30%).</li>
+            <li><strong>Need a document for a customer?</strong> Open the file on the portal, verify it looks correct, then save or print-to-PDF from your browser.</li>
+            <li><strong>Something looks wrong or outdated?</strong> Message Aaron on Telegram immediately. Do not edit the portal directly.</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <p><strong>Important:</strong> The portal is read-only for CB. All updates flow through Aaron or the automated build system. If you notice a broken link, missing file, or incorrect price, flag it to Aaron on Telegram with the exact page name.</p>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- SECTION 2: SHIPPING WORKFLOW -->
+      <!-- ═══════════════════════════════════════ -->
+      <section class="nu-section" id="section-2">
+        <div class="nu-section-header">
+          <div class="nu-section-number">2</div>
+          <h2 class="nu-section-title">Shipping <span>Workflow — Step by Step</span></h2>
+        </div>
+
+        <p style="margin-bottom: 24px; font-size: 0.92rem;">Every order follows this exact sequence. No steps are skipped. If something stalls at any step, message Aaron on Telegram.</p>
+
+        <div class="nu-card" style="padding: 0; overflow: hidden;">
+          <ol class="step-list" style="padding: 8px 28px;">
+            <li class="step-item">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Order Comes In</h4>
+                <p>Aaron receives the order via email, phone call, or through a distributor/dealer channel. Aaron confirms the order details with the customer — product, quantity, ship-to address, and any special instructions.</p>
+              </div>
+            </li>
+            <li class="step-item">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Aaron Builds the Shipping Document (SD)</h4>
+                <p>Aaron creates the SD using the master template. The SD includes: customer name, ship-to address, product SKUs, quantities, order date, and any notes. Aaron saves the completed SD to Google Drive and notifies CB it is ready.</p>
+              </div>
+            </li>
+            <li class="step-item">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Aaron Ships the Order</h4>
+                <p>Aaron coordinates with the supplier or ships directly from inventory. Once shipped, Aaron obtains the tracking number and carrier information (UPS, FedEx, or freight LTL) and sends it to CB.</p>
+              </div>
+            </li>
+            <li class="step-item">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>CB Enters Tracking in Google Sheets <span class="badge-pill cyan">CB Action</span></h4>
+                <p>CB opens the shared Google Sheets order tracker. Locate the row for this order (match by customer name and order date). Enter: tracking number, carrier, ship date. Mark the status column as <strong>"Shipped"</strong>.</p>
+              </div>
+            </li>
+            <li class="step-item">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <h4>CB Creates the QuickBooks Invoice <span class="badge-pill cyan">CB Action</span></h4>
+                <p>Using the SD as the source of truth, CB creates the invoice in QuickBooks Online. Match the line items exactly to the SD — same SKUs, descriptions, quantities, and prices. Apply the correct customer payment terms. See Section 3 for detailed QB instructions.</p>
+              </div>
+            </li>
+            <li class="step-item">
+              <div class="step-number">6</div>
+              <div class="step-content">
+                <h4>CB Sends the Invoice to the Customer <span class="badge-pill cyan">CB Action</span></h4>
+                <p>Send the invoice directly from QuickBooks using the customer's email on file. Include the tracking number in the invoice email message body so the customer has everything in one place. BCC Aaron on the invoice email.</p>
+              </div>
+            </li>
+            <li class="step-item">
+              <div class="step-number">7</div>
+              <div class="step-content">
+                <h4>CB Updates Google Sheets Status <span class="badge-pill cyan">CB Action</span></h4>
+                <p>Return to the Google Sheets tracker. Update the status to <strong>"Invoiced"</strong>. Enter the QB invoice number and the date sent. This closes the loop on that order.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="info-box" style="margin-top: 24px;">
+          <p><strong>Shipping Cost Formula (Ben's Formula):</strong> Customer shipping cost = ROUNDUP(ROUNDUP(RegCost, 0) × 1.10, 0). This rounds the base shipping cost up to the nearest whole dollar, then adds 10%, and rounds up again. Aaron will provide the RegCost figure on the SD.</p>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- SECTION 3: QB INVOICE PROCESS -->
+      <!-- ═══════════════════════════════════════ -->
+      <section class="nu-section" id="section-3">
+        <div class="nu-section-header">
+          <div class="nu-section-number">3</div>
+          <h2 class="nu-section-title">QuickBooks <span>Invoice Process</span></h2>
+        </div>
+
+        <div class="nu-card">
+          <h3>Creating the Invoice</h3>
+          <ol style="margin: 8px 0 0 20px; line-height: 2.2;">
+            <li>Log in to QuickBooks Online at <strong>qbo.intuit.com</strong></li>
+            <li>Click <strong>+ New</strong> → <strong>Invoice</strong></li>
+            <li>Select the customer from the dropdown (if new customer, see below)</li>
+            <li>Set the <strong>Invoice Date</strong> to the ship date from the SD</li>
+            <li>Set <strong>Due Date</strong> per the customer's payment terms (Net 30 is standard unless Aaron specifies otherwise)</li>
+            <li>Add each line item from the SD:
+              <ul style="margin: 4px 0 4px 20px;">
+                <li><strong>Product/Service:</strong> Match the SKU (e.g., NU-BC-2851)</li>
+                <li><strong>Description:</strong> Use the description exactly as written on the SD</li>
+                <li><strong>Quantity:</strong> Match the SD</li>
+                <li><strong>Rate:</strong> Match the SD price (this already reflects the correct margin)</li>
+              </ul>
+            </li>
+            <li>Add shipping as a separate line item if applicable, using Ben's Formula result</li>
+            <li>Review the total against the SD to confirm they match</li>
+            <li>Add a <strong>Message on Invoice:</strong> "Thank you for your business. Tracking: [NUMBER] via [CARRIER]."</li>
+            <li>Click <strong>Save and Send</strong></li>
+          </ol>
+        </div>
+
+        <div class="nu-card">
+          <h3>New Customer Setup in QuickBooks</h3>
+          <p>If the customer does not exist in QB yet:</p>
+          <ul style="margin: 8px 0 0 20px;">
+            <li>Click <strong>+ New</strong> → <strong>Customer</strong></li>
+            <li>Enter the company name, billing address, shipping address, primary contact name, email, and phone</li>
+            <li>Set payment terms to <strong>Net 30</strong> unless Aaron specifies otherwise</li>
+            <li>Save, then return to create the invoice</li>
+          </ul>
+        </div>
+
+        <div class="warning-box">
+          <div class="warning-title">⚠ Never Do This in QuickBooks</div>
+          <ul>
+            <li>Never change a product price without Aaron's direct instruction</li>
+            <li>Never delete an invoice — if an error is made, void it and recreate</li>
+            <li>Never set up new payment terms without Aaron's approval</li>
+            <li>Never apply credits or discounts without Aaron's explicit written approval</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- SECTION 4: GOOGLE DRIVE -->
+      <!-- ═══════════════════════════════════════ -->
+      <section class="nu-section" id="section-4">
+        <div class="nu-section-header">
+          <div class="nu-section-number">4</div>
+          <h2 class="nu-section-title">Google Drive <span>Folder Structure</span></h2>
+        </div>
+
+        <p style="margin-bottom: 20px; font-size: 0.92rem;">All Norris Utilities® files live in Google Drive. Use this exact structure. Never create new top-level folders without Aaron's approval.</p>
+
+        <div class="folder-tree">
+          <div><span class="folder">📁 Norris Utilities</span></div>
+          <div class="indent"><span class="folder">📁 Customers</span></div>
+          <div class="indent2"><span class="folder">📁 [Customer Name]</span></div>
+          <div class="indent2" style="margin-left: 72px;"><span class="file">📄 Quotes</span></div>
+          <div class="indent2" style="margin-left: 72px;"><span class="file">📄 Orders / SDs</span></div>
+          <div class="indent2" style="margin-left: 72px;"><span class="file">📄 Invoices</span></div>
+          <div class="indent2" style="margin-left: 72px;"><span class="file">📄 Correspondence</span></div>
+          <div class="indent"><span class="folder">📁 Products</span></div>
+          <div class="indent2"><span class="folder">📁 FlexPro Armor</span></div>
+          <div class="indent2"><span class="folder">📁 Samson Rope</span></div>
+          <div class="indent2"><span class="folder">📁 Skylift</span></div>
+          <div class="indent2"><span class="folder">📁 Bay Shore Systems</span></div>
+          <div class="indent2"><span class="folder">📁 Boss Products</span></div>
+          <div class="indent"><span class="folder">📁 Shipping Documents</span></div>
+          <div class="indent2"><span class="file">📄 SD-[YYYY]-[###].pdf</span></div>
+          <div class="indent"><span class="folder">📁 Templates</span></div>
+          <div class="indent2"><span class="file">📄 SD Master Template</span></div>
+          <div class="indent2"><span class="file">📄 Quote Template</span></div>
+          <div class="indent"><span class="folder">📁 Brand Assets</span></div>
+          <div class="indent2"><span class="file">📄 Logos, Line Cards, Collateral</span></div>
+          <div class="indent"><span class="folder">📁 Admin</span></div>
+          <div class="indent2"><span class="file">📄 Order Tracker (Google Sheets)</span></div>
+          <div class="indent2"><span class="file">📄 Contact Lists</span></div>
+          <div class="indent2"><span class="file">📄 Process Documents</span></div>
+        </div>
+
+        <div class="info-box" style="margin-top: 24px;">
+          <p><strong>Naming Convention:</strong> Shipping Documents follow the format <strong>SD-2025-001</strong>, <strong>SD-2025-002</strong>, etc. Customer folders use the full company name (e.g., "Sheffield Utilities" not "Sheffield"). Keep names clean — no abbreviations unless universally understood.</p>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- SECTION 5: KEY CONTACTS -->
+      <!-- ═══════════════════════════════════════ -->
+      <section class="nu-section" id="section-5">
+        <div class="nu-section-header">
+          <div class="nu-section-number">5</div>
+          <h2 class="nu-section-title">Key <span>Contacts Reference</span></h2>
+        </div>
+
+        <div class="nu-card" style="padding: 0; overflow: hidden;">
+          <table class="contacts-table">
+            <thead>
+              <tr>
+                <th>Contact</th>
+                <th>Company / Role</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Troy Gongwer</strong></td>
+                <td>Boss Products</td>
+                <td>Always CC both Troy AND Thayne on all Boss communications</td>
+              </tr>
+              <tr>
+                <td><strong>Thayne Grove</strong></td>
+                <td>Boss Products</td>
+                <td>Always CC both Troy AND Thayne on all Boss communications</td>
+              </tr>
+              <tr>
+                <td><strong>Donna Poll</strong></td>
+                <td>Samson Rope</td>
+                <td>Always CC both Donna AND Sarah on all Samson communications</td>
+              </tr>
+              <tr>
+                <td><strong>Sarah Daniels</strong></td>
+                <td>Samson Rope</td>
+                <td>Always CC both Donna AND Sarah on all Samson communications</td>
+              </tr>
+              <tr>
+                <td><strong>Andrew Jarmoszuk</strong></td>
+                <td>Skylift</td>
+                <td>Primary Skylift contact</td>
+              </tr>
+              <tr>
+                <td><strong>Dale Williams</strong></td>
+                <td>Skylift</td>
+                <td>Secondary contact</td>
+              </tr>
+              <tr>
+                <td><strong>Nick Jarmoszuk Jr</strong></td>
+                <td>Skylift</td>
+                <td>Secondary contact</td>
+              </tr>
+              <tr>
+                <td><strong>Jared Lemoine</strong></td>
+                <td>Irby Construction</td>
+                <td>New primary contact (replaced Gary Wiggs &amp; Scott Argyle)</td>
+              </tr>
+              <tr>
+                <td><strong>Herb Minatre</strong></td>
+                <td>Bay Shore Systems (Owner)</td>
+                <td>Owner — use for escalations only</td>
+              </tr>
+              <tr>
+                <td><strong>Andy Barron</strong></td>
+                <td>Bay Shore Systems</td>
+                <td>Primary day-to-day contact; Aaron's travel/sales partner</td>
+              </tr>
+              <tr>
+                <td><strong>Nick Gordon</strong></td>
+                <td>Skylift</td>
+                <td>Pricing and specifications inquiries</td>
+              </tr>
+              <tr>
+                <td><strong>Patrick Lavette</strong></td>
+                <td>Renasant Bank</td>
+                <td>Banking relationship</td>
+              </tr>
+              <tr>
+                <td><strong>Rick Sutherland</strong></td>
+                <td>EPB Chattanooga</td>
+                <td>Customer contact</td>
+              </tr>
+              <tr>
+                <td><strong>Shon Cunningham</strong></td>
+                <td>Gridco</td>
+                <td>Customer contact</td>
+              </tr>
+              <tr>
+                <td><strong>Michael Waldrep</strong></td>
+                <td>Sheffield Utilities</td>
+                <td>Customer contact</td>
+              </tr>
+              <tr>
+                <td><strong>MK Smith</strong></td>
+                <td>Marketing Contractor</td>
+                <td>Marketing projects — coordinate through Aaron</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="warning-box" style="margin-top: 24px;">
+          <div class="warning-title">⚠ Critical CC Rules</div>
+          <ul>
+            <li><strong>Boss Products:</strong> Always CC BOTH Troy Gongwer AND Thayne Grove — never email just one</li>
+            <li><strong>Samson Rope:</strong> Always CC BOTH Donna Poll AND Sarah Daniels — never email just one</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- SECTION 6: NEVER DO WITHOUT APPROVAL -->
+      <!-- ═══════════════════════════════════════ -->
+      <section class="nu-section" id="section-6">
+        <div class="nu-section-header">
+          <div class="nu-section-number">6</div>
+          <h2 class="nu-section-title">What CB <span>Never Does Without Aaron's Approval</span></h2>
+        </div>
+
+        <p style="margin-bottom: 20px; font-size: 0.92rem;">These items require Aaron's explicit written approval (Telegram message or email) before any action is taken. No exceptions.</p>
+
+        <div class="warning-box" style="border-left-color: #cc0000;">
+          <div class="warning-title">🛑 Requires Aaron's Approval — Always</div>
+          <ul style="line-height: 2.2;">
+            <li><strong>Pricing changes</strong> — Never adjust any price on a quote, invoice, or portal document. All pricing flows from Aaron.</li>
+            <li><strong>Customer-facing communications</strong> — No emails, calls, or messages to customers or suppliers without Aaron reviewing the content first. Routine invoice sends from QB (using the standard template) are the only exception.</li>
+            <li><strong>Discounts, credits, or refunds</strong> — Never apply any discount, credit memo, or refund in QuickBooks without written approval from Aaron.</li>
+            <li><strong>New customer setup with non-standard terms</strong> — Net 30 is the default. Any other payment terms require Aaron's approval.</li>
+            <li><strong>Vendor/supplier communications</strong> — Do not contact Boss Products, Samson Rope, Skylift, Bay Shore Systems, or any supplier directly unless Aaron specifically instructs it.</li>
+            <li><strong>Creating new Google Drive top-level folders</strong> — Use the existing structure. If a new folder is needed, ask Aaron first.</li>
+            <li><strong>Editing or modifying portal files</strong> — The Norris Ops portal is managed by Aaron. Report issues; do not attempt to fix them.</li>
+            <li><strong>Social media posts or brand communications</strong> — All public-facing content goes through Aaron and MK Smith.</li>
+            <li><strong>Committing to delivery dates</strong> — Aaron manages all delivery timelines. Never promise a customer a ship date.</li>
+            <li><strong>Sharing internal pricing, cost data, or margin information</strong> — This data is strictly confidential. Never share with customers, suppliers, or anyone outside the company.</li>
+          </ul>
+        </div>
+
+        <div class="info-box" style="margin-top: 24px;">
+          <p><strong>When in doubt, ask.</strong> It is always better to pause and message Aaron on Telegram than to take an action that needs to be reversed. Aaron checks Telegram constantly starting at 4 AM.</p>
+        </div>
+      </section>
+
+      <!-- QUICK REFERENCE CHECKLIST -->
+      <section class="nu-section" style="margin-bottom: 0;">
+        <div class="nu-section-header">
+          <div class="nu-section-number" style="background: linear-gradient(135deg, #0a0e5c, var(--nu-cyan));">✓</div>
+          <h2 class="nu-section-title">Daily <span>Quick Reference Checklist</span></h2>
+        </div>
+
+        <div class="nu-card">
+          <ul class="checklist">
+            <li>Check Telegram for messages from Aaron</li>
+            <li>Review Google Sheets order tracker for any orders marked "Shipped" that need invoicing</li>
+            <li>Create and send QB invoices for all shipped orders</li>
+            <li>Update Google Sheets tracker with invoice numbers and "Invoiced" status</li>
+            <li>Verify all SD files are saved in the correct Google Drive customer folder</li>
+            <li>Flag any discrepancies, missing info, or customer issues to Aaron via Telegram</li>
+            <li>Check QB for any overdue invoices and report to Aaron</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+    <div class="nu-footer-legal">
+      Internal Document — Confidential. Norris Utilities® and A Legacy of Commitment® are registered trademarks of Norris Utilities, LLC. Rev. June 2025.
+    </div>
+  </footer>
+
+</body>
+</html>

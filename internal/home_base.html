@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norris Utilities - Home Base Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            color: #333;
+            background-color: #fff;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0000FF 0%, #000033 100%);
+            color: white;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" opacity="0.1"><path d="M0,300 L200,100 L400,300 L600,100 L800,300 L1000,100 L1200,300" stroke="white" stroke-width="2" fill="none"/><circle cx="200" cy="100" r="8" fill="white"/><circle cx="600" cy="100" r="8" fill="white"/><circle cx="1000" cy="100" r="8" fill="white"/></svg>');
+            background-size: cover;
+            opacity: 0.2;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .chevron-container {
+            background: #fff;
+            text-align: center;
+            margin-top: -2px;
+        }
+        
+        .chevron-container svg {
+            display: block;
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .alert-section {
+            background: #fff;
+            padding: 40px 0;
+        }
+        
+        .alert-header {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .alert-badge {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        .alert-item {
+            background: #fff3cd;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+        
+        .alert-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .priority-section {
+            background: #F8F9FA;
+            padding: 40px 0;
+        }
+        
+        .priority-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .priority-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .priority-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #0000FF;
+            border-radius: 4px;
+            margin-right: 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .checkbox:checked {
+            background: #0000FF;
+        }
+        
+        .expand-icon {
+            font-size: 20px;
+            color: #0000FF;
+            transition: transform 0.3s ease;
+        }
+        
+        .priority-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 15px;
+            padding-left: 39px;
+        }
+        
+        .priority-details.expanded {
+            max-height: 200px;
+        }
+        
+        .nav-section {
+            background: #fff;
+            padding: 40px 0;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .nav-tile {
+            background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .nav-tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+        
+        .nav-tile h3 {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        
+        .activity-section {
+            background: #F8F9FA;
+            padding: 40px 0;
+        }
+        
+        .activity-feed {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-time {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .contacts-section {
+            background: #fff;
+            padding: 40px 0;
+        }
+        
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .contact-card {
+            background: #F8F9FA;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .contact-name {
+            font-weight: 700;
+            color: #0000FF;
+            margin-bottom: 5px;
+        }
+        
+        .contact-role {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #0000FF 0%, #000033 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-tagline {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .footer-contact {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .logo {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Norris Utilities®</div>
+            <div class="tagline">Home Base Portal - Operations Dashboard</div>
+        </div>
+    </header>
+    
+    <div class="chevron-container">
+        <svg viewBox="0 0 1200 60">
+            <polygon points="0,0 600,60 1200,0" fill="#0000FF"/>
+        </svg>
+    </div>
+    
+    <section class="alert-section">
+        <div class="container">
+            <h2 class="alert-header">
+                Critical Alerts
+                <span class="alert-badge">2</span>
+            </h2>
+            <div class="alert-item">
+                <strong>BSS Order #2834</strong> - FlexPro Armor® shipment delayed. Customer notification required by EOD.
+            </div>
+            <div class="alert-item">
+                <strong>Samson Rope Inventory</strong> - Low stock alert on 3/4" ArborPlex. Reorder threshold reached.
+            </div>
+        </div>
+    </section>
+    
+    <section class="priority-section">
+        <div class="container">
+            <h2 class="section-title">Today's Priority Actions</h2>
+            <div class="priority-item" onclick="toggleExpand(this)">
+                <div class="priority-header">
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" class="checkbox" onclick="event.stopPropagation()">
+                        <span><strong>Follow up with Rick Sutherland</strong> - EPB Chattanooga bucket cover order</span>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="priority-details">
+                    <p>Contact Rick regarding the 5-unit order of NU-BC2851 covers. Confirm delivery timeline and installation support requirements. Reference quote #Q2024-0312.</p>
+                </div>
+            </div>
+            <div class="priority-item" onclick="toggleExpand(this)">
+                <div class="priority-header">
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" class="checkbox" onclick="event.stopPropagation()">
+                        <span><strong>Review Skylift pricing update</strong> - Q1 2024 adjustments</span>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="priority-details">
+                    <p>Nick Gordon sent updated pricing structure. Review margin impact and update internal systems. Target 12-15% equipment margins.</p>
+                </div>
+            </div>
+            <div class="priority-item" onclick="toggleExpand(this)">
+                <div class="priority-header">
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" class="checkbox" onclick="event.stopPropagation()">
+                        <span><strong>Sheffield Utilities demo prep</strong> - FlexPro Armor® presentation</span>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="priority-details">
+                    <p>Prepare demo units for Michael Waldrep's team visit Thursday. Include both NU-BC2851 and NU-BC2834 models. Print updated spec sheets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="nav-section">
+        <div class="container">
+            <h2 class="section-title">Quick Navigation</h2>
+            <div class="nav-grid">
+                <a href="/operations" class="nav-tile">
+                    <h3>Operations Center</h3>
+                    <p>Order management, inventory tracking, shipping logistics</p>
+                </a>
+                <a href="/bss" class="nav-tile">
+                    <h3>BSS Portal</h3>
+                    <p>Bay Shore Systems equipment, quotes, technical specs</p>
+                </a>
+                <a href="/nu-products" class="nav-tile">
+                    <h3>NU Products</h3>
+                    <p>FlexPro Armor® catalog, pricing, customer resources</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="activity-section">
+        <div class="container">
+            <h2 class="section-title">Recent Activity</h2>
+            <div class="activity-feed">
+                <div class="activity-item">
+                    <div class="activity-time">2 hours ago</div>
+                    <div>New order received: Irby Construction - 3x NU-BC2851-C combo units</div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-time">4 hours ago</div>
+                    <div>Samson Rope shipment confirmed - Tracking #1Z999AA10123456784</div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-time">Yesterday</div>
+                    <div>Gridco Systems quote approved - ReelStrong equipment package</div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-time">Yesterday</div>
+                    <div>FlexPro Armor® production update: 12 units completed this week</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contacts-section">
+        <div class="container">
+            <h2 class="section-title">Key Contacts - Quick Reference</h2>
+            <div class="contacts-grid">
+                <div class="contact-card">
+                    <div class="contact-name">Rick Sutherland</div>
+                    <div class="contact-role">EPB Chattanooga</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-name">Shon Cunningham</div>
+                    <div class="contact-role">Gridco Systems</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-name">Michael Waldrep</div>
+                    <div class="contact-role">Sheffield Utilities</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-name">Nick Gordon</div>
+                    <div class="contact-role">Skylift Representative</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-name">Andy Barron</div>
+                    <div class="contact-role">Bay Shore Systems</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-name">Donna Poll</div>
+                    <div class="contact-role">Samson Rope</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-tagline">A Legacy of Commitment®</div>
+        <div>Phoenix Icon® - Rising from Challenge to Excellence</div>
+        <div class="footer-contact">
+            <p>Aaron C. Norris, Founder & CEO</p>
+            <p>205-500-1343 | acnorris@norrisutilities.com</p>
+            <p>130 Inverness Plaza #210, Birmingham, AL 35242</p>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleExpand(element) {
+            const details = element.querySelector('.priority-details');
+            const icon = element.querySelector('.expand-icon');
+            
+            if (details.classList.contains('expanded')) {
+                details.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                details.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+</html>

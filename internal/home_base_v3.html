@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Base v3 — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ══ ROOT VARIABLES ══ */
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --nu-accent-gold: #C9A84C;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* ══ BASE ══ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ HEADER — Power Tower Infrastructure Overlay ══ */
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 48px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+
+    .nu-header * { position: relative; z-index: 2; }
+
+    /* ══ LIVE DATE PILL ══ */
+    .nu-date-pill {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 6px 20px;
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ══ LOGO AREA ══ */
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+    }
+    .nu-phoenix-icon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .nu-tagline {
+      font-family: var(--font-primary);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .nu-header-label {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      padding: 4px 16px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--nu-cyan);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 12px;
+    }
+
+    /* ══ WHITE CHEVRON TRANSITION ══ */
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    /* ══ GHOST PHOENIX WATERMARK ══ */
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    /* ══ MAIN CONTAINER ══ */
+    .nu-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 40px 60px;
+    }
+
+    /* ══ PROGRESS BAR ══ */
+    .nu-progress-section {
+      margin-bottom: 48px;
+    }
+    .nu-progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .nu-progress-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .nu-progress-percent {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+    }
+    .nu-progress-bar-track {
+      width: 100%;
+      height: 12px;
+      background: var(--nu-medium-gray);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    .nu-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
+      border-radius: 6px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .nu-progress-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 30px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4));
+      border-radius: 0 6px 6px 0;
+    }
+    .nu-progress-sub {
+      font-family: var(--font-primary);
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    /* ══ SECTION HEADERS ══ */
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .nu-section-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+    .nu-section-desc {
+      font-family: var(--font-primary);
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    /* ══ NAV GRID ══ */
+    .nu-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    /* ══ CHEVRON BADGES — Navigation Items ══ */
+    .nu-badge {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 18px 28px 18px 20px;
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 50%, calc(100% - 24px) 100%, 0 100%, 24px 50%);
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      min-height: 64px;
+    }
+    .nu-badge:hover {
+      background: linear-gradient(135deg, #0000CC 0%, #0033FF 100%);
+      transform: translateX(4px);
+    }
+    .nu-badge-icon {
+      width: 28px;
+      height: 28px;
+      margin-right: 14px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .nu-badge-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .nu-badge-label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+    .nu-badge-sub {
+      display: block;
+      font-weight: 300;
+      font-size: 0.75rem;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+    .nu-badge-check {
+      width: 20px;
+      height: 20px;
+      margin-left: 12px;
+      flex-shrink: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .nu-badge-check:checked {
+      background: var(--nu-cyan);
+      border-color: var(--nu-cyan);
+    }
+    .nu-badge-check:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--nu-navy);
+      line-height: 1;
+    }
+
+    .nu-badge.completed {
+      background: linear-gradient(135deg, #1a3e1a 0%, #2a5e2a 100%);
+    }
+
+    /* ══ TRACKER SECTION ══ */
+    .nu-tracker-section {
+      margin-bottom: 48px;
+    }
+
+    .nu-tracker-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* ══ CARDS ══ */
+    .nu-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .nu-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .nu-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .nu-card-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .nu-card-desc {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: #777;
+      line-height: 1.5;
+    }
+    .nu-card-status {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .nu-card-status.active {
+      background: rgba(0, 200, 83, 0.1);
+      color: #00C853;
+    }
+    .nu-card-status.pending {
+      background: rgba(255, 193, 7, 0.1);
+      color: #FFA000;
+    }
+    .nu-card-status.review {
+      background: rgba(0, 0, 255, 0.08);
+      color: var(--nu-blue);
+    }
+
+    /* ══ QUICK STATS ROW ══ */
+    .nu-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .nu-stat-card {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .nu-stat-value {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-blue);
+      line-height: 1.2;
+    }
+    .nu-stat-label {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    /* ══ DIVIDER ══ */
+    .nu-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--nu-medium-gray), transparent);
+      margin: 48px 0;
+    }
+
+    /* ══ CONFETTI CANVAS ══ */
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ══ FOOTER ══ */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+    .nu-footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 1024px) {
+      .nu-tracker-grid { grid-template-columns: repeat(2, 1fr); }
+      .nu-stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nu-header { padding: 36px 20px 60px; min-height: 260px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .nu-container { padding: 32px 20px 40px; }
+      .nu-nav-grid { grid-template-columns: 1fr; }
+      .nu-badge {
+        clip-path: none;
+        border-radius: 8px;
+        padding: 16px 20px;
+      }
+      .nu-tracker-grid { grid-template-columns: 1fr; }
+      .nu-stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .nu-stats-row { grid-template-columns: 1fr; }
+    }
+
+    /* ══ PRINT ══ */
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      #confetti-canvas { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CONFETTI CANVAS -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-date-pill" id="live-date"></div>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-header-label">HOME BASE — COMMAND CENTER v3</div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div class="nu-container">
+
+      <!-- PROGRESS BAR -->
+      <div class="nu-progress-section">
+        <div class="nu-progress-header">
+          <div class="nu-progress-title">Daily Mission Progress</div>
+          <div class="nu-progress-percent" id="progress-percent">0%</div>
+        </div>
+        <div class="nu-progress-bar-track">
+          <div class="nu-progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="nu-progress-sub" id="progress-sub">0 of 10 sections completed — check off each section as you finish</div>
+      </div>
+
+      <!-- QUICK STATS -->
+      <div class="nu-stats-row">
+        <div class="nu-stat-card">
+          <div class="nu-stat-value">20+</div>
+          <div class="nu-stat-label">States Served</div>
+        </div>
+        <div class="nu-stat-card">
+          <div class="nu-stat-value">4</div>
+          <div class="nu-stat-label">Product Lines</div>
+        </div>
+        <div class="nu-stat-card">
+          <div class="nu-stat-value">50%</div>
+          <div class="nu-stat-label">FlexPro Margin</div>
+        </div>
+        <div class="nu-stat-card">
+          <div class="nu-stat-value">3</div>
+          <div class="nu-stat-label">Sales Channels</div>
+        </div>
+      </div>
+
+      <div class="nu-divider"></div>
+
+      <!-- NAVIGATION SECTION -->
+      <div class="nu-section-title">COMMAND <span>NAVIGATION</span></div>
+      <div class="nu-section-desc">Complete each section and check it off. Hit 100% to celebrate.</div>
+
+      <div class="nu-nav-grid">
+
+        <!-- 1. SALES PIPELINE -->
+        <div class="nu-badge" data-index="0">
+          <div class="nu-badge-icon">📊</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">Sales Pipeline</span>
+            <span class="nu-badge-sub">Active leads, proposals, follow-ups</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+        <!-- 2. FLEXPO ARMOR -->
+        <div class="nu-badge" data-index="1">
+          <div class="nu-badge-icon">🛡️</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">FlexPro Armor</span>
+            <span class="nu-badge-sub">Bucket covers — pricing, SKUs, orders</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+        <!-- 3. SAMSON ROPE -->
+        <div class="nu-badge" data-index="2">
+          <div class="nu-badge-icon">🪢</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">Samson Rope</span>
+            <span class="nu-badge-sub">Authorized distributor — 30% margin</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+        <!-- 4. SKYLIFT -->
+        <div class="nu-badge" data-index="3">
+          <div class="nu-badge-icon">🏗️</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">Skylift Bucket Trucks</span>
+            <span class="nu-badge-sub">Equipment sales, specs, Nick Gordon</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+        <!-- 5. BAY SHORE SYSTEMS -->
+        <div class="nu-badge" data-index="4">
+          <div class="nu-badge-icon">🔩</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">Bay Shore Systems</span>
+            <span class="nu-badge-sub">Drill rigs — SE territory rep</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+        <!-- 6. CUSTOMER TRACKER -->
+        <div class="nu-badge" data-index="5">
+          <div class="nu-badge-icon">👥</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">Customer Tracker</span>
+            <span class="nu-badge-sub">Contacts, accounts, relationship notes</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+        <!-- 7. PRICING ENGINE -->
+        <div class="nu-badge" data-index="6">
+          <div class="nu-badge-icon">💰</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">Pricing Engine</span>
+            <span class="nu-badge-sub">Margins, shipping calc, channel pricing</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+        <!-- 8. COMMUNICATIONS -->
+        <div class="nu-badge" data-index="7">
+          <div class="nu-badge-icon">✉️</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">Communications Hub</span>
+            <span class="nu-badge-sub">Email drafts, follow-ups, templates</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+        <!-- 9. BRAND ASSETS -->
+        <div class="nu-badge" data-index="8">
+          <div class="nu-badge-icon">🎨</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">Brand Assets</span>
+            <span class="nu-badge-sub">Phoenix Icon®, Line Card, design system</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+        <!-- 10. OPERATIONS & ADMIN -->
+        <div class="nu-badge" data-index="9">
+          <div class="nu-badge-icon">⚙️</div>
+          <div class="nu-badge-content">
+            <span class="nu-badge-label">Operations &amp; Admin</span>
+            <span class="nu-badge-sub">Invoicing, banking, compliance</span>
+          </div>
+          <input type="checkbox" class="nu-badge-check" title="Mark complete">
+        </div>
+
+      </div>
+
+      <div class="nu-divider"></div>
+
+      <!-- ACTIVE TRACKERS -->
+      <div class="nu-tracker-section">
+        <div class="nu-section-title">LIVE <span>TRACKERS</span></div>
+        <div class="nu-section-desc">Real-time status across all active workstreams.</div>
+
+        <div class="nu-tracker-grid">
+          <div class="nu-card">
+            <div class="nu-card-icon">📋</div>
+            <div class="nu-card-title">FlexPro Armor Orders</div>
+            <div class="nu-card-desc">Track bucket cover orders by SKU. NU-BC-2851, NU-BC-2834, combo kits. 50% margin on all units.</div>
+            <span class="nu-card-status active">Active</span>
+          </div>
+
+          <div class="nu-card">
+            <div class="nu-card-icon">🧵</div>
+            <div class="nu-card-title">Samson Rope Inventory</div>
+            <div class="nu-card-desc">Authorized distributor stock levels. Donna Poll and Sarah Daniels CC on all Samson communications.</div>
+            <span class="nu-card-status active">Active</span>
+          </div>
+
+          <div class="nu-card">
+            <div class="nu-card-icon">🚚</div>
+            <div class="nu-card-title">Equipment Pipeline</div>
+            <div class="nu-card-desc">Skylift bucket trucks and Bay Shore drill rigs. Coordinate with Nick Gordon and Andy Barron.</div>
+            <span class="nu-card-status pending">In Progress</span>
+          </div>
+
+          <div class="nu-card">
+            <div class="nu-card-icon">🏦</div>
+            <div class="nu-card-title">Banking &amp; Finance</div>
+            <div class="nu-card-desc">Renasant Bank relationship with Patrick Lavette. Invoice tracking and receivables.</div>
+            <span class="nu-card-status review">Review</span>
+          </div>
+
+          <div class="nu-card">
+            <div class="nu-card-icon">🤝</div>
+            <div class="nu-card-title">Key Accounts</div>
+            <div class="nu-card-desc">EPB Chattanooga (Rick Sutherland), Sheffield Utilities (Michael Waldrep), Gridco (Shon Cunningham).</div>
+            <span class="nu-card-status active">Active</span>
+          </div>
+
+          <div class="nu-card">
+            <div class="nu-card-icon">📦</div>
+            <div class="nu-card-title">Shipping Calculator</div>
+            <div class="nu-card-desc">Customer cost = ROUNDUP(ROUNDUP(RegCost, 0) × 1.10, 0). Automated markup on all outbound freight.</div>
+            <span class="nu-card-status active">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="nu-divider"></div>
+
+      <!-- CHANNEL PRICING REFERENCE -->
+      <div class="nu-section-title">CHANNEL <span>PRICING MATRIX</span></div>
+      <div class="nu-section-desc">Three-tier distribution model across all product lines.</div>
+
+      <div class="nu-stats-row" style="margin-bottom: 0;">
+        <div class="nu-stat-card">
+          <div class="nu-stat-value" style="color: #00C853;">Direct</div>
+          <div class="nu-stat-label">Full Price</div>
+        </div>
+        <div class="nu-stat-card">
+          <div class="nu-stat-value" style="color: #FFA000;">Dealer</div>
+          <div class="nu-stat-label">30% Off List</div>
+        </div>
+        <div class="nu-stat-card">
+          <div class="nu-stat-value" style="color: var(--nu-blue);">Distributor</div>
+          <div class="nu-stat-label">40% Off List</div>
+        </div>
+        <div class="nu-stat-card">
+          <div class="nu-stat-value" style="font-size: 1.4rem; color: var(--nu-dark-text);">12–15%</div>
+          <div class="nu-stat-label">Equipment Margin</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris | Founder &amp; CEO<br>
+      Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a><br>
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+  <script>
+    // ══ LIVE DATE ══
+    (function setLiveDate() {
+      var el = document.getElementById('live-date');
+      var now = new Date();
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      el.textContent = now.toLocaleDateString('en-US', options);
+    })();
+
+    // ══ PROGRESS TRACKING ══
+    var checkboxes = document.querySelectorAll('.nu-badge-check');
+    var totalSections = checkboxes.length;
+    var STORAGE_KEY = 'norris-homebase-v3-checks';
+
+    function loadState() {
+      try {
+        var saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          var arr = JSON.parse(saved);
+          checkboxes.forEach(function(cb, i) {
+            if (arr[i]) {
+              cb.checked = true;
+              cb.closest('.nu-badge').classList.add('completed');
+            }
+          });
+        }
+      } catch(e) {}
+      updateProgress(false);
+    }
+
+    function saveState() {
+      try {
+        var arr = [];
+        checkboxes.forEach(function(cb) { arr.push(cb.checked); });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      } catch(e) {}
+    }
+
+    function updateProgress(animate) {
+      var completed = 0;
+      checkboxes.forEach(function(cb) { if (cb.checked) completed++; });
+      var pct = Math.round((completed / totalSections) * 100);
+      document.getElementById('progress-percent').textContent = pct + '%';
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-sub').textContent =
+        completed + ' of ' + totalSections + ' sections completed' +
+        (completed === totalSections ? ' — ALL CLEAR! Outstanding work.' : ' — check off each section as you finish');
+
+      if (animate && completed === totalSections) {
+        launchConfetti();
+      }
+    }
+
+    checkboxes.forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var badge = this.closest('.nu-badge');
+        if (this.checked) {
+          badge.classList.add('completed');
+        } else {
+          badge.classList.remove('completed');
+        }
+        saveState();
+        updateProgress(true);
+      });
+
+      // Prevent badge click from interfering with checkbox
+      cb.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    });
+
+    loadState();
+
+    // ══ CONFETTI ENGINE ══
+    function launchConfetti() {
+      var canvas = document.getElementById('confetti-canvas');
+      var ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      var particles = [];
+      var colors = ['#0000FF', '#06D0FF', '#C9A84C', '#FFFFFF', '#00C853', '#FF6D00'];
+
+      for (var i = 0; i < 200; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          w: Math.random() * 10 + 5,
+          h: Math.random() * 6 + 3,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 4,
+          vy: Math.random() * 3 + 2,
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 10,
+          opacity: 1
+        });
+      }
+
+      var startTime = Date.now();
+      var duration = 4000;
+
+      function animateConfetti() {
+        var elapsed = Date.now() - startTime;
+        if (elapsed > duration) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          return;
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        var fadeStart = duration * 0.6;
+        var globalAlpha = elapsed > fadeStart ? 1 - ((elapsed - fadeStart) / (duration - fadeStart)) : 1;
+
+        particles.forEach(function(p) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.05;
+          p.rotation += p.rotSpeed;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.globalAlpha = globalAlpha * p.opacity;
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+
+        requestAnimationFrame(animateConfetti);
+      }
+
+      animateConfetti();
+    }
+
+    // Resize canvas on window resize
+    window.addEventListener('resize', function() {
+      var canvas = document.getElementById('confetti-canvas');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+
+</body>
+</html>

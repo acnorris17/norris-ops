@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexPro Armor Bucket Covers — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    /* ══ ROOT VARIABLES ══ */
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* ══ BASE ══ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ HEADER — Power Tower Infrastructure Overlay ══ */
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    /* ══ LOGO AREA ══ */
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    /* ══ PHOENIX SHIELD ICON ══ */
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+    }
+    .nu-phoenix-icon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+
+    /* ══ WHITE CHEVRON TRANSITION ══ */
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    /* ══ GHOST PHOENIX WATERMARK ══ */
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    /* ══ HERO SECTION ══ */
+    .hero-section {
+      text-align: center;
+      padding: 60px 40px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-product-name {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2.8rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+    .hero-made-usa {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--nu-dark-text);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .hero-made-usa .flag {
+      font-size: 1.4rem;
+    }
+    .hero-description {
+      font-size: 1.15rem;
+      color: var(--nu-body-text);
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 32px;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 16px 40px;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .hero-cta:hover {
+      background: #0000CC;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,255,0.3);
+    }
+
+    /* ══ SECTION HEADERS ══ */
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .nu-section-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    /* ══ DIVIDER ══ */
+    .section-divider {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan));
+      margin: 0 auto 40px;
+      border: none;
+    }
+
+    /* ══ PRODUCT GRID ══ */
+    .products-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 40px 60px;
+    }
+    .products-section .nu-section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      margin-top: 40px;
+    }
+    .product-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      border: 1px solid var(--nu-medium-gray);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    }
+    .product-image {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8ecf8 50%, #dde5f5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-image::before {
+      content: '';
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 3px solid rgba(0,0,255,0.08);
+      border-radius: 12px;
+      transform: rotate(15deg);
+    }
+    .product-image-icon {
+      position: relative;
+      z-index: 1;
+    }
+    .product-image-icon svg {
+      width: 80px;
+      height: 80px;
+      opacity: 0.35;
+    }
+    .product-sku-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--nu-navy);
+      color: var(--nu-white);
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 3px;
+      z-index: 2;
+    }
+    .product-info {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-name {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .product-size {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .product-desc {
+      font-size: 0.92rem;
+      color: var(--nu-body-text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .product-price {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--nu-blue);
+      margin-bottom: 16px;
+    }
+    .product-price .price-note {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #888;
+      display: block;
+    }
+    .product-btn {
+      display: block;
+      width: 100%;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 14px 20px;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      text-align: center;
+      text-decoration: none;
+    }
+    .product-btn:hover {
+      background: #0000CC;
+      box-shadow: 0 4px 12px rgba(0,0,255,0.3);
+    }
+
+    /* ══ FEATURES SECTION ══ */
+    .features-section {
+      background: var(--nu-light-gray);
+      padding: 60px 40px;
+    }
+    .features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .features-section .nu-section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .feature-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      border-left: 4px solid var(--nu-blue);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--nu-blue), #0033CC);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--nu-white);
+    }
+    .feature-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 8px;
+    }
+    .feature-desc {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+      line-height: 1.7;
+    }
+
+    /* ══ TESTIMONIALS ══ */
+    .testimonials-section {
+      padding: 60px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .testimonials-section .nu-section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin-top: 40px;
+    }
+    .testimonial-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 32px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: Georgia, serif;
+      font-size: 4rem;
+      color: var(--nu-cyan);
+      position: absolute;
+      top: 12px;
+      left: 20px;
+      line-height: 1;
+      opacity: 0.5;
+    }
+    .testimonial-text {
+      font-size: 1rem;
+      color: var(--nu-body-text);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 16px;
+      padding-top: 20px;
+    }
+    .testimonial-author {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--nu-dark-text);
+    }
+    .testimonial-role {
+      font-size: 0.8rem;
+      color: #888;
+    }
+    .testimonial-stars {
+      color: #F5A623;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    /* ══ CONTACT / QUOTE FORM ══ */
+    .quote-section {
+      background: linear-gradient(135deg, #f8f9ff 0%, #eef1ff 100%);
+      padding: 60px 40px;
+    }
+    .quote-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .quote-section .nu-section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .quote-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--nu-body-text);
+      margin-bottom: 40px;
+    }
+    .quote-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+    .form-group label {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: var(--font-primary);
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      border: 1px solid #d0d0d8;
+      border-radius: 6px;
+      background: var(--nu-white);
+      color: var(--nu-dark-text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--nu-blue);
+      box-shadow: 0 0 0 3px rgba(0,0,255,0.08);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .form-submit {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .form-submit button {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 16px 48px;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+    }
+    .form-submit button:hover {
+      background: #0000CC;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,255,0.3);
+    }
+    .form-note {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: -8px;
+    }
+
+    /* ══ FOOTER ══ */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+    .nu-footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .hero-product-name { font-size: 2rem; }
+      .hero-made-usa { font-size: 1rem; }
+      .hero-description { font-size: 1rem; }
+      .product-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .quote-form { grid-template-columns: 1fr; }
+      .products-section,
+      .features-section,
+      .testimonials-section,
+      .quote-section { padding: 40px 20px; }
+      .hero-section { padding: 40px 20px 20px; }
+    }
+
+    /* ══ PRINT ══ */
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .product-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment&reg;</div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <h1 class="hero-product-name">FlexPro Armor</h1>
+      <div class="hero-made-usa">
+        <span class="flag">&#x1F1FA;&#x1F1F8;</span> Hand Made in the USA <span class="flag">&#x1F1FA;&#x1F1F8;</span>
+      </div>
+      <p class="hero-description">
+        Premium flexi-rigid collapsible bucket covers designed to protect utility crews and equipment in the field. Every FlexPro Armor cover is hand-crafted in the United States with a rigid top panel, flexible collapsible sidewalls, and a water-shedding design that keeps your crew dry and your bucket clean.
+      </p>
+      <a href="#quote-form" class="hero-cta">Request a Quote</a>
+    </section>
+
+    <!-- PRODUCT GRID -->
+    <section class="products-section">
+      <h2 class="nu-section-title"><span style="color: var(--nu-blue);">Our</span> <span>Bucket Covers</span></h2>
+      <hr class="section-divider">
+
+      <div class="product-grid">
+
+        <!-- NU-BC-2851 -->
+        <div class="product-card">
+          <div class="product-image">
+            <span class="product-sku-badge">NU-BC-2851</span>
+            <div class="product-image-icon">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="20" width="60" height="50" rx="4" fill="none" stroke="#0000FF" stroke-width="2.5" opacity="0.4"/>
+                <path d="M10 20 Q40 5 70 20" fill="none" stroke="#0000FF" stroke-width="2.5" opacity="0.4"/>
+                <line x1="25" y1="20" x2="25" y2="70" stroke="#0000FF" stroke-width="1" opacity="0.2"/>
+                <line x1="40" y1="15" x2="40" y2="70" stroke="#0000FF" stroke-width="1" opacity="0.2"/>
+                <line x1="55" y1="20" x2="55" y2="70" stroke="#0000FF" stroke-width="1" opacity="0.2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">FlexPro Armor 2-Man Cover</h3>
+            <div class="product-size">28" &times; 51" &mdash; Fits standard 2-man buckets</div>
+            <p class="product-desc">Full-size bucket cover for 2-man aerial lifts. Rigid top panel sheds rain and debris, collapsible sidewalls fold flat for easy storage. Replaces competitor 24"&times;48" covers with a better fit.</p>
+            <div class="product-price">
+              $275
+              <span class="price-note">Per unit &mdash; volume pricing available</span>
+            </div>
+            <a href="#quote-form" class="product-btn">Request Quote</a>
+          </div>
+        </div>
+
+        <!-- NU-BC-2851-C -->
+        <div class="product-card">
+          <div class="product-image">
+            <span class="product-sku-badge">NU-BC-2851-C</span>
+            <div class="product-image-icon">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="20" width="60" height="50" rx="4" fill="none" stroke="#0000FF" stroke-width="2.5" opacity="0.4"/>
+                <path d="M10 20 Q40 5 70 20" fill="none" stroke="#0000FF" stroke-width="2.5" opacity="0.4"/>
+                <rect x="20" y="30" width="40" height="30" rx="2" fill="none" stroke="#06D0FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="4 2"/>
+                <line x1="40" y1="15" x2="40" y2="70" stroke="#0000FF" stroke-width="1" opacity="0.2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">FlexPro Armor 2-Man Combo</h3>
+            <div class="product-size">28" &times; 51" &mdash; Cover + liner system</div>
+            <p class="product-desc">Complete protection package: 2-man bucket cover paired with a fitted liner for double-layer defense against weather, UV exposure, and jobsite debris. The combo keeps your bucket in service-ready condition.</p>
+            <div class="product-price">
+              $305
+              <span class="price-note">Per unit &mdash; volume pricing available</span>
+            </div>
+            <a href="#quote-form" class="product-btn">Request Quote</a>
+          </div>
+        </div>
+
+        <!-- NU-BC-2834 -->
+        <div class="product-card">
+          <div class="product-image">
+            <span class="product-sku-badge">NU-BC-2834</span>
+            <div class="product-image-icon">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="22" width="50" height="45" rx="4" fill="none" stroke="#0000FF" stroke-width="2.5" opacity="0.4"/>
+                <path d="M15 22 Q40 10 65 22" fill="none" stroke="#0000FF" stroke-width="2.5" opacity="0.4"/>
+                <line x1="30" y1="22" x2="30" y2="67" stroke="#0000FF" stroke-width="1" opacity="0.2"/>
+                <line x1="40" y1="17" x2="40" y2="67" stroke="#0000FF" stroke-width="1" opacity="0.2"/>
+                <line x1="50" y1="22" x2="50" y2="67" stroke="#0000FF" stroke-width="1" opacity="0.2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">FlexPro Armor 1.5-Man Cover</h3>
+            <div class="product-size">28" &times; 34" &mdash; Fits standard 1.5-man buckets</div>
+            <p class="product-desc">Compact bucket cover for 1.5-man aerial lifts. Same flexi-rigid construction and water-shedding design as the 2-man, sized for single-operator buckets. Replaces competitor 24"&times;34" covers.</p>
+            <div class="product-price">
+              Contact for Pricing
+              <span class="price-note">Call 205-500-1343 or request a quote below</span>
+            </div>
+            <a href="#quote-form" class="product-btn">Request Quote</a>
+          </div>
+        </div>
+
+        <!-- NU-BC-2834-C -->
+        <div class="product-card">
+          <div class="product-image">
+            <span class="product-sku-badge">NU-BC-2834-C</span>
+            <div class="product-image-icon">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="22" width="50" height="45" rx="4" fill="none" stroke="#0000FF" stroke-width="2.5" opacity="0.4"/>
+                <path d="M15 22 Q40 10 65 22" fill="none" stroke="#0000FF" stroke-width="2.5" opacity="0.4"/>
+                <rect x="23" y="30" width="34" height="28" rx="2" fill="none" stroke="#06D0FF" stroke-width="1.5" opacity="0.4" stroke-dasharray="4 2"/>
+                <line x1="40" y1="17" x2="40" y2="67" stroke="#0000FF" stroke-width="1" opacity="0.2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">FlexPro Armor 1.5-Man Combo</h3>
+            <div class="product-size">28" &times; 34" &mdash; Cover + liner system</div>
+            <p class="product-desc">Complete combo package for 1.5-man buckets. Includes the rigid-top cover and a fitted liner, delivering full protection from rain, sun, and debris in a compact size.</p>
+            <div class="product-price">
+              Contact for Pricing
+              <span class="price-note">Call 205-500-1343 or request a quote below</span>
+            </div>
+            <a href="#quote-form" class="product-btn">Request Quote</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features-section">
+      <div class="features-inner">
+        <h2 class="nu-section-title"><span style="color: var(--nu-blue);">Why</span> <span>FlexPro Armor?</span></h2>
+        <hr class="section-divider">
+
+        <div class="features-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Rigid Top Panel</h3>
+            <p class="feature-desc">The reinforced rigid top panel prevents sagging and pooling, keeping water, ice, and debris from collecting on the cover. Your bucket stays clean and ready for the next job.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Flexi-Rigid Collapsible Design</h3>
+            <p class="feature-desc">Collapses flat in seconds for compact storage and transport. The flexible sidewalls fold down while the rigid top maintains its shape, so the cover is always ready to deploy.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2c-5.33 4.55-8 8.48-8 11.8C4 18.78 7.8 22 12 22s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zm0 18c-3.35 0-6-2.57-6-6.2 0-2.34 1.95-5.44 6-9.14 4.05 3.7 6 6.79 6 9.14 0 3.63-2.65 6.2-6 6.2z"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Water-Shedding Construction</h3>
+            <p class="feature-desc">Engineered to shed rain, sleet, and snow on contact. The angled rigid top and treated fabric work together so water runs off instead of soaking through to the bucket.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Hand Made in the USA</h3>
+            <p class="feature-desc">Every FlexPro Armor cover is hand-crafted in the United States. No mass production, no overseas shortcuts. Built by skilled hands with pride and attention to detail.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Direct from the Manufacturer</h3>
+            <p class="feature-desc">Buy direct from Norris Utilities&reg; and get the best price, fastest lead times, and a single point of contact. No middlemen, no markups, no runaround.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Ships Nationwide</h3>
+            <p class="feature-desc">Serving utility crews across 20+ states. Covers ship direct to your yard, your shop, or your jobsite. Volume orders and fleet pricing available on request.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section">
+      <h2 class="nu-section-title"><span style="color: var(--nu-blue);">What</span> <span>Crews Are Saying</span></h2>
+      <hr class="section-divider">
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">We switched from the old vinyl covers to FlexPro Armor last year. The rigid top is a game-changer &mdash; no more water pooling, no more flipping the cover to drain it. These things just work.</p>
+          <div class="testimonial-author">Line Crew Foreman</div>
+          <div class="testimonial-role">Municipal Electric Utility, Alabama</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">We ordered covers for our entire fleet. They collapse flat so the guys can store them in the truck without taking up half the compartment. Quality is outstanding and Aaron stands behind every one.</p>
+          <div class="testimonial-author">Fleet Manager</div>
+          <div class="testimonial-role">Electric Cooperative, Southeast Region</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">Hand made in the USA and it shows. The stitching, the materials, the fit &mdash; everything about these covers says quality. We have been running them through an Alabama summer with no issues.</p>
+          <div class="testimonial-author">Safety Coordinator</div>
+          <div class="testimonial-role">Utility Contractor, Tennessee</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUOTE REQUEST FORM -->
+    <section class="quote-section" id="quote-form">
+      <div class="quote-inner">
+        <h2 class="nu-section-title"><span style="color: var(--nu-blue);">Request</span> <span>a Quote</span></h2>
+        <hr class="section-divider">
+        <p class="quote-subtitle">Tell us what you need and we will get back to you within one business day.</p>
+
+        <form class="quote-form" action="mailto:acnorris@norrisutilities.com" method="post" enctype="text/plain">
+
+          <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company / Utility</label>
+            <input type="text" id="company" name="company" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="product">Product Interest</label>
+            <select id="product" name="product" required>
+              <option value="" disabled selected>Select a product</option>
+              <option value="NU-BC-2851">NU-BC-2851 &mdash; 2-Man Cover (28"&times;51")</option>
+              <option value="NU-BC-2851-C">NU-BC-2851-C &mdash; 2-Man Combo (28"&times;51")</option>
+              <option value="NU-BC-2834">NU-BC-2834 &mdash; 1.5-Man Cover (28"&times;34")</option>
+              <option value="NU-BC-2834-C">NU-BC-2834-C &mdash; 1.5-Man Combo (28"&times;34")</option>
+              <option value="multiple">Multiple Products / Fleet Order</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Estimated Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1" placeholder="How many units?">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="message">Additional Details</label>
+            <textarea id="message" name="message" placeholder="Truck models, bucket sizes, delivery location, timeline, or any other details that will help us prepare your quote."></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit">Submit Quote Request</button>
+          </div>
+
+          <p class="form-note">Your information is sent directly to Aaron C. Norris and will never be shared with third parties.</p>
+
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment&reg;</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities&reg;, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
