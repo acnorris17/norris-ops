@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-06T17:31:22",
-  "active_count": 9,
+  "last_updated": "2026-04-06T18:01:04",
+  "active_count": 7,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -13,9 +13,9 @@
     "v4_builder": {
       "name": "Agent V4",
       "role": "The Builder",
-      "status": "idle",
-      "last_run": "2026-04-06 17:21",
-      "message": "Queue: 4 pending tasks"
+      "status": "active",
+      "last_run": "2026-04-06 17:58",
+      "message": "Building... 3 in queue"
     },
     "email_scout": {
       "name": "Email Scout",
@@ -55,7 +55,7 @@
     "scribe": {
       "name": "The Scribe",
       "role": "Follow-up Drafter",
-      "status": "active",
+      "status": "idle",
       "last_run": "2026-04-06 17:07",
       "message": "8 drafts ready",
       "items": 8,
@@ -64,7 +64,7 @@
     "voice_decoder": {
       "name": "Voice Decoder",
       "role": "Voice Router",
-      "status": "active",
+      "status": "idle",
       "last_run": "2026-04-06 17:08",
       "message": "Listening for voice input"
     },
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-06 17:31",
+      "last_run": "2026-04-06 17:56",
       "message": "All systems UP"
     },
     "backup": {
@@ -96,15 +96,15 @@
       "role": "iCloud Backup",
       "status": "idle",
       "last_run": "never",
-      "message": "1,886 files protected",
+      "message": "1,908 files protected",
       "next_run": "Daily 2:00 AM"
     },
     "n8n": {
       "name": "n8n",
       "role": "The New Kid",
-      "status": "active",
+      "status": "down",
       "last_run": "2026-04-06 16:40",
-      "message": "Running on port 5678"
+      "message": "Offline \u2014 port 5678 not responding"
     },
     "aaron": {
       "name": "Aaron C. Norris",
