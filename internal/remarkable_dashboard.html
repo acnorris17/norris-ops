@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>reMarkable Notes &mdash; Norris Utilities&reg;</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:100vh}
+
+/* Login */
+.login-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%)}
+.login-overlay.hidden{display:none}
+.login-box{background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;overflow:hidden}
+.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)}
+.login-title{font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px}
+.login-sub{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px}
+.login-input{width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;outline:none}
+.login-input:focus{border-color:#0033cc}
+.login-btn{width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer}
+.login-err{color:#cc0000;font-size:12px;margin-top:10px;min-height:18px;font-weight:700}
+
+/* Header */
+.header{background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:36px 24px 52px;text-align:center;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23fff' stroke-width='.3' opacity='.06'%3E%3Cpath d='M0 30h60M30 0v60'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.header h1{font-weight:900;font-size:26px;color:#fff;letter-spacing:2px;position:relative;z-index:2}
+.header p{color:rgba(255,255,255,.7);font-size:13px;margin-top:6px;position:relative;z-index:2}
+.chevron{margin-top:-1px;line-height:0}
+.chevron svg{display:block;width:100%}
+
+/* Stats bar */
+.stats-bar{display:flex;flex-wrap:wrap;gap:12px;max-width:1100px;margin:-28px auto 24px;padding:0 20px;position:relative;z-index:10}
+.stat-pill{flex:1;min-width:140px;background:#fff;border-radius:12px;padding:16px 20px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:3px solid #0033cc}
+.stat-pill.red{border-top-color:#cc0000}
+.stat-pill.green{border-top-color:#00802b}
+.stat-pill.gold{border-top-color:#b38600}
+.stat-pill.purple{border-top-color:#6600cc}
+.stat-pill .num{font-size:28px;font-weight:900;color:#0033cc}
+.stat-pill.red .num{color:#cc0000}
+.stat-pill.green .num{color:#00802b}
+.stat-pill.gold .num{color:#b38600}
+.stat-pill.purple .num{color:#6600cc}
+.stat-pill .label{font-size:11px;color:#666;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+/* Controls */
+.controls{max-width:1100px;margin:0 auto 20px;padding:0 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.search-input{flex:1;min-width:200px;padding:12px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s}
+.search-input:focus{border-color:#0033cc}
+.filter-btn{padding:8px 16px;border:2px solid #e0e0e0;border-radius:8px;background:#fff;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:#666}
+.filter-btn:hover,.filter-btn.active{background:#0033cc;color:#fff;border-color:#0033cc}
+.filter-btn.active-red{background:#cc0000;color:#fff;border-color:#cc0000}
+.filter-btn.active-gold{background:#b38600;color:#fff;border-color:#b38600}
+.export-btn{padding:8px 16px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:8px;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.5px}
+
+/* Sections */
+.content{max-width:1100px;margin:0 auto;padding:0 20px 60px}
+.sec-title{font-size:20px;font-weight:700;margin:28px 0 14px;padding-bottom:8px;border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#0033cc,#06D0FF) 1}
+.sec-title .blue{color:#0033cc}
+.sec-title .dark{color:#1a1a1a}
+.sec-title .count{font-size:13px;color:#888;font-weight:400;margin-left:8px}
+
+/* Items */
+.item-list{list-style:none}
+.item{display:flex;align-items:flex-start;gap:12px;background:#fff;border-radius:10px;padding:14px 18px;margin-bottom:8px;border:1px solid #eee;border-left:4px solid #0033cc;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,.03)}
+.item:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateX(2px)}
+.item.done{opacity:.5;border-left-color:#00802b}
+.item.done .item-text{text-decoration:line-through}
+.item.cat-CUSTOMER{border-left-color:#0033cc}
+.item.cat-PRODUCT{border-left-color:#6600cc}
+.item.cat-FINANCIAL{border-left-color:#cc0000}
+.item.cat-INTERNAL{border-left-color:#555}
+.item.cat-PERSONAL{border-left-color:#b38600}
+.item.cat-CB{border-left-color:#00802b}
+
+.item-check{flex-shrink:0;width:22px;height:22px;border:2px solid #ccc;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+.item-check:hover{border-color:#0033cc}
+.item-check.checked{background:#00802b;border-color:#00802b;color:#fff}
+.item-check.checked::after{content:'\2713';font-size:14px;font-weight:700}
+
+.item-body{flex:1;min-width:0}
+.item-text{font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.4}
+.item-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;align-items:center}
+.item-meta span{font-size:11px;font-weight:600}
+
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+.badge-high{background:#fde8e8;color:#cc0000}
+.badge-medium{background:#fff8e1;color:#b38600}
+.badge-low{background:#e8f0ff;color:#0033cc}
+.badge-info{background:#f0f0f0;color:#666}
+
+.badge-cat{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:.3px}
+.badge-CUSTOMER{background:#e8f0ff;color:#0033cc}
+.badge-PRODUCT{background:#f0e8ff;color:#6600cc}
+.badge-FINANCIAL{background:#fde8e8;color:#cc0000}
+.badge-INTERNAL{background:#f0f0f0;color:#555}
+.badge-PERSONAL{background:#fff8e1;color:#b38600}
+.badge-CB{background:#e6f9ee;color:#00802b}
+
+.notebook-tag{color:#888;font-size:10px}
+.date-tag{color:#aaa;font-size:10px}
+
+/* Footer */
+.footer{background:linear-gradient(135deg,#0a0e5c,#001144);padding:28px 24px;text-align:center}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:15px}
+.footer-copy{color:rgba(255,255,255,.3);font-size:11px;margin-top:6px}
+
+/* Responsive */
+@media(max-width:600px){
+  .stats-bar{margin-top:-20px}
+  .stat-pill{min-width:45%;padding:12px}
+  .stat-pill .num{font-size:22px}
+  .item{padding:10px 14px}
+  .controls{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-title">reMarkable Notes</div>
+    <div class="login-sub">Norris Utilities&reg;</div>
+    <input type="password" class="login-input" id="loginInput" placeholder="Enter portal password" autocomplete="off" autofocus>
+    <button class="login-btn" id="loginBtn">ACCESS</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<div id="mainContent" style="display:none">
+
+<!-- Header -->
+<div class="header">
+  <h1>reMarkable Notes</h1>
+  <p>Scanned, categorized, and ready for action</p>
+</div>
+<div class="chevron"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 547,0 547,60 0,0" fill="#06D0FF" opacity=".12"/><polygon points="0,0 547,60 1440,0" fill="#f5f6fa"/></svg></div>
+
+<!-- Stats -->
+<div class="stats-bar" id="statsBar">
+  <div class="stat-pill"><div class="num" id="sTotal">-</div><div class="label">Total Items</div></div>
+  <div class="stat-pill red"><div class="num" id="sHigh">-</div><div class="label">High Priority</div></div>
+  <div class="stat-pill purple"><div class="num" id="sProduct">-</div><div class="label">Product</div></div>
+  <div class="stat-pill gold"><div class="num" id="sCustomer">-</div><div class="label">Customer</div></div>
+  <div class="stat-pill green"><div class="num" id="sDone">0</div><div class="label">Completed</div></div>
+</div>
+
+<!-- Controls -->
+<div class="controls">
+  <input type="text" class="search-input" id="searchInput" placeholder="Search items...">
+  <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All</button>
+  <button class="filter-btn" data-filter="high" onclick="setFilter('high',this)">High Priority</button>
+  <button class="filter-btn" data-filter="CUSTOMER" onclick="setFilter('CUSTOMER',this)">Customer</button>
+  <button class="filter-btn" data-filter="PRODUCT" onclick="setFilter('PRODUCT',this)">Product</button>
+  <button class="filter-btn" data-filter="FINANCIAL" onclick="setFilter('FINANCIAL',this)">Financial</button>
+  <button class="filter-btn" data-filter="PERSONAL" onclick="setFilter('PERSONAL',this)">Personal</button>
+  <button class="export-btn" onclick="exportCSV()">Export CSV</button>
+</div>
+
+<!-- Content -->
+<div class="content">
+  <div class="sec-title"><span class="blue">All</span> <span class="dark">Items</span><span class="count" id="visibleCount"></span></div>
+  <ul class="item-list" id="itemList"></ul>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-tagline">A Legacy of Commitment&reg;</div>
+  <div class="footer-copy">&copy; 2026 Norris Utilities, LLC</div>
+</div>
+
+</div>
+
+<script>
+// Login
+(function(){
+  const PW='legacy2026';
+  if(sessionStorage.getItem('nu_auth')==='1'){show();return}
+  document.getElementById('loginBtn').onclick=tryLogin;
+  document.getElementById('loginInput').onkeydown=function(e){if(e.key==='Enter')tryLogin()};
+  function tryLogin(){
+    if(document.getElementById('loginInput').value.trim()===PW){sessionStorage.setItem('nu_auth','1');show()}
+    else{document.getElementById('loginErr').textContent='Wrong password'}
+  }
+  function show(){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('mainContent').style.display='';init()}
+})();
+
+let ALL_ITEMS=[];
+let CURRENT_FILTER='all';
+let COMPLETED={};
+
+function loadCompleted(){
+  try{COMPLETED=JSON.parse(localStorage.getItem('rm_completed')||'{}');}catch(e){COMPLETED={}}
+}
+function saveCompleted(){
+  localStorage.setItem('rm_completed',JSON.stringify(COMPLETED));
+}
+
+async function init(){
+  loadCompleted();
+  try{
+    const r=await fetch('/data/remarkable_organized.json?t='+Date.now());
+    if(!r.ok) throw 0;
+    const data=await r.json();
+    ALL_ITEMS=data.items||[];
+    updateStats(data);
+    renderItems();
+  }catch(e){
+    document.getElementById('itemList').innerHTML='<li style="padding:20px;color:#888">Could not load data. Run remarkable_compiler.py first.</li>';
+  }
+  document.getElementById('searchInput').addEventListener('input',renderItems);
+}
+
+function updateStats(data){
+  document.getElementById('sTotal').textContent=data.total_items||0;
+  document.getElementById('sHigh').textContent=(data.by_priority||{}).high||0;
+  document.getElementById('sProduct').textContent=(data.by_category||{}).PRODUCT||0;
+  document.getElementById('sCustomer').textContent=(data.by_category||{}).CUSTOMER||0;
+  const done=ALL_ITEMS.filter(i=>COMPLETED[itemKey(i)]).length;
+  document.getElementById('sDone').textContent=done;
+}
+
+function itemKey(item){return(item.notebook||'')+'|'+(item.page||'')+'|'+(item.text||'').substring(0,60);}
+
+function setFilter(f,btn){
+  CURRENT_FILTER=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active','active-red','active-gold'));
+  btn.classList.add('active');
+  renderItems();
+}
+
+function renderItems(){
+  const q=(document.getElementById('searchInput').value||'').toLowerCase();
+  const list=document.getElementById('itemList');
+  list.innerHTML='';
+
+  let visible=0;
+  ALL_ITEMS.forEach((item,idx)=>{
+    // Filter
+    if(CURRENT_FILTER==='high'&&item.priority!=='high') return;
+    if(CURRENT_FILTER!=='all'&&CURRENT_FILTER!=='high'&&item.category!==CURRENT_FILTER) return;
+    // Search
+    const searchText=((item.text||'')+(item.customer||'')+(item.notebook||'')+(item.raw||'')).toLowerCase();
+    if(q&&!searchText.includes(q)) return;
+
+    const key=itemKey(item);
+    const isDone=!!COMPLETED[key];
+    visible++;
+
+    const li=document.createElement('li');
+    li.className='item cat-'+(item.category||'INTERNAL')+(isDone?' done':'');
+    li.innerHTML=`
+      <div class="item-check${isDone?' checked':''}" onclick="toggleDone(this,'${esc(key)}')"></div>
+      <div class="item-body">
+        <div class="item-text">${esc(item.text||'')}</div>
+        <div class="item-meta">
+          <span class="badge badge-${item.priority||'info'}">${item.priority||'info'}</span>
+          <span class="badge-cat badge-${item.category||'INTERNAL'}">${item.category||'?'}</span>
+          <span class="notebook-tag">${esc(item.notebook||'')}</span>
+          ${item.customer?`<span class="notebook-tag">${esc(item.customer)}</span>`:''}
+          <span class="date-tag">${(item.scanned_at||'').substring(0,10)}</span>
+        </div>
+      </div>
+    `;
+    list.appendChild(li);
+  });
+
+  document.getElementById('visibleCount').textContent=`(${visible} shown)`;
+}
+
+function toggleDone(el,key){
+  if(COMPLETED[key]){delete COMPLETED[key];el.classList.remove('checked');el.closest('.item').classList.remove('done')}
+  else{COMPLETED[key]=Date.now();el.classList.add('checked');el.closest('.item').classList.add('done')}
+  saveCompleted();
+  const done=ALL_ITEMS.filter(i=>COMPLETED[itemKey(i)]).length;
+  document.getElementById('sDone').textContent=done;
+}
+
+function esc(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'\\\''):'';}
+
+function exportCSV(){
+  let csv='Text,Priority,Category,Notebook,Customer,Date,Completed\n';
+  ALL_ITEMS.forEach(i=>{
+    const done=COMPLETED[itemKey(i)]?'Yes':'No';
+    csv+=`"${(i.text||'').replace(/"/g,'""')}","${i.priority||''}","${i.category||''}","${(i.notebook||'').replace(/"/g,'""')}","${(i.customer||'').replace(/"/g,'""')}","${(i.scanned_at||'').substring(0,10)}","${done}"\n`;
+  });
+  const blob=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='remarkable_items_'+new Date().toISOString().substring(0,10)+'.csv';
+  a.click();
+}
+</script>
+</body>
+</html>
