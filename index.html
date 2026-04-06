@@ -17,7 +17,7 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 .login-overlay.hidden{display:none}
 .login-box{background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:420px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;overflow:hidden}
 .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)}
-.login-phoenix{font-size:64px;margin-bottom:16px;opacity:0.85}
+.login-phoenix{display:block;width:220px;margin:0 auto 16px;}
 .login-title{font-family:'Lato',sans-serif;font-weight:900;font-size:24px;color:#0a0e5c;margin-bottom:4px}
 .login-subtitle{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:15px;margin-bottom:32px}
 .login-input{width:100%;padding:14px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s}
@@ -30,7 +30,7 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 
 /* ===== HEADER ===== */
 .header{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:40px 40px 60px;text-align:center;overflow:hidden}
-.header-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:280px;opacity:0.07;pointer-events:none;user-select:none;line-height:1}
+.header-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:65%;max-width:600px;opacity:0.07;pointer-events:none;user-select:none}
 .header-content{position:relative;z-index:2}
 .header-title{font-weight:900;font-size:28px;color:#fff;letter-spacing:2px}
 .header-tagline{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.85);font-size:15px;margin-top:6px;letter-spacing:1px}
@@ -150,7 +150,7 @@ tr:hover{background:#f8f9ff}
 <!-- ==================== LOGIN GATE ==================== -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
-    <div class="login-phoenix">🔥</div>
+    <img src="logo-blue.png" alt="Norris Utilities® Phoenix Icon®" class="login-phoenix">
     <div class="login-title">Norris Utilities&reg;</div>
     <div class="login-subtitle">A Legacy of Commitment&reg;</div>
     <input type="password" class="login-input" id="loginInput" placeholder="Enter portal password" autocomplete="off" autofocus>
@@ -163,7 +163,7 @@ tr:hover{background:#f8f9ff}
 <div id="portalContent" style="display:none">
 
 <div class="header">
-  <div class="header-watermark">🔥</div>
+  <img src="logo-white.png" alt="" class="header-watermark">
   <div class="header-content">
     <div class="header-title">NORRIS UTILITIES&reg; &mdash; OPERATIONS PORTAL</div>
     <div class="header-tagline">A Legacy of Commitment&reg;</div>
