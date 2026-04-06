@@ -88,6 +88,17 @@ tr:hover{background:#f8f9ff}
 .badge-pending{background:#fff8e1;color:#b38600}
 .badge-settled{background:#e8f0ff;color:#0033cc}
 
+/* ===== QUICK LINKS ===== */
+.quick-links{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.ql-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:#fff;border:1px solid #eee;border-radius:10px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#0a0e5c;text-decoration:none;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.ql-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,51,204,0.12);border-color:#06D0FF;color:#0033cc}
+.ql-btn .ql-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+
+/* ===== PAGE LINKS BAR ===== */
+.page-links{display:flex;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(10,14,92,0.8);border-top:1px solid rgba(6,208,255,0.15)}
+.page-links a{color:rgba(255,255,255,0.5);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:10px 14px;text-decoration:none;transition:color .2s}
+.page-links a:hover{color:#06D0FF}
+
 /* ===== SEARCH ===== */
 .search-box{width:100%;max-width:500px;padding:12px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:15px;font-family:'Lato',sans-serif;margin-bottom:24px;outline:none;transition:border-color .2s}
 .search-box:focus{border-color:#0033cc}
@@ -189,6 +200,18 @@ tr:hover{background:#f8f9ff}
   <button data-tab="caroline">CB&rsquo;s Tasks</button>
   <button data-tab="samson">Samson Rope</button>
 </nav>
+<div class="page-links">
+  <a href="shipping-log.html" target="_blank">Shipping Log</a>
+  <a href="po-tracker.html" target="_blank">PO Tracker</a>
+  <a href="calendar.html" target="_blank">Calendar</a>
+  <a href="cb-dashboard.html" target="_blank">CB Dashboard</a>
+  <a href="cb-onboarding.html" target="_blank">CB Onboarding</a>
+  <a href="journal.html" target="_blank">Journal</a>
+  <a href="team.html" target="_blank">Team</a>
+  <a href="mission-control.html" target="_blank">Mission Control</a>
+  <a href="storefront/" target="_blank">Storefront</a>
+  <a href="shipping-docs/" target="_blank">Shipping Docs</a>
+</div>
 
 <!-- ================================================================ -->
 <!-- TAB 1: DASHBOARD                                                  -->
@@ -196,6 +219,28 @@ tr:hover{background:#f8f9ff}
 <div class="tab-content active" id="tab-dashboard">
 
   <div id="greeting" style="font-size:24px;font-weight:900;margin-bottom:24px;color:#0a0e5c"></div>
+
+  <!-- Quick Links -->
+  <div class="sec-title"><span class="blue">Quick</span> <span class="dark">Links</span></div>
+  <div class="quick-links">
+    <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#ea4335;color:#fff">✉</span>Gmail</a>
+    <a href="https://app.qbo.intuit.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#2ca01c;color:#fff">📗</span>QuickBooks</a>
+    <a href="https://drive.google.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#4285f4;color:#fff">📁</span>Google Drive</a>
+    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6b4c14;color:#fff">📦</span>UPS Shipping Log</a>
+    <a href="#" onclick="alert('Aaron: paste the full Google Sheets URL here');return false" class="ql-btn" style="border-style:dashed"><span class="ql-icon" style="background:#0033cc;color:#fff">💲</span>Pricing Tools <span style="font-size:10px;color:#cc0000;font-weight:700">(URL needed)</span></a>
+    <a href="https://web.telegram.org" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0088cc;color:#fff">💬</span>Telegram</a>
+  </div>
+
+  <!-- Google Drive -->
+  <div class="sec-title"><span class="blue">Google</span> <span class="dark">Drive</span></div>
+  <div class="card" style="padding:16px;margin-bottom:32px">
+    <div style="border-radius:10px;overflow:hidden;border:1px solid #eee">
+      <iframe src="https://drive.google.com/embeddedfolderview?id=root#list" width="100%" height="300" frameborder="0" style="display:block;background:#fff" loading="lazy"></iframe>
+    </div>
+    <div style="text-align:center;margin-top:12px">
+      <a href="https://drive.google.com" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-decoration:none">Open Full Google Drive ↗</a>
+    </div>
+  </div>
 
   <!-- Quick Stats -->
   <div class="stats-grid">
