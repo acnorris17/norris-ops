@@ -1,0 +1,10 @@
+[
+  {
+    "customer": "Rick Sutherland",
+    "days_waiting": 7,
+    "subject": "EPB bucket cover quote",
+    "_captured_at": "2026-04-06T17:37:01.800579",
+    "_source": "email_scanner",
+    "_category": "followup"
+  }
+]

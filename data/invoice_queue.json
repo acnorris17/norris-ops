@@ -1,0 +1,10 @@
+[
+  {
+    "invoice": "#314425",
+    "amount": 3235.31,
+    "vendor": "Samson Rope",
+    "_captured_at": "2026-04-06T17:37:01.107249",
+    "_source": "samson_tracker",
+    "_category": "invoice"
+  }
+]
