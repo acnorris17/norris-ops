@@ -1,0 +1,110 @@
+{
+  "last_updated": "2026-04-06T17:16:03",
+  "active_count": 8,
+  "total_count": 13,
+  "agents": {
+    "legacy": {
+      "name": "Legacy",
+      "role": "Chief of Staff",
+      "status": "active",
+      "last_run": "2026-04-06 16:42",
+      "message": "Bridge active \u2014 standing by on Telegram"
+    },
+    "v4_builder": {
+      "name": "Agent V4",
+      "role": "The Builder",
+      "status": "active",
+      "last_run": "2026-04-06 17:14",
+      "message": "Building... 3 in queue"
+    },
+    "email_scout": {
+      "name": "Email Scout",
+      "role": "Email Scanner",
+      "status": "active",
+      "last_run": "2026-04-06 16:47",
+      "message": "5 emails need response",
+      "items": 5,
+      "next_run": "Every 2 hours"
+    },
+    "rope_tracker": {
+      "name": "Rope Tracker",
+      "role": "Samson Rope Scanner",
+      "status": "active",
+      "last_run": "2026-04-06 20:09",
+      "message": "12 invoices tracked",
+      "items": 12,
+      "next_run": "Daily 8:00 AM"
+    },
+    "money_watcher": {
+      "name": "Money Watcher",
+      "role": "A/P Scanner",
+      "status": "idle",
+      "last_run": "2026-04-06 15:08",
+      "message": "7 vendor invoices tracked",
+      "items": 7,
+      "next_run": "Daily 7:00 AM"
+    },
+    "morning_herald": {
+      "name": "Morning Herald",
+      "role": "Morning Briefing",
+      "status": "idle",
+      "last_run": "2026-04-06 16:45",
+      "message": "Brief delivered!",
+      "next_run": "Daily 4:45 AM"
+    },
+    "scribe": {
+      "name": "The Scribe",
+      "role": "Follow-up Drafter",
+      "status": "active",
+      "last_run": "2026-04-06 17:07",
+      "message": "8 drafts ready",
+      "items": 8,
+      "next_run": "Daily 4:30 AM"
+    },
+    "voice_decoder": {
+      "name": "Voice Decoder",
+      "role": "Voice Router",
+      "status": "active",
+      "last_run": "2026-04-06 17:08",
+      "message": "Listening for voice input"
+    },
+    "ship_captain": {
+      "name": "Ship Captain",
+      "role": "Shipping Processor",
+      "status": "active",
+      "last_run": "2026-04-06 21:50",
+      "message": "310 shipments, $3,899 unbilled",
+      "items": 310
+    },
+    "note_reader": {
+      "name": "Note Reader",
+      "role": "reMarkable Scanner",
+      "status": "idle",
+      "last_run": "2026-04-06 15:28",
+      "message": "Waiting for notes",
+      "items": 0
+    },
+    "watchdog": {
+      "name": "Watchdog",
+      "role": "Gateway Guard",
+      "status": "active",
+      "last_run": "2026-04-06 17:11",
+      "message": "All systems UP"
+    },
+    "backup": {
+      "name": "The Backup",
+      "role": "iCloud Backup",
+      "status": "idle",
+      "last_run": "never",
+      "message": "1,885 files protected",
+      "next_run": "Daily 2:00 AM"
+    },
+    "n8n": {
+      "name": "n8n",
+      "role": "The New Kid",
+      "status": "down",
+      "last_run": "2026-04-06 16:40",
+      "message": "Offline \u2014 port 5678 not responding"
+    }
+  }
+}

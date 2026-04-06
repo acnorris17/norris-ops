@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Norris Utilities&reg; AI Team &mdash; All on OneWheels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:#0a0e2a;color:#fff;min-height:100vh;overflow-x:hidden}
+
+/* ===== LOGIN ===== */
+.login-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%)}
+.login-overlay.hidden{display:none}
+.login-box{background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)}
+.login-title{font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px}
+.login-sub{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px}
+.login-input{width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s}
+.login-input:focus{border-color:#0033cc}
+.login-btn{width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer}
+.login-err{color:#cc0000;font-size:12px;margin-top:10px;min-height:18px}
+
+/* ===== HEADER ===== */
+.header{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:40px 24px 60px;text-align:center;overflow:hidden}
+.header h1{font-weight:900;font-size:28px;color:#fff;letter-spacing:2px}
+.header .tagline{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.85);font-size:15px;margin-top:6px}
+.header .count{color:#06D0FF;font-size:14px;font-weight:700;margin-top:10px;letter-spacing:1px}
+.chevron-wrap{margin-top:-1px;line-height:0}
+.chevron-wrap svg{display:block;width:100%}
+
+/* ===== STATUS BAR ===== */
+.status-bar{display:flex;justify-content:center;align-items:center;gap:32px;padding:16px;background:rgba(0,51,204,0.15);border-bottom:1px solid rgba(6,208,255,0.2);flex-wrap:wrap}
+.status-bar .stat{font-size:14px;font-weight:700;letter-spacing:0.5px}
+.status-bar .stat span{color:#06D0FF}
+.dot-active{display:inline-block;width:8px;height:8px;border-radius:50%;background:#00cc44;margin-right:6px;animation:pulse 2s infinite}
+.dot-idle{display:inline-block;width:8px;height:8px;border-radius:50%;background:#b38600;margin-right:6px}
+.dot-down{display:inline-block;width:8px;height:8px;border-radius:50%;background:#cc0000;margin-right:6px;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* ===== SCENE ===== */
+.scene{position:relative;min-height:500px;background:linear-gradient(180deg,#0d1230 0%,#1a1040 30%,#2a1845 50%,#3d2050 65%,#1a1a3a 80%,#222 85%,#333 100%);overflow:hidden;padding:40px 20px 100px}
+
+/* Dawn sky */
+.scene::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,#0d1230 0%,#1a1040 20%,#2a1845 40%,rgba(255,120,50,0.08) 70%,rgba(255,180,80,0.05) 100%);pointer-events:none}
+
+/* Stars */
+.stars{position:absolute;top:0;left:0;right:0;height:45%;pointer-events:none;overflow:hidden}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s infinite}
+@keyframes twinkle{0%,100%{opacity:0.3}50%{opacity:1}}
+
+/* Road */
+.road{position:absolute;bottom:0;left:0;right:0;height:100px;background:linear-gradient(180deg,#2a2a2a,#1a1a1a);border-top:3px solid #444}
+.road::before{content:'';position:absolute;top:45px;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#0033cc 0px,#0033cc 40px,transparent 40px,transparent 80px)}
+.road::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0033cc,#06D0FF);opacity:0.6}
+
+/* ===== CHARACTER GRID ===== */
+.team-grid{position:relative;z-index:10;display:flex;flex-wrap:wrap;justify-content:center;gap:16px;padding-bottom:80px}
+
+/* ===== CHARACTER ===== */
+.agent{position:relative;width:130px;text-align:center;cursor:pointer;transition:transform .3s}
+.agent:hover{transform:scale(1.08)}
+.agent:hover .bubble{opacity:1;transform:translateY(0);max-height:200px;padding:10px 14px}
+
+/* Status aura */
+.agent .aura{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:80px;height:80px;border-radius:50%;filter:blur(20px);opacity:0.4;pointer-events:none;z-index:0}
+.agent[data-status="active"] .aura{background:#00cc44;animation:auraPulse 2s infinite}
+.agent[data-status="idle"] .aura{background:#b38600;opacity:0.2}
+.agent[data-status="down"] .aura{background:#cc0000;animation:auraPulse 1s infinite}
+@keyframes auraPulse{0%,100%{opacity:0.4;transform:translateX(-50%) scale(1)}50%{opacity:0.7;transform:translateX(-50%) scale(1.2)}}
+
+/* Name */
+.agent-name{font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#06D0FF;margin-bottom:4px;white-space:nowrap}
+.agent-role{font-size:9px;color:rgba(255,255,255,0.5);margin-bottom:8px}
+
+/* Body container */
+.body-wrap{position:relative;z-index:2;height:90px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+
+/* Character body — each is unique via inline styles */
+.char-body{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;position:relative;z-index:2}
+
+/* Accessory above head */
+.accessory{font-size:14px;margin-bottom:2px;height:18px;line-height:18px}
+
+/* OneWheel */
+.onewheel{position:relative;width:40px;height:22px;margin-top:-2px;z-index:2}
+.ow-board{position:absolute;top:0;left:2px;right:2px;height:8px;background:linear-gradient(90deg,#222,#333);border-radius:4px;z-index:2}
+.ow-wheel{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:conic-gradient(#444 0deg,#666 90deg,#444 180deg,#666 270deg,#444 360deg);border:2px solid #555;z-index:1}
+.agent[data-status="active"] .ow-wheel{animation:spin 0.8s linear infinite}
+.agent[data-status="idle"] .ow-wheel{animation:spin 3s linear infinite}
+.agent[data-status="down"] .ow-wheel{animation:none}
+@keyframes spin{from{transform:translateX(-50%) rotate(0deg)}to{transform:translateX(-50%) rotate(360deg)}}
+
+/* Riding bounce */
+.agent[data-status="active"] .body-wrap{animation:ride 0.6s ease-in-out infinite}
+.agent[data-status="idle"] .body-wrap{animation:ride 1.5s ease-in-out infinite}
+@keyframes ride{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+/* Down state — tipped over */
+.agent[data-status="down"] .body-wrap{transform:rotate(25deg) translateX(8px)}
+.agent[data-status="down"] .onewheel{transform:rotate(70deg)}
+.down-alert{position:absolute;top:-5px;right:5px;font-size:18px;animation:alertBounce 0.5s infinite;z-index:20}
+@keyframes alertBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* Motion lines for active agents */
+.motion-lines{position:absolute;left:-20px;top:50%;transform:translateY(-50%);opacity:0;pointer-events:none}
+.agent[data-status="active"] .motion-lines{opacity:0.5;animation:motionFade 1s infinite}
+.motion-lines span{display:block;width:12px;height:2px;background:#06D0FF;margin:3px 0;border-radius:1px}
+@keyframes motionFade{0%{opacity:0.5;transform:translateY(-50%) translateX(0)}100%{opacity:0;transform:translateY(-50%) translateX(-15px)}}
+
+/* Speech bubble */
+.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%) translateY(8px);background:rgba(255,255,255,0.95);color:#1a1a1a;font-size:10px;font-weight:600;line-height:1.4;padding:0;border-radius:8px;white-space:nowrap;max-height:0;opacity:0;overflow:hidden;transition:all .3s;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.3);pointer-events:none}
+.bubble::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(255,255,255,0.95)}
+.bubble .b-name{font-weight:900;color:#0033cc;font-size:11px;margin-bottom:4px}
+.bubble .b-msg{color:#444;margin-bottom:3px}
+.bubble .b-time{color:#888;font-size:9px}
+.bubble .b-next{color:#0033cc;font-size:9px}
+
+/* Sparks for V4 builder */
+@keyframes spark{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-20px) scale(0.3)}}
+.spark{position:absolute;width:3px;height:3px;background:#ffaa00;border-radius:50%;pointer-events:none}
+
+/* ===== LEADER ===== */
+.agent.leader{width:160px}
+.agent.leader .char-body{width:56px;height:56px;font-size:28px}
+.agent.leader .agent-name{font-size:13px;color:#fff}
+.agent.leader .onewheel{width:48px}
+
+/* ===== FOOTER ===== */
+.footer{background:linear-gradient(135deg,#0a0e5c,#001144);padding:40px 24px;text-align:center}
+.footer-quote{font-family:'Lato',sans-serif;font-size:15px;color:rgba(255,255,255,0.6);font-weight:400;font-style:italic;max-width:600px;margin:0 auto 16px}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:16px;letter-spacing:1px}
+.footer-copy{color:rgba(255,255,255,0.3);font-size:11px;margin-top:8px}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .header h1{font-size:20px}
+  .team-grid{gap:10px}
+  .agent{width:110px}
+  .agent.leader{width:130px}
+  .status-bar{gap:16px}
+  .status-bar .stat{font-size:12px}
+}
+@media(max-width:480px){
+  .agent{width:100px}
+  .char-body{width:38px;height:38px;font-size:18px}
+  .agent-name{font-size:9px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box" style="position:relative">
+    <div class="login-title">Norris Utilities&reg; AI Team</div>
+    <div class="login-sub">A Legacy of Commitment&reg;</div>
+    <input type="password" class="login-input" id="loginInput" placeholder="Enter portal password" autocomplete="off" autofocus>
+    <button class="login-btn" id="loginBtn">RIDE IN</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<div id="mainContent" style="display:none">
+
+<div class="header">
+  <h1>The Norris Utilities&reg; AI Team</h1>
+  <div class="tagline">A Legacy of Commitment&reg; &mdash; Powered by Legacy</div>
+  <div class="count" id="agentCount">13 agents. All on OneWheels. All working for you.</div>
+</div>
+<div class="chevron-wrap">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0,0 547,0 547,60 0,0" fill="#06D0FF" opacity="0.15"/>
+    <polygon points="0,0 547,60 1440,0" fill="#0a0e2a"/>
+  </svg>
+</div>
+
+<!-- ===== STATUS BAR ===== -->
+<div class="status-bar" id="statusBar">
+  <div class="stat"><span class="dot-active"></span><span id="activeNum">0</span> Active</div>
+  <div class="stat"><span class="dot-idle"></span><span id="idleNum">0</span> Idle</div>
+  <div class="stat"><span class="dot-down"></span><span id="downNum">0</span> Down</div>
+  <div class="stat">Last updated: <span id="lastUpdated">loading...</span></div>
+</div>
+
+<!-- ===== SCENE ===== -->
+<div class="scene">
+  <div class="stars" id="stars"></div>
+  <div class="road"></div>
+  <div class="team-grid" id="teamGrid"></div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <div class="footer-quote">"Built by Aaron C. Norris &mdash; because one man with the right team can outwork anyone."</div>
+  <div class="footer-tagline">A Legacy of Commitment&reg;</div>
+  <div class="footer-copy">&copy; 2026 Norris Utilities, LLC &bull; Birmingham, Alabama &bull; 205-500-1343</div>
+</div>
+
+</div><!-- /mainContent -->
+
+<script>
+// ===== LOGIN =====
+(function(){
+  const PW='legacy2026';
+  if(sessionStorage.getItem('nu_auth')==='1'){
+    document.getElementById('loginOverlay').classList.add('hidden');
+    document.getElementById('mainContent').style.display='block';
+    init();
+    return;
+  }
+  document.getElementById('loginBtn').addEventListener('click',tryLogin);
+  document.getElementById('loginInput').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin()});
+  function tryLogin(){
+    const v=document.getElementById('loginInput').value.trim();
+    if(v===PW){
+      sessionStorage.setItem('nu_auth','1');
+      document.getElementById('loginOverlay').classList.add('hidden');
+      document.getElementById('mainContent').style.display='block';
+      init();
+    }else{
+      document.getElementById('loginErr').textContent='Wrong password';
+      document.getElementById('loginInput').classList.add('error');
+      setTimeout(()=>document.getElementById('loginInput').classList.remove('error'),500);
+    }
+  }
+})();
+
+// ===== CHARACTER DEFINITIONS =====
+const CHARS = {
+  legacy: {
+    name:'Legacy', role:'Chief of Staff', emoji:'🔥',
+    bodyBg:'linear-gradient(135deg,#0033cc,#0055ff)', accent:'#06D0FF',
+    accessory:'👑', extraClass:'leader',
+  },
+  v4_builder: {
+    name:'Agent V4', role:'The Builder', emoji:'🔨',
+    bodyBg:'linear-gradient(135deg,#cc6600,#ff8800)', accent:'#ffaa00',
+    accessory:'⛑️', extraClass:'',
+  },
+  email_scout: {
+    name:'Email Scout', role:'Email Scanner', emoji:'📬',
+    bodyBg:'linear-gradient(135deg,#cc3333,#ff4444)', accent:'#ff6666',
+    accessory:'🔍', extraClass:'',
+  },
+  rope_tracker: {
+    name:'Rope Tracker', role:'Samson Scanner', emoji:'🧵',
+    bodyBg:'linear-gradient(135deg,#6600cc,#9933ff)', accent:'#aa55ff',
+    accessory:'🪢', extraClass:'',
+  },
+  money_watcher: {
+    name:'Money Watcher', role:'A/P Scanner', emoji:'💰',
+    bodyBg:'linear-gradient(135deg,#008833,#00bb44)', accent:'#00dd66',
+    accessory:'🤑', extraClass:'',
+  },
+  morning_herald: {
+    name:'Morning Herald', role:'Morning Briefing', emoji:'📯',
+    bodyBg:'linear-gradient(135deg,#cc8800,#ffaa00)', accent:'#ffcc44',
+    accessory:'☀️', extraClass:'',
+  },
+  scribe: {
+    name:'The Scribe', role:'Follow-up Drafter', emoji:'✍️',
+    bodyBg:'linear-gradient(135deg,#334455,#556677)', accent:'#88aacc',
+    accessory:'🪶', extraClass:'',
+  },
+  voice_decoder: {
+    name:'Voice Decoder', role:'Voice Router', emoji:'🎧',
+    bodyBg:'linear-gradient(135deg,#005588,#0088cc)', accent:'#00aaee',
+    accessory:'🎤', extraClass:'',
+  },
+  ship_captain: {
+    name:'Ship Captain', role:'Shipping Processor', emoji:'📦',
+    bodyBg:'linear-gradient(135deg,#003366,#005599)', accent:'#0088dd',
+    accessory:'🧢', extraClass:'',
+  },
+  note_reader: {
+    name:'Note Reader', role:'reMarkable Scanner', emoji:'📝',
+    bodyBg:'linear-gradient(135deg,#555555,#777777)', accent:'#999',
+    accessory:'✏️', extraClass:'',
+  },
+  watchdog: {
+    name:'Watchdog', role:'Gateway Guard', emoji:'🛡️',
+    bodyBg:'linear-gradient(135deg,#880000,#cc0000)', accent:'#ff3333',
+    accessory:'🐕', extraClass:'',
+  },
+  backup: {
+    name:'The Backup', role:'iCloud Backup', emoji:'☁️',
+    bodyBg:'linear-gradient(135deg,#4488cc,#66aaee)', accent:'#88ccff',
+    accessory:'🔒', extraClass:'',
+  },
+  n8n: {
+    name:'n8n', role:'The New Kid', emoji:'🌱',
+    bodyBg:'linear-gradient(135deg,#cc4488,#ee6699)', accent:'#ff88bb',
+    accessory:'🎓', extraClass:'',
+  },
+};
+
+// Agent display order (Legacy first, Backup last)
+const ORDER = [
+  'legacy','v4_builder','email_scout','rope_tracker','money_watcher',
+  'morning_herald','scribe','voice_decoder','ship_captain','note_reader',
+  'watchdog','n8n','backup'
+];
+
+// ===== BUILD CHARACTERS =====
+function buildCharacter(key, charDef, agentData) {
+  const status = agentData ? agentData.status : 'idle';
+  const msg = agentData ? agentData.message : 'Standing by';
+  const lastRun = agentData ? agentData.last_run : 'never';
+  const nextRun = agentData ? (agentData.next_run || '') : '';
+  const items = agentData ? (agentData.items || '') : '';
+
+  const div = document.createElement('div');
+  div.className = 'agent' + (charDef.extraClass ? ' ' + charDef.extraClass : '');
+  div.dataset.status = status;
+  div.dataset.key = key;
+
+  div.innerHTML = `
+    <div class="aura"></div>
+    <div class="agent-name">${charDef.name}</div>
+    <div class="agent-role">${charDef.role}</div>
+    <div class="bubble">
+      <div class="b-name">${charDef.name} &mdash; ${charDef.role}</div>
+      <div class="b-msg">${escHtml(msg)}</div>
+      <div class="b-time">Last: ${escHtml(lastRun)}</div>
+      ${nextRun ? `<div class="b-next">Next: ${escHtml(nextRun)}</div>` : ''}
+      ${items ? `<div class="b-next">Items: ${items}</div>` : ''}
+    </div>
+    <div class="body-wrap">
+      <div class="accessory">${charDef.accessory}</div>
+      <div class="char-body" style="background:${charDef.bodyBg}">${charDef.emoji}</div>
+      <div class="onewheel">
+        <div class="ow-board"></div>
+        <div class="ow-wheel"></div>
+      </div>
+    </div>
+    ${status === 'active' ? `<div class="motion-lines"><span></span><span></span><span></span></div>` : ''}
+    ${status === 'down' ? `<div class="down-alert">❗</div>` : ''}
+  `;
+
+  return div;
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ===== STARS =====
+function generateStars() {
+  const container = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = (Math.random() * 3) + 's';
+    star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
+    container.appendChild(star);
+  }
+}
+
+// ===== LOAD DATA & RENDER =====
+async function loadStatus() {
+  try {
+    const resp = await fetch('data/team_status.json?t=' + Date.now());
+    if (!resp.ok) throw new Error('fetch failed');
+    return await resp.json();
+  } catch(e) {
+    console.warn('Could not load team_status.json, using defaults', e);
+    return null;
+  }
+}
+
+function render(data) {
+  const grid = document.getElementById('teamGrid');
+  grid.innerHTML = '';
+
+  const agents = data ? data.agents : {};
+  let active = 0, idle = 0, down = 0;
+
+  ORDER.forEach(key => {
+    const charDef = CHARS[key];
+    if (!charDef) return;
+    const agentData = agents[key] || null;
+    const el = buildCharacter(key, charDef, agentData);
+    grid.appendChild(el);
+
+    const st = agentData ? agentData.status : 'idle';
+    if (st === 'active') active++;
+    else if (st === 'down') down++;
+    else idle++;
+  });
+
+  document.getElementById('activeNum').textContent = active;
+  document.getElementById('idleNum').textContent = idle;
+  document.getElementById('downNum').textContent = down;
+
+  const updated = data ? data.last_updated : 'unknown';
+  if (updated && updated !== 'unknown') {
+    try {
+      const d = new Date(updated);
+      document.getElementById('lastUpdated').textContent =
+        d.toLocaleString('en-US', {month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
+    } catch(e) {
+      document.getElementById('lastUpdated').textContent = updated;
+    }
+  }
+
+  document.getElementById('agentCount').textContent =
+    `${active + idle + down} agents. All on OneWheels. ${active} riding hard right now.`;
+}
+
+// ===== INIT =====
+async function init() {
+  generateStars();
+  const data = await loadStatus();
+  render(data);
+
+  // Auto-refresh every 5 minutes
+  setInterval(async () => {
+    const fresh = await loadStatus();
+    if (fresh) render(fresh);
+  }, 300000);
+}
+</script>
+</body>
+</html>
