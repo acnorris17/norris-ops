@@ -99,6 +99,19 @@ tr:hover{background:#f8f9ff}
 .page-links a{color:rgba(255,255,255,0.5);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:10px 14px;text-decoration:none;transition:color .2s}
 .page-links a:hover{color:#06D0FF}
 
+/* ===== TOOL GRID ===== */
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tool-card{display:flex;align-items:flex-start;gap:14px;padding:20px;background:#fff;border-radius:12px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,0.04);text-decoration:none;color:#1a1a1a;transition:all .25s}
+.tool-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,255,0.08);border-color:#06D0FF}
+.tool-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.tool-card h4{font-size:14px;font-weight:700;margin-bottom:3px}
+.tool-card p{font-size:12px;color:#888;line-height:1.4}
+.doc-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-left:6px}
+.doc-soon{background:#fff8e1;color:#b38600}
+.doc-live{background:#e6f9ee;color:#00802b}
+@media(max-width:900px){.tool-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.tool-grid{grid-template-columns:1fr}}
+
 /* ===== SEARCH ===== */
 .search-box{width:100%;max-width:500px;padding:12px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:15px;font-family:'Lato',sans-serif;margin-bottom:24px;outline:none;transition:border-color .2s}
 .search-box:focus{border-color:#0033cc}
@@ -200,6 +213,8 @@ tr:hover{background:#f8f9ff}
   <button data-tab="caroline">CB&rsquo;s Tasks</button>
   <button data-tab="samson">Samson Rope</button>
   <button data-tab="pogen">PO Generator</button>
+  <button data-tab="tools">Tools</button>
+  <button data-tab="docs">Docs</button>
 </nav>
 <div class="page-links">
   <a href="shipping-log.html" target="_blank">Shipping Log</a>
@@ -215,6 +230,7 @@ tr:hover{background:#f8f9ff}
   <a href="website/index.html" target="_blank">Website Homepage</a>
   <a href="shipping-docs/" target="_blank">Shipping Docs</a>
   <a href="msp-orders.html" target="_blank" style="color:#06D0FF">MSP Rope Orders</a>
+  <a href="aaron.html" target="_blank">AC</a>
 </div>
 
 <!-- ================================================================ -->
@@ -822,6 +838,53 @@ tr:hover{background:#f8f9ff}
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB: TOOLS                                                        -->
+<!-- ================================================================ -->
+<div class="tab-content" id="tab-tools">
+  <div class="sec-title"><span class="blue">All</span> <span class="dark">Tools &amp; Dashboards</span></div>
+  <div class="tool-grid">
+    <a href="tools/pricing-calculator.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">💲</div><div><h4>Pricing Calculator</h4><p>All product margins, three-channel pricing, Ben&rsquo;s Formula</p></div></a>
+    <a href="internal/shipping_calculator.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">📦</div><div><h4>UPS Shipping Calculator</h4><p>Ben&rsquo;s Formula &mdash; ROUNDUP shipping costs</p></div></a>
+    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">📋</div><div><h4>UPS Shipping Log</h4><p>Google Sheets &mdash; live shipment tracking</p></div></a>
+    <a href="internal/home_base_v3.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">🏠</div><div><h4>Home Base Portal</h4><p>Central hub &mdash; links to all systems</p></div></a>
+    <a href="internal/mission_control_v2.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6600cc,#aa44ff)">🎯</div><div><h4>Mission Control</h4><p>Strategic overview and task management</p></div></a>
+    <a href="internal/cb_onboarding.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">📝</div><div><h4>CB Onboarding</h4><p>Caroline Butler operations guide</p></div></a>
+    <a href="internal/daily_journal.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#ff6600,#ffaa00)">📔</div><div><h4>Daily Journal</h4><p>Agent build log and daily entries</p></div></a>
+    <a href="internal/ap_tracker.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">💰</div><div><h4>A/P Tracker</h4><p>Accounts payable &mdash; vendor balances</p></div></a>
+    <a href="internal/bss_expense_report.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#008888,#00cccc)">📊</div><div><h4>BSS Expense Report</h4><p>Bay Shore Systems expense tracking</p></div></a>
+    <a href="msp-orders.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">🧵</div><div><h4>MSP Ordering Portal</h4><p>Mississippi Power rope order form</p></div></a>
+    <a href="internal/flexpro_store.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">🛒</div><div><h4>FlexPro Armor&reg; Store</h4><p>Product catalog and storefront</p></div></a>
+    <a href="website/index.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0a0e5c,#0033cc)">🌐</div><div><h4>Website Homepage</h4><p>Draft public website</p></div></a>
+    <a href="website/about.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0a0e5c,#0033cc)">📄</div><div><h4>About Page</h4><p>The Norris Legacy &mdash; three generations</p></div></a>
+    <a href="internal/contact_master_list.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#555,#888)">📇</div><div><h4>Contact Master List</h4><p>All vendors, customers, and contacts</p></div></a>
+    <a href="internal/po_tracker_dashboard.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#ff6600,#ffaa00)">📋</div><div><h4>PO Tracker</h4><p>Purchase order tracking dashboard</p></div></a>
+    <a href="internal/agent_calendar.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#0088cc,#00bbee)">📅</div><div><h4>Calendar &amp; Timeline</h4><p>Agent schedule and project timeline</p></div></a>
+    <a href="internal/shipping_doc_v7.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">📑</div><div><h4>Shipping Doc Template</h4><p>Branded shipping document generator</p></div></a>
+    <a href="internal/video_breakdown.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">🎬</div><div><h4>Video Breakdown</h4><p>Video content analysis tool</p></div></a>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB: DOCS                                                         -->
+<!-- ================================================================ -->
+<div class="tab-content" id="tab-docs">
+  <div class="sec-title"><span class="blue">Documents</span> <span class="dark">&amp; Resources</span></div>
+  <div class="tool-grid">
+    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#cc0000,#ff4444)">📜</div><div><h4>Alabama Dealer License Guide <span class="doc-badge doc-soon">Coming Soon</span></h4><p>Application process, surety bond requirements</p></div></div>
+    <a href="internal/cb_onboarding.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">📗</div><div><h4>CB Operations Workbook <span class="doc-badge doc-live">Live</span></h4><p>Caroline Butler full onboarding guide</p></div></a>
+    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#0088cc,#00bbee)">✉️</div><div><h4>Email Templates for CB <span class="doc-badge doc-soon">Coming Soon</span></h4><p>Pre-approved customer communication templates</p></div></div>
+    <a href="internal/bss_expense_report.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#008888,#00cccc)">📊</div><div><h4>BSS Expense Report <span class="doc-badge doc-live">Live</span></h4><p>Bay Shore Systems expense tracker</p></div></a>
+    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF)">🛡️</div><div><h4>FlexPro Armor&reg; Product Specs <span class="doc-badge doc-soon">Coming Soon</span></h4><p>Full product specifications and fit guide</p></div></div>
+    <div class="tool-card" style="cursor:default"><div class="tool-icon" style="background:linear-gradient(135deg,#6600cc,#aa44ff)">🧵</div><div><h4>Samson Rope Order Guide <span class="doc-badge doc-soon">Coming Soon</span></h4><p>SKU reference, ordering process, CC rules</p></div></div>
+    <a href="internal/shipping_doc_v7.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#6b4c14,#b8860b)">🚚</div><div><h4>Shipping SOP <span class="doc-badge doc-live">Live</span></h4><p>Standard operating procedure for shipments</p></div></a>
+    <a href="internal/goodwill_donations_2025.html" target="_blank" class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#00aa44,#00dd66)">🎁</div><div><h4>2025 Goodwill Donations <span class="doc-badge doc-live">Live</span></h4><p>Donation records with values</p></div></a>
+  </div>
+  <div class="card" style="margin-top:24px;text-align:center;background:#f8f9fc;border-style:dashed">
+    <p style="font-size:14px;color:#888">📁 To add documents, place files in <code style="background:#eee;padding:2px 6px;border-radius:4px">~/norris-ops/docs/</code> and they&rsquo;ll be linked here.</p>
   </div>
 </div>
 
