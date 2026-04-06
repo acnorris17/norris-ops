@@ -199,6 +199,7 @@ tr:hover{background:#f8f9ff}
   <button data-tab="contacts">Contacts</button>
   <button data-tab="caroline">CB&rsquo;s Tasks</button>
   <button data-tab="samson">Samson Rope</button>
+  <button data-tab="pogen">PO Generator</button>
 </nav>
 <div class="page-links">
   <a href="shipping-log.html" target="_blank">Shipping Log</a>
@@ -754,6 +755,75 @@ tr:hover{background:#f8f9ff}
   </div>
 </div>
 
+<!-- ================================================================ -->
+<!-- TAB 8: PO GENERATOR                                               -->
+<!-- ================================================================ -->
+<div class="tab-content" id="tab-pogen">
+  <div class="sec-title"><span class="blue">PO</span> <span class="dark">Generator</span></div>
+
+  <div class="card info" style="margin-bottom:24px">
+    <strong>PO Format:</strong> <code style="font-size:1.1rem;font-weight:900;color:#0033cc;background:#f0f0ff;padding:4px 12px;border-radius:4px;letter-spacing:0.05em">NU-[CODE]-[MMDD]-[YY]-[SEQ]</code>
+    <br><span style="font-size:13px;color:#666;margin-top:4px;display:inline-block">Example: NU-MSP-0406-26-001 = Norris Utilities, Mississippi Power, April 6 2026, first PO that day</span>
+  </div>
+
+  <!-- Generator Form -->
+  <div class="card" style="padding:28px;margin-bottom:32px">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end">
+      <div style="flex:1;min-width:220px">
+        <label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Customer</label>
+        <select id="poCustomer" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem;color:#1a1a2e;background:#fff;cursor:pointer">
+          <option value="">Select customer...</option>
+        </select>
+      </div>
+      <div id="poCustomRow" style="display:none;flex:1;min-width:220px;gap:8px;align-items:flex-end">
+        <div style="flex:0 0 90px">
+          <label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Code (3 letters)</label>
+          <input type="text" id="poCustomCode" maxlength="3" placeholder="ABC" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem;text-transform:uppercase;text-align:center;font-weight:900;letter-spacing:0.1em">
+        </div>
+        <div style="flex:1">
+          <label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Company Name</label>
+          <input type="text" id="poCustomName" placeholder="Full company name" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem">
+        </div>
+      </div>
+      <div style="flex:0 0 160px">
+        <label style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px">Date</label>
+        <input type="date" id="poDate" style="width:100%;padding:12px;border:2px solid #e8e8ec;border-radius:8px;font-family:'Lato',sans-serif;font-size:0.95rem;color:#1a1a2e">
+      </div>
+      <div>
+        <button id="poGenBtn" style="padding:12px 32px;background:linear-gradient(135deg,#0000ff,#0033cc);color:#fff;border:none;border-radius:8px;font-family:'Lato',sans-serif;font-weight:900;font-size:0.9rem;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:transform .1s">GENERATE PO</button>
+      </div>
+    </div>
+    <div id="poResult"></div>
+  </div>
+
+  <!-- PO Log -->
+  <div class="card" style="padding:0;overflow:hidden">
+    <div style="padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:2px solid #e8e8ec">
+      <div style="font-weight:900;font-size:1rem;color:#1a1a2e;text-transform:uppercase;letter-spacing:0.05em">PO Log</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="text" id="poSearch" placeholder="Search POs..." style="padding:8px 14px;border:2px solid #e8e8ec;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.85rem;width:200px">
+        <button id="poExportBtn" style="padding:8px 16px;background:#f5f5f7;border:2px solid #e8e8ec;border-radius:6px;font-family:'Lato',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;color:#555;letter-spacing:0.04em" title="Export CSV">CSV &#8595;</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr style="background:#f5f5f7">
+            <th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">PO Number</th>
+            <th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">Customer</th>
+            <th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">Date</th>
+            <th style="padding:12px 16px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec">Notes</th>
+            <th style="padding:12px 16px;text-align:center;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;border-bottom:2px solid #e8e8ec;width:50px">Copy</th>
+          </tr>
+        </thead>
+        <tbody id="poLogBody">
+          <tr><td colspan="5" style="text-align:center;color:#999;padding:24px">No POs generated yet</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
   <div class="footer-tagline">A Legacy of Commitment&reg;</div>
@@ -806,6 +876,166 @@ tr:hover{background:#f8f9ff}
   const now=new Date();
   const opts={weekday:'long',year:'numeric',month:'long',day:'numeric'};
   document.getElementById('headerDate').textContent=now.toLocaleDateString('en-US',opts);
+})();
+
+// === PO GENERATOR LOGIC ===
+(function(){
+  const CUSTOMERS={
+    MSP:'Mississippi Power',IRB:'Irby Construction',DOM:'Dominion Energy',
+    LTC:'LineTec Services',FLO:'Florence Electric Dept',AEP:'AEP / Appalachian Power',
+    SWP:'SWEPCO',CHN:'Chain Electric',SHF:'Sheffield Utilities',
+    EPB:'EPB Chattanooga',GRD:'Gridco',TRX:'Terex'
+  };
+
+  function getStore(){
+    try{return JSON.parse(localStorage.getItem('nu_po_log')||'[]');}
+    catch(e){return[];}
+  }
+  function saveStore(data){localStorage.setItem('nu_po_log',JSON.stringify(data));}
+
+  function getNextSeq(code,dateStr){
+    const log=getStore();
+    const prefix='NU-'+code+'-'+dateStr+'-';
+    let max=0;
+    log.forEach(function(po){
+      if(po.number&&po.number.startsWith(prefix)){
+        const s=parseInt(po.number.split('-').pop(),10);
+        if(s>max)max=s;
+      }
+    });
+    return max+1;
+  }
+
+  function pad(n,len){return String(n).padStart(len,'0');}
+
+  function renderLog(filter){
+    var log=getStore().slice().reverse();
+    var tbody=document.getElementById('poLogBody');
+    if(!tbody)return;
+    var fq=(filter||'').toLowerCase();
+    var html='';
+    log.forEach(function(po,idx){
+      var realIdx=log.length-1-idx;
+      if(fq&&!(po.number||'').toLowerCase().includes(fq)&&!(po.customer||'').toLowerCase().includes(fq)&&!(po.notes||'').toLowerCase().includes(fq))return;
+      html+='<tr>'
+        +'<td style="font-weight:700;color:#0033cc;font-family:monospace;font-size:0.95rem">'+esc(po.number)+'</td>'
+        +'<td>'+esc(po.customer)+'</td>'
+        +'<td>'+esc(po.date)+'</td>'
+        +'<td><input type="text" value="'+escAttr(po.notes||'')+'" data-idx="'+realIdx+'" class="po-note-input" placeholder="What was this PO for?"></td>'
+        +'<td style="text-align:center"><button class="po-copy-btn" data-po="'+escAttr(po.number)+'" title="Copy">📋</button></td>'
+        +'</tr>';
+    });
+    if(!html)html='<tr><td colspan="5" style="text-align:center;color:#999;padding:24px">No POs generated yet</td></tr>';
+    tbody.innerHTML=html;
+
+    tbody.querySelectorAll('.po-note-input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        var all=getStore();
+        var i=parseInt(this.dataset.idx,10);
+        if(all[i])all[i].notes=this.value;
+        saveStore(all);
+      });
+    });
+    tbody.querySelectorAll('.po-copy-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        navigator.clipboard.writeText(this.dataset.po).then(function(){
+          btn.textContent='✅';setTimeout(function(){btn.textContent='📋';},1200);
+        });
+      });
+    });
+  }
+
+  function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function escAttr(s){return esc(s).replace(/"/g,'&quot;');}
+
+  window.addEventListener('DOMContentLoaded',function(){
+    var sel=document.getElementById('poCustomer');
+    var customRow=document.getElementById('poCustomRow');
+    var dateInput=document.getElementById('poDate');
+    var genBtn=document.getElementById('poGenBtn');
+    var resultDiv=document.getElementById('poResult');
+    var searchInput=document.getElementById('poSearch');
+    if(!sel)return;
+
+    // Populate dropdown
+    Object.keys(CUSTOMERS).sort(function(a,b){return CUSTOMERS[a].localeCompare(CUSTOMERS[b]);}).forEach(function(code){
+      var opt=document.createElement('option');
+      opt.value=code;opt.textContent=CUSTOMERS[code]+' ('+code+')';
+      sel.appendChild(opt);
+    });
+    var customOpt=document.createElement('option');
+    customOpt.value='__custom__';customOpt.textContent='+ Add New Customer...';
+    sel.appendChild(customOpt);
+
+    sel.addEventListener('change',function(){
+      customRow.style.display=sel.value==='__custom__'?'flex':'none';
+    });
+
+    // Default date = today
+    var now=new Date();
+    dateInput.value=now.getFullYear()+'-'+pad(now.getMonth()+1,2)+'-'+pad(now.getDate(),2);
+
+    // Generate
+    genBtn.addEventListener('click',function(){
+      var code=sel.value;
+      if(code==='__custom__'){
+        code=document.getElementById('poCustomCode').value.toUpperCase().replace(/[^A-Z]/g,'').substring(0,3);
+        if(code.length!==3){alert('Enter a 3-letter customer code.');return;}
+      }
+      if(!code){alert('Select a customer.');return;}
+
+      var d=new Date(dateInput.value+'T12:00:00');
+      if(isNaN(d)){alert('Enter a valid date.');return;}
+      var dateStr=pad(d.getMonth()+1,2)+pad(d.getDate(),2)+'-'+String(d.getFullYear()).slice(-2);
+      var seq=getNextSeq(code,dateStr);
+      var poNum='NU-'+code+'-'+dateStr+'-'+pad(seq,3);
+
+      var custName=CUSTOMERS[code]||document.getElementById('poCustomName').value||code;
+
+      var log=getStore();
+      log.push({number:poNum,code:code,customer:custName,date:dateInput.value,notes:'',created:new Date().toISOString()});
+      saveStore(log);
+
+      navigator.clipboard.writeText(poNum).then(function(){
+        resultDiv.innerHTML='<div style="background:#e8f5e9;border:2px solid #00aa44;border-radius:10px;padding:20px;text-align:center;margin-top:16px">'
+          +'<div style="font-size:0.8rem;font-weight:700;color:#00aa44;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">PO Generated &amp; Copied to Clipboard</div>'
+          +'<div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc;letter-spacing:0.05em">'+esc(poNum)+'</div>'
+          +'<div style="font-size:0.85rem;color:#555;margin-top:8px">'+esc(custName)+' &mdash; '+dateInput.value+'</div>'
+          +'</div>';
+      }).catch(function(){
+        resultDiv.innerHTML='<div style="background:#fff3e0;border:2px solid #ff9900;border-radius:10px;padding:20px;text-align:center;margin-top:16px">'
+          +'<div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc">'+esc(poNum)+'</div>'
+          +'<div style="font-size:0.85rem;color:#cc6600;margin-top:8px">Copy manually (clipboard blocked)</div>'
+          +'</div>';
+      });
+
+      renderLog(searchInput?searchInput.value:'');
+    });
+
+    // Search
+    if(searchInput){
+      searchInput.addEventListener('input',function(){renderLog(this.value);});
+    }
+
+    // Export CSV
+    var expBtn=document.getElementById('poExportBtn');
+    if(expBtn){
+      expBtn.addEventListener('click',function(){
+        var log=getStore();
+        var csv='PO Number,Customer,Date,Notes\n';
+        log.forEach(function(po){
+          csv+='"'+po.number+'","'+po.customer+'","'+po.date+'","'+(po.notes||'').replace(/"/g,'""')+'"\n';
+        });
+        var blob=new Blob([csv],{type:'text/csv'});
+        var a=document.createElement('a');
+        a.href=URL.createObjectURL(blob);
+        a.download='norris_po_log_'+new Date().toISOString().slice(0,10)+'.csv';
+        a.click();
+      });
+    }
+
+    renderLog();
+  });
 })();
 
 // === TAB NAVIGATION ===
