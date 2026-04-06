@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aaron C. Norris — Personal Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #0000FF;
+  --cyan: #06D0FF;
+  --navy: #0a0e5c;
+  --dark: #1a1a1a;
+  --card-bg: #ffffff;
+  --page-bg: #f0f2f8;
+  --border: #e0e4ef;
+  --red: #dc2626;
+  --green: #16a34a;
+  --yellow: #eab308;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  background: var(--page-bg);
+  color: var(--dark);
+  line-height: 1.5;
+}
+
+/* ── LOGIN GATE ── */
+#login-screen {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(135deg, #0a0e5c, #0033cc, #0066ee, #00aaff, #06D0FF);
+  display: flex; align-items: center; justify-content: center;
+}
+#login-box {
+  background: #fff; border-radius: 16px; padding: 48px 36px; text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35); max-width: 380px; width: 90%;
+}
+#login-box img { width: 140px; margin-bottom: 20px; }
+#login-box h1 { font-family: 'Lato', sans-serif; font-weight: 900; font-size: 22px; color: var(--navy); margin-bottom: 4px; }
+#login-box .subtitle { font-size: 14px; color: #666; margin-bottom: 28px; }
+#login-box input {
+  width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 8px;
+  font-size: 15px; font-family: 'Lato', sans-serif; outline: none; transition: border .2s;
+}
+#login-box input:focus { border-color: var(--cyan); }
+#login-box button {
+  margin-top: 14px; width: 100%; padding: 12px; border: none; border-radius: 8px;
+  background: linear-gradient(135deg, #0033cc, #06D0FF); color: #fff;
+  font-family: 'Lato', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer;
+  transition: opacity .2s;
+}
+#login-box button:hover { opacity: .9; }
+#login-error { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+
+/* ── HEADER ── */
+header {
+  background: linear-gradient(135deg, #0a0e5c, #0033cc, #0066ee, #00aaff, #06D0FF);
+  padding: 36px 24px 60px; color: #fff; text-align: center; position: relative;
+}
+header h1 { font-weight: 900; font-size: 28px; letter-spacing: .5px; }
+header .tagline { font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan); font-size: 15px; margin-top: 4px; }
+header .date { font-size: 13px; opacity: .75; margin-top: 8px; }
+.chevron {
+  position: relative; margin-top: -1px; width: 100%; overflow: hidden; line-height: 0;
+}
+.chevron svg { display: block; width: 100%; height: 50px; }
+
+/* ── LAYOUT ── */
+main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 80px; }
+.section-title {
+  font-weight: 700; font-size: 24px; margin: 36px 0 16px; padding-left: 4px;
+}
+.section-title span:first-child { color: #0033cc; }
+.section-title span:last-child { color: var(--dark); }
+
+.card {
+  background: var(--card-bg); border-radius: 12px; padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06); margin-bottom: 16px;
+}
+
+/* ── CRITICAL REMINDERS ── */
+.card.critical {
+  border: 2px solid var(--red); background: #fef2f2; position: sticky; top: 0; z-index: 50;
+}
+.card.critical h3 { color: var(--red); font-weight: 900; margin-bottom: 10px; font-size: 16px; }
+.card.critical ul { list-style: none; padding: 0; }
+.card.critical li { padding: 6px 0; border-bottom: 1px solid #fecaca; font-size: 14px; }
+.card.critical li:last-child { border: none; }
+.card.critical li::before { content: "\26A0\FE0F"; margin-right: 8px; }
+
+/* ── TO-DO ── */
+.todo-controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.todo-controls input, .todo-controls select {
+  padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
+  font-family: 'Lato', sans-serif; font-size: 14px;
+}
+.todo-controls input[type="text"] { flex: 1; min-width: 160px; }
+.todo-controls input[type="date"] { width: 150px; }
+.btn {
+  padding: 8px 18px; border: none; border-radius: 8px; font-family: 'Lato', sans-serif;
+  font-weight: 700; font-size: 14px; cursor: pointer; color: #fff;
+  background: linear-gradient(135deg, #0033cc, #06D0FF); transition: opacity .2s;
+}
+.btn:hover { opacity: .85; }
+.btn.sm { padding: 4px 10px; font-size: 12px; }
+.btn.danger { background: linear-gradient(135deg, #dc2626, #f87171); }
+
+.todo-list { list-style: none; }
+.todo-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px 0;
+  border-bottom: 1px solid var(--border); font-size: 14px;
+}
+.todo-item:last-child { border: none; }
+.todo-item.done .todo-text { text-decoration: line-through; opacity: .5; }
+.todo-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue); cursor: pointer; }
+.todo-text { flex: 1; cursor: pointer; }
+.todo-priority { font-size: 16px; flex-shrink: 0; }
+.todo-due { font-size: 12px; color: #888; white-space: nowrap; }
+
+/* ── DEALS ── */
+.deals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.deal-card { position: relative; }
+.deal-card h4 { font-weight: 900; font-size: 15px; margin-bottom: 2px; color: var(--navy); }
+.deal-card .contact { font-size: 13px; color: #666; margin-bottom: 8px; }
+.deal-card .value { font-weight: 700; color: #0033cc; font-size: 18px; margin-bottom: 8px; }
+.deal-status {
+  display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #fff;
+}
+.status-Prospect { background: #6366f1; }
+.status-Quoted { background: #eab308; color: #000; }
+.status-Negotiating { background: #f97316; }
+.status-Won { background: #16a34a; }
+.status-Lost { background: #dc2626; }
+.deal-card select {
+  margin-top: 8px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; font-family: 'Lato', sans-serif;
+}
+.deal-card textarea {
+  margin-top: 8px; width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; font-family: 'Lato', sans-serif; resize: vertical; min-height: 40px;
+}
+.deal-card .overdue-badge {
+  position: absolute; top: 12px; right: 12px; background: var(--red); color: #fff;
+  font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
+}
+.deal-card .deal-delete { position: absolute; top: 12px; right: 12px; }
+
+/* ── QUICK LINKS ── */
+.links-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.link-btn {
+  display: flex; align-items: center; justify-content: center; padding: 14px 12px;
+  background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px;
+  text-decoration: none; color: var(--navy); font-weight: 700; font-size: 14px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.link-btn:hover { border-color: var(--cyan); box-shadow: 0 4px 16px rgba(6,208,255,.2); }
+
+/* ── REMARKABLE ── */
+.remark-info { font-size: 14px; color: #555; line-height: 1.7; }
+.remark-info code { background: #e8eaf0; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+.empty-state { text-align: center; color: #aaa; padding: 30px 10px; font-size: 14px; }
+
+/* ── FOOTER ── */
+footer {
+  background: linear-gradient(135deg, #060930, var(--navy)); text-align: center;
+  padding: 28px 16px; margin-top: 40px;
+}
+footer .tagline { font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan); font-size: 16px; }
+footer .copy { color: rgba(255,255,255,.4); font-size: 12px; margin-top: 8px; }
+
+/* ── ADD DEAL MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 100;
+  display: none; align-items: center; justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: #fff; border-radius: 14px; padding: 28px; width: 90%; max-width: 440px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+.modal h3 { font-weight: 900; margin-bottom: 16px; color: var(--navy); }
+.modal label { display: block; font-weight: 700; font-size: 13px; margin: 10px 0 4px; }
+.modal input, .modal select, .modal textarea {
+  width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
+  font-family: 'Lato', sans-serif; font-size: 14px;
+}
+.modal textarea { resize: vertical; min-height: 50px; }
+.modal-actions { display: flex; gap: 10px; margin-top: 18px; justify-content: flex-end; }
+.btn.secondary { background: #e5e7eb; color: var(--dark); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  header h1 { font-size: 22px; }
+  .section-title { font-size: 20px; }
+  .deals-grid { grid-template-columns: 1fr; }
+  .links-grid { grid-template-columns: repeat(2, 1fr); }
+  .todo-controls { flex-direction: column; }
+  .todo-controls input[type="date"] { width: 100%; }
+  #login-box { padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ LOGIN SCREEN ════════ -->
+<div id="login-screen">
+  <div id="login-box">
+    <img src="logo-blue.png" alt="Norris Utilities">
+    <h1>Aaron C. Norris</h1>
+    <p class="subtitle">Personal Dashboard</p>
+    <input type="password" id="pw-input" placeholder="Enter password" autocomplete="off">
+    <button onclick="attemptLogin()">Sign In</button>
+    <p id="login-error">Incorrect password. Try again.</p>
+  </div>
+</div>
+
+<!-- ════════ MAIN APP ════════ -->
+<div id="app" style="display:none;">
+
+<header>
+  <h1>Aaron C. Norris — Dashboard</h1>
+  <p class="tagline">A Legacy of Commitment&reg;</p>
+  <p class="date" id="header-date"></p>
+</header>
+<div class="chevron">
+  <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+    <polygon points="0,0 456,50 1200,0 1200,50 0,50" fill="#f0f2f8"/>
+  </svg>
+</div>
+
+<main>
+
+  <!-- CRITICAL REMINDERS (pinned) -->
+  <div class="card critical">
+    <h3>CRITICAL REMINDERS</h3>
+    <ul>
+      <li>QB Invoices — 5 orders uninvoiced since March 20</li>
+      <li>Alabama Dealer License — not started, need surety bond</li>
+      <li>BSS agreement expires January 2027 — earn the extension</li>
+      <li>Time Machine backup — NOT running on M1</li>
+      <li>MK marketing materials for Skylift — behind schedule</li>
+      <li>Trademark filings due by February 4, 2031</li>
+    </ul>
+  </div>
+
+  <!-- TO-DO LIST -->
+  <h2 class="section-title"><span>Personal </span><span>To-Do List</span></h2>
+  <div class="card">
+    <div class="todo-controls">
+      <input type="text" id="todo-text" placeholder="New task...">
+      <select id="todo-priority">
+        <option value="1">&#128308; Critical</option>
+        <option value="2">&#128993; Important</option>
+        <option value="3" selected>&#128994; Normal</option>
+      </select>
+      <input type="date" id="todo-date">
+      <button class="btn" onclick="addTodo()">Add</button>
+    </div>
+    <ul class="todo-list" id="todo-list"></ul>
+  </div>
+
+  <!-- DEAL PIPELINE -->
+  <h2 class="section-title"><span>Deal </span><span>Pipeline</span></h2>
+  <div style="margin-bottom:14px;"><button class="btn" onclick="openDealModal()">+ Add Deal</button></div>
+  <div class="deals-grid" id="deals-grid"></div>
+
+  <!-- REMARKABLE NOTES -->
+  <h2 class="section-title"><span>reMarkable </span><span>Notes</span></h2>
+  <div class="card">
+    <p class="remark-info">reMarkable scan results feed into your Telegram morning brief. Check <code>~/norris-agent/data/remarkable_items.json</code> on the M1 for all scanned items.</p>
+  </div>
+  <div class="card">
+    <h4 style="font-weight:700;margin-bottom:8px;">Latest Scans</h4>
+    <p class="empty-state">No scans loaded — check Telegram for morning brief summaries</p>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <h2 class="section-title"><span>Quick </span><span>Links</span></h2>
+  <div class="links-grid">
+    <a class="link-btn" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Gmail</a>
+    <a class="link-btn" href="https://app.qbo.intuit.com" target="_blank">QuickBooks</a>
+    <a class="link-btn" href="https://drive.google.com" target="_blank">Google Drive</a>
+    <a class="link-btn" href="https://ops.norrisutilities.com" target="_blank">Ops Portal</a>
+    <a class="link-btn" href="https://ops.norrisutilities.com/msp-orders.html" target="_blank">MSP Orders</a>
+    <a class="link-btn" href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank">UPS Shipping Log</a>
+    <a class="link-btn" href="https://web.telegram.org" target="_blank">Telegram</a>
+    <a class="link-btn" href="tools/pricing-calculator.html">Pricing Calculator</a>
+  </div>
+
+</main>
+
+<footer>
+  <p class="tagline">A Legacy of Commitment&reg;</p>
+  <p class="copy">&copy; 2026 Norris Utilities, LLC. All rights reserved.</p>
+</footer>
+
+</div><!-- /app -->
+
+<!-- ════════ ADD DEAL MODAL ════════ -->
+<div class="modal-overlay" id="deal-modal">
+  <div class="modal">
+    <h3>Add New Deal</h3>
+    <label>Company</label>
+    <input type="text" id="dm-company">
+    <label>Contact</label>
+    <input type="text" id="dm-contact">
+    <label>Value</label>
+    <input type="text" id="dm-value" placeholder="e.g. $50,000">
+    <label>Status</label>
+    <select id="dm-status">
+      <option>Prospect</option><option>Quoted</option><option>Negotiating</option><option>Won</option><option>Lost</option>
+    </select>
+    <label>Notes</label>
+    <textarea id="dm-notes"></textarea>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeDealModal()">Cancel</button>
+      <button class="btn" onclick="saveDealFromModal()">Save Deal</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── AUTH ── */
+const PASS = 'norris2026';
+const AUTH_KEY = 'aaron_auth';
+
+function attemptLogin() {
+  const v = document.getElementById('pw-input').value;
+  if (v === PASS) {
+    sessionStorage.setItem(AUTH_KEY, 'true');
+    showApp();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+
+function showApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+}
+
+if (sessionStorage.getItem(AUTH_KEY) === 'true') showApp();
+
+/* ── DATE ── */
+document.getElementById('header-date').textContent = new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+/* ══════════ TO-DO LIST ══════════ */
+const TODO_KEY = 'aaron_todos';
+let todos = JSON.parse(localStorage.getItem(TODO_KEY) || '[]');
+
+function saveTodos() { localStorage.setItem(TODO_KEY, JSON.stringify(todos)); }
+
+function priorityIcon(p) { return p == 1 ? '\u{1F534}' : p == 2 ? '\u{1F7E1}' : '\u{1F7E2}'; }
+
+function renderTodos() {
+  const sorted = [...todos].sort((a, b) => {
+    if (a.priority !== b.priority) return a.priority - b.priority;
+    if (a.due && b.due) return a.due.localeCompare(b.due);
+    if (a.due) return -1;
+    if (b.due) return 1;
+    return 0;
+  });
+  const ul = document.getElementById('todo-list');
+  ul.innerHTML = '';
+  sorted.forEach(t => {
+    const li = document.createElement('li');
+    li.className = 'todo-item' + (t.done ? ' done' : '');
+    li.innerHTML = `
+      <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTodo('${t.id}')">
+      <span class="todo-priority">${priorityIcon(t.priority)}</span>
+      <span class="todo-text" onclick="toggleTodo('${t.id}')">${esc(t.text)}</span>
+      ${t.due ? '<span class="todo-due">' + t.due + '</span>' : ''}
+      <button class="btn sm danger" onclick="deleteTodo('${t.id}')">X</button>
+    `;
+    ul.appendChild(li);
+  });
+}
+
+function addTodo() {
+  const text = document.getElementById('todo-text').value.trim();
+  if (!text) return;
+  todos.push({
+    id: Date.now().toString(36),
+    text,
+    priority: parseInt(document.getElementById('todo-priority').value),
+    due: document.getElementById('todo-date').value || '',
+    done: false
+  });
+  document.getElementById('todo-text').value = '';
+  document.getElementById('todo-date').value = '';
+  saveTodos(); renderTodos();
+}
+
+function toggleTodo(id) {
+  const t = todos.find(x => x.id === id);
+  if (t) { t.done = !t.done; saveTodos(); renderTodos(); }
+}
+
+function deleteTodo(id) {
+  todos = todos.filter(x => x.id !== id);
+  saveTodos(); renderTodos();
+}
+
+document.getElementById('todo-text').addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
+renderTodos();
+
+/* ══════════ DEALS ══════════ */
+const DEAL_KEY = 'aaron_deals';
+const DEFAULT_DEALS = [
+  { id:'d1', company:'Skylift', contact:'Andrew Jarmoszuk', value:'$1.09M', status:'Negotiating', notes:'5x SBA40i-LW + 1x SBA47i-MH', overdue:false },
+  { id:'d2', company:'EPB Chattanooga', contact:'Rick Sutherland', value:'~$185K', status:'Quoted', notes:'SkyTruck47 — Quoted Dec 4, 2025', overdue:true },
+  { id:'d3', company:'Terex OEM Bucket Covers', contact:'Bill Kugler', value:'$500K+ potential', status:'Prospect', notes:'', overdue:false },
+  { id:'d4', company:'Sheffield Utilities', contact:'Michael Waldrep', value:'', status:'Prospect', notes:'', overdue:false },
+  { id:'d5', company:'Irby', contact:'Jared Lemoine', value:'', status:'Quoted', notes:'RCOO Program follow-up', overdue:false },
+  { id:'d6', company:'BSS Drill Rigs / Izzy B Drilling', contact:'', value:'', status:'Prospect', notes:'2 units', overdue:false },
+  { id:'d7', company:'BSS Drill Rigs / Richard Baughn Construction', contact:'', value:'', status:'Prospect', notes:'1 unit', overdue:false }
+];
+
+let deals = JSON.parse(localStorage.getItem(DEAL_KEY) || 'null');
+if (!deals) { deals = DEFAULT_DEALS; localStorage.setItem(DEAL_KEY, JSON.stringify(deals)); }
+
+function saveDeals() { localStorage.setItem(DEAL_KEY, JSON.stringify(deals)); }
+
+const STATUSES = ['Prospect','Quoted','Negotiating','Won','Lost'];
+
+function renderDeals() {
+  const g = document.getElementById('deals-grid');
+  g.innerHTML = '';
+  deals.forEach(d => {
+    const div = document.createElement('div');
+    div.className = 'card deal-card';
+    const opts = STATUSES.map(s => `<option ${s===d.status?'selected':''}>${s}</option>`).join('');
+    div.innerHTML = `
+      ${d.overdue ? '<span class="overdue-badge">OVERDUE</span>' : ''}
+      <h4>${esc(d.company)}</h4>
+      <p class="contact">${esc(d.contact || '—')}</p>
+      ${d.value ? '<p class="value">' + esc(d.value) + '</p>' : ''}
+      <span class="deal-status status-${d.status}">${d.status}</span>
+      <select onchange="updateDealStatus('${d.id}', this.value)">${opts}</select>
+      <textarea placeholder="Notes..." onchange="updateDealNotes('${d.id}', this.value)">${esc(d.notes)}</textarea>
+      <button class="btn sm danger" style="margin-top:8px;" onclick="deleteDeal('${d.id}')">Remove</button>
+    `;
+    g.appendChild(div);
+  });
+}
+
+function updateDealStatus(id, val) {
+  const d = deals.find(x => x.id === id);
+  if (d) { d.status = val; saveDeals(); renderDeals(); }
+}
+function updateDealNotes(id, val) {
+  const d = deals.find(x => x.id === id);
+  if (d) { d.notes = val; saveDeals(); }
+}
+function deleteDeal(id) {
+  deals = deals.filter(x => x.id !== id);
+  saveDeals(); renderDeals();
+}
+
+function openDealModal() { document.getElementById('deal-modal').classList.add('active'); }
+function closeDealModal() {
+  document.getElementById('deal-modal').classList.remove('active');
+  ['dm-company','dm-contact','dm-value','dm-notes'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('dm-status').value = 'Prospect';
+}
+function saveDealFromModal() {
+  const company = document.getElementById('dm-company').value.trim();
+  if (!company) return;
+  deals.push({
+    id: Date.now().toString(36),
+    company,
+    contact: document.getElementById('dm-contact').value.trim(),
+    value: document.getElementById('dm-value').value.trim(),
+    status: document.getElementById('dm-status').value,
+    notes: document.getElementById('dm-notes').value.trim(),
+    overdue: false
+  });
+  saveDeals(); renderDeals(); closeDealModal();
+}
+
+renderDeals();
+
+/* ── UTILS ── */
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+</script>
+
+</body>
+</html>
