@@ -3,563 +3,1087 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Norris Utilities Team</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <title>The Team — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ══ ROOT VARIABLES ══ */
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
+    /* ══ BASE ══ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
     body {
-      background: #ffffff;
-      font-family: 'Lato', sans-serif;
-      min-height: 100vh;
-      padding: 40px 20px 60px;
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .page-header {
+    /* ══ HEADER ══ */
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
       text-align: center;
-      margin-bottom: 56px;
+      overflow: hidden;
+      min-height: 300px;
     }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
 
-    .page-header h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
+    .nu-phoenix-icon { width: 80px; height: 80px; margin: 0 auto 16px; }
+    .nu-phoenix-icon svg { width: 100%; height: 100%; }
+    .nu-logo-text {
+      font-family: var(--font-primary);
       font-weight: 900;
-      color: #0000FF;
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-    }
-
-    .page-header h1 span {
-      color: #06D0FF;
-    }
-
-    .page-header .subtitle {
-      margin-top: 10px;
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: #444;
-      letter-spacing: 2px;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
       text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+    .header-page-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--nu-white);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 24px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .header-page-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.08em;
+      margin-top: 6px;
     }
 
-    .divider {
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, #0000FF, #06D0FF);
+    /* ══ CHEVRON ══ */
+    .nu-chevron { position: relative; height: 50px; margin-top: -50px; z-index: 10; }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+
+    /* ══ CONTENT AREA ══ */
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    /* ══ TEAM GRID ══ */
+    .team-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px 40px;
+    }
+    .section-label {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-label h2 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--nu-blue);
+      letter-spacing: 0.08em;
+    }
+    .section-label h2 span { color: var(--nu-dark-text); font-weight: 700; }
+    .section-label .accent-line {
+      width: 80px; height: 4px;
+      background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan));
       border-radius: 2px;
-      margin: 18px auto 0;
+      margin: 12px auto 0;
     }
 
     .team-grid {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 36px;
-      justify-content: center;
-      max-width: 1100px;
-      margin: 0 auto;
+      justify-items: center;
     }
 
-    .card {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 32px rgba(0,0,255,0.08), 0 1px 4px rgba(0,0,0,0.06);
-      padding: 32px 24px 28px;
-      width: 240px;
+    /* ══ CARDS ══ */
+    .team-card {
+      background: var(--nu-white);
+      border-radius: 16px;
+      padding: 36px 28px 32px;
+      width: 100%;
+      max-width: 320px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-      border: 1.5px solid #f0f0ff;
+      box-shadow: 0 4px 24px rgba(0,0,255,0.06), 0 1px 4px rgba(0,0,0,0.04);
+      border: 1.5px solid var(--nu-medium-gray);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,255,0.12), 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan));
+      border-radius: 16px 16px 0 0;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 48px rgba(0,0,255,0.13), 0 2px 8px rgba(0,0,0,0.08);
+    .team-card.featured { border-color: var(--nu-cyan); }
+    .team-card.featured::before {
+      height: 5px;
+      background: linear-gradient(90deg, var(--nu-cyan), var(--nu-blue), var(--nu-cyan));
     }
-
-    .card.legacy-card {
-      border-color: #06D0FF;
-      background: linear-gradient(160deg, #f0faff 0%, #fff 100%);
-    }
-
-    .card.ghost-card {
+    .team-card.ghost {
       border-color: #ddd;
-      background: #fafafa;
-      opacity: 0.85;
+      background: linear-gradient(180deg, #fafafa 0%, #f0f0f2 100%);
+      opacity: 0.9;
+    }
+    .team-card.ghost::before {
+      background: linear-gradient(90deg, #ccc, #ddd, #ccc);
     }
 
-    .character-wrap {
-      width: 180px;
-      height: 200px;
+    .character-stage {
+      width: 220px;
+      height: 240px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      margin-bottom: 8px;
+      margin-bottom: 16px;
     }
 
-    /* === FLOAT ANIMATIONS === */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-8px); }
-    }
-    @keyframes float-slow {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-6px); }
-    }
-    @keyframes float-ghost {
-      0%, 100% { transform: translateY(0px) scaleX(1); }
-      50%       { transform: translateY(-10px) scaleX(1.02); }
-    }
-    @keyframes spin-wheel {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    @keyframes glow-pulse {
-      0%, 100% { filter: drop-shadow(0 0 6px #06D0FF) drop-shadow(0 0 12px #0000FF88); }
-      50%       { filter: drop-shadow(0 0 14px #06D0FF) drop-shadow(0 0 28px #0000FFaa); }
-    }
-    @keyframes flame-flicker {
-      0%, 100% { transform: scaleY(1) scaleX(1); }
-      30%       { transform: scaleY(1.06) scaleX(0.97); }
-      70%       { transform: scaleY(0.96) scaleX(1.03); }
-    }
-    @keyframes ghost-float {
-      0%, 100% { transform: translateY(0) rotate(-1deg); opacity: 0.7; }
-      50%       { transform: translateY(-12px) rotate(1deg); opacity: 0.9; }
-    }
-    @keyframes question-pulse {
-      0%, 100% { opacity: 0.5; }
-      50%       { opacity: 1; }
-    }
-    @keyframes speed-lines {
-      0%   { transform: translateX(0); opacity: 0.7; }
-      100% { transform: translateX(30px); opacity: 0; }
-    }
-
-    .float-anim   { animation: float 2.8s ease-in-out infinite; }
-    .float-slow   { animation: float-slow 3.4s ease-in-out infinite; }
-    .float-ghost  { animation: ghost-float 3s ease-in-out infinite; }
-    .glow-anim    { animation: glow-pulse 2.2s ease-in-out infinite; }
-
-    /* Name badge */
-    .name-badge {
+    .member-info {
       text-align: center;
-      margin-top: 6px;
     }
-    .name-badge .name {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #0000FF;
-      line-height: 1.2;
+    .member-name {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: var(--nu-blue);
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
     }
-    .name-badge .role {
-      font-size: 0.82rem;
+    .member-role {
+      font-family: var(--font-primary);
       font-weight: 400;
-      color: #555;
-      margin-top: 3px;
-      letter-spacing: 0.3px;
+      font-size: 0.92rem;
+      color: #666;
+      letter-spacing: 0.02em;
     }
-    .name-badge .emoji {
-      font-size: 1.3rem;
-      display: block;
-      margin-bottom: 2px;
-    }
-    .coming-soon {
-      display: inline-block;
+    .member-detail {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: #888;
       margin-top: 8px;
+      line-height: 1.5;
+    }
+    .badge-tag {
+      display: inline-block;
+      margin-top: 12px;
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #06D0FF;
-      border: 1.5px solid #06D0FF;
+      color: var(--nu-cyan);
+      border: 1.5px solid var(--nu-cyan);
       border-radius: 20px;
-      padding: 3px 10px;
+      padding: 4px 14px;
+    }
+    .badge-tag.ghost-tag {
+      color: #aaa;
+      border-color: #ccc;
+    }
+
+    /* ══ ANIMATIONS ══ */
+    @keyframes ride {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-6px) rotate(-0.5deg); }
+      50% { transform: translateY(-10px) rotate(0deg); }
+      75% { transform: translateY(-6px) rotate(0.5deg); }
+    }
+    @keyframes ride-fast {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      30% { transform: translateY(-8px) rotate(0deg); }
+      60% { transform: translateY(-12px) rotate(1deg); }
+      80% { transform: translateY(-5px) rotate(0deg); }
+    }
+    @keyframes ride-smooth {
+      0%, 100% { transform: translateY(0) rotate(0.3deg); }
+      50% { transform: translateY(-7px) rotate(-0.3deg); }
+    }
+    @keyframes spin-wheel {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes glow-pulse {
+      0%, 100% { filter: drop-shadow(0 0 8px rgba(6,208,255,0.4)) drop-shadow(0 0 16px rgba(0,0,255,0.2)); }
+      50% { filter: drop-shadow(0 0 16px rgba(6,208,255,0.7)) drop-shadow(0 0 32px rgba(0,0,255,0.4)); }
+    }
+    @keyframes flame-dance {
+      0%, 100% { transform: scaleY(1) scaleX(1) translateY(0); }
+      20% { transform: scaleY(1.08) scaleX(0.95) translateY(-2px); }
+      40% { transform: scaleY(0.94) scaleX(1.05) translateY(1px); }
+      60% { transform: scaleY(1.06) scaleX(0.97) translateY(-1px); }
+      80% { transform: scaleY(0.97) scaleX(1.02) translateY(0); }
+    }
+    @keyframes steam-rise {
+      0% { transform: translateY(0) scaleX(1); opacity: 0.5; }
+      50% { transform: translateY(-8px) scaleX(1.3); opacity: 0.3; }
+      100% { transform: translateY(-16px) scaleX(1.6); opacity: 0; }
+    }
+    @keyframes speed-trail {
+      0% { transform: translateX(0); opacity: 0.6; }
+      100% { transform: translateX(35px); opacity: 0; }
+    }
+    @keyframes ghost-drift {
+      0%, 100% { transform: translateY(0) rotate(-1deg); opacity: 0.6; }
+      50% { transform: translateY(-14px) rotate(1deg); opacity: 0.85; }
+    }
+    @keyframes question-blink {
+      0%, 40%, 100% { opacity: 0.25; }
+      50%, 90% { opacity: 0.7; }
+    }
+    @keyframes ring-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.15; }
+      50% { transform: scale(1.08); opacity: 0.05; }
+    }
+    @keyframes clipboard-check {
+      0%, 80%, 100% { transform: rotate(0deg); }
+      85% { transform: rotate(-3deg); }
+      90% { transform: rotate(2deg); }
+      95% { transform: rotate(-1deg); }
+    }
+    @keyframes hair-blow {
+      0%, 100% { transform: rotate(0deg) scaleX(1); }
+      30% { transform: rotate(2deg) scaleX(1.02); }
+      70% { transform: rotate(-1deg) scaleX(0.98); }
+    }
+    @keyframes data-scroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+    @keyframes blink-eyes {
+      0%, 46%, 50%, 100% { transform: scaleY(1); }
+      48% { transform: scaleY(0.1); }
+    }
+
+    .anim-ride { animation: ride 3s ease-in-out infinite; }
+    .anim-ride-fast { animation: ride-fast 2.4s ease-in-out infinite; }
+    .anim-ride-smooth { animation: ride-smooth 3.6s ease-in-out infinite; }
+    .anim-glow { animation: glow-pulse 2.5s ease-in-out infinite; }
+    .anim-ghost { animation: ghost-drift 3.2s ease-in-out infinite; }
+
+    /* ══ GROUND SHADOWS ══ */
+    .ground-shadow {
+      fill: rgba(0,0,0,0.08);
+    }
+    @keyframes shadow-pulse {
+      0%, 100% { rx: 40; ry: 6; opacity: 0.08; }
+      50% { rx: 35; ry: 5; opacity: 0.04; }
+    }
+
+    /* ══ FOOTER ══ */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.85);
+      padding: 48px 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--nu-cyan);
+      margin-bottom: 16px;
+    }
+    .nu-footer-contact {
+      font-size: 1.05rem;
+      line-height: 2;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+    .nu-footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 240px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .header-page-title { font-size: 1.3rem; }
+      .team-section { padding: 40px 20px 20px; }
+      .team-grid { grid-template-columns: 1fr; gap: 28px; }
+      .team-card { max-width: 340px; }
+      .nu-footer { padding: 36px 20px; }
+      .nu-footer-contact { font-size: 0.95rem; }
+    }
+
+    /* ══ PRINT ══ */
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .team-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
 <body>
 
-<header class="page-header">
-  <h1>The Norris Utilities <span>Team</span></h1>
-  <p class="subtitle">Work Hard. Ride Hard. Build the Legacy.</p>
-  <div class="divider"></div>
-</header>
-
-<div class="team-grid">
-
-  <!-- ==============================
-       CARD 1: LEGACY (AI Agent)
-       ============================== -->
-  <div class="card legacy-card">
-    <div class="character-wrap">
-      <svg class="glow-anim" width="170" height="195" viewBox="0 0 170 195" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-        <!-- OneWheel Board -->
-        <rect x="30" y="158" width="110" height="14" rx="7" fill="#1a1a2e"/>
-        <rect x="38" y="155" width="94" height="8" rx="4" fill="#0000FF" opacity="0.7"/>
-
-        <!-- Wheel (animated spin) -->
-        <g transform="translate(85,172)">
-          <circle r="20" fill="#111" stroke="#06D0FF" stroke-width="2.5"/>
-          <g style="animation: spin-wheel 1.4s linear infinite; transform-origin: 0 0;">
-            <line x1="0" y1="-17" x2="0" y2="17" stroke="#06D0FF" stroke-width="1.5" opacity="0.6"/>
-            <line x1="-17" y1="0" x2="17" y2="0" stroke="#06D0FF" stroke-width="1.5" opacity="0.6"/>
-            <line x1="-12" y1="-12" x2="12" y2="12" stroke="#06D0FF" stroke-width="1.5" opacity="0.4"/>
-            <line x1="12" y1="-12" x2="-12" y2="12" stroke="#06D0FF" stroke-width="1.5" opacity="0.4"/>
-          </g>
-          <circle r="4" fill="#06D0FF"/>
-        </g>
-
-        <!-- Character body group (floats) -->
-        <g class="float-anim">
-
-          <!-- Feet / shoe stubs on board -->
-          <rect x="50" y="148" width="22" height="10" rx="5" fill="#0000FF"/>
-          <rect x="98" y="148" width="22" height="10" rx="5" fill="#0000FF"/>
-
-          <!-- Legs (flame-styled) -->
-          <path d="M58 148 Q55 130 60 118" stroke="#06D0FF" stroke-width="8" stroke-linecap="round" fill="none"/>
-          <path d="M112 148 Q115 130 110 118" stroke="#0055FF" stroke-width="8" stroke-linecap="round" fill="none"/>
-
-          <!-- Body — flame torso -->
-          <path d="M62 120 Q65 100 85 95 Q105 100 108 120 Q106 138 85 140 Q64 138 62 120Z" fill="url(#bodyGrad)"/>
-
-          <!-- Laptop held in left arm -->
-          <rect x="28" y="108" width="36" height="24" rx="3" fill="#1a1a2e" stroke="#06D0FF" stroke-width="1.5"/>
-          <rect x="31" y="111" width="30" height="16" rx="2" fill="#0a0a20"/>
-          <!-- screen glow lines -->
-          <line x1="34" y1="115" x2="57" y2="115" stroke="#06D0FF" stroke-width="1" opacity="0.7"/>
-          <line x1="34" y1="119" x2="52" y2="119" stroke="#06D0FF" stroke-width="1" opacity="0.5"/>
-          <line x1="34" y1="123" x2="55" y2="123" stroke="#06D0FF" stroke-width="1" opacity="0.6"/>
-          <!-- trackpad -->
-          <rect x="38" y="129" width="16" height="3" rx="1.5" fill="#06D0FF" opacity="0.4"/>
-          <!-- Arm holding laptop -->
-          <path d="M64 120 Q50 116 32 122" stroke="#0044DD" stroke-width="7" stroke-linecap="round" fill="none"/>
-
-          <!-- Right arm (loose/balance) -->
-          <path d="M106 120 Q120 112 130 118" stroke="#0044DD" stroke-width="7" stroke-linecap="round" fill="none"/>
-          <circle cx="132" cy="120" r="6" fill="#0044DD"/><!-- hand -->
-
-          <!-- Neck -->
-          <rect x="80" y="83" width="10" height="13" rx="5" fill="#0055FF"/>
-
-          <!-- Head — flame creature -->
-          <ellipse cx="85" cy="74" rx="22" ry="20" fill="url(#headGrad)"/>
-
-          <!-- Eyes — glowing -->
-          <ellipse cx="78" cy="72" rx="5" ry="6" fill="#fff"/>
-          <ellipse cx="78" cy="73" rx="3" ry="4" fill="#06D0FF"/>
-          <circle cx="78" cy="73" r="1.5" fill="#001aff"/>
-
-          <ellipse cx="92" cy="72" rx="5" ry="6" fill="#fff"/>
-          <ellipse cx="92" cy="73" rx="3" ry="4" fill="#06D0FF"/>
-          <circle cx="92" cy="73" r="1.5" fill="#001aff"/>
-
-          <!-- Smile -->
-          <path d="M79 82 Q85 86 91 82" stroke="#06D0FF" stroke-width="2" stroke-linecap="round" fill="none"/>
-
-          <!-- Flame hair / crown -->
-          <g style="animation: flame-flicker 1.6s ease-in-out infinite; transform-origin: 85px 55px;">
-            <path d="M85 55 Q80 42 85 30 Q90 42 85 55Z" fill="#06D0FF" opacity="0.9"/>
-            <path d="M78 58 Q72 46 76 34 Q82 46 78 58Z" fill="#0088FF" opacity="0.8"/>
-            <path d="M92 58 Q98 46 94 34 Q88 46 92 58Z" fill="#0000FF" opacity="0.8"/>
-            <path d="M85 54 Q81 44 85 35 Q89 44 85 54Z" fill="#aaeeff" opacity="0.6"/>
-          </g>
-
-          <!-- Earbuds -->
-          <circle cx="63" cy="74" r="5" fill="#1a1a2e" stroke="#06D0FF" stroke-width="1.5"/>
-          <circle cx="63" cy="74" r="2" fill="#06D0FF"/>
-          <path d="M63 79 Q65 88 68 90" stroke="#555" stroke-width="1.2" fill="none"/>
-
-          <circle cx="107" cy="74" r="5" fill="#1a1a2e" stroke="#06D0FF" stroke-width="1.5"/>
-          <circle cx="107" cy="74" r="2" fill="#06D0FF"/>
-          <path d="M107 79 Q105 88 102 90" stroke="#555" stroke-width="1.2" fill="none"/>
-
-        </g><!-- /float-anim -->
-
-        <defs>
-          <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0066FF"/>
-            <stop offset="100%" stop-color="#0000CC"/>
-          </linearGradient>
-          <linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#06D0FF"/>
-            <stop offset="100%" stop-color="#0044FF"/>
-          </linearGradient>
-        </defs>
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
       </svg>
     </div>
-    <div class="name-badge">
-      <span class="emoji">🔥</span>
-      <div class="name">Legacy</div>
-      <div class="role">AI Field Operator</div>
-    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="header-page-title">Meet the Team</div>
+    <div class="header-page-subtitle">Work Hard. Ride Hard. Build the Legacy.</div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
   </div>
 
-  <!-- ==============================
-       CARD 2: CAROLINE BUTLER
-       ============================== -->
-  <div class="card">
-    <div class="character-wrap">
-      <svg class="float-slow" width="160" height="195" viewBox="0 0 160 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div class="team-section">
 
-        <!-- OneWheel Board -->
-        <rect x="25" y="158" width="110" height="14" rx="7" fill="#1a1a2e"/>
-        <rect x="33" y="155" width="94" height="8" rx="4" fill="#0000FF" opacity="0.5"/>
+      <div class="section-label">
+        <h2>The <span>Norris Utilities® Crew</span></h2>
+        <div class="accent-line"></div>
+      </div>
 
-        <!-- Wheel -->
-        <g transform="translate(80,172)">
-          <circle r="20" fill="#111" stroke="#0000FF" stroke-width="2.5"/>
-          <g style="animation: spin-wheel 1.8s linear infinite; transform-origin: 0 0;">
-            <line x1="0" y1="-17" x2="0" y2="17" stroke="#aaaaff" stroke-width="1.5" opacity="0.6"/>
-            <line x1="-17" y1="0" x2="17" y2="0" stroke="#aaaaff" stroke-width="1.5" opacity="0.6"/>
-            <line x1="-12" y1="-12" x2="12" y2="12" stroke="#aaaaff" stroke-width="1.5" opacity="0.4"/>
-            <line x1="12" y1="-12" x2="-12" y2="12" stroke="#aaaaff" stroke-width="1.5" opacity="0.4"/>
-          </g>
-          <circle r="4" fill="#0000FF"/>
-        </g>
+      <div class="team-grid">
 
-        <!-- Feet -->
-        <rect x="45" y="148" width="22" height="10" rx="5" fill="#c06030"/>
-        <rect x="93" y="148" width="22" height="10" rx="5" fill="#c06030"/>
+        <!-- ══════════════════════════════════════
+             AARON C. NORRIS — Founder & CEO
+             ══════════════════════════════════════ -->
+        <div class="team-card featured">
+          <div class="character-stage">
+            <svg width="220" height="240" viewBox="0 0 220 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="aaron-shirt" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0022CC"/>
+                  <stop offset="100%" stop-color="#0000AA"/>
+                </linearGradient>
+                <linearGradient id="aaron-pants" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#c4a870"/>
+                  <stop offset="100%" stop-color="#a88850"/>
+                </linearGradient>
+                <linearGradient id="board-glow-a" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#0000CC"/>
+                  <stop offset="50%" stop-color="#0033FF"/>
+                  <stop offset="100%" stop-color="#0000CC"/>
+                </linearGradient>
+                <filter id="aaron-shadow">
+                  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.15"/>
+                </filter>
+              </defs>
 
-        <!-- Legs -->
-        <path d="M53 148 Q50 132 54 120" stroke="#e8a070" stroke-width="8" stroke-linecap="round" fill="none"/>
-        <path d="M107 148 Q110 132 106 120" stroke="#e8a070" stroke-width="8" stroke-linecap="round" fill="none"/>
+              <!-- Ground shadow -->
+              <ellipse cx="110" cy="222" rx="45" ry="6" class="ground-shadow" style="animation: shadow-pulse 2.4s ease-in-out infinite;"/>
 
-        <!-- Skirt / lower body -->
-        <path d="M54 120 Q58 136 80 138 Q102 136 106 120 Q100 112 80 110 Q60 112 54 120Z" fill="#0000FF"/>
+              <!-- Speed trails (behind everything) -->
+              <g style="animation: speed-trail 0.6s linear infinite;">
+                <line x1="10" y1="155" x2="38" y2="155" stroke="var(--nu-cyan)" stroke-width="2.5" opacity="0.5" stroke-linecap="round"/>
+                <line x1="5" y1="165" x2="28" y2="165" stroke="var(--nu-cyan)" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+                <line x1="12" y1="175" x2="30" y2="175" stroke="var(--nu-cyan)" stroke-width="1.5" opacity="0.3" stroke-linecap="round"/>
+                <line x1="18" y1="145" x2="32" y2="145" stroke="var(--nu-cyan)" stroke-width="1.5" opacity="0.25" stroke-linecap="round"/>
+              </g>
 
-        <!-- Body / torso -->
-        <rect x="62" y="92" width="36" height="30" rx="8" fill="#06D0FF"/>
+              <!-- ─── ONEWHEEL ─── -->
+              <g transform="rotate(-6, 110, 205)">
+                <!-- Board -->
+                <rect x="52" y="198" width="116" height="16" rx="8" fill="#111827"/>
+                <!-- Board accent stripe -->
+                <rect x="58" y="194" width="104" height="8" rx="4" fill="url(#board-glow-a)" opacity="0.7"/>
+                <!-- Grip tape texture -->
+                <rect x="60" y="199" width="100" height="14" rx="7" fill="#1a1a2e" opacity="0.8"/>
+                <!-- Foot pads -->
+                <rect x="62" y="196" width="36" height="6" rx="3" fill="#333" opacity="0.6"/>
+                <rect x="122" y="196" width="36" height="6" rx="3" fill="#333" opacity="0.6"/>
+              </g>
 
-        <!-- Clipboard (left arm) -->
-        <rect x="18" y="98" width="28" height="36" rx="3" fill="#f5f0e0" stroke="#888" stroke-width="1.5"/>
-        <rect x="30" y="93" width="12" height="8" rx="3" fill="#888"/><!-- clip -->
-        <line x1="22" y1="108" x2="42" y2="108" stroke="#333" stroke-width="1.2"/>
-        <line x1="22" y1="113" x2="42" y2="113" stroke="#333" stroke-width="1.2"/>
-        <line x1="22" y1="118" x2="38" y2="118" stroke="#333" stroke-width="1.2"/>
-        <line x1="22" y1="123" x2="40" y2="123" stroke="#0000FF" stroke-width="1.5"/>
-        <!-- Left arm holding clipboard -->
-        <path d="M64 105 Q44 100 24 110" stroke="#e8a070" stroke-width="7" stroke-linecap="round" fill="none"/>
+              <!-- Wheel -->
+              <g transform="translate(110, 216)">
+                <circle r="22" fill="#0a0a0a" stroke="#333" stroke-width="3"/>
+                <circle r="18" fill="none" stroke="#222" stroke-width="4"/>
+                <g style="animation: spin-wheel 0.6s linear infinite; transform-origin: 0 0;">
+                  <line x1="0" y1="-16" x2="0" y2="16" stroke="#555" stroke-width="2" opacity="0.6"/>
+                  <line x1="-16" y1="0" x2="16" y2="0" stroke="#555" stroke-width="2" opacity="0.6"/>
+                  <line x1="-11" y1="-11" x2="11" y2="11" stroke="#555" stroke-width="1.5" opacity="0.4"/>
+                  <line x1="11" y1="-11" x2="-11" y2="11" stroke="#555" stroke-width="1.5" opacity="0.4"/>
+                </g>
+                <circle r="5" fill="#222"/>
+                <circle r="3" fill="var(--nu-blue)" opacity="0.8"/>
+              </g>
 
-        <!-- Right arm -->
-        <path d="M96 105 Q112 100 120 110" stroke="#e8a070" stroke-width="7" stroke-linecap="round" fill="none"/>
-        <circle cx="122" cy="112" r="5" fill="#e8a070"/>
+              <!-- ─── CHARACTER (rides) ─── -->
+              <g class="anim-ride-fast" filter="url(#aaron-shadow)">
 
-        <!-- Neck -->
-        <rect x="76" y="82" width="8" height="12" rx="4" fill="#e8a070"/>
+                <!-- Shoes -->
+                <path d="M72 188 Q70 192 72 196 L92 196 Q96 192 94 188 Z" fill="#2a1a0a"/>
+                <path d="M126 188 Q124 192 126 196 L146 196 Q150 192 148 188 Z" fill="#2a1a0a"/>
 
-        <!-- Head -->
-        <ellipse cx="80" cy="72" rx="20" ry="21" fill="#f4c090"/>
+                <!-- Legs -->
+                <path d="M82 188 Q78 170 82 152" stroke="#c4a870" stroke-width="12" stroke-linecap="round" fill="none"/>
+                <path d="M138 188 Q142 170 138 152" stroke="#c4a870" stroke-width="12" stroke-linecap="round" fill="none"/>
 
-        <!-- Red hair — back layer -->
-        <ellipse cx="80" cy="60" rx="22" ry="16" fill="#cc2200"/>
-        <!-- Hair strands right -->
-        <path d="M98 65 Q108 75 104 90" stroke="#cc2200" stroke-width="7" stroke-linecap="round" fill="none"/>
-        <!-- Forehead band -->
-        <path d="M60 62 Q80 54 100 62" stroke="#aa1800" stroke-width="5" stroke-linecap="round" fill="none"/>
+                <!-- Khaki pants -->
+                <path d="M78 155 Q84 172 110 174 Q136 172 142 155 Q138 140 110 137 Q82 140 78 155Z" fill="url(#aaron-pants)"/>
+                <!-- Belt -->
+                <rect x="85" y="136" width="50" height="5" rx="2" fill="#5a3a1a"/>
+                <rect x="107" y="135" width="6" height="7" rx="1.5" fill="#c4a050"/>
 
-        <!-- Eyes -->
-        <ellipse cx="74" cy="70" rx="4.5" ry="5" fill="#fff"/>
-        <circle cx="74" cy="71" r="2.5" fill="#3a2a00"/>
-        <circle cx="75" cy="70" r="1" fill="#fff"/>
+                <!-- Polo shirt body -->
+                <path d="M84 138 Q86 118 110 112 Q134 118 136 138 Q130 142 110 144 Q90 142 84 138Z" fill="url(#aaron-shirt)"/>
 
-        <ellipse cx="86" cy="70" rx="4.5" ry="5" fill="#fff"/>
-        <circle cx="86" cy="71" r="2.5" fill="#3a2a00"/>
-        <circle cx="87" cy="70" r="1" fill="#fff"/>
+                <!-- Polo collar -->
+                <path d="M98 112 Q110 120 122 112" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <!-- Collar points -->
+                <path d="M98 112 L94 118" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M122 112 L126 118" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
 
-        <!-- Eyebrows -->
-        <path d="M70 64 Q74 62 78 64" stroke="#8a3000" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-        <path d="M82 64 Q86 62 90 64" stroke="#8a3000" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <!-- LEFT ARM — holding coffee -->
+                <path d="M88 122 Q68 126 58 138" stroke="#d4a878" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <!-- Hand -->
+                <circle cx="56" cy="140" r="6" fill="#d4a878"/>
 
-        <!-- Smile -->
-        <path d="M74 79 Q80 84 86 79" stroke="#c06040" stroke-width="2" stroke-linecap="round" fill="none"/>
-        <!-- Cheeks -->
-        <circle cx="68" cy="77" r="5" fill="#ff8888" opacity="0.3"/>
-        <circle cx="92" cy="77" r="5" fill="#ff8888" opacity="0.3"/>
+                <!-- Coffee cup -->
+                <path d="M42 132 Q42 152 54 152 L64 152 Q76 152 76 132 Z" fill="#5a3018" stroke="#3a1a08" stroke-width="1.5"/>
+                <rect x="42" y="128" width="34" height="7" rx="3.5" fill="#3a1a08"/>
+                <!-- Cup sleeve -->
+                <rect x="44" y="138" width="30" height="10" rx="2" fill="#7a5030" opacity="0.6"/>
+                <!-- Handle -->
+                <path d="M76 136 Q86 136 84 144 Q82 152 74 152" stroke="#5a3018" stroke-width="3.5" fill="none"/>
+                <!-- Lid sip hole -->
+                <circle cx="54" cy="129" r="2" fill="#2a0a00"/>
+                <!-- Steam -->
+                <g>
+                  <path d="M50 124 Q52 116 50 108" stroke="#999" stroke-width="2" stroke-linecap="round" fill="none" style="animation: steam-rise 2s ease-out infinite;"/>
+                  <path d="M58 123 Q60 114 58 106" stroke="#999" stroke-width="1.5" stroke-linecap="round" fill="none" style="animation: steam-rise 2s ease-out infinite 0.5s;"/>
+                  <path d="M66 124 Q68 117 66 110" stroke="#999" stroke-width="1.5" stroke-linecap="round" fill="none" style="animation: steam-rise 2s ease-out infinite 1s;"/>
+                </g>
 
-      </svg>
+                <!-- RIGHT ARM — holding phone up -->
+                <path d="M132 122 Q148 114 156 106" stroke="#d4a878" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <circle cx="158" cy="104" r="6" fill="#d4a878"/>
+
+                <!-- Phone -->
+                <rect x="148" y="82" width="20" height="34" rx="4" fill="#1a1a2e" stroke="#444" stroke-width="1.5"/>
+                <rect x="151" y="87" width="14" height="22" rx="2" fill="#0a0e1a"/>
+                <!-- Screen content -->
+                <rect x="153" y="89" width="10" height="2" rx="1" fill="var(--nu-cyan)" opacity="0.7"/>
+                <rect x="153" y="93" width="8" height="2" rx="1" fill="var(--nu-cyan)" opacity="0.5"/>
+                <rect x="153" y="97" width="10" height="2" rx="1" fill="var(--nu-cyan)" opacity="0.6"/>
+                <rect x="153" y="101" width="6" height="2" rx="1" fill="var(--nu-cyan)" opacity="0.4"/>
+                <!-- Home indicator -->
+                <rect x="155" y="111" width="8" height="2" rx="1" fill="#444"/>
+
+                <!-- Neck -->
+                <rect x="104" y="98" width="12" height="16" rx="6" fill="#d4a878"/>
+
+                <!-- Head -->
+                <ellipse cx="110" cy="84" rx="26" ry="26" fill="#d4a878"/>
+
+                <!-- Short dark hair -->
+                <path d="M85 78 Q90 56 110 52 Q130 56 135 78 Q132 62 110 58 Q88 62 85 78Z" fill="#2a1800"/>
+                <!-- Hair top -->
+                <path d="M92 72 Q110 54 128 72" fill="#2a1800"/>
+                <!-- Side burns -->
+                <path d="M85 78 Q83 72 86 68" stroke="#2a1800" stroke-width="5" stroke-linecap="round" fill="none"/>
+                <path d="M135 78 Q137 72 134 68" stroke="#2a1800" stroke-width="5" stroke-linecap="round" fill="none"/>
+
+                <!-- Eyes -->
+                <g style="animation: blink-eyes 4s ease-in-out infinite;">
+                  <ellipse cx="100" cy="82" rx="6" ry="6.5" fill="#fff"/>
+                  <circle cx="101" cy="83" r="3.5" fill="#3a2800"/>
+                  <circle cx="102" cy="82" r="1.5" fill="#fff"/>
+
+                  <ellipse cx="120" cy="82" rx="6" ry="6.5" fill="#fff"/>
+                  <circle cx="121" cy="83" r="3.5" fill="#3a2800"/>
+                  <circle cx="122" cy="82" r="1.5" fill="#fff"/>
+                </g>
+
+                <!-- Eyebrows (confident/determined) -->
+                <path d="M94 74 Q100 71 106 74" stroke="#2a1800" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M114 74 Q120 71 126 74" stroke="#2a1800" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+                <!-- Nose -->
+                <path d="M110 86 Q108 90 110 92 Q112 90 110 86" stroke="#c09060" stroke-width="1.5" fill="none"/>
+
+                <!-- Confident grin -->
+                <path d="M100 96 Q110 102 120 96" stroke="#b06040" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <!-- Teeth hint -->
+                <path d="M104 97 Q110 100 116 97" fill="#fff" opacity="0.6"/>
+
+              </g>
+            </svg>
+          </div>
+          <div class="member-info">
+            <div class="member-name">Aaron C. Norris</div>
+            <div class="member-role">Founder &amp; CEO</div>
+            <div class="member-detail">3rd-generation utility equipment dealer.<br>Birmingham, Alabama. Up at 4 AM.</div>
+            <span class="badge-tag">The Boss</span>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             CAROLINE BUTLER — Operations
+             ══════════════════════════════════════ -->
+        <div class="team-card">
+          <div class="character-stage">
+            <svg width="200" height="240" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="cb-top" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0044DD"/>
+                  <stop offset="100%" stop-color="#0022AA"/>
+                </linearGradient>
+                <linearGradient id="cb-skirt" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0000EE"/>
+                  <stop offset="100%" stop-color="#0000AA"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Ground shadow -->
+              <ellipse cx="100" cy="222" rx="42" ry="6" class="ground-shadow" style="animation: shadow-pulse 3.6s ease-in-out infinite;"/>
+
+              <!-- ─── ONEWHEEL ─── -->
+              <rect x="42" y="198" width="116" height="16" rx="8" fill="#111827"/>
+              <rect x="48" y="194" width="104" height="8" rx="4" fill="var(--nu-blue)" opacity="0.5"/>
+
+              <!-- Wheel -->
+              <g transform="translate(100, 216)">
+                <circle r="22" fill="#0a0a0a" stroke="#333" stroke-width="3"/>
+                <circle r="18" fill="none" stroke="#222" stroke-width="4"/>
+                <g style="animation: spin-wheel 1.6s linear infinite; transform-origin: 0 0;">
+                  <line x1="0" y1="-16" x2="0" y2="16" stroke="#555" stroke-width="2" opacity="0.6"/>
+                  <line x1="-16" y1="0" x2="16" y2="0" stroke="#555" stroke-width="2" opacity="0.6"/>
+                  <line x1="-11" y1="-11" x2="11" y2="11" stroke="#555" stroke-width="1.5" opacity="0.4"/>
+                  <line x1="11" y1="-11" x2="-11" y2="11" stroke="#555" stroke-width="1.5" opacity="0.4"/>
+                </g>
+                <circle r="5" fill="#222"/>
+                <circle r="3" fill="var(--nu-blue)" opacity="0.6"/>
+              </g>
+
+              <!-- ─── CHARACTER ─── -->
+              <g class="anim-ride-smooth">
+
+                <!-- Shoes (flats) -->
+                <path d="M66 188 Q64 194 68 196 L86 196 Q90 194 88 188 Z" fill="#c06030"/>
+                <path d="M112 188 Q110 194 114 196 L132 196 Q136 194 134 188 Z" fill="#c06030"/>
+
+                <!-- Legs -->
+                <path d="M76 188 Q72 172 76 156" stroke="#e8a878" stroke-width="10" stroke-linecap="round" fill="none"/>
+                <path d="M124 188 Q128 172 124 156" stroke="#e8a878" stroke-width="10" stroke-linecap="round" fill="none"/>
+
+                <!-- Skirt -->
+                <path d="M72 158 Q78 176 100 178 Q122 176 128 158 Q122 146 100 143 Q78 146 72 158Z" fill="url(#cb-skirt)"/>
+
+                <!-- Torso -->
+                <path d="M82 144 Q84 122 100 116 Q116 122 118 144 Q112 148 100 150 Q88 148 82 144Z" fill="url(#cb-top)"/>
+
+                <!-- Necklace -->
+                <path d="M92 118 Q100 124 108 118" stroke="var(--nu-cyan)" stroke-width="1.5" fill="none"/>
+                <circle cx="100" cy="124" r="2.5" fill="var(--nu-cyan)"/>
+
+                <!-- LEFT ARM — holding clipboard -->
+                <path d="M86 126 Q64 124 48 132" stroke="#e8a878" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <circle cx="46" cy="134" r="5.5" fill="#e8a878"/>
+
+                <!-- Clipboard -->
+                <g style="animation: clipboard-check 4s ease-in-out infinite;">
+                  <rect x="28" y="118" width="32" height="42" rx="3" fill="#f5f0e0" stroke="#999" stroke-width="1.5"/>
+                  <!-- Clip -->
+                  <rect x="38" y="113" width="14" height="9" rx="3.5" fill="#888"/>
+                  <rect x="42" y="115" width="6" height="5" rx="2" fill="#aaa"/>
+                  <!-- Lines -->
+                  <line x1="33" y1="128" x2="55" y2="128" stroke="#555" stroke-width="1.2"/>
+                  <line x1="33" y1="133" x2="55" y2="133" stroke="#555" stroke-width="1.2"/>
+                  <line x1="33" y1="138" x2="50" y2="138" stroke="#555" stroke-width="1.2"/>
+                  <line x1="33" y1="143" x2="53" y2="143" stroke="var(--nu-blue)" stroke-width="1.5"/>
+                  <line x1="33" y1="148" x2="48" y2="148" stroke="var(--nu-blue)" stroke-width="1.5"/>
+                  <!-- Checkmarks -->
+                  <path d="M33 129 L35 131 L39 126" stroke="#00aa00" stroke-width="1.5" fill="none"/>
+                  <path d="M33 134 L35 136 L39 131" stroke="#00aa00" stroke-width="1.5" fill="none"/>
+                </g>
+
+                <!-- RIGHT ARM — wave/gesture -->
+                <path d="M114 126 Q136 118 148 128" stroke="#e8a878" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <circle cx="150" cy="130" r="5.5" fill="#e8a878"/>
+                <!-- Fingers detail -->
+                <path d="M150 126 Q154 122 152 118" stroke="#e8a878" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+                <!-- Neck -->
+                <rect x="95" y="102" width="10" height="16" rx="5" fill="#e8a878"/>
+
+                <!-- Head -->
+                <ellipse cx="100" cy="88" rx="24" ry="24" fill="#f4c090"/>
+
+                <!-- Hair — auburn/red -->
+                <ellipse cx="100" cy="72" rx="26" ry="18" fill="#b82200"/>
+                <!-- Part -->
+                <path d="M90 56 Q100 62 110 56" stroke="#991800" stroke-width="3" fill="none"/>
+                <!-- Hair flowing right -->
+                <g style="animation: hair-blow 4s ease-in-out infinite;">
+                  <path d="M122 76 Q134 86 130 102" stroke="#b82200" stroke-width="9" stroke-linecap="round" fill="none"/>
+                  <path d="M124 78 Q138 90 134 108" stroke="#991800" stroke-width="6" stroke-linecap="round" fill="none"/>
+                </g>
+                <!-- Hair left side -->
+                <path d="M78 76 Q70 82 72 96" stroke="#b82200" stroke-width="8" stroke-linecap="round" fill="none"/>
+                <!-- Bangs -->
+                <path d="M80 72 Q90 66 100 68 Q110 66 120 72" stroke="#aa1800" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+                <!-- Eyes -->
+                <g style="animation: blink-eyes 5s ease-in-out infinite;">
+                  <ellipse cx="92" cy="86" rx="5.5" ry="6" fill="#fff"/>
+                  <circle cx="93" cy="87" r="3" fill="#3a2a00"/>
+                  <circle cx="94" cy="86" r="1.2" fill="#fff"/>
+                  <!-- Lashes -->
+                  <path d="M87 82 Q89 80 91 82" stroke="#3a1a00" stroke-width="1.5" fill="none"/>
+
+                  <ellipse cx="108" cy="86" rx="5.5" ry="6" fill="#fff"/>
+                  <circle cx="109" cy="87" r="3" fill="#3a2a00"/>
+                  <circle cx="110" cy="86" r="1.2" fill="#fff"/>
+                  <path d="M105 82 Q107 80 109 82" stroke="#3a1a00" stroke-width="1.5" fill="none"/>
+                </g>
+
+                <!-- Eyebrows -->
+                <path d="M87 78 Q92 76 97 78" stroke="#7a2a00" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M103 78 Q108 76 113 78" stroke="#7a2a00" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+                <!-- Nose -->
+                <path d="M100 90 Q98 93 100 94 Q102 93 100 90" stroke="#d09068" stroke-width="1.2" fill="none"/>
+
+                <!-- Warm smile -->
+                <path d="M92 98 Q100 104 108 98" stroke="#c06040" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+                <!-- Cheek blush -->
+                <circle cx="84" cy="94" r="5" fill="#ff8888" opacity="0.2"/>
+                <circle cx="116" cy="94" r="5" fill="#ff8888" opacity="0.2"/>
+
+              </g>
+            </svg>
+          </div>
+          <div class="member-info">
+            <div class="member-name">Caroline Butler</div>
+            <div class="member-role">Operations</div>
+            <div class="member-detail">Tier 1 admin keeping everything<br>organized and running smooth.</div>
+            <span class="badge-tag">CB</span>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             LEGACY — AI Field Operator
+             ══════════════════════════════════════ -->
+        <div class="team-card featured">
+          <div class="character-stage">
+            <svg class="anim-glow" width="200" height="240" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="legacy-body" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0066FF"/>
+                  <stop offset="100%" stop-color="#0000CC"/>
+                </linearGradient>
+                <linearGradient id="legacy-head" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--nu-cyan)"/>
+                  <stop offset="100%" stop-color="#0044FF"/>
+                </linearGradient>
+                <radialGradient id="legacy-glow" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="var(--nu-cyan)" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="var(--nu-cyan)" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+
+              <!-- Ambient glow behind character -->
+              <circle cx="100" cy="140" r="70" fill="url(#legacy-glow)"/>
+
+              <!-- Ground shadow -->
+              <ellipse cx="100" cy="222" rx="42" ry="6" fill="rgba(0,0,255,0.1)" style="animation: shadow-pulse 2.8s ease-in-out infinite;"/>
+
+              <!-- ─── ONEWHEEL ─── -->
+              <rect x="42" y="198" width="116" height="16" rx="8" fill="#111827"/>
+              <rect x="48" y="194" width="104" height="8" rx="4" fill="var(--nu-blue)" opacity="0.8"/>
+              <!-- Cyan LED strip -->
+              <rect x="50" y="210" width="100" height="2" rx="1" fill="var(--nu-cyan)" opacity="0.6"/>
+
+              <!-- Wheel -->
+              <g transform="translate(100, 216)">
+                <circle r="22" fill="#0a0a0a" stroke="var(--nu-cyan)" stroke-width="2.5"/>
+                <circle r="18" fill="none" stroke="#111" stroke-width="4"/>
+                <g style="animation: spin-wheel 1.2s linear infinite; transform-origin: 0 0;">
+                  <line x1="0" y1="-16" x2="0" y2="16" stroke="var(--nu-cyan)" stroke-width="2" opacity="0.6"/>
+                  <line x1="-16" y1="0" x2="16" y2="0" stroke="var(--nu-cyan)" stroke-width="2" opacity="0.6"/>
+                  <line x1="-11" y1="-11" x2="11" y2="11" stroke="var(--nu-cyan)" stroke-width="1.5" opacity="0.4"/>
+                  <line x1="11" y1="-11" x2="-11" y2="11" stroke="var(--nu-cyan)" stroke-width="1.5" opacity="0.4"/>
+                </g>
+                <circle r="5" fill="#111"/>
+                <circle r="3" fill="var(--nu-cyan)"/>
+              </g>
+
+              <!-- ─── CHARACTER ─── -->
+              <g class="anim-ride">
+
+                <!-- Feet — energy boots -->
+                <rect x="66" y="188" width="24" height="10" rx="5" fill="#0000CC"/>
+                <rect x="68" y="194" width="20" height="3" rx="1.5" fill="var(--nu-cyan)" opacity="0.5"/>
+                <rect x="110" y="188" width="24" height="10" rx="5" fill="#0000CC"/>
+                <rect x="112" y="194" width="20" height="3" rx="1.5" fill="var(--nu-cyan)" opacity="0.5"/>
+
+                <!-- Legs — energy styled -->
+                <path d="M76 188 Q72 170 76 154" stroke="var(--nu-cyan)" stroke-width="10" stroke-linecap="round" fill="none"/>
+                <path d="M124 188 Q128 170 124 154" stroke="#0055FF" stroke-width="10" stroke-linecap="round" fill="none"/>
+
+                <!-- Body — energy torso -->
+                <path d="M78 156 Q82 130 100 124 Q118 130 122 156 Q116 164 100 166 Q84 164 78 156Z" fill="url(#legacy-body)"/>
+                <!-- Circuit lines on torso -->
+                <path d="M92 134 L92 150" stroke="var(--nu-cyan)" stroke-width="1" opacity="0.4"/>
+                <path d="M108 134 L108 150" stroke="var(--nu-cyan)" stroke-width="1" opacity="0.4"/>
+                <circle cx="100" cy="142" r="4" stroke="var(--nu-cyan)" stroke-width="1" fill="none" opacity="0.3"/>
+
+                <!-- LEFT ARM — holding laptop -->
+                <path d="M82 134 Q62 130 44 138" stroke="#0044DD" stroke-width="9" stroke-linecap="round" fill="none"/>
+
+                <!-- Laptop -->
+                <rect x="24" y="128" width="40" height="28" rx="3" fill="#111827" stroke="var(--nu-cyan)" stroke-width="1.5"/>
+                <rect x="28" y="132" width="32" height="20" rx="2" fill="#0a0e1a"/>
+                <!-- Screen data (scrolling) -->
+                <g>
+                  <rect x="30" y="134" width="18" height="2" rx="1" fill="var(--nu-cyan)" opacity="0.8"/>
+                  <rect x="30" y="138" width="14" height="2" rx="1" fill="var(--nu-cyan)" opacity="0.5"/>
+                  <rect x="30" y="142" width="20" height="2" rx="1" fill="var(--nu-cyan)" opacity="0.6"/>
+                  <rect x="30" y="146" width="12" height="2" rx="1" fill="var(--nu-cyan)" opacity="0.4"/>
+                  <!-- Green status dot -->
+                  <circle cx="54" cy="135" r="2" fill="#00ff88" opacity="0.8"/>
+                </g>
+                <!-- Trackpad -->
+                <rect x="36" y="154" width="16" height="3" rx="1.5" fill="var(--nu-cyan)" opacity="0.3"/>
+
+                <!-- RIGHT ARM -->
+                <path d="M118 134 Q138 126 150 136" stroke="#0044DD" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <circle cx="152" cy="138" r="6" fill="#0044DD"/>
+
+                <!-- Neck -->
+                <rect x="95" y="108" width="10" height="18" rx="5" fill="#0055FF"/>
+
+                <!-- Head -->
+                <ellipse cx="100" cy="94" rx="26" ry="24" fill="url(#legacy-head)"/>
+
+                <!-- Eyes — glowing cyan -->
+                <ellipse cx="90" cy="92" rx="6" ry="7" fill="#fff"/>
+                <ellipse cx="91" cy="93" rx="4" ry="5" fill="var(--nu-cyan)"/>
+                <circle cx="91" cy="93" r="2" fill="#001aff"/>
+                <circle cx="92" cy="92" r="1" fill="#fff"/>
+
+                <ellipse cx="110" cy="92" rx="6" ry="7" fill="#fff"/>
+                <ellipse cx="111" cy="93" rx="4" ry="5" fill="var(--nu-cyan)"/>
+                <circle cx="111" cy="93" r="2" fill="#001aff"/>
+                <circle cx="112" cy="92" r="1" fill="#fff"/>
+
+                <!-- Smile -->
+                <path d="M92 102 Q100 108 108 102" stroke="var(--nu-cyan)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+                <!-- Flame hair / energy crown -->
+                <g style="animation: flame-dance 1.8s ease-in-out infinite; transform-origin: 100px 72px;">
+                  <path d="M100 72 Q94 56 100 40 Q106 56 100 72Z" fill="var(--nu-cyan)" opacity="0.9"/>
+                  <path d="M90 76 Q82 60 88 44 Q96 60 90 76Z" fill="#0088FF" opacity="0.8"/>
+                  <path d="M110 76 Q118 60 112 44 Q104 60 110 76Z" fill="var(--nu-blue)" opacity="0.8"/>
+                  <path d="M82 80 Q76 68 80 54 Q86 68 82 80Z" fill="#0066FF" opacity="0.6"/>
+                  <path d="M118 80 Q124 68 120 54 Q114 68 118 80Z" fill="#0066FF" opacity="0.6"/>
+                  <!-- Inner glow -->
+                  <path d="M100 70 Q96 58 100 46 Q104 58 100 70Z" fill="#aaeeff" opacity="0.5"/>
+                </g>
+
+                <!-- Earbuds -->
+                <circle cx="74" cy="94" r="6" fill="#111827" stroke="var(--nu-cyan)" stroke-width="1.5"/>
+                <circle cx="74" cy="94" r="2.5" fill="var(--nu-cyan)"/>
+                <path d="M74 100 Q76 110 80 112" stroke="#444" stroke-width="1.2" fill="none"/>
+
+                <circle cx="126" cy="94" r="6" fill="#111827" stroke="var(--nu-cyan)" stroke-width="1.5"/>
+                <circle cx="126" cy="94" r="2.5" fill="var(--nu-cyan)"/>
+                <path d="M126 100 Q124 110 120 112" stroke="#444" stroke-width="1.2" fill="none"/>
+
+              </g>
+            </svg>
+          </div>
+          <div class="member-info">
+            <div class="member-name">Legacy</div>
+            <div class="member-role">AI Field Operator</div>
+            <div class="member-detail">Autonomous build engine powering<br>every page, quote, and system.</div>
+            <span class="badge-tag">Always On</span>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             MK SMITH — Marketing
+             ══════════════════════════════════════ -->
+        <div class="team-card">
+          <div class="character-stage">
+            <svg width="200" height="240" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="mk-top" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1a1a3e"/>
+                  <stop offset="100%" stop-color="#0a0a2e"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Ground shadow -->
+              <ellipse cx="100" cy="222" rx="42" ry="6" class="ground-shadow" style="animation: shadow-pulse 3.2s ease-in-out infinite;"/>
+
+              <!-- ─── ONEWHEEL ─── -->
+              <rect x="42" y="198" width="116" height="16" rx="8" fill="#111827"/>
+              <rect x="48" y="194" width="104" height="8" rx="4" fill="var(--nu-blue)" opacity="0.5"/>
+
+              <!-- Wheel -->
+              <g transform="translate(100, 216)">
+                <circle r="22" fill="#0a0a0a" stroke="#333" stroke-width="3"/>
+                <circle r="18" fill="none" stroke="#222" stroke-width="4"/>
+                <g style="animation: spin-wheel 1.8s linear infinite; transform-origin: 0 0;">
+                  <line x1="0" y1="-16" x2="0" y2="16" stroke="#555" stroke-width="2" opacity="0.6"/>
+                  <line x1="-16" y1="0" x2="16" y2="0" stroke="#555" stroke-width="2" opacity="0.6"/>
+                  <line x1="-11" y1="-11" x2="11" y2="11" stroke="#555" stroke-width="1.5" opacity="0.4"/>
+                  <line x1="11" y1="-11" x2="-11" y2="11" stroke="#555" stroke-width="1.5" opacity="0.4"/>
+                </g>
+                <circle r="5" fill="#222"/>
+                <circle r="3" fill="var(--nu-blue)" opacity="0.6"/>
+              </g>
+
+              <!-- ─── CHARACTER ─── -->
+              <g class="anim-ride-smooth">
+
+                <!-- Shoes -->
+                <path d="M66 188 Q64 194 68 196 L86 196 Q90 194 88 188 Z" fill="#333"/>
+                <path d="M112 188 Q110 194 114 196 L132 196 Q136 194 134 188 Z" fill="#333"/>
+
+                <!-- Legs — dark jeans -->
+                <path d="M76 188 Q72 170 76 156" stroke="#2a2a44" stroke-width="11" stroke-linecap="round" fill="none"/>
+                <path d="M124 188 Q128 170 124 156" stroke="#2a2a44" stroke-width="11" stroke-linecap="round" fill="none"/>
+
+                <!-- Jeans body -->
+                <path d="M72 158 Q78 176 100 178 Q122 176 128 158 Q122 146 100 143 Q78 146 72 158Z" fill="#2a2a44"/>
+
+                <!-- Torso — dark creative top -->
+                <path d="M82 144 Q84 122 100 116 Q116 122 118 144 Q112 148 100 150 Q88 148 82 144Z" fill="url(#mk-top)"/>
+                <!-- Creative neckline -->
+                <path d="M92 116 Q100 122 108 116" stroke="#444" stroke-width="1.5" fill="none"/>
+
+                <!-- LEFT ARM — holding tablet/camera -->
+                <path d="M86 126 Q66 122 52 130" stroke="#d4a878" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <circle cx="50" cy="132" r="5.5" fill="#d4a878"/>
+
+                <!-- Camera -->
+                <rect x="32" y="120" width="28" height="22" rx="4" fill="#222" stroke="#555" stroke-width="1.5"/>
+                <circle cx="46" cy="131" r="8" fill="#333" stroke="#666" stroke-width="1.5"/>
+                <circle cx="46" cy="131" r="5" fill="#111"/>
+                <circle cx="46" cy="131" r="2" fill="#0066FF" opacity="0.6"/>
+                <!-- Flash -->
+                <rect x="52" y="122" width="5" height="3" rx="1" fill="#888"/>
+                <!-- Viewfinder -->
+                <rect x="35" y="122" width="6" height="4" rx="1" fill="#444"/>
+
+                <!-- RIGHT ARM — gesture -->
+                <path d="M114 126 Q134 120 146 126" stroke="#d4a878" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <circle cx="148" cy="128" r="5.5" fill="#d4a878"/>
+                <!-- Pointing finger -->
+                <path d="M150 124 Q156 118 158 114" stroke="#d4a878" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+                <!-- Neck -->
+                <rect x="95" y="102" width="10" height="16" rx="5" fill="#d4a878"/>
+
+                <!-- Head -->
+                <ellipse cx="100" cy="88" rx="24" ry="24" fill="#d4a878"/>
+
+                <!-- Hair — stylish dark -->
+                <path d="M78 80 Q80 58 100 54 Q120 58 122 80" fill="#1a1a1a"/>
+                <path d="M76 78 Q100 50 124 78" fill="#222"/>
+                <!-- Styled swoop -->
+                <path d="M82 68 Q96 56 114 64" stroke="#2a2a2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+                <!-- Eyes -->
+                <g style="animation: blink-eyes 4.5s ease-in-out infinite;">
+                  <ellipse cx="92" cy="86" rx="5" ry="5.5" fill="#fff"/>
+                  <circle cx="93" cy="87" r="3" fill="#2a1a00"/>
+                  <circle cx="94" cy="86" r="1.2" fill="#fff"/>
+
+                  <ellipse cx="108" cy="86" rx="5" ry="5.5" fill="#fff"/>
+                  <circle cx="109" cy="87" r="3" fill="#2a1a00"/>
+                  <circle cx="110" cy="86" r="1.2" fill="#fff"/>
+                </g>
+
+                <!-- Eyebrows -->
+                <path d="M87 78 Q92 76 97 79" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M103 79 Q108 76 113 78" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+                <!-- Nose -->
+                <path d="M100 90 Q98 93 100 94 Q102 93 100 90" stroke="#c09068" stroke-width="1.2" fill="none"/>
+
+                <!-- Creative smirk -->
+                <path d="M93 98 Q100 103 107 97" stroke="#a06040" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+              </g>
+            </svg>
+          </div>
+          <div class="member-info">
+            <div class="member-name">MK Smith</div>
+            <div class="member-role">Marketing</div>
+            <div class="member-detail">Creative direction, brand voice,<br>and visual storytelling.</div>
+            <span class="badge-tag">Brand</span>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             FUTURE AGENT — Coming Soon
+             ══════════════════════════════════════ -->
+        <div class="team-card ghost">
+          <div class="character-stage">
+            <svg width="200" height="240" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+              <!-- Ground shadow (faded) -->
+              <ellipse cx="100" cy="222" rx="35" ry="5" fill="rgba(0,0,0,0.04)" style="animation: shadow-pulse 3.2s ease-in-out infinite;"/>
+
+              <!-- ─── ONEWHEEL (faded) ─── -->
+              <rect x="42" y="198" width="116" height="16" rx="8" fill="#ccc"/>
+              <rect x="48" y="194" width="104" height="8" rx="4" fill="#bbb" opacity="0.4"/>
+
+              <!-- Wheel -->
+              <g transform="translate(100, 216)">
+                <circle r="22" fill="#ddd" stroke="#bbb" stroke-width="2"/>
+                <g style="animation: spin-wheel 3s linear infinite; transform-origin: 0 0;">
+                  <line x1="0" y1="-14" x2="0" y2="14" stroke="#bbb" stroke-width="1.5" opacity="0.5"/>
+                  <line x1="-14" y1="0" x2="14" y2="0" stroke="#bbb" stroke-width="1.5" opacity="0.5"/>
+                </g>
+                <circle r="4" fill="#bbb"/>
+              </g>
+
+              <!-- ─── GHOST CHARACTER ─── -->
+              <g class="anim-ghost">
+
+                <!-- Ghost drape body -->
+                <path d="M62 168 Q70 186 80 178 Q88 188 100 178 Q112 188 120 178 Q130 186 138 168 Q142 140 100 128 Q58 140 62 168Z" fill="#e0e0e0" opacity="0.8" stroke="#ccc" stroke-width="1.5"/>
+
+                <!-- Wispy arms -->
+                <path d="M66 146 Q48 138 42 148" stroke="#d0d0d0" stroke-width="7" stroke-linecap="round" fill="none" opacity="0.6"/>
+                <path d="M134 146 Q152 138 158 148" stroke="#d0d0d0" stroke-width="7" stroke-linecap="round" fill="none" opacity="0.6"/>
+
+                <!-- Ghost head -->
+                <ellipse cx="100" cy="108" rx="30" ry="32" fill="#e8e8e8" stroke="#ccc" stroke-width="1.5" opacity="0.9"/>
+
+                <!-- Question mark -->
+                <text x="100" y="120" text-anchor="middle" font-family="Lato, sans-serif" font-size="42" font-weight="900"
+                      fill="var(--nu-blue)" opacity="0.2"
+                      style="animation: question-blink 2.4s ease-in-out infinite;">?</text>
+
+                <!-- Ghost eyes -->
+                <ellipse cx="88" cy="102" rx="8" ry="9" fill="#ccc" opacity="0.5"/>
+                <ellipse cx="112" cy="102" rx="8" ry="9" fill="#ccc" opacity="0.5"/>
+
+                <!-- Aura rings -->
+                <ellipse cx="100" cy="108" rx="36" ry="38" stroke="var(--nu-cyan)" stroke-width="1" fill="none" opacity="0.15"
+                         style="animation: ring-pulse 2.8s ease-in-out infinite;"/>
+                <ellipse cx="100" cy="108" rx="44" ry="46" stroke="var(--nu-cyan)" stroke-width="0.5" fill="none" opacity="0.08"
+                         style="animation: ring-pulse 2.8s ease-in-out infinite 0.5s;"/>
+
+              </g>
+            </svg>
+          </div>
+          <div class="member-info">
+            <div class="member-name" style="color: #999;">Next Agent</div>
+            <div class="member-role" style="color: #aaa;">AI Specialist</div>
+            <div class="member-detail" style="color: #bbb;">Position open for the next<br>autonomous team member.</div>
+            <span class="badge-tag ghost-tag">Coming Soon</span>
+          </div>
+        </div>
+
+      </div><!-- /team-grid -->
+    </div><!-- /team-section -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
-    <div class="name-badge">
-      <span class="emoji">📋</span>
-      <div class="name">Caroline Butler</div>
-      <div class="role">Operations</div>
-    </div>
-  </div>
-
-  <!-- ==============================
-       CARD 3: AARON C. NORRIS
-       ============================== -->
-  <div class="card">
-    <div class="character-wrap">
-      <svg class="float-anim" width="190" height="195" viewBox="0 0 190 195" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-        <!-- Speed lines (behind) -->
-        <g style="animation: speed-lines 0.5s linear infinite;">
-          <line x1="0" y1="130" x2="30" y2="130" stroke="#06D0FF" stroke-width="2" opacity="0.5"/>
-          <line x1="0" y1="140" x2="22" y2="140" stroke="#06D0FF" stroke-width="1.5" opacity="0.4"/>
-          <line x1="0" y1="150" x2="18" y2="150" stroke="#06D0FF" stroke-width="1" opacity="0.3"/>
-          <line x1="0" y1="120" x2="14" y2="120" stroke="#06D0FF" stroke-width="1" opacity="0.25"/>
-        </g>
-
-        <!-- OneWheel Board (leaning forward for speed) -->
-        <g transform="rotate(-8, 95, 165)">
-          <rect x="38" y="158" width="114" height="14" rx="7" fill="#1a1a2e"/>
-          <rect x="46" y="155" width="98" height="8" rx="4" fill="#0000FF" opacity="0.6"/>
-        </g>
-
-        <!-- Wheel (fast spin) -->
-        <g transform="translate(95,172)">
-          <circle r="20" fill="#111" stroke="#0000FF" stroke-width="2.5"/>
-          <g style="animation: spin-wheel 0.7s linear infinite; transform-origin: 0 0;">
-            <line x1="0" y1="-17" x2="0" y2="17" stroke="#aaaaff" stroke-width="2" opacity="0.7"/>
-            <line x1="-17" y1="0" x2="17" y2="0" stroke="#aaaaff" stroke-width="2" opacity="0.7"/>
-            <line x1="-12" y1="-12" x2="12" y2="12" stroke="#aaaaff" stroke-width="1.5" opacity="0.5"/>
-            <line x1="12" y1="-12" x2="-12" y2="12" stroke="#aaaaff" stroke-width="1.5" opacity="0.5"/>
-          </g>
-          <circle r="4" fill="#0000FF"/>
-        </g>
-
-        <!-- Feet (angled for lean) -->
-        <rect x="58" y="146" width="22" height="10" rx="5" fill="#222244" transform="rotate(-8,69,151)"/>
-        <rect x="108" y="146" width="22" height="10" rx="5" fill="#222244" transform="rotate(-8,119,151)"/>
-
-        <!-- Legs (leaning) -->
-        <path d="M68 148 Q64 130 68 116" stroke="#ddb080" stroke-width="8" stroke-linecap="round" fill="none"/>
-        <path d="M122 148 Q126 130 120 116" stroke="#ddb080" stroke-width="8" stroke-linecap="round" fill="none"/>
-
-        <!-- Khakis / pants -->
-        <path d="M68 116 Q72 130 95 132 Q118 130 122 116 Q116 106 95 104 Q74 106 68 116Z" fill="#b8a070"/>
-
-        <!-- Body / polo shirt -->
-        <rect x="72" y="84" width="46" height="32" rx="9" fill="#0000FF"/>
-        <!-- polo collar -->
-        <path d="M86 84 Q95 92 104 84" stroke="#fff" stroke-width="2" fill="none"/>
-
-        <!-- Phone (right hand raised) -->
-        <rect x="130" y="78" width="16" height="26" rx="3" fill="#1a1a2e" stroke="#06D0FF" stroke-width="1.5"/>
-        <rect x="133" y="82" width="10" height="16" rx="1" fill="#0a1a40"/>
-        <line x1="136" y1="85" x2="140" y2="85" stroke="#06D0FF" stroke-width="1" opacity="0.7"/>
-        <line x1="136" y1="88" x2="140" y2="88" stroke="#06D0FF" stroke-width="0.8" opacity="0.5"/>
-        <!-- Right arm raised holding phone -->
-        <path d="M114 92 Q124 84 132 82" stroke="#ddb080" stroke-width="7" stroke-linecap="round" fill="none"/>
-
-        <!-- Coffee cup (left hand) -->
-        <path d="M34 108 Q34 124 44 124 L54 124 Q64 124 64 108 Z" fill="#6b3a1f" stroke="#4a2010" stroke-width="1"/>
-        <rect x="34" y="104" width="30" height="6" rx="3" fill="#4a2010"/><!-- lid -->
-        <path d="M64 112 Q72 112 70 118 Q68 124 62 124" stroke="#6b3a1f" stroke-width="3" fill="none"/><!-- handle -->
-        <!-- steam -->
-        <path d="M42 100 Q44 94 42 88" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
-        <path d="M49 99 Q51 92 49 86" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
-        <!-- Left arm holding coffee -->
-        <path d="M76 96 Q60 100 52 110" stroke="#ddb080" stroke-width="7" stroke-linecap="round" fill="none"/>
-
-        <!-- Neck -->
-        <rect x="90" y="74" width="10" height="12" rx="5" fill="#ddb080"/>
-
-        <!-- Head -->
-        <ellipse cx="95" cy="64" rx="22" ry="22" fill="#ddb080"/>
-
-        <!-- Short dark hair -->
-        <path d="M74 60 Q95 44 116 60 Q112 48 95 44 Q78 48 74 60Z" fill="#2a1800"/>
-        <path d="M74 60 Q72 55 76 52" stroke="#2a1800" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <path d="M116 60 Q118 55 114 52" stroke="#2a1800" stroke-width="4" stroke-linecap="round" fill="none"/>
-
-        <!-- Eyes (determined/focused expression) -->
-        <ellipse cx="88" cy="63" rx="5" ry="5.5" fill="#fff"/>
-        <circle cx="88" cy="64" r="3" fill="#3a2800"/>
-        <circle cx="89" cy="63" r="1.2" fill="#fff"/>
-        <!-- Eyebrow (slightly furrowed = focused) -->
-        <path d="M83 57 Q88 55 93 57" stroke="#2a1800" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-
-        <ellipse cx="102" cy="63" rx="5" ry="5.5" fill="#fff"/>
-        <circle cx="102" cy="64" r="3" fill="#3a2800"/>
-        <circle cx="103" cy="63" r="1.2" fill="#fff"/>
-        <path d="M97 57 Q102 55 107 57" stroke="#2a1800" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-
-        <!-- Confident smirk -->
-        <path d="M88 73 Q96 78 104 73" stroke="#c07050" stroke-width="2" stroke-linecap="round" fill="none"/>
-
-      </svg>
-    </div>
-    <div class="name-badge">
-      <span class="emoji">⚡</span>
-      <div class="name">Aaron C. Norris</div>
-      <div class="role">Founder &amp; CEO</div>
-    </div>
-  </div>
-
-  <!-- ==============================
-       CARD 4: FUTURE AGENT SLOT
-       ============================== -->
-  <div class="card ghost-card">
-    <div class="character-wrap">
-      <svg width="160" height="195" viewBox="0 0 160 195" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-        <!-- OneWheel Board -->
-        <rect x="25" y="158" width="110" height="14" rx="7" fill="#cccccc"/>
-        <rect x="33" y="155" width="94" height="8" rx="4" fill="#aaaaaa" opacity="0.5"/>
-
-        <!-- Wheel -->
-        <g transform="translate(80,172)">
-          <circle r="20" fill="#ddd" stroke="#aaa" stroke-width="2"/>
-          <g style="animation: spin-wheel 2.5s linear infinite; transform-origin: 0 0;">
-            <line x1="0" y1="-15" x2="0" y2="15" stroke="#aaa" stroke-width="1.5" opacity="0.5"/>
-            <line x1="-15" y1="0" x2="15" y2="0" stroke="#aaa" stroke-width="1.5" opacity="0.5"/>
-          </g>
-          <circle r="4" fill="#aaa"/>
-        </g>
-
-        <!-- Ghost character (floats and wiggles) -->
-        <g class="float-ghost">
-
-          <!-- Ghost lower body (floaty drape) -->
-          <path d="M52 140 Q60 155 70 148 Q78 158 80 148 Q82 158 90 148 Q100 155 108 140 Q110 115 80 108 Q50 115 52 140Z" fill="#e0e0e0" opacity="0.8" stroke="#bbb" stroke-width="1"/>
-
-          <!-- Feet suggestion (faded) -->
-          <ellipse cx="64" cy="152" rx="8" ry="4" fill="#ccc" opacity="0.5"/>
-          <ellipse cx="96" cy="152" rx="8" ry="4" fill="#ccc" opacity="0.5"/>
-
-          <!-- Ghost arms (wispy) -->
-          <path d="M58 120 Q42 112 36 122" stroke="#ccc" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.6"/>
-          <path d="M102 120 Q118 112 124 122" stroke="#ccc" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.6"/>
-
-          <!-- Ghost head -->
-          <ellipse cx="80" cy="82" rx="28" ry="30" fill="#e8e8e8" stroke="#bbb" stroke-width="1.5" opacity="0.9"/>
-
-          <!-- Question mark (pulses) -->
-          <text x="80" y="93" text-anchor="middle" font-family="Lato, sans-serif" font-size="38" font-weight="900"
-                fill="#0000FF" opacity="0.3"
-                style="animation: question-pulse 1.8s ease-in-out infinite;">?</text>
-
-          <!-- Ghost eyes (hollow) -->
-          <ellipse cx="68" cy="76" rx="7" ry="8" fill="#bbb" opacity="0.5"/>
-          <ellipse cx="92" cy="76" rx="7" ry="8" fill="#bbb" opacity="0.5"/>
-
-          <!-- Subtle aura rings -->
-          <ellipse cx="80" cy="82" rx="32" ry="34" stroke="#06D0FF" stroke-width="1" fill="none" opacity="0.2"
-                   style="animation: question-pulse 2.4s ease-in-out infinite;"/>
-          <ellipse cx="80" cy="82" rx="38" ry="40" stroke="#06D0FF" stroke-width="0.5" fill="none" opacity="0.1"
-                   style="animation: question-pulse 2.4s ease-in-out infinite 0.4s;"/>
-
-        </g>
-
-      </svg>
-    </div>
-    <div class="name-badge">
-      <span class="emoji">👻</span>
-      <div class="name" style="color:#999;">Unknown Agent</div>
-      <div class="role" style="color:#aaa;">AI Specialist</div>
-      <span class="coming-soon">Coming Soon</span>
-    </div>
-  </div>
-
-</div><!-- /team-grid -->
-
-<footer style="text-align:center; margin-top:56px; font-size:0.78rem; color:#bbb; letter-spacing:1px; font-weight:300;">
-  NORRIS UTILITIES, LLC &nbsp;·&nbsp; A Legacy of Commitment®
-</footer>
+  </footer>
 
 </body>
 </html>
