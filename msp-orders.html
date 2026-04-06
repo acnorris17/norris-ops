@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mississippi Power — Rope Ordering Portal | Norris Utilities&reg;</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:100vh}
+
+/* LOGIN */
+.login-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%)}
+.login-overlay.hidden{display:none}
+.login-box{background:#fff;border-radius:16px;padding:44px 36px;width:92%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;overflow:hidden}
+.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)}
+.login-logo{height:50px;margin:0 auto 12px}
+.login-title{font-weight:900;font-size:18px;color:#0a0e5c;margin-bottom:2px}
+.login-sub{font-size:13px;color:#888;margin-bottom:24px}
+.login-input{width:100%;padding:14px 16px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s}
+.login-input:focus{border-color:#0033cc}
+.login-input.error{border-color:#cc0000;animation:shake .4s}
+.login-btn{width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,51,204,0.35)}
+.login-error{color:#cc0000;font-size:13px;font-weight:700;margin-top:10px;min-height:18px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+
+/* HEADER */
+.header{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:28px 20px 48px;text-align:center;overflow:hidden}
+.header-wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:55%;max-width:500px;opacity:0.06;pointer-events:none}
+.header-content{position:relative;z-index:2}
+.header-logo{height:48px;margin:0 auto 8px}
+.header-title{font-weight:900;font-size:14px;color:rgba(255,255,255,0.7);letter-spacing:3px;text-transform:uppercase}
+.header-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-top:4px}
+
+/* CHEVRON */
+.chev{position:relative;margin-top:-1px;z-index:10;line-height:0}
+.chev svg{display:block;width:100%}
+
+/* TABS */
+.tab-bar{position:sticky;top:0;z-index:900;background:rgba(10,14,92,0.97);backdrop-filter:blur(12px);display:flex;justify-content:center;gap:0;border-bottom:2px solid #06D0FF}
+.tab-bar button{background:none;border:none;color:#fff;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 24px;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
+.tab-bar button:hover,.tab-bar button.active{background:rgba(6,208,255,0.15);color:#06D0FF}
+
+/* MAIN */
+.main{max-width:800px;margin:0 auto;padding:32px 20px 80px}
+.tab-pane{display:none;animation:fadeIn .3s ease}
+.tab-pane.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTION */
+.sec-title{font-size:20px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#0033cc,#06D0FF) 1}
+.sec-title .blue{color:#0033cc}
+
+/* CARD */
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #eee}
+
+/* FORM */
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:12px;font-weight:700;color:#555;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:5px}
+.form-input,.form-select,.form-textarea{width:100%;padding:12px 14px;border:2px solid #e0e0e0;border-radius:8px;font-size:15px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s;background:#fff}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:#0033cc}
+.form-textarea{resize:vertical;min-height:70px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-row-3{display:grid;grid-template-columns:2.5fr 1fr auto;gap:10px;align-items:end}
+.required::after{content:' *';color:#cc0000}
+
+/* LINE ITEMS */
+.line-items{margin-bottom:20px}
+.li-row{display:grid;grid-template-columns:1fr 80px 1fr 40px;gap:10px;align-items:end;margin-bottom:10px}
+.li-header{font-size:11px;font-weight:700;color:#888;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px}
+.remove-btn{width:36px;height:42px;background:#fde8e8;color:#cc0000;border:none;border-radius:8px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.remove-btn:hover{background:#cc0000;color:#fff}
+.add-line{background:none;border:2px dashed #ccc;border-radius:8px;padding:10px;width:100%;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#888;cursor:pointer;transition:all .2s}
+.add-line:hover{border-color:#0033cc;color:#0033cc}
+
+/* SUBMIT */
+.submit-btn{width:100%;padding:18px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-family:'Lato',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,51,204,0.35)}
+.submit-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* CONFIRMATION */
+.confirm-screen{display:none;text-align:center;padding:48px 24px}
+.confirm-screen.show{display:block}
+.confirm-icon{font-size:64px;margin-bottom:16px}
+.confirm-po{font-size:28px;font-weight:900;color:#0033cc;margin:12px 0 8px;letter-spacing:1px}
+.confirm-msg{font-size:15px;color:#666;margin-bottom:24px;line-height:1.6}
+.btn-outline{display:inline-block;padding:12px 28px;border:2px solid #0033cc;color:#0033cc;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;background:none;font-family:'Lato',sans-serif;transition:all .2s}
+.btn-outline:hover{background:#0033cc;color:#fff}
+
+/* HISTORY */
+.order-card{background:#fff;border-radius:12px;padding:20px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.04);border:1px solid #eee}
+.order-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.order-po{font-size:16px;font-weight:900;color:#0033cc}
+.order-date{font-size:12px;color:#888}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase}
+.badge-submitted{background:#fff8e1;color:#b38600}
+.badge-confirmed{background:#e8f0ff;color:#0033cc}
+.badge-shipped{background:#e6f9ee;color:#00802b}
+.badge-delivered{background:#f0f0f0;color:#555}
+.order-items{font-size:13px;color:#555;line-height:1.7}
+.order-contact{font-size:12px;color:#888;margin-top:8px}
+.status-select{padding:4px 10px;border:1px solid #ddd;border-radius:6px;font-size:12px;font-family:'Lato',sans-serif;cursor:pointer}
+.empty-state{text-align:center;padding:40px;color:#aaa;font-size:14px}
+
+/* CC RULE */
+.cc-rule{background:linear-gradient(135deg,#0a0e5c,#0033cc);color:#fff;border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:13px;font-weight:700;text-align:center}
+.cc-rule span{color:#06D0FF}
+
+/* FOOTER */
+.footer{background:linear-gradient(135deg,#050824,#0a0e5c);padding:28px 20px;text-align:center}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px}
+.footer-copy{color:rgba(255,255,255,0.3);font-size:11px;margin-top:6px}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .header{padding:24px 16px 36px}
+  .main{padding:20px 14px 60px}
+  .li-row{grid-template-columns:1fr;gap:6px}
+  .li-row .li-header{display:none}
+  .form-row{grid-template-columns:1fr}
+  .card{padding:18px}
+  .tab-bar button{font-size:11px;padding:12px 14px}
+  .remove-btn{width:100%;height:36px}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== LOGIN ========== -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <img src="logo-blue.png" alt="Norris Utilities&reg;" class="login-logo">
+    <div class="login-title">Mississippi Power</div>
+    <div class="login-sub">Rope Ordering Portal</div>
+    <input type="password" class="login-input" id="loginInput" placeholder="Enter portal password" autocomplete="off" autofocus>
+    <button class="login-btn" id="loginBtn">ACCESS PORTAL</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- ========== PORTAL ========== -->
+<div id="portal" style="display:none">
+
+<div class="header">
+  <img src="logo-white.png" alt="" class="header-wm">
+  <div class="header-content">
+    <img src="logo-white.png" alt="Norris Utilities&reg;" class="header-logo">
+    <div class="header-title">Mississippi Power &mdash; Rope Ordering Portal</div>
+    <div class="header-tagline">A Legacy of Commitment&reg;</div>
+  </div>
+</div>
+<div class="chev">
+  <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0,0 547,0 547,50 0,0" fill="#06D0FF" opacity="0.15"/>
+    <polygon points="0,0 547,50 1440,0" fill="#f5f6fa"/>
+  </svg>
+</div>
+
+<div class="tab-bar">
+  <button class="active" data-tab="order">New Order</button>
+  <button data-tab="history">Order History</button>
+</div>
+
+<div class="main">
+
+<!-- ========== NEW ORDER TAB ========== -->
+<div class="tab-pane active" id="tab-order">
+
+  <div class="cc-rule">
+    📧 Samson Rope CC Rule: <span>ALWAYS CC Donna Poll AND Sarah Daniels</span> on every Samson communication
+  </div>
+
+  <!-- ORDER FORM -->
+  <div id="orderForm">
+    <div class="sec-title"><span class="blue">New</span> Rope Order</div>
+
+    <!-- Requestor Info -->
+    <div class="card">
+      <h4 style="font-size:14px;font-weight:700;color:#0033cc;margin-bottom:14px">Requestor Information</h4>
+      <div class="form-group">
+        <label class="required">Requestor Name</label>
+        <select class="form-select" id="reqName">
+          <option value="">Select or type name...</option>
+          <option value="custom">— Enter Custom Name —</option>
+        </select>
+        <input type="text" class="form-input" id="reqNameCustom" placeholder="Enter name" style="display:none;margin-top:8px">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="required">Phone</label>
+          <input type="tel" class="form-input" id="reqPhone" placeholder="(555) 555-5555">
+        </div>
+        <div class="form-group">
+          <label class="required">Email</label>
+          <input type="email" class="form-input" id="reqEmail" placeholder="name@southernco.com">
+        </div>
+      </div>
+    </div>
+
+    <!-- Line Items -->
+    <div class="card">
+      <h4 style="font-size:14px;font-weight:700;color:#0033cc;margin-bottom:14px">Products</h4>
+      <div class="line-items" id="lineItems">
+        <!-- JS populated -->
+      </div>
+      <button class="add-line" id="addLineBtn">+ Add Another Product</button>
+    </div>
+
+    <!-- Delivery -->
+    <div class="card">
+      <h4 style="font-size:14px;font-weight:700;color:#0033cc;margin-bottom:14px">Delivery Details</h4>
+      <div class="form-group">
+        <label class="required">Delivery Address</label>
+        <textarea class="form-textarea" id="deliveryAddr" rows="2">Mississippi Power Company&#10;2992 West Beach Blvd&#10;Gulfport, MS 39501</textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="required">Needed-By Date</label>
+          <input type="date" class="form-input" id="neededBy">
+        </div>
+        <div class="form-group">
+          <label>PO / Reference</label>
+          <input type="text" class="form-input" id="mspRef" placeholder="MSP PO# (if applicable)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Special Instructions / Notes</label>
+        <textarea class="form-textarea" id="specialNotes" rows="3" placeholder="Any special delivery instructions, split shipments, etc."></textarea>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="submitBtn">Submit Order</button>
+  </div>
+
+  <!-- CONFIRMATION -->
+  <div class="confirm-screen" id="confirmScreen">
+    <div class="confirm-icon">✅</div>
+    <div style="font-size:14px;color:#888;text-transform:uppercase;letter-spacing:2px;font-weight:700">Order Submitted</div>
+    <div class="confirm-po" id="confirmPo"></div>
+    <div class="confirm-msg">Aaron will review and confirm within 24 hours.<br>You will receive a confirmation email with tracking details once shipped.</div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-outline" id="newOrderBtn">Place Another Order</button>
+      <button class="btn-outline" id="emailOrderBtn" style="background:#0033cc;color:#fff;border-color:#0033cc">📧 Email Order Details</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========== ORDER HISTORY TAB ========== -->
+<div class="tab-pane" id="tab-history">
+  <div class="sec-title"><span class="blue">Order</span> History</div>
+  <div id="historyList"></div>
+</div>
+
+</div><!-- .main -->
+
+<footer class="footer">
+  <div class="footer-tagline">A Legacy of Commitment&reg;</div>
+  <div class="footer-copy">&copy; 2026 Norris Utilities, LLC &mdash; Birmingham, Alabama</div>
+</footer>
+
+</div><!-- #portal -->
+
+<script>
+(function(){
+
+// ── CONFIG ──
+var PRODUCTS = [
+  {sku:'MSP-SR-001', name:'Soft-Eye Sling — 3/4" x 6\'', price:''},
+  {sku:'MSP-SR-002', name:'Soft-Eye Sling — 3/4" x 8\'', price:''},
+  {sku:'MSP-SR-003', name:'Soft-Eye Sling — 3/4" x 10\'', price:''},
+  {sku:'MSP-SR-004', name:'Soft-Eye Sling — 1" x 6\'', price:''},
+  {sku:'MSP-SR-005', name:'Soft-Eye Sling — 1" x 8\'', price:''},
+  {sku:'MSP-SR-006', name:'Bull Rope — 3/4" x 100\'', price:''},
+  {sku:'MSP-SR-007', name:'Bull Rope — 3/4" x 150\'', price:''},
+  {sku:'MSP-SR-008', name:'Bull Rope — 1" x 100\'', price:''},
+  {sku:'MSP-SR-009', name:'Handline — 5/8" x 100\'', price:''},
+  {sku:'MSP-SR-010', name:'Handline — 5/8" x 150\'', price:''},
+  {sku:'CUSTOM', name:'— Custom Product (describe in notes) —', price:''}
+];
+
+var CONTACTS = [];  // Aaron to provide MSP contacts
+
+var STORAGE_KEY = 'msp_orders';
+var COUNTER_KEY = 'msp_order_counter';
+
+// ── LOGIN ──
+var overlay = document.getElementById('loginOverlay');
+var portal = document.getElementById('portal');
+var loginInput = document.getElementById('loginInput');
+var loginBtn = document.getElementById('loginBtn');
+var loginError = document.getElementById('loginError');
+
+if(sessionStorage.getItem('msp_auth')==='granted'){
+  overlay.classList.add('hidden');
+  portal.style.display='block';
+}
+
+function tryLogin(){
+  if(loginInput.value==='msp2026'){
+    sessionStorage.setItem('msp_auth','granted');
+    overlay.classList.add('hidden');
+    portal.style.display='block';
+  } else {
+    loginInput.classList.add('error');
+    loginError.textContent='Access Denied.';
+    setTimeout(function(){loginInput.classList.remove('error')},500);
+  }
+}
+loginBtn.addEventListener('click',tryLogin);
+loginInput.addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin()});
+
+// ── TABS ──
+document.querySelectorAll('.tab-bar button').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-bar button').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab==='history') renderHistory();
+  });
+});
+
+// ── REQUESTOR NAME ──
+var reqNameSel = document.getElementById('reqName');
+var reqNameCustom = document.getElementById('reqNameCustom');
+CONTACTS.forEach(function(c){
+  var opt = document.createElement('option');
+  opt.value = c;
+  opt.textContent = c;
+  reqNameSel.insertBefore(opt, reqNameSel.lastElementChild);
+});
+reqNameSel.addEventListener('change',function(){
+  reqNameCustom.style.display = this.value==='custom'?'block':'none';
+});
+
+// ── LINE ITEMS ──
+var lineCount = 0;
+function buildProductOptions(){
+  var html = '<option value="">Select product...</option>';
+  PRODUCTS.forEach(function(p){
+    var label = p.sku + ' — ' + p.name;
+    if(p.price) label += ' — $' + p.price;
+    html += '<option value="'+p.sku+'">'+label+'</option>';
+  });
+  return html;
+}
+
+function addLineItem(){
+  lineCount++;
+  var id = lineCount;
+  var div = document.createElement('div');
+  div.className = 'li-row';
+  div.id = 'line-'+id;
+  div.innerHTML =
+    '<div><div class="li-header">Product</div><select class="form-select li-product">'+buildProductOptions()+'</select></div>'+
+    '<div><div class="li-header">Qty</div><input type="number" class="form-input li-qty" min="1" value="1" style="text-align:center"></div>'+
+    '<div><div class="li-header">Notes</div><input type="text" class="form-input li-notes" placeholder="Color, length, etc."></div>'+
+    '<div><div class="li-header">&nbsp;</div><button class="remove-btn" onclick="this.closest(\'.li-row\').remove()" title="Remove">&times;</button></div>';
+  document.getElementById('lineItems').appendChild(div);
+}
+
+document.getElementById('addLineBtn').addEventListener('click',addLineItem);
+// Start with 1 line
+addLineItem();
+
+// ── PO NUMBER ──
+function generatePO(){
+  var now = new Date();
+  var mm = String(now.getMonth()+1).padStart(2,'0');
+  var dd = String(now.getDate()).padStart(2,'0');
+  var yy = String(now.getFullYear()).slice(-2);
+  var counter = parseInt(localStorage.getItem(COUNTER_KEY)||'0',10)+1;
+  localStorage.setItem(COUNTER_KEY, String(counter));
+  var seq = String(counter).padStart(3,'0');
+  return 'NU-MSP-'+mm+dd+'-'+yy+'-'+seq;
+}
+
+// ── SUBMIT ──
+var submitBtn = document.getElementById('submitBtn');
+submitBtn.addEventListener('click',function(){
+  // Gather data
+  var reqName = reqNameSel.value==='custom'?reqNameCustom.value.trim():(reqNameSel.value||'');
+  var reqPhone = document.getElementById('reqPhone').value.trim();
+  var reqEmail = document.getElementById('reqEmail').value.trim();
+  var deliveryAddr = document.getElementById('deliveryAddr').value.trim();
+  var neededBy = document.getElementById('neededBy').value;
+  var mspRef = document.getElementById('mspRef').value.trim();
+  var specialNotes = document.getElementById('specialNotes').value.trim();
+
+  // Validate
+  if(!reqName){alert('Please enter the requestor name.');return}
+  if(!reqPhone){alert('Please enter a phone number.');return}
+  if(!reqEmail){alert('Please enter an email address.');return}
+  if(!neededBy){alert('Please select a needed-by date.');return}
+
+  // Gather line items
+  var items = [];
+  document.querySelectorAll('.li-row').forEach(function(row){
+    var product = row.querySelector('.li-product').value;
+    var qty = parseInt(row.querySelector('.li-qty').value,10)||0;
+    var notes = row.querySelector('.li-notes').value.trim();
+    if(product && qty>0){
+      var p = PRODUCTS.find(function(x){return x.sku===product});
+      items.push({
+        sku: product,
+        name: p?p.name:product,
+        qty: qty,
+        notes: notes
+      });
+    }
+  });
+
+  if(items.length===0){alert('Please add at least one product.');return}
+
+  // Generate PO
+  var po = generatePO();
+  var now = new Date();
+  var dateStr = now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  var timeStr = now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+
+  // Build order object
+  var order = {
+    po: po,
+    date: dateStr,
+    time: timeStr,
+    timestamp: now.toISOString(),
+    requestor: reqName,
+    phone: reqPhone,
+    email: reqEmail,
+    deliveryAddr: deliveryAddr,
+    neededBy: neededBy,
+    mspRef: mspRef,
+    specialNotes: specialNotes,
+    items: items,
+    status: 'submitted'
+  };
+
+  // Save to localStorage
+  var orders = JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  orders.unshift(order);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+
+  // Build email body
+  var body = 'NEW MSP ROPE ORDER — '+po+'\n';
+  body += '═══════════════════════════════\n\n';
+  body += 'Date: '+dateStr+' at '+timeStr+'\n';
+  body += 'Requestor: '+reqName+'\n';
+  body += 'Phone: '+reqPhone+'\n';
+  body += 'Email: '+reqEmail+'\n';
+  if(mspRef) body += 'MSP PO/Ref: '+mspRef+'\n';
+  body += '\nPRODUCTS:\n';
+  items.forEach(function(item,i){
+    body += '  '+(i+1)+'. '+item.sku+' — '+item.name+' — Qty: '+item.qty;
+    if(item.notes) body += ' ('+item.notes+')';
+    body += '\n';
+  });
+  body += '\nDELIVERY:\n'+deliveryAddr+'\n';
+  body += 'Needed by: '+neededBy+'\n';
+  if(specialNotes) body += '\nSPECIAL INSTRUCTIONS:\n'+specialNotes+'\n';
+  body += '\n═══════════════════════════════\n';
+  body += 'Submitted via MSP Rope Ordering Portal\n';
+  body += 'Norris Utilities® — A Legacy of Commitment®\n';
+
+  // Store email data for the email button
+  order._emailBody = body;
+
+  // Show confirmation
+  document.getElementById('orderForm').style.display='none';
+  document.getElementById('confirmScreen').classList.add('show');
+  document.getElementById('confirmPo').textContent=po;
+
+  // Email button
+  document.getElementById('emailOrderBtn').onclick=function(){
+    var subject = encodeURIComponent('New MSP Rope Order — '+po);
+    var encodedBody = encodeURIComponent(body);
+    var mailto = 'mailto:acnorris@norrisutilities.com,cbutler@norrisutilities.com'
+      + '?subject='+subject
+      + '&body='+encodedBody;
+    window.location.href=mailto;
+  };
+  // Auto-trigger mailto
+  setTimeout(function(){
+    var subject = encodeURIComponent('New MSP Rope Order — '+po);
+    var encodedBody = encodeURIComponent(body);
+    window.location.href='mailto:acnorris@norrisutilities.com,cbutler@norrisutilities.com?subject='+subject+'&body='+encodedBody;
+  },500);
+});
+
+// ── NEW ORDER ──
+document.getElementById('newOrderBtn').addEventListener('click',function(){
+  document.getElementById('orderForm').style.display='block';
+  document.getElementById('confirmScreen').classList.remove('show');
+  // Reset form
+  reqNameSel.value='';
+  reqNameCustom.value='';reqNameCustom.style.display='none';
+  document.getElementById('reqPhone').value='';
+  document.getElementById('reqEmail').value='';
+  document.getElementById('deliveryAddr').value='Mississippi Power Company\n2992 West Beach Blvd\nGulfport, MS 39501';
+  document.getElementById('neededBy').value='';
+  document.getElementById('mspRef').value='';
+  document.getElementById('specialNotes').value='';
+  document.getElementById('lineItems').innerHTML='';
+  lineCount=0;
+  addLineItem();
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+// ── HISTORY ──
+function renderHistory(){
+  var orders = JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  var container = document.getElementById('historyList');
+  if(orders.length===0){
+    container.innerHTML='<div class="empty-state">No orders yet. Place your first order above.</div>';
+    return;
+  }
+  var html='';
+  orders.forEach(function(o,idx){
+    var badgeClass = 'badge-'+o.status;
+    var statusLabel = o.status.charAt(0).toUpperCase()+o.status.slice(1);
+    var itemLines = '';
+    o.items.forEach(function(item){
+      itemLines += item.qty+'× '+item.sku+' — '+item.name;
+      if(item.notes) itemLines += ' ('+item.notes+')';
+      itemLines += '<br>';
+    });
+
+    html += '<div class="order-card">'
+      + '<div class="order-card-header">'
+      + '<div><span class="order-po">'+o.po+'</span><br><span class="order-date">'+o.date+' at '+o.time+'</span></div>'
+      + '<div style="display:flex;align-items:center;gap:8px">'
+      + '<span class="badge '+badgeClass+'">'+statusLabel+'</span>'
+      + '<select class="status-select" data-idx="'+idx+'" onchange="updateStatus(this)">'
+      + '<option value="submitted"'+(o.status==='submitted'?' selected':'')+'>Submitted</option>'
+      + '<option value="confirmed"'+(o.status==='confirmed'?' selected':'')+'>Confirmed</option>'
+      + '<option value="shipped"'+(o.status==='shipped'?' selected':'')+'>Shipped</option>'
+      + '<option value="delivered"'+(o.status==='delivered'?' selected':'')+'>Delivered</option>'
+      + '</select>'
+      + '</div></div>'
+      + '<div class="order-items">'+itemLines+'</div>'
+      + '<div class="order-contact">'+o.requestor+' &bull; '+o.phone+' &bull; '+o.email
+      + (o.mspRef?' &bull; Ref: '+o.mspRef:'')
+      + '<br>Deliver to: '+o.deliveryAddr.replace(/\n/g,', ')
+      + ' &bull; Need by: '+o.neededBy+'</div>'
+      + '</div>';
+  });
+  container.innerHTML=html;
+}
+
+// Global status update function
+window.updateStatus = function(el){
+  var idx = parseInt(el.dataset.idx,10);
+  var orders = JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  if(orders[idx]){
+    orders[idx].status = el.value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+    renderHistory();
+  }
+};
+
+// Set default needed-by to 2 weeks from now
+var twoWeeks = new Date();
+twoWeeks.setDate(twoWeeks.getDate()+14);
+document.getElementById('neededBy').value = twoWeeks.toISOString().split('T')[0];
+
+})();
+</script>
+
+</body>
+</html>
