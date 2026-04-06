@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samson Rope Dashboard | Norris Utilities</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font-primary); color: var(--nu-body-text); background: var(--nu-light-gray); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+    /* ══ HEADER ══ */
+    .header {
+      position: relative;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 35%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
+      padding: 40px 32px 64px;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px);
+      background-size: 40px 40px, 40px 40px, 60px 60px;
+      z-index: 1; opacity: 0.6;
+    }
+    .header * { position: relative; z-index: 2; }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+    .header h1 { font-weight: 900; font-size: 2rem; color: #fff; letter-spacing: 0.08em; }
+    .header h1 span { font-weight: 300; font-size: 1rem; display: block; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 2px; }
+    .last-scan { font-size: 0.75rem; color: rgba(255,255,255,0.5); background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+
+    /* ══ CHEVRON ══ */
+    .chevron { position: relative; height: 40px; margin-top: -40px; z-index: 10; }
+    .chevron svg { width: 100%; height: 40px; display: block; }
+
+    /* ══ CONTENT ══ */
+    .content { max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px; }
+
+    /* ══ SUMMARY BAR ══ */
+    .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .stat {
+      background: #fff; border-radius: 10px; padding: 20px; text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-top: 4px solid #0033cc;
+    }
+    .stat.green { border-top-color: #00aa44; }
+    .stat.yellow { border-top-color: #ffaa00; }
+    .stat.red { border-top-color: #cc0000; }
+    .stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 4px; }
+    .stat-value { font-weight: 900; font-size: 1.5rem; color: var(--nu-dark-text); }
+    .stat.red .stat-value { color: #cc0000; }
+
+    /* ══ ALERT BOX ══ */
+    .alert-box {
+      background: #fff3e0; border: 2px solid #ff9900; border-radius: 10px;
+      padding: 20px 24px; margin-bottom: 28px;
+    }
+    .alert-box h3 { font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; color: #cc6600; margin-bottom: 8px; }
+    .alert-item { font-size: 0.9rem; padding: 4px 0; color: #555; }
+    .alert-item strong { color: #cc0000; }
+    .unbilled-total { font-size: 1.3rem; font-weight: 900; color: #cc0000; margin-top: 12px; }
+
+    /* ══ PAYMENT BOX ══ */
+    .payment-box {
+      background: var(--nu-navy); color: #fff; border-radius: 10px;
+      padding: 20px 24px; margin-bottom: 28px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;
+    }
+    .payment-box h3 { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: var(--nu-cyan); margin-bottom: 8px; width: 100%; }
+    .pay-col { flex: 1; min-width: 200px; font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.85); }
+    .pay-col strong { color: #fff; }
+    .pay-warn { color: #ff6666; font-weight: 700; font-size: 0.8rem; }
+    .pay-cc { color: var(--nu-cyan); font-size: 0.8rem; }
+
+    /* ══ TABLE ══ */
+    .table-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 28px; }
+    .table-header { padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-bottom: 2px solid var(--nu-medium-gray); }
+    .table-header h2 { font-weight: 900; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--nu-dark-text); }
+    .filter-row { display: flex; gap: 8px; align-items: center; }
+    .filter-row select, .filter-row input {
+      padding: 6px 12px; border: 2px solid var(--nu-medium-gray); border-radius: 6px;
+      font-family: var(--font-primary); font-size: 0.8rem; color: var(--nu-dark-text); background: #fff;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      padding: 10px 14px; text-align: left; font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; color: #888;
+      background: var(--nu-light-gray); border-bottom: 2px solid var(--nu-medium-gray);
+      cursor: pointer; white-space: nowrap; user-select: none;
+    }
+    thead th:hover { color: #0033cc; }
+    thead th.right, tbody td.right { text-align: right; }
+    tbody td {
+      padding: 10px 14px; font-size: 0.85rem; border-bottom: 1px solid #f0f0f0;
+      font-variant-numeric: tabular-nums;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr.row-paid { background: #f0fdf4; }
+    tbody tr.row-unpaid { background: #fffbeb; }
+    tbody tr.row-overdue { background: #fef2f2; }
+    .badge {
+      display: inline-block; padding: 2px 8px; border-radius: 4px;
+      font-size: 0.65rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .badge-paid { background: #dcfce7; color: #166534; }
+    .badge-unpaid { background: #fef9c3; color: #854d0e; }
+    .badge-overdue { background: #fecaca; color: #991b1b; }
+    .badge-yes { background: #dcfce7; color: #166534; }
+    .badge-no { background: #fecaca; color: #991b1b; }
+    .mono { font-family: 'SF Mono', 'Menlo', monospace; font-size: 0.8rem; font-weight: 700; color: #0033cc; }
+
+    /* ══ FOOTER ══ */
+    .footer {
+      background: linear-gradient(135deg, var(--nu-navy), #001133);
+      padding: 32px 24px; text-align: center;
+    }
+    .footer-tagline { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--nu-cyan); margin-bottom: 8px; }
+    .footer-info { font-size: 0.75rem; color: rgba(255,255,255,0.4); line-height: 1.7; }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .header { padding: 24px 16px 48px; }
+      .header h1 { font-size: 1.4rem; }
+      .content { padding: 20px 12px 40px; }
+      .summary { grid-template-columns: 1fr 1fr; }
+      .payment-box { flex-direction: column; }
+      thead th, tbody td { padding: 8px 8px; font-size: 0.75rem; }
+      .table-header { padding: 12px 16px; }
+    }
+    @media (max-width: 480px) {
+      .summary { grid-template-columns: 1fr; }
+    }
+
+    .loading { text-align: center; padding: 60px; color: #888; font-size: 1.1rem; }
+    .error-msg { text-align: center; padding: 40px; color: #cc0000; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-top">
+      <h1>Samson Rope <span>Invoice Tracker Dashboard</span></h1>
+      <div class="last-scan" id="lastScan">Loading...</div>
+    </div>
+  </header>
+  <div class="chevron"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><polygon points="0,0 456,40 1200,0 1200,40 0,40" fill="#f5f5f7"/></svg></div>
+
+  <div class="content">
+    <div id="app"><div class="loading">Loading Samson data...</div></div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-tagline">A Legacy of Commitment&reg;</div>
+    <div class="footer-info">
+      Norris Utilities&reg;, LLC &mdash; Birmingham, Alabama &mdash; 205-500-1343 &mdash; acnorris@norrisutilities.com<br>
+      Samson Rope &mdash; Customer #363100 &mdash; Internal Use Only
+    </div>
+  </footer>
+
+<script>
+(function(){
+  // Try multiple paths for the JSON (local dev vs GitHub Pages)
+  var paths = [
+    '../data/samson_orders.json',
+    '/data/samson_orders.json',
+    '../../data/samson_orders.json',
+    '/norris-ops/data/samson_orders.json'
+  ];
+
+  function tryFetch(idx){
+    if(idx >= paths.length){
+      document.getElementById('app').innerHTML = '<div class="error-msg">Could not load samson_orders.json. Make sure the file exists in the data/ directory.</div>';
+      return;
+    }
+    fetch(paths[idx]).then(function(r){
+      if(!r.ok) throw new Error(r.status);
+      return r.json();
+    }).then(render).catch(function(){
+      tryFetch(idx+1);
+    });
+  }
+
+  function money(n){ return '$' + (n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function parseDate(d){
+    if(!d) return null;
+    // Handle various formats
+    var s = String(d).split(' ')[0];
+    if(s.includes('/')) {
+      var p = s.split('/');
+      if(p[2] && p[2].length === 4) return new Date(p[2], p[0]-1, p[1]);
+      if(p[2] && p[2].length === 2) return new Date(2000+parseInt(p[2]), p[0]-1, p[1]);
+    }
+    var dt = new Date(s);
+    return isNaN(dt) ? null : dt;
+  }
+
+  function formatDate(d){
+    var dt = parseDate(d);
+    if(!dt) return d || '';
+    return (dt.getMonth()+1)+'/'+dt.getDate()+'/'+dt.getFullYear();
+  }
+
+  function render(data){
+    var invoices = [];
+    var inv = data.invoices || {};
+    for(var k in inv){ if(inv.hasOwnProperty(k)) invoices.push(inv[k]); }
+
+    // Recalculate sell prices with 30% margin for any missing
+    invoices.forEach(function(i){
+      if(i.cost > 0 && (!i.sell_price || i.sell_price === 0)){
+        i.sell_price = Math.round(i.cost / 0.70 * 100) / 100;
+      }
+      i._margin = (i.sell_price||0) - (i.cost||0);
+    });
+
+    // Sort by date, newest first
+    invoices.sort(function(a,b){
+      var da = parseDate(a.invoice_date), db = parseDate(b.invoice_date);
+      if(!da && !db) return 0;
+      if(!da) return 1;
+      if(!db) return -1;
+      return db - da;
+    });
+
+    // Stats
+    var total = invoices.length;
+    var paid = invoices.filter(function(i){ return i.payment_status === 'paid'; }).length;
+    var unpaid = total - paid;
+    var uninvoiced = invoices.filter(function(i){ return !i.qb_invoiced; }).length;
+    var totalCost = invoices.reduce(function(s,i){ return s + (i.cost||0); }, 0);
+    var totalSell = invoices.reduce(function(s,i){ return s + (i.sell_price||0); }, 0);
+    var totalMargin = totalSell - totalCost;
+    var unbilledInvoices = invoices.filter(function(i){ return !i.qb_invoiced; });
+    var unbilledRevenue = unbilledInvoices.reduce(function(s,i){ return s + (i.sell_price||0); }, 0);
+
+    // Update header
+    document.getElementById('lastScan').textContent = 'Last scan: ' + (data.last_scan||'Unknown');
+
+    var html = '';
+
+    // Summary bar
+    html += '<div class="summary">';
+    html += '<div class="stat"><div class="stat-label">Total Tracked</div><div class="stat-value">'+total+'</div></div>';
+    html += '<div class="stat green"><div class="stat-label">Paid</div><div class="stat-value">'+paid+'</div></div>';
+    html += '<div class="stat yellow"><div class="stat-label">Unpaid</div><div class="stat-value">'+unpaid+'</div></div>';
+    html += '<div class="stat red"><div class="stat-label">Uninvoiced in QB</div><div class="stat-value">'+uninvoiced+'</div></div>';
+    html += '<div class="stat"><div class="stat-label">Total Cost</div><div class="stat-value">'+money(totalCost)+'</div></div>';
+    html += '<div class="stat"><div class="stat-label">Total Sell (30%)</div><div class="stat-value">'+money(totalSell)+'</div></div>';
+    html += '<div class="stat green"><div class="stat-label">Total Margin</div><div class="stat-value">'+money(totalMargin)+'</div></div>';
+    html += '</div>';
+
+    // Action items — unbilled revenue
+    if(unbilledInvoices.length > 0){
+      html += '<div class="alert-box">';
+      html += '<h3>\u26a0\ufe0f Unbilled Revenue \u2014 '+unbilledInvoices.length+' Invoices Not in QuickBooks</h3>';
+      unbilledInvoices.forEach(function(i){
+        var amt = i.sell_price > 0 ? money(i.sell_price) : 'amount unknown';
+        html += '<div class="alert-item">\u2022 Invoice <strong>#'+esc(i.invoice_number)+'</strong>';
+        if(i.customer) html += ' ('+esc(i.customer)+')';
+        html += ' \u2014 '+amt+'</div>';
+      });
+      html += '<div class="unbilled-total">Total Unbilled: '+money(unbilledRevenue)+'</div>';
+      html += '</div>';
+    }
+
+    // Payment info
+    html += '<div class="payment-box">';
+    html += '<h3>Samson Rope Payment Info \u2014 Customer #363100</h3>';
+    html += '<div class="pay-col"><strong>Remit Payment To:</strong><br>PO Box 536753<br>Pittsburgh, PA 15253-5909<br><span class="pay-warn">\u26a0\ufe0f NOT Ferndale, WA address</span></div>';
+    html += '<div class="pay-col"><strong>CC on ALL Communications:</strong><br><span class="pay-cc">Donna Poll \u2014 dpoll@samsonrope.com<br>Sarah Daniels \u2014 sdaniels@samsonrope.com</span><br><br><span style="color:rgba(255,255,255,0.5);font-size:0.75rem">Margin: 30% \u2014 Sell = Cost \u00f7 0.70</span></div>';
+    html += '</div>';
+
+    // Invoice table
+    html += '<div class="table-card">';
+    html += '<div class="table-header">';
+    html += '<h2>Invoice Detail</h2>';
+    html += '<div class="filter-row">';
+    html += '<select id="filterStatus"><option value="all">All Status</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option></select>';
+    html += '<select id="filterQB"><option value="all">All QB Status</option><option value="yes">QB Invoiced</option><option value="no">Not in QB</option></select>';
+    html += '<input type="text" id="filterSearch" placeholder="Search...">';
+    html += '</div></div>';
+    html += '<div style="overflow-x:auto">';
+    html += '<table><thead><tr>';
+    html += '<th>Invoice #</th><th>Date</th><th>Customer</th><th class="right">Samson Cost</th><th class="right">NU Sell (30%)</th><th class="right">Margin $</th><th>Paid?</th><th>QB Invoiced?</th><th>PO / SO</th>';
+    html += '</tr></thead><tbody id="invoiceBody">';
+    html += '</tbody></table></div></div>';
+
+    document.getElementById('app').innerHTML = html;
+
+    // Render table rows
+    function renderRows(list){
+      var tbody = document.getElementById('invoiceBody');
+      if(!tbody) return;
+      var rows = '';
+      list.forEach(function(i){
+        var cls = i.payment_status === 'paid' ? 'row-paid' : 'row-unpaid';
+        var payBadge = i.payment_status === 'paid'
+          ? '<span class="badge badge-paid">Paid</span>'
+          : '<span class="badge badge-unpaid">Unpaid</span>';
+        var qbBadge = i.qb_invoiced
+          ? '<span class="badge badge-yes">Yes</span>'
+          : '<span class="badge badge-no">No</span>';
+        var poSo = [];
+        if(i.po_number) poSo.push('PO: '+esc(i.po_number));
+        if(i.sales_order) poSo.push('SO: '+esc(i.sales_order));
+
+        rows += '<tr class="'+cls+'">';
+        rows += '<td class="mono">'+esc(i.invoice_number)+'</td>';
+        rows += '<td>'+formatDate(i.invoice_date)+'</td>';
+        rows += '<td>'+esc(i.customer||'\u2014')+'</td>';
+        rows += '<td class="right" style="font-weight:700">'+(i.cost>0?money(i.cost):'\u2014')+'</td>';
+        rows += '<td class="right" style="font-weight:700">'+(i.sell_price>0?money(i.sell_price):'\u2014')+'</td>';
+        rows += '<td class="right" style="font-weight:700;color:'+(i._margin>0?'#166534':'#888')+'">'+(i._margin>0?money(i._margin):'\u2014')+'</td>';
+        rows += '<td>'+payBadge+'</td>';
+        rows += '<td>'+qbBadge+'</td>';
+        rows += '<td style="font-size:0.75rem;color:#888">'+(poSo.join(' / ')||'\u2014')+'</td>';
+        rows += '</tr>';
+      });
+      if(!rows) rows = '<tr><td colspan="9" style="text-align:center;color:#999;padding:24px">No invoices match filters</td></tr>';
+      tbody.innerHTML = rows;
+    }
+
+    renderRows(invoices);
+
+    // Filters
+    function applyFilters(){
+      var status = document.getElementById('filterStatus').value;
+      var qb = document.getElementById('filterQB').value;
+      var q = (document.getElementById('filterSearch').value||'').toLowerCase();
+      var filtered = invoices.filter(function(i){
+        if(status !== 'all' && i.payment_status !== status) return false;
+        if(qb === 'yes' && !i.qb_invoiced) return false;
+        if(qb === 'no' && i.qb_invoiced) return false;
+        if(q){
+          var hay = (i.invoice_number+' '+i.customer+' '+i.po_number+' '+i.sales_order).toLowerCase();
+          if(!hay.includes(q)) return false;
+        }
+        return true;
+      });
+      renderRows(filtered);
+    }
+
+    document.getElementById('filterStatus').addEventListener('change', applyFilters);
+    document.getElementById('filterQB').addEventListener('change', applyFilters);
+    document.getElementById('filterSearch').addEventListener('input', applyFilters);
+  }
+
+  tryFetch(0);
+})();
+</script>
+
+</body>
+</html>
