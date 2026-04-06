@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legacy Daily Journal — Norris Utilities®</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f0f4ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  /* ═══════════════════════════════════════
+     HEADER
+  ═══════════════════════════════════════ */
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    min-height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 20px 80px;
+  }
+
+  /* Ghost Phoenix Watermark */
+  .phoenix-watermark {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    font-size: 420px;
+    opacity: 0.07;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    filter: grayscale(1) brightness(2);
+    z-index: 0;
+  }
+
+  /* Power Tower SVG Overlay */
+  .tower-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    opacity: 0.10;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 10px;
+  }
+
+  .header-wordmark {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 1.1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+
+  .header-wordmark span {
+    color: #ffffff;
+    opacity: 0.85;
+    font-weight: 300;
+    font-size: clamp(18px, 3vw, 32px);
+    letter-spacing: 6px;
+    display: block;
+    margin-top: 4px;
+  }
+
+  .header-subtitle {
+    margin-top: 14px;
+    font-size: clamp(13px, 2vw, 15px);
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 2px;
+  }
+
+  .header-tagline {
+    margin-top: 12px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.05em;
+  }
+
+  .header-badge {
+    display: inline-block;
+    margin-top: 16px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 30px;
+    padding: 6px 22px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  /* ═══════════════════════════════════════
+     CHEVRON DIVIDER
+  ═══════════════════════════════════════ */
+  .chevron-divider {
+    width: 100%;
+    height: 62px;
+    background: #f0f4ff;
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+    margin-top: -1px;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* ═══════════════════════════════════════
+     MAIN LAYOUT
+  ═══════════════════════════════════════ */
+  .main-wrapper {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ═══════════════════════════════════════
+     DATE NAVIGATION BAR
+  ═══════════════════════════════════════ */
+  .date-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.08);
+    padding: 16px 24px;
+    margin-bottom: 28px;
+    border-left: 5px solid #0000FF;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .date-nav-arrows {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .nav-btn {
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: opacity 0.2s;
+  }
+  .nav-btn:hover { opacity: 0.82; }
+  .nav-btn:disabled { opacity: 0.35; cursor: default; }
+
+  .date-display {
+    text-align: center;
+    flex: 1;
+  }
+
+  .date-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #06D0FF;
+  }
+
+  .date-main {
+    font-size: clamp(16px, 3vw, 22px);
+    font-weight: 900;
+    color: #0000FF;
+    letter-spacing: 1px;
+  }
+
+  .date-entry-num {
+    font-size: 12px;
+    font-weight: 300;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .date-picker-btn {
+    background: #f0f4ff;
+    border: 2px solid #0000FF;
+    color: #0000FF;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+  .date-picker-btn:hover { background: #e8eeff; }
+
+  /* ═══════════════════════════════════════
+     X-SEPARATOR
+  ═══════════════════════════════════════ */
+  .x-separator {
+    text-align: center;
+    color: #06D0FF;
+    font-size: 20px;
+    opacity: 0.45;
+    letter-spacing: 18px;
+    margin: 26px 0;
+  }
+
+  /* ═══════════════════════════════════════
+     STATS ROW
+  ═══════════════════════════════════════ */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,255,0.08);
+    padding: 18px 20px;
+    border-top: 4px solid #0000FF;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-3px); }
+  .stat-card.cyan { border-top-color: #06D0FF; }
+  .stat-card.green { border-top-color: #00c48c; }
+  .stat-card.orange { border-top-color: #ff9800; }
+
+  .stat-value {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 900;
+    color: #0000FF;
+    line-height: 1;
+  }
+  .stat-card.cyan .stat-value { color: #06D0FF; }
+  .stat-card.green .stat-value { color: #00c48c; }
+  .stat-card.orange .stat-value { color: #ff9800; }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    margin-top: 6px;
+  }
+
+  /* ═══════════════════════════════════════
+     TWO-COLUMN LAYOUT
+  ═══════════════════════════════════════ */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+  }
+  @media(max-width: 760px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════════════════════════
+     JOURNAL CARDS
+  ═══════════════════════════════════════ */
+  .card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,255,0.08);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .card-header {
+    background: linear-gradient(135deg, #0000FF 0%, #06D0FF 100%);
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-header-icon {
+    font-size: 22px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+  }
+
+  .card-header-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+  }
+
+  .card-header-sub {
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    margin-top: 1px;
+    letter-spacing: 0.5px;
+  }
+
+  .card-body {
+    padding: 22px;
+  }
+
+  /* ═══════════════════════════════════════
+     NARRATIVE ENTRY (MAIN JOURNAL)
+  ═══════════════════════════════════════ */
+  .journal-card { border-left: 5px solid #0000FF; }
+
+  .journal-meta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed #e0e8ff;
+  }
+
+  .meta-tag {
+    background: #f0f4ff;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0000FF;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .meta-tag.cyan { background: #e6faff; color: #06acd0; }
+  .meta-tag.green { background: #e6fff6; color: #00a876; }
+
+  .journal-narrative {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #1a1a2e;
+    font-weight: 400;
+  }
+
+  .journal-narrative p { margin-bottom: 14px; }
+  .journal-narrative p:last-child { margin-bottom: 0; }
+
+  .journal-narrative strong { color: #0000FF; font-weight: 700; }
+
+  .journal-quote {
+    border-left: 4px solid #06D0FF;
+    margin: 18px 0;
+    padding: 12px 18px;
+    background: #f0f4ff;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    font-size: 14px;
+    color: #444;
+  }
+
+  /* ═══════════════════════════════════════
+     TASK / ACTIVITY LOG TABLE
+  ═══════════════════════════════════════ */
+  .activity-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .activity-table th {
+    background: #f0f4ff;
+    color: #0000FF;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 2px solid #e0e8ff;
+  }
+
+  .activity-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f0f4ff;
+    color: #1a1a2e;
+    vertical-align: top;
+  }
+
+  .activity-table tr:last-child td { border-bottom: none; }
+  .activity-table tr:hover td { background: #fafbff; }
+
+  .status-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .badge-done { background: #e6fff6; color: #00a876; }
+  .badge-ip   { background: #fff8e6; color: #cc7a00; }
+  .badge-plan { background: #f0f4ff; color: #0000FF; }
+  .badge-block{ background: #ffe6e6; color: #cc0000; }
+
+  .time-col { font-weight: 700; color: #0000FF; white-space: nowrap; }
+  .cat-col  { font-weight: 300; color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ═══════════════════════════════════════
+     PRIORITY / DECISIONS
+  ═══════════════════════════════════════ */
+  .priority-list { list-style: none; }
+
+  .priority-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px dashed #e8eeff;
+  }
+  .priority-item:last-child { border-bottom: none; }
+
+  .priority-num {
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    color: white;
+    font-weight: 900;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .priority-text { font-size: 14px; line-height: 1.5; }
+  .priority-text strong { color: #0000FF; }
+  .priority-text .sub { font-size: 12px; color: #888; margin-top: 2px; }
+
+  /* ═══════════════════════════════════════
+     DECISION LOG
+  ═══════════════════════════════════════ */
+  .decision-item {
+    background: #f8f9ff;
+    border-radius: 10px;
+    border-left: 4px solid #0000FF;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .decision-item:last-child { margin-bottom: 0; }
+  .decision-item.cyan-border { border-left-color: #06D0FF; }
+
+  .decision-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #0000FF;
+    margin-bottom: 5px;
+  }
+  .decision-item.cyan-border .decision-label { color: #06acd0; }
+
+  .decision-text {
+    font-size: 14px;
+    color: #1a1a2e;
+    line-height: 1.55;
+  }
+
+  .decision-outcome {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #00a876;
+    font-weight: 700;
+  }
+
+  /* ═══════════════════════════════════════
+     METRICS / KPI MINI CARDS
+  ═══════════════════════════════════════ */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+  }
+
+  .kpi-mini {
+    background: #f8f9ff;
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+    border: 1px solid #e0e8ff;
+  }
+
+  .kpi-val {
+    font-size: 24px;
+    font-weight: 900;
+    color: #0000FF;
+    line-height: 1;
+  }
+  .kpi-val.cyan { color: #06D0FF; }
+  .kpi-val.green { color: #00c48c; }
+
+  .kpi-name {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #aaa;
+    margin-top: 5px;
+  }
+
+  .kpi-delta {
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .kpi-delta.up { color: #00a876; }
+  .kpi-delta.down { color: #cc3333; }
+  .kpi-delta.flat { color: #888; }
+
+  /* ═══════════════════════════════════════
+     MOOD / FOCUS INDICATOR
+  ═══════════════════════════════════════ */
+  .focus-bar-wrap {
+    margin-bottom: 14px;
+  }
+
+  .focus-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  .focus-bar-label span:last-child { color: #0000FF; }
+
+  .focus-bar-bg {
+    background: #e8eeff;
+    border-radius: 20px;
+    height: 10px;
+    overflow: hidden;
+  }
+
+  .focus-bar-fill {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #0000FF, #06D0FF);
+    transition: width 0.6s ease;
+  }
+
+  /* ═══════════════════════════════════════
+     TOMORROW PREVIEW
+  ═══════════════════════════════════════ */
+  .tomorrow-list { list-style: none; }
+  .tomorrow-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f4ff;
+    font-size: 14px;
+  }
+  .tomorrow-item:last-child { border-bottom: none; }
+  .tomorrow-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0000FF, #06D0FF);
+    flex-shrink: 0;
+  }
+
+  /* ═══════════════════════════════════════
+     SYSTEM STATUS
+  ═══════════════════════════════════════ */
+  .sys-status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f4ff;
+    font-size: 13px;
+  }
+  .sys-status-row:last-child { border-bottom: none; }
+
+  .sys-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .sys-dot.ok     { background: #00c48c; box-shadow: 0 0 6px #00c48c88; }
+  .sys-dot.warn   { background: #ffb700; box-shadow: 0 0 6px #ffb70088; }
+  .sys-dot.err    { background: #ff3333; box-shadow: 0 0 6px #ff333388; }
+  .sys-dot.idle   { background: #aaa; }
+
+  .sys-name { flex: 1; font-weight: 700; color: #1a1a2e; }
+  .sys-state { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .sys-state.ok   { color: #00a876; }
+  .sys-state.warn { color: #cc7a00; }
+  .sys-state.err  { color: #cc0000; }
+  .sys-state.idle { color: #888; }
+
+  /* ═══════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════ */
+  .footer {
+    background: linear-gradient(135deg, #000033 0%, #000066 100%);
+    padding: 40px 20px;
+    text-align: center;
+    color: rgba(255,255,255,0.8);
+    margin-top: 40px;
+  }
+
+  .footer-brand {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  .footer-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #06D0FF;
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-contact {
+    margin-top: 14px;
+    font-size: 12px;
+    opacity: 0.75;
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+  }
+
+  .footer-contact a {
+    color: #06D0FF;
+    text-decoration: none;
+  }
+
+  .footer-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin: 14px auto;
+    width: 60%;
+  }
+
+  .footer-note {
+    font-size: 10px;
+    opacity: 0.5;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════ */
+  @media(max-width: 600px) {
+    .date-nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .date-display { border-top: 1px dashed #e0e8ff; border-bottom: 1px dashed #e0e8ff; padding: 10px 0; }
+    .date-nav-arrows { justify-content: center; }
+    .date-picker-btn { width: 100%; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .card-body { padding: 16px; }
+    .activity-table th:nth-child(3),
+    .activity-table td:nth-child(3) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="header">
+  <!-- Ghost Phoenix -->
+  <div class="phoenix-watermark" aria-hidden="true">&#x1F985;</div>
+
+  <!-- Power Tower Overlay -->
+  <svg class="tower-overlay" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="white" d="
+      M0,120 L0,80 L20,80 L40,20 L60,80 L80,80 L80,55 L100,55 L120,15 L140,55 L160,55 L160,80
+      L180,80 L200,80 L220,20 L240,80 L260,80 L260,55 L280,55 L300,10 L320,55 L340,55 L340,80
+      L360,80 L380,80 L400,25 L420,80 L440,80 L440,55 L460,55 L480,12 L500,55 L520,55 L520,80
+      L540,80 L560,80 L580,22 L600,80 L620,80 L620,55 L640,55 L660,10 L680,55 L700,55 L700,80
+      L720,80 L740,80 L760,25 L780,80 L800,80 L800,55 L820,55 L840,14 L860,55 L880,55 L880,80
+      L900,80 L920,80 L940,20 L960,80 L980,80 L980,55 L1000,55 L1020,12 L1040,55 L1060,55 L1060,80
+      L1080,80 L1100,80 L1120,22 L1140,80 L1160,80 L1180,80 L1200,80 L1200,120 Z
+    "/>
+    <line x1="40" y1="20" x2="100" y2="80" stroke="white" stroke-width="1.2"/>
+    <line x1="60" y1="80" x2="80" y2="55" stroke="white" stroke-width="1.2"/>
+    <line x1="120" y1="15" x2="180" y2="80" stroke="white" stroke-width="1.2"/>
+    <line x1="220" y1="20" x2="280" y2="55" stroke="white" stroke-width="1.2"/>
+    <line x1="300" y1="10" x2="360" y2="80" stroke="white" stroke-width="1.2"/>
+    <line x1="400" y1="25" x2="460" y2="55" stroke="white" stroke-width="1.2"/>
+    <line x1="480" y1="12" x2="540" y2="80" stroke="white" stroke-width="1.2"/>
+    <line x1="580" y1="22" x2="640" y2="55" stroke="white" stroke-width="1.2"/>
+    <line x1="660" y1="10" x2="720" y2="80" stroke="white" stroke-width="1.2"/>
+    <line x1="760" y1="25" x2="820" y2="55" stroke="white" stroke-width="1.2"/>
+    <line x1="840" y1="14" x2="900" y2="80" stroke="white" stroke-width="1.2"/>
+    <line x1="940" y1="20" x2="1000" y2="55" stroke="white" stroke-width="1.2"/>
+    <line x1="1020" y1="12" x2="1080" y2="80" stroke="white" stroke-width="1.2"/>
+    <line x1="1120" y1="22" x2="1180" y2="80" stroke="white" stroke-width="1.2"/>
+    <line x1="0" y1="55" x2="1200" y2="55" stroke="white" stroke-width="0.6" opacity="0.5"/>
+    <line x1="0" y1="80" x2="1200" y2="80" stroke="white" stroke-width="0.6" opacity="0.5"/>
+  </svg>
+
+  <div class="header-content">
+    <div class="header-eyebrow">Norris Utilities&#174; &mdash; Internal Operations</div>
+    <div class="header-wordmark">
+      LEGACY
+      <span>Daily Journal</span>
+    </div>
+    <div class="header-tagline">A Legacy of Commitment&#174;</div>
+    <div class="header-subtitle">Autonomous Agent Operational Record &amp; Historical Archive</div>
+    <div class="header-badge">Operational Log &mdash; Active</div>
+  </div>
+</header>
+
+<!-- White Chevron Divider -->
+<div class="chevron-divider"></div>
+
+<!-- ═══════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════ -->
+<main class="main-wrapper">
+
+  <!-- DATE NAVIGATION BAR -->
+  <div class="date-nav">
+    <div class="date-nav-arrows">
+      <button class="nav-btn" id="prevBtn" onclick="navigateDay(-1)" title="Previous Day">&#8592;</button>
+    </div>
+
+    <div class="date-display">
+      <div class="date-label">Current Entry</div>
+      <div class="date-main" id="dateDisplay">Sunday, April 6, 2025</div>
+      <div class="date-entry-num" id="entryNum">Entry #001 &mdash; Day 1 of Operations</div>
+    </div>
+
+    <div class="date-nav-arrows" style="gap:10px; align-items:center;">
+      <input type="date" id="datePicker" value="2025-04-06"
+        style="opacity:0; position:absolute; pointer-events:none; width:0;"
+        onchange="jumpToDate(this.value)">
+      <button class="date-picker-btn" onclick="document.getElementById('datePicker').showPicker()">Jump to Date</button>
+      <button class="nav-btn" id="nextBtn" onclick="navigateDay(1)" title="Next Day">&#8594;</button>
+    </div>
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value" id="statTasks">0</div>
+      <div class="stat-label">Tasks Completed</div>
+    </div>
+    <div class="stat-card cyan">
+      <div class="stat-value" id="statDecisions">0</div>
+      <div class="stat-label">Decisions Made</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-value" id="statHours">0</div>
+      <div class="stat-label">Hours Logged</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-value" id="statPriority">0</div>
+      <div class="stat-label">Priority Items</div>
+    </div>
+  </div>
+
+  <!-- SEPARATOR -->
+  <div class="x-separator">&#10005; &#10005; &#10005;</div>
+
+  <!-- JOURNAL NARRATIVE CARD -->
+  <div class="card journal-card">
+    <div class="card-header">
+      <div class="card-header-icon">&#128221;</div>
+      <div>
+        <div class="card-header-title">Daily Narrative</div>
+        <div class="card-header-sub">Operational Summary &amp; Key Events</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="journal-meta">
+        <span class="meta-tag">Operations</span>
+        <span class="meta-tag cyan">Sales</span>
+        <span class="meta-tag green">Systems</span>
+      </div>
+      <div class="journal-narrative" id="journalNarrative">
+        <p>No journal entry for this date. Use the date navigation to browse existing entries or create a new one.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWO COLUMN: ACTIVITY LOG + PRIORITIES -->
+  <div class="two-col">
+
+    <!-- ACTIVITY LOG -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">&#9201;</div>
+        <div>
+          <div class="card-header-title">Activity Log</div>
+          <div class="card-header-sub">Chronological Task Record</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="activity-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Task</th>
+              <th>Category</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="activityBody">
+            <tr>
+              <td class="time-col">--:--</td>
+              <td>No activities logged</td>
+              <td class="cat-col">--</td>
+              <td><span class="status-badge badge-plan">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PRIORITIES -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">&#127919;</div>
+        <div>
+          <div class="card-header-title">Top Priorities</div>
+          <div class="card-header-sub">Focus Items for the Day</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul class="priority-list" id="priorityList">
+          <li class="priority-item">
+            <div class="priority-num">1</div>
+            <div class="priority-text">No priorities set for this date.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TWO COLUMN: DECISIONS + METRICS -->
+  <div class="two-col">
+
+    <!-- DECISIONS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">&#9878;</div>
+        <div>
+          <div class="card-header-title">Decision Log</div>
+          <div class="card-header-sub">Key Decisions &amp; Outcomes</div>
+        </div>
+      </div>
+      <div class="card-body" id="decisionsBody">
+        <div class="decision-item">
+          <div class="decision-label">No Decisions</div>
+          <div class="decision-text">No decisions recorded for this date.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">&#128200;</div>
+        <div>
+          <div class="card-header-title">Daily Metrics</div>
+          <div class="card-header-sub">Key Performance Indicators</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="kpi-grid" id="kpiGrid">
+          <div class="kpi-mini">
+            <div class="kpi-val">--</div>
+            <div class="kpi-name">Quotes Sent</div>
+          </div>
+          <div class="kpi-mini">
+            <div class="kpi-val cyan">--</div>
+            <div class="kpi-name">Calls Made</div>
+          </div>
+          <div class="kpi-mini">
+            <div class="kpi-val green">--</div>
+            <div class="kpi-name">Orders</div>
+          </div>
+          <div class="kpi-mini">
+            <div class="kpi-val">--</div>
+            <div class="kpi-name">Revenue</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <div class="focus-bar-wrap">
+            <div class="focus-bar-label">
+              <span>Focus Level</span>
+              <span id="focusVal">0%</span>
+            </div>
+            <div class="focus-bar-bg">
+              <div class="focus-bar-fill" id="focusBar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="focus-bar-wrap">
+            <div class="focus-bar-label">
+              <span>Energy Level</span>
+              <span id="energyVal">0%</span>
+            </div>
+            <div class="focus-bar-bg">
+              <div class="focus-bar-fill" id="energyBar" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TWO COLUMN: TOMORROW PREVIEW + SYSTEM STATUS -->
+  <div class="two-col">
+
+    <!-- TOMORROW PREVIEW -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">&#9728;</div>
+        <div>
+          <div class="card-header-title">Tomorrow Preview</div>
+          <div class="card-header-sub">Upcoming Tasks &amp; Priorities</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul class="tomorrow-list" id="tomorrowList">
+          <li class="tomorrow-item">
+            <div class="tomorrow-dot"></div>
+            <span>No items scheduled for tomorrow.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SYSTEM STATUS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">&#9881;</div>
+        <div>
+          <div class="card-header-title">System Status</div>
+          <div class="card-header-sub">Infrastructure &amp; Agent Health</div>
+        </div>
+      </div>
+      <div class="card-body" id="systemStatusBody">
+        <div class="sys-status-row">
+          <div class="sys-dot ok"></div>
+          <div class="sys-name">Agent Engine</div>
+          <div class="sys-state ok">Online</div>
+        </div>
+        <div class="sys-status-row">
+          <div class="sys-dot ok"></div>
+          <div class="sys-name">GitHub Sync</div>
+          <div class="sys-state ok">Active</div>
+        </div>
+        <div class="sys-status-row">
+          <div class="sys-dot ok"></div>
+          <div class="sys-name">Telegram Bot</div>
+          <div class="sys-state ok">Connected</div>
+        </div>
+        <div class="sys-status-row">
+          <div class="sys-dot idle"></div>
+          <div class="sys-name">Cron Scheduler</div>
+          <div class="sys-state idle">Standby</div>
+        </div>
+        <div class="sys-status-row">
+          <div class="sys-dot ok"></div>
+          <div class="sys-name">Ops Portal</div>
+          <div class="sys-state ok">Live</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-brand">Norris Utilities&#174;</div>
+  <div class="footer-tagline">A Legacy of Commitment&#174;</div>
+  <div class="footer-contact">
+    Aaron C. Norris, Founder &amp; CEO | Norris Utilities&#174;, LLC<br>
+    <a href="tel:2055001343">205-500-1343</a> |
+    <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+    <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-note">Legacy Daily Journal &mdash; Norris Utilities Autonomous Agent System</div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT — Date Navigation & Dynamic Content
+═══════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  var currentDate = new Date();
+  var startDate = new Date('2025-04-06');
+
+  var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function formatDate(d) {
+    return dayNames[d.getDay()] + ', ' + monthNames[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  }
+
+  function toISODate(d) {
+    var y = d.getFullYear();
+    var m = String(d.getMonth() + 1).padStart(2, '0');
+    var day = String(d.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + day;
+  }
+
+  function daysBetween(a, b) {
+    var msPerDay = 86400000;
+    var utcA = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    var utcB = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+    return Math.floor((utcB - utcA) / msPerDay);
+  }
+
+  function updateDisplay() {
+    var dateEl = document.getElementById('dateDisplay');
+    var entryEl = document.getElementById('entryNum');
+    var pickerEl = document.getElementById('datePicker');
+
+    dateEl.textContent = formatDate(currentDate);
+    pickerEl.value = toISODate(currentDate);
+
+    var entryNumber = daysBetween(startDate, currentDate) + 1;
+    if (entryNumber < 1) entryNumber = 1;
+    var padded = String(entryNumber).padStart(3, '0');
+    entryEl.textContent = 'Entry #' + padded + ' \u2014 Day ' + entryNumber + ' of Operations';
+
+    // Update prev/next button states
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var today = new Date();
+    today.setHours(0,0,0,0);
+
+    prevBtn.disabled = (currentDate <= startDate);
+    nextBtn.disabled = (currentDate >= today);
+  }
+
+  window.navigateDay = function(offset) {
+    var newDate = new Date(currentDate);
+    newDate.setDate(newDate.getDate() + offset);
+
+    var today = new Date();
+    today.setHours(0,0,0,0);
+
+    if (newDate < startDate) return;
+    if (newDate > today) return;
+
+    currentDate = newDate;
+    updateDisplay();
+  };
+
+  window.jumpToDate = function(val) {
+    if (!val) return;
+    var parts = val.split('-');
+    var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+
+    var today = new Date();
+    today.setHours(0,0,0,0);
+
+    if (d < startDate) d = new Date(startDate);
+    if (d > today) d = today;
+
+    currentDate = d;
+    updateDisplay();
+  };
+
+  // Initialize
+  var today = new Date();
+  today.setHours(0,0,0,0);
+  currentDate = today;
+  updateDisplay();
+})();
+</script>
+
+</body>
+</html>
