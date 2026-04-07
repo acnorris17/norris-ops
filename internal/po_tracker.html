@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PO Tracker | Norris Utilities</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<script>
+(function(){var K='nu_auth_2026',RK='nu_role';var r=sessionStorage.getItem(RK);if(!(sessionStorage.getItem(K)==='granted'&&r)){window.location.href='/login.html';return}if(r==='cb')document.body.classList.add('role-cb')})();
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f8f9ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+  body.role-cb .aaron-only { display: none !important; }
+
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 50%, #00aaff 75%, #06D0FF 100%);
+    padding: 48px 40px 80px;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 65%; height: 120%;
+    background: url('/logo-white.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+  .header-inner {
+    position: relative; z-index: 2;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .header h1 {
+    font-weight: 900; font-size: 42px; color: #fff; margin-bottom: 6px;
+  }
+  .header p { color: rgba(255,255,255,0.85); font-size: 18px; font-weight: 300; }
+  .nav-back {
+    display: inline-block; margin-bottom: 16px;
+    color: #06D0FF; text-decoration: none; font-weight: 700; font-size: 14px;
+  }
+  .nav-back:hover { text-decoration: underline; }
+
+  .chevron-wrap { position: relative; margin-top: -60px; z-index: 3; }
+  .chevron-wrap svg { display: block; width: 100%; height: 60px; }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
+
+  .section-title {
+    font-size: 24px; font-weight: 700; margin: 32px 0 16px; border-bottom: 2px solid #e0e4f0; padding-bottom: 8px;
+  }
+  .section-title span:first-child { color: #0033cc; }
+  .section-title span:last-child { color: #1a1a1a; }
+
+  /* STATUS LEGEND */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #555;
+  }
+  .legend-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+  }
+  .dot-active { background: #007bff; }
+  .dot-progress { background: #ffc107; }
+  .dot-shipped { background: #28a745; }
+  .dot-urgent { background: #dc3545; }
+
+  /* PO CARDS */
+  .po-list { display: flex; flex-direction: column; gap: 20px; }
+  .po-card {
+    background: #fff; border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    overflow: hidden;
+  }
+  .po-card-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 24px; border-bottom: 1px solid #eee;
+  }
+  .po-card-header h3 { font-size: 18px; font-weight: 900; color: #0a0e5c; }
+  .po-card-body { padding: 20px 24px; }
+  .po-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .po-field label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #999; font-weight: 700; margin-bottom: 2px; }
+  .po-field .val { font-size: 15px; font-weight: 700; color: #1a1a2e; }
+  .po-field .val.money { font-size: 22px; color: #0033cc; }
+
+  .po-items {
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid #eee;
+  }
+  .po-items h4 { font-size: 12px; text-transform: uppercase; color: #999; margin-bottom: 8px; letter-spacing: 0.5px; }
+  .po-items ul { list-style: none; padding: 0; }
+  .po-items li {
+    font-size: 14px; color: #333; padding: 6px 0 6px 20px; position: relative; border-bottom: 1px solid #f5f5f5;
+  }
+  .po-items li:last-child { border-bottom: none; }
+  .po-items li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 2px; background: #0033cc;
+  }
+
+  /* STATUS BADGES */
+  .status-badge {
+    display: inline-block; padding: 5px 16px; border-radius: 20px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .status-active { background: #cce5ff; color: #004085; }
+  .status-progress { background: #fff3cd; color: #856404; }
+  .status-shipped { background: #d4edda; color: #155724; }
+  .status-complete { background: #d4edda; color: #155724; }
+  .status-urgent { background: #f8d7da; color: #721c24; }
+
+  .footer {
+    background: linear-gradient(135deg, #0a0e5c, #001a4d);
+    padding: 32px 24px; text-align: center; margin-top: 40px;
+  }
+  .footer .tagline { font-family: 'Playfair Display', serif; font-style: italic; color: #06D0FF; font-size: 18px; }
+  .footer .copy { color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 8px; }
+
+  @media (max-width: 600px) {
+    .header { padding: 32px 20px 60px; }
+    .header h1 { font-size: 28px; }
+    .main { padding: 20px 16px 40px; }
+    .po-meta { grid-template-columns: 1fr; }
+    .po-card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <a href="/" class="nav-back">&larr; Back to Portal</a>
+    <h1>PO Tracker</h1>
+    <p>Purchase Order Status &amp; Tracking</p>
+  </div>
+</div>
+
+<div class="chevron-wrap">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+    <path d="M0,0 L547,0 L547,60 L0,60 Z" fill="#fff"/>
+    <path d="M547,0 L1440,60 L547,60 Z" fill="#fff"/>
+    <path d="M547,0 L1440,0 L1440,60 Z" fill="transparent"/>
+  </svg>
+</div>
+
+<div class="main">
+
+  <h2 class="section-title"><span>Status </span><span>Legend</span></h2>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot dot-active"></div> Active</div>
+    <div class="legend-item"><div class="legend-dot dot-progress"></div> In Progress</div>
+    <div class="legend-item"><div class="legend-dot dot-shipped"></div> Shipped / Complete</div>
+    <div class="legend-item"><div class="legend-dot dot-urgent"></div> Urgent</div>
+  </div>
+
+  <h2 class="section-title"><span>Purchase </span><span>Orders</span></h2>
+  <div class="po-list">
+
+    <!-- Skylift PO -->
+    <div class="po-card">
+      <div class="po-card-header">
+        <h3>Skylift PO &mdash; Equipment Order</h3>
+        <span class="status-badge status-active">ACTIVE</span>
+      </div>
+      <div class="po-card-body">
+        <div class="po-meta">
+          <div class="po-field">
+            <label>PO Value</label>
+            <div class="val money">$1,091,402.50</div>
+          </div>
+          <div class="po-field">
+            <label>Date Issued</label>
+            <div class="val">January 12, 2026</div>
+          </div>
+          <div class="po-field">
+            <label>Vendor</label>
+            <div class="val">Skylift (Andrew Jarmoszuk)</div>
+          </div>
+          <div class="po-field">
+            <label>Status</label>
+            <div class="val" style="color:#004085;">Active &mdash; Awaiting Delivery</div>
+          </div>
+        </div>
+        <div class="po-items">
+          <h4>Line Items</h4>
+          <ul>
+            <li>5x SBA40i-LW &mdash; 40ft Insulated Aerial Lift (Lightweight)</li>
+            <li>1x SBA47i-MH &mdash; 47ft Insulated Aerial Lift (Material Handler)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boss Products Reorder -->
+    <div class="po-card">
+      <div class="po-card-header">
+        <h3>Boss Products &mdash; March 2026 Restock</h3>
+        <span class="status-badge status-progress">IN PROGRESS</span>
+      </div>
+      <div class="po-card-body">
+        <div class="po-meta">
+          <div class="po-field">
+            <label>Order Type</label>
+            <div class="val">Restock / Reorder</div>
+          </div>
+          <div class="po-field">
+            <label>Period</label>
+            <div class="val">March 2026</div>
+          </div>
+          <div class="po-field">
+            <label>Vendor</label>
+            <div class="val">Boss Products (Troy Gongwer)</div>
+          </div>
+          <div class="po-field">
+            <label>Status</label>
+            <div class="val" style="color:#856404;">In Progress &mdash; Order Processing</div>
+          </div>
+        </div>
+        <div class="po-items">
+          <h4>Details</h4>
+          <ul>
+            <li>March 2026 inventory restock order</li>
+            <li>Contact: Troy Gongwer &amp; Thayne Grove</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chain Electric / AJ Morris -->
+    <div class="po-card">
+      <div class="po-card-header">
+        <h3>Chain Electric / AJ Morris &mdash; Drop Ship</h3>
+        <span class="status-badge status-shipped">SHIPPED</span>
+      </div>
+      <div class="po-card-body">
+        <div class="po-meta">
+          <div class="po-field">
+            <label>Ship Date</label>
+            <div class="val">April 1, 2026</div>
+          </div>
+          <div class="po-field">
+            <label>Destination</label>
+            <div class="val">Hattiesburg, MS</div>
+          </div>
+          <div class="po-field">
+            <label>Customer</label>
+            <div class="val">Chain Electric / AJ Morris</div>
+          </div>
+          <div class="po-field">
+            <label>Status</label>
+            <div class="val" style="color:#155724;">Shipped Apr 1 &mdash; Drop Ship Complete</div>
+          </div>
+        </div>
+        <div class="po-items">
+          <h4>Line Items</h4>
+          <ul>
+            <li>5x 2-Man Bucket Covers</li>
+            <li>5x 1.5-Man Bucket Covers</li>
+            <li>Drop shipped directly to Hattiesburg, MS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <div class="tagline">A Legacy of Commitment&reg;</div>
+  <div class="copy">&copy; 2026 Norris Utilities, LLC. All rights reserved.</div>
+</div>
+
+</body>
+</html>

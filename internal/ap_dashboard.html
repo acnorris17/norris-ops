@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A/P Dashboard | Norris Utilities</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<script>
+(function(){var K='nu_auth_2026',RK='nu_role';var r=sessionStorage.getItem(RK);if(!(sessionStorage.getItem(K)==='granted'&&r)){window.location.href='/login.html';return}if(r==='cb')document.body.classList.add('role-cb')})();
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f8f9ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+  body.role-cb .aaron-only { display: none !important; }
+
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 50%, #00aaff 75%, #06D0FF 100%);
+    padding: 48px 40px 80px;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 65%; height: 120%;
+    background: url('/logo-white.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+  .header-inner {
+    position: relative; z-index: 2;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .header h1 {
+    font-weight: 900; font-size: 42px; color: #fff; margin-bottom: 6px;
+  }
+  .header p { color: rgba(255,255,255,0.85); font-size: 18px; font-weight: 300; }
+  .nav-back {
+    display: inline-block; margin-bottom: 16px;
+    color: #06D0FF; text-decoration: none; font-weight: 700; font-size: 14px;
+  }
+  .nav-back:hover { text-decoration: underline; }
+
+  .chevron-wrap { position: relative; margin-top: -60px; z-index: 3; }
+  .chevron-wrap svg { display: block; width: 100%; height: 60px; }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
+
+  /* SUMMARY BAR */
+  .summary-bar {
+    display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;
+  }
+  .summary-card {
+    flex: 1; min-width: 200px;
+    background: #fff; border-radius: 10px; padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center;
+  }
+  .summary-card .label { font-size: 13px; color: #666; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .summary-card .value { font-size: 32px; font-weight: 900; margin-top: 4px; }
+  .summary-card .value.green { color: #28a745; }
+  .summary-card .value.red { color: #dc3545; }
+  .summary-card .value.blue { color: #0033cc; }
+
+  .section-title {
+    font-size: 24px; font-weight: 700; margin: 32px 0 16px; border-bottom: 2px solid #e0e4f0; padding-bottom: 8px;
+  }
+  .section-title span:first-child { color: #0033cc; }
+  .section-title span:last-child { color: #1a1a1a; }
+
+  /* VENDOR CARDS */
+  .vendor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+  .vendor-card {
+    background: #fff; border-radius: 12px; padding: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07); border-left: 5px solid #0033cc;
+    position: relative;
+  }
+  .vendor-card h3 { font-size: 18px; font-weight: 900; color: #0a0e5c; margin-bottom: 6px; }
+  .vendor-card .amount { font-size: 28px; font-weight: 900; color: #1a1a2e; margin: 8px 0; }
+  .vendor-card .detail { font-size: 13px; color: #555; line-height: 1.8; }
+  .vendor-card .detail strong { color: #1a1a2e; }
+
+  .status-badge {
+    display: inline-block; padding: 4px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .status-paid { background: #d4edda; color: #155724; }
+  .status-partial { background: #fff3cd; color: #856404; }
+  .status-unknown { background: #f8d7da; color: #721c24; }
+  .status-settled { background: #d1ecf1; color: #0c5460; }
+
+  .payment-history {
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee;
+  }
+  .payment-history h4 { font-size: 12px; text-transform: uppercase; color: #999; margin-bottom: 6px; letter-spacing: 0.5px; }
+  .payment-history li { font-size: 13px; color: #444; line-height: 1.7; list-style: none; padding-left: 16px; position: relative; }
+  .payment-history li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: #0033cc; }
+
+  .footer {
+    background: linear-gradient(135deg, #0a0e5c, #001a4d);
+    padding: 32px 24px; text-align: center; margin-top: 40px;
+  }
+  .footer .tagline { font-family: 'Playfair Display', serif; font-style: italic; color: #06D0FF; font-size: 18px; }
+  .footer .copy { color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 8px; }
+
+  @media (max-width: 600px) {
+    .header { padding: 32px 20px 60px; }
+    .header h1 { font-size: 28px; }
+    .main { padding: 20px 16px 40px; }
+    .vendor-grid { grid-template-columns: 1fr; }
+    .summary-bar { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <a href="/" class="nav-back">&larr; Back to Portal</a>
+    <h1>Accounts Payable</h1>
+    <p>Vendor Payment Tracking &amp; Status</p>
+  </div>
+</div>
+
+<div class="chevron-wrap">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+    <path d="M0,0 L547,0 L547,60 L0,60 Z" fill="#fff"/>
+    <path d="M547,0 L1440,60 L547,60 Z" fill="#fff"/>
+    <path d="M547,0 L1440,0 L1440,60 Z" fill="transparent"/>
+  </svg>
+</div>
+
+<div class="main">
+
+  <!-- SUMMARY -->
+  <div class="summary-bar">
+    <div class="summary-card">
+      <div class="label">Total Outstanding</div>
+      <div class="value red">$1,538.09</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Vendors Paid</div>
+      <div class="value green">3</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Vendors Open</div>
+      <div class="value blue">2</div>
+    </div>
+  </div>
+
+  <h2 class="section-title"><span>Vendor </span><span>Accounts</span></h2>
+  <div class="vendor-grid">
+
+    <!-- Samson Rope -->
+    <div class="vendor-card">
+      <h3>Samson Rope</h3>
+      <span class="status-badge status-paid">PAID</span>
+      <div class="amount">$14,100.16</div>
+      <div class="detail">
+        <strong>Address:</strong> PO Box 536753, Pittsburgh, PA 15253-5909<br>
+        <strong>Contact:</strong> Donna Poll &amp; Sarah Daniels
+      </div>
+      <div class="payment-history">
+        <h4>Payment History</h4>
+        <ul>
+          <li>Checks mailed 3/20/26 &mdash; full payment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Boss Products -->
+    <div class="vendor-card">
+      <h3>Boss Products</h3>
+      <span class="status-badge status-partial">PARTIAL PAID</span>
+      <div class="amount">$150.66 <span style="font-size:14px;color:#856404;font-weight:700;">remaining</span></div>
+      <div class="detail">
+        <strong>Address:</strong> 602 Maple Lane, Wakarusa, IN 46573<br>
+        <strong>Contact:</strong> Troy Gongwer &amp; Thayne Grove
+      </div>
+      <div class="payment-history">
+        <h4>Payment History</h4>
+        <ul>
+          <li>Partial payment applied &mdash; $150.66 balance remaining</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MK Smith -->
+    <div class="vendor-card">
+      <h3>MK Smith / Metro Marketing</h3>
+      <span class="status-badge status-unknown">STATUS UNKNOWN</span>
+      <div class="amount">$1,387.43</div>
+      <div class="detail">
+        <strong>Address:</strong> 2700 Samantha Dr, Dothan, AL 36303<br>
+        <strong>Contact:</strong> MK Smith
+      </div>
+      <div class="payment-history">
+        <h4>Payment History</h4>
+        <ul>
+          <li>No payment recorded &mdash; status needs confirmation</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EUFMC -->
+    <div class="vendor-card">
+      <h3>EUFMC</h3>
+      <span class="status-badge status-paid">PAID</span>
+      <div class="amount">$7,350.00</div>
+      <div class="detail">
+        <strong>Payment:</strong> Charged to credit card 3/19/26
+      </div>
+      <div class="payment-history">
+        <h4>Payment History</h4>
+        <ul>
+          <li>CC charged 3/19/26 &mdash; full payment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Majors Law Firm -->
+    <div class="vendor-card">
+      <h3>Majors Law Firm</h3>
+      <span class="status-badge status-settled">SETTLED</span>
+      <div class="amount" style="color:#0c5460;">CLOSED</div>
+      <div class="detail">
+        <strong>Status:</strong> Matter settled, retainer refunded
+      </div>
+      <div class="payment-history">
+        <h4>Payment History</h4>
+        <ul>
+          <li>Retainer refunded &mdash; account closed</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <div class="tagline">A Legacy of Commitment&reg;</div>
+  <div class="copy">&copy; 2026 Norris Utilities, LLC. All rights reserved.</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CB Tasks | Norris Utilities</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<script>
+(function(){var K='nu_auth_2026',RK='nu_role';var r=sessionStorage.getItem(RK);if(!(sessionStorage.getItem(K)==='granted'&&r)){window.location.href='/login.html';return}if(r==='cb')document.body.classList.add('role-cb')})();
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f8f9ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+  body.role-cb .aaron-only { display: none !important; }
+
+  /* HEADER */
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 50%, #00aaff 75%, #06D0FF 100%);
+    padding: 48px 40px 80px;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 65%; height: 120%;
+    background: url('/logo-white.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+  .header-inner {
+    position: relative; z-index: 2;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .header h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900; font-size: 42px;
+    color: #fff; margin-bottom: 6px;
+  }
+  .header p {
+    color: rgba(255,255,255,0.85);
+    font-size: 18px; font-weight: 300;
+  }
+  .nav-back {
+    display: inline-block; margin-bottom: 16px;
+    color: #06D0FF; text-decoration: none; font-weight: 700; font-size: 14px;
+  }
+  .nav-back:hover { text-decoration: underline; }
+
+  /* CHEVRON TRANSITION */
+  .chevron-wrap { position: relative; margin-top: -60px; z-index: 3; }
+  .chevron-wrap svg { display: block; width: 100%; height: 60px; }
+
+  /* MAIN */
+  .main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
+  .section-title {
+    font-size: 24px; font-weight: 700; margin: 32px 0 16px; border-bottom: 2px solid #e0e4f0; padding-bottom: 8px;
+  }
+  .section-title span:first-child { color: #0033cc; }
+  .section-title span:last-child { color: #1a1a1a; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; background: #fff; border-radius: 8px;
+    margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    font-size: 15px; cursor: pointer; transition: background 0.15s;
+  }
+  .checklist li:hover { background: #f0f4ff; }
+  .checklist li input[type="checkbox"] {
+    width: 20px; height: 20px; accent-color: #0033cc; flex-shrink: 0;
+  }
+  .checklist li.checked { text-decoration: line-through; opacity: 0.55; }
+  .checklist a { color: #0033cc; text-decoration: none; font-weight: 700; }
+  .checklist a:hover { text-decoration: underline; }
+
+  /* PERMISSIONS */
+  .perm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .perm-card {
+    background: #fff; border-radius: 10px; padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .perm-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .perm-card ul { list-style: disc; padding-left: 20px; }
+  .perm-card li { font-size: 14px; line-height: 1.7; }
+  .badge-green { background: #d4edda; color: #155724; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+  .badge-yellow { background: #fff3cd; color: #856404; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+  .badge-red { background: #f8d7da; color: #721c24; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+
+  /* CC RULES */
+  .cc-box {
+    background: #0a0e5c; color: #fff; border-radius: 10px; padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .cc-box h3 { color: #06D0FF; font-size: 18px; font-weight: 700; margin-bottom: 14px; }
+  .cc-row {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-bottom: 10px; font-size: 14px;
+  }
+  .cc-row strong { color: #fff; min-width: 140px; }
+  .cc-email {
+    background: rgba(6,208,255,0.15); color: #06D0FF; padding: 4px 12px;
+    border-radius: 6px; font-family: monospace; font-size: 13px;
+  }
+
+  /* QUICK LINKS */
+  .quick-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+  .quick-links a {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fff; border: 2px solid #0033cc; border-radius: 8px;
+    padding: 12px 20px; color: #0033cc; font-weight: 700; font-size: 14px;
+    text-decoration: none; transition: all 0.15s;
+  }
+  .quick-links a:hover { background: #0033cc; color: #fff; }
+
+  /* FOOTER */
+  .footer {
+    background: linear-gradient(135deg, #0a0e5c, #001a4d);
+    padding: 32px 24px; text-align: center; margin-top: 40px;
+  }
+  .footer .tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; color: #06D0FF; font-size: 18px;
+  }
+  .footer .copy { color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 8px; }
+
+  @media (max-width: 600px) {
+    .header { padding: 32px 20px 60px; }
+    .header h1 { font-size: 28px; }
+    .main { padding: 20px 16px 40px; }
+    .perm-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <a href="/" class="nav-back">&larr; Back to Portal</a>
+    <h1>CB Daily Tasks</h1>
+    <p>Caroline Butler &mdash; Operations Checklist &amp; Reference</p>
+  </div>
+</div>
+
+<div class="chevron-wrap">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+    <path d="M0,0 L547,0 L547,60 L0,60 Z" fill="#fff"/>
+    <path d="M547,0 L1440,60 L547,60 Z" fill="#fff"/>
+    <path d="M547,0 L1440,0 L1440,60 Z" fill="transparent"/>
+  </svg>
+</div>
+
+<div class="main">
+
+  <!-- DAILY CHECKLIST -->
+  <h2 class="section-title"><span>Daily </span><span>Checklist</span></h2>
+  <ul class="checklist" id="checklist">
+    <li><input type="checkbox"> Check email &amp; flag anything requiring Aaron's review</li>
+    <li><input type="checkbox"> Review <a href="/internal/ap_dashboard.html">A/P Dashboard</a> for payment status updates</li>
+    <li><input type="checkbox"> QuickBooks data entry &amp; reconciliation</li>
+    <li><input type="checkbox"> A/R follow-up &mdash; check outstanding invoices</li>
+    <li><input type="checkbox"> Review <a href="/internal/po_tracker.html">PO Tracker</a> for order status changes</li>
+    <li><input type="checkbox"> File documents &amp; update records</li>
+    <li><input type="checkbox"> Check <a href="/internal/email_templates.html">Email Templates</a> for any pending drafts</li>
+    <li><input type="checkbox"> End-of-day summary to Aaron via Telegram</li>
+  </ul>
+
+  <!-- CC RULES -->
+  <h2 class="section-title"><span>CC </span><span>Rules &mdash; Always Follow</span></h2>
+  <div class="cc-box">
+    <h3>Required CC on Every Email</h3>
+    <div class="cc-row">
+      <strong>Boss Products:</strong>
+      <span class="cc-email">tgongwer@bossproductsinc.com</span>
+      <span style="color:#06D0FF;font-weight:700;">AND</span>
+      <span class="cc-email">tgrove@bossproductsinc.com</span>
+    </div>
+    <div class="cc-row">
+      <strong>Samson Rope:</strong>
+      <span class="cc-email">dpoll@samsonrope.com</span>
+      <span style="color:#06D0FF;font-weight:700;">AND</span>
+      <span class="cc-email">sdaniels@samsonrope.com</span>
+    </div>
+  </div>
+
+  <!-- PERMISSIONS -->
+  <h2 class="section-title"><span>Permissions </span><span>Reference</span></h2>
+  <div class="perm-grid">
+    <div class="perm-card">
+      <h3><span class="badge-green">CAN DO</span> Independent Tasks</h3>
+      <ul>
+        <li>Internal administrative tasks</li>
+        <li>QuickBooks data entry</li>
+        <li>A/R follow-up (internal tracking)</li>
+        <li>Filing &amp; document organization</li>
+        <li>Research &amp; information gathering</li>
+        <li>Scheduling &amp; calendar management</li>
+      </ul>
+    </div>
+    <div class="perm-card">
+      <h3><span class="badge-yellow">NEEDS REVIEW</span> Aaron Must Approve</h3>
+      <ul>
+        <li>ALL customer-facing communications</li>
+        <li>Any email sent to a customer or vendor</li>
+        <li>Responses to inquiries</li>
+        <li>Anything representing Norris Utilities externally</li>
+      </ul>
+    </div>
+    <div class="perm-card">
+      <h3><span class="badge-red">CANNOT DO</span> Aaron Only</h3>
+      <ul>
+        <li>Pricing decisions of any kind</li>
+        <li>Creating new quotes or proposals</li>
+        <li>Vendor negotiations</li>
+        <li>Financial commitments or approvals</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <h2 class="section-title"><span>Quick </span><span>Links</span></h2>
+  <div class="quick-links">
+    <a href="/internal/march20-invoice-reference.html">March 20 Invoice Reference</a>
+    <a href="/tools/product-reference.html">Product Reference</a>
+    <a href="/internal/email_templates.html">Email Templates</a>
+    <a href="/internal/ap_dashboard.html">A/P Dashboard</a>
+    <a href="/internal/po_tracker.html">PO Tracker</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="tagline">A Legacy of Commitment&reg;</div>
+  <div class="copy">&copy; 2026 Norris Utilities, LLC. All rights reserved.</div>
+</div>
+
+<script>
+// Persist checklist state
+const checks = document.querySelectorAll('#checklist input[type="checkbox"]');
+const KEY = 'cb_tasks_' + new Date().toISOString().slice(0,10);
+const saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+checks.forEach((cb, i) => {
+  if (saved[i]) { cb.checked = true; cb.parentElement.classList.add('checked'); }
+  cb.addEventListener('change', () => {
+    cb.parentElement.classList.toggle('checked', cb.checked);
+    const state = Array.from(checks).map(c => c.checked);
+    localStorage.setItem(KEY, JSON.stringify(state));
+  });
+});
+</script>
+</body>
+</html>
