@@ -750,5 +750,6 @@ updateGreeting();
 /* === INIT === */
 window.addEventListener('DOMContentLoaded',function(){NUPortal.restoreShipments();NUPortal.restoreFollowups();NUPortal.restoreCB();NUPortal.renderQBCards('pending');NUPortal.initAPSort();NUPortal.saveTodayCount();var ld=localStorage.getItem('nu_cb_last_date'),td=new Date().toISOString().slice(0,10);if(ld&&ld!==td)localStorage.removeItem('nu_cb_'+ld);localStorage.setItem('nu_cb_last_date',td)});
 </script>
+<script src="/components/nav.js"></script>
 </body>
 </html>

@@ -1,0 +1,55 @@
+{
+  "documents": [
+    {
+      "title": "CB Operations Workbook",
+      "category": "guides",
+      "filename": "cb_onboarding.html",
+      "path": "/internal/cb_onboarding.html",
+      "date": "2026-04-06",
+      "access": "team",
+      "description": "Caroline Butler full onboarding and operations guide"
+    },
+    {
+      "title": "BSS Expense Report",
+      "category": "reports",
+      "filename": "bss_expense_report.html",
+      "path": "/internal/bss_expense_report.html",
+      "date": "2026-04-05",
+      "access": "aaron-only",
+      "description": "Bay Shore Systems expense tracker"
+    },
+    {
+      "title": "Shipping SOP",
+      "category": "guides",
+      "filename": "shipping_doc_v7.html",
+      "path": "/internal/shipping_doc_v7.html",
+      "date": "2026-04-04",
+      "access": "team",
+      "description": "Standard operating procedure for all shipments"
+    },
+    {
+      "title": "2025 Goodwill Donations",
+      "category": "reports",
+      "filename": "goodwill_donations_2025.html",
+      "path": "/internal/goodwill_donations_2025.html",
+      "date": "2026-03-15",
+      "access": "aaron-only",
+      "description": "Donation records with itemized values"
+    },
+    {
+      "title": "Pricing Calculator",
+      "category": "guides",
+      "filename": "pricing-calculator.html",
+      "path": "/tools/pricing-calculator.html",
+      "date": "2026-04-06",
+      "access": "aaron-only",
+      "description": "All product margins, three-channel pricing, Ben's Formula"
+    }
+  ],
+  "categories": {
+    "guides": { "label": "Operating Guides & SOPs", "icon": "\uD83D\uDCD6" },
+    "templates": { "label": "Email & Form Templates", "icon": "\uD83D\uDCDD" },
+    "reports": { "label": "Financial Reports", "icon": "\uD83D\uDCCA" },
+    "specs": { "label": "Product Specifications", "icon": "\uD83D\uDD27" }
+  }
+}
