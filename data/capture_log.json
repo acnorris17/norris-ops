@@ -964,5 +964,29 @@
     "category": "followup",
     "source": "email_scanner",
     "summary": "Andy Barron"
+  },
+  {
+    "timestamp": "2026-04-07T12:49:18.282176",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Richard Thornhill"
+  },
+  {
+    "timestamp": "2026-04-07T12:49:18.290397",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Aaron C. Norris"
+  },
+  {
+    "timestamp": "2026-04-07T12:49:18.294079",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Thayne Grove"
+  },
+  {
+    "timestamp": "2026-04-07T12:49:18.297134",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Andy Barron"
   }
 ]
