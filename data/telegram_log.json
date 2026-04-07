@@ -97,7 +97,14 @@
       "source": "email_scanner.py",
       "message": "\ud83d\udcec EMAIL \u2014 \ud83d\udea8 <b>URGENT \u2014 1 emails waiting 5+ days</b>\n  \u2022 Aaron C. Norris \u2014 Issues with iship emails not being received \u2014 5d ago\n\n\ud83d\udcca Full scan: 12 total items in morning brief",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-07T16:38:39.021608",
+      "category": "ORDER",
+      "source": "order_monitor.py",
+      "message": "<b>NEW ORDERS DETECTED</b>\n\n<b>acnorris@norrisutilities.com</b>\n  Products: (see email)\n  Subject: \u26a1 3:08 PM Flag \u2014 Skylift April Open Order Report\n  Received: 2026-04-07 15:08\n\n<b>Jamie Eden</b>\n  Products: (see email)\n  Subject: April Open Order Report\n  Received: 2026-04-07 14:22\n\nReview at ops.norrisutilities.com/internal/orders.html",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-07T14:49:29.296971"
+  "last_updated": "2026-04-07T16:38:39.021629"
 }

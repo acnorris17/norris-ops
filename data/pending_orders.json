@@ -6,7 +6,9 @@
       "company": "Primoris",
       "email": "",
       "po_number": "W6237",
-      "products": ["2x 2-Man Bucket Cover"],
+      "products": [
+        "2x 2-Man Bucket Cover"
+      ],
       "ship_to": "",
       "subject": "PO W6237 - 2-Man Bucket Covers",
       "date_received": "2026-03-30",
@@ -21,7 +23,9 @@
       "company": "Dominion Energy",
       "email": "",
       "po_number": "42350802",
-      "products": ["5x 2-Man Bucket Cover"],
+      "products": [
+        "5x 2-Man Bucket Cover"
+      ],
       "ship_to": "",
       "subject": "Material #42350802 - 5x 2-Man BCs",
       "date_received": "2026-03-30",
@@ -36,7 +40,9 @@
       "company": "",
       "email": "",
       "po_number": "",
-      "products": ["QUOTE 24X24 BLUE COVER"],
+      "products": [
+        "QUOTE 24X24 BLUE COVER"
+      ],
       "ship_to": "",
       "subject": "QUOTE 24X24 BLUE COVER",
       "date_received": "2026-04-07",
@@ -44,7 +50,39 @@
       "status": "PENDING REVIEW",
       "source": "manual_entry",
       "notes": "New quote request -- not an order yet."
+    },
+    {
+      "id": "19d698fc48b5228c",
+      "customer": "acnorris@norrisutilities.com",
+      "company": "",
+      "email": "acnorris@norrisutilities.com",
+      "po_number": "",
+      "products": [
+        "(see email)"
+      ],
+      "ship_to": "",
+      "subject": "\u26a1 3:08 PM Flag \u2014 Skylift April Open Order Report",
+      "date_received": "2026-04-07 15:08",
+      "date_detected": "2026-04-07T21:38:37.391864+00:00",
+      "status": "PENDING REVIEW",
+      "source": "gmail_scan"
+    },
+    {
+      "id": "19d6965ccdf7a2d2",
+      "customer": "Jamie Eden",
+      "company": "",
+      "email": "Jamie@skyliftus.com",
+      "po_number": "",
+      "products": [
+        "(see email)"
+      ],
+      "ship_to": "",
+      "subject": "April Open Order Report",
+      "date_received": "2026-04-07 14:22",
+      "date_detected": "2026-04-07T21:38:38.354425+00:00",
+      "status": "PENDING REVIEW",
+      "source": "gmail_scan"
     }
   ],
-  "last_updated": "2026-04-07T00:00:00+00:00"
+  "last_updated": "2026-04-07T21:38:38.354531+00:00"
 }
