@@ -1005,7 +1005,7 @@ def send_eod_recap():
     done = [t for t in tasks if t["status"] == "done"]
 
     recap = (
-        f"\U0001f319 EOD \u2014 <b>EOD Recap -- {today}</b>\n\n"
+        f"\U0001f319 EOD \u2014 <b>{today}</b>\n\n"
         f"\U0001f4ca <b>Today's Results</b>\n"
         f"\u2705 Built: {len(done_today)} | \u274c Failed: {len(failed_today)}\n"
     )

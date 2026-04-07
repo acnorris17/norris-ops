@@ -296,15 +296,19 @@ body{font-family:'Lato',sans-serif;background:#070b1a;color:#fff;min-height:100v
 // LOGIN
 // ================================================================
 (function(){
-  const PW='legacy2026';
-  if(sessionStorage.getItem('nu_auth')==='1'){show();return}
+  var K='nu_auth_2026',RK='nu_role';
+  var storedRole=sessionStorage.getItem(RK);
+  if(sessionStorage.getItem(K)==='granted'&&storedRole){show(storedRole);return}
   document.getElementById('loginBtn').onclick=tryLogin;
   document.getElementById('loginInput').onkeydown=function(e){if(e.key==='Enter')tryLogin()};
   function tryLogin(){
-    if(document.getElementById('loginInput').value.trim()===PW){sessionStorage.setItem('nu_auth','1');show()}
-    else{document.getElementById('loginErr').textContent='Wrong password';document.getElementById('loginInput').style.borderColor='#cc0000';setTimeout(()=>{document.getElementById('loginInput').style.borderColor=''},600)}
+    var pw=document.getElementById('loginInput').value.trim(),role=null;
+    if(pw==='norris2026')role='aaron';
+    else if(pw==='legacy2026')role='cb';
+    if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem(RK,role);show(role)}
+    else{document.getElementById('loginErr').textContent='Wrong password';document.getElementById('loginInput').style.borderColor='#cc0000';setTimeout(function(){document.getElementById('loginInput').style.borderColor=''},600)}
   }
-  function show(){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('mainContent').style.display='';init()}
+  function show(role){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('mainContent').style.display='';if(role==='cb')document.body.classList.add('role-cb');init()}
 })();
 
 // ================================================================

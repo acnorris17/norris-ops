@@ -130,7 +130,7 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 
 <script>
 /* === PASSWORD GATE === */
-(function(){var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026';if(sessionStorage.getItem(K)==='granted'){o.classList.add('hidden');p.style.display='block'}function a(){if(i.value==='norris2026'||i.value==='legacy2026'){sessionStorage.setItem(K,'granted');o.classList.add('hidden');p.style.display='block'}else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
+(function(){var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026',RK='nu_role';if(sessionStorage.getItem(K)==='granted'&&sessionStorage.getItem(RK)==='aaron'){o.classList.add('hidden');p.style.display='block'}function a(){if(i.value==='norris2026'){sessionStorage.setItem(K,'granted');sessionStorage.setItem(RK,'aaron');o.classList.add('hidden');p.style.display='block'}else{i.classList.add('error');e.textContent=i.value==='legacy2026'?'Aaron-only page.':'Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
 </script>
 
 <script>

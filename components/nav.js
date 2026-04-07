@@ -7,8 +7,8 @@
 (function(){
   'use strict';
 
-  // Detect role
-  var role = sessionStorage.getItem('portal-role') || 'aaron';
+  // Detect role — main portal stores role under 'nu_role'
+  var role = sessionStorage.getItem('nu_role') || sessionStorage.getItem('portal-role') || 'aaron';
   // Also check the main portal auth key — if nu_auth_2026 is set, user is logged in
   var isLoggedIn = sessionStorage.getItem('nu_auth_2026') === 'granted' ||
                    sessionStorage.getItem('nu_auth') === '1' ||
