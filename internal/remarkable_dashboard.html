@@ -175,12 +175,12 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 <script>
 // Login
 (function(){
-  const PW='legacy2026';
-  if(sessionStorage.getItem('nu_auth')==='1'){show();return}
+  const PW='norris2026';
+  if(sessionStorage.getItem('nu_auth_2026')==='1'){show();return}
   document.getElementById('loginBtn').onclick=tryLogin;
   document.getElementById('loginInput').onkeydown=function(e){if(e.key==='Enter')tryLogin()};
   function tryLogin(){
-    if(document.getElementById('loginInput').value.trim()===PW){sessionStorage.setItem('nu_auth','1');show()}
+    if(document.getElementById('loginInput').value.trim()===PW){sessionStorage.setItem('nu_auth_2026','1');show()}
     else{document.getElementById('loginErr').textContent='Wrong password'}
   }
   function show(){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('mainContent').style.display='';init()}
