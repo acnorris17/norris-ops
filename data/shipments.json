@@ -1,0 +1,114 @@
+{
+  "last_updated": "2026-04-07T04:00:00",
+  "blocked_note": "2 orders BLOCKED \u2014 ARCH SKUs unconfirmed with Boss Products. Contact Troy Gongwer and Thayne Grove to resolve before invoicing.",
+  "orders": [
+    {
+      "id": 1,
+      "customer": "Richard Thornhill",
+      "company": "LineTec Services",
+      "product": "1\u00d7 2-Man Bucket Cover",
+      "sku": "NU-BC-2851",
+      "amount": "$275",
+      "ship_date": "2026-03-20",
+      "status": "ready",
+      "status_label": "READY TO INVOICE",
+      "sd_link": "/shipping-docs/SD-2026-LINETEC-0402.html"
+    },
+    {
+      "id": 2,
+      "customer": "Coy Crosby",
+      "company": "Dominion Energy",
+      "product": "6\u00d7 1.5-Man Bucket Cover",
+      "sku": "NU-BC-2834",
+      "amount": "Contact Aaron for price",
+      "ship_date": "2026-03-20",
+      "status": "ready",
+      "status_label": "READY TO INVOICE",
+      "sd_link": ""
+    },
+    {
+      "id": 3,
+      "customer": "Jimmy Benz",
+      "company": "SWEPCO/AEP",
+      "product": "1\u00d7 2-Man Bucket Cover",
+      "sku": "NU-BC-2851 \u2022 Truck #860377",
+      "amount": "$275",
+      "ship_date": "2026-03-20",
+      "status": "ready",
+      "status_label": "READY TO INVOICE",
+      "sd_link": ""
+    },
+    {
+      "id": 4,
+      "customer": "Darrell Pickle",
+      "company": "Florence Electric",
+      "product": "1\u00d7 BCB + 3\u00d7 ARCH + 2\u00d7 1.5-Man",
+      "sku": "ARCH SKUs TBD",
+      "amount": "",
+      "ship_date": "2026-03-20",
+      "status": "blocked",
+      "status_label": "BLOCKED \u2014 ARCH SKUs unconfirmed",
+      "sd_link": ""
+    },
+    {
+      "id": 5,
+      "customer": "Sammy Myers",
+      "company": "AEP",
+      "product": "2\u00d7 ARCH + 1\u00d7 Combo 1.5-Man",
+      "sku": "ARCH SKUs TBD",
+      "amount": "",
+      "ship_date": "2026-03-20",
+      "status": "blocked",
+      "status_label": "BLOCKED \u2014 ARCH SKUs unconfirmed",
+      "sd_link": ""
+    },
+    {
+      "id": 6,
+      "customer": "Dave Bedwell",
+      "company": "SWEPCO",
+      "product": "4\u00d7 D-Shape Bucket Cover",
+      "sku": "",
+      "amount": "",
+      "ship_date": "2026-04-07",
+      "status": "ready",
+      "status_label": "NEEDS INVOICE",
+      "sd_link": "/shipping-docs/SD-2026-BEDWELL-0407.html"
+    },
+    {
+      "id": 7,
+      "customer": "Richard Thornhill",
+      "company": "Linetec Services",
+      "product": "1\u00d7 2-Man Bucket Cover \u2022 PO DEPT889",
+      "sku": "",
+      "amount": "",
+      "ship_date": "2026-04-06",
+      "status": "ready",
+      "status_label": "NEEDS INVOICE",
+      "sd_link": "/shipping-docs/SD-2026-LINETEC-0406.html"
+    },
+    {
+      "id": 8,
+      "customer": "Richard Thornhill",
+      "company": "Linetec Services",
+      "product": "1\u00d7 2-Man Bucket Cover \u2022 PO DEPT450",
+      "sku": "",
+      "amount": "",
+      "ship_date": "2026-04-02",
+      "status": "ready",
+      "status_label": "NEEDS INVOICE",
+      "sd_link": "/shipping-docs/SD-2026-LINETEC-0402.html"
+    },
+    {
+      "id": 9,
+      "customer": "AJ Morris",
+      "company": "Chain Electric",
+      "product": "FlexPro Armor\u00ae Order",
+      "sku": "",
+      "amount": "",
+      "ship_date": "2026-04-01",
+      "status": "ready",
+      "status_label": "NEEDS INVOICE",
+      "sd_link": "/shipping-docs/SD-2026-AJ-0401-ARCH.html"
+    }
+  ]
+}

@@ -286,5 +286,37 @@
     "_captured_at": "2026-04-07T06:48:51.776967",
     "_source": "email_scanner",
     "_category": "followup"
+  },
+  {
+    "customer": "Thayne Grove",
+    "subject": "Invoice 6651",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-07T08:49:00.600074",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Andy Barron",
+    "subject": "Canyon",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-07T08:49:00.609209",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Jeff Fickel",
+    "subject": "RE: Schedule",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-07T08:49:00.612810",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "",
+    "subject": "EUFMC Planning",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-07T08:49:00.615735",
+    "_source": "email_scanner",
+    "_category": "followup"
   }
 ]
