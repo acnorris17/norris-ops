@@ -856,5 +856,35 @@
     "category": "note",
     "source": "remarkable",
     "summary": "Contact Spencer about Tradeshows & ICUEE"
+  },
+  {
+    "timestamp": "2026-04-07T04:48:43.538597",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Thayne Grove"
+  },
+  {
+    "timestamp": "2026-04-07T04:48:43.540430",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Andy Barron"
+  },
+  {
+    "timestamp": "2026-04-07T04:48:43.541318",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Jeff Fickel"
+  },
+  {
+    "timestamp": "2026-04-07T04:48:43.542161",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": ""
+  },
+  {
+    "timestamp": "2026-04-07T04:48:43.543012",
+    "category": "followup",
+    "source": "email_scanner",
+    "summary": "Richard Thornhill"
   }
 ]
