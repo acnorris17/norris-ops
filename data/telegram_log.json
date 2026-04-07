@@ -83,7 +83,14 @@
       "source": "claude_code",
       "message": "\u2728 BUILD \u2014 <b>DESIGN SYSTEM DEPLOYED</b>\n\n<b>Brand CSS framework</b> (/css/brand.css) with 25+ component classes:\n\n\u2022 CSS custom properties: all brand colors, spacing, shadows, transitions\n\u2022 Status pills with dot indicators (ready/blocked/overdue/active)\n\u2022 View SD buttons with hover state\n\u2022 Staggered fade-in animations on stat cards\n\u2022 Auth wall styling for internal pages\n\u2022 CC rule banner (sticky)\n\u2022 Ghost phoenix watermark class\n\u2022 Primary/secondary button styles\n\u2022 Badge variants (live/coming soon)\n\nLinked to <b>68 HTML files</b> across the portal.\nPost-commit audit: CLEAN \u2014 0 issues.",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-07T12:49:19.066794",
+      "category": "EMAIL",
+      "source": "email_scanner.py",
+      "message": "\ud83d\udcec EMAIL \u2014 \ud83d\udea8 <b>URGENT \u2014 1 emails waiting 5+ days</b>\n  \u2022 Aaron C. Norris \u2014 Issues with iship emails not being received \u2014 5d ago\n\n\ud83d\udcca Full scan: 11 total items in morning brief",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-07T11:50:09.520179"
+  "last_updated": "2026-04-07T12:49:19.066814"
 }
