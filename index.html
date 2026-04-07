@@ -29,12 +29,13 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
 
 /* ===== HEADER ===== */
-.header{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:40px 40px 60px;text-align:center;overflow:hidden}
+.header{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:44px 40px 64px;text-align:center;overflow:hidden}
+.header::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(6,208,255,0.08) 0%,transparent 60%);pointer-events:none}
 .header-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:65%;max-width:600px;opacity:0.07;pointer-events:none;user-select:none}
 .header-content{position:relative;z-index:2}
 .header-title{font-weight:900;font-size:28px;color:#fff;letter-spacing:2px}
 .header-tagline{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.85);font-size:15px;margin-top:6px;letter-spacing:1px}
-.header-date{color:rgba(255,255,255,0.6);font-size:13px;margin-top:8px;font-weight:400}
+.header-date{color:rgba(255,255,255,0.55);font-size:13px;margin-top:8px;font-weight:400;letter-spacing:0.5px}
 
 /* ===== CHEVRON ===== */
 .chevron-wrap{position:relative;margin-top:-1px;z-index:10;line-height:0}
@@ -50,9 +51,9 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 @media(max-width:768px){.tab-nav button{font-size:10px;padding:12px 10px;letter-spacing:0.5px}}
 
 /* ===== TAB CONTENT ===== */
-.tab-content{display:none;max-width:1200px;margin:0 auto;padding:40px 24px 80px;animation:fadeIn .3s ease}
+.tab-content{display:none;max-width:1200px;margin:0 auto;padding:40px 24px 80px;animation:fadeIn .4s cubic-bezier(.25,.46,.45,.94)}
 .tab-content.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
 /* ===== SECTION HEADERS ===== */
 .sec-title{font-size:22px;font-weight:700;margin-bottom:22px;padding-bottom:12px;border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#0033cc,#06D0FF) 1;display:flex;align-items:center;gap:8px}
@@ -213,8 +214,8 @@ body.role-cb .aaron-only{display:none!important}
 body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-child(4),body.role-cb #tab-samson th:nth-child(5),body.role-cb #tab-samson tbody td:nth-child(5),body.role-cb #tab-samson tfoot td:nth-child(3),body.role-cb #tab-samson tfoot td:nth-child(4){display:none!important}
 
 /* ===== COMPLETION COUNTER (fixed) ===== */
-.completion-counter{position:fixed;bottom:20px;right:20px;z-index:9000;background:#fff;border:2px solid #0033cc;border-radius:12px;padding:10px 16px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#0033cc;box-shadow:0 4px 20px rgba(0,0,0,0.12);cursor:pointer;transition:transform .2s}
-.completion-counter:hover{transform:scale(1.05)}
+.completion-counter{position:fixed;bottom:20px;right:20px;z-index:9000;background:#fff;border:2px solid #0033cc;border-radius:14px;padding:12px 18px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#0033cc;box-shadow:0 6px 24px rgba(0,51,204,0.15);cursor:pointer;transition:all .3s cubic-bezier(.25,.46,.45,.94);backdrop-filter:blur(10px)}
+.completion-counter:hover{transform:scale(1.05);box-shadow:0 8px 32px rgba(0,51,204,0.2)}
 .completion-counter .cc-detail{display:none;margin-top:8px;font-weight:400;font-size:12px;color:#666}
 .completion-counter.expanded .cc-detail{display:block}
 
@@ -236,6 +237,12 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 .footer-copy{color:rgba(255,255,255,0.4);font-size:12px;margin-top:10px}
 
 /* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .quick-links{gap:8px}
+  .ql-btn{padding:10px 14px;font-size:12px}
+  .ql-btn .ql-icon{width:32px;height:32px}
+  .cc-rule{font-size:12px;padding:14px 16px}
+}
 @media(max-width:600px){
   .header{padding:28px 20px 40px}
   .header-title{font-size:20px}
@@ -249,6 +256,9 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
   .icard{flex-wrap:wrap}
   .streak-popup{font-size:22px}
   .level-up-text{font-size:12px}
+  .quick-links{gap:6px}
+  .ql-btn{padding:10px 12px;font-size:11px;flex:1 1 calc(50% - 6px)}
+  .completion-counter{bottom:12px;right:12px;font-size:12px;padding:8px 14px}
 }
 </style>
 </head>
@@ -285,7 +295,7 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 <div class="chevron-wrap">
   <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <polygon points="0,0 547,0 547,60 0,0" fill="#06D0FF" opacity="0.15"/>
-    <polygon points="0,0 547,60 1440,0" fill="#fff"/>
+    <polygon points="0,0 547,60 1440,0" fill="#f5f6fa"/>
   </svg>
 </div>
 
