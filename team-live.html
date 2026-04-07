@@ -318,7 +318,7 @@ document.getElementById('auth-input').addEventListener('keypress',function(e){if
     if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem(RK,role);show(role)}
     else{document.getElementById('loginErr').textContent='Wrong password';document.getElementById('loginInput').style.borderColor='#cc0000';setTimeout(function(){document.getElementById('loginInput').style.borderColor=''},600)}
   }
-  function show(role){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('mainContent').style.display='';if(role==='cb')document.body.classList.add('role-cb');init()}
+  function show(role){init()}
 })();
 
 // ================================================================
