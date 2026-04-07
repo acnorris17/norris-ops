@@ -58,8 +58,36 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 .footer small{color:rgba(255,255,255,0.3);font-size:11px;display:block;margin-top:6px}
 @media(max-width:600px){.header h1{font-size:18px}.msg-header{gap:8px}.msg-source{margin-left:0}}
 </style>
+/* ===== LOGIN SCREEN ===== */
+.login-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);font-family:'Lato',sans-serif}
+.login-overlay.hidden{display:none}
+.login-box{background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:420px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;overflow:hidden}
+.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)}
+.login-title{font-family:'Lato',sans-serif;font-weight:900;font-size:24px;color:#0a0e5c;margin-bottom:4px}
+.login-subtitle{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:15px;margin-bottom:32px}
+.login-input{width:100%;padding:14px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s}
+.login-input:focus{border-color:#0033cc}
+.login-input.error{border-color:#cc0000;animation:shake .4s ease}
+.login-btn{width:100%;padding:14px;margin-top:16px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,51,204,0.35)}
+.login-error{color:#cc0000;font-size:13px;font-weight:700;margin-top:12px;min-height:20px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+</style>
 </head>
 <body>
+
+<!-- ==================== LOGIN GATE ==================== -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-title">Norris Utilities&reg;</div>
+    <div class="login-subtitle">A Legacy of Commitment&reg;</div>
+    <input type="password" class="login-input" id="loginInput" placeholder="Enter portal password" autocomplete="off" autofocus>
+    <button class="login-btn" id="loginBtn">ACCESS PORTAL</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<div id="portalContent" style="display:none">
 <div class="header">
   <h1>Telegram Message Log</h1>
   <p>A Legacy of Commitment&reg;</p>
@@ -87,6 +115,11 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
   <p>A Legacy of Commitment&reg;</p>
   <small>&copy; 2026 Norris Utilities, LLC &mdash; Internal Use Only</small>
 </footer>
+
+<script>
+/* === PASSWORD GATE === */
+(function(){var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026';if(sessionStorage.getItem(K)==='granted'){o.classList.add('hidden');p.style.display='block'}function a(){if(i.value==='legacy2026'){sessionStorage.setItem(K,'granted');o.classList.add('hidden');p.style.display='block'}else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
+</script>
 
 <script>
 (function(){
@@ -217,5 +250,6 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
   loadData();
 })();
 </script>
+</div><!-- /portalContent -->
 </body>
 </html>
