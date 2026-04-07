@@ -3,11 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Norris Utilities&reg; — Internal</title>
+<title>Mission Control — Norris Utilities&reg;</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/brand.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:#fff;color:#1a1a2e}
+.header{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:48px 40px 70px;text-align:center;overflow:hidden}
+.header-title{font-weight:900;font-size:2.4rem;color:#fff;letter-spacing:0.3em;text-transform:uppercase}
+.header-sub{font-weight:900;font-size:1.2rem;color:#fff;letter-spacing:0.8em;text-transform:uppercase;margin-bottom:16px}
+.header-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,0.9)}
+.chevron{position:relative;height:50px;margin-top:-50px;z-index:10}
+.chevron svg{width:100%;height:50px;display:block}
+.content{max-width:900px;margin:0 auto;padding:60px 40px 80px;text-align:center}
+.placeholder{background:#f5f5f7;border-radius:12px;padding:48px 32px;border:1px solid #e8e8ec}
+.footer{background:linear-gradient(135deg,#000033 0%,#000066 100%);color:rgba(255,255,255,0.8);padding:40px;text-align:center}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:#06D0FF;margin-bottom:12px}
+.footer-contact{font-size:0.9rem;line-height:1.8}
+.footer-contact a{color:#06D0FF;text-decoration:none}
+</style>
 </head>
-<body>
+<body class="aaron-only">
 <div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
 <img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
 <h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
@@ -21,19 +37,34 @@ function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='n
 document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
 </script>
 
-<!-- AUTH GATE -->
-<div id="nuAuthOverlay" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF)">
-<div style="background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;overflow:hidden">
-<div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)"></div>
-<div style="font-family:Lato,sans-serif;font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px">Norris Utilities&reg;</div>
-<div style="font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px">A Legacy of Commitment&reg;</div>
-<input type="password" id="nuAuthInput" placeholder="Enter password" autocomplete="off" autofocus style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:Lato,sans-serif;outline:none">
-<button id="nuAuthBtn" style="width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer">ACCESS</button>
-<div id="nuAuthErr" style="color:#cc0000;font-size:12px;margin-top:10px;min-height:18px;font-weight:700"></div>
-</div></div>
-<div id="nuAuthContent" style="display:none;padding:40px;text-align:center;font-family:Lato,sans-serif">
-<h2 style="color:#0a0e5c">This page is being rebuilt</h2>
-<p style="color:#888;margin-top:12px">Content is in progress. Use the <a href="/" style="color:#0033cc">main portal</a> instead.</p>
+<div class="header">
+  <div class="header-title">NORRIS</div>
+  <div class="header-sub">UTILITIES</div>
+  <div class="header-tagline">A Legacy of Commitment&reg;</div>
 </div>
+<div class="chevron">
+  <svg viewBox="0 0 1440 50" preserveAspectRatio="none"><polygon fill="#ffffff" points="0,50 548,0 1440,50"/></svg>
+</div>
+
+<div class="content">
+  <h1 style="font-weight:900;font-size:2rem;color:#1a1a2e;margin-bottom:24px;"><span style="color:#0033cc;">Mission</span> Control</h1>
+  <div class="placeholder">
+    <div style="font-size:3rem;margin-bottom:16px;">🎯</div>
+    <h2 style="font-weight:900;font-size:1.4rem;color:#1a1a2e;margin-bottom:12px;">Coming Soon</h2>
+    <p style="color:#666;font-size:1rem;line-height:1.6;max-width:500px;margin:0 auto 24px;">
+      The Mission Control dashboard is being built. Strategic overview, agent status, and system health will appear here.
+    </p>
+    <a href="/" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;">Back to Portal</a>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-tagline">A Legacy of Commitment&reg;</div>
+  <div class="footer-contact">
+    Norris Utilities, LLC &mdash; Birmingham, Alabama<br>
+    <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp; <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a>
+  </div>
+</div>
+
 </body>
 </html>

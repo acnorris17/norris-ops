@@ -1,0 +1,85 @@
+{
+  "last_updated": "2026-04-07T18:00:00",
+  "documents": [
+    {
+      "filename": "SD-2026-ABADIE-0331.html",
+      "customer": "Wayne Abadie",
+      "company": "Aerial Hydraulics, Inc.",
+      "date": "03/30/2026",
+      "products": "FlexPro Armor 2-Man Bucket Cover",
+      "status": "uninvoiced"
+    },
+    {
+      "filename": "SD-2026-AJ-0331-B-JeremyBrown.html",
+      "customer": "AJ / Jeremy Brown",
+      "company": "Chain Electric Company",
+      "date": "03/31/2026",
+      "products": "FlexPro Armor 2-Man Bucket Cover, FlexPro Armor 1.5-Man Bucket Cover",
+      "status": "uninvoiced"
+    },
+    {
+      "filename": "SD-2026-AJ-0331-ChainElectric.html",
+      "customer": "AJ Morris",
+      "company": "Chain Electric Company",
+      "date": "03/31/2026",
+      "products": "FlexPro Armor 2-Man Bucket Cover",
+      "status": "uninvoiced"
+    },
+    {
+      "filename": "SD-2026-AJ-0401-ARCH.html",
+      "customer": "AJ Morris",
+      "company": "Chain Electric Company",
+      "date": "04/01/2026",
+      "products": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
+      "status": "uninvoiced"
+    },
+    {
+      "filename": "SD-2026-BEDWELL-0407.html",
+      "customer": "Dave Bedwell",
+      "company": "AEP/SWEPCO",
+      "date": "04/07/2026",
+      "products": "FlexPro Armor D-Shape Transmission Bucket Cover",
+      "status": "uninvoiced"
+    },
+    {
+      "filename": "SD-2026-JeremyBrown-0331.html",
+      "customer": "Jeremy Brown / AJ Morris",
+      "company": "Chain Electric Company",
+      "date": "03/31/2026",
+      "products": "FlexPro Armor 2-Man Bucket Cover",
+      "status": "uninvoiced"
+    },
+    {
+      "filename": "SD-2026-JeremyBrown-0401-ARCH.html",
+      "customer": "Jeremy Brown / AJ Morris",
+      "company": "Chain Electric Company",
+      "date": "04/01/2026",
+      "products": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
+      "status": "uninvoiced"
+    },
+    {
+      "filename": "SD-2026-LINETEC-0402.html",
+      "customer": "Richard Thornhill",
+      "company": "Linetec Services",
+      "date": "04/02/2026",
+      "products": "FlexPro Armor 2-Man Bucket Cover",
+      "status": "uninvoiced"
+    },
+    {
+      "filename": "SD-2026-LINETEC-0406.html",
+      "customer": "Richard Thornhill",
+      "company": "Linetec Services",
+      "date": "04/06/2026",
+      "products": "FlexPro Armor 2-Man Bucket Cover",
+      "status": "uninvoiced"
+    },
+    {
+      "filename": "SD-TEST-DEMO.html",
+      "customer": "John Sample",
+      "company": "Alabama Power Company",
+      "date": "04/07/2026",
+      "products": "FlexPro Armor 2-Man Bucket Cover, FlexPro Armor 1.5-Man Bucket Cover",
+      "status": "demo"
+    }
+  ]
+}
