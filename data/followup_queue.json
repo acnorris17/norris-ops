@@ -86,5 +86,45 @@
     "_captured_at": "2026-04-06T20:48:14.482802",
     "_source": "email_scanner",
     "_category": "followup"
+  },
+  {
+    "customer": "Thayne Grove",
+    "subject": "Invoice 6651",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-06T22:48:21.435590",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Andy Barron",
+    "subject": "Canyon",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-06T22:48:21.436765",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Jeff Fickel",
+    "subject": "RE: Schedule",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-06T22:48:21.437221",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "",
+    "subject": "EUFMC Planning",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-06T22:48:21.437660",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Richard Thornhill",
+    "subject": "Linetec Order",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-06T22:48:21.438089",
+    "_source": "email_scanner",
+    "_category": "followup"
   }
 ]
