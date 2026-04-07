@@ -7,6 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 </head>
 <body>
+<div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
+<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
+<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
+<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
+<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
+<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
+</div>
+<script>
+(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted'&&sessionStorage.getItem('nu_role')==='aaron'){document.getElementById('auth-wall').style.display='none'}})();
+function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else{document.getElementById('auth-error').style.display='block'}}
+document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
+</script>
+
 <!-- AUTH GATE -->
 <div id="nuAuthOverlay" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF)">
 <div style="background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;overflow:hidden">
@@ -21,12 +34,5 @@
 <h2 style="color:#0a0e5c">This page is being rebuilt</h2>
 <p style="color:#888;margin-top:12px">Content is in progress. Use the <a href="/" style="color:#0033cc">main portal</a> instead.</p>
 </div>
-<script>
-(function(){var K='nu_auth_2026',o=document.getElementById('nuAuthOverlay'),c=document.getElementById('nuAuthContent'),i=document.getElementById('nuAuthInput'),b=document.getElementById('nuAuthBtn'),e=document.getElementById('nuAuthErr');
-if(sessionStorage.getItem(K)==='granted'){o.style.display='none';c.style.display='block';return}
-function a(){var pw=i.value,role=null;if(pw==='norris2026')role='aaron';else if(pw==='legacy2026')role='cb';
-if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem('nu_role',role);o.style.display='none';c.style.display='block'}else{e.textContent='Access Denied';i.style.borderColor='#cc0000';setTimeout(function(){i.style.borderColor=''},500)}}
-b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
-</script>
 </body>
 </html>

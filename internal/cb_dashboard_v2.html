@@ -651,159 +651,16 @@
 </style>
 </head>
 <body>
-<!-- AUTH GATE -->
-<div id="nuAuthOverlay" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF)">
-<div style="background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;overflow:hidden">
-<div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)"></div>
-<div style="font-family:Lato,sans-serif;font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px">Norris Utilities&reg;</div>
-<div style="font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px">A Legacy of Commitment&reg;</div>
-<input type="password" id="nuAuthInput" placeholder="Enter password" autocomplete="off" autofocus style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:Lato,sans-serif;outline:none">
-<button id="nuAuthBtn" style="width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer">ACCESS</button>
-<div id="nuAuthErr" style="color:#cc0000;font-size:12px;margin-top:10px;min-height:18px;font-weight:700"></div>
-</div></div>
-<div id="nuAuthContent" style="display:none">
-
-
-
-<!-- ─── HEADER ─────────────────────────────────────────────── -->
-<header class="header">
-
-  <!-- Infrastructure SVG Silhouette -->
-  <svg class="infra-overlay" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Power Towers -->
-    <g fill="white">
-      <rect x="60" y="30" width="3" height="90"/>
-      <rect x="40" y="40" width="43" height="3"/>
-      <rect x="50" y="58" width="23" height="2"/>
-      <line x1="40" y1="40" x2="61.5" y2="120" stroke="white" stroke-width="1.5"/>
-      <line x1="83" y1="40" x2="61.5" y2="120" stroke="white" stroke-width="1.5"/>
-      <line x1="50" y1="60" x2="61.5" y2="120" stroke="white" stroke-width="1"/>
-      <line x1="73" y1="60" x2="61.5" y2="120" stroke="white" stroke-width="1"/>
-
-      <rect x="240" y="20" width="3" height="100"/>
-      <rect x="220" y="32" width="43" height="3"/>
-      <rect x="230" y="52" width="23" height="2"/>
-      <line x1="220" y1="32" x2="241.5" y2="120" stroke="white" stroke-width="1.5"/>
-      <line x1="263" y1="32" x2="241.5" y2="120" stroke="white" stroke-width="1.5"/>
-      <line x1="230" y1="54" x2="241.5" y2="120" stroke="white" stroke-width="1"/>
-      <line x1="253" y1="54" x2="241.5" y2="120" stroke="white" stroke-width="1"/>
-
-      <!-- Wires between towers -->
-      <path d="M63 41 Q152 55 240 33" stroke="white" stroke-width="1" fill="none"/>
-      <path d="M63 60 Q152 72 240 54" stroke="white" stroke-width="0.8" fill="none"/>
-
-      <!-- Right side towers -->
-      <rect x="900" y="25" width="3" height="95"/>
-      <rect x="880" y="38" width="43" height="3"/>
-      <rect x="890" y="56" width="23" height="2"/>
-      <line x1="880" y1="38" x2="901.5" y2="120" stroke="white" stroke-width="1.5"/>
-      <line x1="923" y1="38" x2="901.5" y2="120" stroke="white" stroke-width="1.5"/>
-
-      <rect x="1100" y="18" width="3" height="102"/>
-      <rect x="1080" y="30" width="43" height="3"/>
-      <rect x="1090" y="50" width="23" height="2"/>
-      <line x1="1080" y1="30" x2="1101.5" y2="120" stroke="white" stroke-width="1.5"/>
-      <line x1="1123" y1="30" x2="1101.5" y2="120" stroke="white" stroke-width="1.5"/>
-
-      <path d="M903 38 Q1001 52 1100 30" stroke="white" stroke-width="1" fill="none"/>
-      <path d="M903 56 Q1001 68 1100 50" stroke="white" stroke-width="0.8" fill="none"/>
-
-      <!-- Horizon line / substation suggestion -->
-      <rect x="0" y="100" width="1200" height="2" fill="white" opacity="0.5"/>
-      <rect x="480" y="70" width="40" height="50"/>
-      <rect x="488" y="62" width="24" height="10"/>
-      <rect x="560" y="80" width="30" height="40"/>
-      <rect x="566" y="72" width="18" height="10"/>
-    </g>
-  </svg>
-
-  <div class="header-inner">
-    <div class="header-top">
-      <div>
-        <div class="wordmark">Norris Utilities LLC — Internal Operations</div>
-        <div class="header-title">Caroline Butler<br>Operations Dashboard</div>
-        <div class="header-subtitle">Task Board · Tier 1 Authority · Customer Queue for Aaron Review</div>
-        <div class="header-meta">
-          <div class="header-meta-item">📍 <span>Birmingham, AL</span></div>
-          <div class="header-meta-item">👤 <span>CB Access Level: Tier 1 — Ops Specialist</span></div>
-          <div class="header-meta-item">📅 <span id="currentDate"></span></div>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end;">
-        <div class="header-badge">🔴 Live Dashboard</div>
-        <div style="color:rgba(255,255,255,0.7);font-size:11px;text-align:right;font-weight:300;">A Legacy of Commitment®</div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- ─── CHEVRON DIVIDER ─────────────────────────────────────── -->
-<div class="chevron-divider"></div>
-
-<!-- ─── MAIN ───────────────────────────────────────────────── -->
-<main class="main">
-
-  <!-- Welcome Banner -->
-  <div class="welcome-banner">
-    <div>
-      <div class="welcome-text"><span class="live-dot"></span>Good morning, <strong>Caroline</strong> — Here's your operational snapshot for today.</div>
-      <div class="timestamp" style="margin-top:4px;" id="liveTime"></div>
-    </div>
-    <div style="text-align:right;">
-      <div style="font-size:11px;color:#6b7280;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Escalation Contact</div>
-      <div style="font-size:13px;color:#0000FF;font-weight:700;margin-top:3px;">Aaron C. Norris</div>
-      <div style="font-size:12px;color:#6b7280;">205-500-1343 · acnorris@norrisutilities.com</div>
-    </div>
-  </div>
-
-  <!-- ─── STATS ROW ──────────────────────────────────────────── -->
-  <div class="stats-row mb-8">
-    <div class="stat-card">
-      <div class="stat-label">Active Tasks</div>
-      <div class="stat-value">14</div>
-      <div class="stat-sub">Across all columns</div>
-    </div>
-    <div class="stat-card amber">
-      <div class="stat-label">In Progress</div>
-      <div class="stat-value">6</div>
-      <div class="stat-sub">Assigned to CB</div>
-    </div>
-    <div class="stat-card green">
-      <div class="stat-label">Completed Today</div>
-      <div class="stat-value">4</div>
-      <div class="stat-sub">Since 8:00 AM</div>
-    </div>
-    <div class="stat-card red">
-      <div class="stat-label">Overdue</div>
-      <div class="stat-value">2</div>
-      <div class="stat-sub">Needs immediate action</div>
-    </div>
-    <div class="stat-card cyan">
-      <div class="stat-label">Customer Queue</div>
-      <div class="stat-value">9</div>
-      <div class="stat-sub">Pending Aaron review</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Tier 1 Resolved</div>
-      <div class="stat-value">7</div>
-      <div class="stat-sub">CB independent actions</div>
-    </div>
-  </div>
-
-  <!-- ─── X SEPARATOR ───────────────────────────────────────── -->
-  <div class="x-separator">× × ×</div>
-
-  <!-- ─── SECTION 1: TASK BOARD ────────────────────────────── -->
-  <div class="section-header mb-6">
-    <div class="section-title">📋 CB's Task Board</div>
-<script src="/components/nav.js"></script>
-
-</div><!-- /nuAuthContent -->
+<div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
+<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
+<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
+<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
+<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
+<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
+</div>
 <script>
-(function(){var K='nu_auth_2026',o=document.getElementById('nuAuthOverlay'),c=document.getElementById('nuAuthContent'),i=document.getElementById('nuAuthInput'),b=document.getElementById('nuAuthBtn'),e=document.getElementById('nuAuthErr');
-if(sessionStorage.getItem(K)==='granted'){o.style.display='none';c.style.display='block';return}
-function a(){var pw=i.value,role=null;if(pw==='norris2026')role='aaron';else if(pw==='legacy2026')role='cb';
-if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem('nu_role',role);o.style.display='none';c.style.display='block'}else{e.textContent='Access Denied';i.style.borderColor='#cc0000';setTimeout(function(){i.style.borderColor=''},500)}}
-b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
+(function(){var r=sessionStorage.getItem('nu_role');if(sessionStorage.getItem('nu_auth_2026')==='granted'&&(r==='aaron'||r==='cb')){document.getElementById('auth-wall').style.display='none';if(r==='cb'){document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}}})();
+function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else if(p==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');document.getElementById('auth-wall').style.display='none';document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}else{document.getElementById('auth-error').style.display='block'}}
+document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
 </script>
 

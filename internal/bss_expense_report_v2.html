@@ -622,158 +622,16 @@
 </style>
 </head>
 <body>
-<!-- AUTH GATE -->
-<div id="nuAuthOverlay" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF)">
-<div style="background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;overflow:hidden">
-<div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)"></div>
-<div style="font-family:Lato,sans-serif;font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px">Norris Utilities&reg;</div>
-<div style="font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px">A Legacy of Commitment&reg;</div>
-<input type="password" id="nuAuthInput" placeholder="Enter password" autocomplete="off" autofocus style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:Lato,sans-serif;outline:none">
-<button id="nuAuthBtn" style="width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer">ACCESS</button>
-<div id="nuAuthErr" style="color:#cc0000;font-size:12px;margin-top:10px;min-height:18px;font-weight:700"></div>
-</div></div>
-<div id="nuAuthContent" style="display:none">
-
-
-
-<!-- ─── HEADER ──────────────────────────────────────────────── -->
-<div class="header">
-  <!-- Ghost Phoenix Watermark -->
-  <div class="phoenix-watermark">🔥</div>
-
-  <!-- Power Tower SVG Overlay -->
-  <svg class="tower-overlay" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,80 L40,40 L60,40 L50,0 L70,0 L60,40 L80,40 L120,80 L100,80 L100,120 L60,120 L60,80 Z" fill="white"/>
-    <line x1="0" y1="62" x2="120" y2="62" stroke="white" stroke-width="2"/>
-    <line x1="40" y1="40" x2="80" y2="40" stroke="white" stroke-width="2"/>
-    <path d="M200,80 L240,40 L260,40 L250,0 L270,0 L260,40 L280,40 L320,80 L300,80 L300,120 L260,120 L260,80 Z" fill="white"/>
-    <line x1="200" y1="62" x2="320" y2="62" stroke="white" stroke-width="2"/>
-    <line x1="240" y1="40" x2="280" y2="40" stroke="white" stroke-width="2"/>
-    <path d="M400,80 L440,40 L460,40 L450,0 L470,0 L460,40 L480,40 L520,80 L500,80 L500,120 L460,120 L460,80 Z" fill="white"/>
-    <line x1="400" y1="62" x2="520" y2="62" stroke="white" stroke-width="2"/>
-    <line x1="440" y1="40" x2="480" y2="40" stroke="white" stroke-width="2"/>
-    <path d="M600,80 L640,40 L660,40 L650,0 L670,0 L660,40 L680,40 L720,80 L700,80 L700,120 L660,120 L660,80 Z" fill="white"/>
-    <line x1="600" y1="62" x2="720" y2="62" stroke="white" stroke-width="2"/>
-    <line x1="640" y1="40" x2="680" y2="40" stroke="white" stroke-width="2"/>
-    <path d="M800,80 L840,40 L860,40 L850,0 L870,0 L860,40 L880,40 L920,80 L900,80 L900,120 L860,120 L860,80 Z" fill="white"/>
-    <line x1="800" y1="62" x2="920" y2="62" stroke="white" stroke-width="2"/>
-    <line x1="840" y1="40" x2="880" y2="40" stroke="white" stroke-width="2"/>
-    <path d="M1000,80 L1040,40 L1060,40 L1050,0 L1070,0 L1060,40 L1080,40 L1120,80 L1100,80 L1100,120 L1060,120 L1060,80 Z" fill="white"/>
-    <line x1="1000" y1="62" x2="1120" y2="62" stroke="white" stroke-width="2"/>
-    <line x1="1040" y1="40" x2="1080" y2="40" stroke="white" stroke-width="2"/>
-    <!-- Power lines connecting towers -->
-    <path d="M60,62 Q130,50 200,62" fill="none" stroke="white" stroke-width="1.5"/>
-    <path d="M60,40 Q130,30 200,40" fill="none" stroke="white" stroke-width="1"/>
-    <path d="M260,62 Q330,50 400,62" fill="none" stroke="white" stroke-width="1.5"/>
-    <path d="M260,40 Q330,30 400,40" fill="none" stroke="white" stroke-width="1"/>
-    <path d="M460,62 Q530,50 600,62" fill="none" stroke="white" stroke-width="1.5"/>
-    <path d="M460,40 Q530,30 600,40" fill="none" stroke="white" stroke-width="1"/>
-    <path d="M660,62 Q730,50 800,62" fill="none" stroke="white" stroke-width="1.5"/>
-    <path d="M660,40 Q730,30 800,40" fill="none" stroke="white" stroke-width="1"/>
-    <path d="M860,62 Q930,50 1000,62" fill="none" stroke="white" stroke-width="1.5"/>
-    <path d="M860,40 Q930,30 1000,40" fill="none" stroke="white" stroke-width="1"/>
-  </svg>
-
-  <div class="header-content">
-    <div class="header-badge">Bay Shore Systems Partnership</div>
-    <h1>BSS Expense Report</h1>
-    <h2>Bay Shore Systems — Monthly Retainer & Commission Tracker</h2>
-    <div class="header-meta">
-      <div class="meta-chip">Prepared By:<span>Aaron C. Norris</span></div>
-      <div class="meta-chip">Period:<span>July 2025</span></div>
-      <div class="meta-chip">Report #:<span>BSS-2025-07</span></div>
-      <div class="meta-chip">Due Date:<span>August 1, 2025</span></div>
-    </div>
-  </div>
+<div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
+<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
+<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
+<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
+<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
+<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
 </div>
-
-<!-- ─── CHEVRON DIVIDER ────────────────────────────────────── -->
-<div class="chevron-divider"></div>
-
-<!-- ─── ACTION BAR ─────────────────────────────────────────── -->
-<div class="action-bar">
-  <button class="btn btn-outline" onclick="window.print()">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-    Print / PDF
-  </button>
-  <button class="btn btn-primary">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-    Submit Report
-  </button>
-</div>
-
-<!-- ─── MAIN ────────────────────────────────────────────────── -->
-<div class="main">
-
-  <!-- Period Banner -->
-  <div class="period-banner" style="margin-top:24px;">
-    <div>
-      <div class="period-label">Reporting Period</div>
-      <div class="period-value">July 1 – July 31, 2025</div>
-    </div>
-    <div style="text-align:center;">
-      <div class="period-label">Submitted To</div>
-      <div class="period-value" style="font-size:15px; margin-top:4px;">Bay Shore Systems LLC</div>
-    </div>
-    <div class="period-right">
-      <div class="period-report-num">Report Number</div>
-      <div class="period-report-id">BSS-2025-07</div>
-    </div>
-  </div>
-
-  <!-- ─── SUMMARY STATS ───────────────────────────────────── -->
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-label">Monthly Retainer</div>
-      <div class="stat-value">$3,000</div>
-      <div class="stat-sub">Fixed / Recurring</div>
-    </div>
-    <div class="stat-card accent">
-      <div class="stat-label" style="color:#06D0FF;">Commissions</div>
-      <div class="stat-value">$2,450</div>
-      <div class="stat-sub">3 Qualifying Events</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Mileage</div>
-      <div class="stat-value">$189.70</div>
-      <div class="stat-sub">278 mi @ $0.67/mi</div>
-    </div>
-    <div class="stat-card orange">
-      <div class="stat-label" style="color:#ff6d00;">Misc. Expenses</div>
-      <div class="stat-value">$364.18</div>
-      <div class="stat-sub">4 Line Items</div>
-    </div>
-    <div class="stat-card green">
-      <div class="stat-label" style="color:#00c853;">Total Due</div>
-      <div class="stat-value">$6,003.88</div>
-      <div class="stat-sub">Due Aug 1, 2025</div>
-    </div>
-  </div>
-
-  <!-- ─── SUBMITTER INFO ───────────────────────────────────── -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-title">
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Report Information
-      </div>
-    </div>
-    <div class="info-grid">
-      <div class="info-item">
-        <div class="info-label">Submitted By</div>
-        <div class="info-value">Aaron C. Norris</div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">Title</div>
-        <div class="info-value">Founder & CEO</div>
-<script src="/components/nav.js"></script>
-
-</div><!-- /nuAuthContent -->
 <script>
-(function(){var K='nu_auth_2026',o=document.getElementById('nuAuthOverlay'),c=document.getElementById('nuAuthContent'),i=document.getElementById('nuAuthInput'),b=document.getElementById('nuAuthBtn'),e=document.getElementById('nuAuthErr');
-if(sessionStorage.getItem(K)==='granted'){o.style.display='none';c.style.display='block';return}
-function a(){var pw=i.value,role=null;if(pw==='norris2026')role='aaron';else if(pw==='legacy2026')role='cb';
-if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem('nu_role',role);o.style.display='none';c.style.display='block'}else{e.textContent='Access Denied';i.style.borderColor='#cc0000';setTimeout(function(){i.style.borderColor=''},500)}}
-b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
+(function(){var r=sessionStorage.getItem('nu_role');if(sessionStorage.getItem('nu_auth_2026')==='granted'&&(r==='aaron'||r==='cb')){document.getElementById('auth-wall').style.display='none';if(r==='cb'){document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}}})();
+function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else if(p==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');document.getElementById('auth-wall').style.display='none';document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}else{document.getElementById('auth-error').style.display='block'}}
+document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
 </script>
 

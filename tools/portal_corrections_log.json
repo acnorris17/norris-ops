@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "description": "Tracks every portal correction so the agent learns patterns and stops repeating mistakes",
+  "corrections": [
+    {"date": "2026-04-07", "issue": "FlexPro Armor® used with ®", "fix": "Remove ® — FlexPro Armor is NOT registered", "times_found": 3, "rule": "NEVER use ® with FlexPro Armor"},
+    {"date": "2026-04-07", "issue": "Only 5 orders in Shipments tab", "fix": "Added all 9 orders (7 ready + 2 blocked)", "rule": "Always show ALL orders including new ones"},
+    {"date": "2026-04-07", "issue": "Skylift deal card said Darrell Pickle", "fix": "Replaced with correct Skylift PO description", "rule": "Skylift trucks are Aaron's PO to sell, not a customer deal"},
+    {"date": "2026-04-07", "issue": "Follow-ups all showed as completed", "fix": "Reset to unchecked default state", "rule": "Follow-ups default to OPEN unless explicitly marked done"},
+    {"date": "2026-04-07", "issue": "Samson tab showed 30% margin as customer price", "fix": "Clarified 30% is cost from Samson, not sell price", "rule": "Aaron's actual margin to customers is 40-60%+"},
+    {"date": "2026-04-07", "issue": "Gridco/Cunningham still appearing", "fix": "Removed — deal is DEAD", "rule": "Gridco is dead. Remove everywhere. Never re-add."},
+    {"date": "2026-04-07", "issue": "Team page auth broken", "fix": "Re-added two-tier auth block", "rule": "Never remove auth from internal pages"},
+    {"date": "2026-04-07", "issue": "Dashboard pipeline value wrong", "fix": "Updated to $1.8M+ (EPB+Terex+Skylift)", "rule": "Pipeline = all active deal values summed"},
+    {"date": "2026-04-07", "issue": "Static day count on follow-ups", "fix": "Calculate dynamically from today's date", "rule": "Never hardcode dates or day counts"},
+    {"date": "2026-04-07", "issue": "Missing Google Fonts on some pages", "fix": "Added Lato+Playfair CDN link to all HTML files", "rule": "Every HTML file needs Google Fonts CDN in <head>"},
+    {"date": "2026-04-07", "issue": "EOD recap double tag", "fix": "Changed 'EOD — EOD Recap' to 'EOD — {date}'", "rule": "EOD tag format: 'EOD — {date}' only"},
+    {"date": "2026-04-07", "issue": "Pricing Tools icon barely visible", "fix": "Replaced with dollar-sign SVG on gradient background", "rule": "Quick link icons must be bold and high-contrast"}
+  ],
+  "hard_rules": [
+    "FlexPro Armor NEVER gets ® symbol",
+    "FlexPro Armor is NEVER called 'FlexPro Armor Guard'",
+    "Norris Utilities® ALWAYS gets ® symbol",
+    "A Legacy of Commitment® ALWAYS gets ® symbol",
+    "Phoenix Icon® ALWAYS gets ® symbol",
+    "Gridco / Shon Cunningham deal is DEAD — never reference as active",
+    "class='aaron-only' hides content from CB (role=cb)",
+    "norris2026 = aaron, legacy2026 = cb — never swap or expose",
+    "Celebrations (confetti, fireworks, phoenix) are SECRET from CB — never remove",
+    "All margin/pricing data must be class='aaron-only'",
+    "Ben's Formula is SACRED: ROUNDUP(ROUNDUP(RegCost,0)×1.10,0)",
+    "Samson CC: ALWAYS Donna Poll AND Sarah Daniels",
+    "Boss CC: ALWAYS Troy Gongwer AND Thayne Grove",
+    "MSP Portal: DO NOT LAUNCH until QB data verified for real pricing",
+    "Never send/post/transact without Aaron's explicit approval"
+  ]
+}

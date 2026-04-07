@@ -116,19 +116,29 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 </style>
 </head>
 <body>
+<div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
+<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
+<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
+<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
+<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
+<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
+</div>
+<script>
+(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted'&&sessionStorage.getItem('nu_role')==='aaron'){document.getElementById('auth-wall').style.display='none'}})();
+function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else{document.getElementById('auth-error').style.display='block'}}
+document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
+</script>
+
 
 <!-- Login -->
-<div class="login-overlay" id="loginOverlay">
-  <div class="login-box">
-    <div class="login-title">reMarkable Notes</div>
-    <div class="login-sub">Norris Utilities&reg;</div>
+<div class="login-sub">Norris Utilities&reg;</div>
     <input type="password" class="login-input" id="loginInput" placeholder="Enter portal password" autocomplete="off" autofocus>
     <button class="login-btn" id="loginBtn">ACCESS</button>
     <div class="login-err" id="loginErr"></div>
   </div>
 </div>
 
-<div id="mainContent" style="display:none">
+<div id="mainContent">
 
 <!-- Header -->
 <div class="header">
@@ -174,17 +184,7 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 
 <script>
 // Login
-(function(){
-  const PW='norris2026';
-  if(sessionStorage.getItem('nu_auth_2026')==='1'){show();return}
-  document.getElementById('loginBtn').onclick=tryLogin;
-  document.getElementById('loginInput').onkeydown=function(e){if(e.key==='Enter')tryLogin()};
-  function tryLogin(){
-    if(document.getElementById('loginInput').value.trim()===PW){sessionStorage.setItem('nu_auth_2026','1');show()}
-    else{document.getElementById('loginErr').textContent='Wrong password'}
-  }
-  function show(){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('mainContent').style.display='';init()}
-})();
+
 
 let ALL_ITEMS=[];
 let CURRENT_FILTER='all';

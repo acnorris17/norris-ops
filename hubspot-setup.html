@@ -85,6 +85,19 @@ body{font-family:'Lato',sans-serif;background:#fff;color:#1a1a2e}
 </style>
 </head>
 <body>
+<div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
+<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
+<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
+<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
+<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
+<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
+</div>
+<script>
+(function(){var r=sessionStorage.getItem('nu_role');if(sessionStorage.getItem('nu_auth_2026')==='granted'&&(r==='aaron'||r==='cb')){document.getElementById('auth-wall').style.display='none';if(r==='cb'){document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}}})();
+function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else if(p==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');document.getElementById('auth-wall').style.display='none';document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}else{document.getElementById('auth-error').style.display='block'}}
+document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
+</script>
+
 
 <!-- STICKY NAV -->
 <nav class="sticky-nav">

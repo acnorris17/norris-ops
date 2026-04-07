@@ -667,144 +667,16 @@
 </style>
 </head>
 <body>
-<!-- AUTH GATE -->
-<div id="nuAuthOverlay" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF)">
-<div style="background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;overflow:hidden">
-<div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)"></div>
-<div style="font-family:Lato,sans-serif;font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px">Norris Utilities&reg;</div>
-<div style="font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px">A Legacy of Commitment&reg;</div>
-<input type="password" id="nuAuthInput" placeholder="Enter password" autocomplete="off" autofocus style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:Lato,sans-serif;outline:none">
-<button id="nuAuthBtn" style="width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer">ACCESS</button>
-<div id="nuAuthErr" style="color:#cc0000;font-size:12px;margin-top:10px;min-height:18px;font-weight:700"></div>
-</div></div>
-<div id="nuAuthContent" style="display:none">
-
-
-
-<!-- ═══════════════════════════════════════════════════════ -->
-<!--  HEADER                                                  -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<header class="header">
-
-  <!-- Power Tower SVG Silhouette -->
-  <svg class="tower-overlay" viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <!-- Tower 1 -->
-    <polygon points="80,100 90,60 100,40 110,60 120,100" fill="white"/>
-    <line x1="70" y1="65" x2="130" y2="65" stroke="white" stroke-width="2"/>
-    <line x1="75" y1="50" x2="125" y2="50" stroke="white" stroke-width="1.5"/>
-    <line x1="80" y1="100" x2="60" y2="100" stroke="white" stroke-width="1"/>
-    <line x1="120" y1="100" x2="140" y2="100" stroke="white" stroke-width="1"/>
-    <!-- Wires from tower 1 -->
-    <path d="M 70,65 Q 200,80 360,70" stroke="white" stroke-width="1" fill="none"/>
-    <path d="M 130,65 Q 250,80 400,72" stroke="white" stroke-width="1" fill="none"/>
-    <!-- Tower 2 -->
-    <polygon points="380,100 390,58 400,36 410,58 420,100" fill="white"/>
-    <line x1="370" y1="63" x2="430" y2="63" stroke="white" stroke-width="2"/>
-    <line x1="375" y1="48" x2="425" y2="48" stroke="white" stroke-width="1.5"/>
-    <path d="M 370,63 Q 550,82 720,68" stroke="white" stroke-width="1" fill="none"/>
-    <path d="M 430,63 Q 580,80 740,70" stroke="white" stroke-width="1" fill="none"/>
-    <!-- Tower 3 -->
-    <polygon points="720,100 730,56 740,34 750,56 760,100" fill="white"/>
-    <line x1="710" y1="62" x2="770" y2="62" stroke="white" stroke-width="2"/>
-    <line x1="715" y1="47" x2="765" y2="47" stroke="white" stroke-width="1.5"/>
-    <path d="M 710,62 Q 880,78 1060,66" stroke="white" stroke-width="1" fill="none"/>
-    <path d="M 770,62 Q 920,76 1080,68" stroke="white" stroke-width="1" fill="none"/>
-    <!-- Tower 4 -->
-    <polygon points="1060,100 1070,60 1080,38 1090,60 1100,100" fill="white"/>
-    <line x1="1050" y1="65" x2="1110" y2="65" stroke="white" stroke-width="2"/>
-    <line x1="1055" y1="50" x2="1105" y2="50" stroke="white" stroke-width="1.5"/>
-    <path d="M 1050,65 Q 1200,80 1380,70" stroke="white" stroke-width="1" fill="none"/>
-    <path d="M 1110,65 Q 1240,78 1400,72" stroke="white" stroke-width="1" fill="none"/>
-    <!-- Tower 5 -->
-    <polygon points="1360,100 1370,62 1380,42 1390,62 1400,100" fill="white"/>
-    <line x1="1350" y1="67" x2="1410" y2="67" stroke="white" stroke-width="2"/>
-    <line x1="1355" y1="52" x2="1405" y2="52" stroke="white" stroke-width="1.5"/>
-  </svg>
-
-  <div class="header-inner">
-    <div class="header-top-row">
-      <div class="brand-block">
-        <div class="wordmark">⚡ Norris Utilities</div>
-        <div class="tagline">A Legacy of Commitment®</div>
-      </div>
-      <div class="header-title-block">
-        <h1>🛰 Mission Control</h1>
-        <div class="subtitle">Legacy AI — Live Task Dashboard</div>
-        <div class="live-badge">
-          <div class="live-dot"></div>
-          System Active
-        </div>
-      </div>
-    </div>
-
-    <div class="header-meta">
-      <div class="meta-chip">Agent: <span>Legacy v2.1</span></div>
-      <div class="meta-chip">Operator: <span>Aaron C. Norris</span></div>
-      <div class="meta-chip">Sprint: <span>Q3-2025 · Week 28</span></div>
-      <div class="meta-chip">Last Sync: <span id="sync-time">—</span></div>
-    </div>
-  </div>
-</header>
-
-<!-- ─── CHEVRON DIVIDER ─────────────────────────────────── -->
-<div class="chevron-divider"></div>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-<!--  MAIN CONTENT                                            -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<main class="main">
-
-  <!-- ── STAT BAR ─────────────────────────────────────── -->
-  <div class="stat-bar">
-    <div class="stat-card">
-      <div class="stat-num">14</div>
-      <div class="stat-label">Active Tasks</div>
-    </div>
-    <div class="stat-card cyan">
-      <div class="stat-num">6</div>
-      <div class="stat-label">In Pipeline</div>
-    </div>
-    <div class="stat-card green">
-      <div class="stat-num">31</div>
-      <div class="stat-label">Completed</div>
-    </div>
-    <div class="stat-card orange">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Awaiting Input</div>
-    </div>
-    <div class="stat-card purple">
-      <div class="stat-num">87%</div>
-      <div class="stat-label">Sprint Progress</div>
-    </div>
-  </div>
-
-  <!-- ── ACTIVE NOW BANNER ─────────────────────────────── -->
-  <div class="active-banner">
-    <div class="active-banner-icon">⚙️</div>
-    <div class="active-banner-text">
-      <h3>Currently Working On: FlexPro Armor Storefront — Product Card Layouts</h3>
-      <p>Generating responsive HTML product cards with specs, pricing, and CTA buttons · Initiated 09:42 AM · Est. completion 10:15 AM</p>
-    </div>
-    <div class="active-banner-badge">🔄 In Progress</div>
-  </div>
-
-  <!-- ── CALENDAR STRIP ────────────────────────────────── -->
-  <div class="section-label">📅 Weekly Calendar — July 2025</div>
-  <div class="card" style="margin-bottom: 28px;">
-    <div class="calendar-strip">
-      <div class="cal-day has-event">
-        <div class="day-name">Mon</div>
-        <div class="day-num">7</div>
-        <div class="day-dot"></div>
-      </div>
-<script src="/components/nav.js"></script>
-
-</div><!-- /nuAuthContent -->
+<div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
+<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
+<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
+<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
+<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
+<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
+</div>
 <script>
-(function(){var K='nu_auth_2026',o=document.getElementById('nuAuthOverlay'),c=document.getElementById('nuAuthContent'),i=document.getElementById('nuAuthInput'),b=document.getElementById('nuAuthBtn'),e=document.getElementById('nuAuthErr');
-if(sessionStorage.getItem(K)==='granted'){o.style.display='none';c.style.display='block';return}
-function a(){var pw=i.value,role=null;if(pw==='norris2026')role='aaron';else if(pw==='legacy2026')role='cb';
-if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem('nu_role',role);o.style.display='none';c.style.display='block'}else{e.textContent='Access Denied';i.style.borderColor='#cc0000';setTimeout(function(){i.style.borderColor=''},500)}}
-b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
+(function(){var r=sessionStorage.getItem('nu_role');if(sessionStorage.getItem('nu_auth_2026')==='granted'&&(r==='aaron'||r==='cb')){document.getElementById('auth-wall').style.display='none';if(r==='cb'){document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}}})();
+function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else if(p==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');document.getElementById('auth-wall').style.display='none';document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}else{document.getElementById('auth-error').style.display='block'}}
+document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
 </script>
 

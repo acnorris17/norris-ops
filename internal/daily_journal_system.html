@@ -689,103 +689,16 @@
 </style>
 </head>
 <body>
-<!-- AUTH GATE -->
-<div id="nuAuthOverlay" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF)">
-<div style="background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;overflow:hidden">
-<div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)"></div>
-<div style="font-family:Lato,sans-serif;font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px">Norris Utilities&reg;</div>
-<div style="font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px">A Legacy of Commitment&reg;</div>
-<input type="password" id="nuAuthInput" placeholder="Enter password" autocomplete="off" autofocus style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:Lato,sans-serif;outline:none">
-<button id="nuAuthBtn" style="width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer">ACCESS</button>
-<div id="nuAuthErr" style="color:#cc0000;font-size:12px;margin-top:10px;min-height:18px;font-weight:700"></div>
-</div></div>
-<div id="nuAuthContent" style="display:none">
-
-
-
-<!-- ═══════════════════════════════════════
-     HEADER
-═══════════════════════════════════════ -->
-<header class="header">
-  <!-- Ghost Phoenix -->
-  <div class="phoenix-watermark" aria-hidden="true">🦅</div>
-
-  <!-- Power Tower Overlay -->
-  <svg class="tower-overlay" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="white" d="
-      M0,120 L0,80 L20,80 L40,20 L60,80 L80,80 L80,55 L100,55 L120,15 L140,55 L160,55 L160,80
-      L180,80 L200,80 L220,20 L240,80 L260,80 L260,55 L280,55 L300,10 L320,55 L340,55 L340,80
-      L360,80 L380,80 L400,25 L420,80 L440,80 L440,55 L460,55 L480,12 L500,55 L520,55 L520,80
-      L540,80 L560,80 L580,22 L600,80 L620,80 L620,55 L640,55 L660,10 L680,55 L700,55 L700,80
-      L720,80 L740,80 L760,25 L780,80 L800,80 L800,55 L820,55 L840,14 L860,55 L880,55 L880,80
-      L900,80 L920,80 L940,20 L960,80 L980,80 L980,55 L1000,55 L1020,12 L1040,55 L1060,55 L1060,80
-      L1080,80 L1100,80 L1120,22 L1140,80 L1160,80 L1180,80 L1200,80 L1200,120 Z
-    "/>
-    <!-- Crosslines -->
-    <line x1="40" y1="20" x2="100" y2="80" stroke="white" stroke-width="1.2"/>
-    <line x1="60" y1="80" x2="80" y2="55" stroke="white" stroke-width="1.2"/>
-    <line x1="120" y1="15" x2="180" y2="80" stroke="white" stroke-width="1.2"/>
-    <line x1="220" y1="20" x2="280" y2="55" stroke="white" stroke-width="1.2"/>
-    <line x1="300" y1="10" x2="360" y2="80" stroke="white" stroke-width="1.2"/>
-    <line x1="400" y1="25" x2="460" y2="55" stroke="white" stroke-width="1.2"/>
-    <line x1="480" y1="12" x2="540" y2="80" stroke="white" stroke-width="1.2"/>
-    <line x1="580" y1="22" x2="640" y2="55" stroke="white" stroke-width="1.2"/>
-    <line x1="660" y1="10" x2="720" y2="80" stroke="white" stroke-width="1.2"/>
-    <line x1="760" y1="25" x2="820" y2="55" stroke="white" stroke-width="1.2"/>
-    <line x1="840" y1="14" x2="900" y2="80" stroke="white" stroke-width="1.2"/>
-    <line x1="940" y1="20" x2="1000" y2="55" stroke="white" stroke-width="1.2"/>
-    <line x1="1020" y1="12" x2="1080" y2="80" stroke="white" stroke-width="1.2"/>
-    <line x1="1120" y1="22" x2="1180" y2="80" stroke="white" stroke-width="1.2"/>
-    <!-- Horizontal wire lines -->
-    <line x1="0" y1="55" x2="1200" y2="55" stroke="white" stroke-width="0.6" opacity="0.5"/>
-    <line x1="0" y1="80" x2="1200" y2="80" stroke="white" stroke-width="0.6" opacity="0.5"/>
-  </svg>
-
-  <div class="header-content">
-    <div class="header-eyebrow">Norris Utilities LLC — Internal Operations</div>
-    <div class="header-wordmark">
-      LEGACY
-      <span>Daily Journal</span>
-    </div>
-    <div class="header-subtitle">Autonomous Agent Operational Record &amp; Historical Archive</div>
-    <div class="header-badge">📔 Operational Log — Active</div>
-  </div>
-</header>
-
-<!-- White Chevron Divider -->
-<div class="chevron-divider"></div>
-
-<!-- ═══════════════════════════════════════
-     MAIN CONTENT
-═══════════════════════════════════════ -->
-<main class="main-wrapper">
-
-  <!-- DATE NAVIGATION BAR -->
-  <div class="date-nav">
-    <div class="date-nav-arrows">
-      <button class="nav-btn" id="prevBtn" onclick="navigateDay(-1)" title="Previous Day">&#8592;</button>
-    </div>
-
-    <div class="date-display">
-      <div class="date-label">Current Entry</div>
-      <div class="date-main" id="dateDisplay">Tuesday, July 8, 2025</div>
-      <div class="date-entry-num" id="entryNum">Entry #001 — Day 1 of Operations</div>
-    </div>
-
-    <div class="date-nav-arrows" style="gap:10px; align-items:center;">
-      <input type="date" id="datePicker" value="2025-07-08"
-        style="opacity:0; position:absolute; pointer-events:none; width:0;"
-        onchange="jumpToDate(this.value)">
-      <button class="date-picker-btn" onclick="document.getElementById('datePicker').showPicker()">📅 Jump to Date</button>
-      <button class="nav-btn" id="nextBtn" onclick="navigateDay(1)" title="Next Day">
-<script src="/components/nav.js"></script>
-
-</div><!-- /nuAuthContent -->
+<div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
+<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
+<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
+<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
+<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
+<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
+</div>
 <script>
-(function(){var K='nu_auth_2026',o=document.getElementById('nuAuthOverlay'),c=document.getElementById('nuAuthContent'),i=document.getElementById('nuAuthInput'),b=document.getElementById('nuAuthBtn'),e=document.getElementById('nuAuthErr');
-if(sessionStorage.getItem(K)==='granted'){o.style.display='none';c.style.display='block';return}
-function a(){var pw=i.value,role=null;if(pw==='norris2026')role='aaron';else if(pw==='legacy2026')role='cb';
-if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem('nu_role',role);o.style.display='none';c.style.display='block'}else{e.textContent='Access Denied';i.style.borderColor='#cc0000';setTimeout(function(){i.style.borderColor=''},500)}}
-b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
+(function(){var r=sessionStorage.getItem('nu_role');if(sessionStorage.getItem('nu_auth_2026')==='granted'&&(r==='aaron'||r==='cb')){document.getElementById('auth-wall').style.display='none';if(r==='cb'){document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}}})();
+function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else if(p==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');document.getElementById('auth-wall').style.display='none';document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}else{document.getElementById('auth-error').style.display='block'}}
+document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
 </script>
 
