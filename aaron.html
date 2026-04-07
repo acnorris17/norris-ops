@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aaron C. Norris — Personal Dashboard</title>
+<title>Aaron C. Norris — CEO Dashboard | Norris Utilities&reg;</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/brand.css">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,6 +19,7 @@
   --red: #dc2626;
   --green: #16a34a;
   --yellow: #eab308;
+  --orange: #f97316;
 }
 
 body {
@@ -27,143 +27,241 @@ body {
   font-weight: 400;
   background: var(--page-bg);
   color: var(--dark);
-  line-height: 1.5;
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(500px, 60vw); aspect-ratio: 1;
+  background: url('logo-blue.png') center/contain no-repeat;
+  opacity: 0.025; pointer-events: none; z-index: 0;
 }
 
-/* ── LOGIN GATE ── */
-#login-screen {
-  position: fixed; inset: 0; z-index: 9999;
+/* ── AUTH WALL ── */
+#auth-wall {
+  position: fixed; inset: 0; z-index: 99999;
   background: linear-gradient(135deg, #0a0e5c, #0033cc, #0066ee, #00aaff, #06D0FF);
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
 }
-#login-box {
-  background: #fff; border-radius: 16px; padding: 48px 36px; text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,.35); max-width: 380px; width: 90%;
+#auth-wall img { width: 120px; margin-bottom: 24px; }
+#auth-wall h2 { color: #fff; font-weight: 900; margin-bottom: 16px; }
+#auth-wall input {
+  padding: 12px 20px; font-size: 16px; border: 2px solid #0066ee; border-radius: 8px;
+  text-align: center; width: 280px; font-family: 'Lato', sans-serif; outline: none;
 }
-#login-box img { width: 140px; margin-bottom: 20px; }
-#login-box h1 { font-family: 'Lato', sans-serif; font-weight: 900; font-size: 22px; color: var(--navy); margin-bottom: 4px; }
-#login-box .subtitle { font-size: 14px; color: #666; margin-bottom: 28px; }
-#login-box input {
-  width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 8px;
-  font-size: 15px; font-family: 'Lato', sans-serif; outline: none; transition: border .2s;
-}
-#login-box input:focus { border-color: var(--cyan); }
-#login-box button {
-  margin-top: 14px; width: 100%; padding: 12px; border: none; border-radius: 8px;
-  background: linear-gradient(135deg, #0033cc, #06D0FF); color: #fff;
-  font-family: 'Lato', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer;
+#auth-wall input:focus { border-color: var(--cyan); }
+#auth-wall button {
+  margin-top: 12px; padding: 10px 32px; background: #0033cc; color: #fff;
+  border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: 700;
   transition: opacity .2s;
 }
-#login-box button:hover { opacity: .9; }
-#login-error { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+#auth-wall button:hover { opacity: .85; }
+#auth-error { color: #ff4444; margin-top: 12px; display: none; font-weight: 700; }
 
 /* ── HEADER ── */
 header {
   background: linear-gradient(135deg, #0a0e5c, #0033cc, #0066ee, #00aaff, #06D0FF);
-  padding: 36px 24px 60px; color: #fff; text-align: center; position: relative;
+  padding: 36px 24px 60px; color: #fff; text-align: center; position: relative; overflow: hidden;
 }
-header h1 { font-weight: 900; font-size: 28px; letter-spacing: .5px; }
-header .tagline { font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan); font-size: 15px; margin-top: 4px; }
-header .date { font-size: 13px; opacity: .75; margin-top: 8px; }
-.chevron {
-  position: relative; margin-top: -1px; width: 100%; overflow: hidden; line-height: 0;
+header::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(6,208,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
 }
+.header-watermark {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 65%; max-width: 600px; opacity: 0.07; pointer-events: none;
+}
+header .content { position: relative; z-index: 2; }
+header h1 { font-weight: 900; font-size: 28px; letter-spacing: 1px; }
+header .tagline { font-family: 'Playfair Display', serif; font-style: italic; color: rgba(255,255,255,.85); font-size: 15px; margin-top: 6px; }
+header .date { font-size: 13px; opacity: .6; margin-top: 8px; }
+header .role-badge {
+  display: inline-block; margin-top: 10px; padding: 4px 14px; border-radius: 20px;
+  background: rgba(255,255,255,.15); color: var(--cyan); font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid rgba(6,208,255,.3);
+}
+.chevron { position: relative; margin-top: -1px; line-height: 0; }
 .chevron svg { display: block; width: 100%; height: 50px; }
 
-/* ── LAYOUT ── */
-main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 80px; }
-.section-title {
-  font-weight: 700; font-size: 24px; margin: 36px 0 16px; padding-left: 4px;
+/* ── NAV BAR ── */
+.nav-bar {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(10,14,92,.97); backdrop-filter: blur(12px);
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+  border-bottom: 2px solid var(--cyan); padding: 0;
 }
-.section-title span:first-child { color: #0033cc; }
-.section-title span:last-child { color: var(--dark); }
+.nav-bar a {
+  color: rgba(255,255,255,.7); font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 14px 18px; text-decoration: none;
+  transition: all .2s; white-space: nowrap;
+}
+.nav-bar a:hover { color: #fff; background: rgba(6,208,255,.08); }
+.nav-bar a.active { color: var(--cyan); border-bottom: 2px solid var(--cyan); }
 
-.card {
-  background: var(--card-bg); border-radius: 12px; padding: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.06); margin-bottom: 16px;
+/* ── LAYOUT ── */
+main { max-width: 1200px; margin: 0 auto; padding: 24px 16px 80px; position: relative; z-index: 1; }
+
+.section-title {
+  font-weight: 700; font-size: 22px; margin: 36px 0 16px; padding-bottom: 10px;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(90deg, #0033cc, #06D0FF) 1;
+  display: flex; align-items: center; gap: 8px;
 }
+.section-title .blue { color: #0033cc; }
+.section-title .dark { color: var(--dark); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card-bg); border-radius: 14px; padding: 24px;
+  box-shadow: 0 3px 14px rgba(0,0,0,.05); margin-bottom: 16px;
+  border: 1px solid #eee; transition: box-shadow .3s;
+}
+.card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.08); }
 
 /* ── CRITICAL REMINDERS ── */
 .card.critical {
-  border: 2px solid var(--red); background: #fef2f2; position: sticky; top: 0; z-index: 50;
+  border: 2px solid var(--red); border-left: 6px solid var(--red);
+  background: #fef2f2;
 }
-.card.critical h3 { color: var(--red); font-weight: 900; margin-bottom: 10px; font-size: 16px; }
+.card.critical h3 { color: var(--red); font-weight: 900; margin-bottom: 12px; font-size: 16px; }
 .card.critical ul { list-style: none; padding: 0; }
-.card.critical li { padding: 6px 0; border-bottom: 1px solid #fecaca; font-size: 14px; }
+.card.critical li {
+  padding: 10px 0; border-bottom: 1px solid #fecaca; font-size: 14px; line-height: 1.5;
+}
 .card.critical li:last-child { border: none; }
-.card.critical li::before { content: "\26A0\FE0F"; margin-right: 8px; }
-
-/* ── TO-DO ── */
-.todo-controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
-.todo-controls input, .todo-controls select {
-  padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
-  font-family: 'Lato', sans-serif; font-size: 14px;
+.reminder-tag {
+  display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-right: 6px;
 }
-.todo-controls input[type="text"] { flex: 1; min-width: 160px; }
-.todo-controls input[type="date"] { width: 150px; }
-.btn {
-  padding: 8px 18px; border: none; border-radius: 8px; font-family: 'Lato', sans-serif;
-  font-weight: 700; font-size: 14px; cursor: pointer; color: #fff;
-  background: linear-gradient(135deg, #0033cc, #06D0FF); transition: opacity .2s;
-}
-.btn:hover { opacity: .85; }
-.btn.sm { padding: 4px 10px; font-size: 12px; }
-.btn.danger { background: linear-gradient(135deg, #dc2626, #f87171); }
+.tag-ship { background: #fde8e8; color: #cc0000; }
+.tag-call { background: #fff8e1; color: #b38600; }
+.tag-money { background: #e6f9ee; color: #00802b; }
+.tag-system { background: #e8f0ff; color: #0033cc; }
 
-.todo-list { list-style: none; }
-.todo-item {
-  display: flex; align-items: center; gap: 10px; padding: 10px 0;
-  border-bottom: 1px solid var(--border); font-size: 14px;
+/* ── STAT CARDS ── */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-bottom: 24px;
 }
-.todo-item:last-child { border: none; }
-.todo-item.done .todo-text { text-decoration: line-through; opacity: .5; }
-.todo-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue); cursor: pointer; }
-.todo-text { flex: 1; cursor: pointer; }
-.todo-priority { font-size: 16px; flex-shrink: 0; }
-.todo-due { font-size: 12px; color: #888; white-space: nowrap; }
+.stat-card {
+  background: #fff; border-radius: 14px; padding: 24px 20px; text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,.06); border-top: 4px solid #0033cc;
+  transition: all .3s; cursor: default; position: relative; overflow: hidden;
+}
+.stat-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(6,208,255,.04));
+  pointer-events: none;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,51,204,.12); border-top-color: var(--cyan); }
+.stat-number { font-size: 36px; font-weight: 900; color: #0033cc; line-height: 1; }
+.stat-number.red { color: var(--red); }
+.stat-number.green { color: var(--green); }
+.stat-number.yellow { color: var(--yellow); }
+.stat-label {
+  font-size: 11px; color: #666; margin-top: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.2px;
+}
 
-/* ── DEALS ── */
-.deals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
-.deal-card { position: relative; }
-.deal-card h4 { font-weight: 900; font-size: 15px; margin-bottom: 2px; color: var(--navy); }
-.deal-card .contact { font-size: 13px; color: #666; margin-bottom: 8px; }
-.deal-card .value { font-weight: 700; color: #0033cc; font-size: 18px; margin-bottom: 8px; }
+/* ── QUICK ACTIONS ── */
+.actions-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px;
+  margin-bottom: 24px;
+}
+.action-btn {
+  display: flex; align-items: center; gap: 12px; padding: 16px 20px;
+  background: #fff; border: 1px solid #e8e8ec; border-left: 3px solid #0033cc;
+  border-radius: 12px; text-decoration: none; color: var(--navy); font-weight: 700;
+  font-size: 14px; transition: all .3s; box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+.action-btn:hover {
+  transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,51,204,.15);
+  border-color: var(--cyan); border-left-color: var(--cyan); color: #0033cc;
+}
+.action-icon {
+  width: 40px; height: 40px; border-radius: 10px; display: flex;
+  align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+  color: #fff;
+}
+
+/* ── PIPELINE ── */
+.pipeline-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+.deal-card {
+  background: #fff; border-radius: 14px; padding: 20px; position: relative;
+  box-shadow: 0 3px 14px rgba(0,0,0,.05); border: 1px solid #eee;
+  transition: all .3s;
+}
+.deal-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+.deal-card h4 { font-weight: 900; font-size: 15px; color: var(--navy); margin-bottom: 2px; }
+.deal-contact { font-size: 13px; color: #666; margin-bottom: 8px; }
+.deal-value { font-weight: 900; color: #0033cc; font-size: 20px; margin-bottom: 8px; }
 .deal-status {
-  display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #fff;
+  display: inline-block; padding: 3px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; color: #fff; letter-spacing: .5px; text-transform: uppercase;
 }
-.status-Prospect { background: #6366f1; }
-.status-Quoted { background: #eab308; color: #000; }
-.status-Negotiating { background: #f97316; }
-.status-Won { background: #16a34a; }
-.status-Lost { background: #dc2626; }
-.deal-card select {
-  margin-top: 8px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px;
-  font-size: 13px; font-family: 'Lato', sans-serif;
+.status-active { background: var(--green); }
+.status-dead { background: #6b7280; }
+.status-likely-dead { background: var(--orange); }
+.status-inventory { background: #6366f1; }
+.status-prospect { background: #0033cc; }
+.deal-notes { font-size: 12px; color: #888; margin-top: 10px; line-height: 1.5; }
+.deal-margin {
+  position: absolute; top: 16px; right: 16px; font-size: 11px; font-weight: 700;
+  padding: 2px 10px; border-radius: 10px; background: #f0f2f8; color: #666;
 }
-.deal-card textarea {
-  margin-top: 8px; width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px;
-  font-size: 13px; font-family: 'Lato', sans-serif; resize: vertical; min-height: 40px;
-}
-.deal-card .overdue-badge {
-  position: absolute; top: 12px; right: 12px; background: var(--red); color: #fff;
-  font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
-}
-.deal-card .deal-delete { position: absolute; top: 12px; right: 12px; }
 
-/* ── QUICK LINKS ── */
-.links-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
-.link-btn {
-  display: flex; align-items: center; justify-content: center; padding: 14px 12px;
-  background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px;
-  text-decoration: none; color: var(--navy); font-weight: 700; font-size: 14px;
-  transition: border-color .2s, box-shadow .2s;
+/* ── ORDERS TABLE ── */
+.table-wrap {
+  overflow-x: auto; border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(0,0,0,.06); border: 1px solid #eee;
 }
-.link-btn:hover { border-color: var(--cyan); box-shadow: 0 4px 16px rgba(6,208,255,.2); }
+table { width: 100%; border-collapse: collapse; background: #fff; font-size: 14px; }
+thead { background: linear-gradient(135deg, #0a0e5c, #0033cc); color: #fff; }
+th {
+  padding: 14px 16px; text-align: left; font-weight: 700; letter-spacing: .5px;
+  font-size: 12px; text-transform: uppercase; white-space: nowrap;
+}
+td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; }
+tbody tr { transition: background .15s; }
+tbody tr:nth-child(even) { background: #fafbff; }
+tbody tr:hover { background: #f0f4ff; }
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+}
+.badge-red { background: #fde8e8; color: #cc0000; }
+.badge-green { background: #e6f9ee; color: #00802b; }
+.badge-yellow { background: #fff8e1; color: #b38600; }
+.badge-blue { background: #e8f0ff; color: #0033cc; }
+.badge-gray { background: #f0f0f0; color: #666; }
 
-/* ── REMARKABLE ── */
-.remark-info { font-size: 14px; color: #555; line-height: 1.7; }
-.remark-info code { background: #e8eaf0; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
-.empty-state { text-align: center; color: #aaa; padding: 30px 10px; font-size: 14px; }
+/* ── MARGIN TABLE ── */
+.margin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.margin-card {
+  background: #fff; border-radius: 12px; padding: 16px 20px;
+  border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+.margin-card h5 { font-weight: 900; font-size: 13px; color: var(--navy); margin-bottom: 4px; }
+.margin-card .sku { font-size: 11px; color: #999; font-weight: 700; letter-spacing: .5px; }
+.margin-row { display: flex; justify-content: space-between; margin-top: 8px; font-size: 13px; }
+.margin-row .label { color: #666; }
+.margin-row .val { font-weight: 700; }
+.margin-row .val.cost { color: var(--red); }
+.margin-row .val.price { color: #0033cc; }
+.margin-row .val.margin { color: var(--green); }
+.margin-bar { height: 6px; background: #e8e8ec; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+.margin-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #0033cc, #06D0FF); }
+
+/* ── STRATEGIC NOTES ── */
+.note-box {
+  background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid var(--yellow);
+  border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; font-size: 14px;
+}
+.note-box strong { color: var(--navy); }
 
 /* ── FOOTER ── */
 footer {
@@ -173,83 +271,564 @@ footer {
 footer .tagline { font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan); font-size: 16px; }
 footer .copy { color: rgba(255,255,255,.4); font-size: 12px; margin-top: 8px; }
 
-/* ── ADD DEAL MODAL ── */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 100;
-  display: none; align-items: center; justify-content: center;
-}
-.modal-overlay.active { display: flex; }
-.modal {
-  background: #fff; border-radius: 14px; padding: 28px; width: 90%; max-width: 440px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.3);
-}
-.modal h3 { font-weight: 900; margin-bottom: 16px; color: var(--navy); }
-.modal label { display: block; font-weight: 700; font-size: 13px; margin: 10px 0 4px; }
-.modal input, .modal select, .modal textarea {
-  width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
-  font-family: 'Lato', sans-serif; font-size: 14px;
-}
-.modal textarea { resize: vertical; min-height: 50px; }
-.modal-actions { display: flex; gap: 10px; margin-top: 18px; justify-content: flex-end; }
-.btn.secondary { background: #e5e7eb; color: var(--dark); }
-
 /* ── RESPONSIVE ── */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   header h1 { font-size: 22px; }
-  .section-title { font-size: 20px; }
-  .deals-grid { grid-template-columns: 1fr; }
-  .links-grid { grid-template-columns: repeat(2, 1fr); }
-  .todo-controls { flex-direction: column; }
-  .todo-controls input[type="date"] { width: 100%; }
-  #login-box { padding: 32px 24px; }
+  .section-title { font-size: 18px; }
+  .pipeline-grid { grid-template-columns: 1fr; }
+  .actions-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .margin-grid { grid-template-columns: 1fr; }
+  .nav-bar { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
+  .nav-bar a { font-size: 10px; padding: 12px 10px; flex-shrink: 0; }
+  table { display: block; overflow-x: auto; }
+}
+@media (max-width: 480px) {
+  .actions-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
-<div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
-<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
-<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
-<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
-<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
-<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
+
+<!-- ═══ AUTH WALL (Aaron only — norris2026) ═══ -->
+<div id="auth-wall">
+  <img src="/logo-white.png" alt="Norris Utilities" onerror="this.style.display='none'">
+  <h2>Norris Utilities&reg;</h2>
+  <input type="password" id="auth-input" placeholder="CEO access code" autofocus>
+  <button onclick="checkAuth()">ACCESS DASHBOARD</button>
+  <p id="auth-error">Invalid access code</p>
 </div>
 <script>
-(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted'&&sessionStorage.getItem('nu_role')==='aaron'){document.getElementById('auth-wall').style.display='none'}})();
-function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else{document.getElementById('auth-error').style.display='block'}}
+(function(){
+  if(sessionStorage.getItem('nu_auth_2026')==='granted' && sessionStorage.getItem('nu_role')==='aaron'){
+    document.getElementById('auth-wall').style.display='none';
+  }
+})();
+function checkAuth(){
+  var p=document.getElementById('auth-input').value;
+  if(p==='norris2026'){
+    sessionStorage.setItem('nu_auth_2026','granted');
+    sessionStorage.setItem('nu_role','aaron');
+    document.getElementById('auth-wall').style.display='none';
+  } else {
+    document.getElementById('auth-error').style.display='block';
+  }
+}
 document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
 </script>
 
-<!-- LOGIN SCREEN (hidden when authenticated) -->
-<div id="login-screen" style="display:none;"></div>
-
+<!-- ═══ HEADER ═══ -->
 <header>
-  <h1>Aaron C. Norris</h1>
-  <div class="tagline">A Legacy of Commitment&reg;</div>
-  <div class="date" id="header-date"></div>
+  <img src="/phoenix-white.png" alt="" class="header-watermark" onerror="this.style.display='none'">
+  <div class="content">
+    <h1>Aaron C. Norris</h1>
+    <div class="tagline">A Legacy of Commitment&reg;</div>
+    <div class="date" id="header-date"></div>
+    <div class="role-badge">CEO Dashboard &mdash; Aaron Only</div>
+  </div>
 </header>
 <div class="chevron">
   <svg viewBox="0 0 1440 50" preserveAspectRatio="none"><polygon fill="#f0f2f8" points="0,50 548,0 1440,50"/></svg>
 </div>
 
+<!-- ═══ NAV BAR ═══ -->
+<nav class="nav-bar">
+  <a href="/">Portal Home</a>
+  <a href="/aaron.html" class="active">CEO Dashboard</a>
+  <a href="/internal/shipping_log_dashboard.html">Shipping Log</a>
+  <a href="/internal/orders.html">Orders</a>
+  <a href="/internal/contact_master_list.html">Contacts</a>
+  <a href="/internal/cb_tasks.html">CB Tasks</a>
+  <a href="/tools/pricing-calculator.html">Pricing</a>
+  <a href="/internal/portal_notes.html">Notes</a>
+</nav>
+
 <main>
-  <div class="section-title"><span>Personal</span> <span>Dashboard</span></div>
-  <div class="card" style="text-align:center;padding:48px 32px;">
-    <div style="font-size:3rem;margin-bottom:16px;">🏗️</div>
-    <h2 style="font-weight:900;font-size:1.4rem;color:#1a1a1a;margin-bottom:12px;">Coming Soon</h2>
-    <p style="color:#666;font-size:1rem;line-height:1.6;max-width:500px;margin:0 auto 24px;">
-      Your personal CEO dashboard is being built. To-dos, deal pipeline, critical reminders, and quick links will appear here.
-    </p>
-    <a href="/" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;">Back to Portal</a>
+
+  <!-- ═══ SECTION: MORNING REMINDERS ═══ -->
+  <div class="section-title"><span class="blue">Morning</span> <span class="dark">Reminders</span></div>
+
+  <div class="card critical">
+    <h3>CRITICAL &mdash; Revenue at Risk</h3>
+    <ul id="critical-reminders">
+      <li><span class="reminder-tag tag-ship">SHIP</span> Abadie/Primoris &mdash; 2&times; 2-Man BCs to Conroe TX, 3606 N. Frazier St. PO# 0330-PRIMORIS W6237. Wayne emailed April 7 asking about it. <strong>Promise: before 8:30 AM.</strong></li>
+      <li><span class="reminder-tag tag-ship">SHIP</span> Bedwell / SWEPCO Tulsa &mdash; New order April 7. SD created, not shipped.</li>
+      <li><span class="reminder-tag tag-ship">SHIP</span> Thornhill / LineTec &mdash; PO DEPT450 (Apr 2) and PO DEPT889 (Apr 6). Both SDs created, not shipped.</li>
+      <li><span class="reminder-tag tag-call">CALL</span> Text Wayne Abadie tracking number from UPS counter after shipping.</li>
+      <li><span class="reminder-tag tag-call">RESPOND</span> Wayne&rsquo;s &ldquo;QUOTE 24X24 BLUE COVER&rdquo; request &mdash; no 24&times;24 exists. Smallest is 28&times;28 (NU-BC-2828) at $235. Clarify what he needs.</li>
+      <li><span class="reminder-tag tag-call">CALL</span> Coy Crosby &mdash; Mar 25 order for 5&times; 2-Man BCs, 13 days no response. Confirm ship-to address. Also confirm price for 6&times; 1.5-Man BCs (previous order) so CB can invoice.</li>
+      <li><span class="reminder-tag tag-money">INVOICE</span> 3 orders ready for CB: Thornhill $275, Benz $275, AJ Morris/Chain Electric (confirm amounts).</li>
+      <li><span class="reminder-tag tag-money">DEPOSIT</span> 7 uncashed checks on your desk.</li>
+      <li><span class="reminder-tag tag-call">CALL</span> Boss Products (Troy + Thayne) &mdash; confirm ARCH/Combo SKUs. Unblocks Pickle and Myers invoices.</li>
+      <li><span class="reminder-tag tag-system">UPS</span> Ask UPS Store why shipping confirmation emails stopped &mdash; broke CB&rsquo;s workflow.</li>
+    </ul>
   </div>
+
+  <div class="card" style="border-left: 4px solid var(--yellow); background: #fffbeb;">
+    <h3 style="font-weight:900; font-size:15px; color:var(--navy); margin-bottom:10px;">Today&rsquo;s Schedule</h3>
+    <ul style="list-style:none; padding:0; font-size:14px;">
+      <li style="padding:6px 0; border-bottom:1px solid #fde68a;"><strong>Before 8:30 AM</strong> &mdash; UPS: Ship Abadie, Bedwell, LineTec &times;2. Text Wayne tracking.</li>
+      <li style="padding:6px 0; border-bottom:1px solid #fde68a;"><strong>After 10:30 AM</strong> &mdash; CB follow-up session (cleaners at 10, CB checking childcare).</li>
+      <li style="padding:6px 0; border-bottom:1px solid #fde68a;"><strong>During CB call</strong> &mdash; Walk through invoicing for 3 ready orders. Forward March 20 Invoice Reference.</li>
+      <li style="padding:6px 0;"><strong>End of day</strong> &mdash; Review portal, deposit checks, call Bill Kugler re: Terex status.</li>
+    </ul>
+  </div>
+
+  <!-- ═══ SECTION: KEY METRICS ═══ -->
+  <div class="section-title"><span class="blue">Key</span> <span class="dark">Metrics</span></div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number red" id="stat-uninvoiced">46</div>
+      <div class="stat-label">Uninvoiced Orders</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number yellow">2</div>
+      <div class="stat-label">Not Shipped &mdash; Customer Waiting</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Pending Shipments (SD Created)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number green">310</div>
+      <div class="stat-label">Total Shipments All-Time</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">$3,899</div>
+      <div class="stat-label">Uninvoiced Shipping Charges</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number green">$138,884</div>
+      <div class="stat-label">All-Time Samson Revenue (MSP)</div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION: QUICK ACTIONS ═══ -->
+  <div class="section-title"><span class="blue">Quick</span> <span class="dark">Actions</span></div>
+
+  <div class="actions-grid">
+    <a href="/shipping-docs/" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #0033cc, #06D0FF);">&#128230;</div>
+      Shipping Documents
+    </a>
+    <a href="/internal/march20-invoice-reference.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #16a34a, #22c55e);">&#128176;</div>
+      March 20 Invoice Ref (CB)
+    </a>
+    <a href="/internal/shipping_log_dashboard.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #6366f1, #818cf8);">&#128203;</div>
+      Shipping Log
+    </a>
+    <a href="/internal/contact_master_list.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #f97316, #fb923c);">&#128101;</div>
+      Contacts
+    </a>
+    <a href="/internal/cb_tasks.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #ec4899, #f472b6);">&#9745;</div>
+      CB Tasks
+    </a>
+    <a href="/internal/orders.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #0a0e5c, #0033cc);">&#128220;</div>
+      Orders
+    </a>
+    <a href="/tools/pricing-calculator.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #eab308, #facc15);">&#128178;</div>
+      Pricing Calculator
+    </a>
+    <a href="/tools/product-reference.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #dc2626, #f87171);">&#128209;</div>
+      Product Reference
+    </a>
+    <a href="/internal/email_templates.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #059669, #34d399);">&#9993;</div>
+      Email Templates
+    </a>
+    <a href="/internal/po_tracker.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">&#128196;</div>
+      PO Tracker
+    </a>
+    <a href="/internal/ap_tracker.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #b91c1c, #ef4444);">&#128181;</div>
+      Accounts Payable
+    </a>
+    <a href="/internal/samson_dashboard.html" class="action-btn">
+      <div class="action-icon" style="background: linear-gradient(135deg, #0e7490, #22d3ee);">&#9875;</div>
+      Samson Rope
+    </a>
+  </div>
+
+  <!-- ═══ SECTION: PIPELINE ═══ -->
+  <div class="section-title"><span class="blue">Deal</span> <span class="dark">Pipeline</span></div>
+
+  <div class="pipeline-grid">
+    <div class="deal-card">
+      <div class="deal-margin">INVENTORY</div>
+      <h4>Skylift PO</h4>
+      <div class="deal-contact">Andrew Jarmoszuk, Dale Williams, Nick Jarmoszuk Jr</div>
+      <div class="deal-value">$1,091,402.50</div>
+      <span class="deal-status status-inventory">Active Inventory</span>
+      <div class="deal-notes">This is inventory to move, NOT a pipeline deal. Equipment on order. 12-15% margin target.</div>
+    </div>
+
+    <div class="deal-card">
+      <h4>BSS RCOO Program at Irby</h4>
+      <div class="deal-contact">Jared Lemoine (Irby) &bull; Herb Minatre, Andy Barron (BSS)</div>
+      <div class="deal-value">TBD</div>
+      <span class="deal-status status-prospect">Active &mdash; Prospect</span>
+      <div class="deal-notes">Positive reception Mar 18. Follow up with Jared. Gary Wiggs + Scott Argyle retired &mdash; Jared is the contact now.</div>
+    </div>
+
+    <div class="deal-card" style="opacity:.7;">
+      <h4>Terex OEM / Bill Kugler</h4>
+      <div class="deal-contact">Bill Kugler &mdash; Terex</div>
+      <div class="deal-value" style="color:var(--orange);">$500K+</div>
+      <span class="deal-status status-likely-dead">Likely Dead</span>
+      <div class="deal-notes">Aaron heard it&rsquo;s dead. Needs to call Bill to confirm. Do NOT count in pipeline total.</div>
+    </div>
+
+    <div class="deal-card" style="opacity:.7;">
+      <h4>EPB Chattanooga / Rick Sutherland</h4>
+      <div class="deal-contact">Rick Sutherland</div>
+      <div class="deal-value" style="color:var(--orange);">~$185K</div>
+      <span class="deal-status status-likely-dead">Likely Dead</span>
+      <div class="deal-notes">Rick gone silent. 1-2 year bid process. Do NOT count in pipeline total.</div>
+    </div>
+
+    <div class="deal-card" style="opacity:.5;">
+      <h4>Gridco / Shon Cunningham</h4>
+      <div class="deal-contact">Shon Cunningham</div>
+      <div class="deal-value" style="color:#6b7280; text-decoration:line-through;">Previously Listed</div>
+      <span class="deal-status status-dead">Confirmed Dead</span>
+      <div class="deal-notes">Aaron confirmed dead. Legacy kept listing it. Remove from all pipeline counts.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px; border-left:4px solid #0033cc;">
+    <strong style="color:var(--navy);">Pipeline Reality Check:</strong>
+    <span style="font-size:14px;"> Aaron said $685K pipeline feels too high. Active pipeline = Skylift inventory ($1.09M to move) + BSS RCOO (TBD). Terex and EPB are likely dead until confirmed otherwise. Gridco is dead.</span>
+  </div>
+
+  <!-- ═══ SECTION: UNINVOICED ORDERS ═══ -->
+  <div class="section-title"><span class="blue">Uninvoiced</span> <span class="dark">Orders &mdash; Shipped &amp; Delivered</span></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Tracking</th>
+          <th>Delivered</th>
+          <th>Product</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Richard Thornhill / LineTec</strong></td>
+          <td style="font-family:monospace;font-size:12px;">1Z2W49000395021357</td>
+          <td>Mar 23</td>
+          <td>1&times; 2-Man BC, PO DEPT468R</td>
+          <td><strong>$275</strong></td>
+          <td><span class="badge badge-green">Ready to Invoice</span></td>
+        </tr>
+        <tr>
+          <td><strong>Coy Crosby / Dominion Energy</strong></td>
+          <td style="font-family:monospace;font-size:12px;">1Z2W...006856 + ...343091</td>
+          <td>Mar 24</td>
+          <td>6&times; 1.5-Man BC, 2 packages</td>
+          <td><strong>Price TBD</strong></td>
+          <td><span class="badge badge-yellow">Need Price from Aaron</span></td>
+        </tr>
+        <tr>
+          <td><strong>Sammy Myers (Abshire) / AEP</strong></td>
+          <td style="font-family:monospace;font-size:12px;">1Z2W49000395012652</td>
+          <td>Mar 24</td>
+          <td>ARCH + Combo (SKUs unconfirmed)</td>
+          <td><strong>TBD</strong></td>
+          <td><span class="badge badge-red">Blocked &mdash; SKU Confirmation</span></td>
+        </tr>
+        <tr>
+          <td><strong>Darrell Pickle / Florence Utilities</strong></td>
+          <td style="font-family:monospace;font-size:12px;">1Z2W49000328351797</td>
+          <td>Mar 23</td>
+          <td>BCB + ARCH + 1.5-Man mix</td>
+          <td><strong>TBD</strong></td>
+          <td><span class="badge badge-red">Blocked &mdash; SKU Confirmation</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jimmy Benz / SWEPCO</strong></td>
+          <td style="font-family:monospace;font-size:12px;">1Z2W49000393585850</td>
+          <td>Mar 24</td>
+          <td>1&times; 2-Man BC, Truck #860377</td>
+          <td><strong>$275</strong></td>
+          <td><span class="badge badge-green">Ready to Invoice</span></td>
+        </tr>
+        <tr>
+          <td><strong>AJ Morris / Chain Electric</strong></td>
+          <td style="font-family:monospace;font-size:12px;">3 packages (Apr 3)</td>
+          <td>Apr 3</td>
+          <td>5&times;2-Man + 5&times;1.5-Man</td>
+          <td><strong>Confirm</strong></td>
+          <td><span class="badge badge-green">Ready to Invoice</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jeremy Brown / Chain Electric</strong></td>
+          <td style="font-family:monospace;font-size:12px;">4 packages (Apr 3)</td>
+          <td>Apr 3</td>
+          <td>Multiple covers</td>
+          <td><strong>Confirm</strong></td>
+          <td><span class="badge badge-green">Ready to Invoice</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title"><span class="blue">Not</span> <span class="dark">Shipped &mdash; Customer Waiting</span></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Customer</th><th>Details</th><th>Days Waiting</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr style="background:#fef2f2;">
+          <td><strong>Wayne Abadie / Primoris</strong></td>
+          <td>2&times; 2-Man BC, PO 0330-PRIMORIS W6237, Conroe TX. Wayne emailed April 7.</td>
+          <td><strong style="color:var(--red);">8 days</strong></td>
+          <td><span class="badge badge-red">Ship Today</span></td>
+        </tr>
+        <tr style="background:#fef2f2;">
+          <td><strong>Coy Crosby / Dominion Energy</strong></td>
+          <td>5&times; 2-Man BCs (NEW order Mar 25), Material #42350802. No response after OOO.</td>
+          <td><strong style="color:var(--red);">13 days</strong></td>
+          <td><span class="badge badge-red">No Response</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══ SECTION: COST & MARGIN DATA (Aaron Only) ═══ -->
+  <div class="section-title"><span class="blue">Cost</span> <span class="dark">&amp; Margin Analysis</span></div>
+
+  <div class="card" style="border-left:4px solid var(--red); margin-bottom:20px;">
+    <strong style="color:var(--red);">CONFIDENTIAL &mdash; Aaron Only.</strong>
+    <span style="font-size:13px; color:#666;"> CB never sees cost data, margins, or strategic pricing. This section is gated by norris2026 auth.</span>
+  </div>
+
+  <h4 style="font-weight:900; color:var(--navy); margin-bottom:12px;">FlexPro Armor &mdash; Standard Covers</h4>
+  <div class="margin-grid">
+    <div class="margin-card">
+      <h5>1-Man Bucket Cover</h5>
+      <div class="sku">NU-BC-2828 &bull; 28&times;28</div>
+      <div class="margin-row"><span class="label">Cost</span><span class="val cost">$89.00</span></div>
+      <div class="margin-row"><span class="label">Direct</span><span class="val price">$235.00</span></div>
+      <div class="margin-row"><span class="label">Dealer</span><span class="val">$195.00</span></div>
+      <div class="margin-row"><span class="label">Margin</span><span class="val margin">62.1%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:62.1%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>1.5-Man Bucket Cover</h5>
+      <div class="sku">NU-BC-2834 &bull; 28&times;34</div>
+      <div class="margin-row"><span class="label">Cost</span><span class="val cost">$97.00</span></div>
+      <div class="margin-row"><span class="label">Direct</span><span class="val price">$265.00</span></div>
+      <div class="margin-row"><span class="label">Dealer</span><span class="val">$205.00</span></div>
+      <div class="margin-row"><span class="label">Margin</span><span class="val margin">63.4%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:63.4%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>1.5-Man Large Bucket Cover</h5>
+      <div class="sku">NU-BC-2842 &bull; 28&times;42</div>
+      <div class="margin-row"><span class="label">Cost</span><span class="val cost">$101.50</span></div>
+      <div class="margin-row"><span class="label">Direct</span><span class="val price">$265.00</span></div>
+      <div class="margin-row"><span class="label">Dealer</span><span class="val">$210.00</span></div>
+      <div class="margin-row"><span class="label">Margin</span><span class="val margin">61.7%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:61.7%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>2-Man Bucket Cover</h5>
+      <div class="sku">NU-BC-2851 &bull; 28&times;51</div>
+      <div class="margin-row"><span class="label">Cost</span><span class="val cost">$112.00</span></div>
+      <div class="margin-row"><span class="label">Direct</span><span class="val price">$305.00</span></div>
+      <div class="margin-row"><span class="label">Dealer</span><span class="val">$235.00</span></div>
+      <div class="margin-row"><span class="label">Margin</span><span class="val margin">63.3%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:63.3%"></div></div>
+    </div>
+  </div>
+
+  <h4 style="font-weight:900; color:var(--navy); margin: 20px 0 12px;">FlexPro Armor &mdash; High-Margin Specialty</h4>
+  <div class="margin-grid">
+    <div class="margin-card">
+      <h5>D-Shape Transmission Cover</h5>
+      <div class="sku">NU-BC-D4577 &bull; 45&times;77</div>
+      <div class="margin-row"><span class="label">Cost</span><span class="val cost">$176.50</span></div>
+      <div class="margin-row"><span class="label">Direct</span><span class="val price">$1,050.00</span></div>
+      <div class="margin-row"><span class="label">Dealer</span><span class="val">$850.00</span></div>
+      <div class="margin-row"><span class="label">Margin</span><span class="val margin">83.2%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:83.2%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>D-Shape MSP Spec</h5>
+      <div class="sku">NU-BC-D4577-MSP &bull; 45&times;77</div>
+      <div class="margin-row"><span class="label">Cost</span><span class="val cost">$216.50</span></div>
+      <div class="margin-row"><span class="label">Direct</span><span class="val price">$1,100.00</span></div>
+      <div class="margin-row"><span class="label">Margin</span><span class="val margin">80.3%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:80.3%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>Test Tank Cover</h5>
+      <div class="sku">TC-6060 &bull; 60&times;60</div>
+      <div class="margin-row"><span class="label">Cost</span><span class="val cost">$195.50</span></div>
+      <div class="margin-row"><span class="label">Direct</span><span class="val price">$1,100.00</span></div>
+      <div class="margin-row"><span class="label">Margin</span><span class="val margin">82.2%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:82.2%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>ARCH 2-Man + Shield Combo</h5>
+      <div class="sku">NU-BC-2851-FC &bull; 28&times;51</div>
+      <div class="margin-row"><span class="label">Cost</span><span class="val cost">$145.50</span></div>
+      <div class="margin-row"><span class="label">Direct</span><span class="val price">$385.00</span></div>
+      <div class="margin-row"><span class="label">Dealer</span><span class="val">$305.00</span></div>
+      <div class="margin-row"><span class="label">Margin</span><span class="val margin">62.2%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:62.2%"></div></div>
+    </div>
+  </div>
+
+  <h4 style="font-weight:900; color:var(--navy); margin: 20px 0 12px;">Samson Rope Margins by Category (MSP)</h4>
+  <div class="margin-grid">
+    <div class="margin-card">
+      <h5>Puller Ropes (TENEX)</h5>
+      <div class="sku">6,000&rsquo; / 8,000&rsquo; spools</div>
+      <div class="margin-row"><span class="label">Cost Range</span><span class="val cost">$3,059&ndash;$3,254</span></div>
+      <div class="margin-row"><span class="label">Target Margin</span><span class="val margin">55%</span></div>
+      <div class="margin-row"><span class="label">Markup</span><span class="val">122%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:55%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>Jib Lines w/ Thimble End</h5>
+      <div class="sku">Various lengths</div>
+      <div class="margin-row"><span class="label">Cost Range</span><span class="val cost">$104&ndash;$120</span></div>
+      <div class="margin-row"><span class="label">Target Margin</span><span class="val margin">60%</span></div>
+      <div class="margin-row"><span class="label">Markup</span><span class="val">150%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:60%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>Jib Lines Eye-Eye</h5>
+      <div class="sku">Various lengths</div>
+      <div class="margin-row"><span class="label">Cost Range</span><span class="val cost">$67&ndash;$85</span></div>
+      <div class="margin-row"><span class="label">Target Margin</span><span class="val margin">50%</span></div>
+      <div class="margin-row"><span class="label">Markup</span><span class="val">100%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:50%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>Nylite Class II Assemblies</h5>
+      <div class="sku">Various assemblies</div>
+      <div class="margin-row"><span class="label">Cost Range</span><span class="val cost">$248&ndash;$314</span></div>
+      <div class="margin-row"><span class="label">Target Margin</span><span class="val margin">42%</span></div>
+      <div class="margin-row"><span class="label">Markup</span><span class="val">72%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:42%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>Turret Ropes (AMSTEEL)</h5>
+      <div class="sku">Various lengths</div>
+      <div class="margin-row"><span class="label">Cost Range</span><span class="val cost">$308&ndash;$1,716</span></div>
+      <div class="margin-row"><span class="label">Target Margin</span><span class="val margin">30%</span></div>
+      <div class="margin-row"><span class="label">Markup</span><span class="val">43%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:30%"></div></div>
+    </div>
+    <div class="margin-card">
+      <h5>Jib Lines w/ Spool (STABLE BRAID)</h5>
+      <div class="sku">Various lengths</div>
+      <div class="margin-row"><span class="label">Cost Range</span><span class="val cost">$96&ndash;$185</span></div>
+      <div class="margin-row"><span class="label">Target Margin</span><span class="val margin">30%</span></div>
+      <div class="margin-row"><span class="label">Markup</span><span class="val">43%</span></div>
+      <div class="margin-bar"><div class="margin-bar-fill" style="width:30%"></div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px; border-left:4px solid var(--red);">
+    <strong style="color:var(--red);">Samson Pricing Rule:</strong>
+    <span style="font-size:14px;"> SellPrice = SamsonCost &divide; (1 &minus; TargetMargin). Cost fluctuates every order. The formula is the authority, not any snapshot. All sales through NAPA &mdash; Mississippi Power Parts. DO NOT launch MSP Ordering Portal until QB data verified.</span>
+  </div>
+
+  <!-- ═══ SECTION: STRATEGIC NOTES ═══ -->
+  <div class="section-title"><span class="blue">Strategic</span> <span class="dark">Notes</span></div>
+
+  <div class="note-box">
+    <strong>Competitive Position:</strong> No competitor makes ARCH covers, D-Shape rigid covers, or Shield combos. FlexPro Armor owns those segments exclusively. PCC is cheapest at $124-$139 (vinyl over polycomb). Klein is most expensive at $232-$283. FlexPro Armor sits in the premium middle with vastly superior product (3-panel rigid, hand made USA).
+  </div>
+  <div class="note-box">
+    <strong>Price Increase Impact:</strong> 19 SKUs increased April 7. Biggest jumps: D-Shape Transmission +$175 (to $1,050), D-Shape MSP +$185 (to $1,100), Upper Control Cover +$70 (to $285). All justified by zero competition in those segments. Orders already quoted at old prices honor those prices.
+  </div>
+  <div class="note-box">
+    <strong>Aerial Hydraulics Exception:</strong> Aaron gave one-time $185 on 1-Man BC (April 7) as a favor due to troubles. Normal dealer price is $195. Their dealer list prices are set in QB Price Rule &ldquo;Dealer Discount.&rdquo;
+  </div>
+  <div class="note-box">
+    <strong>QB Corrections Needed:</strong> 14 items pending &mdash; 2 critical (NU-BC-2828 pricing), 4 high (&ldquo;Guard&rdquo; name removals), 3 medium (purchase descriptions), 3 medium (negative inventory: NU-BC-2834-C at -12, NU-BC-2851-C at -21, NU-BC-2945-EPBC at -9), 2 low.
+  </div>
+  <div class="note-box">
+    <strong>Calls to Make:</strong> Bill Kugler (Terex OEM &mdash; confirm dead). Rick Sutherland (EPB Chattanooga &mdash; confirm dead). Boss Products (ARCH/Combo SKUs &mdash; CC Troy Gongwer + Thayne Grove). Jared Lemoine at Irby (BSS RCOO follow-up).
+  </div>
+  <div class="note-box">
+    <strong>CB Needs:</strong> UPS email fix (her workflow is broken). Notes tool on every page. Contact-level CRM history. Computer is failing. Tomorrow&rsquo;s follow-up session after 10:30 AM &mdash; hands-on invoice walkthrough. She told Colby she still feels like it&rsquo;s her first week after 4 months. Give her wins and clarity.
+  </div>
+
+  <!-- ═══ SECTION: FORMULAS ═══ -->
+  <div class="section-title"><span class="blue">Pricing</span> <span class="dark">Formulas</span></div>
+
+  <div class="card">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:20px;">
+      <div>
+        <h4 style="font-weight:900; color:var(--navy); margin-bottom:8px;">FlexPro Armor</h4>
+        <ul style="font-size:14px; padding-left:18px; line-height:2;">
+          <li><strong>Direct:</strong> 62-65% standard, 65-68% ARCH, 80%+ D-Shape</li>
+          <li><strong>Dealer:</strong> ~52-55% margin, ~19% off list on D-Shape</li>
+          <li><strong>Combo:</strong> +$40 over standalone cover price</li>
+          <li><strong>Distributor (future):</strong> 40% off direct list</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-weight:900; color:var(--navy); margin-bottom:8px;">Ben&rsquo;s Formula (UPS Shipping)</h4>
+        <div style="background:#f0f2f8; padding:14px 18px; border-radius:10px; font-family:monospace; font-size:14px; margin-top:4px;">
+          CustomerCost = ROUNDUP(ROUNDUP(RegCost, 0) &times; 1.10, 0)
+        </div>
+        <p style="font-size:12px; color:var(--red); margin-top:8px; font-weight:700;">SACRED &mdash; Never modify this formula.</p>
+      </div>
+      <div>
+        <h4 style="font-weight:900; color:var(--navy); margin-bottom:8px;">Samson Rope</h4>
+        <div style="background:#f0f2f8; padding:14px 18px; border-radius:10px; font-family:monospace; font-size:14px; margin-top:4px;">
+          SellPrice = SamsonCost &divide; (1 &minus; TargetMargin)
+        </div>
+        <p style="font-size:12px; color:#666; margin-top:8px;">Margin varies by category (30-60%). See table above.</p>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <footer>
   <div class="tagline">A Legacy of Commitment&reg;</div>
-  <div class="copy">Norris Utilities, LLC &mdash; Birmingham, Alabama</div>
+  <div class="copy">Norris Utilities, LLC &mdash; Birmingham, Alabama &mdash; CEO Dashboard</div>
 </footer>
 
 <script>
-document.getElementById('header-date').textContent = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+// Set header date
+document.getElementById('header-date').textContent = new Date().toLocaleDateString('en-US', {
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+});
+
+// Fetch live uninvoiced count from shipping_billing.json
+fetch('/data/shipping_billing.json')
+  .then(r => r.json())
+  .then(data => {
+    var el = document.getElementById('stat-uninvoiced');
+    if (data && data.uninvoiced_count != null) {
+      el.textContent = data.uninvoiced_count;
+    }
+  })
+  .catch(function(){});
 </script>
 
 </body>
