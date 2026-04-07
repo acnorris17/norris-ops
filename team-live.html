@@ -181,6 +181,18 @@ body{font-family:'Lato',sans-serif;background:#070b1a;color:#fff;min-height:100v
 .cloud-float{animation:cloudBob 3s ease-in-out infinite}
 @keyframes cloudBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
+/* Claude purple glow */
+.claude-glow{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.25) 0%,transparent 70%);animation:claudePulse 2.5s ease-in-out infinite;pointer-events:none}
+@keyframes claudePulse{0%,100%{opacity:.4;transform:translateX(-50%) scale(1)}50%{opacity:.8;transform:translateX(-50%) scale(1.15)}}
+
+/* MK paint splatter */
+.paint-trail{position:absolute;top:15px;left:-12px;pointer-events:none}
+.paint-dot{position:absolute;width:5px;height:5px;border-radius:50%;animation:paintFade 2s infinite}
+.paint-dot:nth-child(1){background:#ff3366;animation-delay:0s}
+.paint-dot:nth-child(2){background:#06D0FF;top:8px;left:5px;animation-delay:.5s}
+.paint-dot:nth-child(3){background:#ffcc00;top:-3px;left:10px;animation-delay:1s}
+@keyframes paintFade{0%{opacity:.8;transform:translateX(0)}100%{opacity:0;transform:translateX(-20px)}}
+
 /* ===== FOOTER ===== */
 .footer{background:linear-gradient(135deg,#0a0e5c,#001144);padding:48px 24px;text-align:center;border-top:1px solid rgba(6,208,255,.1)}
 .footer-quote{font-size:16px;color:rgba(255,255,255,.5);font-style:italic;max-width:650px;margin:0 auto 20px;line-height:1.6}
@@ -236,7 +248,7 @@ body{font-family:'Lato',sans-serif;background:#070b1a;color:#fff;min-height:100v
     <div class="tagline">A Legacy of Commitment&reg; &mdash; Powered by Legacy</div>
     <div class="motto">WORK HARD. RIDE HARD. BUILD THE LEGACY.</div>
     <div class="status-summary" id="statusSummary">
-      <span>15</span> team members. <span id="hdrActive">0</span> active. <span id="hdrIdle">0</span> idle. <span id="hdrDown">0</span> down.
+      <span>17</span> team members. <span id="hdrActive">0</span> active. <span id="hdrIdle">0</span> idle. <span id="hdrDown">0</span> down.
     </div>
   </div>
 </div>
@@ -503,8 +515,8 @@ function svgChar(opts){
 // CHARACTER DEFINITIONS
 // ================================================================
 const AGENT_ORDER = [
-  'legacy','aaron','caroline','v4_builder','email_scout','rope_tracker',
-  'money_watcher','morning_herald','scribe','voice_decoder',
+  'aaron','caroline','legacy','claude','email_scout','v4_builder','mk_smith',
+  'rope_tracker','money_watcher','morning_herald','scribe','voice_decoder',
   'ship_captain','note_reader','watchdog','n8n','backup'
 ];
 
@@ -531,14 +543,14 @@ const CHAR_DEFS = {
       accessoryRight:'📱',badgeText:null},
   },
   v4_builder: {
-    name:'Agent V4', role:'The Builder', type:'agent',
+    name:'Phoenix', role:'Build Engine', type:'agent',
     owAccent:'#ff8800',cls:'',
     svgOpts:{_id:'v4',skinColor:'#ddb888',headSize:15,bodyColor:'#cc5500',bodyColor2:'#ff7700',
       hairColor:'#333',hairStyle:'short',hatStyle:'hardhat',hatColor:'#ffcc00',
       vestColor:'#ff8800',expression:'focused',accessoryRight:'🔨'},
   },
   email_scout: {
-    name:'Email Scout', role:'Email Scanner', type:'agent',
+    name:'Scout', role:'Email Intel', type:'agent',
     owAccent:'#cc3333',cls:'',
     svgOpts:{_id:'email',skinColor:'#ffcc99',headSize:14,bodyColor:'#cc2222',bodyColor2:'#ee3333',
       hairColor:'#222',hairStyle:'short',expression:'focused',
@@ -614,6 +626,20 @@ const CHAR_DEFS = {
       hairColor:'#442200',hairStyle:'short',expression:'nervous',
       badgeText:'TRAINEE',badgeColor:'#cc4488'},
   },
+  claude: {
+    name:'Claude', role:'Deep Reasoning', type:'agent',
+    owAccent:'#7c3aed',cls:'',
+    svgOpts:{_id:'claude',skinColor:'#d4b8ff',headSize:16,bodyColor:'#5b21b6',bodyColor2:'#7c3aed',
+      hairColor:'#7c3aed',hairStyle:'short',flameHair:false,expression:'confident',
+      accessoryRight:'🧠',badgeText:'OPUS',badgeColor:'#7c3aed'},
+  },
+  mk_smith: {
+    name:'MK Smith', role:'Creative Director', type:'human',
+    owAccent:'#e65100',cls:'human',
+    svgOpts:{_id:'mk',skinColor:'#f0c8a0',headSize:15,bodyColor:'#e65100',bodyColor2:'#ff8f00',
+      hairColor:'#2a1a0a',hairStyle:'medium',expression:'happy',
+      accessoryLeft:'🎨',accessoryRight:'🖌️',badgeText:null},
+  },
 };
 
 // ================================================================
@@ -628,8 +654,8 @@ function buildChar(key, agentData) {
 
   if(def.type === 'human') {
     status = 'active';
-    msg = key === 'aaron' ? 'Running the show' : 'Operations lead';
-    lastRun = 'Always on';
+    msg = key === 'aaron' ? 'Running the show' : key === 'mk_smith' ? 'Creative direction & marketing' : 'Operations lead';
+    lastRun = key === 'mk_smith' ? 'Contractor' : 'Always on';
   } else if(agentData) {
     status = agentData.status || 'idle';
     msg = agentData.message || '';
@@ -661,6 +687,12 @@ function buildChar(key, agentData) {
   }
   if(key === 'backup'){
     extras = '<div class="cloud-float" style="position:absolute;top:0;left:50%;transform:translateX(-50%);font-size:18px;opacity:.7">☁️</div>';
+  }
+  if(key === 'claude'){
+    extras = '<div class="claude-glow"></div>';
+  }
+  if(key === 'mk_smith' && status === 'active'){
+    extras = '<div class="paint-trail"><div class="paint-dot"></div><div class="paint-dot"></div><div class="paint-dot"></div></div>';
   }
 
   el.innerHTML = `
