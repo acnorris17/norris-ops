@@ -47,9 +47,29 @@ body::before{content:'';position:fixed;top:50%;left:50%;transform:translate(-50%
 .tab-nav button{background:none;border:none;color:rgba(255,255,255,0.75);font-family:'Lato',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;cursor:pointer;transition:all .25s;white-space:nowrap;position:relative}
 .tab-nav button::after{content:'';position:absolute;bottom:0;left:50%;right:50%;height:2px;background:#06D0FF;transition:all .3s;opacity:0}
 .tab-nav button:hover{color:#fff;background:rgba(6,208,255,0.08)}
-.tab-nav button.active{color:#06D0FF;background:rgba(6,208,255,0.12)}
+.tab-nav button.active{color:#06D0FF;background:rgba(255,255,255,0.15);border-left:3px solid #06D0FF;font-weight:700}
 .tab-nav button.active::after{left:15%;right:15%;opacity:1}
-@media(max-width:768px){.tab-nav button{font-size:10px;padding:12px 10px;letter-spacing:0.5px}}
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger{display:none;position:fixed;top:12px;left:12px;z-index:1001;background:#0a0e5c;color:#fff;border:none;padding:8px 12px;border-radius:6px;font-size:20px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.3)}
+@media(max-width:768px){
+  .hamburger{display:block}
+  .tab-nav{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-left:52px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tab-nav::-webkit-scrollbar{display:none}
+  .tab-nav button{font-size:10px;padding:12px 10px;letter-spacing:0.5px;flex-shrink:0}
+  .page-links{display:none}
+  .page-links.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;background:rgba(10,14,92,0.98);padding:60px 20px 20px;overflow-y:auto;align-items:flex-start;gap:4px}
+  .page-links.open a{padding:12px 16px;font-size:14px;color:rgba(255,255,255,0.9);width:100%;border-bottom:1px solid rgba(255,255,255,0.08)}
+  .page-links.open .sep{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-number{font-size:28px}
+  .deal-card{flex-wrap:wrap}
+  .deal-value{margin-left:0;margin-top:8px}
+  .quick-links{gap:6px}
+  .ql-btn{padding:10px 12px;font-size:11px;flex:1 1 calc(50% - 6px)}
+  .tool-grid{grid-template-columns:1fr!important}
+  table{display:block;overflow-x:auto}
+}
 
 /* ===== TAB CONTENT ===== */
 .tab-content{display:none;max-width:1200px;margin:0 auto;padding:40px 24px 80px;animation:fadeIn .4s cubic-bezier(.25,.46,.45,.94)}
@@ -247,32 +267,25 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 .footer{background:linear-gradient(135deg,#0a0e5c 0%,#001144 100%);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden}
 .footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#06D0FF,transparent)}
 .footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:17px;letter-spacing:1.5px}
-.footer-copy{color:rgba(255,255,255,0.4);font-size:12px;margin-top:10px}
+.footer-copy{color:#6c757d;font-family:'Lato',sans-serif;font-size:13px;margin-top:10px}
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  .quick-links{gap:8px}
-  .ql-btn{padding:10px 14px;font-size:12px}
-  .ql-btn .ql-icon{width:32px;height:32px}
-  .cc-rule{font-size:12px;padding:14px 16px}
-}
+/* ===== GHOST PHOENIX WATERMARK ===== */
+.ghost-phoenix{position:fixed;bottom:20px;right:20px;width:150px;opacity:0.07;pointer-events:none;z-index:-1;user-select:none}
+
+/* ===== RESPONSIVE (small screens) ===== */
 @media(max-width:600px){
   .header{padding:28px 20px 40px}
   .header-title{font-size:20px}
   .tab-content{padding:24px 16px 60px}
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .deal-card{flex-wrap:wrap}
-  .deal-value{margin-left:0;margin-top:8px}
+  .stats-grid{grid-template-columns:1fr}
   th,td{padding:10px 12px;font-size:12px}
-  .stat-number{font-size:28px}
   #tab-contacts [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
   .login-box{padding:36px 24px}
   .icard{flex-wrap:wrap}
   .streak-popup{font-size:22px}
   .level-up-text{font-size:12px}
-  .quick-links{gap:6px}
-  .ql-btn{padding:10px 12px;font-size:11px;flex:1 1 calc(50% - 6px)}
   .completion-counter{bottom:12px;right:12px;font-size:12px;padding:8px 14px}
+  .cc-rule{font-size:12px;padding:14px 16px}
 }
 </style>
 </head>
@@ -296,6 +309,8 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 
 <!-- ==================== HEADER ==================== -->
 <div id="portalContent" style="display:none">
+<button class="hamburger" id="hamburgerBtn">&#9776;</button>
+<img src="logo-white.png" alt="" class="ghost-phoenix">
 
 <div class="header">
   <img src="logo-white.png" alt="" class="header-watermark">
@@ -359,6 +374,7 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
     <div id="greeting" style="font-size:28px;font-weight:900;color:#0a0e5c;margin-bottom:6px;letter-spacing:0.5px"></div>
     <div id="greetingDate" style="font-size:14px;color:#666;font-weight:400"></div>
     <div id="greetingQuote" style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#0033cc;margin-top:8px;opacity:0.7"></div>
+    <div id="greetingStatus" style="font-size:13px;color:#888;margin-top:8px;font-weight:600"></div>
   </div>
   <div class="sec-title"><span class="blue">Quick</span> <span class="dark">Links</span></div>
   <div class="quick-links">
@@ -724,7 +740,7 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
   <div class="footer-tagline">A Legacy of Commitment&reg;</div>
-  <div class="footer-copy">&copy; 2026 Norris Utilities, LLC &mdash; Birmingham, Alabama &mdash; Internal Use Only</div>
+  <div class="footer-copy">A Legacy of Commitment&reg; | &copy; 2026 Norris Utilities, LLC &mdash; Birmingham, Alabama | Internal Use Only</div>
 </footer>
 
 </div><!-- end #portalContent -->
@@ -813,12 +829,32 @@ return{toggleShipment:toggleShipment,undoShipment:undoShipment,toggleFollowup:to
 /* === PASSWORD GATE (Two-Tier Access) === */
 (function(){var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026',RK='nu_role';var storedRole=sessionStorage.getItem(RK);if(sessionStorage.getItem(K)==='granted'&&storedRole){o.classList.add('hidden');p.style.display='block';if(storedRole==='cb')document.body.classList.add('role-cb')}function a(){var pw=i.value,role=null;if(pw==='norris2026')role='aaron';else if(pw==='legacy2026')role='cb';if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem(RK,role);o.classList.add('hidden');p.style.display='block';if(role==='cb')document.body.classList.add('role-cb');if(typeof updateGreeting==='function')updateGreeting()}else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
 
-/* === GREETING (called after login resolves) === */
-function updateGreeting(){var h=new Date().getHours(),role=sessionStorage.getItem('nu_role'),name=role==='cb'?'Caroline':'Aaron',g='Good evening, '+name;if(h>=4&&h<11)g='Good morning, '+name;else if(h>=11&&h<17)g='Good afternoon, '+name;var el=document.getElementById('greeting');if(el)el.textContent=g;var n=new Date();var dateStr=n.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});var hd=document.getElementById('headerDate');if(hd)hd.textContent=dateStr;var gd=document.getElementById('greetingDate');if(gd)gd.textContent=dateStr;var quotes=['Build the legacy. Every deal matters.','Three generations of grit. Keep pushing.','Outwork everyone. Outserve everyone.','The best time to follow up was yesterday.','Discipline is the bridge between goals and accomplishment.','Fortune favors the prepared.','Commit to the process. Results will follow.'];var qi=Math.floor(Math.random()*quotes.length);var gq=document.getElementById('greetingQuote');if(gq)gq.textContent='\u201C'+quotes[qi]+'\u201D'}
+/* === GREETING (Central Time, called after login resolves) === */
+function updateGreeting(){
+  var ct=new Date().toLocaleString('en-US',{timeZone:'America/Chicago',hour:'numeric',hour12:false});
+  var h=parseInt(ct,10);
+  var role=sessionStorage.getItem('nu_role'),name=role==='cb'?'Caroline':'Aaron';
+  var g;
+  if(h>=4&&h<12)g='Good morning, '+name;
+  else if(h>=12&&h<17)g='Good afternoon, '+name;
+  else if(h>=17&&h<21)g='Good evening, '+name;
+  else g='Burning the midnight oil, '+name+'?';
+  var el=document.getElementById('greeting');if(el)el.textContent=g;
+  var n=new Date();
+  var dateStr=n.toLocaleDateString('en-US',{timeZone:'America/Chicago',weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var hd=document.getElementById('headerDate');if(hd)hd.textContent=dateStr;
+  var gd=document.getElementById('greetingDate');if(gd)gd.textContent=dateStr;
+  var quotes=['Build the legacy. Every deal matters.','Three generations of grit. Keep pushing.','Outwork everyone. Outserve everyone.','The best time to follow up was yesterday.','Discipline is the bridge between goals and accomplishment.','Fortune favors the prepared.','Commit to the process. Results will follow.'];
+  var qi=Math.floor(Math.random()*quotes.length);
+  var gq=document.getElementById('greetingQuote');if(gq)gq.textContent='\u201C'+quotes[qi]+'\u201D';
+}
 updateGreeting();
 
 /* === PO GENERATOR === */
 (function(){var CS={MSP:'Mississippi Power',IRB:'Irby Construction',DOM:'Dominion Energy',LTC:'LineTec Services',FLO:'Florence Electric Dept',AEP:'AEP / Appalachian Power',SWP:'SWEPCO',CHN:'Chain Electric',SHF:'Sheffield Utilities',EPB:'EPB Chattanooga',TRX:'Terex'};function gs(){try{return JSON.parse(localStorage.getItem('nu_po_log')||'[]')}catch(e){return[]}}function ss(d){localStorage.setItem('nu_po_log',JSON.stringify(d))}function gns(c,ds){var l=gs(),pf='NU-'+c+'-'+ds+'-',mx=0;l.forEach(function(p){if(p.number&&p.number.startsWith(pf)){var s=parseInt(p.number.split('-').pop(),10);if(s>mx)mx=s}});return mx+1}function pad(n,l){return String(n).padStart(l,'0')}function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}function escA(s){return esc(s).replace(/"/g,'&quot;')}function rl(f){var l=gs().slice().reverse(),tb=document.getElementById('poLogBody');if(!tb)return;var fq=(f||'').toLowerCase(),h='';l.forEach(function(po,i){var ri=l.length-1-i;if(fq&&!(po.number||'').toLowerCase().includes(fq)&&!(po.customer||'').toLowerCase().includes(fq)&&!(po.notes||'').toLowerCase().includes(fq))return;h+='<tr><td style="font-weight:700;color:#0033cc;font-family:monospace;font-size:0.95rem">'+esc(po.number)+'</td><td>'+esc(po.customer)+'</td><td>'+esc(po.date)+'</td><td><input type="text" value="'+escA(po.notes||'')+'" data-idx="'+ri+'" class="po-note-input" placeholder="What was this PO for?"></td><td style="text-align:center"><button class="po-copy-btn" data-po="'+escA(po.number)+'">📋</button></td></tr>'});if(!h)h='<tr><td colspan="5" style="text-align:center;color:#999;padding:24px">No POs generated yet</td></tr>';tb.innerHTML=h;tb.querySelectorAll('.po-note-input').forEach(function(inp){inp.addEventListener('change',function(){var a=gs(),ix=parseInt(this.dataset.idx,10);if(a[ix])a[ix].notes=this.value;ss(a)})});tb.querySelectorAll('.po-copy-btn').forEach(function(btn){btn.addEventListener('click',function(){var b=btn;navigator.clipboard.writeText(b.dataset.po).then(function(){b.textContent='\u2705';setTimeout(function(){b.textContent='📋'},1200)})})})}window.addEventListener('DOMContentLoaded',function(){var sel=document.getElementById('poCustomer'),cr=document.getElementById('poCustomRow'),di=document.getElementById('poDate'),gb=document.getElementById('poGenBtn'),rd=document.getElementById('poResult'),si=document.getElementById('poSearch');if(!sel)return;Object.keys(CS).sort(function(a,b){return CS[a].localeCompare(CS[b])}).forEach(function(c){var o=document.createElement('option');o.value=c;o.textContent=CS[c]+' ('+c+')';sel.appendChild(o)});var co=document.createElement('option');co.value='__custom__';co.textContent='+ Add New Customer...';sel.appendChild(co);sel.addEventListener('change',function(){cr.style.display=sel.value==='__custom__'?'flex':'none'});var now=new Date();di.value=now.getFullYear()+'-'+pad(now.getMonth()+1,2)+'-'+pad(now.getDate(),2);gb.addEventListener('click',function(){var c=sel.value;if(c==='__custom__'){c=document.getElementById('poCustomCode').value.toUpperCase().replace(/[^A-Z]/g,'').substring(0,3);if(c.length!==3){alert('Enter a 3-letter customer code.');return}}if(!c){alert('Select a customer.');return}var d=new Date(di.value+'T12:00:00');if(isNaN(d)){alert('Enter a valid date.');return}var ds=pad(d.getMonth()+1,2)+pad(d.getDate(),2)+'-'+String(d.getFullYear()).slice(-2),sq=gns(c,ds),pn='NU-'+c+'-'+ds+'-'+pad(sq,3),cn=CS[c]||document.getElementById('poCustomName').value||c,lg=gs();lg.push({number:pn,code:c,customer:cn,date:di.value,notes:'',created:new Date().toISOString()});ss(lg);navigator.clipboard.writeText(pn).then(function(){rd.innerHTML='<div style="background:#e8f5e9;border:2px solid #00aa44;border-radius:10px;padding:20px;text-align:center;margin-top:16px"><div style="font-size:0.8rem;font-weight:700;color:#00aa44;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">PO Generated &amp; Copied</div><div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc">'+esc(pn)+'</div><div style="font-size:0.85rem;color:#555;margin-top:8px">'+esc(cn)+' \u2014 '+di.value+'</div></div>'}).catch(function(){rd.innerHTML='<div style="background:#fff3e0;border:2px solid #ff9900;border-radius:10px;padding:20px;text-align:center;margin-top:16px"><div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc">'+esc(pn)+'</div><div style="font-size:0.85rem;color:#cc6600;margin-top:8px">Copy manually</div></div>'});rl(si?si.value:'')});if(si)si.addEventListener('input',function(){rl(this.value)});var eb=document.getElementById('poExportBtn');if(eb)eb.addEventListener('click',function(){var l=gs(),csv='PO Number,Customer,Date,Notes\n';l.forEach(function(p){csv+='"'+p.number+'","'+p.customer+'","'+p.date+'","'+(p.notes||'').replace(/"/g,'""')+'"\n'});var b=new Blob([csv],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='norris_po_log_'+new Date().toISOString().slice(0,10)+'.csv';a.click()});rl()})})();
+
+/* === HAMBURGER MENU === */
+(function(){var hb=document.getElementById('hamburgerBtn');if(!hb)return;var pl=document.querySelector('.page-links');hb.addEventListener('click',function(){if(pl)pl.classList.toggle('open');hb.textContent=pl&&pl.classList.contains('open')?'\u2715':'\u2630'})})();
 
 /* === TAB NAVIGATION === */
 (function(){var bs=document.querySelectorAll('.tab-nav button'),ts=document.querySelectorAll('.tab-content');bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.remove('active')});ts.forEach(function(x){x.classList.remove('active')});b.classList.add('active');document.getElementById('tab-'+b.dataset.tab).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})})})})();
@@ -842,6 +878,8 @@ var su=document.getElementById('statUninvoiced');if(su)su.textContent='9';
 var sf=document.getElementById('statFollowups');if(sf)sf.textContent='3';
 var sp=document.getElementById('statPipeline');if(sp)sp.textContent='$1.8M+';
 var ss2=document.getElementById('statSkylift');if(ss2)ss2.textContent='6';
+/* Status summary */
+var gs2=document.getElementById('greetingStatus');if(gs2)gs2.textContent='9 orders need invoicing \u2022 3 follow-ups overdue \u2022 $1.8M+ pipeline active';
 /* Dynamic days */
 document.querySelectorAll('.days-since').forEach(function(el){var since=new Date(el.dataset.since+'T00:00:00');var now=new Date();var days=Math.floor((now-since)/(1000*60*60*24));el.textContent=days+'+ days'})});
 
