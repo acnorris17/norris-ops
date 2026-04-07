@@ -141,10 +141,10 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 .icard:hover{box-shadow:0 5px 20px rgba(0,0,0,0.07)}
 .icard.completed{background:linear-gradient(135deg,#f0faf0,#e8f5e9);border-color:#00aa44;opacity:0.85}
 .icard.blocked{background:linear-gradient(135deg,#fef2f2,#fde8e8);border-color:#cc0000;opacity:0.7}
-.icard .icard-check{flex-shrink:0;width:28px;height:28px;border:2px solid #ccc;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .25s;background:#fff}
-.icard .icard-check:hover{border-color:#0033cc;transform:scale(1.1)}
-.icard.completed .icard-check{background:#00aa44;border-color:#00aa44;color:#fff}
-.icard.blocked .icard-check{background:#f0f0f0;border-color:#ddd;cursor:not-allowed}
+.icard .icard-check{flex-shrink:0;width:30px;height:30px;border:2px solid #ccc;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .3s cubic-bezier(.68,-.55,.27,1.55);background:#fff}
+.icard .icard-check:hover{border-color:#0033cc;transform:scale(1.15);box-shadow:0 2px 8px rgba(0,51,204,0.2)}
+.icard.completed .icard-check{background:linear-gradient(135deg,#00aa44,#00cc55);border-color:#00aa44;color:#fff;box-shadow:0 2px 8px rgba(0,170,68,0.3)}
+.icard.blocked .icard-check{background:#f5f0f0;border-color:#e0d0d0;cursor:not-allowed;color:#cc0000}
 .icard .icard-body{flex:1;min-width:0}
 .icard .icard-title{font-weight:700;font-size:15px;color:#1a1a1a;margin-bottom:4px}
 .icard .icard-meta{font-size:13px;color:#666}
@@ -368,12 +368,12 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 <div class="tab-content" id="tab-shipments">
   <div class="sec-title"><span class="blue">Shipments</span> <span class="dark">&amp; Invoicing &mdash; March 20, 2026</span></div>
   <div style="margin-bottom:24px">
-    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:8px;text-decoration:none;box-shadow:0 4px 16px rgba(0,51,204,0.3)">&#128230; Open UPS Shipping Log</a>
+    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:10px;text-decoration:none;box-shadow:0 4px 16px rgba(0,51,204,0.3);transition:all .3s"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M20 2H4c-1.1 0-2 .9-2 2v3h20V4c0-1.1-.9-2-2-2zM2 19c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9H2v10zm14-7h4v2h-4v-2zm0 4h4v2h-4v-2zm-6-4h4v2h-4v-2zm0 4h4v2h-4v-2zM4 12h4v2H4v-2zm0 4h4v2H4v-2z"/></svg>Open UPS Shipping Log</a>
   </div>
   <div style="margin-bottom:24px;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #eee">
     <iframe src="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533&amp;rm=minimal" width="100%" height="500" frameborder="0" style="display:block;background:#fff" loading="lazy"></iframe>
   </div>
-  <div class="note-box"><strong>&#9888; 2 orders BLOCKED</strong> &mdash; ARCH SKUs unconfirmed with Boss Products. Contact Troy Gongwer and Thayne Grove to resolve before invoicing.</div>
+  <div class="note-box" style="display:flex;align-items:flex-start;gap:12px;border-left:4px solid #ffaa00;border-radius:12px;padding:18px 20px"><svg width="22" height="22" viewBox="0 0 24 24" fill="#b38600" style="flex-shrink:0;margin-top:1px"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg><span><strong>2 orders BLOCKED</strong> &mdash; ARCH SKUs unconfirmed with Boss Products. Contact Troy Gongwer and Thayne Grove to resolve before invoicing.</span></div>
   <div class="filter-bar" id="shipFilterBar">
     <button class="filter-btn active" data-filter="all">Show All</button>
     <button class="filter-btn" data-filter="pending">Show Pending</button>
