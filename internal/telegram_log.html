@@ -57,7 +57,6 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 .footer p{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px}
 .footer small{color:rgba(255,255,255,0.3);font-size:11px;display:block;margin-top:6px}
 @media(max-width:600px){.header h1{font-size:18px}.msg-header{gap:8px}.msg-source{margin-left:0}}
-</style>
 /* ===== LOGIN SCREEN ===== */
 .login-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);font-family:'Lato',sans-serif}
 .login-overlay.hidden{display:none}
@@ -72,6 +71,18 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 .login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,51,204,0.35)}
 .login-error{color:#cc0000;font-size:13px;font-weight:700;margin-top:12px;min-height:20px}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+
+/* ===== POLISH ===== */
+.msg-card{border-radius:12px;padding:18px 22px;margin-bottom:12px;border:1px solid #eee;box-shadow:0 3px 12px rgba(0,0,0,0.04);transition:all .3s}
+.msg-card:hover{border-color:#0033cc;box-shadow:0 6px 20px rgba(0,51,204,0.08)}
+.msg-tag{border-radius:8px;padding:4px 12px}
+.stat{border-radius:12px;padding:14px 22px;border-left:4px solid #0033cc}
+.search-box{border-radius:12px}
+.filter-btn{transition:all .25s}
+.filter-btn.active{background:linear-gradient(135deg,#0033cc,#0055ee);box-shadow:0 3px 12px rgba(0,51,204,0.25)}
+.header{padding:36px 24px;position:relative;overflow:hidden}
+.footer{padding:32px 24px;position:relative}
+.footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#06D0FF,transparent)}
 </style>
 </head>
 <body>
@@ -118,7 +129,7 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 
 <script>
 /* === PASSWORD GATE === */
-(function(){var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026';if(sessionStorage.getItem(K)==='granted'){o.classList.add('hidden');p.style.display='block'}function a(){if(i.value==='legacy2026'){sessionStorage.setItem(K,'granted');o.classList.add('hidden');p.style.display='block'}else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
+(function(){var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026';if(sessionStorage.getItem(K)==='granted'){o.classList.add('hidden');p.style.display='block'}function a(){if(i.value==='norris2026'||i.value==='legacy2026'){sessionStorage.setItem(K,'granted');o.classList.add('hidden');p.style.display='block'}else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
 </script>
 
 <script>
