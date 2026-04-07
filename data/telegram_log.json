@@ -34,7 +34,14 @@
       "source": "claude_code",
       "message": "Telegram organization deployed \u2014 12 scripts updated with tags, logger module created, dashboard built, morning brief digest added",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-07T04:25:15.167980",
+      "category": "SYSTEM",
+      "source": "claude_code",
+      "message": "\ud83d\udd27 SYSTEM \u2014 <b>Telegram Organization Deployed</b>\n\n<b>3 solutions live:</b>\n\n<b>1. Message Tags</b> \u2014 Every Telegram message now starts with a category tag (BUILD, EMAIL, SAMSON, AP, etc). Search any tag in Telegram to find all messages of that type.\n\n<b>2. Telegram Log Dashboard</b> \u2014 ops.norrisutilities.com/internal/telegram_log.html\nSearchable, filterable history of every message sent. Filter by category, date range, keyword. Click to expand.\n\n<b>3. Overnight Digest</b> \u2014 New flag:\n<code>python3 morning_brief.py --digest</code>\nGroups all overnight messages by category into one compact summary.\n\n<b>Scripts updated:</b>\nportal_data_sync, qb_data_loader, news_monitor, universal_capture, agent_runner v3, morning_brief\n\nAll existing scripts (v4, email, samson, AP, shipping, voice, watchdog, followup, remarkable, invoicing) already had tags + logging.",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-07T04:16:53.546533"
+  "last_updated": "2026-04-07T04:25:15.167997"
 }

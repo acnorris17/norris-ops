@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-07T04:16:11",
-  "active_count": 3,
+  "last_updated": "2026-04-07T04:31:11",
+  "active_count": 4,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -14,7 +14,7 @@
       "name": "Agent V4",
       "role": "The Builder",
       "status": "idle",
-      "last_run": "2026-04-07 03:49",
+      "last_run": "2026-04-07 04:19",
       "message": "Queue: 1 pending tasks"
     },
     "email_scout": {
@@ -55,8 +55,8 @@
     "scribe": {
       "name": "The Scribe",
       "role": "Follow-up Drafter",
-      "status": "idle",
-      "last_run": "2026-04-06 17:07",
+      "status": "active",
+      "last_run": "2026-04-07 04:30",
       "message": "8 drafts ready",
       "items": 8,
       "next_run": "Daily 4:30 AM"
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-07 04:11",
+      "last_run": "2026-04-07 04:26",
       "message": "All systems UP"
     },
     "backup": {
@@ -96,7 +96,7 @@
       "role": "iCloud Backup",
       "status": "idle",
       "last_run": "2026-04-07 02:00",
-      "message": "1,911 files protected",
+      "message": "1,913 files protected",
       "next_run": "Daily 2:00 AM"
     },
     "n8n": {
