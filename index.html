@@ -189,6 +189,9 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 /* ===== NOTE BOX ===== */
 .note-box{background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:#8a6d00}
 
+/* ===== ROLE-BASED VISIBILITY ===== */
+body.role-cb .aaron-only{display:none!important}
+
 /* ===== COMPLETION COUNTER (fixed) ===== */
 .completion-counter{position:fixed;bottom:20px;right:20px;z-index:9000;background:#fff;border:2px solid #0033cc;border-radius:12px;padding:10px 16px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#0033cc;box-shadow:0 4px 20px rgba(0,0,0,0.12);cursor:pointer;transition:transform .2s}
 .completion-counter:hover{transform:scale(1.05)}
@@ -275,7 +278,7 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
   <button data-tab="caroline">CB&rsquo;s Tasks</button>
   <button data-tab="samson">Samson Rope</button>
   <button data-tab="pogen">PO Generator</button>
-  <button data-tab="tools">Tools</button>
+  <button data-tab="tools" class="aaron-only">Tools</button>
   <button data-tab="docs">Docs</button>
 </nav>
 <div class="page-links">
@@ -283,21 +286,21 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
   <a href="po-tracker.html" target="_blank">PO Tracker</a><span class="sep">&middot;</span>
   <a href="calendar.html" target="_blank">Calendar</a><span class="sep">&middot;</span>
   <a href="cb-dashboard.html" target="_blank">CB Dashboard</a><span class="sep">&middot;</span>
-  <a href="cb-onboarding.html" target="_blank">CB Onboarding</a><span class="sep">&middot;</span>
-  <a href="journal.html" target="_blank">Journal</a><span class="sep">&middot;</span>
-  <a href="team.html" target="_blank">Team</a><span class="sep">&middot;</span>
-  <a href="mission-control.html" target="_blank">Mission Control</a><span class="sep">&middot;</span>
-  <a href="website/storefront.html" target="_blank">FlexPro Armor Storefront</a><span class="sep">&middot;</span>
-  <a href="website/about.html" target="_blank">About Page</a><span class="sep">&middot;</span>
-  <a href="website/index.html" target="_blank">Website Homepage</a><span class="sep">&middot;</span>
-  <a href="shipping-docs/" target="_blank">Shipping Docs</a><span class="sep">&middot;</span>
-  <a href="msp-orders.html" target="_blank" style="color:#06D0FF">MSP Rope Orders</a><span class="sep">&middot;</span>
-  <a href="/internal/email_dashboard.html" target="_blank">Email Dashboard</a><span class="sep">&middot;</span>
-  <a href="/internal/samson_dashboard.html" target="_blank">Samson Dashboard</a><span class="sep">&middot;</span>
-  <a href="team-live.html" target="_blank" style="color:#06D0FF">AI Team</a><span class="sep">&middot;</span>
-  <a href="/internal/remarkable_dashboard.html" target="_blank">reMarkable</a><span class="sep">&middot;</span>
-  <a href="/internal/telegram_log.html" target="_blank">Telegram Log</a><span class="sep">&middot;</span>
-  <a href="aaron.html" target="_blank">AC</a>
+  <a href="cb-onboarding.html" target="_blank">CB Onboarding</a><span class="sep aaron-only">&middot;</span>
+  <a href="journal.html" target="_blank" class="aaron-only">Journal</a><span class="sep aaron-only">&middot;</span>
+  <a href="team.html" target="_blank" class="aaron-only">Team</a><span class="sep aaron-only">&middot;</span>
+  <a href="mission-control.html" target="_blank" class="aaron-only">Mission Control</a><span class="sep aaron-only">&middot;</span>
+  <a href="website/storefront.html" target="_blank" class="aaron-only">FlexPro Armor Storefront</a><span class="sep aaron-only">&middot;</span>
+  <a href="website/about.html" target="_blank" class="aaron-only">About Page</a><span class="sep aaron-only">&middot;</span>
+  <a href="website/index.html" target="_blank" class="aaron-only">Website Homepage</a><span class="sep aaron-only">&middot;</span>
+  <a href="shipping-docs/" target="_blank" class="aaron-only">Shipping Docs</a><span class="sep aaron-only">&middot;</span>
+  <a href="msp-orders.html" target="_blank" style="color:#06D0FF" class="aaron-only">MSP Rope Orders</a><span class="sep aaron-only">&middot;</span>
+  <a href="/internal/email_dashboard.html" target="_blank" class="aaron-only">Email Dashboard</a><span class="sep aaron-only">&middot;</span>
+  <a href="/internal/samson_dashboard.html" target="_blank" class="aaron-only">Samson Dashboard</a><span class="sep aaron-only">&middot;</span>
+  <a href="team-live.html" target="_blank" style="color:#06D0FF" class="aaron-only">AI Team</a><span class="sep aaron-only">&middot;</span>
+  <a href="/internal/remarkable_dashboard.html" target="_blank" class="aaron-only">reMarkable</a><span class="sep aaron-only">&middot;</span>
+  <a href="/internal/telegram_log.html" target="_blank" class="aaron-only">Telegram Log</a><span class="sep aaron-only">&middot;</span>
+  <a href="aaron.html" target="_blank" class="aaron-only">AC</a>
 </div>
 
 <!-- ================================================================ -->
@@ -311,7 +314,7 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
     <a href="https://app.qbo.intuit.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#2ca01c;color:#fff">&#128215;</span>QuickBooks</a>
     <a href="https://drive.google.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#4285f4;color:#fff">&#128193;</span>Google Drive</a>
     <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6b4c14;color:#fff">&#128230;</span>UPS Shipping Log</a>
-    <a href="/tools/pricing-calculator.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0033cc;color:#fff">&#129518;</span>Pricing Tools</a>
+    <a href="/tools/pricing-calculator.html" target="_blank" rel="noopener" class="ql-btn aaron-only"><span class="ql-icon" style="background:#0033cc;color:#fff">&#129518;</span>Pricing Tools</a>
     <a href="https://web.telegram.org" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0088cc;color:#fff">&#128172;</span>Telegram</a>
     <a href="/internal/email_dashboard.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#cc3333;color:#fff">&#128236;</span>Email Scanner</a>
     <a href="/internal/samson_dashboard.html" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6600cc;color:#fff">&#129525;</span>Samson Tracker</a>
