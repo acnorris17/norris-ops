@@ -73,10 +73,11 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
 
 /* ===== POLISH ===== */
-.msg-card{border-radius:12px;padding:18px 22px;margin-bottom:12px;border:1px solid #eee;box-shadow:0 3px 12px rgba(0,0,0,0.04);transition:all .3s}
-.msg-card:hover{border-color:#0033cc;box-shadow:0 6px 20px rgba(0,51,204,0.08)}
+.msg-card{border-radius:14px;padding:18px 22px;margin-bottom:12px;border:1px solid #eee;box-shadow:0 3px 14px rgba(0,0,0,0.05);transition:all .3s cubic-bezier(.25,.46,.45,.94)}
+.msg-card:hover{border-color:#0033cc;box-shadow:0 6px 24px rgba(0,51,204,0.1);transform:translateY(-2px)}
 .msg-tag{border-radius:8px;padding:4px 12px}
-.stat{border-radius:12px;padding:14px 22px;border-left:4px solid #0033cc}
+.stat{border-radius:14px;padding:14px 22px;border-left:4px solid #0033cc;transition:all .2s}
+.stat:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08)}
 .search-box{border-radius:12px}
 .filter-btn{transition:all .25s}
 .filter-btn.active{background:linear-gradient(135deg,#0033cc,#0055ee);box-shadow:0 3px 12px rgba(0,51,204,0.25)}
