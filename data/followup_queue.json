@@ -318,5 +318,37 @@
     "_captured_at": "2026-04-07T08:49:00.615735",
     "_source": "email_scanner",
     "_category": "followup"
+  },
+  {
+    "customer": "Richard Thornhill",
+    "subject": "Linetec Order",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-07T10:49:08.759521",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "Issues with iship emails not being received",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-07T10:49:08.767269",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Thayne Grove",
+    "subject": "Invoice 6651",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-07T10:49:08.770536",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Andy Barron",
+    "subject": "Canyon",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-07T10:49:08.773252",
+    "_source": "email_scanner",
+    "_category": "followup"
   }
 ]

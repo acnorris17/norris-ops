@@ -1,19 +1,12 @@
 {
-  "last_scan": "2026-04-07T13:48:51",
+  "last_scan": "2026-04-07T15:49:00",
   "needs_response": [
     {
-      "from": "abrownhailey@eufmc.com",
-      "subject": "EUFMC Planning",
-      "days_waiting": 4,
+      "from": "Aaron C. Norris",
+      "subject": "Issues with iship emails not being received",
+      "days_waiting": 5,
       "date": "2026-04-02",
-      "snippet": "EUFMC Planning"
-    },
-    {
-      "from": "Jeff Fickel",
-      "subject": "RE: Schedule",
-      "days_waiting": 4,
-      "date": "2026-04-03",
-      "snippet": "RE: Schedule"
+      "snippet": "Issues with iship emails not being received"
     },
     {
       "from": "Andy Barron",
@@ -28,6 +21,13 @@
       "days_waiting": 4,
       "date": "2026-04-03",
       "snippet": "Invoice 6651"
+    },
+    {
+      "from": "Richard Thornhill",
+      "subject": "Linetec Order",
+      "days_waiting": 1,
+      "date": "2026-04-06",
+      "snippet": "Linetec Order"
     }
   ],
   "followups_due": [
@@ -35,10 +35,15 @@
       "to": "\ud83d\udd25 New Website Lead + BSS Update \u2014 3:29 PM",
       "subject": "\ud83d\udd25 New Website Lead + BSS Update \u2014 3:29 PM",
       "sent_date": "2026-03-31",
-      "days_no_reply": 6
+      "days_no_reply": 7
     }
   ],
   "vendor_emails": [
+    {
+      "from": "BSS (Bay Shore Systems)",
+      "subject": "Re: Deere 210 P for Foundation Services Corp- Peterson Contractors PCI Reinbeck IA",
+      "date": "2026-04-07"
+    },
     {
       "from": "BSS (Bay Shore Systems)",
       "subject": "RE: Report - Customer orders placed last week",
