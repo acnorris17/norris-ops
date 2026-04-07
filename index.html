@@ -42,8 +42,11 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 
 /* ===== TAB NAV ===== */
 .tab-nav{position:sticky;top:0;z-index:1000;background:rgba(10,14,92,0.97);backdrop-filter:blur(12px);display:flex;justify-content:center;flex-wrap:wrap;gap:0;border-bottom:2px solid #06D0FF}
-.tab-nav button{background:none;border:none;color:#fff;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 16px;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
-.tab-nav button:hover,.tab-nav button.active{background:rgba(6,208,255,0.15);color:#06D0FF}
+.tab-nav button{background:none;border:none;color:rgba(255,255,255,0.75);font-family:'Lato',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;cursor:pointer;transition:all .25s;white-space:nowrap;position:relative}
+.tab-nav button::after{content:'';position:absolute;bottom:0;left:50%;right:50%;height:2px;background:#06D0FF;transition:all .3s;opacity:0}
+.tab-nav button:hover{color:#fff;background:rgba(6,208,255,0.08)}
+.tab-nav button.active{color:#06D0FF;background:rgba(6,208,255,0.12)}
+.tab-nav button.active::after{left:15%;right:15%;opacity:1}
 @media(max-width:768px){.tab-nav button{font-size:10px;padding:12px 10px;letter-spacing:0.5px}}
 
 /* ===== TAB CONTENT ===== */
@@ -52,12 +55,12 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* ===== SECTION HEADERS ===== */
-.sec-title{font-size:22px;font-weight:700;margin-bottom:20px;padding-bottom:10px;border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#0033cc,#06D0FF) 1}
+.sec-title{font-size:22px;font-weight:700;margin-bottom:22px;padding-bottom:12px;border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#0033cc,#06D0FF) 1;display:flex;align-items:center;gap:8px}
 .sec-title span.blue{color:#0033cc}
 .sec-title span.dark{color:#1a1a1a}
 
 /* ===== CARDS ===== */
-.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #eee}
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:0 3px 14px rgba(0,0,0,0.05);border:1px solid #eee;transition:box-shadow .2s}
 .card.critical{border:2px solid #cc0000;border-left:6px solid #cc0000}
 .card.success{border-left:4px solid #00aa44}
 .card.warning{border-left:4px solid #ffaa00}
@@ -65,9 +68,11 @@ body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:1
 
 /* ===== STAT CARDS ===== */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px}
-.stat-card{background:#fff;border-radius:12px;padding:24px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-top:4px solid #0033cc}
-.stat-number{font-size:36px;font-weight:900;color:#0033cc}
-.stat-label{font-size:13px;color:#666;margin-top:4px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.stat-card{background:#fff;border-radius:14px;padding:28px 24px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.06);border-top:4px solid #0033cc;transition:all .3s cubic-bezier(.25,.46,.45,.94);cursor:pointer;position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(6,208,255,0.04));pointer-events:none}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,0.1)}
+.stat-number{font-size:38px;font-weight:900;color:#0033cc;line-height:1}
+.stat-label{font-size:12px;color:#666;margin-top:8px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px}
 
 /* ===== TABLES ===== */
 .table-wrap{overflow-x:auto;margin-bottom:24px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
@@ -82,35 +87,36 @@ th.sortable.asc::after{content:'\u2191';opacity:1}
 th.sortable.desc::after{content:'\u2193';opacity:1}
 
 /* ===== BADGES ===== */
-.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase}
-.badge-green{background:#e6f9ee;color:#00802b}
-.badge-red{background:#fde8e8;color:#cc0000}
-.badge-yellow{background:#fff8e1;color:#b38600}
-.badge-blue{background:#e8f0ff;color:#0033cc}
-.badge-gray{background:#f0f0f0;color:#666}
-.badge-paid{background:#e6f9ee;color:#00802b}
-.badge-pending{background:#fff8e1;color:#b38600}
-.badge-settled{background:#e8f0ff;color:#0033cc}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap}
+.badge-green{background:#e6f9ee;color:#00802b;border:1px solid rgba(0,128,43,0.15)}
+.badge-red{background:#fde8e8;color:#cc0000;border:1px solid rgba(204,0,0,0.15)}
+.badge-yellow{background:#fff8e1;color:#b38600;border:1px solid rgba(179,134,0,0.15)}
+.badge-blue{background:#e8f0ff;color:#0033cc;border:1px solid rgba(0,51,204,0.15)}
+.badge-gray{background:#f0f0f0;color:#666;border:1px solid rgba(102,102,102,0.15)}
+.badge-paid{background:#e6f9ee;color:#00802b;border:1px solid rgba(0,128,43,0.15)}
+.badge-pending{background:#fff8e1;color:#b38600;border:1px solid rgba(179,134,0,0.15)}
+.badge-settled{background:#e8f0ff;color:#0033cc;border:1px solid rgba(0,51,204,0.15)}
 
 /* ===== QUICK LINKS ===== */
-.quick-links{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
-.ql-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:#fff;border:1px solid #eee;border-left:3px solid #0033cc;border-radius:10px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#0a0e5c;text-decoration:none;transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.ql-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,51,204,0.12);border-color:#06D0FF;border-left-color:#06D0FF;color:#0033cc}
-.ql-btn .ql-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.quick-links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px}
+.ql-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;background:#fff;border:1px solid #e8e8ec;border-left:3px solid #0033cc;border-radius:12px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#0a0e5c;text-decoration:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.ql-btn:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,51,204,0.15);border-color:#06D0FF;border-left-color:#06D0FF;color:#0033cc}
+.ql-btn .ql-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ql-btn .ql-icon svg{width:20px;height:20px;fill:currentColor}
 
 /* ===== PAGE LINKS BAR ===== */
-.page-links{display:flex;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(10,14,92,0.8);border-top:1px solid rgba(6,208,255,0.15);align-items:center}
-.page-links a{color:rgba(255,255,255,0.7);font-size:12px;font-weight:600;letter-spacing:0.5px;padding:10px 14px;text-decoration:none;transition:color .2s}
-.page-links a:hover{color:#06D0FF}
-.page-links .sep{color:rgba(255,255,255,0.25);font-size:10px;user-select:none}
+.page-links{display:flex;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(10,14,92,0.85);backdrop-filter:blur(8px);border-top:1px solid rgba(6,208,255,0.2);align-items:center;padding:2px 0}
+.page-links a{color:rgba(255,255,255,0.65);font-size:11.5px;font-weight:600;letter-spacing:0.5px;padding:10px 14px;text-decoration:none;transition:all .2s;border-radius:6px}
+.page-links a:hover{color:#06D0FF;background:rgba(6,208,255,0.08)}
+.page-links .sep{color:rgba(6,208,255,0.25);font-size:8px;user-select:none}
 
 /* ===== TOOL GRID ===== */
 .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.tool-card{display:flex;align-items:flex-start;gap:14px;padding:20px;background:#fff;border-radius:12px;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,0.04);text-decoration:none;color:#1a1a1a;transition:all .25s}
+.tool-card{display:flex;align-items:flex-start;gap:14px;padding:20px;background:#fff;border-radius:14px;border:1px solid #eee;box-shadow:0 3px 12px rgba(0,0,0,0.04);text-decoration:none;color:#1a1a1a;transition:all .3s cubic-bezier(.25,.46,.45,.94)}
 .tool-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,255,0.08);border-color:#06D0FF}
-.tool-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
+.tool-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
 .tool-card h4{font-size:14px;font-weight:700;margin-bottom:3px}
-.tool-card p{font-size:12px;color:#888;line-height:1.4}
+.tool-card p{font-size:12px;color:#888;line-height:1.5}
 .doc-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-left:6px}
 .doc-soon{background:#fff8e1;color:#b38600}
 .doc-live{background:#e6f9ee;color:#00802b}
@@ -131,9 +137,10 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 .check-icon.disabled{background:#f0f0f0;border-color:#ddd;cursor:not-allowed;opacity:0.6}
 
 /* ===== INTERACTIVE CARDS ===== */
-.icard{background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,0.05);border:1px solid #eee;display:flex;align-items:center;gap:16px;transition:all .3s ease}
-.icard.completed{background:#f0faf0;border-color:#00aa44;opacity:0.85}
-.icard.blocked{background:#fef2f2;border-color:#cc0000;opacity:0.7}
+.icard{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:14px;box-shadow:0 3px 12px rgba(0,0,0,0.04);border:1px solid #eee;display:flex;align-items:center;gap:16px;transition:all .3s cubic-bezier(.25,.46,.45,.94)}
+.icard:hover{box-shadow:0 5px 20px rgba(0,0,0,0.07)}
+.icard.completed{background:linear-gradient(135deg,#f0faf0,#e8f5e9);border-color:#00aa44;opacity:0.85}
+.icard.blocked{background:linear-gradient(135deg,#fef2f2,#fde8e8);border-color:#cc0000;opacity:0.7}
 .icard .icard-check{flex-shrink:0;width:28px;height:28px;border:2px solid #ccc;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .25s;background:#fff}
 .icard .icard-check:hover{border-color:#0033cc;transform:scale(1.1)}
 .icard.completed .icard-check{background:#00aa44;border-color:#00aa44;color:#fff}
@@ -146,9 +153,9 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 
 /* ===== FILTER BUTTONS ===== */
 .filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.filter-btn{padding:8px 18px;border:2px solid #e0e0e0;border-radius:8px;background:#fff;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#666;cursor:pointer;transition:all .2s}
-.filter-btn:hover{border-color:#0033cc;color:#0033cc}
-.filter-btn.active{background:#0033cc;border-color:#0033cc;color:#fff}
+.filter-btn{padding:8px 18px;border:2px solid #e0e0e0;border-radius:8px;background:#fff;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#666;cursor:pointer;transition:all .25s}
+.filter-btn:hover{border-color:#0033cc;color:#0033cc;box-shadow:0 2px 8px rgba(0,51,204,0.1)}
+.filter-btn.active{background:linear-gradient(135deg,#0033cc,#0055ee);border-color:#0033cc;color:#fff;box-shadow:0 3px 12px rgba(0,51,204,0.25)}
 
 /* ===== PROGRESS BAR ===== */
 .progress-wrap{background:#e8e8ec;border-radius:10px;height:28px;overflow:hidden;margin-bottom:20px;position:relative}
@@ -170,12 +177,14 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 .perm-no{background:#fde8e8;border-left:4px solid #cc0000;color:#cc0000;padding:16px 20px;border-radius:10px;margin-bottom:12px;font-size:14px;font-weight:600}
 
 /* ===== DEALS ===== */
-.deal-card{display:flex;align-items:center;gap:16px;padding:20px;background:#fff;border-radius:12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);border:1px solid #eee;transition:transform .15s}
-.deal-card:hover{transform:translateX(4px)}
-.deal-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.deal-info h4{font-size:15px;font-weight:700;margin-bottom:2px}
-.deal-info p{font-size:13px;color:#666}
-.deal-value{margin-left:auto;font-size:18px;font-weight:900;color:#0033cc;white-space:nowrap}
+.deal-card{display:flex;align-items:center;gap:18px;padding:22px 24px;background:#fff;border-radius:14px;margin-bottom:14px;box-shadow:0 3px 12px rgba(0,0,0,0.05);border:1px solid #eee;transition:all .3s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden}
+.deal-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#0033cc,#06D0FF);border-radius:4px 0 0 4px;opacity:0;transition:opacity .3s}
+.deal-card:hover{transform:translateX(6px);box-shadow:0 6px 24px rgba(0,0,0,0.08)}
+.deal-card:hover::before{opacity:1}
+.deal-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.deal-info h4{font-size:15px;font-weight:700;margin-bottom:3px}
+.deal-info p{font-size:13px;color:#666;line-height:1.5}
+.deal-value{margin-left:auto;font-size:20px;font-weight:900;color:#0033cc;white-space:nowrap}
 
 /* ===== CC RULE BOX ===== */
 .cc-rule{background:linear-gradient(135deg,#0a0e5c,#0033cc);color:#fff;border-radius:12px;padding:20px 24px;margin-bottom:24px;font-size:15px;font-weight:700;text-align:center;letter-spacing:0.5px}
@@ -211,9 +220,10 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 .streak-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Lato',sans-serif;font-weight:900;font-size:32px;color:#ff6600;pointer-events:none;z-index:10000;text-shadow:0 0 20px rgba(255,102,0,0.5);white-space:nowrap}
 
 /* ===== FOOTER ===== */
-.footer{background:linear-gradient(135deg,#0a0e5c 0%,#001144 100%);padding:32px 24px;text-align:center}
-.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:16px;letter-spacing:1px}
-.footer-copy{color:rgba(255,255,255,0.4);font-size:12px;margin-top:8px}
+.footer{background:linear-gradient(135deg,#0a0e5c 0%,#001144 100%);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden}
+.footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#06D0FF,transparent)}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:17px;letter-spacing:1.5px}
+.footer-copy{color:rgba(255,255,255,0.4);font-size:12px;margin-top:10px}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:600px){
@@ -309,34 +319,41 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 <!-- TAB 1: DASHBOARD                                                  -->
 <!-- ================================================================ -->
 <div class="tab-content active" id="tab-dashboard">
-  <div id="greeting" style="font-size:24px;font-weight:900;margin-bottom:24px;color:#0a0e5c"></div>
+  <div style="margin-bottom:28px">
+    <div id="greeting" style="font-size:26px;font-weight:900;color:#0a0e5c;margin-bottom:4px"></div>
+    <div id="greetingDate" style="font-size:14px;color:#666;font-weight:400"></div>
+    <div id="greetingQuote" style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#0033cc;margin-top:8px;opacity:0.7"></div>
+  </div>
   <div class="sec-title"><span class="blue">Quick</span> <span class="dark">Links</span></div>
   <div class="quick-links">
-    <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#ea4335;color:#fff">&#9993;</span>Gmail</a>
-    <a href="https://app.qbo.intuit.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#2ca01c;color:#fff">&#128215;</span>QuickBooks</a>
-    <a href="https://drive.google.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#4285f4;color:#fff">&#128193;</span>Google Drive</a>
-    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6b4c14;color:#fff">&#128230;</span>UPS Shipping Log</a>
-    <a href="/tools/pricing-calculator.html" target="_blank" rel="noopener" class="ql-btn aaron-only"><span class="ql-icon" style="background:#0033cc;color:#fff">&#129518;</span>Pricing Tools</a>
-    <a href="https://web.telegram.org" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0088cc;color:#fff">&#128172;</span>Telegram</a>
-    <a href="/internal/email_dashboard.html" target="_blank" rel="noopener" class="ql-btn aaron-only"><span class="ql-icon" style="background:#cc3333;color:#fff">&#128236;</span>Email Scanner</a>
-    <a href="/internal/samson_dashboard.html" target="_blank" rel="noopener" class="ql-btn aaron-only"><span class="ql-icon" style="background:#6600cc;color:#fff">&#129525;</span>Samson Tracker</a>
+    <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#ea4335;color:#fff"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>Gmail</a>
+    <a href="https://app.qbo.intuit.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#2ca01c;color:#fff"><svg viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM8 12h8v2H8v-2zm0 4h5v2H8v-2z"/></svg></span>QuickBooks</a>
+    <a href="https://drive.google.com" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#4285f4;color:#fff"><svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg></span>Google Drive</a>
+    <a href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#6b4c14;color:#fff"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v3h20V4c0-1.1-.9-2-2-2zM2 19c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9H2v10zm14-7h4v2h-4v-2zm0 4h4v2h-4v-2zm-6-4h4v2h-4v-2zm0 4h4v2h-4v-2zM4 12h4v2H4v-2zm0 4h4v2H4v-2z"/></svg></span>UPS Shipping Log</a>
+    <a href="/tools/pricing-calculator.html" target="_blank" rel="noopener" class="ql-btn aaron-only"><span class="ql-icon" style="background:#0033cc;color:#fff"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span>Pricing Tools</a>
+    <a href="https://web.telegram.org" target="_blank" rel="noopener" class="ql-btn"><span class="ql-icon" style="background:#0088cc;color:#fff"><svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></span>Telegram</a>
+    <a href="/internal/email_dashboard.html" target="_blank" rel="noopener" class="ql-btn aaron-only"><span class="ql-icon" style="background:#cc3333;color:#fff"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></span>Email Scanner</a>
+    <a href="/internal/samson_dashboard.html" target="_blank" rel="noopener" class="ql-btn aaron-only"><span class="ql-icon" style="background:#6600cc;color:#fff"><svg viewBox="0 0 24 24"><path d="M17.66 8L12 2.35 6.34 8A8.02 8.02 0 004 13.64c0 2 .78 4.11 2.34 5.67a7.99 7.99 0 0011.32 0c1.56-1.56 2.34-3.67 2.34-5.67C20 11.22 19.22 9.56 17.66 8zM6 14c.01-2 .62-3.27 1.76-4.4L12 5.27l4.24 4.38C17.38 10.77 17.99 12 18 14H6z"/></svg></span>Samson Tracker</a>
   </div>
   <div class="stats-grid">
-    <div class="stat-card" style="border-top-color:#0033cc"><div class="stat-number" style="color:#0033cc">5</div><div class="stat-label">Uninvoiced Orders</div></div>
-    <div class="stat-card" style="border-top-color:#cc0000"><div class="stat-number" style="color:#cc0000">3</div><div class="stat-label">Overdue Follow-Ups</div></div>
+    <div class="stat-card" style="border-top-color:#0033cc" onclick="document.querySelector('[data-tab=shipments]').click()"><div class="stat-number" style="color:#0033cc">5</div><div class="stat-label">Uninvoiced Orders</div></div>
+    <div class="stat-card" style="border-top-color:#cc0000" onclick="document.querySelector('[data-tab=followups]').click()"><div class="stat-number" style="color:#cc0000">3</div><div class="stat-label">Overdue Follow-Ups</div></div>
     <div class="stat-card" style="border-top-color:#00802b"><div class="stat-number" style="color:#00802b">$685K+</div><div class="stat-label">Active Pipeline</div></div>
     <div class="stat-card" style="border-top-color:#b38600"><div class="stat-number" style="color:#b38600">6</div><div class="stat-label">Skylift Trucks Inbound</div></div>
   </div>
   <div class="sec-title"><span class="blue">Critical</span> <span class="dark">Items</span></div>
-  <div class="card critical">
-    <h4 style="color:#cc0000;font-size:16px;margin-bottom:12px">&#9888; REQUIRES IMMEDIATE ATTENTION</h4>
-    <ul style="list-style:none;padding:0;font-size:14px;line-height:2">
-      <li>&#128308; <strong>5 uninvoiced shipments</strong> from March 20 &mdash; revenue sitting on the table</li>
-      <li>&#128308; <strong>Alabama dealer license</strong> &mdash; application not yet started</li>
-      <li>&#128308; <strong>EPB Chattanooga follow-up</strong> &mdash; Rick Sutherland, ~$185K SkyTruck47 quote from Dec 4, 2025</li>
-      <li>&#128308; <strong>Terex OEM follow-up</strong> &mdash; Bill Kugler, $500K+ potential, still at prospect stage</li>
-      <li>&#128308; <strong>BSS RCOO at Irby</strong> &mdash; Jared Lemoine, positive March 18 meeting needs follow-up</li>
-    </ul>
+  <div class="card critical" style="border-radius:14px;padding:0;overflow:hidden">
+    <div style="background:linear-gradient(135deg,#cc0000,#ff4444);padding:16px 24px;display:flex;align-items:center;gap:10px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+      <h4 style="color:#fff;font-size:15px;font-weight:900;letter-spacing:0.5px;margin:0">REQUIRES IMMEDIATE ATTENTION</h4>
+    </div>
+    <div style="padding:20px 24px">
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0"><svg width="18" height="18" viewBox="0 0 24 24" fill="#cc0000" style="flex-shrink:0;margin-top:2px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span style="font-size:14px"><strong>5 uninvoiced shipments</strong> from March 20 &mdash; revenue sitting on the table</span></div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0"><svg width="18" height="18" viewBox="0 0 24 24" fill="#cc0000" style="flex-shrink:0;margin-top:2px"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg><span style="font-size:14px"><strong>Alabama dealer license</strong> &mdash; application not yet started</span></div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0"><svg width="18" height="18" viewBox="0 0 24 24" fill="#cc0000" style="flex-shrink:0;margin-top:2px"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg><span style="font-size:14px"><strong>EPB Chattanooga follow-up</strong> &mdash; Rick Sutherland, ~$185K SkyTruck47 quote from Dec 4, 2025</span></div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0"><svg width="18" height="18" viewBox="0 0 24 24" fill="#cc0000" style="flex-shrink:0;margin-top:2px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg><span style="font-size:14px"><strong>Terex OEM follow-up</strong> &mdash; Bill Kugler, $500K+ potential, still at prospect stage</span></div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0"><svg width="18" height="18" viewBox="0 0 24 24" fill="#cc0000" style="flex-shrink:0;margin-top:2px"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg><span style="font-size:14px"><strong>BSS RCOO at Irby</strong> &mdash; Jared Lemoine, positive March 18 meeting needs follow-up</span></div>
+    </div>
   </div>
   <div class="sec-title"><span class="blue">Active</span> <span class="dark">Deals</span></div>
   <div class="deal-card"><div class="deal-icon" style="background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff">&#9889;</div><div class="deal-info"><h4>EPB Chattanooga &mdash; SkyTruck47</h4><p>Rick Sutherland &bull; Quoted Dec 4, 2025 &bull; <span class="badge badge-red">OVERDUE</span></p></div><div class="deal-value">~$185K</div></div>
@@ -673,7 +690,7 @@ return{toggleShipment:toggleShipment,undoShipment:undoShipment,toggleFollowup:to
 (function(){var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026',RK='nu_role';var storedRole=sessionStorage.getItem(RK);if(sessionStorage.getItem(K)==='granted'&&storedRole){o.classList.add('hidden');p.style.display='block';if(storedRole==='cb')document.body.classList.add('role-cb')}function a(){var pw=i.value,role=null;if(pw==='norris2026')role='aaron';else if(pw==='legacy2026')role='cb';if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem(RK,role);o.classList.add('hidden');p.style.display='block';if(role==='cb')document.body.classList.add('role-cb')}else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
 
 /* === GREETING === */
-(function(){var h=new Date().getHours(),role=sessionStorage.getItem('nu_role'),name=role==='cb'?'Caroline':'Aaron',g='Good evening, '+name;if(h>=4&&h<12)g='Good morning, '+name;else if(h>=12&&h<17)g='Good afternoon, '+name;document.getElementById('greeting').textContent=g+' \uD83D\uDC4B';var n=new Date();document.getElementById('headerDate').textContent=n.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})})();
+(function(){var h=new Date().getHours(),role=sessionStorage.getItem('nu_role'),name=role==='cb'?'Caroline':'Aaron',g='Good evening, '+name;if(h>=4&&h<12)g='Good morning, '+name;else if(h>=12&&h<17)g='Good afternoon, '+name;document.getElementById('greeting').textContent=g;var n=new Date();var dateStr=n.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});document.getElementById('headerDate').textContent=dateStr;var gd=document.getElementById('greetingDate');if(gd)gd.textContent=dateStr;var quotes=['Build the legacy. Every deal matters.','Three generations of grit. Keep pushing.','Outwork everyone. Outserve everyone.','The best time to follow up was yesterday.','Discipline is the bridge between goals and accomplishment.','Fortune favors the prepared.','Commit to the process. Results will follow.'];var qi=Math.floor(Math.random()*quotes.length);var gq=document.getElementById('greetingQuote');if(gq)gq.textContent='\u201C'+quotes[qi]+'\u201D'})();
 
 /* === PO GENERATOR === */
 (function(){var CS={MSP:'Mississippi Power',IRB:'Irby Construction',DOM:'Dominion Energy',LTC:'LineTec Services',FLO:'Florence Electric Dept',AEP:'AEP / Appalachian Power',SWP:'SWEPCO',CHN:'Chain Electric',SHF:'Sheffield Utilities',EPB:'EPB Chattanooga',GRD:'Gridco',TRX:'Terex'};function gs(){try{return JSON.parse(localStorage.getItem('nu_po_log')||'[]')}catch(e){return[]}}function ss(d){localStorage.setItem('nu_po_log',JSON.stringify(d))}function gns(c,ds){var l=gs(),pf='NU-'+c+'-'+ds+'-',mx=0;l.forEach(function(p){if(p.number&&p.number.startsWith(pf)){var s=parseInt(p.number.split('-').pop(),10);if(s>mx)mx=s}});return mx+1}function pad(n,l){return String(n).padStart(l,'0')}function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}function escA(s){return esc(s).replace(/"/g,'&quot;')}function rl(f){var l=gs().slice().reverse(),tb=document.getElementById('poLogBody');if(!tb)return;var fq=(f||'').toLowerCase(),h='';l.forEach(function(po,i){var ri=l.length-1-i;if(fq&&!(po.number||'').toLowerCase().includes(fq)&&!(po.customer||'').toLowerCase().includes(fq)&&!(po.notes||'').toLowerCase().includes(fq))return;h+='<tr><td style="font-weight:700;color:#0033cc;font-family:monospace;font-size:0.95rem">'+esc(po.number)+'</td><td>'+esc(po.customer)+'</td><td>'+esc(po.date)+'</td><td><input type="text" value="'+escA(po.notes||'')+'" data-idx="'+ri+'" class="po-note-input" placeholder="What was this PO for?"></td><td style="text-align:center"><button class="po-copy-btn" data-po="'+escA(po.number)+'">📋</button></td></tr>'});if(!h)h='<tr><td colspan="5" style="text-align:center;color:#999;padding:24px">No POs generated yet</td></tr>';tb.innerHTML=h;tb.querySelectorAll('.po-note-input').forEach(function(inp){inp.addEventListener('change',function(){var a=gs(),ix=parseInt(this.dataset.idx,10);if(a[ix])a[ix].notes=this.value;ss(a)})});tb.querySelectorAll('.po-copy-btn').forEach(function(btn){btn.addEventListener('click',function(){var b=btn;navigator.clipboard.writeText(b.dataset.po).then(function(){b.textContent='\u2705';setTimeout(function(){b.textContent='📋'},1200)})})})}window.addEventListener('DOMContentLoaded',function(){var sel=document.getElementById('poCustomer'),cr=document.getElementById('poCustomRow'),di=document.getElementById('poDate'),gb=document.getElementById('poGenBtn'),rd=document.getElementById('poResult'),si=document.getElementById('poSearch');if(!sel)return;Object.keys(CS).sort(function(a,b){return CS[a].localeCompare(CS[b])}).forEach(function(c){var o=document.createElement('option');o.value=c;o.textContent=CS[c]+' ('+c+')';sel.appendChild(o)});var co=document.createElement('option');co.value='__custom__';co.textContent='+ Add New Customer...';sel.appendChild(co);sel.addEventListener('change',function(){cr.style.display=sel.value==='__custom__'?'flex':'none'});var now=new Date();di.value=now.getFullYear()+'-'+pad(now.getMonth()+1,2)+'-'+pad(now.getDate(),2);gb.addEventListener('click',function(){var c=sel.value;if(c==='__custom__'){c=document.getElementById('poCustomCode').value.toUpperCase().replace(/[^A-Z]/g,'').substring(0,3);if(c.length!==3){alert('Enter a 3-letter customer code.');return}}if(!c){alert('Select a customer.');return}var d=new Date(di.value+'T12:00:00');if(isNaN(d)){alert('Enter a valid date.');return}var ds=pad(d.getMonth()+1,2)+pad(d.getDate(),2)+'-'+String(d.getFullYear()).slice(-2),sq=gns(c,ds),pn='NU-'+c+'-'+ds+'-'+pad(sq,3),cn=CS[c]||document.getElementById('poCustomName').value||c,lg=gs();lg.push({number:pn,code:c,customer:cn,date:di.value,notes:'',created:new Date().toISOString()});ss(lg);navigator.clipboard.writeText(pn).then(function(){rd.innerHTML='<div style="background:#e8f5e9;border:2px solid #00aa44;border-radius:10px;padding:20px;text-align:center;margin-top:16px"><div style="font-size:0.8rem;font-weight:700;color:#00aa44;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">PO Generated &amp; Copied</div><div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc">'+esc(pn)+'</div><div style="font-size:0.85rem;color:#555;margin-top:8px">'+esc(cn)+' \u2014 '+di.value+'</div></div>'}).catch(function(){rd.innerHTML='<div style="background:#fff3e0;border:2px solid #ff9900;border-radius:10px;padding:20px;text-align:center;margin-top:16px"><div style="font-family:monospace;font-size:2rem;font-weight:900;color:#0033cc">'+esc(pn)+'</div><div style="font-size:0.85rem;color:#cc6600;margin-top:8px">Copy manually</div></div>'});rl(si?si.value:'')});if(si)si.addEventListener('input',function(){rl(this.value)});var eb=document.getElementById('poExportBtn');if(eb)eb.addEventListener('click',function(){var l=gs(),csv='PO Number,Customer,Date,Notes\n';l.forEach(function(p){csv+='"'+p.number+'","'+p.customer+'","'+p.date+'","'+(p.notes||'').replace(/"/g,'""')+'"\n'});var b=new Blob([csv],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='norris_po_log_'+new Date().toISOString().slice(0,10)+'.csv';a.click()});rl()})})();
