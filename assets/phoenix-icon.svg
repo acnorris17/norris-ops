@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140">
+  <defs>
+    <linearGradient id="phoenixGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#06D0FF"/>
+      <stop offset="50%" stop-color="#0033cc"/>
+      <stop offset="100%" stop-color="#0000FF"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#0033cc"/>
+      <stop offset="40%" stop-color="#06D0FF"/>
+      <stop offset="100%" stop-color="#06D0FF" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <!-- Tail flames -->
+  <path d="M30,110 Q20,85 35,70 Q25,90 40,80 Q30,95 45,85 Q35,105 50,95 Q40,115 55,100 L60,120 Z" fill="url(#flameGrad)" opacity="0.6"/>
+  <path d="M90,110 Q100,85 85,70 Q95,90 80,80 Q90,95 75,85 Q85,105 70,95 Q80,115 65,100 L60,120 Z" fill="url(#flameGrad)" opacity="0.6"/>
+  <!-- Body -->
+  <ellipse cx="60" cy="80" rx="22" ry="30" fill="url(#phoenixGrad)"/>
+  <!-- Wings -->
+  <path d="M38,75 Q10,55 5,25 Q15,45 25,50 Q15,35 12,15 Q22,38 30,42 Q20,25 22,8 Q30,30 38,40 Z" fill="url(#phoenixGrad)" opacity="0.9"/>
+  <path d="M82,75 Q110,55 115,25 Q105,45 95,50 Q105,35 108,15 Q98,38 90,42 Q100,25 98,8 Q90,30 82,40 Z" fill="url(#phoenixGrad)" opacity="0.9"/>
+  <!-- Head -->
+  <circle cx="60" cy="48" r="14" fill="url(#phoenixGrad)"/>
+  <!-- Beak -->
+  <path d="M60,54 L55,60 L60,58 L65,60 Z" fill="#06D0FF"/>
+  <!-- Eye -->
+  <circle cx="55" cy="46" r="3" fill="#fff"/>
+  <circle cx="55" cy="46" r="1.5" fill="#0a0e5c"/>
+  <circle cx="67" cy="46" r="3" fill="#fff"/>
+  <circle cx="67" cy="46" r="1.5" fill="#0a0e5c"/>
+  <!-- Crown crest -->
+  <path d="M48,38 Q50,25 55,30 Q58,18 60,28 Q62,18 65,30 Q70,25 72,38" fill="none" stroke="#06D0FF" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

@@ -10,7 +10,8 @@
 /* ===== RESET ===== */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:100vh}
+body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:100vh;position:relative}
+body::before{content:'';position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(500px,60vw);aspect-ratio:1;background:url('logo-blue.png') center/contain no-repeat;opacity:0.025;pointer-events:none;z-index:0}
 
 /* ===== LOGIN SCREEN ===== */
 .login-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);font-family:'Lato',sans-serif}
@@ -230,6 +231,8 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 .done-badge{position:absolute;font-family:'Lato',sans-serif;font-size:14px;font-weight:900;color:#00aa44;pointer-events:none;white-space:nowrap}
 .level-up-text{position:absolute;font-family:'Press Start 2P',monospace;font-size:16px;color:#FFD700;pointer-events:none;text-shadow:0 0 10px rgba(255,215,0,0.8),2px 2px 0 #b38600;white-space:nowrap}
 .streak-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Lato',sans-serif;font-weight:900;font-size:32px;color:#ff6600;pointer-events:none;z-index:10000;text-shadow:0 0 20px rgba(255,102,0,0.5);white-space:nowrap}
+.celeb-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(60px);background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;padding:14px 28px;border-radius:12px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;box-shadow:0 6px 24px rgba(0,51,204,0.35);opacity:0;pointer-events:none;z-index:10000;white-space:nowrap;transition:all .4s cubic-bezier(.25,.46,.45,.94)}
+.celeb-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ===== FOOTER ===== */
 .footer{background:linear-gradient(135deg,#0a0e5c 0%,#001144 100%);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden}
@@ -267,6 +270,7 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 
 <!-- CELEBRATION OVERLAY -->
 <div class="celeb-layer" id="celebLayer"></div>
+<div class="celeb-toast" id="celebToast"></div>
 
 <!-- ==================== LOGIN GATE ==================== -->
 <div class="login-overlay" id="loginOverlay">
@@ -357,8 +361,8 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
     <a href="/internal/samson_dashboard.html" target="_blank" rel="noopener" class="ql-btn aaron-only"><span class="ql-icon" style="background:#6600cc;color:#fff"><svg viewBox="0 0 24 24"><path d="M17.66 8L12 2.35 6.34 8A8.02 8.02 0 004 13.64c0 2 .78 4.11 2.34 5.67a7.99 7.99 0 0011.32 0c1.56-1.56 2.34-3.67 2.34-5.67C20 11.22 19.22 9.56 17.66 8zM6 14c.01-2 .62-3.27 1.76-4.4L12 5.27l4.24 4.38C17.38 10.77 17.99 12 18 14H6z"/></svg></span>Samson Tracker</a>
   </div>
   <div class="stats-grid">
-    <div class="stat-card" style="border-top-color:#0033cc" onclick="document.querySelector('[data-tab=shipments]').click()"><div class="stat-number" style="color:#0033cc">5</div><div class="stat-label">Uninvoiced Orders</div></div>
-    <div class="stat-card" style="border-top-color:#cc0000" onclick="document.querySelector('[data-tab=followups]').click()"><div class="stat-number" style="color:#cc0000">3</div><div class="stat-label">Overdue Follow-Ups</div></div>
+    <div class="stat-card" style="border-top-color:#0033cc" onclick="document.querySelector('[data-tab=shipments]').click()"><svg width="28" height="28" viewBox="0 0 24 24" fill="#0033cc" style="opacity:.18;margin-bottom:8px"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg><div class="stat-number" style="color:#0033cc">5</div><div class="stat-label">Uninvoiced Orders</div></div>
+    <div class="stat-card" style="border-top-color:#cc0000" onclick="document.querySelector('[data-tab=followups]').click()"><svg width="28" height="28" viewBox="0 0 24 24" fill="#cc0000" style="opacity:.18;margin-bottom:8px"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg><div class="stat-number" style="color:#cc0000">3</div><div class="stat-label">Overdue Follow-Ups</div></div>
     <div class="stat-card" style="border-top-color:#00802b"><div class="stat-number" style="color:#00802b">$685K+</div><div class="stat-label">Active Pipeline</div></div>
     <div class="stat-card" style="border-top-color:#b38600"><div class="stat-number" style="color:#b38600">6</div><div class="stat-label">Skylift Trucks Inbound</div></div>
   </div>
@@ -536,7 +540,7 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
     </ul>
   </div>
   <div class="sec-title"><span class="blue">QuickBooks</span> <span class="dark">To-Do</span></div>
-  <div class="qb-summary" id="qbSummary">&#128202; QB Status: Loading...</div>
+  <div class="qb-summary" id="qbSummary" style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0033cc" style="flex-shrink:0"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>QB Status: Loading...</div>
   <div class="filter-bar" id="qbFilterBar">
     <button class="filter-btn active" data-filter="pending">Pending First</button>
     <button class="filter-btn" data-filter="completed">Completed</button>
@@ -649,7 +653,7 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 
 <!-- Completion Counter -->
 <div class="completion-counter aaron-only" id="completionCounter" onclick="this.classList.toggle('expanded')">
-  &#9989; <span id="ccCount">0</span> completed today
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="#0033cc" style="vertical-align:middle;margin-right:4px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span id="ccCount">0</span> completed today
   <div class="cc-detail" id="ccDetail">You've checked off 0 items today. Keep going!</div>
 </div>
 
@@ -676,7 +680,10 @@ function celebLevelUp(pos){var t=document.createElement('div');t.className='leve
 function showStreak(){if(streak<3)return;var msg,fires;if(streak>=10){msg='UNSTOPPABLE!';fires='\uD83D\uDD25\uD83D\uDD25\uD83D\uDD25'}else if(streak>=5){msg=streak+' STREAK!';fires='\uD83D\uDD25\uD83D\uDD25'}else{msg=streak+' IN A ROW!';fires='\uD83D\uDD25'}var el=document.createElement('div');el.className='streak-popup';el.textContent=fires+' '+msg;el.style.transition='all 1.5s ease-out';el.style.opacity='1';celebLayer.appendChild(el);requestAnimationFrame(function(){el.style.transform='translate(-50%,-50%) scale(1.3)';el.style.opacity='0'});setTimeout(function(){el.remove()},1600)}
 
 var celebFns=[celebFireworks,celebConfetti,celebPhoenix,celebStars,null,celebParty,celebLevelUp];
-function celebrate(checkEl){var pos=gcp(checkEl);var type;do{type=Math.floor(Math.random()*7)}while(type===lastCelebType);lastCelebType=type;if(type===4)celebCheckBoom(checkEl);else if(type===1||type===5)celebFns[type]();else celebFns[type](pos);showStreak();incrementCompleted()}
+var celebMsgs=['\uD83C\uDF89 Nice work!','Keep it up!','\u2705 Done!','\uD83D\uDCAA Crushing it!','\uD83D\uDD25 On fire!','Another one down!','\u2B50 Boom!'];
+var celebDing;try{var actx=new(window.AudioContext||window.webkitAudioContext)();celebDing=function(){var o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.frequency.value=880;o.type='sine';g.gain.setValueAtTime(0.08,actx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,actx.currentTime+0.3);o.start(actx.currentTime);o.stop(actx.currentTime+0.3)}}catch(e){celebDing=function(){}}
+function celebToast(msg){var t=document.getElementById('celebToast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(t._timer);t._timer=setTimeout(function(){t.classList.remove('show')},2500)}
+function celebrate(checkEl){var pos=gcp(checkEl);var type;do{type=Math.floor(Math.random()*7)}while(type===lastCelebType);lastCelebType=type;if(type===4)celebCheckBoom(checkEl);else if(type===1||type===5)celebFns[type]();else celebFns[type](pos);showStreak();incrementCompleted();celebToast(celebMsgs[Math.floor(Math.random()*celebMsgs.length)]);celebDing()}
 
 function celebDailyComplete(){var d=0;for(var i=0;i<7;i++){(function(idx){setTimeout(function(){var fp={x:rr(100,window.innerWidth-100),y:rr(100,window.innerHeight-200)};if(idx===4)celebConfetti();else if(idx===1||idx===5)celebFns[idx]();else celebFns[idx](fp)},d)})(i);d+=300}setTimeout(function(){var m=document.createElement('div');m.className='streak-popup';m.style.fontSize=isMobile?'18px':'28px';m.style.color='#FFD700';m.style.textShadow='0 0 30px rgba(255,215,0,0.8)';m.textContent="\uD83C\uDF89 DAILY CHECKLIST COMPLETE! You're a machine, CB! \uD83C\uDF89";m.style.transition='all 3s ease-out';m.style.opacity='1';celebLayer.appendChild(m);setTimeout(function(){m.style.opacity='0'},2000);setTimeout(function(){m.remove()},3200)},d+200)}
 
