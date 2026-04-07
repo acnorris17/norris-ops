@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-07T11:31:17",
-  "active_count": 6,
+  "last_updated": "2026-04-07T11:46:17",
+  "active_count": 5,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -79,7 +79,7 @@
     "note_reader": {
       "name": "Note Reader",
       "role": "reMarkable Scanner",
-      "status": "active",
+      "status": "idle",
       "last_run": "2026-04-07 11:14",
       "message": "Waiting for notes",
       "items": 0
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-07 11:27",
+      "last_run": "2026-04-07 11:42",
       "message": "All systems UP"
     },
     "backup": {
@@ -96,7 +96,7 @@
       "role": "iCloud Backup",
       "status": "idle",
       "last_run": "2026-04-07 02:00",
-      "message": "2,427 files protected",
+      "message": "2,428 files protected",
       "next_run": "Daily 2:00 AM"
     },
     "n8n": {
