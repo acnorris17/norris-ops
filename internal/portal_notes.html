@@ -3,393 +3,355 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Norris Utilities&reg; &mdash; Portal Notes &amp; Change Tracker</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<title>Portal Notes &mdash; Norris Utilities&reg;</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;min-height:100vh}
+html,body{height:100%;font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a}
 
-/* ===== LOGIN ===== */
+/* LOGIN */
 .login-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%)}
 .login-overlay.hidden{display:none}
 .login-box{background:#fff;border-radius:16px;padding:48px 40px;width:90%;max-width:420px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;overflow:hidden}
 .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0000FF,#06D0FF)}
-.login-title{font-weight:900;font-size:24px;color:#0a0e5c;margin-bottom:4px}
-.login-subtitle{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:15px;margin-bottom:32px}
+.login-title{font-weight:900;font-size:22px;color:#0a0e5c;margin-bottom:4px}
+.login-sub{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px;margin-bottom:28px}
 .login-input{width:100%;padding:14px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s}
 .login-input:focus{border-color:#0033cc}
 .login-input.error{border-color:#cc0000;animation:shake .4s ease}
-.login-btn{width:100%;padding:14px;margin-top:16px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:transform .15s,box-shadow .15s}
-.login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,51,204,0.35)}
-.login-error{color:#cc0000;font-size:13px;font-weight:700;margin-top:12px;min-height:20px}
+.login-btn{width:100%;padding:14px;margin-top:14px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;letter-spacing:1px;cursor:pointer}
+.login-error{color:#cc0000;font-size:13px;font-weight:700;margin-top:10px;min-height:18px}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
 
-/* ===== HEADER ===== */
-.header{background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:32px 24px;text-align:center;position:relative;overflow:hidden}
-.header::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:65%;padding-bottom:65%;background:url('../logo-blue.png') center/contain no-repeat;opacity:0.07;pointer-events:none}
-.header h1{font-weight:900;font-size:24px;color:#fff;letter-spacing:2px;position:relative}
-.header p{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.8);font-size:14px;margin-top:4px;position:relative}
-.chevron{line-height:0;margin-top:-1px}
-.chevron svg{display:block;width:100%}
+/* HEADER */
+.header{background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);padding:28px 32px;text-align:center}
+.header h1{font-weight:900;font-size:22px;color:#fff;letter-spacing:2px}
+.header p{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.8);font-size:14px;margin-top:4px}
+.back-link{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.8);text-decoration:none;font-size:13px;font-weight:700}
+.back-link:hover{color:#fff}
 
-/* ===== LAYOUT ===== */
-.app{display:flex;min-height:calc(100vh - 140px);max-width:1400px;margin:0 auto}
-.sidebar{width:260px;min-width:260px;background:#fff;border-right:1px solid #e0e0e0;padding:16px 0;overflow-y:auto}
-.main{flex:1;padding:24px 32px;overflow-y:auto}
+/* LAYOUT */
+.app{display:flex;min-height:calc(100vh - 80px)}
 
-/* ===== SIDEBAR ===== */
-.sidebar-title{font-size:11px;font-weight:900;color:#888;text-transform:uppercase;letter-spacing:1px;padding:12px 20px 8px}
-.page-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:10px 20px;border:none;background:none;font-family:'Lato',sans-serif;font-size:14px;font-weight:400;color:#444;cursor:pointer;text-align:left;transition:all .15s;border-left:3px solid transparent}
-.page-btn:hover{background:#f0f4ff;color:#0033cc}
-.page-btn.active{background:#e8f0ff;color:#0033cc;font-weight:700;border-left-color:#0033cc}
-.page-count{background:#0033cc;color:#fff;font-size:10px;font-weight:900;border-radius:10px;padding:2px 8px;min-width:22px;text-align:center}
-.page-count.zero{background:#ddd;color:#999}
+/* SIDEBAR */
+.sidebar{width:260px;min-width:260px;background:#fff;border-right:1px solid #e0e0e0;overflow-y:auto;padding:16px 0}
+.sidebar h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#888;padding:12px 20px 8px;margin-top:8px}
+.sidebar h3:first-child{margin-top:0}
+.sb-item{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;font-size:14px;font-weight:600;color:#333;cursor:pointer;transition:background .15s,color .15s;border-left:3px solid transparent}
+.sb-item:hover{background:#f0f4ff;color:#0033cc}
+.sb-item.active{background:#e8f0ff;color:#0033cc;border-left-color:#0033cc;font-weight:700}
+.sb-count{background:#0033cc;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;min-width:20px;text-align:center}
+.sb-count.zero{background:#e0e0e0;color:#999}
 
-/* ===== TOOLBAR ===== */
-.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid #e8e8e8}
-.toolbar h2{font-weight:900;font-size:20px;margin-right:auto}
-.toolbar h2 .blue{color:#0033cc}
-.toolbar h2 .dark{color:#1a1a1a}
-.filter-select{padding:8px 14px;border:2px solid #e0e0e0;border-radius:8px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:#444;background:#fff;cursor:pointer;outline:none}
-.filter-select:focus{border-color:#0033cc}
-.btn{padding:9px 18px;border:none;border-radius:8px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;letter-spacing:0.5px}
-.btn-primary{background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,51,204,0.3)}
-.btn-secondary{background:#fff;color:#0033cc;border:2px solid #0033cc}
-.btn-secondary:hover{background:#e8f0ff}
-.btn-danger{background:#fff;color:#cc0000;border:2px solid #cc0000;font-size:12px}
-.btn-danger:hover{background:#fde8e8}
-.btn-export{background:#fff;color:#00802b;border:2px solid #00802b}
-.btn-export:hover{background:#e6f9ee}
+/* MAIN */
+.main{flex:1;padding:32px;overflow-y:auto}
+.page-title{font-size:22px;font-weight:900;color:#0a0e5c;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-title span{font-size:14px;font-weight:400;color:#888}
 
-/* ===== NOTE FORM ===== */
-.note-form{background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:2px solid #06D0FF;display:none}
-.note-form.visible{display:block}
+/* TOOLBAR */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:24px}
+.filter-btn{padding:8px 16px;border:2px solid #e0e0e0;border-radius:8px;background:#fff;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;color:#666;cursor:pointer;transition:all .2s}
+.filter-btn:hover{border-color:#0033cc;color:#0033cc}
+.filter-btn.active{background:#0033cc;border-color:#0033cc;color:#fff}
+.toolbar-spacer{flex:1}
+.action-btn{padding:8px 18px;border:none;border-radius:8px;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
+.action-btn.primary{background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff}
+.action-btn.primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,51,204,0.3)}
+.action-btn.danger{background:#fde8e8;color:#cc0000;border:1px solid #fcc}
+.action-btn.danger:hover{background:#cc0000;color:#fff}
+.action-btn.export{background:#e6f9ee;color:#00802b;border:1px solid #b8e6c8}
+.action-btn.export:hover{background:#00802b;color:#fff}
+
+/* ADD FORM */
+.add-form{background:#fff;border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #eee}
+.add-form h4{font-size:14px;font-weight:700;color:#0033cc;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
 .form-row{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-.form-row select,.form-row input{padding:10px 14px;border:2px solid #e0e0e0;border-radius:8px;font-family:'Lato',sans-serif;font-size:14px;outline:none;flex:1;min-width:140px}
-.form-row select:focus,.form-row input:focus{border-color:#0033cc}
-.form-row textarea{width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:8px;font-family:'Lato',sans-serif;font-size:14px;outline:none;resize:vertical;min-height:80px}
-.form-row textarea:focus{border-color:#0033cc}
-.form-actions{display:flex;gap:10px;justify-content:flex-end}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#888}
+.form-group select,.form-group textarea{font-family:'Lato',sans-serif;font-size:14px;padding:10px 14px;border:2px solid #e0e0e0;border-radius:8px;outline:none;transition:border-color .2s}
+.form-group select:focus,.form-group textarea:focus{border-color:#0033cc}
+.form-group textarea{min-height:80px;resize:vertical;width:100%}
+.form-group.full{flex:1;min-width:100%}
 
-/* ===== NOTE CARDS ===== */
-.note-card{background:#fff;border-radius:10px;padding:16px 20px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,0.04);border:1px solid #eee;transition:all .15s}
-.note-card:hover{border-color:#0033cc;box-shadow:0 4px 16px rgba(0,51,204,0.08)}
-.note-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.note-badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:900;letter-spacing:0.5px;text-transform:uppercase}
-.badge-bug{background:#fde8e8;color:#cc0000}
-.badge-change{background:#fff8e1;color:#b38600}
-.badge-improvement{background:#e8f0ff;color:#0033cc}
-.badge-feature{background:#e6f9ee;color:#00802b}
-.priority-high{color:#cc0000;font-weight:900;font-size:12px}
-.priority-medium{color:#b38600;font-weight:700;font-size:12px}
-.priority-low{color:#888;font-weight:400;font-size:12px}
-.note-time{font-size:11px;color:#aaa;margin-left:auto}
-.note-desc{font-size:14px;color:#333;line-height:1.6;margin-bottom:10px}
-.note-bottom{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.status-select{padding:5px 10px;border:2px solid #e0e0e0;border-radius:6px;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;outline:none}
-.status-open{border-color:#cc0000;color:#cc0000}
-.status-progress{border-color:#b38600;color:#b38600}
-.status-done{border-color:#00802b;color:#00802b}
-.empty-state{text-align:center;padding:60px 20px;color:#888;font-size:15px}
+/* NOTES LIST */
+.note-card{background:#fff;border-radius:12px;padding:20px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);border:1px solid #eee;display:flex;gap:16px;align-items:flex-start;transition:all .2s}
+.note-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08)}
+.note-card.done{opacity:0.6;background:#f9fdf9}
+.note-priority{width:6px;min-height:50px;border-radius:3px;flex-shrink:0}
+.note-priority.high{background:#cc0000}
+.note-priority.medium{background:#ffaa00}
+.note-priority.low{background:#00aa44}
+.note-body{flex:1;min-width:0}
+.note-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.note-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:3px 8px;border-radius:4px}
+.note-type.bug{background:#fde8e8;color:#cc0000}
+.note-type.change{background:#fff8e1;color:#b38600}
+.note-type.improvement{background:#e8f0ff;color:#0033cc}
+.note-type.feature{background:#e6f9ee;color:#00802b}
+.note-time{font-size:11px;color:#aaa;margin-left:auto;white-space:nowrap}
+.note-desc{font-size:14px;color:#333;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.note-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.note-actions button{padding:5px 12px;border:1px solid #e0e0e0;border-radius:6px;background:#fff;font-family:'Lato',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s}
+.note-actions button:hover{border-color:#0033cc;color:#0033cc}
+.note-actions button.del:hover{border-color:#cc0000;color:#cc0000}
+.status-badge{font-size:10px;font-weight:700;text-transform:uppercase;padding:3px 8px;border-radius:4px;letter-spacing:0.5px}
+.status-badge.open{background:#fde8e8;color:#cc0000}
+.status-badge.in-progress{background:#fff8e1;color:#b38600}
+.status-badge.done{background:#e6f9ee;color:#00802b}
+.empty-state{text-align:center;padding:60px 20px;color:#aaa;font-size:15px}
 
-/* ===== FOOTER ===== */
-.footer{background:linear-gradient(135deg,#0a0e5c,#001144);padding:24px;text-align:center}
+/* FOOTER */
+.footer{background:linear-gradient(135deg,#0a0e5c 0%,#001144 100%);padding:20px;text-align:center}
 .footer p{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:14px}
-.footer small{color:rgba(255,255,255,0.3);font-size:11px;display:block;margin-top:6px}
+.footer small{color:rgba(255,255,255,0.4);font-size:11px;display:block;margin-top:4px}
 
-/* ===== TOAST ===== */
-.toast{position:fixed;bottom:24px;right:24px;background:#00802b;color:#fff;padding:12px 24px;border-radius:10px;font-weight:700;font-size:14px;box-shadow:0 4px 20px rgba(0,0,0,0.2);transform:translateY(80px);opacity:0;transition:all .3s;z-index:9999}
-.toast.show{transform:translateY(0);opacity:1}
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0a0e5c;color:#fff;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,0.25);z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
 
 @media(max-width:768px){
   .app{flex-direction:column}
-  .sidebar{width:100%;min-width:100%;border-right:none;border-bottom:1px solid #e0e0e0;display:flex;flex-wrap:wrap;padding:8px}
-  .sidebar-title{display:none}
-  .page-btn{width:auto;padding:8px 14px;font-size:12px;border-left:none;border-bottom:3px solid transparent}
-  .page-btn.active{border-left:none;border-bottom-color:#0033cc}
-  .main{padding:16px}
-  .toolbar{gap:8px}
-  .header h1{font-size:18px}
+  .sidebar{width:100%;min-width:100%;border-right:none;border-bottom:1px solid #e0e0e0;max-height:200px}
+  .main{padding:20px}
+  .form-row{flex-direction:column}
 }
 </style>
 </head>
 <body>
 
-<!-- ==================== LOGIN GATE ==================== -->
+<!-- LOGIN -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
-    <div class="login-title">Norris Utilities&reg;</div>
-    <div class="login-subtitle">A Legacy of Commitment&reg;</div>
+    <div class="login-title">Portal Notes</div>
+    <div class="login-sub">A Legacy of Commitment&reg;</div>
     <input type="password" class="login-input" id="loginInput" placeholder="Enter password" autocomplete="off" autofocus>
-    <button class="login-btn" id="loginBtn">ACCESS NOTES</button>
+    <button class="login-btn" id="loginBtn">ACCESS</button>
     <div class="login-error" id="loginError"></div>
   </div>
 </div>
 
-<div id="portalContent" style="display:none">
-
-<div class="header">
-  <h1>Portal Notes &amp; Change Tracker</h1>
+<!-- APP -->
+<div id="appWrap" style="display:none">
+<div class="header" style="position:relative">
+  <a href="/norris-ops/index.html" class="back-link">&larr; Back to Portal</a>
+  <h1>&#128221; Portal Notes &amp; Change Tracker</h1>
   <p>A Legacy of Commitment&reg;</p>
 </div>
-<div class="chevron"><svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 547,0 547,40 0,0" fill="#06D0FF" opacity="0.15"/><polygon points="0,0 547,40 1440,0" fill="#f5f6fa"/></svg></div>
 
 <div class="app">
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-title">Portal Pages</div>
-  </div>
+  <aside class="sidebar" id="sidebar"></aside>
   <div class="main" id="main"></div>
 </div>
 
 <footer class="footer">
   <p>A Legacy of Commitment&reg;</p>
-  <small>&copy; 2026 Norris Utilities, LLC &mdash; Aaron Only</small>
+  <small>&copy; 2026 Norris Utilities, LLC &mdash; Internal Use Only</small>
 </footer>
+</div>
 
 <div class="toast" id="toast"></div>
 
-</div><!-- /portalContent -->
-
 <script>
 (function(){
-  /* === PASSWORD GATE === */
-  var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),
-      i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),
-      e=document.getElementById('loginError'),K='nu_notes_auth';
-  if(sessionStorage.getItem(K)==='granted'){o.classList.add('hidden');p.style.display='block'}
-  function doLogin(){
-    if(i.value==='norris2026'){sessionStorage.setItem(K,'granted');o.classList.add('hidden');p.style.display='block';init()}
-    else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}
-  }
-  b.addEventListener('click',doLogin);
-  i.addEventListener('keydown',function(ev){if(ev.key==='Enter')doLogin()});
-  if(sessionStorage.getItem(K)==='granted') init();
+'use strict';
 
-  /* === PAGES === */
-  var PAGES = [
-    {id:'overall',      label:'Overall / Global'},
-    {id:'dashboard',    label:'Dashboard'},
-    {id:'shipments',    label:'Shipments'},
-    {id:'ap',           label:'Accounts Payable'},
-    {id:'followups',    label:'Follow-Ups'},
-    {id:'contacts',     label:'Contacts'},
-    {id:'cb-tasks',     label:"CB's Tasks"},
-    {id:'samson',       label:'Samson Rope'},
-    {id:'pogen',        label:'PO Generator'},
-    {id:'tools',        label:'Tools'},
-    {id:'docs',         label:'Docs'},
-    {id:'website',      label:'Website Homepage'},
-    {id:'flexstore',    label:'FlexPro Storefront'},
-    {id:'team',         label:'Team Page'}
-  ];
+/* ── Auth ── */
+var K='nu_pn_auth';
+if(sessionStorage.getItem(K)==='granted'){show()}
+var li=document.getElementById('loginInput'),lb=document.getElementById('loginBtn'),le=document.getElementById('loginError');
+function tryLogin(){if(li.value==='norris2026'){sessionStorage.setItem(K,'granted');show()}else{li.classList.add('error');le.textContent='Access Denied.';setTimeout(function(){li.classList.remove('error')},500)}}
+lb.addEventListener('click',tryLogin);
+li.addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin()});
+function show(){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('appWrap').style.display='block';init()}
 
-  var TYPES = ['Bug','Change','Improvement','New Feature'];
-  var PRIORITIES = ['High','Medium','Low'];
-  var STATUSES = ['Open','In Progress','Done'];
+/* ── Pages ── */
+var PAGES=[
+  {id:'dashboard',label:'Dashboard'},
+  {id:'shipments',label:'Shipments & Invoicing'},
+  {id:'ap',label:'Accounts Payable'},
+  {id:'followups',label:'Follow-Ups'},
+  {id:'contacts',label:'Contacts'},
+  {id:'cb-tasks',label:"CB's Tasks"},
+  {id:'samson',label:'Samson Rope'},
+  {id:'pogen',label:'PO Generator'},
+  {id:'tools',label:'Tools'},
+  {id:'docs',label:'Docs'},
+  {id:'website',label:'Website Homepage'},
+  {id:'storefront',label:'FlexPro Storefront'},
+  {id:'team',label:'Team Page'},
+  {id:'telegram',label:'Telegram Log'},
+  {id:'global',label:'Overall / Global'}
+];
 
-  var activePage = 'overall';
-  var statusFilter = 'all';
+var activePage='dashboard';
+var activeFilter='all';
 
-  /* === STORAGE === */
-  var STORE_KEY = 'nu_portal_notes';
-  function loadNotes(){
-    try{return JSON.parse(localStorage.getItem(STORE_KEY))||{}}catch(e){return{}}
-  }
-  function saveNotes(data){localStorage.setItem(STORE_KEY,JSON.stringify(data))}
+/* ── Storage ── */
+var SK='nu_portal_notes';
+function load(){try{return JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){return{}}}
+function save(d){localStorage.setItem(SK,JSON.stringify(d))}
+function getPageNotes(pageId){var d=load();return(d[pageId]||[]).sort(function(a,b){return b.ts-a.ts})}
+function addNote(pageId,note){var d=load();if(!d[pageId])d[pageId]=[];note.id='n_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);note.ts=Date.now();note.status='open';d[pageId].push(note);save(d);return note}
+function updateNote(pageId,noteId,updates){var d=load();if(!d[pageId])return;d[pageId]=d[pageId].map(function(n){if(n.id===noteId){for(var k in updates)n[k]=updates[k]}return n});save(d)}
+function deleteNote(pageId,noteId){var d=load();if(!d[pageId])return;d[pageId]=d[pageId].filter(function(n){return n.id!==noteId});save(d)}
+function clearDone(pageId){var d=load();if(!d[pageId])return;d[pageId]=d[pageId].filter(function(n){return n.status!=='done'});save(d)}
+function countOpen(pageId){var d=load();if(!d[pageId])return 0;return d[pageId].filter(function(n){return n.status!=='done'}).length}
+function countAllOpen(){var d=load(),c=0;for(var k in d)d[k].forEach(function(n){if(n.status!=='done')c++});return c}
 
-  function getPageNotes(pageId){
-    var data=loadNotes();
-    return data[pageId]||[];
-  }
-  function setPageNotes(pageId,notes){
-    var data=loadNotes();
-    data[pageId]=notes;
-    saveNotes(data);
-  }
+/* ── Render Sidebar ── */
+function renderSidebar(){
+  var sb=document.getElementById('sidebar');
+  var h='<h3>Portal Pages</h3>';
+  PAGES.forEach(function(p){
+    var c=countOpen(p.id);
+    h+='<div class="sb-item'+(p.id===activePage?' active':'')+'" data-page="'+p.id+'">';
+    h+=esc(p.label);
+    h+='<span class="sb-count'+(c===0?' zero':'')+'">'+c+'</span>';
+    h+='</div>';
+  });
+  var total=countAllOpen();
+  h+='<div style="padding:16px 20px;margin-top:12px;border-top:1px solid #e8e8e8;font-size:12px;color:#888;font-weight:700">';
+  h+='Total open: <span style="color:#0033cc">'+total+'</span></div>';
+  sb.innerHTML=h;
+  sb.querySelectorAll('.sb-item').forEach(function(el){
+    el.addEventListener('click',function(){activePage=el.dataset.page;activeFilter='all';renderSidebar();renderMain()});
+  });
+}
 
-  /* === COUNT === */
-  function openCount(pageId){
-    var notes=getPageNotes(pageId);
-    var c=0;
-    for(var i=0;i<notes.length;i++){if(notes[i].status!=='Done')c++}
-    return c;
-  }
+/* ── Render Main ── */
+function renderMain(){
+  var pg=PAGES.filter(function(p){return p.id===activePage})[0];
+  if(!pg)return;
+  var notes=getPageNotes(activePage);
+  var filtered=activeFilter==='all'?notes:notes.filter(function(n){return n.status===activeFilter});
 
-  /* === SIDEBAR === */
-  function renderSidebar(){
-    var sb=document.getElementById('sidebar');
-    sb.innerHTML='<div class="sidebar-title">Portal Pages</div>';
-    PAGES.forEach(function(pg){
-      var btn=document.createElement('button');
-      btn.className='page-btn'+(pg.id===activePage?' active':'');
-      var count=openCount(pg.id);
-      var countCls=count===0?'page-count zero':'page-count';
-      btn.innerHTML='<span>'+pg.label+'</span><span class="'+countCls+'">'+count+'</span>';
-      btn.addEventListener('click',function(){activePage=pg.id;renderSidebar();renderMain()});
-      sb.appendChild(btn);
+  var h='<div class="page-title">'+esc(pg.label)+' <span>'+notes.length+' note'+(notes.length!==1?'s':'')+'</span></div>';
+
+  /* Toolbar */
+  h+='<div class="toolbar">';
+  ['all','open','in-progress','done'].forEach(function(f){
+    var label=f==='all'?'All':f==='open'?'Open':f==='in-progress'?'In Progress':'Done';
+    h+='<button class="filter-btn'+(activeFilter===f?' active':'')+'" data-filter="'+f+'">'+label+'</button>';
+  });
+  h+='<div class="toolbar-spacer"></div>';
+  h+='<button class="action-btn export" id="btnExport">&#128203; Export All</button>';
+  h+='<button class="action-btn danger" id="btnClearDone">Clear Done</button>';
+  h+='</div>';
+
+  /* Add form */
+  h+='<div class="add-form"><h4>+ Add Note</h4>';
+  h+='<div class="form-row">';
+  h+='<div class="form-group"><label>Priority</label><select id="fPriority"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select></div>';
+  h+='<div class="form-group"><label>Type</label><select id="fType"><option value="bug">Bug</option><option value="change">Change</option><option value="improvement" selected>Improvement</option><option value="feature">New Feature</option></select></div>';
+  h+='</div>';
+  h+='<div class="form-row"><div class="form-group full"><label>Description</label><textarea id="fDesc" placeholder="What needs to be done on this page?"></textarea></div></div>';
+  h+='<button class="action-btn primary" id="btnAdd">Add Note</button>';
+  h+='</div>';
+
+  /* Notes */
+  if(filtered.length===0){
+    h+='<div class="empty-state">No notes'+(activeFilter!=='all'?' matching this filter':' yet')+'. Add one above.</div>';
+  }else{
+    filtered.forEach(function(n){
+      h+='<div class="note-card'+(n.status==='done'?' done':'')+'" data-id="'+n.id+'">';
+      h+='<div class="note-priority '+n.priority+'"></div>';
+      h+='<div class="note-body">';
+      h+='<div class="note-header">';
+      h+='<span class="note-type '+n.type+'">'+esc(n.type==='feature'?'New Feature':n.type)+'</span>';
+      h+='<span class="status-badge '+n.status+'">'+esc(n.status==='in-progress'?'In Progress':n.status)+'</span>';
+      h+='<span class="note-time">'+fmtDate(n.ts)+'</span>';
+      h+='</div>';
+      h+='<div class="note-desc">'+esc(n.description)+'</div>';
+      h+='<div class="note-actions">';
+      if(n.status==='open'){
+        h+='<button data-action="progress" data-nid="'+n.id+'">&#9654; Start</button>';
+        h+='<button data-action="done" data-nid="'+n.id+'">&#10003; Done</button>';
+      }else if(n.status==='in-progress'){
+        h+='<button data-action="done" data-nid="'+n.id+'">&#10003; Done</button>';
+        h+='<button data-action="open" data-nid="'+n.id+'">&#8592; Reopen</button>';
+      }else{
+        h+='<button data-action="open" data-nid="'+n.id+'">&#8592; Reopen</button>';
+      }
+      h+='<button class="del" data-action="delete" data-nid="'+n.id+'">&#128465; Delete</button>';
+      h+='</div></div></div>';
     });
   }
 
-  /* === MAIN === */
-  function renderMain(){
-    var main=document.getElementById('main');
-    var pg=PAGES.filter(function(p){return p.id===activePage})[0];
-    var notes=getPageNotes(activePage);
+  document.getElementById('main').innerHTML=h;
 
-    var filtered=notes;
-    if(statusFilter==='open') filtered=notes.filter(function(n){return n.status!=='Done'});
-    else if(statusFilter==='done') filtered=notes.filter(function(n){return n.status==='Done'});
-
-    var html='';
-
-    /* Toolbar */
-    html+='<div class="toolbar">';
-    html+='<h2><span class="blue">'+pg.label.split(' ')[0]+'</span> <span class="dark">'+pg.label.split(' ').slice(1).join(' ')+'</span></h2>';
-    html+='<select class="filter-select" id="statusFilter">';
-    html+='<option value="all"'+(statusFilter==='all'?' selected':'')+'>Show All</option>';
-    html+='<option value="open"'+(statusFilter==='open'?' selected':'')+'>Open Only</option>';
-    html+='<option value="done"'+(statusFilter==='done'?' selected':'')+'>Done</option>';
-    html+='</select>';
-    html+='<button class="btn btn-primary" id="addNoteBtn">+ Add Note</button>';
-    html+='<button class="btn btn-export" id="exportBtn">Export All</button>';
-    html+='</div>';
-
-    /* Add Note Form */
-    html+='<div class="note-form" id="noteForm">';
-    html+='<div class="form-row">';
-    html+='<select id="formType">'+TYPES.map(function(t){return'<option value="'+t+'">'+t+'</option>'}).join('')+'</select>';
-    html+='<select id="formPriority">'+PRIORITIES.map(function(p){return'<option value="'+p+'">'+p+'</option>'}).join('')+'</select>';
-    html+='</div>';
-    html+='<div class="form-row"><textarea id="formDesc" placeholder="Describe the note, bug, or change request..."></textarea></div>';
-    html+='<div class="form-actions"><button class="btn btn-secondary" id="cancelBtn">Cancel</button><button class="btn btn-primary" id="saveBtn">Save Note</button></div>';
-    html+='</div>';
-
-    /* Notes */
-    if(filtered.length===0){
-      html+='<div class="empty-state">No notes for this page'+(statusFilter!=='all'?' with this filter':'')+'. Click <strong>+ Add Note</strong> to start.</div>';
-    } else {
-      filtered.forEach(function(note,idx){
-        var realIdx=notes.indexOf(note);
-        var typeCls='badge-'+note.type.toLowerCase().replace(' ','');
-        if(note.type==='New Feature') typeCls='badge-feature';
-        var priCls='priority-'+note.priority.toLowerCase();
-        var statusCls=note.status==='Open'?'status-open':note.status==='In Progress'?'status-progress':'status-done';
-
-        html+='<div class="note-card">';
-        html+='<div class="note-top">';
-        html+='<span class="note-badge '+typeCls+'">'+note.type+'</span>';
-        html+='<span class="'+priCls+'">'+note.priority+'</span>';
-        html+='<span class="note-time">'+note.timestamp+'</span>';
-        html+='</div>';
-        html+='<div class="note-desc">'+escHtml(note.description)+'</div>';
-        html+='<div class="note-bottom">';
-        html+='<select class="status-select '+statusCls+'" data-idx="'+realIdx+'">';
-        STATUSES.forEach(function(s){
-          html+='<option value="'+s+'"'+(note.status===s?' selected':'')+'>'+s+'</option>';
-        });
-        html+='</select>';
-        html+='<button class="btn btn-danger" data-delidx="'+realIdx+'">Delete</button>';
-        html+='</div>';
-        html+='</div>';
-      });
-    }
-
-    main.innerHTML=html;
-
-    /* Bind events */
-    document.getElementById('statusFilter').addEventListener('change',function(){
-      statusFilter=this.value;renderMain();
+  /* Bind events */
+  document.querySelectorAll('.filter-btn').forEach(function(b){
+    b.addEventListener('click',function(){activeFilter=b.dataset.filter;renderMain()});
+  });
+  document.getElementById('btnAdd').addEventListener('click',function(){
+    var desc=document.getElementById('fDesc').value.trim();
+    if(!desc){document.getElementById('fDesc').focus();return}
+    addNote(activePage,{
+      priority:document.getElementById('fPriority').value,
+      type:document.getElementById('fType').value,
+      description:desc
     });
-    document.getElementById('addNoteBtn').addEventListener('click',function(){
-      document.getElementById('noteForm').classList.toggle('visible');
-      document.getElementById('formDesc').focus();
-    });
-    document.getElementById('cancelBtn').addEventListener('click',function(){
-      document.getElementById('noteForm').classList.remove('visible');
-    });
-    document.getElementById('saveBtn').addEventListener('click',function(){
-      var desc=document.getElementById('formDesc').value.trim();
-      if(!desc) return;
-      var notes=getPageNotes(activePage);
-      notes.unshift({
-        type:document.getElementById('formType').value,
-        priority:document.getElementById('formPriority').value,
-        description:desc,
-        status:'Open',
-        timestamp:new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})
-      });
-      setPageNotes(activePage,notes);
-      document.getElementById('noteForm').classList.remove('visible');
+    renderSidebar();renderMain();toast('Note added');
+  });
+  /* Allow Ctrl+Enter to submit */
+  document.getElementById('fDesc').addEventListener('keydown',function(e){
+    if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){document.getElementById('btnAdd').click()}
+  });
+  document.getElementById('btnExport').addEventListener('click',exportAll);
+  document.getElementById('btnClearDone').addEventListener('click',function(){
+    var ct=getPageNotes(activePage).filter(function(n){return n.status==='done'}).length;
+    if(ct===0){toast('Nothing to clear');return}
+    clearDone(activePage);renderSidebar();renderMain();toast(ct+' done item'+(ct!==1?'s':'')+' cleared');
+  });
+  document.querySelectorAll('.note-actions button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var nid=b.dataset.nid,action=b.dataset.action;
+      if(action==='delete'){
+        if(!confirm('Delete this note?'))return;
+        deleteNote(activePage,nid);
+      }
+      else if(action==='progress'){updateNote(activePage,nid,{status:'in-progress'})}
+      else if(action==='done'){updateNote(activePage,nid,{status:'done'})}
+      else if(action==='open'){updateNote(activePage,nid,{status:'open'})}
       renderSidebar();renderMain();
-      toast('Note saved');
     });
-    document.getElementById('exportBtn').addEventListener('click',exportAll);
+  });
+}
 
-    /* Status change + delete */
-    main.querySelectorAll('.status-select').forEach(function(sel){
-      sel.addEventListener('change',function(){
-        var idx=parseInt(this.dataset.idx);
-        var notes=getPageNotes(activePage);
-        notes[idx].status=this.value;
-        setPageNotes(activePage,notes);
-        renderSidebar();renderMain();
-      });
+/* ── Export ── */
+function exportAll(){
+  var d=load(),out=[];
+  out.push('# Portal Notes Export — '+new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}));
+  out.push('');
+  var hasAny=false;
+  PAGES.forEach(function(pg){
+    var notes=d[pg.id];
+    if(!notes||notes.length===0)return;
+    hasAny=true;
+    out.push('## '+pg.label);
+    notes.sort(function(a,b){return b.ts-a.ts}).forEach(function(n){
+      var status=n.status==='in-progress'?'IN PROGRESS':n.status.toUpperCase();
+      var pri=n.priority.toUpperCase();
+      var type=n.type==='feature'?'NEW FEATURE':n.type.toUpperCase();
+      out.push('- ['+status+'] ['+pri+'] ['+type+'] '+n.description);
+      out.push('  Added: '+fmtDate(n.ts));
     });
-    main.querySelectorAll('[data-delidx]').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        var idx=parseInt(this.dataset.delidx);
-        if(!confirm('Delete this note?')) return;
-        var notes=getPageNotes(activePage);
-        notes.splice(idx,1);
-        setPageNotes(activePage,notes);
-        renderSidebar();renderMain();
-        toast('Note deleted');
-      });
-    });
-  }
+    out.push('');
+  });
+  if(!hasAny){toast('No notes to export');return}
+  var text=out.join('\n');
+  navigator.clipboard.writeText(text).then(function(){toast('All notes copied to clipboard!')}).catch(function(){
+    var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;left:-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('Notes copied!');
+  });
+}
 
-  /* === EXPORT === */
-  function exportAll(){
-    var data=loadNotes();
-    var lines=[];
-    lines.push('NORRIS UTILITIES PORTAL NOTES');
-    lines.push('Exported: '+new Date().toLocaleString());
-    lines.push('='.repeat(50));
-    PAGES.forEach(function(pg){
-      var notes=data[pg.id]||[];
-      if(notes.length===0) return;
-      lines.push('');
-      lines.push('## '+pg.label+' ('+notes.length+' notes)');
-      lines.push('-'.repeat(40));
-      notes.forEach(function(n,i){
-        lines.push((i+1)+'. ['+n.status+'] ['+n.priority+'] ['+n.type+'] '+n.description);
-        lines.push('   Added: '+n.timestamp);
-      });
-    });
-    var text=lines.join('\n');
-    navigator.clipboard.writeText(text).then(function(){
-      toast('All notes copied to clipboard');
-    }).catch(function(){
-      /* Fallback */
-      var ta=document.createElement('textarea');
-      ta.value=text;document.body.appendChild(ta);ta.select();
-      document.execCommand('copy');document.body.removeChild(ta);
-      toast('All notes copied to clipboard');
-    });
-  }
+/* ── Helpers ── */
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function fmtDate(ts){var d=new Date(ts);return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2500)}
 
-  /* === HELPERS === */
-  function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}
-
-  function toast(msg){
-    var t=document.getElementById('toast');
-    t.textContent=msg;t.classList.add('show');
-    setTimeout(function(){t.classList.remove('show')},2500);
-  }
-
-  function init(){renderSidebar();renderMain()}
+/* ── Init ── */
+function init(){renderSidebar();renderMain()}
 })();
 </script>
 </body>
