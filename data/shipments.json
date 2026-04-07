@@ -109,6 +109,18 @@
       "status": "ready",
       "status_label": "NEEDS INVOICE",
       "sd_link": "/shipping-docs/SD-2026-AJ-0401-ARCH.html"
+    },
+    {
+      "id": 10,
+      "customer": "Wayne Abadie",
+      "company": "Primoris (Aerial Hydraulics)",
+      "product": "2\u00d7 2-Man Bucket Cover \u2022 PO W6237",
+      "sku": "",
+      "amount": "Contact Aaron for pricing",
+      "ship_date": "2026-03-31",
+      "status": "ready",
+      "status_label": "READY TO INVOICE",
+      "sd_link": "/shipping-docs/SD-2026-ABADIE-0331.html"
     }
   ]
 }
