@@ -126,8 +126,8 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 @media(max-width:500px){.tool-grid{grid-template-columns:1fr}}
 
 /* ===== SEARCH ===== */
-.search-box{width:100%;max-width:500px;padding:12px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:15px;font-family:'Lato',sans-serif;margin-bottom:24px;outline:none;transition:border-color .2s}
-.search-box:focus{border-color:#0033cc}
+.search-box{width:100%;max-width:600px;padding:14px 20px 14px 44px;border:2px solid #e0e0e0;border-radius:12px;font-size:15px;font-family:'Lato',sans-serif;margin-bottom:24px;outline:none;transition:all .25s;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='%23999'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E") 14px center no-repeat}
+.search-box:focus{border-color:#0033cc;box-shadow:0 0 0 3px rgba(0,51,204,0.1)}
 
 /* ===== INTERACTIVE CHECKLIST ===== */
 .checklist{list-style:none;padding:0}
@@ -457,6 +457,10 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
     <button class="filter-btn" data-sort="name">By Name</button>
     <button class="filter-btn" data-sort="role">By Role</button>
   </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+    <div class="cc-rule" style="font-size:13px;padding:14px 18px;text-align:left;border-radius:10px;display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="#06D0FF" style="flex-shrink:0"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg><span>Boss Products: CC <span style="color:#06D0FF">Troy Gongwer</span> AND <span style="color:#06D0FF">Thayne Grove</span> on every email</span></div>
+    <div class="cc-rule" style="font-size:13px;padding:14px 18px;text-align:left;border-radius:10px;display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="#06D0FF" style="flex-shrink:0"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg><span>Samson Rope: CC <span style="color:#06D0FF">Donna Poll</span> AND <span style="color:#06D0FF">Sarah Daniels</span> on every email</span></div>
+  </div>
   <div class="table-wrap"><table id="contactTable"><thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Phone</th><th>Email</th><th>Category</th></tr></thead><tbody>
     <tr><td><strong>Herb Minatre</strong></td><td>Owner</td><td>BSS (Bay Shore Systems)</td><td>&mdash;</td><td>Herb@bayshoresystems.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
     <tr><td><strong>Andy Barron</strong></td><td>Primary Contact</td><td>BSS (Bay Shore Systems)</td><td>(208) 660-9438</td><td>abarron@bayshoresystems.com</td><td><span class="badge badge-blue">VENDOR</span></td></tr>
@@ -477,9 +481,9 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
     <tr><td><strong>Sammy Myers</strong></td><td>Contact</td><td>AEP</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
     <tr><td><strong>Darrell Pickle</strong></td><td>Contact</td><td>Florence Electric</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-green">CUSTOMER</span></td></tr>
     <tr><td><strong>Bill Kugler</strong></td><td>Contact</td><td>Terex</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-yellow">PROSPECT</span></td></tr>
-    <tr><td><strong>MK Smith</strong></td><td>Marketing Contractor</td><td>Metro Marketing</td><td>&mdash;</td><td>office@metromarketingagency.com</td><td><span class="badge badge-gray">CONTRACTOR</span></td></tr>
-    <tr><td><strong>Patrick Lavette</strong></td><td>Banker</td><td>Renasant Bank</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-gray">FINANCIAL</span></td></tr>
-    <tr><td><strong>Caroline Butler</strong></td><td>Admin / Operations</td><td>Norris Utilities</td><td>&mdash;</td><td>cbutler@norrisutilities.com</td><td><span class="badge badge-blue">TEAM</span></td></tr>
+    <tr><td><strong>MK Smith</strong></td><td>Marketing Contractor</td><td>Metro Marketing</td><td>&mdash;</td><td>office@metromarketingagency.com</td><td><span class="badge" style="background:#f3e5f5;color:#7b1fa2;border:1px solid rgba(123,31,162,0.15)">CONTRACTOR</span></td></tr>
+    <tr><td><strong>Patrick Lavette</strong></td><td>Banker</td><td>Renasant Bank</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge" style="background:#e8eaf6;color:#283593;border:1px solid rgba(40,53,147,0.15)">FINANCIAL</span></td></tr>
+    <tr><td><strong>Caroline Butler</strong></td><td>Admin / Operations</td><td>Norris Utilities</td><td>&mdash;</td><td>cbutler@norrisutilities.com</td><td><span class="badge" style="background:#e0e7ff;color:#0a0e5c;border:1px solid rgba(10,14,92,0.15)">TEAM</span></td></tr>
   </tbody></table></div>
 </div>
 
