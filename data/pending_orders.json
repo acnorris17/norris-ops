@@ -1,0 +1,50 @@
+{
+  "orders": [
+    {
+      "id": "manual_abadie_primoris_w6237",
+      "customer": "Wayne Abadie",
+      "company": "Primoris",
+      "email": "",
+      "po_number": "W6237",
+      "products": ["2x 2-Man Bucket Cover"],
+      "ship_to": "",
+      "subject": "PO W6237 - 2-Man Bucket Covers",
+      "date_received": "2026-03-30",
+      "date_detected": "2026-04-07T00:00:00+00:00",
+      "status": "PENDING REVIEW",
+      "source": "manual_entry",
+      "notes": "NOT SHIPPED -- sat 8 days unprocessed. Critical priority."
+    },
+    {
+      "id": "manual_crosby_dominion_42350802",
+      "customer": "Coy Crosby",
+      "company": "Dominion Energy",
+      "email": "",
+      "po_number": "42350802",
+      "products": ["5x 2-Man Bucket Cover"],
+      "ship_to": "",
+      "subject": "Material #42350802 - 5x 2-Man BCs",
+      "date_received": "2026-03-30",
+      "date_detected": "2026-04-07T00:00:00+00:00",
+      "status": "PENDING REVIEW",
+      "source": "manual_entry",
+      "notes": "NOT SHIPPED, no response from customer. Needs follow-up."
+    },
+    {
+      "id": "manual_abadie_quote_24x24",
+      "customer": "Wayne Abadie",
+      "company": "",
+      "email": "",
+      "po_number": "",
+      "products": ["QUOTE 24X24 BLUE COVER"],
+      "ship_to": "",
+      "subject": "QUOTE 24X24 BLUE COVER",
+      "date_received": "2026-04-07",
+      "date_detected": "2026-04-07T00:00:00+00:00",
+      "status": "PENDING REVIEW",
+      "source": "manual_entry",
+      "notes": "New quote request -- not an order yet."
+    }
+  ],
+  "last_updated": "2026-04-07T00:00:00+00:00"
+}

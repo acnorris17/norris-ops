@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-07T18:00:00",
+  "last_updated": "2026-04-07T16:01:52",
   "documents": [
     {
       "filename": "SD-2026-ABADIE-0331.html",
@@ -11,8 +11,8 @@
     },
     {
       "filename": "SD-2026-AJ-0331-B-JeremyBrown.html",
-      "customer": "AJ / Jeremy Brown",
-      "company": "Chain Electric Company",
+      "customer": "AJ",
+      "company": "(contact info pending)",
       "date": "03/31/2026",
       "products": "FlexPro Armor 2-Man Bucket Cover, FlexPro Armor 1.5-Man Bucket Cover",
       "status": "uninvoiced"
@@ -43,7 +43,7 @@
     },
     {
       "filename": "SD-2026-JeremyBrown-0331.html",
-      "customer": "Jeremy Brown / AJ Morris",
+      "customer": "AJ Morris",
       "company": "Chain Electric Company",
       "date": "03/31/2026",
       "products": "FlexPro Armor 2-Man Bucket Cover",
@@ -51,7 +51,7 @@
     },
     {
       "filename": "SD-2026-JeremyBrown-0401-ARCH.html",
-      "customer": "Jeremy Brown / AJ Morris",
+      "customer": "AJ Morris",
       "company": "Chain Electric Company",
       "date": "04/01/2026",
       "products": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",

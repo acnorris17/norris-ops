@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Monitor | Norris Utilities</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #f8f9ff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  body.role-cb .aaron-only { display: none !important; }
+
+  /* ─── AUTH WALL ────────────────────────────────────────────── */
+  #auth-wall {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #0a0e5c;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 99999; flex-direction: column;
+  }
+  #auth-wall h2 { color: white; font-family: 'Lato', sans-serif; margin-bottom: 16px; font-weight: 900; }
+  #auth-wall input {
+    padding: 12px 20px; font-size: 16px; border: 2px solid #0066ee;
+    border-radius: 8px; text-align: center; width: 280px;
+    font-family: 'Lato', sans-serif; outline: none;
+  }
+  #auth-wall input:focus { border-color: #06D0FF; }
+  #auth-wall button {
+    margin-top: 12px; padding: 10px 32px; background: #0033cc; color: white;
+    border: none; border-radius: 8px; font-size: 16px; cursor: pointer;
+    font-family: 'Lato', sans-serif; font-weight: 700;
+  }
+  #auth-wall button:hover { background: #0044ee; }
+  #auth-error { color: #ff4444; margin-top: 12px; display: none; font-family: 'Lato', sans-serif; }
+
+  /* ─── HEADER ──────────────────────────────────────────────── */
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, #06D0FF 100%);
+    min-height: 220px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 40px 60px;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 65%; height: 130%;
+    background: url('/assets/phoenix-icon.svg') no-repeat center center;
+    background-size: contain;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  .chevron {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 60px;
+  }
+
+  .header-inner {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+  }
+
+  .wordmark {
+    font-size: 13px; font-weight: 700; letter-spacing: 4px;
+    color: rgba(255,255,255,0.75); text-transform: uppercase; margin-bottom: 6px;
+  }
+
+  .header-title {
+    font-size: clamp(26px, 5vw, 42px); font-weight: 900; color: #fff;
+    text-transform: uppercase; letter-spacing: 2px; line-height: 1.1;
+  }
+
+  .header-subtitle {
+    font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.85);
+    margin-top: 8px; letter-spacing: 0.5px;
+  }
+
+  /* ─── STATUS BADGES ───────────────────────────────────────── */
+  .status-filters {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    max-width: 1200px; margin: -24px auto 24px; padding: 0 24px;
+    position: relative; z-index: 3;
+  }
+
+  .filter-btn {
+    padding: 10px 20px; border-radius: 50px; border: none;
+    font-family: 'Lato', sans-serif; font-weight: 700; font-size: 13px;
+    letter-spacing: 1px; cursor: pointer; text-transform: uppercase;
+    transition: all 0.2s; color: white;
+  }
+  .filter-btn.active { box-shadow: 0 4px 12px rgba(0,0,0,0.3); transform: translateY(-2px); }
+  .filter-btn[data-status="all"] { background: #333; }
+  .filter-btn[data-status="PENDING REVIEW"] { background: #cc0000; }
+  .filter-btn[data-status="SD CREATED"] { background: #cc8800; }
+  .filter-btn[data-status="SHIPPED"] { background: #0055cc; }
+  .filter-btn[data-status="INVOICED"] { background: #008833; }
+
+  /* ─── CONTENT ─────────────────────────────────────────────── */
+  .container {
+    max-width: 1200px; margin: 0 auto; padding: 24px;
+  }
+
+  .section-title {
+    font-size: 24px; font-weight: 700; margin-bottom: 16px;
+  }
+  .section-title .first { color: #0033cc; }
+  .section-title .rest { color: #1a1a1a; }
+
+  .summary-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px; margin-bottom: 32px;
+  }
+
+  .summary-card {
+    background: white; border-radius: 12px; padding: 20px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .summary-card .count { font-size: 36px; font-weight: 900; }
+  .summary-card .label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-top: 4px; }
+  .count-pending { color: #cc0000; }
+  .count-sd { color: #cc8800; }
+  .count-shipped { color: #0055cc; }
+  .count-invoiced { color: #008833; }
+
+  /* ─── ORDER CARDS ─────────────────────────────────────────── */
+  .order-card {
+    background: white; border-radius: 12px; padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 16px;
+    border-left: 5px solid #ccc; transition: all 0.2s;
+  }
+  .order-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .order-card[data-status="PENDING REVIEW"] { border-left-color: #cc0000; }
+  .order-card[data-status="SD CREATED"] { border-left-color: #cc8800; }
+  .order-card[data-status="SHIPPED"] { border-left-color: #0055cc; }
+  .order-card[data-status="INVOICED"] { border-left-color: #008833; }
+
+  .order-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+  }
+
+  .order-customer {
+    font-size: 20px; font-weight: 900; color: #0a0e5c;
+  }
+
+  .order-company {
+    font-size: 14px; font-weight: 400; color: #666; margin-left: 8px;
+  }
+
+  .status-badge {
+    padding: 4px 14px; border-radius: 50px; font-size: 11px;
+    font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: white;
+  }
+  .status-badge.pending { background: #cc0000; }
+  .status-badge.sd-created { background: #cc8800; }
+  .status-badge.shipped { background: #0055cc; }
+  .status-badge.invoiced { background: #008833; }
+
+  .order-details {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .detail-item { font-size: 14px; }
+  .detail-label { font-weight: 700; color: #555; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .detail-value { margin-top: 2px; color: #1a1a2e; }
+
+  .order-notes {
+    margin-top: 12px; padding: 10px 14px;
+    background: #fff3f3; border-radius: 8px;
+    font-size: 13px; color: #880000;
+  }
+  .order-card[data-status="SHIPPED"] .order-notes { background: #f0f6ff; color: #003388; }
+  .order-card[data-status="INVOICED"] .order-notes { background: #f0fff4; color: #005522; }
+
+  .days-waiting {
+    font-size: 13px; font-weight: 700; color: #cc0000;
+    margin-top: 4px;
+  }
+
+  #no-orders {
+    text-align: center; padding: 60px 20px; color: #888;
+    font-size: 18px;
+  }
+
+  #loading {
+    text-align: center; padding: 60px 20px; color: #666;
+  }
+
+  /* ─── FOOTER ──────────────────────────────────────────────── */
+  .footer {
+    background: linear-gradient(135deg, #0a0e2e 0%, #0a0e5c 100%);
+    padding: 30px 40px; text-align: center; margin-top: 40px;
+  }
+  .footer-tagline {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    color: #06D0FF; font-size: 18px;
+  }
+  .footer-copy {
+    color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 8px;
+  }
+
+  /* ─── RESPONSIVE ──────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px 50px; min-height: 160px; }
+    .container { padding: 16px; }
+    .order-details { grid-template-columns: 1fr; }
+    .status-filters { padding: 0 16px; margin-top: -20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── AUTH WALL ────────────────────────────────────────────────── -->
+<div id="auth-wall">
+  <h2>Norris Utilities&reg;</h2>
+  <input type="password" id="auth-input" placeholder="Enter access code" autofocus>
+  <button onclick="checkAuth()">ACCESS PORTAL</button>
+  <p id="auth-error">Invalid access code</p>
+</div>
+<script>
+(function(){
+  var r = sessionStorage.getItem('nu_role');
+  if (sessionStorage.getItem('nu_auth_2026') === 'granted' && (r === 'aaron' || r === 'cb')) {
+    document.getElementById('auth-wall').style.display = 'none';
+    if (r === 'cb') {
+      document.body.classList.add('role-cb');
+    }
+  }
+})();
+function checkAuth() {
+  var p = document.getElementById('auth-input').value;
+  if (p === 'norris2026') {
+    sessionStorage.setItem('nu_auth_2026', 'granted');
+    sessionStorage.setItem('nu_role', 'aaron');
+    document.getElementById('auth-wall').style.display = 'none';
+  } else if (p === 'legacy2026') {
+    sessionStorage.setItem('nu_auth_2026', 'granted');
+    sessionStorage.setItem('nu_role', 'cb');
+    document.getElementById('auth-wall').style.display = 'none';
+    document.body.classList.add('role-cb');
+  } else {
+    document.getElementById('auth-error').style.display = 'block';
+  }
+}
+document.getElementById('auth-input').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') checkAuth();
+});
+</script>
+
+<!-- ─── HEADER ───────────────────────────────────────────────────── -->
+<div class="header">
+  <div class="header-inner">
+    <div class="wordmark">NORRIS UTILITIES</div>
+    <div class="header-title">Order Monitor</div>
+    <div class="header-subtitle">Real-time order tracking &mdash; never miss a shipment again</div>
+  </div>
+  <svg class="chevron" viewBox="0 0 1440 60" preserveAspectRatio="none">
+    <polygon fill="#f8f9ff" points="0,60 548,0 1440,60"/>
+  </svg>
+</div>
+
+<!-- ─── STATUS FILTERS ──────────────────────────────────────────── -->
+<div class="status-filters">
+  <button class="filter-btn active" data-status="all" onclick="filterOrders('all', this)">All Orders</button>
+  <button class="filter-btn" data-status="PENDING REVIEW" onclick="filterOrders('PENDING REVIEW', this)">Pending Review</button>
+  <button class="filter-btn" data-status="SD CREATED" onclick="filterOrders('SD CREATED', this)">SD Created</button>
+  <button class="filter-btn" data-status="SHIPPED" onclick="filterOrders('SHIPPED', this)">Shipped</button>
+  <button class="filter-btn" data-status="INVOICED" onclick="filterOrders('INVOICED', this)">Invoiced</button>
+</div>
+
+<!-- ─── CONTENT ─────────────────────────────────────────────────── -->
+<div class="container">
+
+  <!-- Summary Cards -->
+  <div class="summary-row" id="summary-row"></div>
+
+  <!-- Section Title -->
+  <div class="section-title">
+    <span class="first">Active</span> <span class="rest">Orders</span>
+  </div>
+
+  <div id="loading">Loading orders...</div>
+  <div id="orders-container" style="display:none"></div>
+  <div id="no-orders" style="display:none">No orders match this filter.</div>
+
+  <!-- Last Updated -->
+  <p id="last-updated" style="text-align:center;color:#999;font-size:12px;margin-top:24px"></p>
+</div>
+
+<!-- ─── FOOTER ──────────────────────────────────────────────────── -->
+<div class="footer">
+  <div class="footer-tagline">A Legacy of Commitment&reg;</div>
+  <div class="footer-copy">&copy; 2026 Norris Utilities, LLC. All rights reserved.</div>
+</div>
+
+<!-- ─── DATA LOGIC ──────────────────────────────────────────────── -->
+<script>
+(function() {
+  var allOrders = [];
+  var currentFilter = 'all';
+
+  function statusClass(status) {
+    switch (status) {
+      case 'PENDING REVIEW': return 'pending';
+      case 'SD CREATED': return 'sd-created';
+      case 'SHIPPED': return 'shipped';
+      case 'INVOICED': return 'invoiced';
+      default: return '';
+    }
+  }
+
+  function daysAgo(dateStr) {
+    if (!dateStr) return '';
+    try {
+      var d = new Date(dateStr);
+      var now = new Date();
+      var diff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+      if (diff < 0) diff = 0;
+      return diff;
+    } catch(e) { return ''; }
+  }
+
+  function renderSummary(orders) {
+    var counts = { 'PENDING REVIEW': 0, 'SD CREATED': 0, 'SHIPPED': 0, 'INVOICED': 0 };
+    orders.forEach(function(o) {
+      if (counts.hasOwnProperty(o.status)) counts[o.status]++;
+    });
+
+    var row = document.getElementById('summary-row');
+    row.innerHTML = [
+      '<div class="summary-card"><div class="count count-pending">' + counts['PENDING REVIEW'] + '</div><div class="label">Pending Review</div></div>',
+      '<div class="summary-card"><div class="count count-sd">' + counts['SD CREATED'] + '</div><div class="label">SD Created</div></div>',
+      '<div class="summary-card"><div class="count count-shipped">' + counts['SHIPPED'] + '</div><div class="label">Shipped</div></div>',
+      '<div class="summary-card"><div class="count count-invoiced">' + counts['INVOICED'] + '</div><div class="label">Invoiced</div></div>',
+    ].join('');
+  }
+
+  function renderOrders(orders, filter) {
+    var container = document.getElementById('orders-container');
+    var noOrders = document.getElementById('no-orders');
+    container.innerHTML = '';
+
+    var filtered = filter === 'all' ? orders : orders.filter(function(o) { return o.status === filter; });
+
+    // Sort: PENDING REVIEW first, then by date_received desc
+    var statusOrder = { 'PENDING REVIEW': 0, 'SD CREATED': 1, 'SHIPPED': 2, 'INVOICED': 3 };
+    filtered.sort(function(a, b) {
+      var sa = statusOrder[a.status] || 99;
+      var sb = statusOrder[b.status] || 99;
+      if (sa !== sb) return sa - sb;
+      return (b.date_received || '').localeCompare(a.date_received || '');
+    });
+
+    if (filtered.length === 0) {
+      container.style.display = 'none';
+      noOrders.style.display = 'block';
+      return;
+    }
+
+    noOrders.style.display = 'none';
+    container.style.display = 'block';
+
+    filtered.forEach(function(order) {
+      var days = daysAgo(order.date_received);
+      var daysText = '';
+      if (order.status === 'PENDING REVIEW' && days >= 3) {
+        daysText = '<div class="days-waiting">' + days + ' days waiting — needs action</div>';
+      }
+
+      var products = Array.isArray(order.products) ? order.products.join(', ') : (order.products || '(see email)');
+      var notes = order.notes ? '<div class="order-notes">' + order.notes + '</div>' : '';
+
+      var html = '<div class="order-card" data-status="' + order.status + '">' +
+        '<div class="order-header">' +
+          '<div>' +
+            '<span class="order-customer">' + (order.customer || 'Unknown') + '</span>' +
+            (order.company ? '<span class="order-company">' + order.company + '</span>' : '') +
+          '</div>' +
+          '<span class="status-badge ' + statusClass(order.status) + '">' + order.status + '</span>' +
+        '</div>' +
+        '<div class="order-details">' +
+          '<div class="detail-item"><div class="detail-label">PO / Reference</div><div class="detail-value">' + (order.po_number || 'N/A') + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">Products</div><div class="detail-value">' + products + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">Date Received</div><div class="detail-value">' + (order.date_received || 'Unknown') + '</div></div>' +
+          '<div class="detail-item aaron-only"><div class="detail-label">Source</div><div class="detail-value">' + (order.source || '') + '</div></div>' +
+          (order.ship_to ? '<div class="detail-item"><div class="detail-label">Ship To</div><div class="detail-value">' + order.ship_to + '</div></div>' : '') +
+        '</div>' +
+        daysText +
+        notes +
+      '</div>';
+
+      container.innerHTML += html;
+    });
+
+    // Re-apply role-cb visibility
+    if (document.body.classList.contains('role-cb')) {
+      document.querySelectorAll('.aaron-only').forEach(function(el) { el.style.display = 'none'; });
+    }
+  }
+
+  window.filterOrders = function(status, btn) {
+    currentFilter = status;
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+    renderOrders(allOrders, status);
+  };
+
+  // Load data
+  fetch('/data/pending_orders.json?t=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      document.getElementById('loading').style.display = 'none';
+      allOrders = data.orders || [];
+      renderSummary(allOrders);
+      renderOrders(allOrders, 'all');
+      if (data.last_updated) {
+        var d = new Date(data.last_updated);
+        document.getElementById('last-updated').textContent = 'Last updated: ' + d.toLocaleString();
+      }
+    })
+    .catch(function(err) {
+      document.getElementById('loading').textContent = 'Error loading orders: ' + err.message;
+      console.error('Failed to load pending_orders.json:', err);
+    });
+})();
+</script>
+</body>
+</html>

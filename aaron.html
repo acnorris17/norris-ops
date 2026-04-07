@@ -219,5 +219,38 @@ function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='n
 document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
 </script>
 
+<!-- LOGIN SCREEN (hidden when authenticated) -->
+<div id="login-screen" style="display:none;"></div>
+
+<header>
+  <h1>Aaron C. Norris</h1>
+  <div class="tagline">A Legacy of Commitment&reg;</div>
+  <div class="date" id="header-date"></div>
+</header>
+<div class="chevron">
+  <svg viewBox="0 0 1440 50" preserveAspectRatio="none"><polygon fill="#f0f2f8" points="0,50 548,0 1440,50"/></svg>
+</div>
+
+<main>
+  <div class="section-title"><span>Personal</span> <span>Dashboard</span></div>
+  <div class="card" style="text-align:center;padding:48px 32px;">
+    <div style="font-size:3rem;margin-bottom:16px;">🏗️</div>
+    <h2 style="font-weight:900;font-size:1.4rem;color:#1a1a1a;margin-bottom:12px;">Coming Soon</h2>
+    <p style="color:#666;font-size:1rem;line-height:1.6;max-width:500px;margin:0 auto 24px;">
+      Your personal CEO dashboard is being built. To-dos, deal pipeline, critical reminders, and quick links will appear here.
+    </p>
+    <a href="/" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;">Back to Portal</a>
+  </div>
+</main>
+
+<footer>
+  <div class="tagline">A Legacy of Commitment&reg;</div>
+  <div class="copy">Norris Utilities, LLC &mdash; Birmingham, Alabama</div>
+</footer>
+
+<script>
+document.getElementById('header-date').textContent = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+</script>
+
 </body>
 </html>
