@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Reference — Norris Utilities®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lato',sans-serif;font-weight:400;background:#f4f6fa;color:#1a1a1a;min-height:100vh}
+/* AUTH GATE hides all until verified */
+body:not(.authed) .page-content{display:none}
+
+/* HEADER */
+.site-header{background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);color:#fff;padding:0;position:relative;overflow:hidden}
+.header-inner{position:relative;z-index:2;padding:32px 40px 28px}
+.header-inner h1{font-family:'Lato',sans-serif;font-weight:900;font-size:32px;letter-spacing:0.5px}
+.header-inner h1 sup{font-size:14px;vertical-align:super}
+.header-inner p.tagline{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:18px;margin-top:4px}
+.header-inner .subtitle{font-weight:300;font-size:15px;margin-top:8px;opacity:0.85}
+.ghost-phoenix{position:absolute;right:-2%;top:50%;transform:translateY(-50%);width:65%;opacity:0.07;pointer-events:none}
+.chevron{width:100%;height:50px;background:#fff;clip-path:polygon(0 0,38% 100%,100% 0,100% 100%,0 100%)}
+
+/* NAV */
+.back-link{display:inline-block;padding:12px 40px;font-weight:700;color:#0033cc;text-decoration:none;font-size:14px}
+.back-link:hover{text-decoration:underline}
+
+/* SEARCH */
+.search-bar{max-width:1400px;margin:20px auto 0;padding:0 24px}
+.search-bar input{width:100%;padding:12px 20px;border:2px solid #ccd;border-radius:8px;font-size:16px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s}
+.search-bar input:focus{border-color:#0033cc}
+
+/* TABS */
+.tab-bar{max-width:1400px;margin:16px auto 0;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap}
+.tab-btn{padding:8px 18px;border:2px solid #0033cc;background:#fff;color:#0033cc;border-radius:6px;font-family:'Lato',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .2s}
+.tab-btn:hover,.tab-btn.active{background:#0033cc;color:#fff}
+
+/* TABLE WRAPPER */
+.table-section{max-width:1400px;margin:20px auto 40px;padding:0 24px}
+.section-title{font-family:'Lato',sans-serif;font-weight:700;font-size:24px;margin:28px 0 12px}
+.section-title span.blue{color:#0033cc}
+.section-title span.dark{color:#1a1a1a}
+
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-bottom:24px;font-size:14px}
+thead{background:#0a0e5c;color:#fff}
+th{padding:10px 14px;text-align:left;font-weight:700;white-space:nowrap;font-size:13px}
+td{padding:9px 14px;border-bottom:1px solid #eef}
+tr:hover{background:#f0f4ff}
+tr.category-row{background:#e8eeff}
+tr.category-row td{font-weight:900;color:#0033cc;font-size:13px;padding:8px 14px;border-bottom:2px solid #0033cc}
+.money{text-align:right;font-variant-numeric:tabular-nums}
+.pct{text-align:center;font-weight:700;font-size:13px}
+
+/* MARGIN COLORS */
+.margin-green{color:#0a8a2e}
+.margin-blue{color:#0033cc}
+.margin-yellow{color:#b38600}
+.margin-red{color:#cc0000}
+
+/* AARON-ONLY */
+body.role-cb .aaron-only{display:none!important}
+
+/* CONFIDENTIAL BANNER */
+.conf-banner{background:#fff3cd;border-left:4px solid #ffc107;padding:10px 20px;margin:16px 0;font-weight:700;font-size:13px;border-radius:4px}
+.conf-banner.internal{background:#fde8e8;border-left-color:#cc0000}
+
+/* FOOTER */
+.site-footer{background:linear-gradient(135deg,#0a0e5c,#001144);color:#fff;padding:28px 40px;text-align:center}
+.site-footer .legacy{font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF;font-size:18px;margin-bottom:4px}
+.site-footer .copy{font-size:12px;opacity:0.6}
+
+/* SAMSON SECTION */
+.samson-note{background:#e8f4ff;border-left:4px solid #0033cc;padding:10px 16px;margin:8px 0 16px;font-size:13px;border-radius:4px}
+.samson-note strong{color:#0033cc}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .header-inner{padding:20px}
+  .header-inner h1{font-size:22px}
+  table{font-size:12px}
+  th,td{padding:6px 8px}
+}
+</style>
+</head>
+<body>
+<script>
+(function(){var K='nu_auth_2026',RK='nu_role';var r=sessionStorage.getItem(RK);if(!(sessionStorage.getItem(K)==='granted'&&r)){window.location.href='/login.html';return}if(r==='cb')document.body.classList.add('role-cb');document.body.classList.add('authed')})();
+</script>
+
+<header class="site-header">
+  <div class="header-inner">
+    <h1>Norris Utilities<sup>&reg;</sup> &mdash; Product &amp; Price Reference</h1>
+    <p class="tagline">A Legacy of Commitment&reg;</p>
+    <p class="subtitle">Internal Reference &bull; FlexPro Armor&reg; &amp; Samson Rope &bull; Effective April 2026</p>
+  </div>
+  <svg class="ghost-phoenix" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="80" r="50" fill="#fff"/><polygon points="100,20 60,130 100,110 140,130" fill="#fff"/><polygon points="70,100 30,180 100,140" fill="#fff"/><polygon points="130,100 170,180 100,140" fill="#fff"/></svg>
+  <div class="chevron"></div>
+</header>
+
+<a href="/" class="back-link">&larr; Back to Portal</a>
+
+<div class="page-content">
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <input type="text" id="globalSearch" placeholder="Search by P/N, product name, size, or category...">
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="all">All Products</button>
+  <button class="tab-btn" data-tab="flexdirect">FlexPro Armor&reg; (Direct)</button>
+  <button class="tab-btn aaron-only" data-tab="flexinternal">FlexPro Internal (Full)</button>
+  <button class="tab-btn aaron-only" data-tab="samson">Samson Rope</button>
+</div>
+
+<div class="table-section">
+
+<!-- ============================================================ -->
+<!-- FLEXPRO ARMOR DIRECT PRICE LIST (CB + AARON) -->
+<!-- ============================================================ -->
+<div class="product-table" data-tab="all flexdirect">
+<h2 class="section-title"><span class="blue">FlexPro Armor&reg;</span> <span class="dark">Direct Price List</span></h2>
+
+<table id="tblDirect">
+<thead>
+<tr>
+  <th>P/N</th>
+  <th>Product Description</th>
+  <th>Size</th>
+  <th class="money">Direct Price</th>
+  <th class="aaron-only money">Cost</th>
+  <th class="aaron-only money">Dealer Price</th>
+  <th class="aaron-only pct">Direct Margin</th>
+  <th class="aaron-only pct">Dealer Margin</th>
+</tr>
+</thead>
+<tbody>
+<!-- STANDARD BUCKET COVERS -->
+<tr class="category-row"><td colspan="8">Standard Bucket Covers &mdash; Collapsible 3-Panel Rigid Design</td></tr>
+<tr data-cat="standard"><td>NU-BC-2828</td><td>FlexPro Armor Bucket Cover for 1-Man Bucket</td><td>28" x 28"</td><td class="money">$235.00</td><td class="aaron-only money">$89.00</td><td class="aaron-only money">$195.00</td><td class="aaron-only pct margin-green">62.1%</td><td class="aaron-only pct margin-green">54.4%</td></tr>
+<tr data-cat="standard"><td>NU-BC-2834</td><td>FlexPro Armor Bucket Cover for 1.5-Man Bucket</td><td>28" x 34"</td><td class="money">$265.00</td><td class="aaron-only money">$97.00</td><td class="aaron-only money">$205.00</td><td class="aaron-only pct margin-green">63.4%</td><td class="aaron-only pct margin-green">52.7%</td></tr>
+<tr data-cat="standard"><td>NU-BC-2842</td><td>FlexPro Armor Bucket Cover for 1.5-Man (Large) Bucket</td><td>28" x 42"</td><td class="money">$265.00</td><td class="aaron-only money">$101.50</td><td class="aaron-only money">$210.00</td><td class="aaron-only pct margin-green">61.7%</td><td class="aaron-only pct margin-green">51.7%</td></tr>
+<tr data-cat="standard"><td>NU-BC-2844</td><td>FlexPro Armor Bucket Cover for 1.5-Man Bucket (Specialty)</td><td>28" x 44"</td><td class="money">$295.00</td><td class="aaron-only money">$125.00</td><td class="aaron-only money">$235.00</td><td class="aaron-only pct margin-green">57.6%</td><td class="aaron-only pct margin-blue">46.8%</td></tr>
+<tr data-cat="standard"><td>NU-BC-2851</td><td>FlexPro Armor Bucket Cover for 2-Man Bucket</td><td>28" x 51"</td><td class="money">$305.00</td><td class="aaron-only money">$112.00</td><td class="aaron-only money">$235.00</td><td class="aaron-only pct margin-green">63.3%</td><td class="aaron-only pct margin-green">52.3%</td></tr>
+
+<!-- UPPER CONTROL / ARCH -->
+<tr class="category-row"><td colspan="8">Upper Control &amp; ARCH Covers</td></tr>
+<tr data-cat="arch"><td>NU-BC-CC2834</td><td>FlexPro Armor Bucket Cover for 1.5-Man with Upper Control Cover</td><td>28" x 34"</td><td class="money">$285.00</td><td class="aaron-only money">$109.50</td><td class="aaron-only money">$225.00</td><td class="aaron-only pct margin-green">61.6%</td><td class="aaron-only pct margin-green">51.3%</td></tr>
+<tr data-cat="arch"><td>NU-BC-2834-F</td><td>FlexPro Armor ARCH Bucket Cover for 1.5-Man Bucket</td><td>28" x 34"</td><td class="money">$305.00</td><td class="aaron-only money">$104.00</td><td class="aaron-only money">$245.00</td><td class="aaron-only pct margin-green">65.9%</td><td class="aaron-only pct margin-green">57.6%</td></tr>
+<tr data-cat="arch"><td>NU-BC-2851-F</td><td>FlexPro Armor ARCH Bucket Cover for 2-Man Bucket</td><td>28" x 51"</td><td class="money">$345.00</td><td class="aaron-only money">$120.00</td><td class="aaron-only money">$275.00</td><td class="aaron-only pct margin-green">65.2%</td><td class="aaron-only pct margin-green">56.4%</td></tr>
+
+<!-- COMBOS -->
+<tr class="category-row"><td colspan="8">Bucket Cover + Shield Combos</td></tr>
+<tr data-cat="combo"><td>NU-BC-2834-C</td><td>FlexPro Armor 1.5-Man Bucket Cover + Shield Combo</td><td>28" x 34"</td><td class="money">$305.00</td><td class="aaron-only money">$120.50</td><td class="aaron-only money">$245.00</td><td class="aaron-only pct margin-green">60.5%</td><td class="aaron-only pct margin-green">50.8%</td></tr>
+<tr data-cat="combo"><td>NU-BC-2851-C</td><td>FlexPro Armor 2-Man Bucket Cover + Shield Combo</td><td>28" x 51"</td><td class="money">$345.00</td><td class="aaron-only money">$137.50</td><td class="aaron-only money">$275.00</td><td class="aaron-only pct margin-green">60.1%</td><td class="aaron-only pct margin-green">50.0%</td></tr>
+<tr data-cat="combo"><td>NU-BC-2834-FC</td><td>FlexPro Armor ARCH 1.5-Man + Shield Combo</td><td>28" x 34"</td><td class="money">$345.00</td><td class="aaron-only money">$127.50</td><td class="aaron-only money">$275.00</td><td class="aaron-only pct margin-green">63.0%</td><td class="aaron-only pct margin-green">53.6%</td></tr>
+<tr data-cat="combo"><td>NU-BC-2851-FC</td><td>FlexPro Armor ARCH 2-Man + Shield Combo</td><td>28" x 51"</td><td class="money">$385.00</td><td class="aaron-only money">$145.50</td><td class="aaron-only money">$305.00</td><td class="aaron-only pct margin-green">62.2%</td><td class="aaron-only pct margin-green">52.3%</td></tr>
+
+<!-- D-SHAPE & SPECIALTY -->
+<tr class="category-row"><td colspan="8">D-Shape &amp; Specialty Covers</td></tr>
+<tr data-cat="dshape"><td>NU-BC-D4577</td><td>FlexPro Armor D-Shape Transmission BC with Upper Control Cover</td><td>45" x 77"</td><td class="money">$1,050.00</td><td class="aaron-only money">$176.50</td><td class="aaron-only money">$850.00</td><td class="aaron-only pct margin-green">83.2%</td><td class="aaron-only pct margin-green">79.2%</td></tr>
+<tr data-cat="dshape"><td>NU-BC-D4577-MSP</td><td>FlexPro Armor D-Shape MSP Spec (wide opening)</td><td>45" x 77"</td><td class="money">$1,100.00</td><td class="aaron-only money">$216.50</td><td class="aaron-only money">&mdash;</td><td class="aaron-only pct margin-green">80.3%</td><td class="aaron-only pct">&mdash;</td></tr>
+<tr data-cat="dshape"><td>NU-BC-BY2828</td><td>FlexPro Armor BC for SDP &amp; Pin-On Buckets with Bracket Relief</td><td>28" x 28"</td><td class="money">$275.00</td><td class="aaron-only money">$89.00</td><td class="aaron-only money">$225.00</td><td class="aaron-only pct margin-green">67.6%</td><td class="aaron-only pct margin-green">60.4%</td></tr>
+<tr data-cat="dshape"><td>NU-BC-2945-EPBC</td><td>FlexPro Armor Bucket Cover for EPBC ETI Buckets</td><td>29" x 45"</td><td class="money">$325.00</td><td class="aaron-only money">$117.70</td><td class="aaron-only money">$265.00</td><td class="aaron-only pct margin-green">63.8%</td><td class="aaron-only pct margin-green">55.6%</td></tr>
+<tr data-cat="dshape"><td>TC-6060</td><td>FlexPro Armor Test Tank Cover for Dielectric Test Tank</td><td>60" x 60"</td><td class="money">$1,100.00</td><td class="aaron-only money">$195.50</td><td class="aaron-only money">$895.00</td><td class="aaron-only pct margin-green">82.2%</td><td class="aaron-only pct margin-green">78.2%</td></tr>
+
+<!-- SHIELDS -->
+<tr class="category-row"><td colspan="8">Bucket Cover Shields (Protective Bags)</td></tr>
+<tr data-cat="shield"><td>NU-BCB-2834-SL</td><td>FlexPro Armor 1.5-Man Shield with Snap &amp; Lanyard</td><td>28" x 34"</td><td class="money">$45.00</td><td class="aaron-only money">$23.00</td><td class="aaron-only money">$38.00</td><td class="aaron-only pct margin-blue">48.9%</td><td class="aaron-only pct margin-blue">39.5%</td></tr>
+<tr data-cat="shield"><td>NU-BCB-2851-SL</td><td>FlexPro Armor 2-Man Shield with Snap &amp; Lanyard</td><td>28" x 51"</td><td class="money">$55.00</td><td class="aaron-only money">$25.00</td><td class="aaron-only money">$45.00</td><td class="aaron-only pct margin-green">54.5%</td><td class="aaron-only pct margin-blue">44.4%</td></tr>
+
+<!-- DIRT TARPS -->
+<tr class="category-row"><td colspan="8">Dirt Tarps &mdash; Collapsible with 5,000 lb. Rating</td></tr>
+<tr data-cat="tarp"><td>DS-9696</td><td>Dirt Tarp 8' x 8'</td><td>96" x 96"</td><td class="money">$450.00</td><td class="aaron-only money">$226.50</td><td class="aaron-only money">$365.00</td><td class="aaron-only pct margin-blue">49.7%</td><td class="aaron-only pct margin-blue">37.9%</td></tr>
+<tr data-cat="tarp"><td>DS-9696-R</td><td>Dirt Tarp 8' x 8' Reinforced with Extra Webbing</td><td>96" x 96"</td><td class="money">$510.00</td><td class="aaron-only money">$246.50</td><td class="aaron-only money">$415.00</td><td class="aaron-only pct margin-green">51.7%</td><td class="aaron-only pct margin-blue">40.6%</td></tr>
+<tr data-cat="tarp"><td>DS-9696-L</td><td>Dirt Tarp 8' x 8' "Light"</td><td>96" x 96"</td><td class="money">$250.00</td><td class="aaron-only money">$126.00</td><td class="aaron-only money">$205.00</td><td class="aaron-only pct margin-blue">49.6%</td><td class="aaron-only pct margin-blue">38.5%</td></tr>
+<tr data-cat="tarp"><td>DS-120120</td><td>Dirt Tarp 10' x 10'</td><td>120" x 120"</td><td class="money">$550.00</td><td class="aaron-only money">$292.00</td><td class="aaron-only money">$445.00</td><td class="aaron-only pct margin-blue">46.9%</td><td class="aaron-only pct margin-blue">34.4%</td></tr>
+<tr data-cat="tarp"><td>DS-9696-PN</td><td>Pole Notch Dirt Tarp 8' x 8' with U-Shape Cut Out</td><td>96" x 96"</td><td class="money">$515.00</td><td class="aaron-only money">$304.00</td><td class="aaron-only money">$415.00</td><td class="aaron-only pct margin-blue">41.0%</td><td class="aaron-only pct margin-yellow">26.7%</td></tr>
+
+<!-- OTHER -->
+<tr class="category-row"><td colspan="8">Other Products</td></tr>
+<tr data-cat="other"><td>NU-TB2524-M</td><td>Magnetic Tool Board, by Norris Utilities</td><td>25" x 24"</td><td class="money">$195.00</td><td class="aaron-only money">$121.50</td><td class="aaron-only money">$160.00</td><td class="aaron-only pct margin-blue">37.7%</td><td class="aaron-only pct margin-yellow">24.1%</td></tr>
+<tr data-cat="other"><td>AC-GB1512</td><td>Grunt Bag / Nose Bag (Canvas, Embroidered)</td><td>15" x 12"</td><td class="money">$89.75</td><td class="aaron-only money">$68.95</td><td class="aaron-only money">&mdash;</td><td class="aaron-only pct margin-yellow">23.2%</td><td class="aaron-only pct">&mdash;</td></tr>
+<tr data-cat="other"><td>PJA-3-30</td><td>Pole Jacking Assembly with 3 ft Threaded Rod</td><td>&mdash;</td><td class="money">$2,000.00</td><td class="aaron-only money">$1,380.00</td><td class="aaron-only money">$1,650.00</td><td class="aaron-only pct margin-blue">31.0%</td><td class="aaron-only pct margin-red">16.4%</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- INTERNAL MASTER — AARON ONLY (extra products not on direct list) -->
+<!-- ============================================================ -->
+<div class="product-table aaron-only" data-tab="all flexinternal">
+<h2 class="section-title"><span class="blue">Internal</span> <span class="dark">Master &mdash; Additional Products (Aaron Only)</span></h2>
+<div class="conf-banner internal">CONFIDENTIAL &mdash; Internal costs and margins. Aaron-only access.</div>
+
+<table id="tblInternal">
+<thead>
+<tr>
+  <th>P/N</th>
+  <th>Product</th>
+  <th>Size</th>
+  <th>Type</th>
+  <th class="money">Cost</th>
+  <th class="money">Direct Price</th>
+  <th class="money">Dealer Price</th>
+  <th class="pct">Direct Margin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="category-row"><td colspan="8">Internal-Only Products (Not on Direct Price List)</td></tr>
+<tr><td>NU-BC-CC2834G</td><td>1.5-Man Upper Control V2 (AT40G)</td><td>28" x 34"</td><td>Inv</td><td class="money">$108.00</td><td class="money">$230.00</td><td class="money">&mdash;</td><td class="pct margin-green">53.0%</td></tr>
+<tr><td>NU-BCB-2834-S</td><td>1.5-Man Shield w/ Snap (no lanyard)</td><td>28" x 34"</td><td>Inv</td><td class="money">$23.50</td><td class="money">$40.00</td><td class="money">&mdash;</td><td class="pct margin-blue">41.3%</td></tr>
+<tr><td>NU-BCB-2851-S</td><td>2-Man Shield w/ Snap (no lanyard)</td><td>28" x 51"</td><td>Inv</td><td class="money">$25.50</td><td class="money">$50.00</td><td class="money">&mdash;</td><td class="pct margin-blue">49.0%</td></tr>
+<tr><td>BC-S2834</td><td>SOFT 1.5-Man BC (Trial)</td><td>28" x 34"</td><td>Inv</td><td class="money">$62.95</td><td class="money">$135.00</td><td class="money">&mdash;</td><td class="pct margin-green">53.4%</td></tr>
+<tr><td>BC-S2851</td><td>SOFT 2-Man BC (Trial)</td><td>28" x 51"</td><td>Inv</td><td class="money">$73.45</td><td class="money">$150.00</td><td class="money">&mdash;</td><td class="pct margin-green">51.0%</td></tr>
+<tr><td>NU-BC-2834-T</td><td>Terex 1.5-Man (Red)</td><td>28" x 34"</td><td>Non</td><td class="money">$106.70</td><td class="money">$270.00</td><td class="money">&mdash;</td><td class="pct margin-green">60.5%</td></tr>
+<tr><td>NU-BC-2851-T</td><td>Terex 2-Man (Red)</td><td>28" x 51"</td><td>Non</td><td class="money">$123.20</td><td class="money">$310.00</td><td class="money">&mdash;</td><td class="pct margin-green">60.3%</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SAMSON ROPE PRICING — AARON ONLY -->
+<!-- ============================================================ -->
+<div class="product-table aaron-only" data-tab="all samson">
+<h2 class="section-title"><span class="blue">Samson Rope</span> <span class="dark">Pricing (Aaron Only)</span></h2>
+<div class="conf-banner internal">CONFIDENTIAL &mdash; Samson Rope cost data. Norris Utilities IS the dealer. Do NOT distribute.</div>
+<div class="samson-note"><strong>Formula:</strong> Sell Price = Cost &divide; (1 - Target Margin). Costs fluctuate with every order &mdash; the formula is the authority, not snapshot costs. All sales currently through NAPA - Mississippi Power Parts.</div>
+
+<table id="tblSamson">
+<thead>
+<tr>
+  <th>Samson P/N</th>
+  <th>Product</th>
+  <th>Application</th>
+  <th>Category</th>
+  <th class="pct">Target Margin</th>
+  <th class="money">Last Known Cost</th>
+  <th class="money">Calculated Sell</th>
+  <th class="money">Actual Sell (QB)</th>
+</tr>
+</thead>
+<tbody>
+
+<!-- AMSTEEL TURRET ROPES -->
+<tr class="category-row"><td colspan="8">AMSTEEL Turret Ropes &mdash; Target 30% Margin</td></tr>
+<tr data-cat="turret"><td>87407200123900</td><td>AMSTEEL II 1-1/8" x 120'</td><td>DM47 / Terex 4045</td><td>Turret</td><td class="pct margin-blue">30%</td><td class="money">$1,141.00</td><td class="money">$1,630.00</td><td class="money">$1,521.33</td></tr>
+<tr data-cat="turret"><td>87203280103904</td><td>AMSTEEL-BLUE 1/2" x 100'</td><td>SDP Backyard Digger</td><td>Turret</td><td class="pct margin-blue">30%</td><td class="money">$308.00</td><td class="money">$440.00</td><td class="money">$475.27</td></tr>
+<tr data-cat="turret"><td>87206480163203</td><td>AMSTEEL-BLUE 1" x 160'</td><td>D3055, 4060A/B, Terex 6060</td><td>Turret</td><td class="pct margin-blue">30%</td><td class="money">$1,716.00</td><td class="money">$2,451.43</td><td class="money">$2,288.00</td></tr>
+<tr data-cat="turret"><td>87205280123900</td><td>AMSTEEL-BLUE 13/16" x 120'</td><td>Altec DH50 (Pilot)</td><td>Turret</td><td class="pct margin-blue">30%</td><td class="money">$950.00</td><td class="money">$1,357.14</td><td class="money">$1,266.67</td></tr>
+
+<!-- JIB LINES w/ SPOOL -->
+<tr class="category-row"><td colspan="8">Stable Braid Jib Lines w/ Spool &mdash; Target 30% Margin</td></tr>
+<tr data-cat="jib-spool"><td>80603200106902</td><td>STABLE BRAID 1/2" x 105' (Spool)</td><td>A72T &amp; AH100</td><td>Jib-Spool</td><td class="pct margin-blue">30%</td><td class="money">$185.00</td><td class="money">$264.29</td><td class="money">$246.67</td></tr>
+<tr data-cat="jib-spool"><td>80603200084900</td><td>STABLE BRAID 1/2" x 80' (Spool)</td><td>AA55, AA50, AM55</td><td>Jib-Spool</td><td class="pct margin-blue">30%</td><td class="money">$170.00</td><td class="money">$242.86</td><td class="money">$226.67</td></tr>
+<tr data-cat="jib-spool"><td>80602800063901</td><td>STABLE BRAID 7/16" x 65' (Spool)</td><td>AT-40M &amp; AT-41M</td><td>Jib-Spool</td><td class="pct margin-blue">30%</td><td class="money">$152.00</td><td class="money">$217.14</td><td class="money">$202.67</td></tr>
+<tr data-cat="jib-spool"><td>80603200063903</td><td>STABLE BRAID 1/2" x 65'</td><td>SDP Jib Line</td><td>Jib-Spool</td><td class="pct margin-blue">30%</td><td class="money">$96.00</td><td class="money">$137.14</td><td class="money">$230.00</td></tr>
+
+<!-- JIB LINES w/ THIMBLE -->
+<tr class="category-row"><td colspan="8">Stable Braid Jib Lines w/ Thimble &mdash; Target 60% Margin</td></tr>
+<tr data-cat="jib-thimble"><td>80603200103901</td><td>STABLE BRAID 1/2" x 105' (Thimble)</td><td>A72T &amp; AH100</td><td>Jib-Thimble</td><td class="pct margin-green">60%</td><td class="money">$120.00</td><td class="money">$300.00</td><td class="money">$300.00</td></tr>
+<tr data-cat="jib-thimble"><td>80603200083900</td><td>STABLE BRAID 1/2" x 80' (Thimble)</td><td>AA55, AA50</td><td>Jib-Thimble</td><td class="pct margin-green">60%</td><td class="money">$104.00</td><td class="money">$260.00</td><td class="money">$260.00</td></tr>
+
+<!-- JIB LINES EYE-EYE -->
+<tr class="category-row"><td colspan="8">Stable Braid Jib Lines Eye-Eye &mdash; Target 50% Margin</td></tr>
+<tr data-cat="jib-eyeeye"><td>80603200083200</td><td>STABLE BRAID 1/2" x 80' (EEE)</td><td>AA55, AA50, AM55</td><td>Jib-EyeEye</td><td class="pct margin-green">50%</td><td class="money">$85.00</td><td class="money">$170.00</td><td class="money">$155.00</td></tr>
+<tr data-cat="jib-eyeeye"><td>80602800063200</td><td>STABLE BRAID 7/16" x 65' (EEE)</td><td>AT-40M &amp; AT-41M</td><td>Jib-EyeEye</td><td class="pct margin-green">50%</td><td class="money">$67.00</td><td class="money">$134.00</td><td class="money">$125.00</td></tr>
+
+<!-- TENEX PULLER ROPES 6,000' -->
+<tr class="category-row"><td colspan="8">TENEX Puller Ropes 6,000' &mdash; Target 55% Margin</td></tr>
+<tr data-cat="puller"><td>82603286002202</td><td>TENEX 1/2" x 6000' BLUE</td><td>4 Drum Puller</td><td>Puller-6K</td><td class="pct margin-green">55%</td><td class="money">$3,059.00</td><td class="money">$6,797.78</td><td class="money">$6,650.00</td></tr>
+<tr data-cat="puller"><td>82603256002202</td><td>TENEX 1/2" x 6000' GREEN</td><td>4 Drum Puller</td><td>Puller-6K</td><td class="pct margin-green">55%</td><td class="money">$3,059.00</td><td class="money">$6,797.78</td><td class="money">$6,650.00</td></tr>
+<tr data-cat="puller"><td>82603246002202</td><td>TENEX 1/2" x 6000' RED</td><td>4 Drum Puller</td><td>Puller-6K</td><td class="pct margin-green">55%</td><td class="money">$3,059.00</td><td class="money">$6,797.78</td><td class="money">$6,650.00</td></tr>
+<tr data-cat="puller"><td>82603216002201</td><td>TENEX 1/2" x 6000' YELLOW</td><td>4 Drum Puller</td><td>Puller-6K</td><td class="pct margin-green">55%</td><td class="money">$3,059.00</td><td class="money">$6,797.78</td><td class="money">$6,650.00</td></tr>
+
+<!-- TENEX PULLER ROPES 8,000' -->
+<tr class="category-row"><td colspan="8">TENEX Puller Ropes 8,000' &mdash; Target 55% Margin</td></tr>
+<tr data-cat="puller"><td>82603288002201</td><td>TENEX 1/2" x 8000' BLUE</td><td>4 Drum Puller</td><td>Puller-8K</td><td class="pct margin-green">55%</td><td class="money">$3,254.00</td><td class="money">$7,231.11</td><td class="money">$6,675.00</td></tr>
+<tr data-cat="puller"><td>82603258002200</td><td>TENEX 1/2" x 8000' GREEN</td><td>4 Drum Puller</td><td>Puller-8K</td><td class="pct margin-green">55%</td><td class="money">$3,254.00</td><td class="money">$7,231.11</td><td class="money">$6,675.00</td></tr>
+<tr data-cat="puller"><td>82603248002201</td><td>TENEX 1/2" x 8000' RED</td><td>4 Drum Puller</td><td>Puller-8K</td><td class="pct margin-green">55%</td><td class="money">$3,254.00</td><td class="money">$7,231.11</td><td class="money">$6,675.00</td></tr>
+<tr data-cat="puller"><td>82603218002201</td><td>TENEX 1/2" x 8000' YELLOW</td><td>4 Drum Puller</td><td>Puller-8K</td><td class="pct margin-green">55%</td><td class="money">$3,254.00</td><td class="money">$7,231.11</td><td class="money">$6,675.00</td></tr>
+
+<!-- NYLITE ASSEMBLIES -->
+<tr class="category-row"><td colspan="8">Nylite Class II Assemblies &mdash; Target 42% Margin</td></tr>
+<tr data-cat="nylite"><td>9640681</td><td>NYLITE Class II Spool/Shield/Shackle 4 ORG</td><td>Size 4 Assembly</td><td>Nylite-Assy</td><td class="pct margin-blue">42%</td><td class="money">$247.72</td><td class="money">$427.10</td><td class="money">$385.00</td></tr>
+<tr data-cat="nylite"><td>9640841</td><td>NYLITE Class II Spool/Shield/Shackle 5 BLK</td><td>Size 5 Assembly</td><td>Nylite-Assy</td><td class="pct margin-blue">42%</td><td class="money">$314.41</td><td class="money">$542.09</td><td class="money">$525.00</td></tr>
+
+<!-- NYLITE SPOOL/SHIELD -->
+<tr class="category-row"><td colspan="8">Nylite Spool/Shield Only &mdash; Target 30% Margin</td></tr>
+<tr data-cat="nylite"><td>9690681</td><td>Nylite Spool/Shield 4 ORG (ALUM)</td><td>Size 4</td><td>Nylite-SS</td><td class="pct margin-blue">30%</td><td class="money">$107.26</td><td class="money">$153.23</td><td class="money">$143.01</td></tr>
+<tr data-cat="nylite"><td>9690841</td><td>Nylite Spool/Shield 5 BLK (ALUM)</td><td>Size 5</td><td>Nylite-SS</td><td class="pct margin-blue">30%</td><td class="money">$232.08</td><td class="money">$331.54</td><td class="money">$309.45</td></tr>
+<tr data-cat="nylite"><td>9690321</td><td>Nylite Spool/Shield 1 BLU (ALUM)</td><td>Size 1</td><td>Nylite-SS</td><td class="pct margin-blue">30%</td><td class="money">$77.76</td><td class="money">$111.09</td><td class="money">$103.67</td></tr>
+<tr data-cat="nylite"><td>9690320</td><td>Nylite Spool/Shield 1 BLU (NYL)</td><td>Size 1</td><td>Nylite-SS</td><td class="pct margin-blue">30%</td><td class="money">$21.03</td><td class="money">$30.04</td><td class="money">$28.04</td></tr>
+
+<!-- SHACKLES -->
+<tr class="category-row"><td colspan="8">Shackles &amp; Small Parts &mdash; Target 33% Margin</td></tr>
+<tr data-cat="shackle"><td>9610682</td><td>DASH 4 Nylite Shackle w/ Bolt</td><td>For 9690681</td><td>Shackle</td><td class="pct margin-blue">33%</td><td class="money">$87.60</td><td class="money">$130.75</td><td class="money">$122.50</td></tr>
+
+</tbody>
+</table>
+
+<div class="samson-note" style="margin-top:16px">
+<strong>Samson Category Target Margins (April 2026):</strong><br>
+Turret (AMSTEEL): 30% | Jib-Spool: 30% | Jib-Thimble: 60% | Jib-EyeEye: 50% | Puller (TENEX): 55% | Nylite Assemblies: 42% | Nylite Spool/Shield: 30% | Shackles: 33%
+</div>
+</div>
+
+</div><!-- .table-section -->
+</div><!-- .page-content -->
+
+<footer class="site-footer">
+  <div class="legacy">A Legacy of Commitment&reg;</div>
+  <div class="copy">&copy; 2026 Norris Utilities, LLC &bull; Birmingham, AL &bull; All prices subject to change &bull; Data from FlexPro Armor Complete Pricing Master, April 2026</div>
+</footer>
+
+<script>
+// SEARCH
+document.getElementById('globalSearch').addEventListener('input',function(){
+  var q=this.value.toLowerCase();
+  document.querySelectorAll('tbody tr').forEach(function(tr){
+    if(tr.classList.contains('category-row')){tr.style.display='';return}
+    tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none';
+  });
+  // Hide category rows with no visible children
+  document.querySelectorAll('tbody').forEach(function(tb){
+    var rows=tb.querySelectorAll('tr');
+    var lastCat=null;
+    var hasVisible=false;
+    rows.forEach(function(tr,i){
+      if(tr.classList.contains('category-row')){
+        if(lastCat&&!hasVisible)lastCat.style.display='none';
+        lastCat=tr;hasVisible=false;
+      } else {
+        if(tr.style.display!=='none')hasVisible=true;
+      }
+    });
+    if(lastCat&&!hasVisible)lastCat.style.display='none';
+  });
+});
+
+// TABS
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    var tab=btn.dataset.tab;
+    document.querySelectorAll('.product-table').forEach(function(sec){
+      var tabs=sec.dataset.tab.split(' ');
+      sec.style.display=tabs.includes(tab)?'':'none';
+    });
+  });
+});
+
+// Warn about incorrect product naming (Armor + Guard)
+var badName='FlexPro Armor'+' Guard';
+document.querySelectorAll('td').forEach(function(td){
+  if(td.textContent.indexOf(badName)!==-1){
+    td.style.background='#fff3cd';
+    td.title='WARNING: Correct name is FlexPro Armor (no Guard)';
+    td.textContent=td.textContent.replace(badName,'FlexPro Armor [NAME CORRECTED]');
+  }
+});
+</script>
+</body>
+</html>
