@@ -1,25 +1,20 @@
 /**
  * Norris Utilities Operations Portal - Authentication Module
- * Client-side password protection for GitHub Pages static site
+ * Two-tier access: CB (limited) and Aaron (full)
  */
 
 (function() {
   'use strict';
 
-  // SHA-256 hash of the password (NorrisOps2026!)
-  var VALID_HASH = '771222667e07d3868b063bf17c3905fe585919a8288874c46666ddc643b91182';
   var SESSION_KEY = 'nu_auth';
+  var ROLE_KEY = 'nu_role';
   var SESSION_TIMEOUT = 28800000; // 8 hours in milliseconds
 
-  /**
-   * SHA-256 hash function using Web Crypto API
-   */
-  async function sha256(message) {
-    var msgBuffer = new TextEncoder().encode(message);
-    var hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    var hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
-  }
+  // Password-to-role mapping
+  var PASSWORDS = {
+    'legacy2026': 'cb',
+    'norris2026': 'aaron'
+  };
 
   /**
    * Check if session is valid
@@ -33,10 +28,18 @@
   }
 
   /**
-   * Create authenticated session
+   * Get current user role
    */
-  function createSession() {
+  function getRole() {
+    return sessionStorage.getItem(ROLE_KEY) || null;
+  }
+
+  /**
+   * Create authenticated session with role
+   */
+  function createSession(role) {
     sessionStorage.setItem(SESSION_KEY, Date.now().toString());
+    sessionStorage.setItem(ROLE_KEY, role);
   }
 
   /**
@@ -44,17 +47,19 @@
    */
   function logout() {
     sessionStorage.removeItem(SESSION_KEY);
+    sessionStorage.removeItem(ROLE_KEY);
     window.location.href = '/norris-ops/login.html';
   }
 
   /**
    * Validate password and authenticate
+   * Returns role string ('cb' or 'aaron') on success, false on failure
    */
-  async function authenticate(password) {
-    var hash = await sha256(password);
-    if (hash === VALID_HASH) {
-      createSession();
-      return true;
+  function authenticate(password) {
+    var role = PASSWORDS[password] || null;
+    if (role) {
+      createSession(role);
+      return role;
     }
     return false;
   }
@@ -63,8 +68,19 @@
    * Refresh session timestamp (extend timeout on activity)
    */
   function refreshSession() {
-    if (isAuthenticated()) {
-      createSession();
+    var role = getRole();
+    if (isAuthenticated() && role) {
+      createSession(role);
+    }
+  }
+
+  /**
+   * Apply role-based visibility to the page
+   */
+  function applyRole() {
+    var role = getRole();
+    if (role === 'cb') {
+      document.body.classList.add('role-cb');
     }
   }
 
@@ -74,6 +90,7 @@
     authenticate: authenticate,
     logout: logout,
     refreshSession: refreshSession,
-    VALID_HASH: VALID_HASH
+    getRole: getRole,
+    applyRole: applyRole
   };
 })();
