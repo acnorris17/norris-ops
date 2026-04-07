@@ -206,6 +206,7 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 
 /* ===== NOTE BOX ===== */
 .note-box{background:linear-gradient(135deg,#fff8e1,#fff3cd);border:1px solid #ffe082;border-radius:12px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:#8a6d00}
+.addr{display:inline-block;background:#f5f5f7;border:1px solid #e0e0e0;border-radius:4px;padding:2px 8px;font-size:11px;font-family:'Lato',monospace;color:#555;letter-spacing:0.3px;margin-top:4px}
 
 /* ===== ROLE-BASED VISIBILITY ===== */
 body.role-cb .aaron-only{display:none!important}
@@ -416,9 +417,9 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
     <button class="filter-btn" data-filter="paid">Paid</button>
   </div>
   <div class="table-wrap"><table id="apTable"><thead><tr><th class="sortable" data-col="vendor">Vendor</th><th class="sortable" data-col="amount">Amount</th><th class="sortable" data-col="status">Status</th><th>Details</th></tr></thead><tbody>
-    <tr data-ap-status="partial" data-ap-amount="150.66"><td><strong>Boss Products</strong></td><td>$150.66 remaining</td><td><span class="badge badge-pending">PARTIAL PAID</span></td><td>Check #1123 ($20,928) mailed 3/20/26<br><span style="font-size:12px;color:#888">602 Maple Lane, Wakarusa, IN 46573</span></td></tr>
-    <tr data-ap-status="unknown" data-ap-amount="1387.43"><td><strong>Metro Marketing</strong><br><span style="font-size:12px;color:#888">MK Smith</span></td><td>$1,387.43</td><td><span class="badge" style="background:#fff3e0;color:#e65100;border:1px solid rgba(230,81,0,0.15)">STATUS UNKNOWN</span></td><td>Needs verification<br><span style="font-size:12px;color:#888">2700 Samantha Dr, Dothan, AL 36303</span></td></tr>
-    <tr data-ap-status="paid" data-ap-amount="14100.16" style="background:#f0faf0"><td><strong>Samson Rope</strong></td><td>$14,100.16</td><td><span class="badge badge-paid">PAID</span></td><td>Checks written 3/20/26<br><span style="font-size:12px;color:#888">PO Box 536753, Pittsburgh, PA 15253-5909</span></td></tr>
+    <tr data-ap-status="partial" data-ap-amount="150.66"><td><strong>Boss Products</strong></td><td>$150.66 remaining</td><td><span class="badge badge-pending">PARTIAL PAID</span></td><td>Check #1123 ($20,928) mailed 3/20/26<br><span class="addr">602 Maple Lane, Wakarusa, IN 46573</span></td></tr>
+    <tr data-ap-status="unknown" data-ap-amount="1387.43"><td><strong>Metro Marketing</strong><br><span style="font-size:12px;color:#888">MK Smith</span></td><td>$1,387.43</td><td><span class="badge badge-yellow">STATUS UNKNOWN</span></td><td>Needs verification<br><span class="addr">2700 Samantha Dr, Dothan, AL 36303</span></td></tr>
+    <tr data-ap-status="paid" data-ap-amount="14100.16" style="background:#f0faf0"><td><strong>Samson Rope</strong></td><td>$14,100.16</td><td><span class="badge badge-paid">PAID</span></td><td>Checks written 3/20/26<br><span class="addr">PO Box 536753, Pittsburgh, PA 15253-5909</span></td></tr>
     <tr data-ap-status="settled" data-ap-amount="0"><td><strong>Majors Law Firm</strong></td><td>&mdash;</td><td><span class="badge badge-gray">SETTLED</span></td><td>Retainer refunded. Matter closed.</td></tr>
     <tr data-ap-status="paid" data-ap-amount="7350" style="background:#f0faf0"><td><strong>EUFMC</strong></td><td>$7,350.00</td><td><span class="badge badge-paid">PAID</span></td><td>Charged to credit card 3/19/26</td></tr>
   </tbody></table></div>
