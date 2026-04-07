@@ -47,12 +47,11 @@
     'border-bottom:1px solid rgba(6,208,255,0.15);overflow-x:auto;overflow-y:hidden;' +
     '-webkit-overflow-scrolling:touch">';
 
-  // Logo / Home link
+  // Logo / Home link — real graphic, not text
   navHTML += '<a href="/index.html" style="' +
-    'color:#fff;text-decoration:none;font-weight:900;font-size:14px;letter-spacing:1.5px;' +
-    'margin-right:20px;white-space:nowrap;display:flex;align-items:center;gap:8px;flex-shrink:0">' +
-    '<span style="color:#06D0FF;font-size:16px">\u2726</span>' +
-    'NORRIS UTILITIES</a>';
+    'text-decoration:none;margin-right:20px;display:flex;align-items:center;flex-shrink:0">' +
+    '<img src="/logo-white.png" alt="Norris Utilities\u00AE" style="height:32px;display:block">' +
+    '</a>';
 
   // Separator
   navHTML += '<div style="width:1px;height:24px;background:rgba(255,255,255,0.15);margin-right:12px;flex-shrink:0"></div>';
