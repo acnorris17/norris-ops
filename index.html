@@ -119,9 +119,9 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 .tool-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff}
 .tool-card h4{font-size:14px;font-weight:700;margin-bottom:3px}
 .tool-card p{font-size:12px;color:#888;line-height:1.5}
-.doc-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-left:6px}
-.doc-soon{background:#fff8e1;color:#b38600}
-.doc-live{background:#e6f9ee;color:#00802b}
+.doc-badge{display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-left:6px;vertical-align:middle}
+.doc-soon{background:#fff8e1;color:#b38600;border:1px solid rgba(179,134,0,0.15)}
+.doc-live{background:#e6f9ee;color:#00802b;border:1px solid rgba(0,128,43,0.15)}
 @media(max-width:900px){.tool-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:500px){.tool-grid{grid-template-columns:1fr}}
 
@@ -169,7 +169,7 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 .progress-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#1a1a1a;letter-spacing:0.5px;text-shadow:0 1px 2px rgba(255,255,255,0.5)}
 
 /* ===== QB SUMMARY BAR ===== */
-.qb-summary{background:linear-gradient(135deg,#f0f4ff,#e8f0ff);border:1px solid #ccd9ff;border-radius:10px;padding:14px 20px;margin-bottom:20px;font-size:14px;font-weight:700;color:#0033cc}
+.qb-summary{background:linear-gradient(135deg,#f0f4ff,#e8f0ff);border:1px solid #ccd9ff;border-radius:12px;padding:16px 22px;margin-bottom:20px;font-size:15px;font-weight:700;color:#0033cc;box-shadow:0 2px 8px rgba(0,51,204,0.06)}
 
 /* ===== ADD TASK FORM ===== */
 .add-task-form{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:20px;padding:16px 20px;background:#f8f9fc;border-radius:10px;border:1px dashed #ccc}
@@ -193,16 +193,18 @@ th.sortable.desc::after{content:'\u2193';opacity:1}
 .deal-value{margin-left:auto;font-size:20px;font-weight:900;color:#0033cc;white-space:nowrap}
 
 /* ===== CC RULE BOX ===== */
-.cc-rule{background:linear-gradient(135deg,#0a0e5c,#0033cc);color:#fff;border-radius:12px;padding:20px 24px;margin-bottom:24px;font-size:15px;font-weight:700;text-align:center;letter-spacing:0.5px}
+.cc-rule{background:linear-gradient(135deg,#0a0e5c,#0033cc);color:#fff;border-radius:14px;padding:20px 24px;margin-bottom:24px;font-size:15px;font-weight:700;text-align:center;letter-spacing:0.5px;box-shadow:0 4px 16px rgba(10,14,92,0.25);position:relative;overflow:hidden}
+.cc-rule::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#06D0FF,transparent)}
 .cc-rule span{color:#06D0FF}
 
 /* ===== TASK ENTRY ===== */
-.task-entry{background:#fff;border-radius:10px;padding:16px 20px;margin-bottom:10px;border:1px solid #eee;font-size:14px}
+.task-entry{background:#fff;border-radius:12px;padding:18px 22px;margin-bottom:12px;border:1px solid #eee;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.03);transition:box-shadow .2s}
+.task-entry:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06)}
 .task-entry strong{color:#0033cc}
-.task-num{display:inline-block;background:#0033cc;color:#fff;width:24px;height:24px;border-radius:50%;text-align:center;line-height:24px;font-size:12px;font-weight:700;margin-right:8px}
+.task-num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0033cc,#0055ee);color:#fff;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:700;margin-right:10px;box-shadow:0 2px 6px rgba(0,51,204,0.3)}
 
 /* ===== NOTE BOX ===== */
-.note-box{background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:#8a6d00}
+.note-box{background:linear-gradient(135deg,#fff8e1,#fff3cd);border:1px solid #ffe082;border-radius:12px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:#8a6d00}
 
 /* ===== ROLE-BASED VISIBILITY ===== */
 body.role-cb .aaron-only{display:none!important}
@@ -542,7 +544,10 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 <div class="tab-content" id="tab-samson">
   <div class="sec-title"><span class="blue">Samson Rope</span> <span class="dark">&mdash; Invoice Tracker</span></div>
   <div class="cc-rule">&#128231; CC RULE: <span>ALWAYS CC both Donna Poll (dpoll@samsonrope.com) AND Sarah Daniels (sdaniels@samsonrope.com)</span> on every Samson communication</div>
-  <div class="card info" style="margin-bottom:24px"><strong>Payment Address:</strong> PO Box 536753, Pittsburgh, PA 15253-5909<br><span style="font-size:13px;color:#cc0000;font-weight:700">&#9888; Do NOT mail to Ferndale, WA address</span></div>
+  <div style="background:linear-gradient(135deg,#f0f4ff,#e8f0ff);border:2px solid #0033cc;border-radius:14px;padding:22px 26px;margin-bottom:24px;display:flex;align-items:flex-start;gap:14px">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#0033cc" style="flex-shrink:0;margin-top:2px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    <div><div style="font-size:16px;font-weight:900;color:#0033cc;margin-bottom:4px">Payment Address</div><div style="font-size:15px;font-weight:700;color:#1a1a1a">PO Box 536753, Pittsburgh, PA 15253-5909</div><div style="font-size:13px;color:#cc0000;font-weight:700;margin-top:6px;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 24 24" fill="#cc0000"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Do NOT mail to Ferndale, WA address</div></div>
+  </div>
   <div class="table-wrap"><table><thead><tr><th>Samson Invoice #</th><th>Customer</th><th>Invoice Amount</th><th>Sell Price (30% margin)</th><th>Margin $</th><th>Payment Status</th></tr></thead><tbody>
     <tr><td><strong>INV 322183</strong></td><td>Mississippi Power</td><td>$3,112.56</td><td>$4,446.51</td><td>$1,333.95</td><td><span class="badge badge-paid">PAID</span></td></tr>
     <tr><td><strong>INV 322922</strong></td><td>Mississippi Power</td><td>$10,987.60</td><td>$15,696.57</td><td>$4,708.97</td><td><span class="badge badge-paid">PAID</span></td></tr>
