@@ -62,7 +62,8 @@ body::before{content:'';position:fixed;top:50%;left:50%;transform:translate(-50%
 .sec-title span.dark{color:#1a1a1a}
 
 /* ===== CARDS ===== */
-.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:0 3px 14px rgba(0,0,0,0.05);border:1px solid #eee;transition:box-shadow .2s}
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:0 3px 14px rgba(0,0,0,0.05);border:1px solid #eee;transition:all .3s cubic-bezier(.25,.46,.45,.94)}
+.card:hover{box-shadow:0 6px 20px rgba(0,0,0,0.08)}
 .card.critical{border:2px solid #cc0000;border-left:6px solid #cc0000}
 .card.success{border-left:4px solid #00aa44}
 .card.warning{border-left:4px solid #ffaa00}
@@ -81,7 +82,7 @@ body::before{content:'';position:fixed;top:50%;left:50%;transform:translate(-50%
 table{width:100%;border-collapse:collapse;background:#fff;font-size:14px}
 thead{background:linear-gradient(135deg,#0a0e5c,#0033cc);color:#fff}
 th{padding:14px 16px;text-align:left;font-weight:700;letter-spacing:0.5px;font-size:12px;text-transform:uppercase;white-space:nowrap}
-td{padding:13px 16px;border-bottom:1px solid #f0f0f0}
+td{padding:14px 16px;border-bottom:1px solid #f0f0f0}
 tbody tr{transition:background .15s}
 tbody tr:nth-child(even){background:#fafbff}
 tbody tr:hover{background:#f0f4ff}
