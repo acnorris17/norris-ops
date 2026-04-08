@@ -1,5 +1,5 @@
 {
-  "last_scan": "2026-04-08T11:50:33",
+  "last_scan": "2026-04-08T13:50:43",
   "needs_response": [
     {
       "from": "Aaron C. Norris",
@@ -7,13 +7,6 @@
       "days_waiting": 6,
       "date": "2026-04-02",
       "snippet": "Issues with iship emails not being received"
-    },
-    {
-      "from": "Jeff Fickel",
-      "subject": "RE: Schedule",
-      "days_waiting": 5,
-      "date": "2026-04-03",
-      "snippet": "RE: Schedule"
     },
     {
       "from": "Andy Barron",
@@ -28,6 +21,20 @@
       "days_waiting": 5,
       "date": "2026-04-03",
       "snippet": "Invoice 6651"
+    },
+    {
+      "from": "GHK Admin",
+      "subject": "Support God's House",
+      "days_waiting": 1,
+      "date": "2026-04-07",
+      "snippet": "Support God's House"
+    },
+    {
+      "from": "Aaron C. Norris",
+      "subject": "LPL Financial / Carnegie Account Portal Link",
+      "days_waiting": 1,
+      "date": "2026-04-07",
+      "snippet": "LPL Financial / Carnegie Account Portal Link"
     }
   ],
   "followups_due": [],
