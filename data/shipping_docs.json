@@ -1,109 +1,495 @@
 {
-  "last_updated": "2026-04-08T12:04:38",
+  "last_updated": "2026-04-08T12:42:56",
   "documents": [
     {
+      "id": "SD-2026-ABADIE-0331",
       "filename": "SD-2026-ABADIE-0331.html",
       "customer": "Wayne Abadie",
-      "company": "Aerial Hydraulics, Inc.",
+      "company": "Attn: PSC George Dufour",
       "date": "03/30/2026",
-      "products": "FlexPro Armor 2-Man Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-ABADIE-0331.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "0330-PRIMORIS W6237",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 2
+        }
+      ],
+      "shipTo": "3606 N. Frazier St, Conroe, TX 77303",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 2,
+            "unit_price": 305
+          }
+        ],
+        "subtotal": 610,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-ABADIE-0407-BYB0001",
       "filename": "SD-2026-ABADIE-0407-BYB0001.html",
       "customer": "Wayne Abadie",
-      "company": "Aerial Hydraulics, Inc.",
+      "company": "2015 Holly Rd",
       "date": "04/07/2026",
-      "products": "FlexPro Armor 1-Man Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-ABADIE-0407-BYB0001.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "0407-BYB0001",
+      "products": [
+        {
+          "sku": "NU-BC-2828",
+          "name": "FlexPro Armor 1-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "shipTo": "Gilmore, TX 75644",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2828",
+            "name": "FlexPro Armor 1-Man Bucket Cover",
+            "qty": 1,
+            "unit_price": 235
+          }
+        ],
+        "subtotal": 235,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-AJ-0331-B-JeremyBrown",
       "filename": "SD-2026-AJ-0331-B-JeremyBrown.html",
       "customer": "AJ / Jeremy Brown",
-      "company": "Chain Electric Company",
+      "company": "2631 Ridgewood Rd",
       "date": "03/31/2026",
-      "products": "FlexPro Armor 2-Man Bucket Cover, FlexPro Armor 1.5-Man Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-AJ-0331-B-JeremyBrown.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "Verbal",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 5
+        },
+        {
+          "sku": "NU-BC-2834",
+          "name": "FlexPro Armor 1.5-Man Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "shipTo": "Searcy, AR 72143",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 5,
+            "unit_price": 305
+          },
+          {
+            "sku": "NU-BC-2834",
+            "name": "FlexPro Armor 1.5-Man Bucket Cover",
+            "qty": 5,
+            "unit_price": 265
+          }
+        ],
+        "subtotal": 2850,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-AJ-0331-ChainElectric",
       "filename": "SD-2026-AJ-0331-ChainElectric.html",
       "customer": "AJ Morris",
       "company": "Chain Electric Company",
       "date": "03/31/2026",
-      "products": "FlexPro Armor 2-Man Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-AJ-0331-ChainElectric.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "Verbal",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "shipTo": "1308 W Pine St, Hattiesburg, MS 39401, (601) 549-5409 | ajmorris@bchain.com",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 5,
+            "unit_price": 305
+          }
+        ],
+        "subtotal": 1525,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-AJ-0401-ARCH",
       "filename": "SD-2026-AJ-0401-ARCH.html",
       "customer": "AJ Morris",
       "company": "Chain Electric Company",
       "date": "04/01/2026",
-      "products": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-AJ-0401-ARCH.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "Verbal",
+      "products": [
+        {
+          "sku": "NU-BC-2834-ARCH",
+          "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
+          "qty": 5
+        }
+      ],
+      "shipTo": "1308 W Pine St, Hattiesburg, MS 39401",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2834-ARCH",
+            "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
+            "qty": 5,
+            "unit_price": 0
+          }
+        ],
+        "subtotal": 0,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-BEDWELL-0407",
       "filename": "SD-2026-BEDWELL-0407.html",
       "customer": "Dave Bedwell",
       "company": "AEP/SWEPCO",
       "date": "04/07/2026",
-      "products": "FlexPro Armor D-Shape Transmission Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-BEDWELL-0407.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "Verbal",
+      "products": [
+        {
+          "sku": "NU-BC-DSHAPE",
+          "name": "FlexPro Armor D-Shape Transmission Bucket Cover",
+          "qty": 4
+        }
+      ],
+      "shipTo": "355 South 145th East Ave, Tulsa, OK 74108",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-DSHAPE",
+            "name": "FlexPro Armor D-Shape Transmission Bucket Cover",
+            "qty": 4,
+            "unit_price": 0
+          }
+        ],
+        "subtotal": 0,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-CROSBY-0325",
       "filename": "SD-2026-CROSBY-0325.html",
       "customer": "Coy Crosby",
       "company": "Dominion Energy",
       "date": "03/25/2026",
-      "products": "FlexPro Armor 2-Man Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-CROSBY-0325.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "42350802",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "shipTo": "192 Old Wire Rd, MC M40, West Columbia, SC 29170",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 5,
+            "unit_price": 305
+          }
+        ],
+        "subtotal": 1525,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-JeremyBrown-0331",
       "filename": "SD-2026-JeremyBrown-0331.html",
       "customer": "Jeremy Brown / AJ Morris",
-      "company": "Chain Electric Company",
+      "company": "2631 Ridgewood Rd",
       "date": "03/31/2026",
-      "products": "FlexPro Armor 2-Man Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-JeremyBrown-0331.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "Verbal",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "shipTo": "Searcy, AR 72143",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 5,
+            "unit_price": 305
+          }
+        ],
+        "subtotal": 1525,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-JeremyBrown-0401-ARCH",
       "filename": "SD-2026-JeremyBrown-0401-ARCH.html",
       "customer": "Jeremy Brown / AJ Morris",
-      "company": "Chain Electric Company",
+      "company": "2631 Ridgewood Rd",
       "date": "04/01/2026",
-      "products": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-JeremyBrown-0401-ARCH.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "Verbal",
+      "products": [
+        {
+          "sku": "NU-BC-2834-ARCH",
+          "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
+          "qty": 5
+        }
+      ],
+      "shipTo": "Searcy, AR 72143",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2834-ARCH",
+            "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
+            "qty": 5,
+            "unit_price": 0
+          }
+        ],
+        "subtotal": 0,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-LINETEC-0402",
       "filename": "SD-2026-LINETEC-0402.html",
       "customer": "Richard Thornhill",
-      "company": "Linetec Services",
+      "company": "Attn: Richard Thornhill",
       "date": "04/02/2026",
-      "products": "FlexPro Armor 2-Man Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-LINETEC-0402.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "DEPT450",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "shipTo": "6411 Masonic Drive, Alexandria, LA 71301",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 1,
+            "unit_price": 305
+          }
+        ],
+        "subtotal": 305,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-LINETEC-0406",
       "filename": "SD-2026-LINETEC-0406.html",
       "customer": "Richard Thornhill",
-      "company": "Linetec Services",
+      "company": "Attn: Richard Thornhill",
       "date": "04/06/2026",
-      "products": "FlexPro Armor 2-Man Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-LINETEC-0406.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "DEPT889",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "shipTo": "6411 Masonic Drive, Alexandria, LA 71301",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 1,
+            "unit_price": 305
+          }
+        ],
+        "subtotal": 305,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-2026-THORNHILL-DEPT732-0408",
       "filename": "SD-2026-THORNHILL-DEPT732-0408.html",
       "customer": "Richard Thornhill",
       "company": "LineTec Services / LTS Power",
       "date": "04/08/2026",
-      "products": "FlexPro Armor 2-Man Bucket Cover",
-      "status": "uninvoiced"
+      "file": "shipping-docs/SD-2026-THORNHILL-DEPT732-0408.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "DEPT732",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "shipTo": "6411 Masonic Drive, Alexandria LA 71301",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 1,
+            "unit_price": 305
+          }
+        ],
+        "subtotal": 305,
+        "shipping": null,
+        "total": null
+      }
     },
     {
+      "id": "SD-TEST-DEMO",
       "filename": "SD-TEST-DEMO.html",
       "customer": "John Sample",
-      "company": "Alabama Power Company",
+      "company": "Attn: John Sample",
       "date": "04/07/2026",
-      "products": "FlexPro Armor 2-Man Bucket Cover, FlexPro Armor 1.5-Man Bucket Cover",
-      "status": "demo"
+      "file": "shipping-docs/SD-TEST-DEMO.html",
+      "status": "demo",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "TEST-001",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 3
+        },
+        {
+          "sku": "NU-BC-2834",
+          "name": "FlexPro Armor 1.5-Man Bucket Cover",
+          "qty": 2
+        }
+      ],
+      "shipTo": "600 North 18th Street, Birmingham, AL 35203",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 3,
+            "unit_price": 305
+          },
+          {
+            "sku": "NU-BC-2834",
+            "name": "FlexPro Armor 1.5-Man Bucket Cover",
+            "qty": 2,
+            "unit_price": 265
+          }
+        ],
+        "subtotal": 1445,
+        "shipping": null,
+        "total": null
+      }
     }
   ]
 }
