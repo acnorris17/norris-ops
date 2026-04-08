@@ -574,5 +574,37 @@
     "_captured_at": "2026-04-08T00:50:15.618527",
     "_source": "email_scanner",
     "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "Issues with iship emails not being received",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-08T02:50:24.011428",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Thayne Grove",
+    "subject": "Invoice 6651",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-08T02:50:24.019076",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Andy Barron",
+    "subject": "Canyon",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-08T02:50:24.024142",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Jeff Fickel",
+    "subject": "RE: Schedule",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-08T02:50:24.028105",
+    "_source": "email_scanner",
+    "_category": "followup"
   }
 ]
