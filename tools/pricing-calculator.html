@@ -332,17 +332,357 @@ body {
 </style>
 </head>
 <body>
+
+<!-- ===== AUTH WALL ===== -->
 <div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
-<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
-<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
-<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
-<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
-<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
+  <img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
+  <h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
+  <input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
+  <button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
+  <p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
 </div>
+
+<!-- ===== NAV BAR ===== -->
+<nav class="nav-bar" style="position:sticky;top:0;z-index:1000;background:rgba(10,14,92,.97);backdrop-filter:blur(12px);display:flex;justify-content:center;flex-wrap:wrap;gap:0;border-bottom:2px solid #06D0FF;padding:0">
+  <a href="/" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;transition:all .2s;white-space:nowrap">Portal Home</a>
+  <a href="/aaron.html" class="aaron-only" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;transition:all .2s;white-space:nowrap">CEO Dashboard</a>
+  <a href="/internal/shipping_log_dashboard.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;transition:all .2s;white-space:nowrap">Shipping Log</a>
+  <a href="/internal/orders.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;transition:all .2s;white-space:nowrap">Orders</a>
+  <a href="/internal/contact_master_list.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;transition:all .2s;white-space:nowrap">Contacts</a>
+  <a href="/internal/cb_tasks.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;transition:all .2s;white-space:nowrap">CB Tasks</a>
+  <a href="/tools/pricing-calculator.html" style="color:#06D0FF;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;border-bottom:2px solid #06D0FF;white-space:nowrap">Pricing</a>
+  <a href="/internal/portal_notes.html" class="aaron-only" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;transition:all .2s;white-space:nowrap">Notes</a>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>Pricing Calculator</h1>
+  <div class="subtitle">Internal pricing tool &mdash; Norris Utilities&reg;</div>
+</div>
+<div class="chevron-wrap">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0,0 547,0 547,60 0,0" fill="#06D0FF"/>
+    <polygon points="547,60 547,0 1440,0 1440,60" fill="#f4f6fa"/>
+  </svg>
+</div>
+
+<!-- ===== CONFIDENTIAL BANNER ===== -->
+<div class="confidential aaron-only">CONFIDENTIAL &mdash; INTERNAL USE ONLY &mdash; DO NOT DISTRIBUTE</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="tabs-container">
+
+  <!-- Tab Bar -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('flexproTab',this)">FlexPro Armor&reg; Calculator</button>
+    <button class="tab-btn aaron-only" onclick="switchTab('samsonTab',this)">Samson Rope Calculator</button>
+    <button class="tab-btn" onclick="switchTab('shippingTab',this)">Shipping Calculator</button>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- TAB 1: FLEXPRO ARMOR -->
+  <!-- ============================================ -->
+  <div id="flexproTab" class="tab-panel active">
+    <div class="card">
+      <h2><span class="blue">FlexPro</span> Armor&reg; Pricing</h2>
+
+      <div class="form-row">
+        <div class="form-group" style="flex:1 1 100%">
+          <label>Select Product (SKU / Name)</label>
+          <select id="fp-product" onchange="fpCalc()">
+            <optgroup label="Standard Covers">
+              <option value="0">NU-BC-2828 &mdash; 1-Man BC 28x28</option>
+              <option value="1">NU-BC-2834 &mdash; 1.5-Man BC 28x34</option>
+              <option value="2">NU-BC-2842 &mdash; 1.5-Man Large BC 28x42</option>
+              <option value="3">NU-BC-2844 &mdash; 1.5-Man Specialty BC 28x44</option>
+              <option value="4">NU-BC-2851 &mdash; 2-Man BC 28x51</option>
+            </optgroup>
+            <optgroup label="Upper Control &amp; ARCH">
+              <option value="5">NU-BC-CC2834 &mdash; 1.5-Man w/ Upper Control 28x34</option>
+              <option value="6">NU-BC-2834-F &mdash; ARCH 1.5-Man 28x34</option>
+              <option value="7">NU-BC-2851-F &mdash; ARCH 2-Man 28x51</option>
+            </optgroup>
+            <optgroup label="Combos">
+              <option value="8">NU-BC-2834-C &mdash; 1.5-Man + Shield 28x34</option>
+              <option value="9">NU-BC-2851-C &mdash; 2-Man + Shield 28x51</option>
+              <option value="10">NU-BC-2834-FC &mdash; ARCH 1.5-Man + Shield 28x34</option>
+              <option value="11">NU-BC-2851-FC &mdash; ARCH 2-Man + Shield 28x51</option>
+            </optgroup>
+            <optgroup label="D-Shape &amp; Specialty">
+              <option value="12">NU-BC-D4577 &mdash; D-Shape Transmission 45x77</option>
+              <option value="13">NU-BC-D4577-MSP &mdash; D-Shape MSP 45x77</option>
+              <option value="14">NU-BC-BY2828 &mdash; SDP Pin-On 28x28</option>
+              <option value="15">NU-BC-2945-EPBC &mdash; EPBC ETI 29x45</option>
+              <option value="16">TC-6060 &mdash; Test Tank Cover 60x60</option>
+            </optgroup>
+            <optgroup label="Shields">
+              <option value="17">NU-BCB-2834-SL &mdash; 1.5-Man Shield 28x34</option>
+              <option value="18">NU-BCB-2851-SL &mdash; 2-Man Shield 28x51</option>
+            </optgroup>
+            <optgroup label="Dirt Tarps">
+              <option value="19">DS-9696 &mdash; Dirt Tarp 8x8 96x96</option>
+              <option value="20">DS-9696-R &mdash; Dirt Tarp 8x8 Reinforced 96x96</option>
+              <option value="21">DS-9696-L &mdash; Dirt Tarp 8x8 Light 96x96</option>
+              <option value="22">DS-120120 &mdash; Dirt Tarp 10x10 120x120</option>
+              <option value="23">DS-9696-PN &mdash; Pole Notch Dirt Tarp 96x96</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <!-- Custom margin override -->
+      <div class="form-row">
+        <div class="form-group" style="flex:1 1 100%">
+          <label>Custom Margin Override</label>
+          <div class="slider-wrap">
+            <input type="range" id="fp-margin" min="10" max="80" value="50" oninput="fpCalc()">
+            <span class="slider-val" id="fp-margin-val">50%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="results-box">
+        <div class="result-row aaron-only">
+          <span class="result-label">Cost (Boss)</span>
+          <span id="fp-cost">$89.00</span>
+        </div>
+        <div class="result-row big">
+          <span class="result-label">Custom Margin Price</span>
+          <span id="fp-custom-price">$178.00</span>
+        </div>
+      </div>
+
+      <div class="channels">
+        <div class="channel-card aaron-only">
+          <div class="ch-label">Cost</div>
+          <div class="ch-price" id="fp-ch-cost">$89.00</div>
+          <div class="ch-note">Boss Products invoice</div>
+        </div>
+        <div class="channel-card">
+          <div class="ch-label">Direct Price</div>
+          <div class="ch-price" id="fp-ch-direct">$235.00</div>
+          <div class="ch-note">End-user / utility</div>
+        </div>
+        <div class="channel-card">
+          <div class="ch-label">Dealer Price</div>
+          <div class="ch-price" id="fp-ch-dealer">$195.00</div>
+          <div class="ch-note">Authorized dealer</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- TAB 2: SAMSON ROPE (Aaron-only) -->
+  <!-- ============================================ -->
+  <div id="samsonTab" class="tab-panel aaron-only">
+    <div class="card">
+      <h2><span class="blue">Samson</span> Rope Pricing</h2>
+
+      <p style="background:#fff3cd;border-left:4px solid #cc9900;padding:12px 16px;border-radius:6px;font-size:14px;margin-bottom:16px;font-weight:700;color:#664d00">
+        Samson cost FLUCTUATES. THE FORMULA IS THE AUTHORITY, not any snapshot.
+      </p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Rope Category</label>
+          <select id="sam-category" onchange="samCalc()">
+            <option value="0.30">Turret Ropes (AMSTEEL) &mdash; 30%</option>
+            <option value="0.30">Jib Lines w/ Spool (STABLE BRAID) &mdash; 30%</option>
+            <option value="0.60">Jib Lines w/ Thimble End &mdash; 60%</option>
+            <option value="0.50">Jib Lines Eye-Eye &mdash; 50%</option>
+            <option value="0.55">Puller Ropes (TENEX) &mdash; 55%</option>
+            <option value="0.42">Nylite Class II Assemblies &mdash; 42%</option>
+            <option value="0.30">Nylite Spool/Shield Only &mdash; 30%</option>
+            <option value="0.33">Shackles/Small Parts &mdash; 33%</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Samson Cost (from latest invoice)</label>
+          <input type="number" id="sam-cost" placeholder="e.g. 125.00" step="0.01" min="0" oninput="samCalc()">
+        </div>
+      </div>
+
+      <div class="results-box">
+        <div class="result-row">
+          <span class="result-label">Target Margin</span>
+          <span id="sam-margin-display">30%</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Invoice Cost</span>
+          <span id="sam-cost-display">$0.00</span>
+        </div>
+        <div class="result-row big">
+          <span class="result-label">Sell Price</span>
+          <span id="sam-sell-price">$0.00</span>
+        </div>
+      </div>
+
+      <p style="font-size:12px;color:#888;margin-top:8px">Formula: SellPrice = Cost &divide; (1 &minus; TargetMargin)</p>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- TAB 3: SHIPPING CALCULATOR -->
+  <!-- ============================================ -->
+  <div id="shippingTab" class="tab-panel">
+    <div class="card">
+      <h2><span class="blue">Shipping</span> Calculator <span class="sacred-label">SACRED</span></h2>
+
+      <div style="background:linear-gradient(135deg,#f0f4ff,#e8f0ff);border-radius:10px;padding:24px;text-align:center;margin-bottom:20px">
+        <div style="font-size:13px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Ben&rsquo;s Formula</div>
+        <div style="font-family:'Lato',monospace;font-weight:900;font-size:20px;color:#0a0e5c">
+          CustomerCost = ROUNDUP( ROUNDUP(RegCost, 0) &times; 1.10, 0 )
+        </div>
+        <div style="margin-top:8px;font-size:13px;color:#cc0000;font-weight:700">SACRED &mdash; Never modify this formula</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" style="flex:1 1 100%;max-width:400px">
+          <label>UPS Regular Cost ($)</label>
+          <input type="number" id="ship-cost" placeholder="e.g. 42.37" step="0.01" min="0" oninput="shipCalc()">
+        </div>
+      </div>
+
+      <div class="results-box">
+        <div class="result-row">
+          <span class="result-label">UPS Regular Cost</span>
+          <span id="ship-reg">$0.00</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Rounded Up</span>
+          <span id="ship-rounded">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">&times; 1.10</span>
+          <span id="ship-times">$0.00</span>
+        </div>
+        <div class="result-row big">
+          <span class="result-label">Customer Shipping Charge</span>
+          <span id="ship-final">$0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tabs-container -->
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="tagline">A Legacy of Commitment&reg;</div>
+  <div class="copy">&copy; 2026 Norris Utilities, LLC. All rights reserved.</div>
+</footer>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" class="toast"></div>
+
+<!-- ===== SCRIPTS ===== -->
 <script>
-(function(){var r=sessionStorage.getItem('nu_role');if(sessionStorage.getItem('nu_auth_2026')==='granted'&&(r==='aaron'||r==='cb')){document.getElementById('auth-wall').style.display='none';if(r==='cb'){document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}}})();
-function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else if(p==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');document.getElementById('auth-wall').style.display='none';document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}else{document.getElementById('auth-error').style.display='block'}}
-document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
+/* ---------- AUTH ---------- */
+(function(){
+  var r = sessionStorage.getItem('nu_role');
+  if (sessionStorage.getItem('nu_auth_2026') === 'granted' && (r === 'aaron' || r === 'cb')) {
+    document.getElementById('auth-wall').style.display = 'none';
+    if (r === 'cb') {
+      document.querySelectorAll('.aaron-only').forEach(function(el){ el.style.display = 'none'; });
+    }
+  }
+})();
+
+function checkAuth() {
+  var p = document.getElementById('auth-input').value;
+  if (p === 'norris2026') {
+    sessionStorage.setItem('nu_auth_2026', 'granted');
+    sessionStorage.setItem('nu_role', 'aaron');
+    document.getElementById('auth-wall').style.display = 'none';
+  } else if (p === 'legacy2026') {
+    sessionStorage.setItem('nu_auth_2026', 'granted');
+    sessionStorage.setItem('nu_role', 'cb');
+    document.getElementById('auth-wall').style.display = 'none';
+    document.querySelectorAll('.aaron-only').forEach(function(el){ el.style.display = 'none'; });
+  } else {
+    document.getElementById('auth-error').style.display = 'block';
+  }
+}
+document.getElementById('auth-input').addEventListener('keypress', function(e){ if(e.key==='Enter') checkAuth(); });
+
+/* ---------- TAB SWITCHING ---------- */
+function switchTab(panelId, btn) {
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById(panelId).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ---------- FLEXPRO ARMOR DATA ---------- */
+var fpProducts = [
+  { sku:'NU-BC-2828',       cost:89,     direct:235,  dealer:195  },
+  { sku:'NU-BC-2834',       cost:97,     direct:265,  dealer:205  },
+  { sku:'NU-BC-2842',       cost:101.50, direct:265,  dealer:210  },
+  { sku:'NU-BC-2844',       cost:125,    direct:295,  dealer:235  },
+  { sku:'NU-BC-2851',       cost:112,    direct:305,  dealer:235  },
+  { sku:'NU-BC-CC2834',     cost:109.50, direct:285,  dealer:225  },
+  { sku:'NU-BC-2834-F',     cost:104,    direct:305,  dealer:245  },
+  { sku:'NU-BC-2851-F',     cost:120,    direct:345,  dealer:275  },
+  { sku:'NU-BC-2834-C',     cost:120.50, direct:305,  dealer:245  },
+  { sku:'NU-BC-2851-C',     cost:137.50, direct:345,  dealer:275  },
+  { sku:'NU-BC-2834-FC',    cost:127.50, direct:345,  dealer:275  },
+  { sku:'NU-BC-2851-FC',    cost:145.50, direct:385,  dealer:305  },
+  { sku:'NU-BC-D4577',      cost:176.50, direct:1050, dealer:850  },
+  { sku:'NU-BC-D4577-MSP',  cost:216.50, direct:1100, dealer:null },
+  { sku:'NU-BC-BY2828',     cost:89,     direct:275,  dealer:225  },
+  { sku:'NU-BC-2945-EPBC',  cost:117.70, direct:325,  dealer:265  },
+  { sku:'TC-6060',          cost:195.50, direct:1100, dealer:895  },
+  { sku:'NU-BCB-2834-SL',   cost:23,     direct:45,   dealer:38   },
+  { sku:'NU-BCB-2851-SL',   cost:25,     direct:55,   dealer:45   },
+  { sku:'DS-9696',          cost:226.50, direct:450,  dealer:365  },
+  { sku:'DS-9696-R',        cost:246.50, direct:510,  dealer:415  },
+  { sku:'DS-9696-L',        cost:126,    direct:250,  dealer:205  },
+  { sku:'DS-120120',        cost:292,    direct:550,  dealer:445  },
+  { sku:'DS-9696-PN',       cost:304,    direct:515,  dealer:null }
+];
+
+function fpCalc() {
+  var idx = parseInt(document.getElementById('fp-product').value);
+  var p = fpProducts[idx];
+  var margin = parseInt(document.getElementById('fp-margin').value);
+  document.getElementById('fp-margin-val').textContent = margin + '%';
+
+  var customPrice = (p.cost / (1 - margin / 100)).toFixed(2);
+
+  document.getElementById('fp-cost').textContent = '$' + p.cost.toFixed(2);
+  document.getElementById('fp-custom-price').textContent = '$' + customPrice;
+  document.getElementById('fp-ch-cost').textContent = '$' + p.cost.toFixed(2);
+  document.getElementById('fp-ch-direct').textContent = '$' + p.direct.toFixed(2);
+  document.getElementById('fp-ch-dealer').textContent = p.dealer !== null ? '$' + p.dealer.toFixed(2) : '—';
+}
+fpCalc();
+
+/* ---------- SAMSON ROPE ---------- */
+function samCalc() {
+  var margin = parseFloat(document.getElementById('sam-category').value);
+  var cost = parseFloat(document.getElementById('sam-cost').value) || 0;
+  var sell = cost > 0 ? (cost / (1 - margin)).toFixed(2) : '0.00';
+
+  document.getElementById('sam-margin-display').textContent = (margin * 100).toFixed(0) + '%';
+  document.getElementById('sam-cost-display').textContent = '$' + cost.toFixed(2);
+  document.getElementById('sam-sell-price').textContent = '$' + sell;
+}
+
+/* ---------- SHIPPING ---------- */
+function shipCalc() {
+  var reg = parseFloat(document.getElementById('ship-cost').value) || 0;
+  var rounded = Math.ceil(reg);
+  var times = rounded * 1.10;
+  var final = Math.ceil(times);
+
+  document.getElementById('ship-reg').textContent = '$' + reg.toFixed(2);
+  document.getElementById('ship-rounded').textContent = '$' + rounded;
+  document.getElementById('ship-times').textContent = '$' + times.toFixed(2);
+  document.getElementById('ship-final').textContent = '$' + final;
+}
 </script>
 
 </body>
