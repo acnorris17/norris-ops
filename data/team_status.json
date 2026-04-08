@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-08T11:16:38",
-  "active_count": 7,
+  "last_updated": "2026-04-08T11:31:39",
+  "active_count": 6,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -14,13 +14,13 @@
       "name": "Agent V4",
       "role": "The Builder",
       "status": "idle",
-      "last_run": "2026-04-08 10:50",
+      "last_run": "2026-04-08 11:20",
       "message": "Queue: 1 pending tasks"
     },
     "email_scout": {
       "name": "Email Scout",
       "role": "Email Scanner",
-      "status": "active",
+      "status": "idle",
       "last_run": "2026-04-08 10:51",
       "message": "5 emails need response",
       "items": 5,
@@ -80,7 +80,7 @@
       "name": "Note Reader",
       "role": "reMarkable Scanner",
       "status": "active",
-      "last_run": "2026-04-08 11:16",
+      "last_run": "2026-04-08 11:17",
       "message": "Waiting for notes",
       "items": 0
     },
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-08 11:13",
+      "last_run": "2026-04-08 11:28",
       "message": "All systems UP"
     },
     "backup": {
@@ -96,7 +96,7 @@
       "role": "iCloud Backup",
       "status": "idle",
       "last_run": "2026-04-08 02:00",
-      "message": "5,384 files protected",
+      "message": "5,386 files protected",
       "next_run": "Daily 2:00 AM"
     },
     "n8n": {
