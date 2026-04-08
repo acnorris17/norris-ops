@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Templates — Norris Utilities®</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<script src="auth.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Lato', sans-serif; background: #f5f6fa; color: #1a1a2e; }
+
+.header {
+  background: linear-gradient(135deg, #0a0e5c, #0033cc, #0066ee, #00aaff, #06D0FF);
+  padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.header a { text-decoration: none; display: flex; align-items: center; gap: 14px; }
+.header img { height: 42px; filter: brightness(0) invert(1); }
+.header-title { color: #fff; font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.header-right a { color: rgba(255,255,255,0.8); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
+.header-right a:hover { color: #fff; }
+
+.page-title {
+  background: #fff; border-bottom: 2px solid #e4e4e4;
+  padding: 22px 32px;
+}
+.page-title h1 { font-size: 22px; font-weight: 900; color: #0033cc; letter-spacing: 1px; }
+.page-title p { font-size: 13px; color: #888; margin-top: 4px; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 24px 32px; }
+
+.template-card {
+  background: #fff; border: 1px solid #e4e4e4; border-radius: 10px;
+  margin-bottom: 20px; overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.template-card:hover { box-shadow: 0 4px 20px rgba(0,0,255,0.07); }
+
+.template-header {
+  padding: 14px 20px; background: #f7f8ff; border-bottom: 1px solid #dde2ff;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.template-name {
+  font-size: 14px; font-weight: 900; color: #0033cc;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.template-number { font-size: 11px; color: #aaa; font-weight: 700; }
+
+.template-body { padding: 16px 20px; }
+
+.subject-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  padding: 10px 14px; background: #fafbff; border: 1px solid #e8eaff; border-radius: 8px;
+}
+.subject-label { font-size: 10px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; color: #888; white-space: nowrap; }
+.subject-text { font-size: 13px; font-weight: 600; color: #1a1a2e; flex: 1; }
+
+.btn-copy {
+  padding: 6px 14px; border-radius: 6px; border: 1px solid #0033cc;
+  background: #fff; color: #0033cc; font-size: 11px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  font-family: 'Lato', sans-serif; letter-spacing: 0.5px;
+}
+.btn-copy:hover { background: #0033cc; color: #fff; }
+.btn-copy.copied { background: #2e7d32; color: #fff; border-color: #2e7d32; }
+
+.body-area {
+  width: 100%; min-height: 160px; padding: 14px;
+  border: 1px solid #e4e4e4; border-radius: 8px;
+  font-family: 'Lato', sans-serif; font-size: 13px; line-height: 1.7;
+  color: #1a1a2e; background: #fff; resize: none;
+}
+.body-area:read-only { cursor: default; }
+
+.copy-body-row { text-align: right; margin-top: 10px; }
+
+.placeholder-note {
+  font-size: 11px; color: #888; margin-top: 8px; padding-left: 2px;
+}
+
+.footer {
+  text-align: center; padding: 28px 20px;
+  border-top: 1px solid #e8e8e8; background: #0a0e3a; margin-top: 24px;
+}
+.footer p {
+  font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 1.5px; text-transform: uppercase;
+}
+.footer .tagline {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: #06D0FF; font-size: 13px; letter-spacing: 0; text-transform: none;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 640px) {
+  .header { padding: 14px 16px; }
+  .page-title { padding: 16px; }
+  .container { padding: 16px; }
+  .subject-row { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="index.html">
+    <img src="logo-white.png" alt="Norris Utilities">
+    <span class="header-title">Email Templates</span>
+  </a>
+  <div class="header-right">
+    <a href="index.html">Portal</a>
+    <a href="cb-dashboard.html">CB Dashboard</a>
+  </div>
+</div>
+
+<div class="page-title">
+  <h1>Email Templates</h1>
+  <p>Aaron-approved templates. Click "Copy" and paste into your email. Fill in [BRACKETED] fields.</p>
+</div>
+
+<div class="container" id="templates"></div>
+
+<div class="footer">
+  <p class="tagline">A Legacy of Commitment&reg;</p>
+  <p>&copy; 2026 Norris Utilities, LLC</p>
+</div>
+
+<script>
+(function() {
+  // Auth check
+  if (typeof NorrisAuth !== 'undefined') {
+    if (!NorrisAuth.isAuthenticated()) {
+      window.location.href = 'login.html';
+      return;
+    }
+    NorrisAuth.applyRole();
+  }
+
+  var templates = [
+    {
+      name: 'Shipping Notification',
+      subject: 'Your [PRODUCT] Order Has Shipped — Norris Utilities\u00ae',
+      body: '[CUSTOMER NAME] \u2014\n\nYour order has shipped and is on its way. Here are the details:\n\nProduct: [PRODUCT NAME]\nQuantity: [QTY]\nTracking Number: [TRACKING NUMBER]\nCarrier: [CARRIER — UPS/FedEx/USPS]\nEstimated Delivery: [ESTIMATED DATE]\n\nYou can track your shipment using the tracking number above at the carrier\u2019s website.\n\nIf you have any questions about your order or need anything at all, call me directly at 205-500-1343 or reply to this email.\n\nSincerely,\nAaron C. Norris\nFounder & CEO\nNorris Utilities, LLC\n205-500-1343\nacnorris@norrisutilities.com'
+    },
+    {
+      name: 'Invoice Reminder — 30 Days',
+      subject: 'Invoice [INVOICE #] — Friendly Reminder — Norris Utilities\u00ae',
+      body: '[CUSTOMER NAME] \u2014\n\nI wanted to follow up on Invoice [INVOICE #] for [DOLLAR AMOUNT], dated [INVOICE DATE]. Our records show this one is still outstanding.\n\nI understand things get busy, so I wanted to make sure this didn\u2019t slip through the cracks on your end. If payment has already been sent, please disregard this note.\n\nIf you need a copy of the invoice or have any questions about the charges, I\u2019m happy to help. You can reach me directly at 205-500-1343.\n\nSincerely,\nAaron C. Norris\nFounder & CEO\nNorris Utilities, LLC\n205-500-1343\nacnorris@norrisutilities.com'
+    },
+    {
+      name: 'Invoice Reminder — 60 Days',
+      subject: 'Invoice [INVOICE #] — Second Notice — Norris Utilities\u00ae',
+      body: '[CUSTOMER NAME] \u2014\n\nI\u2019m reaching out again regarding Invoice [INVOICE #] for [DOLLAR AMOUNT], which was due on [DUE DATE]. This is now 60 days past the invoice date.\n\nI want to make sure you received the original invoice and my previous follow-up. If there\u2019s an issue with the order or the invoice itself, let me know and I\u2019ll get it sorted out.\n\nPlease confirm receipt of this email and let me know when we can expect payment. I\u2019m available at 205-500-1343 if it\u2019s easier to talk by phone.\n\nSincerely,\nAaron C. Norris\nFounder & CEO\nNorris Utilities, LLC\n205-500-1343\nacnorris@norrisutilities.com'
+    },
+    {
+      name: 'Invoice Reminder — 90 Days',
+      subject: 'Invoice [INVOICE #] — Urgent: Payment Required — Norris Utilities\u00ae',
+      body: '[CUSTOMER NAME] \u2014\n\nThis is my third notice regarding Invoice [INVOICE #] for [DOLLAR AMOUNT], now 90 days past due. Our previous correspondence on [DATE OF LAST EMAIL] has not received a response.\n\nI need to resolve this balance. Please remit payment at your earliest opportunity, or contact me directly so we can discuss next steps.\n\nPayment can be sent to:\nNorris Utilities, LLC\n[MAILING ADDRESS OR PAYMENT LINK]\n\nIf there is a dispute or issue I\u2019m not aware of, I\u2019d rather hear about it now so we can work through it together.\n\nCall me at 205-500-1343.\n\nSincerely,\nAaron C. Norris\nFounder & CEO\nNorris Utilities, LLC\n205-500-1343\nacnorris@norrisutilities.com'
+    },
+    {
+      name: 'Order Confirmation',
+      subject: 'Order Confirmed — [PRODUCT] — Norris Utilities\u00ae',
+      body: '[CUSTOMER NAME] \u2014\n\nThank you for your order. Here\u2019s a summary of what we have:\n\nProduct: [PRODUCT NAME]\nQuantity: [QTY]\nPO Number: [PO # IF APPLICABLE]\nShip To: [SHIPPING ADDRESS]\nExpected Ship Date: [DATE]\n\nI\u2019ll send you a shipping notification with tracking information once your order goes out.\n\nIf anything above needs to be corrected, or if you have questions, reach me directly at 205-500-1343.\n\nSincerely,\nAaron C. Norris\nFounder & CEO\nNorris Utilities, LLC\n205-500-1343\nacnorris@norrisutilities.com'
+    },
+    {
+      name: 'Tracking Follow-Up — Delivery Confirmed',
+      subject: 'Delivery Confirmed — How Did We Do? — Norris Utilities\u00ae',
+      body: '[CUSTOMER NAME] \u2014\n\nAccording to our tracking information, your [PRODUCT NAME] order was delivered on [DELIVERY DATE] to [DELIVERY LOCATION].\n\nI wanted to check in and make sure everything arrived in good condition. If there are any issues with the shipment or the product, let me know right away and I\u2019ll take care of it.\n\nAlso \u2014 if your crew needs additional covers, rope, or any other utility equipment, I\u2019m always a phone call away. We keep a full line of FlexPro Armor\u00ae bucket covers, Samson Rope, and more in stock.\n\n205-500-1343 anytime.\n\nSincerely,\nAaron C. Norris\nFounder & CEO\nNorris Utilities, LLC\n205-500-1343\nacnorris@norrisutilities.com'
+    }
+  ];
+
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(function() {
+      var orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = orig;
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  var container = document.getElementById('templates');
+  var html = '';
+
+  for (var i = 0; i < templates.length; i++) {
+    var t = templates[i];
+    var bodyId = 'body-' + i;
+    var subjectBtnId = 'copy-subject-' + i;
+    var bodyBtnId = 'copy-body-' + i;
+
+    html += '<div class="template-card">';
+    html += '<div class="template-header">';
+    html += '<span class="template-name">' + t.name + '</span>';
+    html += '<span class="template-number">Template ' + (i + 1) + ' of ' + templates.length + '</span>';
+    html += '</div>';
+    html += '<div class="template-body">';
+
+    // Subject row
+    html += '<div class="subject-row">';
+    html += '<span class="subject-label">Subject:</span>';
+    html += '<span class="subject-text" id="subject-' + i + '">' + t.subject + '</span>';
+    html += '<button class="btn-copy" id="' + subjectBtnId + '">Copy Subject</button>';
+    html += '</div>';
+
+    // Body
+    html += '<textarea class="body-area" id="' + bodyId + '" readonly rows="10">' + t.body + '</textarea>';
+    html += '<div class="copy-body-row">';
+    html += '<button class="btn-copy" id="' + bodyBtnId + '">Copy Body</button>';
+    html += '</div>';
+
+    html += '<p class="placeholder-note">Fill in all [BRACKETED] fields before sending.</p>';
+    html += '</div></div>';
+  }
+
+  container.innerHTML = html;
+
+  // Attach copy handlers
+  for (var i = 0; i < templates.length; i++) {
+    (function(idx) {
+      document.getElementById('copy-subject-' + idx).addEventListener('click', function() {
+        copyText(templates[idx].subject, this);
+      });
+      document.getElementById('copy-body-' + idx).addEventListener('click', function() {
+        copyText(templates[idx].body, this);
+      });
+    })(i);
+  }
+})();
+</script>
+</body>
+</html>

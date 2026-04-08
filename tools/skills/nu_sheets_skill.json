@@ -1,0 +1,9 @@
+{
+  "name": "nu-sheets",
+  "description": "NU-native Google Sheets read/write for shipping log and data",
+  "module": "~/norris-agent/skills/nu_sheets.py",
+  "version": "1.0.0",
+  "author": "Norris Utilities — built by Claude Code",
+  "safe": true,
+  "external_packages": false
+}

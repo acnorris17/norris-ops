@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CB Invoice Reference — Norris Utilities®</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<script src="auth.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Lato', sans-serif; background: #f5f6fa; color: #1a1a2e; }
+
+.header {
+  background: linear-gradient(135deg, #0a0e5c, #0033cc, #0066ee, #00aaff, #06D0FF);
+  padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.header a { text-decoration: none; display: flex; align-items: center; gap: 14px; }
+.header img { height: 42px; filter: brightness(0) invert(1); }
+.header-title { color: #fff; font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.header-right a { color: rgba(255,255,255,0.8); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
+.header-right a:hover { color: #fff; }
+
+.summary-bar {
+  background: #fff; border-bottom: 2px solid #e4e4e4;
+  padding: 18px 32px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.summary-bar h1 { font-size: 22px; font-weight: 900; color: #0033cc; letter-spacing: 1px; }
+.summary-stat {
+  background: #fff3f3; border: 1px solid #ffcdd2; border-radius: 8px;
+  padding: 8px 16px; font-size: 14px; font-weight: 700; color: #c62828;
+}
+.summary-count {
+  background: #f0f2ff; border: 1px solid #dde2ff; border-radius: 8px;
+  padding: 8px 16px; font-size: 13px; font-weight: 600; color: #0033cc;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 24px 32px; }
+
+.order-card {
+  background: #fff; border: 1px solid #e4e4e4; border-radius: 10px;
+  margin-bottom: 16px; overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.order-card:hover { box-shadow: 0 4px 20px rgba(0,0,255,0.07); }
+
+.order-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid #f0f0f0; flex-wrap: wrap; gap: 10px;
+}
+.order-customer { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+.order-company { font-size: 12px; color: #666; margin-left: 8px; }
+.order-date { font-size: 12px; color: #888; }
+
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 12px;
+  font-size: 10px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;
+}
+.badge-shipped { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+.badge-invoiced { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.badge-pending { background: #f5f5f5; color: #757575; border: 1px solid #e0e0e0; }
+.badge-ready { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+
+.order-body { padding: 14px 20px; }
+
+.line-items { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+.line-items th {
+  text-align: left; font-size: 10px; font-weight: 900; letter-spacing: 1px;
+  text-transform: uppercase; color: #888; padding: 6px 8px; border-bottom: 1px solid #e4e4e4;
+}
+.line-items td { padding: 8px; font-size: 13px; border-bottom: 1px solid #f5f5f5; }
+.line-items .num { text-align: right; }
+
+.order-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px; background: #fafbff; border-top: 1px solid #f0f0f0;
+  flex-wrap: wrap; gap: 10px;
+}
+.tracking { font-size: 12px; color: #666; }
+.tracking a { color: #0033cc; text-decoration: none; }
+.tracking a:hover { text-decoration: underline; }
+
+.btn-invoice {
+  display: inline-block; padding: 8px 18px; border-radius: 6px;
+  background: #0033cc; color: #fff; font-size: 12px; font-weight: 700;
+  text-decoration: none; letter-spacing: 0.5px;
+  transition: background 0.2s;
+}
+.btn-invoice:hover { background: #0055ff; }
+
+.internal-notes {
+  margin-top: 8px; padding: 8px 12px; background: #fff8e1; border: 1px solid #ffe082;
+  border-radius: 6px; font-size: 12px; color: #5d4037;
+}
+.aaron-only { display: none; }
+body:not(.role-cb) .aaron-only { display: block; }
+
+.empty-state {
+  text-align: center; padding: 60px 20px; color: #888;
+}
+.empty-state h2 { font-size: 18px; color: #aaa; margin-bottom: 8px; }
+
+.footer {
+  text-align: center; padding: 28px 20px;
+  border-top: 1px solid #e8e8e8; background: #0a0e3a; margin-top: 24px;
+}
+.footer p {
+  font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 1.5px; text-transform: uppercase;
+}
+.footer .tagline {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: #06D0FF; font-size: 13px; letter-spacing: 0; text-transform: none;
+  margin-bottom: 6px;
+}
+
+.filter-bar {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+}
+.filter-btn {
+  padding: 6px 14px; border-radius: 20px; border: 1px solid #dde2ff;
+  background: #fff; color: #0033cc; font-size: 11px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: #0033cc; color: #fff; border-color: #0033cc;
+}
+
+.search-box {
+  padding: 8px 14px; border: 1px solid #dde2ff; border-radius: 8px;
+  font-size: 13px; font-family: 'Lato', sans-serif; width: 260px;
+  outline: none;
+}
+.search-box:focus { border-color: #0033cc; box-shadow: 0 0 0 3px rgba(0,51,204,0.1); }
+
+@media (max-width: 640px) {
+  .header { padding: 14px 16px; }
+  .summary-bar { padding: 14px 16px; flex-direction: column; align-items: flex-start; }
+  .container { padding: 16px; }
+  .order-header { flex-direction: column; align-items: flex-start; }
+  .order-footer { flex-direction: column; align-items: flex-start; }
+  .filter-bar { flex-direction: column; }
+  .search-box { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="index.html">
+    <img src="logo-white.png" alt="Norris Utilities">
+    <span class="header-title">CB Invoice Reference</span>
+  </a>
+  <div class="header-right">
+    <a href="index.html">Portal</a>
+    <a href="cb-dashboard.html">CB Dashboard</a>
+  </div>
+</div>
+
+<div class="summary-bar">
+  <h1>Invoice Reference</h1>
+  <div class="summary-stat" id="uninvoiced-total">Loading...</div>
+  <div class="summary-count" id="order-count">Loading...</div>
+</div>
+
+<div class="container">
+  <div class="filter-bar">
+    <input type="text" class="search-box" id="search" placeholder="Search customer, company, SKU...">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="pending">Pending</button>
+    <button class="filter-btn" data-filter="shipped">Shipped</button>
+    <button class="filter-btn" data-filter="ready">Ready to Invoice</button>
+    <button class="filter-btn" data-filter="invoiced">Invoiced</button>
+  </div>
+
+  <div id="orders-container">
+    <div class="empty-state"><h2>Loading orders...</h2></div>
+  </div>
+</div>
+
+<div class="footer">
+  <p class="tagline">A Legacy of Commitment&reg;</p>
+  <p>&copy; 2026 Norris Utilities, LLC</p>
+</div>
+
+<script>
+(function() {
+  // Auth check
+  if (typeof NorrisAuth !== 'undefined') {
+    if (!NorrisAuth.isAuthenticated()) {
+      window.location.href = 'login.html';
+      return;
+    }
+    NorrisAuth.applyRole();
+  }
+
+  var allDocs = [];
+  var currentFilter = 'all';
+  var searchTerm = '';
+
+  function getStatusLabel(doc) {
+    if (doc.invoiced) return 'INVOICED';
+    var s = (doc.status || '').toLowerCase();
+    if (s === 'shipped') return 'SHIPPED';
+    if (s === 'ready to invoice' || s === 'ready_to_invoice') return 'READY TO INVOICE';
+    return 'PENDING';
+  }
+
+  function getBadgeClass(label) {
+    switch (label) {
+      case 'SHIPPED': return 'badge-shipped';
+      case 'INVOICED': return 'badge-invoiced';
+      case 'READY TO INVOICE': return 'badge-ready';
+      default: return 'badge-pending';
+    }
+  }
+
+  function daysSince(dateStr) {
+    if (!dateStr) return null;
+    var parts = dateStr.split('/');
+    if (parts.length !== 3) return null;
+    var d = new Date(parseInt(parts[2]) < 100 ? 2000 + parseInt(parts[2]) : parseInt(parts[2]),
+                     parseInt(parts[0]) - 1, parseInt(parts[1]));
+    var now = new Date();
+    now.setHours(0,0,0,0);
+    return Math.floor((now - d) / 86400000);
+  }
+
+  function formatMoney(n) {
+    if (n == null) return '$0.00';
+    return '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function renderOrders(docs) {
+    var container = document.getElementById('orders-container');
+    var role = (typeof NorrisAuth !== 'undefined') ? NorrisAuth.getRole() : 'aaron';
+
+    // Filter
+    var filtered = docs.filter(function(doc) {
+      var status = getStatusLabel(doc);
+      if (currentFilter !== 'all') {
+        var filterMap = {
+          'pending': 'PENDING',
+          'shipped': 'SHIPPED',
+          'ready': 'READY TO INVOICE',
+          'invoiced': 'INVOICED'
+        };
+        if (status !== filterMap[currentFilter]) return false;
+      }
+      if (searchTerm) {
+        var haystack = [doc.customer, doc.company, doc.po,
+          (doc.products || []).map(function(p) { return p.sku + ' ' + p.name; }).join(' ')
+        ].join(' ').toLowerCase();
+        if (haystack.indexOf(searchTerm.toLowerCase()) === -1) return false;
+      }
+      return true;
+    });
+
+    // Sort: uninvoiced first, then by date desc
+    filtered.sort(function(a, b) {
+      var aInv = a.invoiced ? 1 : 0;
+      var bInv = b.invoiced ? 1 : 0;
+      if (aInv !== bInv) return aInv - bInv;
+      return (b.date || '').localeCompare(a.date || '');
+    });
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<div class="empty-state"><h2>No orders match this filter</h2></div>';
+      return;
+    }
+
+    var html = '';
+    for (var i = 0; i < filtered.length; i++) {
+      var doc = filtered[i];
+      var status = getStatusLabel(doc);
+      var badgeClass = getBadgeClass(status);
+      var days = daysSince(doc.date);
+      var pricing = doc.internal_pricing || {};
+      var items = pricing.line_items || [];
+      var subtotal = pricing.subtotal || 0;
+      var shipping = pricing.shipping || 0;
+      var total = pricing.total || subtotal + shipping;
+
+      html += '<div class="order-card">';
+      html += '<div class="order-header">';
+      html += '<div><span class="order-customer">' + (doc.customer || 'Unknown') + '</span>';
+      html += '<span class="order-company">' + (doc.company || '') + '</span></div>';
+      html += '<div>';
+      if (days !== null) html += '<span class="order-date">' + doc.date + ' (' + days + ' days ago)</span> ';
+      else html += '<span class="order-date">' + (doc.date || '') + '</span> ';
+      html += '<span class="badge ' + badgeClass + '">' + status + '</span>';
+      html += '</div></div>';
+
+      html += '<div class="order-body">';
+      if (items.length > 0) {
+        html += '<table class="line-items"><thead><tr>';
+        html += '<th>SKU</th><th>Product</th><th class="num">Qty</th><th class="num">Unit Price</th><th class="num">Line Total</th>';
+        html += '</tr></thead><tbody>';
+        for (var j = 0; j < items.length; j++) {
+          var item = items[j];
+          var lineTotal = (item.unit_price || 0) * (item.qty || 0);
+          html += '<tr><td>' + (item.sku || '') + '</td>';
+          html += '<td>' + (item.name || '') + '</td>';
+          html += '<td class="num">' + (item.qty || 0) + '</td>';
+          html += '<td class="num">' + formatMoney(item.unit_price) + '</td>';
+          html += '<td class="num">' + formatMoney(lineTotal) + '</td></tr>';
+        }
+        html += '</tbody></table>';
+      }
+
+      if (doc.po) html += '<div style="font-size:12px;color:#666;margin-bottom:4px;"><strong>PO:</strong> ' + doc.po + '</div>';
+      if (doc.shipTo) html += '<div style="font-size:12px;color:#666;"><strong>Ship To:</strong> ' + doc.shipTo + '</div>';
+
+      if (doc.notes && role === 'aaron') {
+        html += '<div class="internal-notes aaron-only"><strong>Internal Notes:</strong> ' + doc.notes + '</div>';
+      }
+      html += '</div>';
+
+      html += '<div class="order-footer">';
+      html += '<div>';
+      if (doc.trackingNumber) {
+        html += '<span class="tracking"><strong>Tracking:</strong> <a href="https://tools.usps.com/go/TrackConfirmAction?tLabels=' + doc.trackingNumber + '" target="_blank">' + doc.trackingNumber + '</a></span>';
+      }
+      if (doc.invoiceNumber) {
+        html += '<span style="margin-left:12px;font-size:12px;color:#2e7d32;font-weight:700;">Invoice: ' + doc.invoiceNumber + '</span>';
+      }
+      html += '</div>';
+      html += '<div>';
+      html += '<span style="font-size:14px;font-weight:700;color:#1a1a2e;margin-right:12px;">Total: ' + formatMoney(total) + '</span>';
+      if (!doc.invoiced) {
+        html += '<a href="https://app.qbo.intuit.com/app/invoice" target="_blank" class="btn-invoice">Create Invoice in QB</a>';
+      }
+      html += '</div></div></div>';
+    }
+
+    container.innerHTML = html;
+  }
+
+  function updateSummary() {
+    var uninvoicedTotal = 0;
+    var uninvoicedCount = 0;
+    var totalCount = allDocs.length;
+
+    for (var i = 0; i < allDocs.length; i++) {
+      if (!allDocs[i].invoiced) {
+        uninvoicedCount++;
+        var pricing = allDocs[i].internal_pricing || {};
+        var subtotal = pricing.subtotal || 0;
+        var shipping = pricing.shipping || 0;
+        uninvoicedTotal += pricing.total || (subtotal + shipping);
+      }
+    }
+
+    document.getElementById('uninvoiced-total').textContent =
+      'Uninvoiced: ' + formatMoney(uninvoicedTotal);
+    document.getElementById('order-count').textContent =
+      uninvoicedCount + ' of ' + totalCount + ' orders uninvoiced';
+  }
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentFilter = btn.getAttribute('data-filter');
+      renderOrders(allDocs);
+    });
+  });
+
+  // Search
+  document.getElementById('search').addEventListener('input', function(e) {
+    searchTerm = e.target.value;
+    renderOrders(allDocs);
+  });
+
+  // Load data
+  fetch('data/shipping_docs.json?t=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      allDocs = data.documents || [];
+      updateSummary();
+      renderOrders(allDocs);
+    })
+    .catch(function(e) {
+      document.getElementById('orders-container').innerHTML =
+        '<div class="empty-state"><h2 style="color:#c62828;">Failed to load data</h2><p>Check data/shipping_docs.json</p></div>';
+    });
+})();
+</script>
+</body>
+</html>
