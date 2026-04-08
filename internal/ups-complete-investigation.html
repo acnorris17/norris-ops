@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Complete UPS Shipping Investigation — Norris Utilities</title>
-<script>(function(){if(!(sessionStorage.getItem('nu_auth_2026')==='granted'&&sessionStorage.getItem('nu_role'))){window.location.href='/login.html'}})()</script>
+<script>(function(){var K='nu_auth_2026',RK='nu_role';var r=sessionStorage.getItem(RK);if(!(sessionStorage.getItem(K)==='granted'&&r)){window.location.href='/login.html';return}if(r==='cb')document.body.classList.add('role-cb')})()</script>
+<style>body.role-cb .aaron-only{display:none!important}</style>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -143,21 +144,21 @@ tbody td { padding:6px 8px; vertical-align:top; line-height:1.5; }
 </table>
 
 <!-- UNINVOICED SHIPMENTS -->
-<div class="section-title">4. All Uninvoiced Shipments — Revenue at Risk</div>
-<div class="box box-red">
+<div class="section-title">4. All Uninvoiced Shipments <span class="aaron-only">— Revenue at Risk</span></div>
+<div class="box box-red aaron-only">
   <strong>2026 — 17 uninvoiced shipments (revenue sitting uncollected)</strong>
 </div>
 <table>
   <thead><tr><th>Date</th><th>Tracking</th><th>Customer</th><th>City/State</th><th>QB Invoice</th><th>Notes</th></tr></thead>
   <tbody>
     <tr style="background:#e8f5e9;"><td>Mar 14</td><td class="tracking">1Z2W49000328003798</td><td>Sheffield Utilities</td><td>Sheffield, AL</td><td>Inv #1507 (exists, not verified)</td><td>Invoiced but not confirmed sent</td></tr>
-    <tr style="background:#fff8e1;"><td>Mar 20</td><td class="tracking">1Z2W49000395021357</td><td>Linetec (Thornhill)</td><td>Alexandria, LA</td><td>❌ NONE</td><td>PO DEPT468R — ready to invoice $275</td></tr>
-    <tr style="background:#fff8e1;"><td>Mar 20</td><td class="tracking">1Z2W49000395006856<br>1Z2W49000328343091</td><td>Dominion Energy (Crosby)</td><td>West Columbia, SC</td><td>❌ NONE</td><td>6× 1.5-Man BC — ask Aaron price</td></tr>
+    <tr style="background:#fff8e1;"><td>Mar 20</td><td class="tracking">1Z2W49000395021357</td><td>Linetec (Thornhill)</td><td>Alexandria, LA</td><td>❌ NONE</td><td>PO DEPT468R — ready to invoice <span class="aaron-only">$275</span></td></tr>
+    <tr style="background:#fff8e1;"><td>Mar 20</td><td class="tracking">1Z2W49000395006856<br>1Z2W49000328343091</td><td>Dominion Energy (Crosby)</td><td>West Columbia, SC</td><td>❌ NONE</td><td>6× 1.5-Man BC — <span class="aaron-only">ask Aaron price</span></td></tr>
     <tr style="background:#fce4ec;"><td>Mar 20</td><td class="tracking">1Z2W49000395012652</td><td>AEP (Myers/Abshire)</td><td>Roanoke, VA</td><td>❌ BLOCKED</td><td>ARCH/Combo — SKU unconfirmed</td></tr>
     <tr style="background:#fce4ec;"><td>Mar 20</td><td class="tracking">1Z2W49000328351797</td><td>Florence Utilities (Pickle)</td><td>Florence, AL</td><td>❌ BLOCKED</td><td>Mixed ARCH — SKU unconfirmed</td></tr>
-    <tr style="background:#fff8e1;"><td>Mar 20</td><td class="tracking">1Z2W49000393585850</td><td>AEP/SWEPCO (Benz)</td><td>Fayetteville, AR</td><td>❌ NONE</td><td>1× 2-Man BC — ready to invoice $275</td></tr>
-    <tr><td>Apr 1</td><td class="tracking">395813055 / 329239194 / 395908757</td><td>Chain Electric (AJ Morris)</td><td>Hattiesburg, MS</td><td>❌ NONE</td><td>CC+4% — confirm price with Aaron</td></tr>
-    <tr><td>Apr 1</td><td class="tracking">395911654 / 329247890 / 395917452 / 395926157</td><td>Jeremy Brown</td><td>Searcy, AR</td><td>❌ NONE</td><td>CC+4% — confirm price with Aaron</td></tr>
+    <tr style="background:#fff8e1;"><td>Mar 20</td><td class="tracking">1Z2W49000393585850</td><td>AEP/SWEPCO (Benz)</td><td>Fayetteville, AR</td><td>❌ NONE</td><td>1× 2-Man BC — ready to invoice <span class="aaron-only">$275</span></td></tr>
+    <tr><td>Apr 1</td><td class="tracking">395813055 / 329239194 / 395908757</td><td>Chain Electric (AJ Morris)</td><td>Hattiesburg, MS</td><td>❌ NONE</td><td><span class="aaron-only">CC+4% — confirm price with Aaron</span></td></tr>
+    <tr><td>Apr 1</td><td class="tracking">395911654 / 329247890 / 395917452 / 395926157</td><td>Jeremy Brown</td><td>Searcy, AR</td><td>❌ NONE</td><td><span class="aaron-only">CC+4% — confirm price with Aaron</span></td></tr>
     <tr><td>Feb 27</td><td class="tracking">1Z2W49000326864095</td><td>Linetec Services</td><td>Marksville, LA</td><td>❌ NONE</td><td>Check if CB handled</td></tr>
     <tr><td>Feb 24</td><td class="tracking">1Z2W49000326733593</td><td>Primoris T&D</td><td>Conroe, TX</td><td>❌ NONE</td><td>Earlier Primoris shipment — check</td></tr>
     <tr><td>Feb 11</td><td class="tracking">1Z2W49000392272154</td><td>Primoris T&D</td><td>Conroe, TX</td><td>❌ NONE</td><td>Check status</td></tr>
