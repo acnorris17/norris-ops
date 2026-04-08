@@ -1,0 +1,84 @@
+{
+  "version": "2.0",
+  "updated": "2026-04-08",
+  "updated_by": "Claude Code — Aaron's feedback",
+  "script": "~/norris-agent/email_watch.py",
+  "scan_frequency": {
+    "business_hours": "every 3 minutes (4 AM - 9 PM CT)",
+    "off_hours": "every 15 minutes"
+  },
+  "priority_levels": {
+    "CRITICAL": {
+      "description": "Alert within 60 seconds",
+      "triggers": [
+        "Subject contains: fleet request, pricing and availability, quote request, PO#, purchase order, please ship, order, RFP, RFQ, bid request",
+        "Subject contains $ amounts or quantities (e.g., $500, 10x, 5 units)",
+        "Customer email from unknown domain (not BSS, Google, UPS, etc.)",
+        "Customer reply on existing thread (if Aaron is on To/CC)"
+      ]
+    },
+    "HIGH": {
+      "description": "Alert within 5 minutes",
+      "triggers": [
+        "Key contacts: Herb Minatre, Thayne Grove, Troy Gongwer, Donna Poll, Sarah Daniels, Nick Gordon, Andrew Jarmoszuk, Dale Williams, Nick Jarmoszuk Jr",
+        "BSS emails meeting territory filter (AL MS LA TN GA SC NC KY, top 1/3 FL)",
+        "BSS emails addressed to Aaron or with call to action",
+        "BSS: Ready Rigs/Paint Schedule from Johnna, commission/retainer/agreement, RCOO, product/pricing updates",
+        "Skylift order reports or open order reports",
+        "Subject contains: invoice, payment, overdue, past due, statement",
+        "Known vendors/conferences: EUFMC (eufmc.org)",
+        "Google security alerts with unknown device/location"
+      ]
+    },
+    "NORMAL": {
+      "description": "Morning brief only, no instant alert",
+      "triggers": [
+        "BSS all-hands without call to action",
+        "Shipping confirmations (UPS, iShip, tracking)",
+        "Google workspace notifications",
+        "Routine vendor updates"
+      ]
+    },
+    "IGNORE": {
+      "description": "No alert, no brief",
+      "triggers": [
+        "Own domain (norrisutilities.com) — all sent items, invoices",
+        "Invoice [N] from Norris Utilities (QuickBooks outbound invoices)",
+        "Larch McWatters (IT alerts)",
+        "Briana Quesnoy / marketing@bayshoresystems.com (marketing blasts)",
+        "David Vance",
+        "Andy Barron Canyon emails (unless addressed to Aaron)",
+        "BSS deal threads where Aaron is NOT on To/CC (e.g., TR300R / Andre Hawks)",
+        "avpc.org (Alabama nonprofit, not a customer)",
+        "Subject: 'Support [church/charity name]' patterns",
+        "Subject: 'Golf Tournament' from BSS",
+        "Google security alerts (routine, not unknown device)",
+        "All noreply/no-reply/notifications/mailer-daemon senders",
+        "Marketing, newsletter, promotions senders",
+        "Gusto, Google Business Profile, Squarespace, Briarwood"
+      ]
+    }
+  },
+  "sent_email_tracking": {
+    "enabled": true,
+    "description": "When Aaron replies to a flagged thread, mark as HANDLED in NorrisPalace and stop alerting"
+  },
+  "duplicate_prevention": {
+    "enabled": true,
+    "store": "~/norris-agent/data/flagged_emails.json",
+    "max_entries": 1000
+  },
+  "refinement_log": [
+    {
+      "date": "2026-04-08",
+      "changes": [
+        "Rule 1: Never flag norrisutilities.com domain or 'Invoice [N] from Norris Utilities'",
+        "Rule 2: Added avpc.org to IGNORE, added charity/church subject patterns, BSS golf tournament",
+        "Rule 3: BSS deal thread To/CC check — only flag if Aaron is on the thread",
+        "Rule 4: EUFMC (eufmc.org) downgraded from CRITICAL to HIGH (known vendor)",
+        "Rule 5: Sent email tracking — auto-mark handled when Aaron replies",
+        "Rule 6: Persistent duplicate prevention via flagged_emails.json"
+      ]
+    }
+  ]
+}
