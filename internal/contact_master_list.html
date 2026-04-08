@@ -608,6 +608,7 @@
 </style>
 </head>
 <body>
+<!-- AUTH WALL -->
 <div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
 <img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
 <h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
@@ -620,4 +621,255 @@
 function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else if(p==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');document.getElementById('auth-wall').style.display='none';document.querySelectorAll('.aaron-only').forEach(function(el){el.style.display='none'})}else{document.getElementById('auth-error').style.display='block'}}
 document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
 </script>
+
+<!-- HEADER -->
+<div class="header">
+  <span class="phoenix-watermark">&#x1F426;</span>
+  <div class="header-content">
+    <div class="header-eyebrow">NORRIS UTILITIES&reg;</div>
+    <div class="header-logo">Contact <span>Directory</span></div>
+    <div class="header-tagline">A Legacy of Commitment&reg;</div>
+    <div class="header-tool-title">Master Contact List</div>
+    <div class="header-meta">Internal Tool &bull; Searchable &bull; Click any contact for details</div>
+  </div>
+</div>
+
+<!-- NAV BAR -->
+<nav style="position:sticky;top:0;z-index:1000;background:rgba(10,14,92,.97);backdrop-filter:blur(12px);display:flex;justify-content:center;flex-wrap:wrap;gap:0;border-bottom:2px solid #06D0FF;padding:0">
+  <a href="/" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;white-space:nowrap">Portal Home</a>
+  <a href="/aaron.html" class="aaron-only" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;white-space:nowrap">CEO Dashboard</a>
+  <a href="/internal/shipping_log_dashboard.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;white-space:nowrap">Shipping Log</a>
+  <a href="/internal/orders.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;white-space:nowrap">Orders</a>
+  <a href="/internal/contact_master_list.html" style="color:#06D0FF;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;border-bottom:2px solid #06D0FF;white-space:nowrap">Contacts</a>
+  <a href="/internal/cb_tasks.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;white-space:nowrap">CB Tasks</a>
+  <a href="/tools/pricing-calculator.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;white-space:nowrap">Pricing</a>
+  <a href="/internal/portal_notes.html" class="aaron-only" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 18px;text-decoration:none;white-space:nowrap">Notes</a>
+</nav>
+
+<!-- CHEVRON -->
+<div class="chevron-divider"></div>
+
+<div class="main-wrapper">
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-number" id="stat-total">0</div><div class="stat-label">Total Contacts</div></div>
+  <div class="stat-card cyan"><div class="stat-number" id="stat-customers">0</div><div class="stat-label">Customers</div></div>
+  <div class="stat-card"><div class="stat-number" id="stat-vendors">0</div><div class="stat-label">Vendors</div></div>
+  <div class="stat-card cyan"><div class="stat-number" id="stat-prospects">0</div><div class="stat-label">Prospects</div></div>
+</div>
+
+<!-- SEPARATOR -->
+<div class="x-separator">&times; &times; &times; &times; &times;</div>
+
+<!-- KEY CONTACTS (ALWAYS CC) -->
+<div class="section-title">CC RULES &mdash; ALWAYS FOLLOW</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px">
+  <div style="background:#fff;border-radius:10px;border-left:4px solid #06D0FF;padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,0.05);font-size:13px"><strong style="color:#0000FF">Boss Products:</strong> CC <strong>Troy Gongwer</strong> AND <strong>Thayne Grove</strong> on every email</div>
+  <div style="background:#fff;border-radius:10px;border-left:4px solid #06D0FF;padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,0.05);font-size:13px"><strong style="color:#0000FF">Samson Rope:</strong> CC <strong>Donna Poll</strong> AND <strong>Sarah Daniels</strong> on every email</div>
+</div>
+
+<!-- CONTROLS -->
+<div class="section-title">CONTACT DIRECTORY</div>
+<div class="controls-row">
+  <input type="text" class="search-box" id="searchBox" placeholder="Search by name, company, email, or phone...">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="customer">Customers</button>
+  <button class="filter-btn" data-filter="vendor">Vendors</button>
+  <button class="filter-btn" data-filter="prospect">Prospects</button>
+</div>
+
+<!-- TABLE -->
+<div class="table-card">
+<div class="table-scroll">
+<table id="contactTable">
+<thead>
+<tr>
+  <th>Contact</th>
+  <th>Company</th>
+  <th>Category</th>
+  <th>Phone</th>
+  <th>Email</th>
+</tr>
+</thead>
+<tbody id="contactBody">
+<!-- KEY VENDORS -->
+<tr data-cat="vendor"><td><div class="contact-name">Troy Gongwer</div><div class="contact-role">Owner</div></td><td><div class="company-name">Boss Products</div></td><td><span class="tier-badge tier-vendor">VENDOR</span></td><td>(574) 226-2099</td><td><a href="mailto:tgongwer@bossproductsinc.com">tgongwer@bossproductsinc.com</a></td></tr>
+<tr data-cat="vendor"><td><div class="contact-name">Thayne Grove</div><div class="contact-role">Sales</div></td><td><div class="company-name">Boss Products</div></td><td><span class="tier-badge tier-vendor">VENDOR</span></td><td>(574) 970-0450 x105</td><td><a href="mailto:tgrove@bossproductsinc.com">tgrove@bossproductsinc.com</a></td></tr>
+<tr data-cat="vendor"><td><div class="contact-name">Donna Poll</div><div class="contact-role">Sales</div></td><td><div class="company-name">Samson Rope</div></td><td><span class="tier-badge tier-vendor">VENDOR</span></td><td>&mdash;</td><td><a href="mailto:dpoll@samsonrope.com">dpoll@samsonrope.com</a></td></tr>
+<tr data-cat="vendor"><td><div class="contact-name">Sarah Daniels</div><div class="contact-role">Sales</div></td><td><div class="company-name">Samson Rope</div></td><td><span class="tier-badge tier-vendor">VENDOR</span></td><td>&mdash;</td><td><a href="mailto:sdaniels@samsonrope.com">sdaniels@samsonrope.com</a></td></tr>
+<tr data-cat="vendor"><td><div class="contact-name">Herb Minatre</div><div class="contact-role">Owner</div></td><td><div class="company-name">Bay Shore Systems</div></td><td><span class="tier-badge tier-vendor">VENDOR</span></td><td>&mdash;</td><td><a href="mailto:Herb@bayshoresystems.com">Herb@bayshoresystems.com</a></td></tr>
+<tr data-cat="vendor"><td><div class="contact-name">Andy Barron</div><div class="contact-role">Primary Contact</div></td><td><div class="company-name">Bay Shore Systems</div></td><td><span class="tier-badge tier-vendor">VENDOR</span></td><td>(208) 660-9438</td><td><a href="mailto:abarron@bayshoresystems.com">abarron@bayshoresystems.com</a></td></tr>
+<tr data-cat="vendor"><td><div class="contact-name">Andrew Jarmoszuk</div><div class="contact-role">Management</div></td><td><div class="company-name">Skylift</div></td><td><span class="tier-badge tier-vendor">VENDOR</span></td><td>&mdash;</td><td><a href="mailto:Andrew@skyliftus.com">Andrew@skyliftus.com</a></td></tr>
+<tr data-cat="vendor"><td><div class="contact-name">Dale Williams</div><div class="contact-role">Sales</div></td><td><div class="company-name">Skylift</div></td><td><span class="tier-badge tier-vendor">VENDOR</span></td><td>&mdash;</td><td><a href="mailto:DWilliams@skyliftus.com">DWilliams@skyliftus.com</a></td></tr>
+<tr data-cat="vendor"><td><div class="contact-name">Nick Jarmoszuk Jr</div><div class="contact-role">Management</div></td><td><div class="company-name">Skylift</div></td><td><span class="tier-badge tier-vendor">VENDOR</span></td><td>&mdash;</td><td><a href="mailto:NJ@skyliftus.com">NJ@skyliftus.com</a></td></tr>
+<!-- KEY CUSTOMERS -->
+<tr data-cat="customer"><td><div class="contact-name">Richard Thornhill</div><div class="contact-role">Contact</div></td><td><div class="company-name">LineTec Services</div></td><td><span class="tier-badge tier-strategic">STRATEGIC</span></td><td>(318) 427-8846</td><td><a href="mailto:rthornhill@ltspower.com">rthornhill@ltspower.com</a></td></tr>
+<tr data-cat="customer"><td><div class="contact-name">AJ Morris</div><div class="contact-role">Contact</div></td><td><div class="company-name">Chain Electric</div></td><td><span class="tier-badge tier-partner">CUSTOMER</span></td><td>(601) 549-5409</td><td><a href="mailto:ajmorris@bchain.com">ajmorris@bchain.com</a></td></tr>
+<tr data-cat="customer"><td><div class="contact-name">Wayne Abadie</div><div class="contact-role">Buyer</div></td><td><div class="company-name">Aerial Hydraulics / Primoris</div></td><td><span class="tier-badge tier-partner">CUSTOMER</span></td><td>&mdash;</td><td><a href="mailto:aerione@aol.com">aerione@aol.com</a></td></tr>
+<tr data-cat="customer"><td><div class="contact-name">Coy Crosby</div><div class="contact-role">Contact</div></td><td><div class="company-name">Dominion Energy</div></td><td><span class="tier-badge tier-partner">CUSTOMER</span></td><td>&mdash;</td><td><a href="mailto:christopher.powers@dominionenergy.com">via Dominion</a></td></tr>
+<tr data-cat="customer"><td><div class="contact-name">Jimmy Benz</div><div class="contact-role">Contact</div></td><td><div class="company-name">SWEPCO / AEP</div></td><td><span class="tier-badge tier-partner">CUSTOMER</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr data-cat="customer"><td><div class="contact-name">Dave Bedwell</div><div class="contact-role">Contact</div></td><td><div class="company-name">SWEPCO</div></td><td><span class="tier-badge tier-partner">CUSTOMER</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr data-cat="customer"><td><div class="contact-name">Michael Waldrep</div><div class="contact-role">Contact</div></td><td><div class="company-name">Sheffield Utilities</div></td><td><span class="tier-badge tier-partner">CUSTOMER</span></td><td>&mdash;</td><td><a href="mailto:mwaldrep@sheffieldutilities.com">mwaldrep@sheffieldutilities.com</a></td></tr>
+<tr data-cat="customer"><td><div class="contact-name">Darrell Pickle</div><div class="contact-role">Contact</div></td><td><div class="company-name">Florence Electric</div></td><td><span class="tier-badge tier-prospect">PROSPECT</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr data-cat="customer"><td><div class="contact-name">Sammy Myers</div><div class="contact-role">Contact</div></td><td><div class="company-name">AEP</div></td><td><span class="tier-badge tier-partner">CUSTOMER</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr data-cat="prospect"><td><div class="contact-name">Rick Sutherland</div><div class="contact-role">Contact</div></td><td><div class="company-name">EPB Chattanooga</div></td><td><span class="tier-badge tier-prospect">PROSPECT</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr data-cat="prospect"><td><div class="contact-name">Bill Kugler</div><div class="contact-role">Contact</div></td><td><div class="company-name">Terex</div></td><td><span class="tier-badge tier-prospect">PROSPECT</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr data-cat="prospect"><td><div class="contact-name">Jared Lemoine</div><div class="contact-role">Contact</div></td><td><div class="company-name">Irby Construction</div></td><td><span class="tier-badge tier-prospect">PROSPECT</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<!-- IMPORTED CONTACTS LOADED VIA JS -->
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- DETAIL PANEL (hidden, shows on click) -->
+<div class="detail-panel" id="detailPanel" style="display:none">
+  <h3 style="font-weight:900;font-size:18px;color:#0000FF;margin-bottom:4px" id="detailName"></h3>
+  <p style="font-size:14px;color:#666;margin-bottom:16px" id="detailCompany"></p>
+  <div class="detail-grid">
+    <div class="detail-item"><label>Phone</label><p id="detailPhone">&mdash;</p></div>
+    <div class="detail-item"><label>Email</label><p id="detailEmail">&mdash;</p></div>
+    <div class="detail-item"><label>Category</label><p id="detailCat">&mdash;</p></div>
+  </div>
+  <div style="margin-top:20px">
+    <div class="section-title" style="font-size:11px;margin-bottom:8px">LINKED DOCUMENTS</div>
+    <p style="font-size:13px;color:#888" id="detailDocs">Select a contact from the table above to see their linked shipping documents, invoices, and follow-ups.</p>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend-card">
+  <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#666">Legend</div>
+  <div class="legend-grid">
+    <span class="tier-badge tier-strategic">STRATEGIC</span>
+    <span class="tier-badge tier-partner">CUSTOMER</span>
+    <span class="tier-badge tier-vendor">VENDOR</span>
+    <span class="tier-badge tier-prospect">PROSPECT</span>
+    <span class="tier-badge tier-dormant">DORMANT</span>
+  </div>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">Norris Utilities&reg;</div>
+  <div class="footer-tagline" style="font-family:'Playfair Display',serif;font-style:italic;color:#06D0FF">A Legacy of Commitment&reg;</div>
+  <div class="footer-copy">&copy; 2026 Norris Utilities, LLC. Internal use only.</div>
+</div>
+
+<script>
+// Load CSV contacts
+(function(){
+  var body=document.getElementById('contactBody');
+  var sdLinks={
+    'Richard Thornhill':['SD-2026-LINETEC-0402','SD-2026-LINETEC-0406'],
+    'Wayne Abadie':['SD-2026-ABADIE-0331'],
+    'AJ Morris':['SD-2026-AJ-0401-ARCH','SD-2026-AJ-0331-ChainElectric'],
+    'Jeremy Brown':['SD-2026-JeremyBrown-0401-ARCH','SD-2026-JeremyBrown-0331'],
+    'Dave Bedwell':['SD-2026-BEDWELL-0407']
+  };
+
+  fetch('/data/contacts_hubspot_import.csv')
+    .then(function(r){return r.text()})
+    .then(function(csv){
+      var lines=csv.trim().split('\n');
+      var existing={};
+      body.querySelectorAll('tr').forEach(function(tr){
+        var n=tr.querySelector('.contact-name');
+        if(n)existing[n.textContent.trim().toLowerCase()]=true;
+      });
+      for(var i=1;i<lines.length;i++){
+        var cols=lines[i].split(',');
+        var fn=(cols[0]||'').trim(),ln=(cols[1]||'').trim(),co=(cols[2]||'').trim(),em=(cols[3]||'').trim(),ph=(cols[4]||'').trim();
+        if(!fn||fn==='Auto'||fn==='Ticket')continue;
+        var fullName=fn+(ln?' '+ln:'');
+        if(existing[fullName.toLowerCase()])continue;
+        var cat=co?'customer':'prospect';
+        var tr=document.createElement('tr');
+        tr.setAttribute('data-cat',cat);
+        tr.innerHTML='<td><div class="contact-name">'+fullName+'</div></td>'
+          +'<td><div class="company-name">'+(co||'&mdash;')+'</div></td>'
+          +'<td><span class="tier-badge '+(co?'tier-partner':'tier-dormant')+'">'+(co?'CUSTOMER':'CONTACT')+'</span></td>'
+          +'<td>'+(ph||'&mdash;')+'</td>'
+          +'<td>'+(em?'<a href="mailto:'+em+'">'+em+'</a>':'&mdash;')+'</td>';
+        body.appendChild(tr);
+      }
+      updateStats();
+      attachRowClicks();
+    })
+    .catch(function(){updateStats();attachRowClicks()});
+
+  // Search
+  document.getElementById('searchBox').addEventListener('input',function(){
+    var q=this.value.toLowerCase();
+    body.querySelectorAll('tr').forEach(function(tr){
+      tr.style.display=tr.textContent.toLowerCase().indexOf(q)>=0?'':'none';
+    });
+  });
+
+  // Filters
+  document.querySelectorAll('.filter-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+      this.classList.add('active');
+      var f=this.getAttribute('data-filter');
+      body.querySelectorAll('tr').forEach(function(tr){
+        if(f==='all')tr.style.display='';
+        else tr.style.display=tr.getAttribute('data-cat')===f?'':'none';
+      });
+    });
+  });
+
+  function updateStats(){
+    var rows=body.querySelectorAll('tr');
+    var total=rows.length,cust=0,vend=0,pros=0;
+    rows.forEach(function(r){
+      var c=r.getAttribute('data-cat');
+      if(c==='customer')cust++;
+      else if(c==='vendor')vend++;
+      else pros++;
+    });
+    document.getElementById('stat-total').textContent=total;
+    document.getElementById('stat-customers').textContent=cust;
+    document.getElementById('stat-vendors').textContent=vend;
+    document.getElementById('stat-prospects').textContent=pros;
+  }
+
+  function attachRowClicks(){
+    body.querySelectorAll('tr').forEach(function(tr){
+      tr.style.cursor='pointer';
+      tr.addEventListener('click',function(){
+        body.querySelectorAll('tr').forEach(function(r){r.classList.remove('row-highlight')});
+        tr.classList.add('row-highlight');
+        var name=(tr.querySelector('.contact-name')||{}).textContent||'';
+        var comp=(tr.querySelector('.company-name')||{}).textContent||'';
+        var ph=tr.cells[3]?tr.cells[3].textContent:'';
+        var emCell=tr.cells[4];
+        var emA=emCell?emCell.querySelector('a'):null;
+        var em=emA?emA.textContent:(emCell?emCell.textContent:'');
+        var catBadge=tr.querySelector('.tier-badge');
+        var cat=catBadge?catBadge.textContent:'';
+        document.getElementById('detailName').textContent=name;
+        document.getElementById('detailCompany').textContent=comp||'No company';
+        document.getElementById('detailPhone').textContent=ph||'\u2014';
+        document.getElementById('detailEmail').innerHTML=em&&em!=='\u2014'?'<a href="mailto:'+em+'">'+em+'</a>':'\u2014';
+        document.getElementById('detailCat').textContent=cat;
+        var docs='';
+        if(sdLinks[name]){
+          docs=sdLinks[name].map(function(sd){return '<a href="/shipping-docs/'+sd+'.html" target="_blank" style="color:#0000FF;font-weight:700;text-decoration:none;display:inline-block;margin:4px 8px 4px 0;padding:4px 12px;background:#e8f0ff;border-radius:6px;font-size:12px">'+sd+'</a>'}).join('');
+        }else{
+          docs='<span style="color:#aaa;font-size:13px">No linked documents yet. As shipping docs and invoices are created, they will appear here.</span>';
+        }
+        document.getElementById('detailDocs').innerHTML=docs;
+        document.getElementById('detailPanel').style.display='block';
+        document.getElementById('detailPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
 
