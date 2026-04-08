@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-08T04:31:32",
-  "active_count": 4,
+  "last_updated": "2026-04-08T04:46:32",
+  "active_count": 5,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -47,8 +47,8 @@
     "morning_herald": {
       "name": "Morning Herald",
       "role": "Morning Briefing",
-      "status": "idle",
-      "last_run": "2026-04-07 04:45",
+      "status": "active",
+      "last_run": "2026-04-08 04:45",
       "message": "Brief delivered!",
       "next_run": "Daily 4:45 AM"
     },
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-08 04:27",
+      "last_run": "2026-04-08 04:43",
       "message": "All systems UP"
     },
     "backup": {
