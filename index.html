@@ -132,41 +132,98 @@ body { font-family: 'Lato', sans-serif; background: #fff; color: #1a1a2e; }
     </div>
   </div>
 
-  <!-- SHIPPING DOCUMENTS -->
-  <div class="section-card">
-    <div class="section-header"><span class="section-icon">📄</span><span class="section-title">Shipping Documents</span></div>
+  <!-- SHIPPING DOCUMENTS — Dynamic from shipping_docs.json -->
+  <div class="section-card" id="sd-section-card">
+    <div class="section-header">
+      <span class="section-icon">📄</span><span class="section-title">Shipping Documents</span>
+      <span id="sd-count-badge" style="background:#0033cc;color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:12px;margin-left:8px;"></span>
+    </div>
     <div class="section-body">
-      <ul class="sd-list">
-        <li><a href="shipping-docs/SD-2026-BEDWELL-0407.html"><span class="sd-icon">📄</span>SD-2026-BEDWELL-0407<span class="sd-date">Apr 7 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-ABADIE-0407-BYB0001.html"><span class="sd-icon">📄</span>SD-2026-ABADIE-0407<span class="sd-date">Apr 7 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-LINETEC-0406.html"><span class="sd-icon">📄</span>SD-2026-LINETEC-0406<span class="sd-date">Apr 6 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-LINETEC-0402.html"><span class="sd-icon">📄</span>SD-2026-LINETEC-0402<span class="sd-date">Apr 2 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-AJ-0401-ARCH.html"><span class="sd-icon">📄</span>SD-2026-AJ-0401-ARCH<span class="sd-date">Apr 1 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-JeremyBrown-0401-ARCH.html"><span class="sd-icon">📄</span>SD-2026-JeremyBrown-0401-ARCH<span class="sd-date">Apr 1 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-ABADIE-0331.html"><span class="sd-icon">📄</span>SD-2026-ABADIE-0331<span class="sd-date">Mar 31 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-AJ-0331-B-JeremyBrown.html"><span class="sd-icon">📄</span>SD-2026-AJ-0331-B-JeremyBrown<span class="sd-date">Mar 31 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-AJ-0331-ChainElectric.html"><span class="sd-icon">📄</span>SD-2026-AJ-0331-ChainElectric<span class="sd-date">Mar 31 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-JeremyBrown-0331.html"><span class="sd-icon">📄</span>SD-2026-JeremyBrown-0331<span class="sd-date">Mar 31 &rsquo;26</span></a></li>
-        <li><a href="shipping-docs/SD-2026-CROSBY-0325.html"><span class="sd-icon">📄</span>SD-2026-CROSBY-0325<span class="sd-date">Mar 25 &rsquo;26</span></a></li>
-      </ul>
+      <div id="sd-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;font-size:12px;">
+        <button class="sd-filter-btn active" data-filter="all" style="padding:4px 12px;border:1px solid #0033cc;border-radius:16px;background:#0033cc;color:#fff;cursor:pointer;font-size:11px;font-weight:700;">All</button>
+        <button class="sd-filter-btn" data-filter="needs-invoice" style="padding:4px 12px;border:1px solid #cc0000;border-radius:16px;background:#fff;color:#cc0000;cursor:pointer;font-size:11px;font-weight:700;">Needs Invoice</button>
+        <button class="sd-filter-btn" data-filter="invoiced" style="padding:4px 12px;border:1px solid #2e7d32;border-radius:16px;background:#fff;color:#2e7d32;cursor:pointer;font-size:11px;font-weight:700;">Invoiced</button>
+        <button class="sd-filter-btn" data-filter="pending" style="padding:4px 12px;border:1px solid #e65100;border-radius:16px;background:#fff;color:#e65100;cursor:pointer;font-size:11px;font-weight:700;">Pending</button>
+      </div>
+      <div id="sd-list-dynamic" style="font-size:0.85rem;">Loading shipping documents...</div>
     </div>
   </div>
-
-  <!-- UNINVOICED SHIPMENTS — 9+ orders, audit-tracked -->
-  <div class="section-card">
-    <div class="section-header"><span class="section-icon">⚠️</span><span class="section-title">Uninvoiced Shipments</span></div>
-    <div class="section-body" id="shipments-section" style="font-size:0.85rem;">
-      <div class="link-row"><span class="li">1</span><span class="lt"><span class="ln">LineTec (Thornhill) DEPT468R</span><span class="ld">1× 2-Man BC · Mar 20 · <b>READY TO INVOICE</b></span></span></div>
-      <div class="link-row"><span class="li">2</span><span class="lt"><span class="ln">Dominion Energy (Crosby)</span><span class="ld">6× 1.5-Man BC · Mar 20 · <b>READY TO INVOICE</b> · Contact Aaron for pricing</span></span></div>
-      <div class="link-row"><span class="li">3</span><span class="lt"><span class="ln">SWEPCO/AEP (Benz) #860377</span><span class="ld">1× 2-Man BC · Mar 20 · <b>READY TO INVOICE</b></span></span></div>
-      <div class="link-row"><span class="li">4</span><span class="lt"><span class="ln">Florence Utilities (Pickle)</span><span class="ld">3×NU-BC-2834 + 1×NU-BC-2834-C + 2×NU-BC-2834-F · $1,710 · Mar 20 · <b>READY TO INVOICE</b></span></span></div>
-      <div class="link-row"><span class="li">5</span><span class="lt"><span class="ln">AEP Myers (Roanoke)</span><span class="ld">2×NU-BC-2834-F + 1×NU-BC-2834-C · $915 · Mar 20 · <b>READY TO INVOICE</b></span></span></div>
-      <div class="link-row"><span class="li">6</span><span class="lt"><span class="ln">Chain Electric (AJ Morris)</span><span class="ld">5×2-Man + 5×1.5-Man · Apr 1 · <b>READY TO INVOICE</b></span></span></div>
-      <div class="link-row"><span class="li">7</span><span class="lt"><span class="ln">Jeremy Brown (Chain)</span><span class="ld">Multiple FlexPro · Apr 1 · <b>READY TO INVOICE</b></span></span></div>
-      <div class="link-row"><span class="li">8</span><span class="lt"><span class="ln">Sheffield Utilities (Waldrep)</span><span class="ld">1× 2-Man BC · Mar 14 · <b>READY TO INVOICE</b></span></span></div>
-      <div class="link-row"><span class="li">9</span><span class="lt"><span class="ln">LineTec (Thornhill) DEPT889</span><span class="ld">1× 2-Man BC · Apr 6 · <b>READY TO INVOICE</b> · Contact Aaron for pricing</span></span></div>
-    </div>
-  </div>
+  <script>
+  (function(){
+    var sdFilter = 'all';
+    function statusBadge(doc) {
+      if (doc.status === 'demo') return '<span style="background:#e3f2fd;color:#1565c0;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;">DEMO</span>';
+      if (doc.invoiced) return '<span style="background:#1b5e20;color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;">INVOICED</span>';
+      if (doc.status === 'shipped' || doc.trackingNumber) return '<span style="background:#2e7d32;color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;">SHIPPED</span>';
+      if (doc.approved) return '<span style="background:#1565c0;color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;">APPROVED</span>';
+      return '<span style="background:#fff3e0;color:#e65100;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;">PENDING</span>';
+    }
+    function needsInvoice(doc) {
+      return !doc.invoiced && doc.status !== 'demo' && (doc.approved || doc.status === 'shipped' || doc.trackingNumber || doc.status === 'pending');
+    }
+    function renderSD(docs) {
+      var container = document.getElementById('sd-list-dynamic');
+      if (!docs || docs.length === 0) { container.innerHTML = '<p style="color:#999;padding:8px;">No shipping documents found.</p>'; return; }
+      // Sort newest first by date
+      docs.sort(function(a,b) { return (b.date||'').localeCompare(a.date||''); });
+      // Filter
+      var filtered = docs.filter(function(d) {
+        if (sdFilter === 'all') return d.status !== 'demo';
+        if (sdFilter === 'needs-invoice') return needsInvoice(d);
+        if (sdFilter === 'invoiced') return d.invoiced;
+        if (sdFilter === 'pending') return d.status === 'pending' && !d.approved;
+        return true;
+      });
+      document.getElementById('sd-count-badge').textContent = filtered.length + ' docs';
+      var html = '';
+      filtered.forEach(function(doc) {
+        var prods = (doc.products||[]).map(function(p){return p.qty+'x '+p.name;}).join(', ') || 'No products';
+        var badge = statusBadge(doc);
+        var needsInv = (!doc.invoiced && doc.status !== 'demo') ? ' <span style="background:#fee;color:#c00;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;">NEEDS INVOICE</span>' : '';
+        var tracking = doc.trackingNumber ? '<div style="font-size:11px;color:#555;margin-top:2px;">Tracking: '+doc.trackingNumber+'</div>' : '';
+        // Invoice reference (internal pricing — visible to both Aaron and CB)
+        var invoiceRef = '';
+        if (doc.internal_pricing && doc.internal_pricing.line_items && doc.internal_pricing.line_items.length > 0) {
+          invoiceRef = '<details style="margin-top:6px;font-size:12px;"><summary style="cursor:pointer;color:#0033cc;font-weight:700;font-size:11px;">Invoice Reference</summary><div style="padding:6px 0;">';
+          doc.internal_pricing.line_items.forEach(function(li){
+            invoiceRef += '<div>'+li.qty+'x '+li.name+' ('+li.sku+') @ $'+li.unit_price+' = <b>$'+(li.qty*li.unit_price)+'</b></div>';
+          });
+          invoiceRef += '<div style="border-top:1px solid #ddd;margin-top:4px;padding-top:4px;font-weight:700;">Subtotal: $'+doc.internal_pricing.subtotal;
+          if (doc.internal_pricing.shipping) invoiceRef += ' + Shipping: $'+doc.internal_pricing.shipping;
+          if (doc.internal_pricing.total) invoiceRef += ' = Total: $'+doc.internal_pricing.total;
+          invoiceRef += '</div>';
+          if (doc.invoiceNumber) invoiceRef += '<div style="color:#2e7d32;font-weight:700;">QB Invoice: '+doc.invoiceNumber+'</div>';
+          invoiceRef += '</div></details>';
+        }
+        html += '<div class="link-row" style="display:block;padding:10px 14px;border-bottom:1px solid #eee;">';
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;">';
+        html += '<span><b>'+doc.customer+'</b>'+(doc.company?' &mdash; '+doc.company:'')+'</span>';
+        html += '<span>'+badge+needsInv+'</span>';
+        html += '</div>';
+        html += '<div style="font-size:12px;color:#555;margin-top:3px;">'+prods+'</div>';
+        html += '<div style="font-size:11px;color:#888;margin-top:2px;">'+doc.date+(doc.po?' &middot; PO: '+doc.po:'')+' &middot; <a href="'+doc.file+'" style="color:#0033cc;font-weight:700;">View SD</a></div>';
+        html += tracking;
+        html += invoiceRef;
+        html += '</div>';
+      });
+      container.innerHTML = html;
+    }
+    // Filter button handlers
+    document.querySelectorAll('.sd-filter-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('.sd-filter-btn').forEach(function(b){b.classList.remove('active');b.style.background='#fff';b.style.color=b.getAttribute('data-filter')==='all'?'#0033cc':b.style.borderColor;});
+        btn.classList.add('active'); btn.style.background=btn.style.borderColor; btn.style.color='#fff';
+        sdFilter = btn.getAttribute('data-filter');
+        fetch('data/shipping_docs.json?t='+Date.now()).then(function(r){return r.json()}).then(function(d){renderSD(d.documents)}).catch(function(){});
+      });
+    });
+    // Initial load
+    fetch('data/shipping_docs.json?t='+Date.now())
+      .then(function(r){return r.json()})
+      .then(function(data){renderSD(data.documents)})
+      .catch(function(e){document.getElementById('sd-list-dynamic').innerHTML='<p style="color:#c00;">Failed to load shipping docs. Check data/shipping_docs.json.</p>';});
+  })();
+  </script>
 
   <!-- TEAM & JOURNAL -->
   <div class="section-card">
