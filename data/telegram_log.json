@@ -202,7 +202,14 @@
       "source": "email_scanner.py",
       "message": "\ud83d\udcec EMAIL \u2014 \ud83d\udea8 <b>URGENT \u2014 3 emails waiting 5+ days</b>\n  \u2022 Aaron C. Norris \u2014 Issues with iship emails not being received \u2014 6d ago\n  \u2022 Andy Barron \u2014 Canyon \u2014 5d ago\n  \u2022 Thayne Grove \u2014 Invoice 6651 \u2014 5d ago\n\n\ud83d\udcca Full scan: 13 total items in morning brief",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-08T10:51:04.131354",
+      "category": "EMAIL",
+      "source": "email_scanner.py",
+      "message": "\ud83d\udcec EMAIL \u2014 \ud83d\udea8 <b>URGENT \u2014 2 emails waiting 5+ days</b>\n  \u2022 Aaron C. Norris \u2014 Issues with iship emails not being received \u2014 6d ago\n  \u2022 Thayne Grove \u2014 Invoice 6651 \u2014 5d ago\n\n\ud83d\udcca Full scan: 13 total items in morning brief",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-08T08:50:53.374436"
+  "last_updated": "2026-04-08T10:51:04.131371"
 }
