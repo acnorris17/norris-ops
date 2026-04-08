@@ -125,7 +125,14 @@
       "source": "email_scanner.py",
       "message": "\ud83d\udcec EMAIL \u2014 \ud83d\udea8 <b>URGENT \u2014 1 emails waiting 5+ days</b>\n  \u2022 Aaron C. Norris \u2014 Issues with iship emails not being received \u2014 5d ago\n\n\ud83d\udcca Full scan: 13 total items in morning brief",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-07T20:49:58.535773",
+      "category": "EMAIL",
+      "source": "email_scanner.py",
+      "message": "\ud83d\udcec EMAIL \u2014 \ud83d\udea8 <b>URGENT \u2014 1 emails waiting 5+ days</b>\n  \u2022 Aaron C. Norris \u2014 Issues with iship emails not being received \u2014 5d ago\n\n\ud83d\udcca Full scan: 13 total items in morning brief",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-07T18:49:49.055452"
+  "last_updated": "2026-04-07T20:49:58.535799"
 }
