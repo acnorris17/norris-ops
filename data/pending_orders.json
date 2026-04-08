@@ -82,7 +82,23 @@
       "date_detected": "2026-04-07T21:38:38.354425+00:00",
       "status": "PENDING REVIEW",
       "source": "gmail_scan"
+    },
+    {
+      "id": "19d633787fa967c3",
+      "customer": "Richard Thornhill",
+      "company": "",
+      "email": "rthornhill@ltspower.com",
+      "po_number": "",
+      "products": [
+        "(see email)"
+      ],
+      "ship_to": "",
+      "subject": "Linetec Order",
+      "date_received": "2026-04-08 11:05",
+      "date_detected": "2026-04-08T16:09:50.614222+00:00",
+      "status": "PENDING REVIEW",
+      "source": "gmail_scan"
     }
   ],
-  "last_updated": "2026-04-08T15:39:49.570758+00:00"
+  "last_updated": "2026-04-08T16:09:52.052331+00:00"
 }
