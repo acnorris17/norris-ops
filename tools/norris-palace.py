@@ -128,6 +128,23 @@ def recency_score(updated_str):
         return 0.1
 
 
+# ─── BRIDGE TRIGGER ─────────────────────────────────────────
+
+def _trigger_bridge():
+    """Silently run the palace-to-claude bridge in the background."""
+    try:
+        import subprocess
+        subprocess.Popen(
+            ['bash', '-c',
+             '~/norris-agent/scripts/palace-to-claude.sh >> '
+             '~/norris-agent/logs/palace-bridge.log 2>&1'],
+            close_fds=True,
+            start_new_session=True
+        )
+    except Exception:
+        pass  # Never let bridge failures break norris-palace
+
+
 # ─── COMMANDS ───────────────────────────────────────────────
 
 def cmd_store(args):
@@ -159,6 +176,7 @@ def cmd_store(args):
     save_record(record)
     print(f"Stored: {record['id'][:8]}... in {wing}/{room}")
     print(f"  Summary: {summary}")
+    _trigger_bridge()
     return record
 
 
@@ -265,6 +283,7 @@ def cmd_update(args):
     record["updated"] = now_iso()
     save_record(record)
     print(f"Updated: {record['id'][:12]}... in {record['wing']}/{record['room']}")
+    _trigger_bridge()
 
 
 def cmd_tag(args):
@@ -286,6 +305,7 @@ def cmd_tag(args):
     record["updated"] = now_iso()
     save_record(record)
     print(f"Tags updated: {record['id'][:12]}... → {record['tags']}")
+    _trigger_bridge()
 
 
 def cmd_export(args):
