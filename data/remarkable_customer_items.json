@@ -1,6 +1,6 @@
 {
-  "compiled_at": "2026-04-08T11:17:25.564209",
-  "count": 129,
+  "compiled_at": "2026-04-08T15:07:08.663650",
+  "count": 134,
   "items": [
     {
       "notebook": "To Do List 4-22-24",
@@ -348,6 +348,20 @@
       "deadline": null,
       "raw": "Trinity RPO Manitex Crane Quote***",
       "scanned_at": "2026-04-08T16:05:11.994455+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Mississippi Power",
+      "text": "Take V5 as finally version to production",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "I really want V5 to be the \"finally version\" to take to production. (Fingers crossed.)",
+      "scanned_at": "2026-04-08T20:07:08.558641+00:00",
       "category": "FINANCIAL",
       "assigned_to": "aaron",
       "completed": false
@@ -1389,6 +1403,48 @@
       "completed": false
     },
     {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 2,
+      "customer": "Email/Notes from 8/13/24 - Troy",
+      "text": "Modify Mississippi Power D-Shape Bucket Cover according to MS Power's spec requirements and ship it back",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Please modify this bucket cover, according to MS Power's spec requirements and ship it back to me",
+      "scanned_at": "2026-04-08T20:06:14.335999+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Mississippi Power",
+      "text": "Get notes and dimensions for project to explain what is needed or call customer",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "and dimensions for this project. Those notes could help in explaining what is needed... or call me.",
+      "scanned_at": "2026-04-08T20:07:08.558641+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Dielectric Tank Cover Project",
+      "text": "Add hole at opposite end for tension strap support on future builds",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "For future builds of this or when we go to modify the other ones MS Power purchased (there were 4 in total, we have fixed 1), we need to also add a hole at the opposite end of where the \"tension strap hole\" is.",
+      "scanned_at": "2026-04-08T20:07:08.558641+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
       "notebook": "To Do List 4-22-24",
       "page": 1,
       "customer": "Tide Pride Account Management",
@@ -1524,6 +1580,20 @@
       "deadline": null,
       "raw": "Sale Stuff (in iPhone)",
       "scanned_at": "2026-04-08T16:13:47.066471+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 3,
+      "customer": "SOFT 1.5-Man Bucket Cover Development",
+      "text": "Ensure no charge when shipping back the modified bucket cover",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "When you ship it back to me, please be sure to not charge me for it again. I have already paid for this",
+      "scanned_at": "2026-04-08T20:06:45.562921+00:00",
       "category": "FINANCIAL",
       "assigned_to": "aaron",
       "completed": false

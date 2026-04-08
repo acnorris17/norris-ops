@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-08T15:01:42",
-  "active_count": 5,
+  "last_updated": "2026-04-08T15:16:42",
+  "active_count": 6,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -79,8 +79,8 @@
     "note_reader": {
       "name": "Note Reader",
       "role": "reMarkable Scanner",
-      "status": "idle",
-      "last_run": "2026-04-08 11:17",
+      "status": "active",
+      "last_run": "2026-04-08 15:07",
       "message": "Waiting for notes",
       "items": 0
     },
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-08 14:58",
+      "last_run": "2026-04-08 15:13",
       "message": "All systems UP"
     },
     "backup": {
