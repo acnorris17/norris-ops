@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-08T12:52:51",
+  "last_updated": "2026-04-08T13:04:31",
   "documents": [
     {
       "id": "SD-2026-ABADIE-0331",
@@ -89,12 +89,12 @@
       "products": [
         {
           "sku": "NU-BC-2851",
-          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "name": "FlexPro Armor® 2-Man Bucket Cover",
           "qty": 5
         },
         {
           "sku": "NU-BC-2834",
-          "name": "FlexPro Armor 1.5-Man Bucket Cover",
+          "name": "FlexPro Armor® 1.5-Man Bucket Cover",
           "qty": 5
         }
       ],
@@ -104,13 +104,13 @@
         "line_items": [
           {
             "sku": "NU-BC-2851",
-            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "name": "FlexPro Armor® 2-Man Bucket Cover",
             "qty": 5,
             "unit_price": 305
           },
           {
             "sku": "NU-BC-2834",
-            "name": "FlexPro Armor 1.5-Man Bucket Cover",
+            "name": "FlexPro Armor® 1.5-Man Bucket Cover",
             "qty": 5,
             "unit_price": 265
           }
