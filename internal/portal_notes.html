@@ -119,17 +119,320 @@ html,body{height:100%;font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a
 </style>
 </head>
 <body>
-<div id="auth-wall" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0e5c;display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column">
-<img src="/logo-white.png" alt="Norris Utilities" style="width:120px;margin-bottom:24px" onerror="this.style.display='none'">
-<h2 style="color:white;font-family:Lato,sans-serif;margin-bottom:16px">Norris Utilities&reg;</h2>
-<input type="password" id="auth-input" placeholder="Enter access code" style="padding:12px 20px;font-size:16px;border:2px solid #0066ee;border-radius:8px;text-align:center;width:280px;font-family:Lato,sans-serif" autofocus>
-<button onclick="checkAuth()" style="margin-top:12px;padding:10px 32px;background:#0033cc;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:Lato,sans-serif">ACCESS PORTAL</button>
-<p id="auth-error" style="color:#ff4444;margin-top:12px;display:none;font-family:Lato,sans-serif">Invalid access code</p>
+
+<!-- AUTH WALL -->
+<div class="login-overlay" id="auth-wall">
+  <div class="login-box">
+    <div class="login-title">Norris Utilities&reg;</div>
+    <div class="login-sub">A Legacy of Commitment&reg;</div>
+    <input type="password" id="auth-input" class="login-input" placeholder="Enter access code" autofocus>
+    <button class="login-btn" onclick="checkAuth()">ACCESS PORTAL</button>
+    <div class="login-error" id="auth-error">&nbsp;</div>
+  </div>
 </div>
+
+<!-- PAGE CONTENT (hidden until auth) -->
+<div id="page-content" style="display:none">
+
+  <!-- HEADER -->
+  <div class="header" style="position:relative">
+    <a href="/internal/" class="back-link">&larr; Back to Portal</a>
+    <h1>PORTAL NOTES</h1>
+    <p>A Legacy of Commitment&reg;</p>
+  </div>
+
+  <!-- APP LAYOUT -->
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <h3>Categories</h3>
+      <div class="sb-item active" data-filter="all" data-filter-type="category" onclick="sidebarFilter(this)">
+        All Notes <span class="sb-count" id="count-all">0</span>
+      </div>
+      <h3>By Type</h3>
+      <div class="sb-item" data-filter="bug" data-filter-type="type" onclick="sidebarFilter(this)">
+        Bugs <span class="sb-count" id="count-bug">0</span>
+      </div>
+      <div class="sb-item" data-filter="change" data-filter-type="type" onclick="sidebarFilter(this)">
+        Changes <span class="sb-count" id="count-change">0</span>
+      </div>
+      <div class="sb-item" data-filter="improvement" data-filter-type="type" onclick="sidebarFilter(this)">
+        Improvements <span class="sb-count" id="count-improvement">0</span>
+      </div>
+      <div class="sb-item" data-filter="feature" data-filter-type="type" onclick="sidebarFilter(this)">
+        Features <span class="sb-count" id="count-feature">0</span>
+      </div>
+      <h3>By Status</h3>
+      <div class="sb-item" data-filter="done" data-filter-type="status" onclick="sidebarFilter(this)">
+        Resolved <span class="sb-count" id="count-resolved">0</span>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+      <div class="page-title">Portal Notes <span id="date-display"></span></div>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <button class="filter-btn active" data-status="all" onclick="statusFilter(this)">All</button>
+        <button class="filter-btn" data-status="open" onclick="statusFilter(this)">Open</button>
+        <button class="filter-btn" data-status="in-progress" onclick="statusFilter(this)">In Progress</button>
+        <button class="filter-btn" data-status="done" onclick="statusFilter(this)">Done</button>
+        <div class="toolbar-spacer"></div>
+        <button class="action-btn primary" onclick="toggleAddForm()">+ Add Note</button>
+      </div>
+
+      <!-- ADD NOTE FORM -->
+      <div class="add-form" id="add-form" style="display:none">
+        <h4>New Note</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type</label>
+            <select id="note-type">
+              <option value="bug">Bug</option>
+              <option value="change">Change Request</option>
+              <option value="improvement">Improvement</option>
+              <option value="feature">Feature Request</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Priority</label>
+            <select id="note-priority">
+              <option value="high">High</option>
+              <option value="medium" selected>Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Page</label>
+            <select id="note-page">
+              <option value="Main Portal">Main Portal</option>
+              <option value="CEO Dashboard">CEO Dashboard</option>
+              <option value="Shipping Docs">Shipping Docs</option>
+              <option value="Pricing Calculator">Pricing Calculator</option>
+              <option value="Product Reference">Product Reference</option>
+              <option value="Contact List">Contact List</option>
+              <option value="CB Tasks">CB Tasks</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea id="note-desc" placeholder="Describe the issue, request, or idea..."></textarea>
+          </div>
+        </div>
+        <button class="action-btn primary" onclick="addNote()">Submit Note</button>
+      </div>
+
+      <!-- NOTES LIST -->
+      <div id="notes-list"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>A Legacy of Commitment&reg;</p>
+    <small>&copy; 2026 Norris Utilities, LLC. All rights reserved.</small>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <script>
-(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted'&&sessionStorage.getItem('nu_role')==='aaron'){document.getElementById('auth-wall').style.display='none'}})();
-function checkAuth(){var p=document.getElementById('auth-input').value;if(p==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');document.getElementById('auth-wall').style.display='none'}else{document.getElementById('auth-error').style.display='block'}}
+/* ── AUTH ── */
+(function(){
+  if(sessionStorage.getItem('nu_auth_2026')==='granted' && sessionStorage.getItem('nu_role')==='aaron'){
+    document.getElementById('auth-wall').classList.add('hidden');
+    document.getElementById('page-content').style.display='';
+  }
+})();
+
+function checkAuth(){
+  var p=document.getElementById('auth-input').value;
+  if(p==='norris2026'){
+    sessionStorage.setItem('nu_auth_2026','granted');
+    sessionStorage.setItem('nu_role','aaron');
+    document.getElementById('auth-wall').classList.add('hidden');
+    document.getElementById('page-content').style.display='';
+  } else {
+    document.getElementById('auth-error').textContent='Invalid access code';
+    document.getElementById('auth-input').classList.add('error');
+    setTimeout(function(){document.getElementById('auth-input').classList.remove('error')},400);
+  }
+}
 document.getElementById('auth-input').addEventListener('keypress',function(e){if(e.key==='Enter')checkAuth()});
+
+/* ── DATE ── */
+document.getElementById('date-display').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+/* ── STORAGE ── */
+var STORAGE_KEY='nu_portal_notes';
+var currentSidebarFilter={type:'category',value:'all'};
+var currentStatusFilter='all';
+
+function loadNotes(){
+  var raw=localStorage.getItem(STORAGE_KEY);
+  if(raw){try{return JSON.parse(raw)}catch(e){}}
+  return null;
+}
+function saveNotes(notes){localStorage.setItem(STORAGE_KEY,JSON.stringify(notes))}
+
+function getSeedNotes(){
+  var now=Date.now();
+  return [
+    {id:now-2,type:'bug',priority:'high',status:'open',page:'Shipping Docs',desc:"CB can't tell which tracking number belongs to which invoice \u2014 UPS shipping confirmation emails stopped arriving",created:now-2},
+    {id:now-1,type:'feature',priority:'medium',status:'open',page:'Contact List',desc:"CB wants CRM-style contact pages \u2014 click a name and see all invoices, emails, follow-ups for that person",created:now-1},
+    {id:now,type:'change',priority:'medium',status:'open',page:'Main Portal',desc:"Follow-up tracker items were checked off during demo for CB \u2014 they are NOT actually complete, need reset",created:now}
+  ];
+}
+
+function getNotes(){
+  var notes=loadNotes();
+  if(!notes){notes=getSeedNotes();saveNotes(notes)}
+  return notes;
+}
+
+/* ── RENDER ── */
+function renderNotes(){
+  var notes=getNotes();
+  var filtered=notes.filter(function(n){
+    var sMatch=true,stMatch=true;
+    if(currentSidebarFilter.type==='type') sMatch=(n.type===currentSidebarFilter.value);
+    else if(currentSidebarFilter.type==='status'&&currentSidebarFilter.value==='done') sMatch=(n.status==='done');
+    if(currentStatusFilter!=='all') stMatch=(n.status===currentStatusFilter);
+    return sMatch&&stMatch;
+  });
+
+  var list=document.getElementById('notes-list');
+  if(filtered.length===0){
+    list.innerHTML='<div class="empty-state">No notes match the current filters.</div>';
+  } else {
+    var html='';
+    filtered.sort(function(a,b){return b.created-a.created});
+    filtered.forEach(function(n){
+      var typeLabel={bug:'Bug',change:'Change',improvement:'Improvement',feature:'Feature'}[n.type]||n.type;
+      var statusLabel={open:'Open','in-progress':'In Progress',done:'Done'}[n.status]||n.status;
+      var time=new Date(n.created).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+      var doneClass=n.status==='done'?' done':'';
+      html+='<div class="note-card'+doneClass+'">';
+      html+='<div class="note-priority '+n.priority+'"></div>';
+      html+='<div class="note-body">';
+      html+='<div class="note-header">';
+      html+='<span class="note-type '+n.type+'">'+typeLabel+'</span>';
+      html+='<span class="status-badge '+n.status+'">'+statusLabel+'</span>';
+      html+='<span class="note-time">'+time+'</span>';
+      html+='</div>';
+      html+='<div class="note-desc">'+escapeHtml(n.desc)+'</div>';
+      html+='<div class="note-actions">';
+      if(n.status!=='done'){
+        html+='<button onclick="markDone('+n.id+')">Mark Done</button>';
+      } else {
+        html+='<button onclick="reopen('+n.id+')">Reopen</button>';
+      }
+      html+='<button class="del" onclick="deleteNote('+n.id+')">Delete</button>';
+      html+='</div></div></div>';
+    });
+    list.innerHTML=html;
+  }
+  updateCounts(notes);
+}
+
+function escapeHtml(t){
+  var d=document.createElement('div');d.textContent=t;return d.innerHTML;
+}
+
+/* ── COUNTS ── */
+function updateCounts(notes){
+  document.getElementById('count-all').textContent=notes.length;
+  document.getElementById('count-all').className='sb-count'+(notes.length===0?' zero':'');
+
+  var types=['bug','change','improvement','feature'];
+  types.forEach(function(t){
+    var c=notes.filter(function(n){return n.type===t}).length;
+    var el=document.getElementById('count-'+t);
+    el.textContent=c;
+    el.className='sb-count'+(c===0?' zero':'');
+  });
+
+  var rc=notes.filter(function(n){return n.status==='done'}).length;
+  var rel=document.getElementById('count-resolved');
+  rel.textContent=rc;
+  rel.className='sb-count'+(rc===0?' zero':'');
+}
+
+/* ── ACTIONS ── */
+function toggleAddForm(){
+  var f=document.getElementById('add-form');
+  f.style.display=f.style.display==='none'?'':'none';
+}
+
+function addNote(){
+  var type=document.getElementById('note-type').value;
+  var priority=document.getElementById('note-priority').value;
+  var page=document.getElementById('note-page').value;
+  var desc=document.getElementById('note-desc').value.trim();
+  if(!desc){showToast('Please enter a description');return}
+  var notes=getNotes();
+  notes.push({id:Date.now(),type:type,priority:priority,status:'open',page:page,desc:desc,created:Date.now()});
+  saveNotes(notes);
+  document.getElementById('note-desc').value='';
+  document.getElementById('add-form').style.display='none';
+  renderNotes();
+  showToast('Note added');
+}
+
+function markDone(id){
+  var notes=getNotes();
+  notes.forEach(function(n){if(n.id===id)n.status='done'});
+  saveNotes(notes);
+  renderNotes();
+  showToast('Marked as done');
+}
+
+function reopen(id){
+  var notes=getNotes();
+  notes.forEach(function(n){if(n.id===id)n.status='open'});
+  saveNotes(notes);
+  renderNotes();
+  showToast('Reopened');
+}
+
+function deleteNote(id){
+  var notes=getNotes().filter(function(n){return n.id!==id});
+  saveNotes(notes);
+  renderNotes();
+  showToast('Note deleted');
+}
+
+/* ── FILTERS ── */
+function sidebarFilter(el){
+  document.querySelectorAll('.sb-item').forEach(function(s){s.classList.remove('active')});
+  el.classList.add('active');
+  currentSidebarFilter={type:el.dataset.filterType,value:el.dataset.filter};
+  renderNotes();
+}
+
+function statusFilter(el){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  el.classList.add('active');
+  currentStatusFilter=el.dataset.status;
+  renderNotes();
+}
+
+/* ── TOAST ── */
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show')},2200);
+}
+
+/* ── INIT ── */
+renderNotes();
 </script>
 
 </body>
