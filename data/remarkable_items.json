@@ -6368,7 +6368,84 @@
       "deadline": null,
       "raw": "For future builds of this or when we go to modify the other ones MS Power purchased (there were 4 in total, we have fixed 1), we need to also add a hole at the opposite end of where the \"tension strap hole\" is.",
       "scanned_at": "2026-04-08T20:07:08.558641+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Negotiation",
+      "text": "Negotiate purchase of 7,098 sq ft estate at 4505 Buttewoods Lane using leverage points identified",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MASTER NEGOTIATION DOSSIER",
+      "scanned_at": "2026-04-09T08:04:30.633246+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Negotiation",
+      "text": "Use property's history of never selling above $425,000 as negotiation leverage",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The property has never sold above $425,000 in its entire history",
+      "scanned_at": "2026-04-09T08:04:30.633246+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Negotiation",
+      "text": "Leverage county appraised market value of $1,111,430 being below asking price",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The county appraised market value is $1,111,430 \u2014 below the asking price",
+      "scanned_at": "2026-04-09T08:04:30.633246+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Research",
+      "text": "Get fee information for H2O Waterproofing warranty transfer",
+      "priority": "high",
+      "has_deadline": true,
+      "deadline": "before closing",
+      "raw": "any fees",
+      "scanned_at": "2026-04-09T08:06:12.776923+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Research",
+      "text": "Define what lifetime means in H2O Waterproofing warranty terms",
+      "priority": "medium",
+      "has_deadline": true,
+      "deadline": "before closing",
+      "raw": "(5) what \"lifetime\" means (life of structure? life of original owner?)",
+      "scanned_at": "2026-04-09T08:06:12.776923+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Research",
+      "text": "Contact: William Acton",
+      "priority": "info",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "",
+      "scanned_at": "2026-04-09T08:06:12.776923+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "Property Research and Due Diligence",
+      "text": "Call Shelby County Development Services about permits pulled at 4505 Buttewoods since 2019",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Shelby County Development Services (205) 670-6941 \u2014 Ask what permits were pulled at 4505 Buttewoods Ln since 2019",
+      "scanned_at": "2026-04-09T08:06:50.151174+00:00"
     }
   ],
-  "last_updated": "2026-04-08T20:07:08.558641+00:00"
+  "last_updated": "2026-04-09T08:06:50.151174+00:00"
 }

@@ -1,10 +1,10 @@
 {
-  "compiled_at": "2026-04-08T15:07:08.663650",
-  "last_scan": "2026-04-08T20:07:08.558641+00:00",
-  "total_items": 506,
+  "compiled_at": "2026-04-09T03:06:50.227681",
+  "last_scan": "2026-04-09T08:06:50.151174+00:00",
+  "total_items": 513,
   "duplicates_removed": 73,
   "by_category": {
-    "PERSONAL": 133,
+    "PERSONAL": 140,
     "PRODUCT": 193,
     "FINANCIAL": 93,
     "INTERNAL": 43,
@@ -12,10 +12,10 @@
     "CUSTOMER": 41
   },
   "by_priority": {
-    "high": 129,
-    "medium": 280,
+    "high": 131,
+    "medium": 284,
     "low": 38,
-    "info": 59
+    "info": 60
   },
   "items": [
     {
@@ -1008,6 +1008,34 @@
       "deadline": null,
       "raw": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 201804260001471760) from probaterecords.shelbyai.com",
       "scanned_at": "2026-04-08T16:17:06.646964+00:00",
+      "category": "PERSONAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Negotiation",
+      "text": "Negotiate purchase of 7,098 sq ft estate at 4505 Buttewoods Lane using leverage points identified",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MASTER NEGOTIATION DOSSIER",
+      "scanned_at": "2026-04-09T08:04:30.633246+00:00",
+      "category": "PERSONAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Research",
+      "text": "Get fee information for H2O Waterproofing warranty transfer",
+      "priority": "high",
+      "has_deadline": true,
+      "deadline": "before closing",
+      "raw": "any fees",
+      "scanned_at": "2026-04-09T08:06:12.776923+00:00",
       "category": "PERSONAL",
       "assigned_to": "aaron",
       "completed": false
@@ -4032,6 +4060,62 @@
       "deadline": null,
       "raw": "Search Alabama SOS (arc-sos.state.al.us) for other LLCs containing \"Golan\" or \"Peled\"",
       "scanned_at": "2026-04-08T16:17:25.488508+00:00",
+      "category": "PERSONAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Negotiation",
+      "text": "Use property's history of never selling above $425,000 as negotiation leverage",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The property has never sold above $425,000 in its entire history",
+      "scanned_at": "2026-04-09T08:04:30.633246+00:00",
+      "category": "PERSONAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Negotiation",
+      "text": "Leverage county appraised market value of $1,111,430 being below asking price",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The county appraised market value is $1,111,430 \u2014 below the asking price",
+      "scanned_at": "2026-04-09T08:04:30.633246+00:00",
+      "category": "PERSONAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Research",
+      "text": "Define what lifetime means in H2O Waterproofing warranty terms",
+      "priority": "medium",
+      "has_deadline": true,
+      "deadline": "before closing",
+      "raw": "(5) what \"lifetime\" means (life of structure? life of original owner?)",
+      "scanned_at": "2026-04-09T08:06:12.776923+00:00",
+      "category": "PERSONAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "Property Research and Due Diligence",
+      "text": "Call Shelby County Development Services about permits pulled at 4505 Buttewoods since 2019",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Shelby County Development Services (205) 670-6941 \u2014 Ask what permits were pulled at 4505 Buttewoods Ln since 2019",
+      "scanned_at": "2026-04-09T08:06:50.151174+00:00",
       "category": "PERSONAL",
       "assigned_to": "aaron",
       "completed": false
@@ -7070,6 +7154,20 @@
       "deadline": null,
       "raw": "",
       "scanned_at": "2026-04-08T16:16:50.877751+00:00",
+      "category": "PERSONAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Research",
+      "text": "Contact: William Acton",
+      "priority": "info",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "",
+      "scanned_at": "2026-04-09T08:06:12.776923+00:00",
       "category": "PERSONAL",
       "assigned_to": "aaron",
       "completed": false
