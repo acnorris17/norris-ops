@@ -1,5 +1,5 @@
 {
-  "last_scan": "2026-04-09T21:53:06",
+  "last_scan": "2026-04-09T23:53:14",
   "needs_response": [
     {
       "from": "Aaron C. Norris",
@@ -42,6 +42,13 @@
       "days_waiting": 1,
       "date": "2026-04-08",
       "snippet": "Time off"
+    },
+    {
+      "from": "The UPS Store #0255",
+      "subject": "Shipments for those dates you asked about.",
+      "days_waiting": 1,
+      "date": "2026-04-08",
+      "snippet": "Shipments for those dates you asked about."
     }
   ],
   "followups_due": [],
@@ -65,11 +72,6 @@
       "from": "BSS (Bay Shore Systems)",
       "subject": "28th Annual Bay Shore Systems Golf Tournament!",
       "date": "2026-04-08"
-    },
-    {
-      "from": "BSS (Bay Shore Systems)",
-      "subject": "RE: Website Leads - USA",
-      "date": "2026-04-07"
     }
   ],
   "invoices_statements": [
