@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-09T06:46:59",
-  "active_count": 3,
+  "last_updated": "2026-04-09T07:01:59",
+  "active_count": 6,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -14,14 +14,14 @@
       "name": "Agent V4",
       "role": "The Builder",
       "status": "idle",
-      "last_run": "2026-04-09 06:20",
+      "last_run": "2026-04-09 06:50",
       "message": "Queue: 1 pending tasks"
     },
     "email_scout": {
       "name": "Email Scout",
       "role": "Email Scanner",
-      "status": "idle",
-      "last_run": "2026-04-09 04:52",
+      "status": "active",
+      "last_run": "2026-04-09 06:52",
       "message": "5 emails need response",
       "items": 5,
       "next_run": "Every 2 hours"
@@ -38,8 +38,8 @@
     "money_watcher": {
       "name": "Money Watcher",
       "role": "A/P Scanner",
-      "status": "idle",
-      "last_run": "2026-04-08 07:00",
+      "status": "active",
+      "last_run": "2026-04-09 07:00",
       "message": "7 vendor invoices tracked",
       "items": 7,
       "next_run": "Daily 7:00 AM"
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-09 06:44",
+      "last_run": "2026-04-09 06:59",
       "message": "All systems UP"
     },
     "backup": {
@@ -116,9 +116,9 @@
     "caroline": {
       "name": "Caroline Butler",
       "role": "Operations",
-      "status": "idle",
+      "status": "active",
       "last_run": "Always on",
-      "message": "Off the clock"
+      "message": "Operations lead"
     }
   }
 }
