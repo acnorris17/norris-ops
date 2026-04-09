@@ -1,6 +1,6 @@
 {
-  "compiled_at": "2026-04-09T11:09:14.992822",
-  "count": 148,
+  "compiled_at": "2026-04-09T11:12:30.145832",
+  "count": 152,
   "items": [
     {
       "notebook": "To Do List 4-22-24",
@@ -404,6 +404,20 @@
       "deadline": null,
       "raw": "I'm looking forward to reaching in the inventory I order on the last PO! (I'm anxiously waiting on that order, as I'm out of many products that I hoped to \"never\" be out of... mainly the 28\" x 51\"!)",
       "scanned_at": "2026-04-09T08:10:29.596121+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "General Business",
+      "text": "Follow up on last PO inventory order - anxiously waiting",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "I'm looking forward to reaching in the inventory I order on the last PO! (I'm anxiously waiting on that order, as I'm out of many products that I hoped to \"never\" be out of... mainly the 28\" x 51\"!)",
+      "scanned_at": "2026-04-09T16:12:30.066459+00:00",
       "category": "FINANCIAL",
       "assigned_to": "aaron",
       "completed": false
@@ -1650,6 +1664,48 @@
       "deadline": null,
       "raw": "For future builds of this or when we go to modify the other ones MS Power purchased (there were 4 in total, we have fixed 1), we need to also add a hole at the opposite end of where the \"tension strap hole\" is. This way you/we/the customer can slide PVC pipe/pole/etc through it to support the middle from sagging.",
       "scanned_at": "2026-04-09T08:10:29.596121+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Mississippi Power",
+      "text": "Call Mississippi Power to get dimensions and notes for project to explain what is needed",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "and dimensions for this project. Those notes could help in explaining what is needed... or call me.",
+      "scanned_at": "2026-04-09T16:12:30.066459+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Mississippi Power",
+      "text": "Take V5 to production as final version",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "I really want V5 to be the \"finally version\" to take to production. (Fingers crossed.)",
+      "scanned_at": "2026-04-09T16:12:30.066459+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Mississippi Power",
+      "text": "Add tension strap hole to opposite end for future builds to prevent sagging",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "For future builds of this or when we go to modify the other ones MS Power purchased (there were 4 in total, we have fixed 1), we need to also add a hole at the opposite end of where the \"tension strap hole\" is. This way you/we/the customer can slide PVC pipe/pole/etc through it to support the middle from sagging.",
+      "scanned_at": "2026-04-09T16:12:30.066459+00:00",
       "category": "FINANCIAL",
       "assigned_to": "aaron",
       "completed": false
