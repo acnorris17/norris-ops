@@ -1,5 +1,5 @@
 {
-  "last_scan": "2026-04-09T19:52:57",
+  "last_scan": "2026-04-09T21:53:06",
   "needs_response": [
     {
       "from": "Aaron C. Norris",
@@ -35,6 +35,13 @@
       "days_waiting": 2,
       "date": "2026-04-07",
       "snippet": "QUOTE 24X24 BLUE COVER"
+    },
+    {
+      "from": "Sam Hastie",
+      "subject": "Time off",
+      "days_waiting": 1,
+      "date": "2026-04-08",
+      "snippet": "Time off"
     }
   ],
   "followups_due": [],
