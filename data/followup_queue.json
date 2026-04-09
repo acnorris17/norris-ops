@@ -1314,5 +1314,45 @@
     "_captured_at": "2026-04-09T12:52:56.961522",
     "_source": "email_scanner",
     "_category": "followup"
+  },
+  {
+    "customer": "Wayne Abadie",
+    "subject": "QUOTE 24X24 BLUE COVER",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-09T14:53:05.689656",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "LPL Financial / Carnegie Account Portal Link",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-09T14:53:05.701561",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "GHK Admin",
+    "subject": "Support God's House",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-09T14:53:05.710648",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "Issues with iship emails not being received",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-09T14:53:05.716747",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Thayne Grove",
+    "subject": "Invoice 6651",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-09T14:53:05.720120",
+    "_source": "email_scanner",
+    "_category": "followup"
   }
 ]
