@@ -6940,7 +6940,62 @@
       "deadline": null,
       "raw": "Shelby County Development Services (205) 670-6941 \u2014 Ask what permits were pulled at 4505 Buttewoods Ln since 2019",
       "scanned_at": "2026-04-09T08:13:37.193964+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Property Negotiation",
+      "text": "Review and negotiate purchase of 7,098 sq ft estate at 4505 Buttewoods Lane for $900,000 offer",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MASTER NEGOTIATION DOSSIER",
+      "scanned_at": "2026-04-09T16:05:15.651392+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Water Intrusion Problem",
+      "text": "Address disclosure discrepancy between rental listing and for-sale listing regarding waterproofing",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The Disclosure Discrepancy",
+      "scanned_at": "2026-04-09T16:06:28.870100+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Research",
+      "text": "Clarify whether Peace of Mind maintenance program is required for warranty validity",
+      "priority": "high",
+      "has_deadline": true,
+      "deadline": "Before closing",
+      "raw": "(4) whether the \"Peace of Mind\" maintenance program is required for warranty validity",
+      "scanned_at": "2026-04-09T16:06:51.475702+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Research",
+      "text": "Define what lifetime means for H2O Waterproofing warranty",
+      "priority": "medium",
+      "has_deadline": true,
+      "deadline": "Before closing",
+      "raw": "(5) what \"lifetime\" means (life of structure? life of original owner?)",
+      "scanned_at": "2026-04-09T16:06:51.475702+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Real Estate Negotiation - 4505 Buttewoods Lane",
+      "text": "Use leverage points in negotiation including property history, water intrusion issue, and failed sales attempts",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Your strongest leverage points",
+      "scanned_at": "2026-04-09T16:07:57.319563+00:00"
     }
   ],
-  "last_updated": "2026-04-09T08:13:37.193964+00:00"
+  "last_updated": "2026-04-09T16:09:14.915763+00:00"
 }
