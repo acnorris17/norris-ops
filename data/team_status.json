@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-09T00:46:52",
-  "active_count": 3,
+  "last_updated": "2026-04-09T01:01:52",
+  "active_count": 4,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -14,14 +14,14 @@
       "name": "Agent V4",
       "role": "The Builder",
       "status": "idle",
-      "last_run": "2026-04-09 00:20",
+      "last_run": "2026-04-09 00:50",
       "message": "Queue: 1 pending tasks"
     },
     "email_scout": {
       "name": "Email Scout",
       "role": "Email Scanner",
-      "status": "idle",
-      "last_run": "2026-04-08 22:51",
+      "status": "active",
+      "last_run": "2026-04-09 00:52",
       "message": "5 emails need response",
       "items": 5,
       "next_run": "Every 2 hours"
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-09 00:43",
+      "last_run": "2026-04-09 00:58",
       "message": "All systems UP"
     },
     "backup": {
