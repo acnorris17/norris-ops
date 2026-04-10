@@ -7633,7 +7633,84 @@
       "deadline": null,
       "raw": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 201804260001417600) from probaterecords.shelbyal.com",
       "scanned_at": "2026-04-10T08:06:50.102860+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 1,
+      "customer": "Boss Products",
+      "text": "Get new Large 1.5-man bucket cover with UCC, size 26.5 x 52 (lip x lip x UCC) for UCC",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "New \"Large 1.5-man\" bucket cover with UCC. Size: 26.5\" x 52\" (lip x lip x UCC) for UCC",
+      "scanned_at": "2026-04-10T16:05:10.942302+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 1,
+      "customer": "Boss Products",
+      "text": "Get update on Auger Cover for 18-20 Auger size",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Auger Cover for 18\" - 20\" Auger size",
+      "scanned_at": "2026-04-10T16:05:10.942302+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 2,
+      "customer": "Bucket Cover Design Discussion",
+      "text": "Discuss upgraded design improvements to all bucket covers - 2-man, 1.5-man BC, and D-Shape BC",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "I also want to discuss upgraded design improvements to all of our bucket covers... especially the 2-man bucket cover, 1st. Then the 1.5-man BC and later the D-Shape BC.",
+      "scanned_at": "2026-04-10T16:05:39.614340+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 3,
+      "customer": "SOFT 1.5-Man Bucket Cover Development",
+      "text": "Modify the bucket cover design to make it smaller and better fitting",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Please modify the one I shipped back to you so we can try and get this dialed in",
+      "scanned_at": "2026-04-10T16:06:08.236879+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 3,
+      "customer": "Cooperative Energy - Small D-Bucket Cover",
+      "text": "Create cover for D-Shape Bucket 35 x 77 inches for old 2006 TM105",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "I need to have them covered",
+      "scanned_at": "2026-04-10T16:06:08.236879+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Mississippi Power",
+      "text": "Find and send drawings and dimensions for this project",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "and dimensions for this project. Those notes could help in explaining what is needed... or call me.)",
+      "scanned_at": "2026-04-10T16:06:32.557184+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Dielectric Tank Cover",
+      "text": "Modify future builds to add hole at opposite end for tension strap support",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "For future builds of this or when we go to modify the other ones MS Power purchased (there were 4 in total, we have fixed 1), we need to also add a hole at the opposite end of where the \"tension strap hole\" is.",
+      "scanned_at": "2026-04-10T16:06:32.557184+00:00"
     }
   ],
-  "last_updated": "2026-04-10T08:06:50.102860+00:00"
+  "last_updated": "2026-04-10T16:06:32.557184+00:00"
 }

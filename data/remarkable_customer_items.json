@@ -1,6 +1,6 @@
 {
-  "compiled_at": "2026-04-10T03:06:50.181590",
-  "count": 166,
+  "compiled_at": "2026-04-10T11:06:32.661533",
+  "count": 168,
   "items": [
     {
       "notebook": "To Do List 4-22-24",
@@ -1907,6 +1907,20 @@
       "completed": false
     },
     {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Mississippi Power",
+      "text": "Find and send drawings and dimensions for this project",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "and dimensions for this project. Those notes could help in explaining what is needed... or call me.)",
+      "scanned_at": "2026-04-10T16:06:32.557184+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
       "notebook": "To Do List 4-22-24",
       "page": 1,
       "customer": "Tide Pride Account Management",
@@ -2042,6 +2056,20 @@
       "deadline": null,
       "raw": "When you ship it back to me, please be sure to not charge me for it again. I have already paid for this",
       "scanned_at": "2026-04-08T20:06:45.562921+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Dielectric Tank Cover",
+      "text": "Modify future builds to add hole at opposite end for tension strap support",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "For future builds of this or when we go to modify the other ones MS Power purchased (there were 4 in total, we have fixed 1), we need to also add a hole at the opposite end of where the \"tension strap hole\" is.",
+      "scanned_at": "2026-04-10T16:06:32.557184+00:00",
       "category": "FINANCIAL",
       "assigned_to": "aaron",
       "completed": false
