@@ -7545,7 +7545,95 @@
       "deadline": null,
       "raw": "Spencer: Tradeshows & ICUEE",
       "scanned_at": "2026-04-09T20:08:23.519195+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Purchase",
+      "text": "Negotiate purchase price below $900,000 asking price using leverage points",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MASTER NEGOTIATION DOSSIER",
+      "scanned_at": "2026-04-10T08:04:34.526739+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Purchase",
+      "text": "Use property's failure to sell above $425,000 in entire history as negotiation leverage",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The property has never sold above $425,000 in its entire history",
+      "scanned_at": "2026-04-10T08:04:34.526739+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Purchase",
+      "text": "Address water intrusion issue disclosure omission in for-sale listing",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The water intrusion issue is disclosed in the rental listing but omitted from the for-sale listing",
+      "scanned_at": "2026-04-10T08:04:34.526739+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Purchase",
+      "text": "Counter seller's claim of much higher offers with 5+ years of failed sales attempts",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The seller's claim of much higher offers is contradicted by 5+ years of failed sales attempts",
+      "scanned_at": "2026-04-10T08:04:34.526739+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Water Intrusion Problem",
+      "text": "Address disclosure discrepancy between rental listing advertising waterproofing and for-sale listing making zero mention",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The Disclosure Discrepancy",
+      "scanned_at": "2026-04-10T08:05:56.944639+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing",
+      "text": "Call H2O Waterproofing and get in writing: (1) confirmation work was done at 4505 Buttewoods, (2) copy of actual warranty document, (3) transfer process and any fees, (4) whether Peace of Mind maintenance program is required for warranty validity, (5) what lifetime means",
+      "priority": "high",
+      "has_deadline": true,
+      "deadline": "Before closing",
+      "raw": "Before closing, you MUST call H2O Waterproofing and get in writing: (1) confirmation work was done at 4505 Buttewoods, (2) a copy of the actual warranty document, (3) the transfer process and any fees, (4) whether the \"Peace of Mind\" maintenance program is required for warranty validity, and (5) what \"lifetime\" means",
+      "scanned_at": "2026-04-10T08:06:15.999398+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 8,
+      "customer": "Real Estate Analysis - Buttewood Home",
+      "text": "Consider making offer where comfortable given seller's position",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "offer where you feel comfortable",
+      "scanned_at": "2026-04-10T08:06:29.415671+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "Real Estate Research - Buttewood Home",
+      "text": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 201804260001417600) from probaterecords.shelbyal.com",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 201804260001417600) from probaterecords.shelbyal.com",
+      "scanned_at": "2026-04-10T08:06:50.102860+00:00"
     }
   ],
-  "last_updated": "2026-04-09T20:08:23.519195+00:00"
+  "last_updated": "2026-04-10T08:06:50.102860+00:00"
 }
