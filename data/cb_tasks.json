@@ -1,30 +1,36 @@
 {
   "last_updated": "2026-04-10",
   "invoicing_queue": [
-    {"order_id":"S001","customer":"Richard Thornhill / LineTec DEPT732","action":"Create QB invoice — 1x NU-BC-2851 $305","status":"ready","priority":1},
-    {"order_id":"S002","customer":"Richard Thornhill / LineTec DEPT889","action":"Create QB invoice — 1x NU-BC-2851 $305","status":"ready","priority":2},
-    {"order_id":"S003","customer":"Richard Thornhill / LineTec DEPT450","action":"Create QB invoice — 1x NU-BC-2851 $305","status":"ready","priority":3},
-    {"order_id":"S006","customer":"Coy Crosby / Dominion Energy","action":"Create QB invoice — 5x NU-BC-2851 $1,525 + shipping. VERIFY qty first.","status":"ready","priority":4},
-    {"order_id":"S007","customer":"Jimmy Benz / SWEPCO","action":"Create QB invoice — 1x NU-BC-2851 $305","status":"ready","priority":5},
-    {"order_id":"S004","customer":"Wayne Abadie / Primoris T&D","action":"Confirm received then invoice — 1x NU-BC-2828 $235","status":"confirm-first","priority":6},
-    {"order_id":"S005","customer":"Wayne Abadie / Primoris W6237","action":"Create QB invoice — 2x NU-BC-2851 $610","status":"ready","priority":7}
+    {"order_id":"S001","customer":"Richard Thornhill / LineTec — DEPT732","action":"Create QB invoice — 1x NU-BC-2851 at $305","status":"ready","priority":1},
+    {"order_id":"S002","customer":"Richard Thornhill / LineTec — DEPT889","action":"Create QB invoice — 1x NU-BC-2851 at $305","status":"ready","priority":2},
+    {"order_id":"S003","customer":"Richard Thornhill / LineTec — DEPT450","action":"Create QB invoice — 1x NU-BC-2851 at $305","status":"ready","priority":3},
+    {"order_id":"S006","customer":"Coy Crosby / Dominion Energy — PO 42350802","action":"Create QB invoice — 5x NU-BC-2851 at $1,525 plus shipping. VERIFY qty first.","status":"ready","priority":4},
+    {"order_id":"S007","customer":"Jimmy Benz / SWEPCO — Truck 860377","action":"Create QB invoice — 1x NU-BC-2851 at $305","status":"ready","priority":5},
+    {"order_id":"S004","customer":"Wayne Abadie / Primoris — PO 0407-BYB0001","action":"Confirm received by Michael Flemming THEN invoice — 1x NU-BC-2828 at $235","status":"confirm-first","priority":6},
+    {"order_id":"S005","customer":"Wayne Abadie / Primoris — PO W6237","action":"Create QB invoice — 2x NU-BC-2851 at $610","status":"ready","priority":7}
   ],
   "blocked_orders": [
-    {"order_id":"S008","customer":"Darrell Pickle / Florence Electric","reason":"ARCH/Combo SKU unconfirmed — DO NOT invoice until Aaron confirms SKUs"},
-    {"order_id":"S009","customer":"Sammy Myers / AEP Roanoke","reason":"ARCH/Combo SKU unconfirmed — DO NOT invoice until Aaron confirms SKUs"}
+    {"order_id":"S008","customer":"Darrell Pickle / Florence Electric","reason":"ARCH/Combo SKU unconfirmed. DO NOT invoice until Aaron confirms SKUs and pricing."},
+    {"order_id":"S009","customer":"Sammy Myers / AEP Roanoke","reason":"ARCH/Combo SKU unconfirmed. DO NOT invoice until Aaron confirms SKUs and pricing."}
   ],
   "daily_checklist": [
-    "Open ops.norrisutilities.com — check Dashboard for critical items",
-    "Check Shipments tab — process any ready invoices in QuickBooks",
-    "Check Follow-Ups tab — text Aaron if anything overdue 7+ days",
-    "Check email — flag anything needing Aaron attention",
-    "Log into QuickBooks — verify A/R current",
-    "Check UPS Shipping Log — verify tracking numbers posted"
+    "Open ops.norrisutilities.com and check Dashboard for critical items",
+    "Check Shipments tab and process any READY invoices in QuickBooks",
+    "Check Follow-Ups tab and text Aaron if any item is 7 or more days overdue",
+    "Check email and flag anything needing Aaron attention — do not reply independently",
+    "Log into QuickBooks and verify accounts receivable is current",
+    "Check UPS Shipping Log and verify tracking numbers are posted"
   ],
   "cc_rules": {
-    "boss_products": ["tgongwer@bossproductsinc.com","tgrove@bossproductsinc.com"],
-    "samson_rope": ["dpoll@samsonrope.com","sdaniels@samsonrope.com"],
-    "note": "CC BOTH contacts on EVERY email. No exceptions."
+    "boss_products_emails": ["tgongwer@bossproductsinc.com","tgrove@bossproductsinc.com"],
+    "samson_rope_emails": ["dpoll@samsonrope.com","sdaniels@samsonrope.com"],
+    "rule": "CC BOTH contacts on EVERY email to Boss Products and EVERY email to Samson Rope. Every time. No exceptions."
   },
-  "samson_payment_address": "PO Box 536753, Pittsburgh PA 15253-5909 — NOT Ferndale WA"
+  "samson_payment_address": "PO Box 536753, Pittsburgh PA 15253-5909 — NOT Ferndale Washington",
+  "cb_cannot_do_independently": [
+    "Quote prices to customers",
+    "Send any customer-facing email without Aaron review first",
+    "Negotiate with any vendor",
+    "Invoice blocked orders — blocked means blocked until Aaron explicitly unblocks"
+  ]
 }
