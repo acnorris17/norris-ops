@@ -1,72 +1,10 @@
 {
   "uninvoiced_count": 46,
   "overdue_followups": 3,
-  "pipeline_value": "$685K+",
+  "pipeline_value": "$1.8M+",
   "skylift_trucks": 6,
   "telegram_messages": 88,
-  "last_updated": "2026-04-10T06:13:39",
-  "critical_items": [
-    {
-      "text": "<strong>11 uninvoiced shipments</strong> (5 from March 20 + 6 recent SDs) \u2014 revenue sitting on the table",
-      "icon": "truck"
-    },
-    {
-      "text": "<strong>Alabama dealer license</strong> \u2014 application not yet started",
-      "icon": "doc"
-    },
-    {
-      "text": "<strong>EPB Chattanooga follow-up</strong> \u2014 Rick Sutherland, ~$185K SkyTruck47 quote from Dec 4, 2025",
-      "icon": "phone"
-    },
-    {
-      "text": "<strong>Terex OEM follow-up</strong> \u2014 Bill Kugler, $500K+ potential, still at prospect stage",
-      "icon": "info"
-    },
-    {
-      "text": "<strong>BSS RCOO at Irby</strong> \u2014 Jared Lemoine, positive March 18 meeting needs follow-up",
-      "icon": "people"
-    }
-  ],
-  "deals": [
-    {
-      "title": "EPB Chattanooga \u2014 SkyTruck47",
-      "contact": "Rick Sutherland",
-      "detail": "Quoted Dec 4, 2025",
-      "status": "OVERDUE",
-      "status_class": "badge-red",
-      "value": "~$185K",
-      "color1": "#0033cc",
-      "color2": "#06D0FF"
-    },
-    {
-      "title": "Terex OEM Partnership",
-      "contact": "Bill Kugler",
-      "detail": "Prospect stage",
-      "status": "NURTURING",
-      "status_class": "badge-yellow",
-      "value": "$500K+",
-      "color1": "#6600cc",
-      "color2": "#aa44ff"
-    },
-    {
-      "title": "Skylift \u2014 6 Trucks Arriving",
-      "contact": "Darrell Pickle / Florence Electric",
-      "detail": "Aaron\u2019s feedback influenced order",
-      "status": "HOT LEAD",
-      "status_class": "badge-green",
-      "value": "6 Units",
-      "color1": "#00aa44",
-      "color2": "#00dd66"
-    },
-    {
-      "title": "BSS RCOO at Irby",
-      "contact": "Jared Lemoine",
-      "detail": "Positive reception March 18",
-      "status": "FOLLOW-UP",
-      "status_class": "badge-blue",
-      "value": "TBD",
-      "color1": "#ff6600",
-      "color2": "#ffaa00"
-    }
-  ]
+  "last_updated": "2026-04-10T07:13:49",
+  "critical_items": [],
+  "deals": []
 }
