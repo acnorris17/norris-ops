@@ -310,6 +310,21 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
   .cc-rule{font-size:12px;padding:14px 16px}
 }
 </style>
+<style id="nu-notes-style">
+.nu-notes-panel{margin-top:28px;border-top:2px solid #ececec;padding-top:16px;}
+.nu-notes-toggle{background:none;border:none;cursor:pointer;font-size:.8rem;color:#999;font-weight:700;padding:0;font-family:Arial;letter-spacing:.04em;text-transform:uppercase;}
+.nu-notes-toggle:hover{color:#0033cc;}
+.nu-notes-body{margin-top:12px;display:none;}
+.nu-notes-list{max-height:160px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
+.nu-note{padding:9px 13px;border-radius:6px;font-size:.86rem;line-height:1.5;}
+.nu-note.aaron{background:#e8f0ff;border-left:3px solid #0033cc;}
+.nu-note.cb{background:#e8f7ee;border-left:3px solid #28a745;}
+.nu-note-meta{font-size:.71rem;color:#bbb;margin-top:2px;}
+.nu-notes-row{display:flex;gap:8px;}
+.nu-notes-row textarea{flex:1;border:1px solid #e0e0e0;border-radius:6px;padding:8px;font-size:.86rem;font-family:Arial;resize:none;height:50px;}
+.nu-notes-row button{background:#0033cc;color:#fff;border:none;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:.83rem;font-weight:700;}
+.nu-notes-export-btn{font-size:.74rem;color:#0033cc;cursor:pointer;text-decoration:underline;display:inline-block;margin-top:5px;}
+</style>
 </head>
 <body>
 
@@ -461,7 +476,18 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
         <textarea id="note-input-dashboard" placeholder="Add a note..." rows="2"></textarea>
         <button class="btn-primary" style="padding:8px 18px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:8px;font-family:Lato,sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap" onclick="addNote('dashboard')">Add Note</button>
       </div>
-      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All Notes for Claude</button>
+      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All No
+<div class="nu-notes-panel" id="nnp-dashboard">
+  <button class="nu-notes-toggle">Tab Notes</button>
+  <div class="nu-notes-body">
+    <div class="nu-notes-list"></div>
+    <div class="nu-notes-row">
+      <textarea placeholder="Add a note for this tab..."></textarea>
+      <button>Save</button>
+    </div>
+    <span class="nu-notes-export-btn">Export all notes as JSON</span>
+  </div>
+</div>tes for Claude</button>
     </div>
   </div>
 </div>
@@ -533,7 +559,18 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
         <textarea id="note-input-shipments" placeholder="Add a note..." rows="2"></textarea>
         <button class="btn-primary" style="padding:8px 18px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:8px;font-family:Lato,sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap" onclick="addNote('shipments')">Add Note</button>
       </div>
-      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All Notes for Claude</button>
+      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All No
+<div class="nu-notes-panel" id="nnp-shipments">
+  <button class="nu-notes-toggle">Tab Notes</button>
+  <div class="nu-notes-body">
+    <div class="nu-notes-list"></div>
+    <div class="nu-notes-row">
+      <textarea placeholder="Add a note for this tab..."></textarea>
+      <button>Save</button>
+    </div>
+    <span class="nu-notes-export-btn">Export all notes as JSON</span>
+  </div>
+</div>tes for Claude</button>
     </div>
   </div>
 </div>
@@ -571,7 +608,18 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
         <textarea id="note-input-ap" placeholder="Add a note..." rows="2"></textarea>
         <button class="btn-primary" style="padding:8px 18px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:8px;font-family:Lato,sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap" onclick="addNote('ap')">Add Note</button>
       </div>
-      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All Notes for Claude</button>
+      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All No
+<div class="nu-notes-panel" id="nnp-ap">
+  <button class="nu-notes-toggle">Tab Notes</button>
+  <div class="nu-notes-body">
+    <div class="nu-notes-list"></div>
+    <div class="nu-notes-row">
+      <textarea placeholder="Add a note for this tab..."></textarea>
+      <button>Save</button>
+    </div>
+    <span class="nu-notes-export-btn">Export all notes as JSON</span>
+  </div>
+</div>tes for Claude</button>
     </div>
   </div>
 </div>
@@ -614,7 +662,18 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
         <textarea id="note-input-followups" placeholder="Add a note..." rows="2"></textarea>
         <button class="btn-primary" style="padding:8px 18px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:8px;font-family:Lato,sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap" onclick="addNote('followups')">Add Note</button>
       </div>
-      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All Notes for Claude</button>
+      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All No
+<div class="nu-notes-panel" id="nnp-followups">
+  <button class="nu-notes-toggle">Tab Notes</button>
+  <div class="nu-notes-body">
+    <div class="nu-notes-list"></div>
+    <div class="nu-notes-row">
+      <textarea placeholder="Add a note for this tab..."></textarea>
+      <button>Save</button>
+    </div>
+    <span class="nu-notes-export-btn">Export all notes as JSON</span>
+  </div>
+</div>tes for Claude</button>
     </div>
   </div>
 </div>
@@ -741,7 +800,18 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
         <textarea id="note-input-caroline" placeholder="Add a note..." rows="2"></textarea>
         <button class="btn-primary" style="padding:8px 18px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:8px;font-family:Lato,sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap" onclick="addNote('caroline')">Add Note</button>
       </div>
-      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All Notes for Claude</button>
+      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All No
+<div class="nu-notes-panel" id="nnp-contacts">
+  <button class="nu-notes-toggle">Tab Notes</button>
+  <div class="nu-notes-body">
+    <div class="nu-notes-list"></div>
+    <div class="nu-notes-row">
+      <textarea placeholder="Add a note for this tab..."></textarea>
+      <button>Save</button>
+    </div>
+    <span class="nu-notes-export-btn">Export all notes as JSON</span>
+  </div>
+</div>tes for Claude</button>
     </div>
   </div>
 </div>
@@ -796,7 +866,18 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
         <textarea id="note-input-pogen" placeholder="Add a note..." rows="2"></textarea>
         <button class="btn-primary" style="padding:8px 18px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:8px;font-family:Lato,sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap" onclick="addNote('pogen')">Add Note</button>
       </div>
-      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All Notes for Claude</button>
+      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All Notes for Cla
+<div class="nu-notes-panel" id="nnp-samson">
+  <button class="nu-notes-toggle">Tab Notes</button>
+  <div class="nu-notes-body">
+    <div class="nu-notes-list"></div>
+    <div class="nu-notes-row">
+      <textarea placeholder="Add a note for this tab..."></textarea>
+      <button>Save</button>
+    </div>
+    <span class="nu-notes-export-btn">Export all notes as JSON</span>
+  </div>
+</div>ude</button>
     </div>
   </div>
 </div>
@@ -839,7 +920,18 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
         <textarea id="note-input-tools" placeholder="Add a note..." rows="2"></textarea>
         <button class="btn-primary" style="padding:8px 18px;background:linear-gradient(135deg,#0033cc,#06D0FF);color:#fff;border:none;border-radius:8px;font-family:Lato,sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap" onclick="addNote('tools')">Add Note</button>
       </div>
-      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All Notes for Claude</button>
+      <button onclick="exportNotes()" style="margin-top:8px;background:none;border:1px solid #e0e0e0;border-radius:6px;padding:6px 14px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;color:#888;cursor:pointer">📋 Export All No
+<div class="nu-notes-panel" id="nnp-tools">
+  <button class="nu-notes-toggle">Tab Notes</button>
+  <div class="nu-notes-body">
+    <div class="nu-notes-list"></div>
+    <div class="nu-notes-row">
+      <textarea placeholder="Add a note for this tab..."></textarea>
+      <button>Save</button>
+    </div>
+    <span class="nu-notes-export-btn">Export all notes as JSON</span>
+  </div>
+</div>tes for Claude</button>
     </div>
   </div>
 </div>
@@ -1124,5 +1216,51 @@ function exportNotes(){var notes=loadNotes();var exp={exported_at:new Date().toI
 renderAllNotes();
 </script>
 <script src="/components/nav.js"></script>
+<script id="nu-notes-engine">
+function nuNotesInit(tabId){
+  var panel=document.getElementById("nnp-"+tabId);
+  if(!panel||panel.dataset.init)return;
+  panel.dataset.init="1";
+  var role=localStorage.getItem("nu_role")||"aaron";
+  var key="nu_notes_"+tabId;
+  var body=panel.querySelector(".nu-notes-body");
+  var toggle=panel.querySelector(".nu-notes-toggle");
+  toggle.onclick=function(){body.style.display=body.style.display==="none"||!body.style.display?"block":"none";};
+  function render(){
+    var notes=JSON.parse(localStorage.getItem(key)||"[]");
+    if(role==="cb")notes=notes.filter(function(n){return n.role!=="aaron-private";});
+    var list=panel.querySelector(".nu-notes-list");
+    list.innerHTML=notes.map(function(n){return'<div class="nu-note '+n.role+'">'+n.text+'<div class="nu-note-meta">'+n.author+" · "+n.time+"</div></div>";}).join("");
+  }
+  panel.querySelector("button").onclick=function(){
+    var ta=panel.querySelector("textarea");
+    var txt=ta.value.trim();if(!txt)return;
+    var notes=JSON.parse(localStorage.getItem(key)||"[]");
+    var now=new Date().toLocaleString("en-US",{timeZone:"America/Chicago",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+    notes.push({text:txt,role:role,author:role==="aaron"?"Aaron":"CB",time:now+" CT"});
+    localStorage.setItem(key,JSON.stringify(notes));ta.value="";render();
+  };
+  panel.querySelector(".nu-notes-export-btn").onclick=function(){
+    var all={};
+    ["dashboard","shipments","ap","followups","contacts","cbtasks","samson","pogenerator","tools","docs"].forEach(function(t){var n=localStorage.getItem("nu_notes_"+t);if(n)all[t]=JSON.parse(n);});
+    navigator.clipboard.writeText(JSON.stringify(all,null,2)).then(function(){alert("A
+<div class="nu-notes-panel" id="nnp-docs">
+  <button class="nu-notes-toggle">Tab Notes</button>
+  <div class="nu-notes-body">
+    <div class="nu-notes-list"></div>
+    <div class="nu-notes-row">
+      <textarea placeholder="Add a note for this tab..."></textarea>
+      <button>Save</button>
+    </div>
+    <span class="nu-notes-export-btn">Export all notes as JSON</span>
+  </div>
+</div>ll notes copied as JSON — paste into Claude for full context.");});
+  };
+  render();
+}
+document.addEventListener("DOMContentLoaded",function(){
+  ["dashboard","shipments","ap","followups","contacts","cbtasks","samson","pogenerator","tools","docs"].forEach(nuNotesInit);
+});
+</script>
 </body>
 </html>
