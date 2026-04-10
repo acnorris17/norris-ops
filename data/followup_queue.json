@@ -1570,5 +1570,61 @@
     "_captured_at": "2026-04-09T22:53:38.057754",
     "_source": "email_scanner",
     "_category": "followup"
+  },
+  {
+    "customer": "The UPS Store #0255",
+    "subject": "Shipments for those dates you asked about.",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-10T00:53:46.267950",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Sam Hastie",
+    "subject": "Time off",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-10T00:53:46.281187",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Wayne Abadie",
+    "subject": "QUOTE 24X24 BLUE COVER",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-10T00:53:46.287512",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "LPL Financial / Carnegie Account Portal Link",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-10T00:53:46.289791",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "GHK Admin",
+    "subject": "Support God's House",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-10T00:53:46.292124",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "Issues with iship emails not being received",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-10T00:53:46.294513",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Thayne Grove",
+    "subject": "Invoice 6651",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-10T00:53:46.296963",
+    "_source": "email_scanner",
+    "_category": "followup"
   }
 ]
