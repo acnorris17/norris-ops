@@ -1,16 +1,30 @@
-[
-  {
-    "timestamp": "2026-04-06T16:49:28.742098",
-    "transcription": "Tell Caroline to invoice the Dominion Energy order from last week",
-    "task": "Invoice the Dominion Energy order from last week",
-    "urgency": "today",
-    "status": "pending_review"
+{
+  "last_updated": "2026-04-10",
+  "invoicing_queue": [
+    {"order_id":"S001","customer":"Richard Thornhill / LineTec DEPT732","action":"Create QB invoice — 1x NU-BC-2851 $305","status":"ready","priority":1},
+    {"order_id":"S002","customer":"Richard Thornhill / LineTec DEPT889","action":"Create QB invoice — 1x NU-BC-2851 $305","status":"ready","priority":2},
+    {"order_id":"S003","customer":"Richard Thornhill / LineTec DEPT450","action":"Create QB invoice — 1x NU-BC-2851 $305","status":"ready","priority":3},
+    {"order_id":"S006","customer":"Coy Crosby / Dominion Energy","action":"Create QB invoice — 5x NU-BC-2851 $1,525 + shipping. VERIFY qty first.","status":"ready","priority":4},
+    {"order_id":"S007","customer":"Jimmy Benz / SWEPCO","action":"Create QB invoice — 1x NU-BC-2851 $305","status":"ready","priority":5},
+    {"order_id":"S004","customer":"Wayne Abadie / Primoris T&D","action":"Confirm received then invoice — 1x NU-BC-2828 $235","status":"confirm-first","priority":6},
+    {"order_id":"S005","customer":"Wayne Abadie / Primoris W6237","action":"Create QB invoice — 2x NU-BC-2851 $610","status":"ready","priority":7}
+  ],
+  "blocked_orders": [
+    {"order_id":"S008","customer":"Darrell Pickle / Florence Electric","reason":"ARCH/Combo SKU unconfirmed — DO NOT invoice until Aaron confirms SKUs"},
+    {"order_id":"S009","customer":"Sammy Myers / AEP Roanoke","reason":"ARCH/Combo SKU unconfirmed — DO NOT invoice until Aaron confirms SKUs"}
+  ],
+  "daily_checklist": [
+    "Open ops.norrisutilities.com — check Dashboard for critical items",
+    "Check Shipments tab — process any ready invoices in QuickBooks",
+    "Check Follow-Ups tab — text Aaron if anything overdue 7+ days",
+    "Check email — flag anything needing Aaron attention",
+    "Log into QuickBooks — verify A/R current",
+    "Check UPS Shipping Log — verify tracking numbers posted"
+  ],
+  "cc_rules": {
+    "boss_products": ["tgongwer@bossproductsinc.com","tgrove@bossproductsinc.com"],
+    "samson_rope": ["dpoll@samsonrope.com","sdaniels@samsonrope.com"],
+    "note": "CC BOTH contacts on EVERY email. No exceptions."
   },
-  {
-    "task": "Invoice Dominion Energy order",
-    "urgency": "today",
-    "_captured_at": "2026-04-06T17:37:02.624955",
-    "_source": "voice_router",
-    "_category": "cb_task"
-  }
-]
+  "samson_payment_address": "PO Box 536753, Pittsburgh PA 15253-5909 — NOT Ferndale WA"
+}
