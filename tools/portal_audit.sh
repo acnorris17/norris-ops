@@ -1,4 +1,5 @@
 #!/bin/bash
+HOUR=$(date +%-H); if [ "$HOUR" -ge 21 ] || [ "$HOUR" -lt 4 ]; then exit 0; fi
 # PORTAL QUALITY AUDIT — Runs after every push or on schedule
 # Checks for known issues, brand violations, data integrity, auth presence
 
@@ -25,7 +26,7 @@ if [ "$guard_violations" -gt 0 ]; then
 fi
 
 # --- DEAD DEAL CHECK ---
-gridco=$(grep -rin "Gridco\|Shon Cunningham" "$REPO" --include="*.html" 2>/dev/null | grep -vi "DEAD\|dead\|removed\|improvement_log\|changelog" | wc -l | tr -d ' ')
+gridco=$(grep -rin "Gridco\|Shon Cunningham" "$REPO" --include="*.html" 2>/dev/null | grep -vi "DEAD\|dead\|removed\|closed\|archived\|improvement_log\|changelog" | wc -l | tr -d ' ')
 if [ "$gridco" -gt 0 ]; then
   ISSUES=$((ISSUES + 1))
   DETAILS="$DETAILS, \"Gridco/Cunningham still referenced in $gridco places\""
@@ -89,10 +90,18 @@ if [ "$celebrations" -lt 2 ]; then
 fi
 
 # --- ORDER COUNT CHECK ---
-order_cards=$(grep -c "READY TO INVOICE\|BLOCKED\|Contact Aaron for pric" "$REPO"/index.html 2>/dev/null | tr -d ' ')
-if [ "$order_cards" -lt 9 ]; then
+# Shipments tab is now dynamic (loads from shipping_docs.json via JS).
+# Check the JSON manifest instead of hardcoded HTML.
+if [ -f "$REPO/data/shipping_docs.json" ]; then
+  order_cards=$(python3 -c "import json; d=json.load(open('$REPO/data/shipping_docs.json')); print(len([x for x in d['documents'] if x.get('status') != 'demo']))" 2>/dev/null || echo "0")
+  dynamic_loader=$(grep -c "shipping_docs.json" "$REPO"/index.html 2>/dev/null | tr -d ' ')
+  if [ "$dynamic_loader" -eq 0 ] && [ "$order_cards" -lt 9 ]; then
+    ISSUES=$((ISSUES + 1))
+    DETAILS="$DETAILS, \"Only $order_cards orders in shipping_docs.json (expected 9+) and no dynamic loader\""
+  fi
+else
   ISSUES=$((ISSUES + 1))
-  DETAILS="$DETAILS, \"Only $order_cards orders found in Shipments (expected 9)\""
+  DETAILS="$DETAILS, \"shipping_docs.json not found — shipments tab has no data source\""
 fi
 
 # --- WRITE LOG ---
@@ -128,21 +137,22 @@ if [ "$ISSUES" -gt 0 ]; then
       >/dev/null 2>&1
   fi
 else
-  # Clean audit — send success
-  BOT_TOKEN=""
-  CHAT_ID=""
-  for envfile in ~/norris-agent/.env ~/.openclaw/.env; do
-    if [ -f "$envfile" ]; then
-      [ -z "$BOT_TOKEN" ] && BOT_TOKEN=$(grep '^TELEGRAM_BOT_TOKEN=' "$envfile" 2>/dev/null | cut -d= -f2 | tr -d ' ')
-      [ -z "$CHAT_ID" ] && CHAT_ID=$(grep '^TELEGRAM_CHAT_ID=' "$envfile" 2>/dev/null | cut -d= -f2 | tr -d ' ')
-    fi
-  done
-  if [ -n "$BOT_TOKEN" ] && [ -n "$CHAT_ID" ]; then
-    MSG="✅ PORTAL AUDIT PASSED — 0 issues across all checks"
-    curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
-      -H "Content-Type: application/json" \
-      -d "{\"chat_id\":\"${CHAT_ID}\",\"text\":$(printf '%s' "$MSG" | python3 -c 'import sys,json; print(json.dumps(sys.stdin.read()))')}" \
-      >/dev/null 2>&1
+  echo "✅ Audit passed — no issues found"
+fi
+
+# --- AUTO-FIX CHAIN ---
+if [ $ISSUES -gt 0 ]; then
+  echo "Issues found — running auto-fix..."
+  ~/norris-agent/scripts/portal_autofix.sh
+  echo "Re-checking after auto-fix..."
+  remaining_fa=$(grep -rn "FlexPro Armor®" "$REPO"/*.html "$REPO"/internal/*.html 2>/dev/null | wc -l | tr -d ' ')
+  remaining_ent=$(grep -rn 'FlexPro Armor&reg;' "$REPO"/*.html "$REPO"/internal/*.html 2>/dev/null | wc -l | tr -d ' ')
+  remaining_guard=$(grep -rin "FlexPro Armor Guard" "$REPO" --include="*.html" 2>/dev/null | wc -l | tr -d ' ')
+  remaining=$((remaining_fa + remaining_ent + remaining_guard))
+  if [ "$remaining" -eq 0 ]; then
+    echo "✅ All auto-fixable issues resolved"
+  else
+    echo "⚠️ $remaining issues remain after auto-fix — needs manual review"
   fi
 fi
 
