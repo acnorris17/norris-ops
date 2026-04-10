@@ -1,6 +1,6 @@
 {
-  "compiled_at": "2026-04-10T11:13:03.380969",
-  "count": 168,
+  "compiled_at": "2026-04-10T15:07:12.958971",
+  "count": 174,
   "items": [
     {
       "notebook": "To Do List 4-22-24",
@@ -563,6 +563,34 @@
       "completed": false
     },
     {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Mississippi Power",
+      "text": "Follow up on order from last PO - anxiously waiting on inventory",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "I'm anxiously waiting on that order, as I'm out of many products that I hoped to \"never\" be out of... mainly the 28\" x 51\"!",
+      "scanned_at": "2026-04-10T20:06:19.583586+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Multiple Priorities",
+      "text": "Catch up on MK emails including intro to Mel via email, payment question (can I pay her cash not 1099), YouTube Channel and Highway Video",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MK Emails (catch up) - Intro to Mel via email - Can I pay her cash (not 1099)? - YouTube Channel and Highway Video",
+      "scanned_at": "2026-04-10T20:07:12.836316+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
       "notebook": "To Do List 4-22-24",
       "page": 1,
       "customer": "Tide Pride Account Management",
@@ -600,20 +628,6 @@
       "deadline": null,
       "raw": "Terex Bucket Cover follow-up- Brand Template (Beau)",
       "scanned_at": "2026-04-07T08:19:47.902955+00:00",
-      "category": "CUSTOMER",
-      "assigned_to": "aaron",
-      "completed": false
-    },
-    {
-      "notebook": "To Do List 4-22-24",
-      "page": 1,
-      "customer": "To Do List Management",
-      "text": "Make LineTec Butch Call about Dirt Tarp",
-      "priority": "medium",
-      "has_deadline": false,
-      "deadline": null,
-      "raw": "LineTec Butch Call - Dirt Tarp",
-      "scanned_at": "2026-04-07T16:10:10.615696+00:00",
       "category": "CUSTOMER",
       "assigned_to": "aaron",
       "completed": false
@@ -810,6 +824,20 @@
       "deadline": null,
       "raw": "Vulcan - Reel Trailer",
       "scanned_at": "2026-04-09T20:07:59.151134+00:00",
+      "category": "CUSTOMER",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Multiple Priorities",
+      "text": "Follow up Stone & Son on bucket cover and reel trailer with power pack quote",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Stone & Son - Bucket Cover Follow-up - Reel Trailer w/ Power Pack, quote",
+      "scanned_at": "2026-04-10T20:07:12.836316+00:00",
       "category": "CUSTOMER",
       "assigned_to": "aaron",
       "completed": false
@@ -1921,6 +1949,34 @@
       "completed": false
     },
     {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 2,
+      "customer": "Troy - Mississippi Power D-Shape Bucket Cover",
+      "text": "Create template or outline for Small D-Shape Bucket Cover (35\" x 77\")",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Template or outline for \"Small D-Shape Bucket Cover\" (35\" x 77\"). See notes in section below.",
+      "scanned_at": "2026-04-10T20:05:39.957436+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Multiple Priorities",
+      "text": "Contact Terry Bayshore List contacts he shared and schedule meetings with PowerGrid, APCO, MS Power, Net Connections, Trinity Co, and others",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Terry Bayshore List - Contact contacts he shared - Schedule Meetings: PowerGrid, APCO, MS Power, Net Connections, Trinity Co. ... others",
+      "scanned_at": "2026-04-10T20:07:12.836316+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
       "notebook": "To Do List 4-22-24",
       "page": 1,
       "customer": "Tide Pride Account Management",
@@ -1944,6 +2000,34 @@
       "deadline": null,
       "raw": "MDR (notes from meeting on 11/29/23): CZ equivalent pole trailer, Lite Dirt Tarp",
       "scanned_at": "2026-04-07T20:15:38.743214+00:00",
+      "category": "CUSTOMER",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Multiple Priorities",
+      "text": "Make LineTec Butch call about dirt tarp",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "LineTec Butch Call - Dirt Tarp",
+      "scanned_at": "2026-04-10T20:07:12.836316+00:00",
+      "category": "CUSTOMER",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Multiple Priorities",
+      "text": "Handle Brink Chad order (ship out)",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Brink- Chad Order (ship out)",
+      "scanned_at": "2026-04-10T20:07:12.836316+00:00",
       "category": "CUSTOMER",
       "assigned_to": "aaron",
       "completed": false
