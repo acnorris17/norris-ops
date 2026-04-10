@@ -7710,7 +7710,172 @@
       "deadline": null,
       "raw": "For future builds of this or when we go to modify the other ones MS Power purchased (there were 4 in total, we have fixed 1), we need to also add a hole at the opposite end of where the \"tension strap hole\" is.",
       "scanned_at": "2026-04-10T16:06:32.557184+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Purchase",
+      "text": "Negotiate purchase of 7,098 sq ft estate at 4505 Buttewoods Lane",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MASTER NEGOTIATION DOSSIER",
+      "scanned_at": "2026-04-10T16:07:21.622927+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Golani Investments",
+      "text": "Research Golani Investments property acquisition strategy and undervalued properties repositioning",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Golani Investments specializes in acquiring undervalued properties, repositioning them, and managing them for cash flow",
+      "scanned_at": "2026-04-10T16:08:56.992144+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "McKnight-Feltman-Renters Warehouse Network",
+      "text": "Contact Brad Clement at ARC Realty regarding current $1.25M for-sale listing",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Handles the current $1.25M for-sale listing (MLS #21430753)",
+      "scanned_at": "2026-04-10T16:08:56.992144+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "McKnight-Feltman-Renters Warehouse Network",
+      "text": "Follow up with Codi Feltman at Renters Warehouse Birmingham office about property management",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Currently manages the 4505 Buttewoods rental listing",
+      "scanned_at": "2026-04-10T16:08:56.992144+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Water Intrusion Problem",
+      "text": "Review disclosure discrepancy between rental and for-sale listings regarding waterproofing",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Rental listing advertises waterproofing system, for-sale listing makes ZERO mention",
+      "scanned_at": "2026-04-10T16:08:56.992144+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Water Intrusion Problem",
+      "text": "Examine contract addendum regarding Basement Water Intrusion and Condition between Aaron Norris and Caroline Norris",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Includes specific Basement Water Intrusion and Condition addendum between Aaron Norris and Caroline Norris",
+      "scanned_at": "2026-04-10T16:08:56.992144+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Due Diligence",
+      "text": "Clarify what lifetime means for H2O Waterproofing warranty",
+      "priority": "medium",
+      "has_deadline": true,
+      "deadline": "Before closing",
+      "raw": "(5) what \"lifetime\" means (life of structure? life of original owner?)",
+      "scanned_at": "2026-04-10T16:09:19.779975+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 8,
+      "customer": "Buttewood Home Real Estate Analysis",
+      "text": "Conduct title search to confirm if minerals were severed in 140+ year chain between Caldwell patents and current deed",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "a title search would confirm",
+      "scanned_at": "2026-04-10T16:09:39.748184+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Real Estate Negotiation - 4505 Buttewoods Lane",
+      "text": "Use leverage points in negotiation - property never sold above $425,000, county appraisal below asking price, no comparable sales above $1M",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Your strongest leverage points",
+      "scanned_at": "2026-04-10T16:10:24.227621+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Real Estate Negotiation - 4505 Buttewoods Lane",
+      "text": "Address water intrusion issue disclosure omitted from for-sale listing",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The water intrusion issue is disclosed in the rental listing but omitted from the for-sale listing",
+      "scanned_at": "2026-04-10T16:10:24.227621+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Golani Investments",
+      "text": "Research Golani Investments property acquisition and management practices",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Golani Investments specializes in acquiring undervalued properties, repositioning them, and managing them for cash flow",
+      "scanned_at": "2026-04-10T16:12:02.019561+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "McKnight-Feltman-Renters Warehouse Network",
+      "text": "Review current $1.25M for-sale listing handled by Brad Clement",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Handles the current $1.25M for-sale listing (MLS #21430753)",
+      "scanned_at": "2026-04-10T16:12:02.019561+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Water Intrusion Problem",
+      "text": "Address disclosure discrepancy between rental and for-sale listings regarding waterproofing",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Rental listing advertises waterproofing, for-sale listing makes ZERO mention",
+      "scanned_at": "2026-04-10T16:12:02.019561+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "H2O Waterproofing Investigation",
+      "text": "Call H2O Waterproofing before closing and get in writing: (1) confirmation work was done at 4505 Buttewoods, (2) copy of actual warranty document, (3) transfer process and any fees, (4) whether Peace of Mind maintenance program is required for warranty validity, (5) what lifetime means",
+      "priority": "high",
+      "has_deadline": true,
+      "deadline": "before closing",
+      "raw": "Before closing, you MUST call H2O Waterproofing and get in writing: (1) confirmation work was done at 4505 Buttewoods, (2) a copy of the actual warranty document, (3) the transfer process and any fees, (4) whether the Peace of Mind maintenance program is required for warranty validity, and (5) what lifetime means",
+      "scanned_at": "2026-04-10T16:12:23.977015+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "Real Estate Research - Buttewood Property",
+      "text": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 201804260001441760) from probaterecords.shelbyal.com",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 201804260001441760) from probaterecords.shelbyal.com",
+      "scanned_at": "2026-04-10T16:13:03.272561+00:00"
     }
   ],
-  "last_updated": "2026-04-10T16:06:32.557184+00:00"
+  "last_updated": "2026-04-10T16:13:03.272561+00:00"
 }
