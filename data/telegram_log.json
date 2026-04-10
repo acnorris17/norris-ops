@@ -391,7 +391,14 @@
       "source": "email_scanner.py",
       "message": "\ud83d\udcec EMAIL \u2014 \ud83d\udea8 <b>URGENT \u2014 2 emails waiting 5+ days</b>\n  \u2022 Aaron C. Norris \u2014 Issues with iship emails not being received \u2014 7d ago\n  \u2022 Thayne Grove \u2014 Invoice 6651 \u2014 6d ago\n\n\ud83d\udcca Full scan: 15 total items in morning brief",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-09T19:15:37.370168",
+      "category": "ORDER",
+      "source": "order_monitor.py",
+      "message": "<b>STALE ORDER ALERT -- 3 order(s) waiting 3+ days</b>\n  Wayne Abadie -- 3d -- PO: W6237\n  Coy Crosby -- 3d -- PO: 42350802\n  Wayne Abadie -- 3d -- PO: ",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-09T18:53:22.588473"
+  "last_updated": "2026-04-09T19:15:37.370190"
 }
