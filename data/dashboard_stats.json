@@ -1,1 +1,10 @@
-{"uninvoiced_count":9,"ready_count":7,"blocked_count":2,"overdue_followups":3,"pipeline_value":"$1.8M+","pipeline_breakdown":"EPB $185K + Terex $500K+ + Skylift $1,091,402 + BSS TBD","skylift_trucks":6,"skylift_po":"$1,091,402.50","active_deals":4,"last_updated":"2026-04-10","greeting_name":"Aaron","note":"7 ready to invoice. 2 blocked — Pickle and Myers ARCH/Combo SKU unconfirmed"}
+{
+  "uninvoiced_count": 46,
+  "overdue_followups": 3,
+  "pipeline_value": "$1.8M+",
+  "skylift_trucks": 6,
+  "telegram_messages": 88,
+  "last_updated": "2026-04-10T06:28:42",
+  "critical_items": [],
+  "deals": []
+}
