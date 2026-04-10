@@ -608,7 +608,14 @@
       "source": "order_monitor.py",
       "message": "<b>STALE ORDER ALERT -- 3 order(s) waiting 3+ days</b>\n  Wayne Abadie -- 3d -- PO: W6237\n  Coy Crosby -- 3d -- PO: 42350802\n  Wayne Abadie -- 3d -- PO: ",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-10T05:46:32.989515",
+      "category": "ORDER",
+      "source": "order_monitor.py",
+      "message": "<b>STALE ORDER ALERT -- 3 order(s) waiting 3+ days</b>\n  Wayne Abadie -- 3d -- PO: W6237\n  Coy Crosby -- 3d -- PO: 42350802\n  Wayne Abadie -- 3d -- PO: ",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-10T05:16:29.929220"
+  "last_updated": "2026-04-10T05:46:32.989563"
 }
