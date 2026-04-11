@@ -10,7 +10,6 @@
       "subject": "INVOICE: Briarwood Christian School (Due 4/15/2026)",
       "from": "FACTS Management Company <noreply@factsmgt.com>",
       "status": "open",
-      "category": "vendor",
       "added": "2026-04-06T15:08:34.988421"
     },
     {
@@ -22,10 +21,8 @@
       "email_date": "2026-04-03 11:45",
       "subject": "Invoice 6651",
       "from": "Thayne Grove <tgrove@bossproductsinc.com>",
-      "status": "paid",
-      "category": "vendor",
-      "notes": "Thayne issued credit memo — shows as paid, no action needed",
-      "added": "2026-04-06T15:08:35.490421"
+      "status": "open",
+      "added": "2026-04-06T15:08:35.490207"
     },
     {
       "email_id": "19d5378498f312be",
@@ -37,8 +34,7 @@
       "subject": "INVOICE: Briarwood Christian School (Due 4/15/2026)",
       "from": "FACTS Management Company <noreply@factsmgt.com>",
       "status": "open",
-      "category": "vendor",
-      "added": "2026-04-06T15:08:36.033421"
+      "added": "2026-04-06T15:08:36.033733"
     },
     {
       "email_id": "19d4ed1597c1263a",
@@ -50,8 +46,7 @@
       "subject": "Tax Statement 2025",
       "from": "Peggy Keller <peggy@avpc.org>",
       "status": "open",
-      "category": "vendor",
-      "added": "2026-04-06T15:08:36.505421"
+      "added": "2026-04-06T15:08:36.505899"
     },
     {
       "email_id": "19d4c79b6ed055bb",
@@ -63,21 +58,19 @@
       "subject": "Google Workspace: Your invoice is available for norrisutilities.com",
       "from": "Google Payments <payments-noreply@google.com>",
       "status": "open",
-      "category": "vendor",
-      "added": "2026-04-06T15:08:37.244421"
+      "added": "2026-04-06T15:08:37.244086"
     },
     {
       "email_id": "19d4c28d8ddf5312",
       "vendor": "Gusto",
       "invoice_number": "",
-      "amount": 29.70,
+      "amount": 29.7,
       "due_date": "2026-05-01",
       "email_date": "2026-04-01 22:07",
-      "subject": "Norris Utilities, LLC March 2026 invoice — paid",
+      "subject": "Norris Utilities, LLC's March 2026 invoice has been paid",
       "from": "Gusto <gustonoreply@gusto.com>",
       "status": "open",
-      "category": "vendor",
-      "added": "2026-04-06T15:08:37.767421"
+      "added": "2026-04-06T15:08:37.767445"
     },
     {
       "email_id": "19d4a51aca006cea",
@@ -86,218 +79,12 @@
       "amount": 0.0,
       "due_date": "2026-05-01",
       "email_date": "2026-04-01 13:32",
-      "subject": "Tax Statement 2025",
+      "subject": "Your email was not received by staff Re: 2025 Statement for Taxes",
       "from": "LS Admin <lsadmin@bcsk12.org>",
       "status": "open",
-      "category": "vendor",
-      "added": "2026-04-06T15:08:38.286421"
-    },
-    {
-      "email_id": "reimbursement-nu-att-001",
-      "vendor": "Aaron C. Norris — Personal Reimbursement",
-      "invoice_number": "ATT-2021-2026",
-      "amount": 5396.96,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "AT&T Phone Bill — Line 205-500-1343 (Nov 2021 – Mar 2026)",
-      "from": "acnorris@norrisutilities.com",
-      "status": "open",
-      "category": "owner_reimbursement",
-      "notes": "NU owes Aaron for personal phone line. Dec 2024–Mar 2026 CONFIRMED from 16 AT&T bills ($1,629.27). Nov 2021–Nov 2024 ESTIMATED 37 months @ $101.83/mo ($3,767.69). Bills: /Users/acnorris1/ATT Bills and Statements copy/. Report: Norris Utilities LLC/Bay Shore Systems - LoDril/BSS Travel Receipts - Reimbursement/ATT_Phone_Expense_Report_ACNorris_2024-2026.html",
-      "breakdown": {
-        "confirmed_dec2024_mar2026": 1629.27,
-        "estimated_nov2021_nov2024": 3767.69,
-        "months_confirmed": 16,
-        "months_estimated": 37,
-        "avg_monthly": 101.83
-      },
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-nu-bestbuy-001",
-      "vendor": "Aaron C. Norris — Personal Reimbursement",
-      "invoice_number": "NU-BESTBUY-NOV2025",
-      "amount": 93.63,
-      "due_date": null,
-      "email_date": "2025-11-17",
-      "subject": "Best Buy #383 — HP 962 Ink Combo 3-Pack Color (Nov 17 2025)",
-      "from": "acnorris@norrisutilities.com",
-      "status": "open",
-      "category": "owner_reimbursement",
-      "notes": "NU owes Aaron $93.63. HP 962 INK COMBO 3PK CLR at Best Buy #383, 5201 Hwy 280 Birmingham AL. Date 11/17/25. BBY Card ending 2122. Aaron wrote 'NU owes myself' on receipt. Photo on file.",
-      "breakdown": {"subtotal": 85.89, "sales_tax": 7.74, "total": 93.63},
-      "added": "2026-04-11T12:22:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-flights-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-CONEXPO-2026-001",
-      "amount": 1256.81,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "ConExpo Las Vegas — Southwest Airlines Flights (Mar 2026)",
-      "from": "acnorris@norrisutilities.com",
-      "status": "open",
-      "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron. Southwest BHM-LAS round trip ConExpo Mar 2-8 2026. Confirmation CTOSX5. Gmail IDs: 19caee4f0595e2af, 19d19e2f7a93e857.",
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-car-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-CONEXPO-2026-002",
-      "amount": 0.0,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "ConExpo Las Vegas — Enterprise Rental Agreement 475354287 (Mar 2-7 2026)",
-      "from": "acnorris@norrisutilities.com",
-      "status": "no_reimbursement",
-      "category": "bss_reimbursement",
-      "notes": "CONFIRMED from PDF receipt. Rental paid entirely with Chase Travel redemption points via Loyalty Travel Agency LLC. Amount Due on receipt: $0.00. No reimbursement owed. Harry Reid Intl LAS, Mar 2-7 2026, Midsize SUV, 17 miles driven.",
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-hotel-room-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-CONEXPO-2026-003",
-      "amount": 2080.80,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "ConExpo Las Vegas — DoubleTree by Hilton Room (Mar 2-8 2026)",
-      "from": "acnorris@norrisutilities.com",
-      "status": "open",
-      "category": "bss_reimbursement",
-      "notes": "CONFIRMED from Gmail PDF folio. 6 nights Mar 2-8 2026. Room $305.87/night x6 = $1,835.22 + occupancy tax $245.58 = $2,080.80. Paid Visa-6138. Confirmation #80201325, Room NKR-226.",
-      "breakdown": {"room_rate_per_night": 305.87, "nights": 6, "room_subtotal": 1835.22, "occupancy_tax": 245.58, "total": 2080.80},
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-hotel-incidentals-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-CONEXPO-2026-004",
-      "amount": 21.50,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "ConExpo Las Vegas — DoubleTree Hotel Incidentals (Mar 2-8 2026)",
-      "from": "acnorris@norrisutilities.com",
-      "status": "open",
-      "category": "bss_reimbursement",
-      "notes": "CONFIRMED from Gmail PDF folio. F&B charges net of Hilton Honors daily credits. Market Food $47.00 + Beer $18.00 + tax $1.50 - Hilton Honors credits $45.00 = $21.50. Paid Visa-1057.",
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-valet-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-CONEXPO-2026-005",
-      "amount": 191.00,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "ConExpo Las Vegas — Valet Parking",
-      "from": "acnorris@norrisutilities.com",
-      "status": "open",
-      "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for valet parking, ConExpo Las Vegas March 2026.",
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-food-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-CONEXPO-2026-006",
-      "amount": 20.34,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "ConExpo Las Vegas — Meals/Food",
-      "from": "acnorris@norrisutilities.com",
-      "status": "open",
-      "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for food/meal charges, ConExpo Las Vegas March 2026.",
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-dinner-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-CONEXPO-2026-007",
-      "amount": 88.04,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "ConExpo Las Vegas — Business Dinner",
-      "from": "acnorris@norrisutilities.com",
-      "status": "open",
-      "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for business dinner, ConExpo Las Vegas March 2026.",
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-lyft-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-CONEXPO-2026-008",
-      "amount": 18.99,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "ConExpo Las Vegas — Lyft (Mar 7 2026, driver Solomon)",
-      "from": "acnorris@norrisutilities.com",
-      "status": "open",
-      "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for Lyft, Las Vegas Mar 7 2026. Gmail ID: 19cccf49192059eb.",
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-apple-card-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-EXPENSES-2026-GROUP3",
-      "amount": 3136.41,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "Apple Card — BSS Business Expenses Group 3 (Feb-Mar 2026)",
-      "from": "acnorris@norrisutilities.com",
-      "status": "pending_verification",
-      "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron ~$3,136.41 on Apple Card for BSS business expenses. Pull Apple Card statement Feb-Mar 2026 from Apple Wallet to itemize.",
-      "added": "2026-04-11T12:17:00.000000"
-    },
-    {
-      "email_id": "reimbursement-bss-idaho-car-001",
-      "vendor": "Aaron C. Norris — BSS Travel Reimbursement",
-      "invoice_number": "BSS-IDAHO-2026-001",
-      "amount": 0.0,
-      "due_date": null,
-      "email_date": "2026-04-11",
-      "subject": "Idaho/BSS Trip — Enterprise Rental Agreement 668270857 (Jan 13-16 2026)",
-      "from": "acnorris@norrisutilities.com",
-      "status": "no_reimbursement",
-      "category": "bss_reimbursement",
-      "notes": "CONFIRMED from PDF receipt. Rental paid with Chase Travel redemption points via Loyalty Travel Agency LLC. Amount Due: $0.00. Spokane GEG Jan 13-16 2026, Mitsubishi Outlander, 130 miles driven. No reimbursement owed.",
-      "added": "2026-04-11T12:17:00.000000"
+      "added": "2026-04-06T15:08:38.286475"
     }
   ],
-  "personal_reimbursement_summary": {
-    "nu_owes_aaron": {
-      "total": 5490.59,
-      "items": [
-        {"description": "AT&T Phone Bill Line 205-500-1343 (Nov 2021-Mar 2026)", "amount": 5396.96, "confirmed": 1629.27, "estimated": 3767.69},
-        {"description": "Best Buy HP 962 Ink Combo 3-Pack (Nov 17 2025)", "amount": 93.63, "status": "confirmed"}
-      ]
-    },
-    "bss_owes_aaron": {
-      "total_confirmed": 3676.68,
-      "total_pending": 3136.41,
-      "notes": "Enterprise rentals (ConExpo + Idaho) = $0 both — paid with Chase Travel points",
-      "items": [
-        {"description": "Southwest Flights BHM-LAS ConExpo Mar 2026", "amount": 1256.81, "status": "confirmed"},
-        {"description": "DoubleTree Room Mar 2-8 2026", "amount": 2080.80, "status": "confirmed"},
-        {"description": "DoubleTree Incidentals Mar 2-8 2026", "amount": 21.50, "status": "confirmed"},
-        {"description": "Valet Parking ConExpo Mar 2026", "amount": 191.00, "status": "confirmed"},
-        {"description": "Food/Meals ConExpo Mar 2026", "amount": 20.34, "status": "confirmed"},
-        {"description": "Business Dinner ConExpo Mar 2026", "amount": 88.04, "status": "confirmed"},
-        {"description": "Lyft Las Vegas Mar 7 2026", "amount": 18.99, "status": "confirmed"},
-        {"description": "Enterprise ConExpo Las Vegas", "amount": 0.0, "status": "no_reimbursement"},
-        {"description": "Enterprise Idaho Spokane Jan 2026", "amount": 0.0, "status": "no_reimbursement"},
-        {"description": "Apple Card Group 3 Feb-Mar 2026", "amount": 3136.41, "status": "pending_verification"}
-      ]
-    }
-  },
   "last_scan": "2026-04-11T07:00:01.725102",
-  "scan_count": 7,
-  "last_updated": "2026-04-11T12:35:00.000000",
-  "updated_by": "Legacy AI Agent — DO NOT OVERWRITE personal_reimbursement entries"
+  "scan_count": 6
 }
