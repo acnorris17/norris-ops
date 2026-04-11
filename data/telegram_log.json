@@ -643,7 +643,21 @@
       "source": "order_monitor.py",
       "message": "<b>STALE ORDER ALERT -- 5 order(s) waiting 3+ days</b>\n  Wayne Abadie -- 4d -- PO: W6237\n  Coy Crosby -- 4d -- PO: 42350802\n  Wayne Abadie -- 4d -- PO: \n  acnorris@norrisutilities.com -- 3d -- PO: \n  Jamie Eden -- 3d -- PO: ",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-11T03:55:01.256923",
+      "category": "BRIEF",
+      "source": "agent_runner_v4.py",
+      "message": "\u2600\ufe0f BRIEF \u2014 <b>Good morning -- Morning Brief -- 2026-04-11</b>\n\n\ud83d\udcca <b>Task Queue</b>\n\u2705 Done: 19 | \u274c Failed: 5 | \ud83d\udd04 Running: 0 | \u23f3 Pending: 0\n\n\u26a0\ufe0f <b>Failed -- Needs Attention (5)</b>\n  \u2022 Task 24 (P1): Redesign Team Page \u2014 Animated OneWheel Characters\n  \u2022 Task 19 (P2): Update Team Characters \u2014 Dynamic Subagent Animatio\n  \u2022 Task 7 (P3): Caroline Butler Operations Dashboard\n  \u2022 Task 10 (P4): Daily Journal System\n  \u2022 Task 11 (P4): Website About Page\n\n\ud83e\udd16 Agent v4 standing by.",
+      "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-11T03:55:04.198376",
+      "category": "BRIEF",
+      "source": "morning_brief.py",
+      "message": "\u2600\ufe0f BRIEF \u2014 <b>Good morning, Aaron \u2014 Saturday, April 11, 2026</b>\nWorking the weekend \u2014 respect the grind.\n\n\ud83d\udcdd <b>REMARKABLE URGENT (5):</b>\n  \u26a0\ufe0f Negotiate purchase of 7,098 sq ft estate at 4505 Buttewoods Lane for u\n  \u26a0\ufe0f Call H2O Waterproofing before closing to get written confirmation work\n  \u26a0\ufe0f Get copy of actual warranty document from H2O Waterproofing\n  \u26a0\ufe0f Get transfer process information from H2O Waterproofing\n  \u26a0\ufe0f Pull the 2018 Compass Bank \u2192 McKnight deed from probaterecords.shelbya\n  \u27a1\ufe0f ops.norrisutilities.com/internal/remarkable-tasks.html\n\n\u2705 <b>COMPLETED OVERNIGHT:</b>\n  \u2022 No overnight builds\n\n\ud83d\udcc5 <b>TODAY'S SCHEDULE:</b>\n  \u2022 No calendar events for today\n\n\ud83d\udce7 <b>EMAILS NEEDING RESPONSE:</b>\n  (7 total)\n  \u2022 The UPS Store #0255 \u2014 Shipments for those dates you asked about. \u2014 1d ago\n  \u2022 Sam Hastie \u2014 Time off \u2014 1d ago\n  \u2022 Wayne Abadie \u2014 QUOTE 24X24 BLUE COVER \u2014 2d ago\n  \u2022 Aaron C. Norris \u2014 LPL Financial / Carnegie Account Portal Link \u2014 3d ago\n  \u2022 GHK Admin \u2014 Support God's House \u2014 3d ago\n\n\u270d\ufe0f <b>2 follow-up drafts ready for your review</b>\n  Open ~/norris-agent/data/followup_drafts.json\n\n\ud83d\udcb0 <b>REVENUE ACTION ITEMS:</b>\n  \u2022 5 FlexPro Armor\u00ae orders (March 20) \u2014 3 ready, 2 blocked by ARCH SKUs\n  \u2022 8 Samson Rope orders shipped, not invoiced in QB \u2014 $3,235.31 unbilled\n\n\ud83d\udd14 <b>DEALS GOING COLD:</b>\n  \u2022 Skylift PO ($1.09M) \u2014 7+ days since last activity\n  \u2022 EPB / Rick Sutherland (~$185K) \u2014 7+ days since last activity\n  \u2022 Terex / Bill Kugler ($500K+) \u2014 7+ days since last activity\n  \u2022 Sheffield / Waldrep \u2014 7+ days since last activity\n  \u2022 Irby / Jared Lemoine \u2014 7+ days since last activity\n\n\ud83d\udd34 <b>NEEDS YOUR ATTENTION:</b>\n  \u2022 QB Invoices \u2014 5 orders uninvoiced since March 20\n  \u2022 Alabama Dealer License \u2014 not started\n  \u2022 5 agent tasks failed \u2014 run --retry-failed when ready\n\n\ud83d\udccb <b>TODAY'S PRIORITIES:</b>\n  \u2022 No pending agent tasks \u2014 queue is clear\n  \u2022 Check QB for uninvoiced orders\n  \u2022 Review overnight emails\n\n\ud83d\udcdd <b>FROM YOUR NOTES:</b>\n  \u2022 Property Investment Research: Search Alabama SOS f",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-10T19:21:36.080811"
+  "last_updated": "2026-04-11T03:55:04.198418"
 }
