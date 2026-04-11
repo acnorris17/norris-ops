@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q2 2026 Business Forecast — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --nu-accent-gold: #C9A84C;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+    .header-meta {
+      margin-top: 18px;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 300;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .content-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .section-intro {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 48px;
+      font-size: 1.05rem;
+      color: #555;
+      line-height: 1.7;
+    }
+    .section-intro strong {
+      color: var(--nu-dark-text);
+    }
+
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .nu-section-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    /* KPI Row */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .kpi-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      border-top: 4px solid var(--nu-blue);
+    }
+    .kpi-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    .kpi-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--nu-dark-text);
+      line-height: 1.1;
+    }
+    .kpi-sub {
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 6px;
+    }
+    .kpi-up { color: #22a867; }
+    .kpi-flat { color: #d4a017; }
+
+    /* Product Lines Table */
+    .forecast-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 48px;
+      font-size: 0.95rem;
+    }
+    .forecast-table thead th {
+      background: linear-gradient(135deg, #1a1a3e, #2a2a5e);
+      color: var(--nu-white);
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+    .forecast-table thead th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+    .forecast-table thead th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+    .forecast-table tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .forecast-table tbody tr:hover {
+      background: #f0f4ff;
+    }
+    .forecast-table tbody tr:last-child td:first-child {
+      border-radius: 0 0 0 8px;
+    }
+    .forecast-table tbody tr:last-child td:last-child {
+      border-radius: 0 0 8px 0;
+    }
+    .forecast-table .total-row td {
+      font-weight: 900;
+      background: var(--nu-light-gray);
+      color: var(--nu-dark-text);
+      border-top: 2px solid var(--nu-blue);
+    }
+    .text-right { text-align: right; }
+    .margin-pill {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .margin-high { background: #e6f9ee; color: #1a7a42; }
+    .margin-mid { background: #fff8e6; color: #9a7b1a; }
+    .margin-low { background: #f0f4ff; color: #0000cc; }
+
+    /* Two-Col Layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .nu-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 2px solid var(--nu-blue);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .expense-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.95rem;
+    }
+    .expense-row:last-child { border-bottom: none; }
+    .expense-label { color: #555; }
+    .expense-amount { font-weight: 700; color: var(--nu-dark-text); }
+    .expense-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0 0;
+      margin-top: 8px;
+      border-top: 2px solid var(--nu-blue);
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+    }
+
+    /* Notes */
+    .meeting-notes {
+      background: var(--nu-light-gray);
+      border-radius: 10px;
+      padding: 32px;
+      margin-bottom: 48px;
+      border-left: 4px solid var(--nu-cyan);
+    }
+    .meeting-notes h3 {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 16px;
+    }
+    .meeting-notes p {
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* Print button */
+    .print-bar {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .nu-btn-primary {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 12px 28px;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .nu-btn-primary:hover {
+      background: #0000CC;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,255,0.3);
+    }
+
+    /* Footer */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .content-wrap { padding: 40px 20px; }
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .forecast-table { font-size: 0.85rem; }
+      .forecast-table thead th,
+      .forecast-table tbody td { padding: 10px 8px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-card { box-shadow: none; border: 1px solid #ccc; }
+      .print-bar { display: none; }
+      .forecast-table thead th { background: #1a1a3e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="header-meta">Q2 2026 Forecast &amp; Operations Review — Prepared for Caroline Butler</div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div class="content-wrap">
+
+      <div class="section-intro">
+        <strong>Internal Document — April 11, 2026</strong><br>
+        Business forecast, revenue projections, and operational priorities for Aaron's meeting with Caroline Butler. All numbers based on current pipeline, confirmed orders, and Q1 actuals.
+      </div>
+
+      <!-- PRINT -->
+      <div class="print-bar">
+        <button class="nu-btn-primary" onclick="window.print()">Print This Report</button>
+      </div>
+
+      <!-- KPI SUMMARY -->
+      <h2 class="nu-section-title">Key <span>Performance Indicators — Q2 2026</span></h2>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Projected Q2 Revenue</div>
+          <div class="kpi-value">$287K</div>
+          <div class="kpi-sub kpi-up">+18% vs Q1 2026</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Blended Gross Margin</div>
+          <div class="kpi-value">34.2%</div>
+          <div class="kpi-sub kpi-up">Weighted by product line</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Active Quotes</div>
+          <div class="kpi-value">14</div>
+          <div class="kpi-sub kpi-flat">$412K total pipeline value</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Avg Close Rate (Trailing)</div>
+          <div class="kpi-value">38%</div>
+          <div class="kpi-sub kpi-up">Up from 31% in Q4 2025</div>
+        </div>
+      </div>
+
+      <!-- REVENUE BY PRODUCT LINE -->
+      <h2 class="nu-section-title">Revenue <span>Forecast by Product Line</span></h2>
+      <table class="forecast-table">
+        <thead>
+          <tr>
+            <th>Product Line</th>
+            <th class="text-right">Q1 Actual</th>
+            <th class="text-right">Q2 Projected</th>
+            <th>Margin</th>
+            <th class="text-right">Q2 Gross Profit</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>FlexPro Armor</strong></td>
+            <td class="text-right">$68,400</td>
+            <td class="text-right">$84,000</td>
+            <td><span class="margin-pill margin-high">50%</span></td>
+            <td class="text-right">$42,000</td>
+            <td>Repeat orders from EPB, Gridco, Sheffield</td>
+          </tr>
+          <tr>
+            <td><strong>Samson Rope</strong></td>
+            <td class="text-right">$52,100</td>
+            <td class="text-right">$61,000</td>
+            <td><span class="margin-pill margin-mid">30%</span></td>
+            <td class="text-right">$18,300</td>
+            <td>Spring restock season; Irby order pending</td>
+          </tr>
+          <tr>
+            <td><strong>Skylift Equipment</strong></td>
+            <td class="text-right">$98,000</td>
+            <td class="text-right">$112,000</td>
+            <td><span class="margin-pill margin-low">14%</span></td>
+            <td class="text-right">$15,680</td>
+            <td>2 bucket trucks in pipeline</td>
+          </tr>
+          <tr>
+            <td><strong>Bay Shore Systems</strong></td>
+            <td class="text-right">$24,200</td>
+            <td class="text-right">$30,000</td>
+            <td><span class="margin-pill margin-low">12%</span></td>
+            <td class="text-right">$3,600</td>
+            <td>SE territory reps — Andy Barron leads</td>
+          </tr>
+          <tr class="total-row">
+            <td><strong>TOTAL</strong></td>
+            <td class="text-right">$242,700</td>
+            <td class="text-right">$287,000</td>
+            <td><span class="margin-pill margin-mid">34.2%</span></td>
+            <td class="text-right">$79,580</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- TWO COLUMN: EXPENSES + ACTION ITEMS -->
+      <div class="two-col">
+        <div class="nu-card">
+          <h2 class="nu-section-title">Monthly <span>Operating Expenses</span></h2>
+          <div style="margin-top: 16px;">
+            <div class="expense-row">
+              <span class="expense-label">Caroline Butler — Admin Salary</span>
+              <span class="expense-amount">$4,200/mo</span>
+            </div>
+            <div class="expense-row">
+              <span class="expense-label">MK Smith — Marketing Contractor</span>
+              <span class="expense-amount">$1,500/mo</span>
+            </div>
+            <div class="expense-row">
+              <span class="expense-label">Office — 130 Inverness Plaza #210</span>
+              <span class="expense-amount">$1,850/mo</span>
+            </div>
+            <div class="expense-row">
+              <span class="expense-label">Insurance &amp; Licensing</span>
+              <span class="expense-amount">$680/mo</span>
+            </div>
+            <div class="expense-row">
+              <span class="expense-label">Software &amp; Tools</span>
+              <span class="expense-amount">$420/mo</span>
+            </div>
+            <div class="expense-row">
+              <span class="expense-label">Travel &amp; Fuel</span>
+              <span class="expense-amount">$1,200/mo</span>
+            </div>
+            <div class="expense-row">
+              <span class="expense-label">Phone &amp; Communication</span>
+              <span class="expense-amount">$180/mo</span>
+            </div>
+            <div class="expense-total">
+              <span>Monthly Total</span>
+              <span>$10,030/mo</span>
+            </div>
+            <div class="expense-total" style="border-top: none; padding-top: 4px;">
+              <span>Quarterly Overhead (Q2)</span>
+              <span>$30,090</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="nu-card">
+          <h2 class="nu-section-title">Meeting <span>Agenda &amp; Action Items</span></h2>
+          <ul class="checklist" style="margin-top: 16px;">
+            <li>
+              <div class="check-icon"></div>
+              <div>Review Q1 actual vs. forecast — identify where we beat or missed</div>
+            </li>
+            <li>
+              <div class="check-icon"></div>
+              <div>Confirm FlexPro Armor inventory levels — reorder if below 20 covers</div>
+            </li>
+            <li>
+              <div class="check-icon"></div>
+              <div>Follow up on open invoices — flag anything 30+ days outstanding</div>
+            </li>
+            <li>
+              <div class="check-icon"></div>
+              <div>Coordinate Samson Rope spring restock — confirm Donna Poll pricing</div>
+            </li>
+            <li>
+              <div class="check-icon"></div>
+              <div>Discuss Skylift bucket truck pipeline — get delivery timeline from Nick Gordon</div>
+            </li>
+            <li>
+              <div class="check-icon"></div>
+              <div>Review CB onboarding checklist status — any blockers?</div>
+            </li>
+            <li>
+              <div class="check-icon"></div>
+              <div>Set Q2 targets and weekly check-in cadence</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MEETING PREP NOTES -->
+      <div class="meeting-notes">
+        <h3>Forecast Assumptions &amp; Notes for Discussion</h3>
+        <p><strong>FlexPro Armor</strong> — Q2 projection assumes repeat orders from Rick Sutherland (EPB Chattanooga), Shon Cunningham (Gridco), and Michael Waldrep (Sheffield Utilities). The 50% margin is non-negotiable. Cost-per-cover should be verified against latest supplier invoices before quoting.</p>
+        <p><strong>Samson Rope</strong> — Spring is historically the strongest season. Jared Lemoine at Irby is now primary contact (Gary Wiggs and Scott Argyle retired). Always CC Donna Poll and Sarah Daniels on Samson communications.</p>
+        <p><strong>Skylift Equipment</strong> — Two pending bucket truck quotes. Margins are thin (12-15%), but these drive relationship revenue. Confirm build slots with Andrew Jarmoszuk and Dale Williams.</p>
+        <p><strong>Bay Shore Systems</strong> — SE territory rep arrangement with Andy Barron. Herb Minatre (owner) oversees. Lower volume but steady territory income.</p>
+        <p><strong>Break-Even</strong> — At $10,030/month overhead, we need approximately $29,400/month in gross profit to cover expenses. Q2 forecast projects $26,527/month gross profit — within striking distance if FlexPro Armor orders track to plan.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
