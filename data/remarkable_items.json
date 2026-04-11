@@ -9437,7 +9437,139 @@
       "deadline": null,
       "raw": "The seller rejected your $900,000 offer without a counter",
       "scanned_at": "2026-04-11T16:08:55.991805+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "H2O Waterproofing",
+      "text": "Call H2O Waterproofing and get written confirmation work was done at 4505 Buttewoods",
+      "priority": "high",
+      "has_deadline": true,
+      "deadline": "Before closing",
+      "raw": "Before closing, you MUST call H2O Waterproofing and get in writing: (1) confirmation work was done at 4505 Buttewoods",
+      "scanned_at": "2026-04-11T16:10:58.081781+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "H2O Waterproofing",
+      "text": "Clarify what lifetime means regarding structure life versus original owner",
+      "priority": "high",
+      "has_deadline": true,
+      "deadline": "Before closing",
+      "raw": "(5) what \"lifetime\" means (life of structure? life of original owner?)",
+      "scanned_at": "2026-04-11T16:10:58.081781+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewoods Lane Property Purchase",
+      "text": "Negotiate purchase price for 7,098 sq ft estate on 2.11 acres from Israeli real estate investors",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "You are attempting to buy a 7,098 sq ft estate on 2.11 acres from Israeli real estate investors",
+      "scanned_at": "2026-04-11T16:12:23.214389+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewoods Lane Property Purchase",
+      "text": "Use leverage points in negotiation including property's sales history and water disclosure issues",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Your strongest leverage points",
+      "scanned_at": "2026-04-11T16:12:23.214389+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "Golani Investments LLC / Kingdom Fund Investigation",
+      "text": "Investigate Golani Investments LLC corporate structure and connections to SNH Golani Investments LLC and Kingdom Fund LLCs",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Golani Investments LLC \u2192 SNH Golani Investments LLC \u2192 \"Kingdom Fund\" LLCs (1-12+)",
+      "scanned_at": "2026-04-11T16:14:03.937628+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "Golani Investments LLC / Kingdom Fund Investigation",
+      "text": "Research Lendai strategic partnership - Israeli fintech providing mortgages to foreign/Israeli investors",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Lendai \u2014 Israeli fintech providing mortgages to foreign/Israeli investors buying U.S. real estate",
+      "scanned_at": "2026-04-11T16:14:03.937628+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 7,
+      "customer": "Golani Investments LLC / Kingdom Fund Investigation",
+      "text": "Verify Ran Peled property tax payments and investigate zero public digital footprint in Alabama",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Ran Peled paid property taxes from 2020 through 2023 but leaves zero public digital footprint tied to Alabama real estate",
+      "scanned_at": "2026-04-11T16:14:03.937628+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "Buttewood Home - H2O Waterproofing",
+      "text": "Call H2O Waterproofing and get in writing: confirmation work was done at 4505 Buttewoods",
+      "priority": "high",
+      "has_deadline": true,
+      "deadline": "Before closing",
+      "raw": "Before closing, you MUST call H2O Waterproofing and get in writing: (1) confirmation work was done at 4505 Buttewoods",
+      "scanned_at": "2026-04-11T16:14:42.956115+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "Buttewood Home - H2O Waterproofing",
+      "text": "Clarify what lifetime means - life of structure vs life of original owner",
+      "priority": "high",
+      "has_deadline": true,
+      "deadline": "Before closing",
+      "raw": "(5) what \"lifetime\" means (life of structure? life of original owner?)",
+      "scanned_at": "2026-04-11T16:14:42.956115+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 10,
+      "customer": "Buttewood Home Real Estate Analysis",
+      "text": "Pull the 2018 Compass Bank McKnight deed from probaterecords.shelbyal.com",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 201804260001417\u200b60) from probaterecords.shelbyal.com",
+      "scanned_at": "2026-04-11T16:15:00.548283+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 10,
+      "customer": "Buttewood Home Real Estate Analysis",
+      "text": "Contact: Renters Warehouse",
+      "priority": "info",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "",
+      "scanned_at": "2026-04-11T16:15:00.548283+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 11,
+      "customer": "Property Research",
+      "text": "Search Alabama SOS for other LLCs containing Golan or Peleel to reveal if investors own other Alabama properties",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Search Alabama SOS (arc-sos.state.al.us) for other LLCs containing \"Golan\" or \"Peleel\" \u2014 this would reveal if these investors own other Alabama properties and expose the full portfolio",
+      "scanned_at": "2026-04-11T16:15:22.322521+00:00"
     }
   ],
-  "last_updated": "2026-04-11T16:09:15.993656+00:00"
+  "last_updated": "2026-04-11T16:15:22.322521+00:00"
 }
