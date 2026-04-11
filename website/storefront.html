@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FlexPro Armor Bucket Covers | Norris Utilities</title>
-  <meta name="description" content="FlexPro Armor flexi-rigid collapsible bucket covers. Hand Made in the USA. First to market D-Shape design. 2-Man and 1.5-Man sizes available.">
+  <title>FlexPro Armor Bucket Covers | Norris Utilities&reg; Store</title>
+  <meta name="description" content="FlexPro Armor flexi-rigid collapsible bucket covers. Hand Made in the USA. First to market D-Shape design. Buy online with secure Stripe checkout.">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap');
-<link rel="stylesheet" href="/css/brand.css">
 
     :root {
       --nu-blue: #0000FF;
@@ -19,6 +18,7 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
+      --nu-green: #00C853;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -97,6 +97,24 @@
       font-size: 1.15rem;
       color: var(--nu-cyan);
       letter-spacing: 0.03em;
+    }
+    .header-secure {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 8px 20px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--nu-white);
+      letter-spacing: 0.04em;
+    }
+    .header-secure svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--nu-cyan);
     }
 
     /* ══ CHEVRON ══ */
@@ -263,14 +281,16 @@
       font-size: 1.1rem;
       color: var(--nu-blue);
     }
-    .btn-quote {
+
+    /* ══ BUTTON STYLES ══ */
+    .btn-buy {
       display: inline-block;
-      padding: 12px 28px;
-      background: var(--nu-blue);
+      padding: 14px 28px;
+      background: var(--nu-green);
       color: var(--nu-white);
       font-family: var(--font-primary);
-      font-weight: 700;
-      font-size: 0.9rem;
+      font-weight: 900;
+      font-size: 0.95rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       border: none;
@@ -278,17 +298,361 @@
       cursor: pointer;
       text-align: center;
       text-decoration: none;
-      transition: background 0.2s, transform 0.1s;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      margin-bottom: 10px;
+      width: 100%;
     }
-    .btn-quote:hover { background: #0033cc; transform: translateY(-1px); }
-    .btn-quote.outline {
+    .btn-buy:hover {
+      background: #00A844;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0,200,83,0.35);
+    }
+    .btn-buy svg {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      margin-right: 6px;
+      fill: currentColor;
+    }
+    .btn-quote {
+      display: inline-block;
+      padding: 10px 28px;
       background: transparent;
-      border: 2px solid var(--nu-blue);
       color: var(--nu-blue);
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 2px solid var(--nu-blue);
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
     }
-    .btn-quote.outline:hover {
+    .btn-quote:hover {
       background: var(--nu-blue);
       color: var(--nu-white);
+      transform: translateY(-1px);
+    }
+    .btn-notify {
+      display: inline-block;
+      padding: 12px 28px;
+      background: transparent;
+      color: var(--nu-accent-gold);
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 2px solid var(--nu-accent-gold);
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+    }
+    .btn-notify:hover {
+      background: var(--nu-accent-gold);
+      color: var(--nu-navy);
+    }
+
+    /* ══ QUANTITY SELECTOR ══ */
+    .qty-selector {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 12px;
+    }
+    .qty-selector button {
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--nu-medium-gray);
+      background: var(--nu-light-gray);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .qty-selector button:first-child { border-radius: 6px 0 0 6px; }
+    .qty-selector button:last-child { border-radius: 0 6px 6px 0; }
+    .qty-selector button:hover { background: var(--nu-medium-gray); }
+    .qty-selector input {
+      width: 48px;
+      height: 36px;
+      border: 2px solid var(--nu-medium-gray);
+      border-left: none;
+      border-right: none;
+      text-align: center;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      -moz-appearance: textfield;
+    }
+    .qty-selector input::-webkit-outer-spin-button,
+    .qty-selector input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .qty-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    /* ══ STRIPE SECURE BADGE ══ */
+    .stripe-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: #888;
+      font-weight: 400;
+    }
+    .stripe-badge svg {
+      height: 14px;
+      width: auto;
+    }
+
+    /* ══ FLOATING CART ══ */
+    .cart-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cart-fab:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(0,0,255,0.5);
+    }
+    .cart-fab svg { width: 26px; height: 26px; fill: var(--nu-white); }
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--nu-green);
+      color: var(--nu-white);
+      font-size: 0.7rem;
+      font-weight: 900;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-fab.hidden { display: none; }
+
+    /* ══ CART DRAWER ══ */
+    .cart-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .cart-overlay.open { opacity: 1; visibility: visible; }
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 400px;
+      max-width: 90vw;
+      height: 100vh;
+      background: var(--nu-white);
+      z-index: 2001;
+      box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s ease;
+    }
+    .cart-drawer.open { right: 0; }
+    .cart-header {
+      padding: 20px 24px;
+      border-bottom: 2px solid var(--nu-medium-gray);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-header h2 {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--nu-dark-text);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .cart-close {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: var(--nu-light-gray);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      color: var(--nu-dark-text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-close:hover { background: var(--nu-medium-gray); }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 24px;
+    }
+    .cart-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 2px;
+    }
+    .cart-item-sku {
+      font-size: 0.75rem;
+      color: var(--nu-blue);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cart-item-qty button {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 4px;
+      background: var(--nu-light-gray);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-item-qty button:hover { background: var(--nu-medium-gray); }
+    .cart-item-qty span {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 20px;
+      text-align: center;
+    }
+    .cart-item-price {
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      white-space: nowrap;
+    }
+    .cart-item-remove {
+      font-size: 0.75rem;
+      color: #cc0000;
+      cursor: pointer;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border: none;
+      background: none;
+      padding: 4px 0;
+      margin-top: 4px;
+    }
+    .cart-item-remove:hover { text-decoration: underline; }
+    .cart-empty {
+      text-align: center;
+      padding: 60px 24px;
+      color: #888;
+    }
+    .cart-empty-icon { font-size: 3rem; margin-bottom: 12px; }
+    .cart-empty p { font-size: 0.95rem; }
+    .cart-footer {
+      padding: 20px 24px;
+      border-top: 2px solid var(--nu-medium-gray);
+      background: var(--nu-light-gray);
+    }
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .cart-total-label {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .cart-total-amount {
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-dark-text);
+    }
+    .cart-shipping-note {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .btn-checkout {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--nu-green);
+      color: var(--nu-white);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-checkout:hover { background: #00A844; }
+    .btn-checkout:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .cart-stripe-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 0.75rem;
+      color: #888;
     }
 
     /* ══ FEATURES ══ */
@@ -326,6 +690,38 @@
       font-size: 0.9rem;
       color: #555;
       line-height: 1.5;
+    }
+
+    /* ══ TRUST SECTION ══ */
+    .trust-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 40px 24px;
+      background: var(--nu-white);
+      border-top: 1px solid var(--nu-medium-gray);
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+    .trust-item svg {
+      width: 40px;
+      height: 40px;
+      fill: var(--nu-blue);
+      opacity: 0.7;
+    }
+    .trust-item span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     /* ══ QUOTE FORM ══ */
@@ -373,29 +769,9 @@
       border-color: var(--nu-blue);
     }
     .form-group textarea { min-height: 100px; resize: vertical; }
-    .qty-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--nu-light-gray);
-    }
-    .qty-row label {
-      flex: 1;
-      font-weight: 400;
-      font-size: 0.9rem;
-      text-transform: none;
-      letter-spacing: 0;
-      margin-bottom: 0;
-    }
-    .qty-row input[type="number"] {
-      width: 72px;
-      text-align: center;
-      padding: 8px;
-    }
     .dealer-note {
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--nu-cyan);
       font-weight: 700;
       margin-top: 24px;
@@ -403,6 +779,29 @@
       border: 1px dashed rgba(6,208,255,0.4);
       border-radius: 8px;
       letter-spacing: 0.03em;
+    }
+
+    /* ══ ADDED TO CART TOAST ══ */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      right: 28px;
+      background: var(--nu-navy);
+      color: var(--nu-white);
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      z-index: 3000;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.3s, opacity 0.3s;
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     /* ══ FOOTER ══ */
@@ -420,7 +819,7 @@
       margin-bottom: 16px;
     }
     .footer-info {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       line-height: 1.8;
     }
     .footer-info a {
@@ -432,9 +831,23 @@
       margin-top: 24px;
       padding-top: 16px;
       border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: rgba(255,255,255,0.4);
     }
+
+    /* ══ SETUP BANNER (hidden in production) ══ */
+    .setup-banner {
+      background: #FFF3CD;
+      border-bottom: 2px solid #FFD93D;
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #664D03;
+      font-weight: 700;
+      display: none;
+    }
+    .setup-banner.visible { display: block; }
+    .setup-banner a { color: #0033cc; }
 
     /* ══ RESPONSIVE ══ */
     @media (max-width: 768px) {
@@ -450,10 +863,22 @@
       .quote-form { padding: 24px 16px; }
       .usp-bar { gap: 16px; padding: 24px 16px; }
       .usp-item { font-size: 0.8rem; }
+      .trust-bar { gap: 24px; }
+      .cart-fab { bottom: 20px; right: 20px; width: 52px; height: 52px; }
+      .cart-fab svg { width: 22px; height: 22px; }
+    }
+
+    @media print {
+      .cart-fab, .cart-overlay, .cart-drawer, .toast, .setup-banner { display: none !important; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ══ STRIPE SETUP BANNER — Hidden when Stripe is configured ══ -->
+  <div class="setup-banner" id="setupBanner">
+    STRIPE SETUP NEEDED &mdash; Open your <a href="https://dashboard.stripe.com/payment-links" target="_blank">Stripe Dashboard</a>, create Payment Links for each product, then paste the URLs into the STRIPE_CONFIG section of this page. Cart will use email quotes until configured.
+  </div>
 
   <!-- ══ HEADER ══ -->
   <header class="nu-header">
@@ -461,6 +886,10 @@
     <div class="header-product-name">FlexPro Armor</div>
     <div class="header-tagline">Flexi-Rigid Collapsible Bucket Covers</div>
     <div class="header-sub">Hand Made in the USA</div>
+    <div class="header-secure">
+      <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+      Secure Checkout Powered by Stripe
+    </div>
   </header>
 
   <div class="nu-chevron">
@@ -492,12 +921,12 @@
   <!-- ══ PRODUCTS ══ -->
   <section class="section" id="products">
     <div class="section-title"><span>Shop</span> FlexPro Armor Bucket Covers</div>
-    <div class="section-subtitle">Professional-grade protection for aerial lift buckets. Rigid top, collapsible sides, built to last.</div>
+    <div class="section-subtitle">Professional-grade protection for aerial lift buckets. Select quantity and buy online or request a custom quote.</div>
 
     <div class="product-grid">
 
       <!-- 2-Man Bucket Cover -->
-      <div class="product-card">
+      <div class="product-card" data-sku="NU-BC-2851" data-name="2-Man Bucket Cover" data-price="275">
         <div class="product-img">
           <span class="product-img-label">Product Photo</span>
           <span class="product-badge">Best Seller</span>
@@ -507,13 +936,27 @@
           <div class="product-sku">SKU: NU-BC-2851</div>
           <div class="product-size">28" x 51" &mdash; Fits standard 2-man aerial buckets</div>
           <div class="product-desc">Full-size flexi-rigid collapsible cover with rigid top panel. Protects tools and equipment from weather and debris. Collapses flat for storage.</div>
-          <div class="product-price">$275 <span class="price-note">End user pricing</span></div>
-          <a href="#quote" class="btn-quote">Request Quote</a>
+          <div class="product-price">$275 <span class="price-note">Per unit &mdash; shipping calculated at checkout</span></div>
+          <div class="qty-label">Quantity</div>
+          <div class="qty-selector">
+            <button type="button" onclick="adjustQty(this,-1)">&#8722;</button>
+            <input type="number" value="1" min="1" max="99">
+            <button type="button" onclick="adjustQty(this,1)">&#43;</button>
+          </div>
+          <button class="btn-buy" onclick="addToCart(this)">
+            <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            Add to Cart
+          </button>
+          <a href="#quote" class="btn-quote">Or Request Quote</a>
+          <div class="stripe-badge">
+            <svg viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 0h50a5 5 0 015 5v15a5 5 0 01-5 5H5a5 5 0 01-5-5V5a5 5 0 015-5z" fill="#635BFF"/><path d="M27.4 10.3c0-1.7 1.3-2.4 2.4-2.4.8 0 1.5.3 2 .8l.9-1c-.7-.7-1.7-1.1-2.9-1.1-2.4 0-4 1.6-4 3.7s1.6 3.7 4 3.7c1.1 0 2.1-.4 2.9-1.1l-.9-1c-.5.5-1.2.8-2 .8-1.1 0-2.4-.7-2.4-2.4zm-6.6-3.6h-1.5v7h1.5v-3.4c0-1.3.8-1.9 1.6-1.9.3 0 .6.1.9.2l.5-1.4c-.3-.2-.7-.3-1.1-.3-.9 0-1.5.4-1.9 1v-.9v-.3zm-4.8 0h-1.5v7h1.5v-7zm0-2.7h-1.7v1.5h1.7V4zm-6 9.9c-1.2 0-2.1-.9-2.1-2.2s.9-2.2 2.1-2.2c1.2 0 2.1.9 2.1 2.2s-.9 2.2-2.1 2.2zm3.6-5.2v-.9h-1.5v9.4h1.5v-3.4c.6.8 1.5 1.3 2.6 1.3 2 0 3.5-1.6 3.5-3.7s-1.5-3.6-3.5-3.6c-1.1 0-2 .5-2.6 1.3v-.4zm21.1.7c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1 .7 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.6-.3-2.1-.8l-.7 1c.7.6 1.7.9 2.7.9 1.8 0 2.9-.9 2.9-2.1 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1zm9-1.5h-2.4V5.1h-1.5v1.8h-1.4v1.3h1.4V12c0 1.5.6 2.4 2.3 2.4.6 0 1.3-.2 1.8-.5l-.4-1.2c-.4.2-.8.3-1.1.3-.6 0-1.1-.3-1.1-1.1V8.2h2.4V6.9zm5.1-.2c-.6 0-1.1.3-1.4.8v-.8h-1.5v7h1.5v-3.9c0-1.2.5-1.8 1.4-1.8.3 0 .6 0 .9.1l.4-1.4c-.3 0-.6-.1-.9-.1h-.4zm3.1 5.4c.7.8 1.7 1.2 2.8 1.2 1.7 0 2.8-.8 2.8-2.2 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1.1.8 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.7-.4-2.2-.8l-.6.9z" fill="#fff"/></svg>
+            Secure payment by Stripe
+          </div>
         </div>
       </div>
 
       <!-- 2-Man Combo -->
-      <div class="product-card">
+      <div class="product-card" data-sku="NU-BC-2851-C" data-name="2-Man Combo with Bag" data-price="305">
         <div class="product-img">
           <span class="product-img-label">Product Photo</span>
           <span class="product-badge">Popular</span>
@@ -523,13 +966,27 @@
           <div class="product-sku">SKU: NU-BC-2851-C</div>
           <div class="product-size">28" x 51" &mdash; Cover + custom carrying bag</div>
           <div class="product-desc">Everything in the 2-Man cover plus a heavy-duty carrying bag for transport and storage. The complete field-ready package.</div>
-          <div class="product-price">$305 <span class="price-note">End user pricing</span></div>
-          <a href="#quote" class="btn-quote">Request Quote</a>
+          <div class="product-price">$305 <span class="price-note">Per unit &mdash; shipping calculated at checkout</span></div>
+          <div class="qty-label">Quantity</div>
+          <div class="qty-selector">
+            <button type="button" onclick="adjustQty(this,-1)">&#8722;</button>
+            <input type="number" value="1" min="1" max="99">
+            <button type="button" onclick="adjustQty(this,1)">&#43;</button>
+          </div>
+          <button class="btn-buy" onclick="addToCart(this)">
+            <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            Add to Cart
+          </button>
+          <a href="#quote" class="btn-quote">Or Request Quote</a>
+          <div class="stripe-badge">
+            <svg viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 0h50a5 5 0 015 5v15a5 5 0 01-5 5H5a5 5 0 01-5-5V5a5 5 0 015-5z" fill="#635BFF"/><path d="M27.4 10.3c0-1.7 1.3-2.4 2.4-2.4.8 0 1.5.3 2 .8l.9-1c-.7-.7-1.7-1.1-2.9-1.1-2.4 0-4 1.6-4 3.7s1.6 3.7 4 3.7c1.1 0 2.1-.4 2.9-1.1l-.9-1c-.5.5-1.2.8-2 .8-1.1 0-2.4-.7-2.4-2.4zm-6.6-3.6h-1.5v7h1.5v-3.4c0-1.3.8-1.9 1.6-1.9.3 0 .6.1.9.2l.5-1.4c-.3-.2-.7-.3-1.1-.3-.9 0-1.5.4-1.9 1v-.9v-.3zm-4.8 0h-1.5v7h1.5v-7zm0-2.7h-1.7v1.5h1.7V4zm-6 9.9c-1.2 0-2.1-.9-2.1-2.2s.9-2.2 2.1-2.2c1.2 0 2.1.9 2.1 2.2s-.9 2.2-2.1 2.2zm3.6-5.2v-.9h-1.5v9.4h1.5v-3.4c.6.8 1.5 1.3 2.6 1.3 2 0 3.5-1.6 3.5-3.7s-1.5-3.6-3.5-3.6c-1.1 0-2 .5-2.6 1.3v-.4zm21.1.7c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1 .7 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.6-.3-2.1-.8l-.7 1c.7.6 1.7.9 2.7.9 1.8 0 2.9-.9 2.9-2.1 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1zm9-1.5h-2.4V5.1h-1.5v1.8h-1.4v1.3h1.4V12c0 1.5.6 2.4 2.3 2.4.6 0 1.3-.2 1.8-.5l-.4-1.2c-.4.2-.8.3-1.1.3-.6 0-1.1-.3-1.1-1.1V8.2h2.4V6.9zm5.1-.2c-.6 0-1.1.3-1.4.8v-.8h-1.5v7h1.5v-3.9c0-1.2.5-1.8 1.4-1.8.3 0 .6 0 .9.1l.4-1.4c-.3 0-.6-.1-.9-.1h-.4zm3.1 5.4c.7.8 1.7 1.2 2.8 1.2 1.7 0 2.8-.8 2.8-2.2 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1.1.8 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.7-.4-2.2-.8l-.6.9z" fill="#fff"/></svg>
+            Secure payment by Stripe
+          </div>
         </div>
       </div>
 
       <!-- 1.5-Man Bucket Cover -->
-      <div class="product-card">
+      <div class="product-card" data-sku="NU-BC-2834" data-name="1.5-Man Bucket Cover" data-price="0">
         <div class="product-img">
           <span class="product-img-label">Product Photo</span>
         </div>
@@ -539,12 +996,12 @@
           <div class="product-size">28" x 34" &mdash; Fits 1.5-man aerial buckets</div>
           <div class="product-desc">Compact flexi-rigid collapsible cover for smaller buckets. Same rigid top construction and water-shedding performance as the full-size model.</div>
           <div class="product-price contact">Contact for Pricing</div>
-          <a href="#quote" class="btn-quote">Request Quote</a>
+          <a href="#quote" class="btn-quote" style="margin-top:auto;">Request Quote</a>
         </div>
       </div>
 
       <!-- 1.5-Man Combo -->
-      <div class="product-card">
+      <div class="product-card" data-sku="NU-BC-2834-C" data-name="1.5-Man Combo with Bag" data-price="0">
         <div class="product-img">
           <span class="product-img-label">Product Photo</span>
         </div>
@@ -554,7 +1011,7 @@
           <div class="product-size">28" x 34" &mdash; Cover + custom carrying bag</div>
           <div class="product-desc">1.5-Man cover bundled with a heavy-duty carrying bag. Perfect for crews who need compact, portable bucket protection.</div>
           <div class="product-price contact">Contact for Pricing</div>
-          <a href="#quote" class="btn-quote">Request Quote</a>
+          <a href="#quote" class="btn-quote" style="margin-top:auto;">Request Quote</a>
         </div>
       </div>
 
@@ -570,7 +1027,7 @@
           <div class="product-size">Dimensions to be announced</div>
           <div class="product-desc">Next-generation ARCH design for enhanced clearance and tool access. Currently in development. Contact us to be notified when available.</div>
           <div class="product-price contact">Coming Soon</div>
-          <a href="#quote" class="btn-quote outline">Get Notified</a>
+          <a href="#quote" class="btn-notify">Get Notified</a>
         </div>
       </div>
 
@@ -586,12 +1043,32 @@
           <div class="product-size">Dimensions to be announced</div>
           <div class="product-desc">ARCH cover paired with a custom carrying bag. Full details and pricing coming soon. Contact us to reserve your spot on the pre-order list.</div>
           <div class="product-price contact">Coming Soon</div>
-          <a href="#quote" class="btn-quote outline">Get Notified</a>
+          <a href="#quote" class="btn-notify">Get Notified</a>
         </div>
       </div>
 
     </div>
   </section>
+
+  <!-- ══ TRUST BAR ══ -->
+  <div class="trust-bar">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+      <span>Secure Checkout</span>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+      <span>All Major Cards</span>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      <span>SSL Encrypted</span>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      <span>Hand Made in USA</span>
+    </div>
+  </div>
 
   <!-- ══ FEATURES ══ -->
   <section class="section-dark">
@@ -639,7 +1116,7 @@
     <div class="section" style="padding-top:0; padding-bottom:0;">
       <div style="text-align:center; margin-bottom:40px;">
         <div class="section-title" style="color:var(--nu-white);"><span style="color:var(--nu-cyan);">Request</span> a Quote</div>
-        <div class="section-subtitle" style="color:rgba(255,255,255,0.6);">Fill out the form below and we will get back to you within one business day.</div>
+        <div class="section-subtitle" style="color:rgba(255,255,255,0.6);">Need volume pricing, dealer rates, or have questions? Fill out the form below.</div>
       </div>
 
       <form class="quote-form" id="quoteForm" onsubmit="return submitQuote()">
@@ -665,27 +1142,8 @@
         </div>
 
         <div class="form-group">
-          <label>Products &amp; Quantities</label>
-          <div class="qty-row">
-            <label for="qty-2851">2-Man Bucket Cover (NU-BC-2851) &mdash; $275</label>
-            <input type="number" id="qty-2851" name="qty-2851" min="0" value="0">
-          </div>
-          <div class="qty-row">
-            <label for="qty-2851c">2-Man Combo with Bag (NU-BC-2851-C) &mdash; $305</label>
-            <input type="number" id="qty-2851c" name="qty-2851c" min="0" value="0">
-          </div>
-          <div class="qty-row">
-            <label for="qty-2834">1.5-Man Bucket Cover (NU-BC-2834)</label>
-            <input type="number" id="qty-2834" name="qty-2834" min="0" value="0">
-          </div>
-          <div class="qty-row">
-            <label for="qty-2834c">1.5-Man Combo with Bag (NU-BC-2834-C)</label>
-            <input type="number" id="qty-2834c" name="qty-2834c" min="0" value="0">
-          </div>
-          <div class="qty-row">
-            <label for="qty-arch">ARCH Bucket Cover (pre-order interest)</label>
-            <input type="number" id="qty-arch" name="qty-arch" min="0" value="0">
-          </div>
+          <label for="message">What do you need?</label>
+          <textarea id="message" name="message" placeholder="Tell us what products you need, quantities, and any special requirements"></textarea>
         </div>
 
         <div class="form-group">
@@ -693,13 +1151,8 @@
           <textarea id="shipping" name="shipping" placeholder="Street address, City, State, ZIP"></textarea>
         </div>
 
-        <div class="form-group">
-          <label for="notes">Notes</label>
-          <textarea id="notes" name="notes" placeholder="Special requirements, questions, or anything else we should know"></textarea>
-        </div>
-
         <div style="text-align:center; margin-top:24px;">
-          <button type="submit" class="btn-quote" style="padding:16px 48px; font-size:1rem;">Submit Quote Request</button>
+          <button type="submit" class="btn-buy" style="max-width:400px; border-radius:6px;">Submit Quote Request</button>
         </div>
 
         <div class="dealer-note">
@@ -724,49 +1177,271 @@
     </div>
   </footer>
 
+  <!-- ══ FLOATING CART BUTTON ══ -->
+  <button class="cart-fab hidden" id="cartFab" onclick="openCart()" aria-label="Open shopping cart">
+    <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+  <!-- ══ CART OVERLAY ══ -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+  <!-- ══ CART DRAWER ══ -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" onclick="closeCart()" aria-label="Close cart">&#10005;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty-icon">&#128722;</div>
+        <p>Your cart is empty</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total">
+        <span class="cart-total-label">Subtotal</span>
+        <span class="cart-total-amount" id="cartTotal">$0</span>
+      </div>
+      <div class="cart-shipping-note">Shipping calculated at checkout</div>
+      <button class="btn-checkout" id="btnCheckout" onclick="proceedToCheckout()">
+        Proceed to Checkout
+      </button>
+      <div class="cart-stripe-badge">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="#888"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        Secured by Stripe
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TOAST ══ -->
+  <div class="toast" id="toast"></div>
+
   <script>
-    function submitQuote() {
-      var name = document.getElementById('name').value;
-      var company = document.getElementById('company').value;
-      var email = document.getElementById('email').value;
-      var phone = document.getElementById('phone').value || 'Not provided';
-      var shipping = document.getElementById('shipping').value || 'Not provided';
-      var notes = document.getElementById('notes').value || 'None';
+    /* ════════════════════════════════════════════════════════
+       STRIPE CONFIGURATION
+       ════════════════════════════════════════════════════════
+       HOW TO SET UP:
+       1. Log into https://dashboard.stripe.com
+       2. Go to Payment Links (left sidebar)
+       3. Create a Payment Link for each product below
+       4. Paste each URL into the 'stripeLink' field
+       5. Save this file and re-deploy
 
-      var products = [];
-      var fields = [
-        { id: 'qty-2851', label: '2-Man Cover (NU-BC-2851) @ $275' },
-        { id: 'qty-2851c', label: '2-Man Combo (NU-BC-2851-C) @ $305' },
-        { id: 'qty-2834', label: '1.5-Man Cover (NU-BC-2834)' },
-        { id: 'qty-2834c', label: '1.5-Man Combo (NU-BC-2834-C)' },
-        { id: 'qty-arch', label: 'ARCH Cover (pre-order interest)' }
-      ];
+       When stripeLink is empty, checkout falls back to
+       an email-based order (mailto: to Aaron).
+       ════════════════════════════════════════════════════════ */
+    var STRIPE_CONFIG = {
+      'NU-BC-2851': {
+        name: '2-Man Bucket Cover',
+        price: 275,
+        stripeLink: ''
+      },
+      'NU-BC-2851-C': {
+        name: '2-Man Combo with Bag',
+        price: 305,
+        stripeLink: ''
+      }
+    };
 
-      for (var i = 0; i < fields.length; i++) {
-        var qty = parseInt(document.getElementById(fields[i].id).value) || 0;
-        if (qty > 0) {
-          products.push(fields[i].label + ' x ' + qty);
+    /* ══ CART STATE ══ */
+    var cart = [];
+
+    function adjustQty(btn, delta) {
+      var input = btn.parentElement.querySelector('input');
+      var val = parseInt(input.value) || 1;
+      val = Math.max(1, Math.min(99, val + delta));
+      input.value = val;
+    }
+
+    function addToCart(btn) {
+      var card = btn.closest('.product-card');
+      var sku = card.getAttribute('data-sku');
+      var name = card.getAttribute('data-name');
+      var price = parseInt(card.getAttribute('data-price'));
+      var qtyInput = card.querySelector('.qty-selector input');
+      var qty = parseInt(qtyInput.value) || 1;
+
+      if (price === 0) return;
+
+      var existing = null;
+      for (var i = 0; i < cart.length; i++) {
+        if (cart[i].sku === sku) { existing = cart[i]; break; }
+      }
+
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ sku: sku, name: name, price: price, qty: qty });
+      }
+
+      qtyInput.value = 1;
+      updateCartUI();
+      showToast(qty + 'x ' + name + ' added to cart');
+    }
+
+    function removeFromCart(sku) {
+      cart = cart.filter(function(item) { return item.sku !== sku; });
+      updateCartUI();
+    }
+
+    function updateCartQty(sku, delta) {
+      for (var i = 0; i < cart.length; i++) {
+        if (cart[i].sku === sku) {
+          cart[i].qty = Math.max(1, cart[i].qty + delta);
+          break;
+        }
+      }
+      updateCartUI();
+    }
+
+    function getCartTotal() {
+      var total = 0;
+      for (var i = 0; i < cart.length; i++) {
+        total += cart[i].price * cart[i].qty;
+      }
+      return total;
+    }
+
+    function getCartCount() {
+      var count = 0;
+      for (var i = 0; i < cart.length; i++) {
+        count += cart[i].qty;
+      }
+      return count;
+    }
+
+    function updateCartUI() {
+      var count = getCartCount();
+      var fab = document.getElementById('cartFab');
+      var countEl = document.getElementById('cartCount');
+      var itemsEl = document.getElementById('cartItems');
+      var emptyEl = document.getElementById('cartEmpty');
+      var footerEl = document.getElementById('cartFooter');
+      var totalEl = document.getElementById('cartTotal');
+
+      if (count > 0) {
+        fab.classList.remove('hidden');
+        countEl.textContent = count;
+        footerEl.style.display = 'block';
+      } else {
+        fab.classList.add('hidden');
+        footerEl.style.display = 'none';
+      }
+
+      itemsEl.innerHTML = '';
+
+      if (cart.length === 0) {
+        itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">&#128722;</div><p>Your cart is empty</p></div>';
+      } else {
+        for (var i = 0; i < cart.length; i++) {
+          var item = cart[i];
+          var div = document.createElement('div');
+          div.className = 'cart-item';
+          div.innerHTML =
+            '<div class="cart-item-info">' +
+              '<div class="cart-item-name">' + item.name + '</div>' +
+              '<div class="cart-item-sku">' + item.sku + '</div>' +
+              '<div class="cart-item-qty">' +
+                '<button onclick="updateCartQty(\'' + item.sku + '\',-1)">&#8722;</button>' +
+                '<span>' + item.qty + '</span>' +
+                '<button onclick="updateCartQty(\'' + item.sku + '\',1)">&#43;</button>' +
+              '</div>' +
+              '<button class="cart-item-remove" onclick="removeFromCart(\'' + item.sku + '\')">Remove</button>' +
+            '</div>' +
+            '<div class="cart-item-price">$' + (item.price * item.qty).toLocaleString() + '</div>';
+          itemsEl.appendChild(div);
         }
       }
 
-      if (products.length === 0) {
-        alert('Please select at least one product.');
-        return false;
+      totalEl.textContent = '$' + getCartTotal().toLocaleString();
+    }
+
+    function openCart() {
+      document.getElementById('cartOverlay').classList.add('open');
+      document.getElementById('cartDrawer').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      document.getElementById('cartOverlay').classList.remove('open');
+      document.getElementById('cartDrawer').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 2500);
+    }
+
+    /* ══ STRIPE CHECKOUT ══ */
+    function proceedToCheckout() {
+      /* Check if any Stripe Payment Links are configured */
+      var hasStripe = false;
+      for (var sku in STRIPE_CONFIG) {
+        if (STRIPE_CONFIG[sku].stripeLink) { hasStripe = true; break; }
       }
 
+      if (hasStripe && cart.length === 1 && STRIPE_CONFIG[cart[0].sku] && STRIPE_CONFIG[cart[0].sku].stripeLink) {
+        /* Single product with Stripe link — redirect directly */
+        var link = STRIPE_CONFIG[cart[0].sku].stripeLink;
+        if (cart[0].qty > 1) {
+          link += (link.indexOf('?') === -1 ? '?' : '&') + 'quantity=' + cart[0].qty;
+        }
+        window.location.href = link;
+        return;
+      }
+
+      if (hasStripe && cart.length > 1) {
+        /* Multiple items — try first item link, note about remaining in email */
+        /* For multi-product Stripe checkout, a server-side session is needed.
+           Fall back to email order with Stripe payment note. */
+      }
+
+      /* Fallback: email-based order */
+      var subject = 'FlexPro Armor Online Order - ' + new Date().toLocaleDateString();
+      var lines = ['FLEXPRO ARMOR ORDER', '='.repeat(30), ''];
+
+      for (var i = 0; i < cart.length; i++) {
+        var item = cart[i];
+        lines.push(item.name + ' (' + item.sku + ')');
+        lines.push('  Qty: ' + item.qty + ' x $' + item.price + ' = $' + (item.qty * item.price).toLocaleString());
+        lines.push('');
+      }
+
+      lines.push('SUBTOTAL: $' + getCartTotal().toLocaleString());
+      lines.push('(Shipping to be calculated)');
+      lines.push('');
+      lines.push('Please reply with shipping address and preferred payment method.');
+
+      window.location.href = 'mailto:acnorris@norrisutilities.com?subject=' +
+        encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+
+      closeCart();
+    }
+
+    /* ══ QUOTE FORM ══ */
+    function submitQuote() {
+      var nameVal = document.getElementById('name').value;
+      var company = document.getElementById('company').value;
+      var email = document.getElementById('email').value;
+      var phone = document.getElementById('phone').value || 'Not provided';
+      var message = document.getElementById('message').value || 'No details provided';
+      var shipping = document.getElementById('shipping').value || 'Not provided';
+
       var subject = 'FlexPro Armor Quote Request - ' + company;
-      var body = 'FLEXPO ARMOR QUOTE REQUEST\n'
+      var body = 'FLEXPRO ARMOR QUOTE REQUEST\n'
         + '==========================\n\n'
-        + 'Name: ' + name + '\n'
+        + 'Name: ' + nameVal + '\n'
         + 'Company: ' + company + '\n'
         + 'Email: ' + email + '\n'
         + 'Phone: ' + phone + '\n\n'
-        + 'PRODUCTS:\n'
-        + products.join('\n') + '\n\n'
+        + 'REQUEST DETAILS:\n'
+        + message + '\n\n'
         + 'SHIPPING ADDRESS:\n'
-        + shipping + '\n\n'
-        + 'NOTES:\n'
-        + notes;
+        + shipping;
 
       window.location.href = 'mailto:acnorris@norrisutilities.com'
         + '?subject=' + encodeURIComponent(subject)
@@ -774,8 +1449,18 @@
 
       return false;
     }
+
+    /* ══ SETUP CHECK ══ */
+    (function() {
+      var configured = false;
+      for (var sku in STRIPE_CONFIG) {
+        if (STRIPE_CONFIG[sku].stripeLink) { configured = true; break; }
+      }
+      if (!configured) {
+        document.getElementById('setupBanner').classList.add('visible');
+      }
+    })();
   </script>
 
-<script src="/components/nav.js"></script>
 </body>
 </html>
