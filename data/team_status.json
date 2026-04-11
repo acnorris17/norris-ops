@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-10T08:17:23",
-  "active_count": 5,
+  "last_updated": "2026-04-11T13:36:52",
+  "active_count": 4,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -14,8 +14,8 @@
       "name": "Agent V4",
       "role": "The Builder",
       "status": "idle",
-      "last_run": "2026-04-10 07:50",
-      "message": "Queue: 1 pending tasks"
+      "last_run": "2026-04-11 13:35",
+      "message": "Queue: 2 pending tasks"
     },
     "email_scout": {
       "name": "Email Scout",
@@ -29,8 +29,8 @@
     "rope_tracker": {
       "name": "Rope Tracker",
       "role": "Samson Rope Scanner",
-      "status": "active",
-      "last_run": "2026-04-10 13:00",
+      "status": "idle",
+      "last_run": "2026-04-11 13:00",
       "message": "12 invoices tracked",
       "items": 12,
       "next_run": "Daily 8:00 AM"
@@ -39,7 +39,7 @@
       "name": "Money Watcher",
       "role": "A/P Scanner",
       "status": "idle",
-      "last_run": "2026-04-10 07:00",
+      "last_run": "2026-04-11 07:00",
       "message": "7 vendor invoices tracked",
       "items": 7,
       "next_run": "Daily 7:00 AM"
@@ -48,7 +48,7 @@
       "name": "Morning Herald",
       "role": "Morning Briefing",
       "status": "idle",
-      "last_run": "2026-04-10 03:55",
+      "last_run": "2026-04-11 03:55",
       "message": "Brief delivered!",
       "next_run": "Daily 4:45 AM"
     },
@@ -56,7 +56,7 @@
       "name": "The Scribe",
       "role": "Follow-up Drafter",
       "status": "idle",
-      "last_run": "2026-04-10 04:30",
+      "last_run": "2026-04-11 04:30",
       "message": "8 drafts ready",
       "items": 8,
       "next_run": "Daily 4:30 AM"
@@ -80,7 +80,7 @@
       "name": "Note Reader",
       "role": "reMarkable Scanner",
       "status": "idle",
-      "last_run": "2026-04-10 03:06",
+      "last_run": "2026-04-11 11:15",
       "message": "Waiting for notes",
       "items": 0
     },
@@ -88,22 +88,22 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-10 08:15",
+      "last_run": "2026-04-11 13:33",
       "message": "All systems UP"
     },
     "backup": {
       "name": "The Backup",
       "role": "iCloud Backup",
       "status": "idle",
-      "last_run": "2026-04-10 02:00",
-      "message": "5,438 files protected",
+      "last_run": "2026-04-11 02:00",
+      "message": "5,447 files protected",
       "next_run": "Daily 2:00 AM"
     },
     "n8n": {
       "name": "n8n",
       "role": "The New Kid",
       "status": "down",
-      "last_run": "2026-04-09 16:40",
+      "last_run": "2026-04-11 08:21",
       "message": "Offline \u2014 port 5678 not responding"
     },
     "aaron": {
