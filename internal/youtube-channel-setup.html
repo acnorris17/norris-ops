@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Channel &amp; Highway Video Setup — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .page-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .page-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .nu-section-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    .phase-section {
+      margin-bottom: 40px;
+    }
+    .phase-label {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
+      color: var(--nu-white);
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      padding: 14px 20px;
+      margin-bottom: 8px;
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      border-left: 4px solid var(--nu-blue);
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      line-height: 1.5;
+      transition: background 0.2s ease;
+    }
+    .checklist li:hover {
+      background: #eef0ff;
+    }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      margin-right: 14px;
+      margin-top: 1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .check-box.checked {
+      background: var(--nu-blue);
+    }
+    .check-box.checked::after {
+      content: '✓';
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .checklist li.completed {
+      opacity: 0.5;
+      text-decoration: line-through;
+      border-left-color: #28a745;
+    }
+
+    .item-text strong {
+      color: var(--nu-dark-text);
+    }
+    .item-note {
+      display: block;
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 4px;
+    }
+
+    .tips-card {
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f4ff 100%);
+      border: 1px solid rgba(0,0,255,0.1);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-top: 40px;
+    }
+    .tips-card h3 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--nu-blue);
+      margin-bottom: 12px;
+    }
+    .tips-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .tips-card ul li {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+    }
+    .tips-card ul li::before {
+      content: '▸ ';
+      color: var(--nu-cyan);
+      font-weight: 700;
+    }
+
+    .video-ideas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .video-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .video-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .video-card-number {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 32px;
+      font-weight: 900;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .video-card h4 {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+    }
+    .video-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .page-title { font-size: 1.5rem; }
+      .video-ideas { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .video-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div style="max-width: 1000px; margin: 0 auto; padding: 60px 40px;">
+
+      <h1 class="page-title">YouTube Channel &amp; Highway Video Setup</h1>
+      <p class="page-subtitle">Action Plan — Norris Utilities® Video Marketing Launch</p>
+
+      <!-- PHASE 1: CHANNEL SETUP -->
+      <div class="phase-section">
+        <div class="phase-label">Phase 1 — Channel Setup</div>
+        <div class="nu-section-title">Create <span>the YouTube Channel</span></div>
+        <ul class="checklist">
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Create a Brand YouTube Account</strong>
+              <span class="item-note">Use the Norris Utilities Google Workspace account (acnorris@norrisutilities.com). Create as a Brand Account so Caroline or MK can manage it without sharing personal login credentials.</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Set Channel Name: Norris Utilities</strong>
+              <span class="item-note">Handle: @NorrisUtilities — claim this immediately before someone else does.</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Upload Channel Art &amp; Profile Picture</strong>
+              <span class="item-note">Profile: Phoenix Icon® logo (white on blue). Banner: Power infrastructure photo with blue gradient overlay, "Norris Utilities®" and "A Legacy of Commitment®" text. Banner size: 2560×1440px safe area 1546×423px.</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Write Channel Description</strong>
+              <span class="item-note">"Norris Utilities — third-generation utility equipment dealer serving 20+ states. FlexPro Armor bucket covers, Samson Rope, Skylift bucket trucks, and Bay Shore Systems drill rigs. Birmingham, Alabama. 205-500-1343."</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Add Channel Links</strong>
+              <span class="item-note">Website: www.NorrisUtilities.com | Email: acnorris@norrisutilities.com | Phone: 205-500-1343</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Set Channel Keywords</strong>
+              <span class="item-note">utility equipment, bucket truck, bucket cover, FlexPro Armor, lineman, electric utility, Samson Rope, utility tools, Birmingham Alabama, bucket truck accessories</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- PHASE 2: CHANNEL BRANDING -->
+      <div class="phase-section">
+        <div class="phase-label">Phase 2 — Channel Branding</div>
+        <div class="nu-section-title">Brand <span>Consistency Setup</span></div>
+        <ul class="checklist">
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Create Video Intro Template (5-8 seconds)</strong>
+              <span class="item-note">Blue gradient background matching brand colors (#0000FF → #06D0FF). Phoenix Icon® animation. "NORRIS UTILITIES" text in Lato Black 900. Tagline fade-in: "A Legacy of Commitment®"</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Create Video Outro Template (10 seconds)</strong>
+              <span class="item-note">Dark navy background. Subscribe button animation. Contact info: 205-500-1343, acnorris@norrisutilities.com. End screen layout for suggested videos.</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Design Thumbnail Template</strong>
+              <span class="item-note">1280×720px. Bold Lato Black text. Blue gradient sidebar stripe. Phoenix Icon® watermark bottom-right corner. High-contrast imagery. Coordinate with MK Smith on template.</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Create Default Upload Settings</strong>
+              <span class="item-note">Default description template with company info, website link, phone number, and standard hashtags: #NorrisUtilities #UtilityEquipment #FlexProArmor #BucketTruck #Lineman</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- PHASE 3: HIGHWAY VIDEO -->
+      <div class="phase-section">
+        <div class="phase-label">Phase 3 — Highway Video Production</div>
+        <div class="nu-section-title">Highway <span>Video — First Upload</span></div>
+        <ul class="checklist">
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Plan the Highway Video Concept</strong>
+              <span class="item-note">Showcase Norris Utilities equipment in real-world highway/utility settings. Capture bucket trucks, linemen at work, FlexPro Armor covers installed on buckets, roadside utility operations. Emphasize the "built for the field" credibility.</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Shoot Highway B-Roll Footage</strong>
+              <span class="item-note">Film from inside the truck on deliveries or site visits. Capture: utility poles, bucket trucks in action, highway driving shots, equipment loading/unloading. Use iPhone in 4K at 30fps. Shoot horizontal only.</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Record a Voiceover or On-Camera Intro</strong>
+              <span class="item-note">Aaron introduces the company: who Norris Utilities is, what you sell, the family legacy (third-generation), and why customers trust you. Keep it under 90 seconds. Authentic — not scripted corporate talk.</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Edit the Highway Video</strong>
+              <span class="item-note">Use iMovie or coordinate with MK for editing. Add branded intro/outro. Overlay text for key points. Background music — royalty-free, energetic but professional. Target length: 2-3 minutes.</span>
+            </div>
+          </li>
+          <li>
+            <div class="check-box" onclick="this.classList.toggle('checked');this.parentElement.classList.toggle('completed')"></div>
+            <div>
+              <strong>Upload and Optimize</strong>
+              <span class="item-note">Title: "Norris Utilities — Serving America's Linemen from Birmingham, AL" | Description: Full company overview, product lines, contact info. Tags: utility equipment, bucket cover, FlexPro Armor, lineman tools, Birmingham AL. Custom thumbnail. End screen with subscribe prompt.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- VIDEO IDEAS -->
+      <div class="phase-section">
+        <div class="nu-section-title">Future <span>Video Content Ideas</span></div>
+        <div class="video-ideas">
+          <div class="video-card">
+            <div class="video-card-number">1</div>
+            <h4>FlexPro Armor Install Demo</h4>
+            <p>Show how FlexPro Armor bucket covers are installed on a bucket truck. Highlight the handmade-in-USA quality, fit, and durability.</p>
+          </div>
+          <div class="video-card">
+            <div class="video-card-number">2</div>
+            <h4>Samson Rope Product Showcase</h4>
+            <p>Walk through the Samson Rope product line for utility applications — pull tape, double-braid, and rigging rope specs and real-world use cases.</p>
+          </div>
+          <div class="video-card">
+            <div class="video-card-number">3</div>
+            <h4>Bucket Truck Walkaround</h4>
+            <p>Tour a Skylift bucket truck — features, specs, what linemen care about. Position Norris Utilities as the knowledgeable dealer customers want to buy from.</p>
+          </div>
+          <div class="video-card">
+            <div class="video-card-number">4</div>
+            <h4>Customer Testimonial</h4>
+            <p>Record a short interview with a satisfied customer at their yard or job site. Let them tell the story of why they work with Norris Utilities.</p>
+          </div>
+          <div class="video-card">
+            <div class="video-card-number">5</div>
+            <h4>Bay Shore Drill Rig in Action</h4>
+            <p>Capture a Bay Shore Systems drill rig operating on a job site. Show the capability and reliability that makes BSS the choice for underground utility work.</p>
+          </div>
+          <div class="video-card">
+            <div class="video-card-number">6</div>
+            <h4>Behind the Scenes — Deliveries</h4>
+            <p>Ride along on equipment deliveries. Show the personal, hands-on service that sets Norris Utilities apart from the big-box distributors.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIPS -->
+      <div class="tips-card">
+        <h3>YouTube Best Practices for Norris Utilities®</h3>
+        <ul>
+          <li>Post consistently — aim for 1-2 videos per month to start</li>
+          <li>Keep videos under 5 minutes until the audience grows</li>
+          <li>Always include a call to action: "Call Aaron at 205-500-1343"</li>
+          <li>Share every video on the Norris Utilities website and any social accounts</li>
+          <li>Reply to every comment — YouTube rewards engagement</li>
+          <li>Use YouTube Shorts (under 60 seconds) for quick product clips and job site highlights</li>
+          <li>Add chapters (timestamps) to longer videos so viewers can jump to what they need</li>
+          <li>Coordinate with MK Smith on thumbnail design and posting schedule</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris | Founder &amp; CEO<br>
+      Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a><br>
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
