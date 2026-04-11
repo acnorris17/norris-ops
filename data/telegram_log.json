@@ -636,7 +636,14 @@
       "source": "eod_recap.py",
       "message": "\ud83c\udf19 EOD \u2014 <b>Friday, April 10, 2026</b>\n\n\u2705 <b>DONE TODAY:</b>\n  \u2022 No agent tasks completed today\n\n\ud83d\udcb0 <b>REVENUE STATUS:</b>\n  \u2022 5 FlexPro Armor orders STILL UNINVOICED (March 20)\n  \ud83e\uddf5 Samson: 8 unpaid invoices, $3,235.31 unbilled to customers\n\n\ud83d\udd14 <b>DEALS STATUS:</b>\n  \u2744\ufe0f Skylift PO ($1.09M) \u2014 no activity in 7 days\n  \u2744\ufe0f EPB / Rick Sutherland (~$185K) \u2014 no activity in 7 days\n  \u2744\ufe0f Terex / Bill Kugler ($500K+) \u2014 no activity in 7 days\n  \u2744\ufe0f Sheffield / Waldrep \u2014 no activity in 7 days\n  \u2744\ufe0f Irby / Jared Lemoine \u2014 no activity in 7 days\n\n\ud83d\udc40 <b>NEEDS YOUR REVIEW:</b>\n  \u2022 Nothing flagged \u2014 all clear\n  \u2022 5 tasks in failed state \u2014 run --retry-failed when ready\n\n\ud83d\udd1c <b>QUEUED FOR TONIGHT:</b>\n  \u2022 Queue is clear \u2014 agent standing by\n\nHave a great weekend! \ud83e\udd1d",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-10T19:21:36.080768",
+      "category": "ORDER",
+      "source": "order_monitor.py",
+      "message": "<b>STALE ORDER ALERT -- 5 order(s) waiting 3+ days</b>\n  Wayne Abadie -- 4d -- PO: W6237\n  Coy Crosby -- 4d -- PO: 42350802\n  Wayne Abadie -- 4d -- PO: \n  acnorris@norrisutilities.com -- 3d -- PO: \n  Jamie Eden -- 3d -- PO: ",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-10T18:00:03.662921"
+  "last_updated": "2026-04-10T19:21:36.080811"
 }
