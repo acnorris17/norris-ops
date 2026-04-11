@@ -93,7 +93,7 @@
       "added": "2026-04-06T15:08:38.286421"
     },
     {
-      "email_id": "reimbursement-att-001",
+      "email_id": "reimbursement-nu-att-001",
       "vendor": "Aaron C. Norris — Personal Reimbursement",
       "invoice_number": "ATT-2021-2026",
       "amount": 5396.96,
@@ -103,7 +103,7 @@
       "from": "acnorris@norrisutilities.com",
       "status": "open",
       "category": "owner_reimbursement",
-      "notes": "NU owes Aaron for personal phone line used exclusively for NU business. Dec 2024–Mar 2026 CONFIRMED from 16 AT&T bills on file ($1,629.27). Nov 2021–Nov 2024 ESTIMATED at $101.83/mo avg x 37 months ($3,767.69). Bills saved at: /Users/acnorris1/ATT Bills and Statements copy/. Report: Norris Utilities LLC/Bay Shore Systems - LoDril/BSS Travel Receipts - Reimbursement/ATT_Phone_Expense_Report_ACNorris_2024-2026.html",
+      "notes": "NU owes Aaron for personal phone line used exclusively for NU business. Dec 2024–Mar 2026 CONFIRMED from 16 AT&T bills on file ($1,629.27). Nov 2021–Nov 2024 ESTIMATED at $101.83/mo x 37 months ($3,767.69). Bills at: /Users/acnorris1/ATT Bills and Statements copy/. Report at: Norris Utilities LLC/Bay Shore Systems - LoDril/BSS Travel Receipts - Reimbursement/ATT_Phone_Expense_Report_ACNorris_2024-2026.html",
       "breakdown": {
         "confirmed_dec2024_mar2026": 1629.27,
         "estimated_nov2021_nov2024": 3767.69,
@@ -112,6 +112,25 @@
         "avg_monthly": 101.83
       },
       "added": "2026-04-11T12:17:00.000000"
+    },
+    {
+      "email_id": "reimbursement-nu-bestbuy-001",
+      "vendor": "Aaron C. Norris — Personal Reimbursement",
+      "invoice_number": "NU-BESTBUY-NOV2025",
+      "amount": 93.63,
+      "due_date": null,
+      "email_date": "2025-11-17",
+      "subject": "Best Buy #383 — HP 962 Ink Combo 3-Pack Color (Nov 17 2025)",
+      "from": "acnorris@norrisutilities.com",
+      "status": "open",
+      "category": "owner_reimbursement",
+      "notes": "NU owes Aaron $93.63 for HP 962 INK COMBO 3PK CLR purchased at Best Buy #383, 5201 Hwy 280 Birmingham AL 35242. Date: 11/17/25. Paid with BBY Card ending 2122. Aaron handwrote 'NU owes myself' on receipt. Receipt photo on file.",
+      "breakdown": {
+        "subtotal": 85.89,
+        "sales_tax": 7.74,
+        "total": 93.63
+      },
+      "added": "2026-04-11T12:22:00.000000"
     },
     {
       "email_id": "reimbursement-bss-flights-001",
@@ -124,7 +143,7 @@
       "from": "acnorris@norrisutilities.com",
       "status": "open",
       "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for Southwest flights BHM-LAS round trip, ConExpo March 2-8 2026. Confirmation CTOSX5. Receipts in acnorris1@gmail.com (email IDs: 19caee4f0595e2af, 19d19e2f7a93e857, 19cc44503ad1b3ea, 19cc444fc6cc5169).",
+      "notes": "BSS owes Aaron for Southwest flights BHM-LAS round trip, ConExpo March 2-8 2026. Confirmation CTOSX5. Receipts in acnorris1@gmail.com (email IDs: 19caee4f0595e2af, 19d19e2f7a93e857).",
       "added": "2026-04-11T12:17:00.000000"
     },
     {
@@ -138,7 +157,7 @@
       "from": "acnorris@norrisutilities.com",
       "status": "open",
       "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for Enterprise rental car, Las Vegas ConExpo March 7 2026. Agreement #475354287. PDF receipt in acnorris1@gmail.com (email ID: 19cc9a482c433be9). Verify amount against PDF.",
+      "notes": "BSS owes Aaron for Enterprise rental car, Las Vegas ConExpo March 7 2026. Agreement #475354287. PDF receipt in acnorris1@gmail.com email ID 19cc9a482c433be9. Verify amount against PDF.",
       "added": "2026-04-11T12:17:00.000000"
     },
     {
@@ -152,7 +171,7 @@
       "from": "acnorris@norrisutilities.com",
       "status": "pending_verification",
       "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for hotel room. 2 folio PDFs in acnorris1@gmail.com (email ID: 19cceb12a798b539 — 'We hope you enjoyed your stay' Mar 8 2026). Amount $2,080.80 is from prior session memory — verify against PDF folio before finalizing.",
+      "notes": "BSS owes Aaron for hotel room. 2 folio PDFs in acnorris1@gmail.com email ID 19cceb12a798b539. Amount $2,080.80 from prior session — verify against PDF folio.",
       "added": "2026-04-11T12:17:00.000000"
     },
     {
@@ -180,7 +199,7 @@
       "from": "acnorris@norrisutilities.com",
       "status": "open",
       "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for valet parking charges, ConExpo Las Vegas March 2026.",
+      "notes": "BSS owes Aaron for valet parking, ConExpo Las Vegas March 2026.",
       "added": "2026-04-11T12:17:00.000000"
     },
     {
@@ -222,7 +241,7 @@
       "from": "acnorris@norrisutilities.com",
       "status": "open",
       "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for Lyft ride, Las Vegas March 7 2026. Receipt in acnorris1@gmail.com (email ID: 19cccf49192059eb).",
+      "notes": "BSS owes Aaron for Lyft ride, Las Vegas March 7 2026. Receipt in acnorris1@gmail.com email ID 19cccf49192059eb.",
       "added": "2026-04-11T12:17:00.000000"
     },
     {
@@ -236,7 +255,7 @@
       "from": "acnorris@norrisutilities.com",
       "status": "pending_verification",
       "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for Apple Card charges incurred for BSS business (Group 3, ~$3,136.41). Requires Apple Card statement to itemize. Aaron to pull Apple Card statement for Feb-Mar 2026 billing period.",
+      "notes": "BSS owes Aaron for Apple Card charges Group 3 (~$3,136.41). Requires Apple Card statement for Feb-Mar 2026 to itemize.",
       "added": "2026-04-11T12:17:00.000000"
     },
     {
@@ -250,15 +269,16 @@
       "from": "acnorris@norrisutilities.com",
       "status": "pending_verification",
       "category": "bss_reimbursement",
-      "notes": "BSS owes Aaron for Enterprise rental car, Idaho BSS trip January 16 2026. Agreement #668270857. PDF receipt in acnorris1@gmail.com (email ID: 19bc82c419411940). Amount TBD — open PDF to confirm total.",
+      "notes": "BSS owes Aaron for Enterprise rental, Idaho BSS trip January 16 2026. Agreement #668270857. PDF in acnorris1@gmail.com email ID 19bc82c419411940. Amount TBD — open PDF to confirm.",
       "added": "2026-04-11T12:17:00.000000"
     }
   ],
   "personal_reimbursement_summary": {
     "nu_owes_aaron": {
-      "total": 5396.96,
+      "total": 5490.59,
       "items": [
-        {"description": "AT&T Phone Bill Line 205-500-1343", "amount": 5396.96, "period": "Nov 2021 – Mar 2026", "confirmed": 1629.27, "estimated": 3767.69}
+        {"description": "AT&T Phone Bill Line 205-500-1343 (Nov 2021–Mar 2026)", "amount": 5396.96, "confirmed": 1629.27, "estimated": 3767.69},
+        {"description": "Best Buy HP 962 Ink Combo 3-Pack (Nov 17 2025)", "amount": 93.63, "status": "confirmed"}
       ]
     },
     "bss_owes_aaron": {
@@ -266,7 +286,7 @@
       "total_pending": 5217.21,
       "items": [
         {"description": "Southwest Flights BHM-LAS (ConExpo Mar 2026)", "amount": 1256.81, "status": "confirmed"},
-        {"description": "Enterprise Rental Las Vegas (ConExpo Mar 7 2026)", "amount": 442.59, "status": "confirmed"},
+        {"description": "Enterprise Rental Las Vegas #475354287 (Mar 7 2026)", "amount": 442.59, "status": "confirmed"},
         {"description": "DoubleTree Hotel Incidentals (ConExpo Mar 2026)", "amount": 21.50, "status": "confirmed"},
         {"description": "Valet Parking (ConExpo Mar 2026)", "amount": 191.00, "status": "confirmed"},
         {"description": "Food/Meals (ConExpo Mar 2026)", "amount": 20.34, "status": "confirmed"},
@@ -278,8 +298,8 @@
       ]
     }
   },
-  "last_scan": "2026-04-11T12:17:00.000000",
+  "last_scan": "2026-04-11T12:22:00.000000",
   "scan_count": 7,
-  "last_updated": "2026-04-11T12:17:00.000000",
+  "last_updated": "2026-04-11T12:22:00.000000",
   "updated_by": "Legacy AI Agent"
 }
