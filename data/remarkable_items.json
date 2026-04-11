@@ -9569,7 +9569,172 @@
       "deadline": null,
       "raw": "Search Alabama SOS (arc-sos.state.al.us) for other LLCs containing \"Golan\" or \"Peleel\" \u2014 this would reveal if these investors own other Alabama properties and expose the full portfolio",
       "scanned_at": "2026-04-11T16:15:22.322521+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Transaction",
+      "text": "Review and analyze the master negotiation dossier for property purchase",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MASTER NEGOTIATION DOSSIER",
+      "scanned_at": "2026-04-11T20:04:27.591288+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Transaction",
+      "text": "Use leverage points in negotiations - property never sold above $425,000",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The property has never sold above $425,000 in its entire history",
+      "scanned_at": "2026-04-11T20:04:27.591288+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Buttewood Home Real Estate Transaction",
+      "text": "Address water intrusion disclosure issue in negotiations",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The water intrusion issue is disclosed in the rental listing but omitted from the for-sale listing",
+      "scanned_at": "2026-04-11T20:04:27.591288+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Golan Investments",
+      "text": "Investigate Golan Investments' property acquisition and management practices",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Golan Investments specializes in acquiring undervalued properties, repositioning them, and managing them for cash flow",
+      "scanned_at": "2026-04-11T20:05:53.694645+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Golan Investments",
+      "text": "Contact: Golan Investments",
+      "priority": "info",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "",
+      "scanned_at": "2026-04-11T20:05:53.694645+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "McKnight-Feltman-Renters Warehouse Network",
+      "text": "Follow up on current management of 4505 Buttewoods rental listing",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Currently manages the 4505 Buttewoods rental listing",
+      "scanned_at": "2026-04-11T20:05:53.694645+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 6,
+      "customer": "Water Intrusion Problem",
+      "text": "Investigate disclosure discrepancy between rental and for-sale listings regarding waterproofing",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Rental listing openly advertises waterproofing, for-sale listing makes ZERO mention",
+      "scanned_at": "2026-04-11T20:05:53.694645+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "Buttewood Home Property Research",
+      "text": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 2018042600141760) from probaterecords.shelbyal.com",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 2018042600141760) from probaterecords.shelbyal.com",
+      "scanned_at": "2026-04-11T20:06:42.798288+00:00"
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Tide Pride Account Management",
+      "text": "Catch up with MK via emails about Mel intro, cash payment (not 1099), YouTube Channel and Highway Video",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MK Emails (catch up) - Intro to Mel via email, Can I pay her cash (not 1099)?, YouTube Channel and Highway Video",
+      "scanned_at": "2026-04-11T20:07:42.915879+00:00"
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Tide Pride Account Management",
+      "text": "Get Southern Co Standards Update",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Southern Co \"Standards\" Update",
+      "scanned_at": "2026-04-11T20:07:42.915879+00:00"
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Tide Pride Account Management",
+      "text": "Pay SDP Invoice for MS Power Samson",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MS Power Samson SDP - Pay Invoice",
+      "scanned_at": "2026-04-11T20:07:42.915879+00:00"
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Tide Pride Account Management",
+      "text": "Follow up with Stone & Son on Bucket Cover and get Reel Trailer with Power Pack quote",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Stone & Son - Bucket Cover Follow-up, Reel Trailer w/ Power Pack, quote",
+      "scanned_at": "2026-04-11T20:07:42.915879+00:00"
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Tide Pride Account Management",
+      "text": "Handle CPA Financials with LA Agent, call Mark or Katie",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "CPA Financials - LA Agent, call Mark or Katie",
+      "scanned_at": "2026-04-11T20:07:42.915879+00:00"
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Tide Pride Account Management",
+      "text": "Contact contacts Terry Bayshore shared and schedule meetings with PowerGrid, APCO, MS Power, Net Connections, Trinity Co and others",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Terry Bayshore List - Contact contacts he shared, Schedule Meetings: PowerGrid, APCO, MS Power, Net Connections, Trinity Co. ... others",
+      "scanned_at": "2026-04-11T20:07:42.915879+00:00"
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List - Tide Pride Account Management",
+      "text": "Follow up on Reel Cover with H&D email to Scott and Condux Tesmec email to Logan",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Reel Cover Follow-up: H&D email (Scott), Condux Tesmec - email Logan",
+      "scanned_at": "2026-04-11T20:07:42.915879+00:00"
     }
   ],
-  "last_updated": "2026-04-11T16:15:22.322521+00:00"
+  "last_updated": "2026-04-11T20:08:05.233733+00:00"
 }
