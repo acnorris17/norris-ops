@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-10T18:51:33",
-  "active_count": 4,
+  "last_updated": "2026-04-10T19:06:33",
+  "active_count": 3,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-10 18:47",
+      "last_run": "2026-04-10 19:02",
       "message": "All systems UP"
     },
     "backup": {
@@ -116,9 +116,9 @@
     "caroline": {
       "name": "Caroline Butler",
       "role": "Operations",
-      "status": "active",
+      "status": "idle",
       "last_run": "Always on",
-      "message": "Operations lead"
+      "message": "Off the clock"
     }
   }
 }
