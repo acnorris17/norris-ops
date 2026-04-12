@@ -136,7 +136,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
     }
     .action-icon {
       width: 56px;
@@ -151,7 +151,6 @@
     .action-icon svg {
       width: 28px;
       height: 28px;
-      fill: white;
     }
     .action-title {
       font-family: var(--font-primary);
@@ -166,72 +165,69 @@
     .action-meta {
       display: flex;
       gap: 24px;
-      flex-wrap: wrap;
       margin-bottom: 36px;
-      padding: 20px 24px;
-      background: var(--nu-light-gray);
-      border-radius: 10px;
-      border-left: 4px solid var(--nu-blue);
+      flex-wrap: wrap;
     }
-    .meta-item {
-      display: flex;
+    .meta-tag {
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-    }
-    .meta-label {
+      background: var(--nu-light-gray);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
       font-weight: 700;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #666;
-    }
-    .meta-value {
-      font-weight: 700;
-      font-size: 0.95rem;
       color: var(--nu-dark-text);
     }
-    .status-badge {
-      display: inline-block;
-      background: #FFF3CD;
-      color: #856404;
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.85rem;
+    .meta-tag svg {
+      width: 16px;
+      height: 16px;
+    }
+    .meta-tag.priority-high {
+      background: #FFF3E0;
+      color: #E65100;
+    }
+    .meta-tag.status-open {
+      background: #E3F2FD;
+      color: var(--nu-blue);
     }
 
     .action-card {
       background: var(--nu-white);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 32px;
       box-shadow: 0 2px 16px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
       margin-bottom: 28px;
     }
-    .card-title {
+    .card-label {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--nu-blue);
-      margin-bottom: 16px;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.12em;
+      color: var(--nu-blue);
+      margin-bottom: 12px;
     }
-
-    .checklist {
+    .card-content {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--nu-body-text);
+    }
+    .card-content ul {
       list-style: none;
       padding: 0;
     }
-    .checklist li {
+    .card-content ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f0f0;
-      font-size: 1rem;
-      line-height: 1.5;
     }
-    .checklist li:last-child { border-bottom: none; }
+    .card-content ul li:last-child {
+      border-bottom: none;
+    }
     .check-box {
       width: 22px;
       height: 22px;
@@ -241,22 +237,28 @@
       margin-top: 2px;
     }
 
-    .details-text {
-      font-size: 1rem;
-      line-height: 1.8;
+    .context-section {
+      background: linear-gradient(135deg, #f8f9ff 0%, var(--nu-light-gray) 100%);
+      border-radius: 12px;
+      padding: 28px 32px;
+      border-left: 4px solid var(--nu-blue);
+      margin-bottom: 28px;
+    }
+    .context-section .card-label {
+      margin-bottom: 8px;
+    }
+    .context-section p {
+      font-size: 0.95rem;
+      line-height: 1.7;
       color: var(--nu-body-text);
     }
-    .details-text p { margin-bottom: 14px; }
 
-    .note-box {
-      background: #E8F4FD;
-      border: 1px solid #B8DAFF;
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-top: 24px;
-    }
-    .note-box strong {
-      color: var(--nu-blue);
+    .timestamp {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 20px;
+      font-weight: 400;
     }
 
     .nu-footer {
@@ -289,7 +291,7 @@
       .nu-tagline { font-size: 1rem; }
       .action-container { padding: 40px 20px; }
       .action-title { font-size: 1.4rem; }
-      .action-meta { flex-direction: column; gap: 12px; }
+      .action-meta { gap: 12px; }
       .action-card { padding: 24px; }
     }
 
@@ -325,75 +327,71 @@
 
       <div class="action-header">
         <div class="action-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.85 3.42L12 11.02 5.15 7.6 12 4.18zM4 8.89l7 3.5v7.72l-7-3.5V8.89zm9 11.22V12.39l7-3.5v7.72l-7 3.5z"/>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 12l10 5 10-5"/>
+            <path d="M2 17l10 5 10-5"/>
           </svg>
         </div>
-        <h1 class="action-title"><span>Action Item:</span> Update Carbon 3D</h1>
+        <div class="action-title"><span>Update</span> Carbon 3D</div>
       </div>
 
       <div class="action-meta">
-        <div class="meta-item">
-          <span class="meta-label">Source:</span>
-          <span class="meta-value">reMarkable Notes</span>
+        <div class="meta-tag status-open">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 3"/></svg>
+          Open
         </div>
-        <div class="meta-item">
-          <span class="meta-label">Date Captured:</span>
-          <span class="meta-value">April 11, 2026</span>
+        <div class="meta-tag priority-high">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 22h20L12 2z"/><line x1="12" y1="9" x2="12" y2="15"/><circle cx="12" cy="18" r="0.5" fill="currentColor"/></svg>
+          Action Required
         </div>
-        <div class="meta-item">
-          <span class="meta-label">Status:</span>
-          <span class="status-badge">Pending</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Owner:</span>
-          <span class="meta-value">Aaron C. Norris</span>
+        <div class="meta-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          April 12, 2026
         </div>
       </div>
 
       <div class="action-card">
-        <div class="card-title">Task Summary</div>
-        <div class="details-text">
-          <p>Update the Carbon 3D platform with current Norris Utilities® product designs and manufacturing files. Carbon 3D is the digital manufacturing platform used for 3D-printed prototype parts and production components.</p>
-          <p>Ensuring the Carbon 3D account and project files are current keeps the prototyping and manufacturing pipeline ready for new FlexPro Armor hardware, mounting brackets, and accessory components.</p>
+        <div class="card-label">Action Steps</div>
+        <div class="card-content">
+          <ul>
+            <li>
+              <div class="check-box"></div>
+              <span>Log in to Carbon 3D platform and review current account status</span>
+            </li>
+            <li>
+              <div class="check-box"></div>
+              <span>Update software to the latest version available</span>
+            </li>
+            <li>
+              <div class="check-box"></div>
+              <span>Review and update any saved print profiles or material settings</span>
+            </li>
+            <li>
+              <div class="check-box"></div>
+              <span>Verify all project files and designs are synced and current</span>
+            </li>
+            <li>
+              <div class="check-box"></div>
+              <span>Confirm subscription and licensing is active and up to date</span>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <div class="action-card">
-        <div class="card-title">Action Steps</div>
-        <ul class="checklist">
-          <li>
-            <div class="check-box"></div>
-            <span>Log in to the Carbon 3D platform and review current project status</span>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <span>Upload any revised CAD files or design iterations</span>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <span>Update material selections and print settings as needed</span>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <span>Verify account subscription and billing are current</span>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <span>Confirm any pending print jobs or queued orders</span>
-          </li>
-        </ul>
+      <div class="context-section">
+        <div class="card-label">Context</div>
+        <p>Carbon 3D is a key tool for prototyping and manufacturing components for Norris Utilities® products. Keeping the platform updated ensures access to the latest materials, print capabilities, and design tools needed for FlexPro Armor development and other product innovation.</p>
       </div>
 
       <div class="action-card">
-        <div class="card-title">Context</div>
-        <div class="details-text">
-          <p>Carbon 3D enables rapid prototyping of custom parts for Norris Utilities® product lines. Keeping the platform updated ensures design files stay in sync with current product specifications and manufacturing needs.</p>
-          <div class="note-box">
-            <strong>Note:</strong> This action item was captured from Aaron's reMarkable tablet notes. Complete this update to keep the digital manufacturing pipeline current and ready for upcoming FlexPro Armor product development.
-          </div>
+        <div class="card-label">Owner</div>
+        <div class="card-content">
+          <strong>Aaron C. Norris</strong> — Founder &amp; CEO, Norris Utilities®, LLC
         </div>
       </div>
+
+      <div class="timestamp">Captured from reMarkable — April 12, 2026</div>
 
     </div>
   </main>
