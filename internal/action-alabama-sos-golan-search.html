@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Item: Alabama SOS LLC Search — Norris Utilities®</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: var(--font-primary);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .action-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 3px solid var(--nu-blue);
+    }
+    .action-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .action-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+    .action-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--nu-dark-text);
+      line-height: 1.3;
+    }
+    .action-title span {
+      color: var(--nu-blue);
+    }
+
+    .action-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .meta-card {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      padding: 16px 20px;
+      border-left: 4px solid var(--nu-blue);
+    }
+    .meta-label {
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--nu-blue);
+      margin-bottom: 4px;
+    }
+    .meta-value {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+    }
+
+    .search-section {
+      background: var(--nu-white);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 28px;
+    }
+    .search-section h2 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--nu-blue);
+      margin-bottom: 16px;
+    }
+    .search-section h2 span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    .search-terms {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .search-term {
+      background: linear-gradient(135deg, #1a1a3e, #2a2a5e);
+      color: var(--nu-white);
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .search-term .quote {
+      color: var(--nu-cyan);
+      font-size: 1.4rem;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+    .check-box {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(0,0,255,0.04), rgba(6,208,255,0.06));
+      border: 1px solid rgba(0,0,255,0.12);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 20px;
+    }
+    .info-box-title {
+      font-weight: 900;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .info-box p {
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      line-height: 1.6;
+    }
+    .info-box a {
+      color: var(--nu-blue);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 2px solid var(--nu-cyan);
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    .results-table thead th {
+      background: linear-gradient(135deg, #1a1a3e, #2a2a5e);
+      color: var(--nu-white);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .results-table thead th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+    .results-table thead th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+    .results-table tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 0.95rem;
+    }
+    .results-table tbody tr:nth-child(even) {
+      background: var(--nu-light-gray);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .status-pending {
+      background: #FFF3CD;
+      color: #856404;
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 2;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .search-section { padding: 20px; }
+      .action-title { font-size: 1.4rem; }
+      .search-term { font-size: 1rem; padding: 10px 20px; }
+      .action-meta { grid-template-columns: 1fr; }
+      .results-table { font-size: 0.85rem; }
+      .results-table thead th, .results-table tbody td { padding: 10px 12px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .search-section { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 60px 40px;">
+
+      <div class="action-header">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="action-title"><span>Action Item:</span> Alabama Secretary of State LLC Search</div>
+        </div>
+      </div>
+
+      <div class="action-meta">
+        <div class="meta-card">
+          <div class="meta-label">Source</div>
+          <div class="meta-value">reMarkable Notebook</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Date Captured</div>
+          <div class="meta-value">April 12, 2026</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Status</div>
+          <div class="meta-value"><span class="status-badge status-pending">Pending</span></div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Priority</div>
+          <div class="meta-value">Research Task</div>
+        </div>
+      </div>
+
+      <div class="search-section">
+        <h2>Search <span>Parameters</span></h2>
+        <p style="margin-bottom: 16px; font-size: 1.05rem;">Search the Alabama Secretary of State Business Entity Database for any LLCs or other entities containing the following names:</p>
+        <div class="search-terms">
+          <div class="search-term"><span class="quote">&ldquo;</span>Golan<span class="quote">&rdquo;</span></div>
+          <div class="search-term"><span class="quote">&ldquo;</span>Pel<span class="quote">&rdquo;</span></div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">Alabama SOS Business Search</div>
+          <p>Use the Alabama Secretary of State online entity search at <a href="https://www.sos.alabama.gov/government-records/business-entity-records" target="_blank">sos.alabama.gov/government-records/business-entity-records</a> to look up business filings. Search by entity name using each keyword separately.</p>
+        </div>
+      </div>
+
+      <div class="search-section">
+        <h2>Steps <span>to Complete</span></h2>
+        <ul class="checklist">
+          <li>
+            <div class="check-box"></div>
+            <div>Go to the Alabama Secretary of State Business Entity Search portal</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Search for all entities containing <strong>&ldquo;Golan&rdquo;</strong> — record each LLC name, entity ID, formation date, registered agent, and status (Active/Inactive)</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Search for all entities containing <strong>&ldquo;Pel&rdquo;</strong> — record each LLC name, entity ID, formation date, registered agent, and status (Active/Inactive)</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Cross-reference results for any overlapping registered agents, addresses, or principals between the two search sets</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Note any entities that appear connected — shared addresses, officers, or organizational similarities</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Compile findings into a summary with entity details and any connections identified</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="search-section">
+        <h2>Results <span>Log</span></h2>
+        <p style="margin-bottom: 16px; color: #666; font-size: 0.95rem;">Record search results below as they are found:</p>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Entity Name</th>
+              <th>Search Term</th>
+              <th>Entity ID</th>
+              <th>Formation Date</th>
+              <th>Status</th>
+              <th>Registered Agent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6" style="text-align: center; color: #999; font-style: italic; padding: 32px 16px;">Search results to be recorded upon completion</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="search-section">
+        <h2>Notes <span>&amp; Connections</span></h2>
+        <div style="min-height: 100px; border: 2px dashed var(--nu-medium-gray); border-radius: 8px; padding: 20px; color: #999; font-style: italic;">
+          Record any connections, overlapping agents, shared addresses, or other notable findings here.
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
