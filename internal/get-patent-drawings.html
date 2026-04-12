@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Item: Get Patent Drawings — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .content-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .action-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .action-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .action-icon svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
+    }
+    .action-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-blue);
+    }
+    .action-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--nu-light-gray);
+      padding: 16px 24px;
+      border-radius: 8px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .status-pending {
+      background: #FFF3CD;
+      color: #856404;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #856404;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .status-meta {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .status-meta strong {
+      color: var(--nu-dark-text);
+    }
+
+    .section-block {
+      margin-bottom: 36px;
+    }
+    .section-label {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-blue);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .task-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 16px;
+    }
+    .task-card p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--nu-body-text);
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 20px;
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      line-height: 1.5;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .checklist li:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .context-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .context-card {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .context-card h4 {
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .context-card p {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+      line-height: 1.5;
+    }
+
+    .notes-block {
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f4fd 100%);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+    }
+    .notes-block p {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+      line-height: 1.6;
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .content-wrapper { padding: 40px 20px; }
+      .action-title { font-size: 1.5rem; }
+      .context-grid { grid-template-columns: 1fr; }
+      .status-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checklist li { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div class="content-wrapper">
+
+      <div class="action-header">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 3.5L18.5 8H14V3.5zM6 20V4h7v5h5v11H6z"/>
+            <path d="M9 13h6v1.5H9zM9 16h4v1.5H9zM9 10h2v1.5H9z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="action-title">Get <span>Patent Drawings</span></div>
+        </div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-pill status-pending">
+          <div class="status-dot"></div>
+          Action Required
+        </div>
+        <div class="status-meta"><strong>Source:</strong> reMarkable Notes</div>
+        <div class="status-meta"><strong>Date Captured:</strong> April 11, 2026</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Overview</div>
+        <div class="task-card">
+          <p>Obtain official patent drawings for FlexPro Armor bucket cover design. Patent drawings are required to document and protect the proprietary design elements of the FlexPro Armor product line, including the unique construction, fit system, and material configuration that distinguish it from competitors.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Action Steps</div>
+        <ul class="checklist">
+          <li>
+            <div class="check-box"></div>
+            <span>Identify and contact a registered patent illustrator or patent attorney who can produce USPTO-compliant drawings</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <span>Gather all FlexPro Armor reference materials — product photos, dimensions (28"×51" and 28"×34"), construction details, and material specs</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <span>Provide illustrator with physical samples or detailed photographs showing all angles, seams, attachment points, and unique design features</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <span>Review draft patent drawings for accuracy — confirm all critical design elements are represented</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <span>Finalize drawings in USPTO-accepted format (black and white line drawings with proper numbering and reference labels)</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <span>File drawings with patent application or store securely for future filing</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Context</div>
+        <div class="context-grid">
+          <div class="context-card">
+            <h4>Product</h4>
+            <p>FlexPro Armor bucket covers — handmade in the USA. Available in 2-Man (28"×51") and 1.5-Man (28"×34") configurations, plus combo variants.</p>
+          </div>
+          <div class="context-card">
+            <h4>Why It Matters</h4>
+            <p>Patent drawings establish formal intellectual property protection for the FlexPro Armor design, preventing competitors from copying the proprietary construction and fit system.</p>
+          </div>
+          <div class="context-card">
+            <h4>SKUs Covered</h4>
+            <p>NU-BC-2851 (2-Man) · NU-BC-2834 (1.5-Man) · NU-BC-2851-C (2-Man Combo) · NU-BC-2834-C (1.5-Man Combo)</p>
+          </div>
+          <div class="context-card">
+            <h4>Priority</h4>
+            <p>High — IP protection is essential as FlexPro Armor gains market traction. Drawings should be completed before any additional public product disclosures.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Notes</div>
+        <div class="notes-block">
+          <p>Patent drawings must meet USPTO requirements: black ink on white paper, specific margin sizes, and proper figure numbering. A qualified patent illustrator will ensure compliance. Consider whether to pursue a design patent (protects appearance) or utility patent (protects function), as drawing requirements differ for each type.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
