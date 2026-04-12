@@ -126,103 +126,85 @@
     .nu-content-area > * { position: relative; z-index: 1; }
 
     .action-container {
-      max-width: 900px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 60px 40px;
     }
 
-    .action-header {
+    .action-status-bar {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       margin-bottom: 32px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFF8E1 100%);
+      border-left: 4px solid #F57C00;
+      border-radius: 0 8px 8px 0;
     }
-    .action-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .action-icon svg {
+    .status-icon {
       width: 28px;
       height: 28px;
-      fill: var(--nu-white);
+      flex-shrink: 0;
     }
+    .status-label {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #E65100;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .status-date {
+      margin-left: auto;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: #BF360C;
+    }
+
     .action-title {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.8rem;
+      font-size: 2rem;
       color: var(--nu-dark-text);
+      margin-bottom: 8px;
+      line-height: 1.3;
     }
     .action-title span {
       color: var(--nu-blue);
     }
 
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #FFF3E0;
-      color: #E65100;
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 32px;
-    }
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      background: #E65100;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+    .action-subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 40px;
+      font-weight: 400;
     }
 
-    .detail-card {
+    .task-card {
       background: var(--nu-white);
-      border-radius: 12px;
+      border-radius: 8px;
       padding: 32px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
       margin-bottom: 24px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .detail-card h3 {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--nu-blue);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+    .task-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
 
-    .detail-row {
+    .task-section-title {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--nu-blue);
+      margin-bottom: 16px;
       display: flex;
-      align-items: flex-start;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--nu-light-gray);
+      align-items: center;
+      gap: 10px;
     }
-    .detail-row:last-child { border-bottom: none; }
-    .detail-label {
-      font-weight: 700;
-      color: var(--nu-dark-text);
-      min-width: 160px;
+    .task-section-title svg {
+      width: 22px;
+      height: 22px;
       flex-shrink: 0;
-      font-size: 0.95rem;
-    }
-    .detail-value {
-      color: var(--nu-body-text);
-      font-size: 0.95rem;
     }
 
     .checklist {
@@ -231,41 +213,52 @@
     }
     .checklist li {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
-      padding: 14px 0;
+      padding: 12px 0;
       border-bottom: 1px solid var(--nu-light-gray);
       font-size: 1rem;
-      color: var(--nu-body-text);
+      line-height: 1.5;
     }
-    .checklist li:last-child { border-bottom: none; }
+    .checklist li:last-child {
+      border-bottom: none;
+    }
     .check-box {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border: 2px solid var(--nu-blue);
-      border-radius: 6px;
+      border-radius: 4px;
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin-top: 2px;
     }
 
-    .notes-section {
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+    }
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    .detail-label {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      font-size: 0.95rem;
+    }
+    .detail-value {
+      font-weight: 400;
+      color: var(--nu-body-text);
+      font-size: 0.95rem;
+      text-align: right;
+    }
+
+    .notes-box {
       background: var(--nu-light-gray);
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-top: 24px;
-    }
-    .notes-section h3 {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--nu-blue);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .notes-section p {
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 16px;
       font-size: 0.95rem;
       line-height: 1.7;
       color: var(--nu-body-text);
@@ -286,8 +279,8 @@
       margin-bottom: 12px;
     }
     .nu-footer-contact {
-      font-size: 1rem;
-      line-height: 2;
+      font-size: 0.95rem;
+      line-height: 1.8;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
@@ -300,15 +293,18 @@
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
       .action-container { padding: 40px 20px; }
-      .action-title { font-size: 1.4rem; }
-      .detail-row { flex-direction: column; gap: 4px; }
-      .detail-label { min-width: auto; }
+      .action-title { font-size: 1.5rem; }
+      .task-card { padding: 24px 20px; }
+      .action-status-bar { flex-wrap: wrap; }
+      .status-date { margin-left: 0; width: 100%; margin-top: 4px; }
+      .detail-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .detail-value { text-align: left; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .task-card { box-shadow: none; border: 1px solid #ccc; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .detail-card { box-shadow: none; border: 1px solid #ccc; }
     }
   </style>
 </head>
@@ -335,37 +331,53 @@
   <main class="nu-content-area">
     <div class="action-container">
 
-      <div class="action-header">
-        <div class="action-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <div class="action-status-bar">
+        <svg class="status-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="#F57C00" stroke-width="2"/>
+          <path d="M12 6v6l4 2" stroke="#F57C00" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="status-label">Action Required</span>
+        <span class="status-date">April 12, 2026</span>
+      </div>
+
+      <h1 class="action-title"><span>Pearl River</span> Service Truck — Get Photos</h1>
+      <p class="action-subtitle">Capture high-quality photos of the Pearl River service truck for sales materials, inventory records, and customer presentations.</p>
+
+      <div class="task-card">
+        <div class="task-section-title">
+          <svg viewBox="0 0 24 24" fill="var(--nu-blue)" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
           </svg>
+          Photos Needed
         </div>
-        <div class="action-title"><span>Action Item:</span> Pearl River Service Truck Photos</div>
+        <ul class="checklist">
+          <li><div class="check-box"></div>Full front view of the service truck</li>
+          <li><div class="check-box"></div>Full driver-side profile (entire length visible)</li>
+          <li><div class="check-box"></div>Full passenger-side profile</li>
+          <li><div class="check-box"></div>Rear view showing compartments and tailgate</li>
+          <li><div class="check-box"></div>Compartment doors open — all sides</li>
+          <li><div class="check-box"></div>Crane/boom detail shots (if equipped)</li>
+          <li><div class="check-box"></div>Interior cab photo (dashboard, seats, controls)</li>
+          <li><div class="check-box"></div>VIN plate and hour meter close-up</li>
+          <li><div class="check-box"></div>Any existing damage or wear (document for transparency)</li>
+          <li><div class="check-box"></div>Branding/decals on truck (if applicable)</li>
+        </ul>
       </div>
 
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        Pending — Photos Needed
-      </div>
-
-      <div class="detail-card">
-        <h3>Task Details</h3>
-        <div class="detail-row">
-          <span class="detail-label">Action Required</span>
-          <span class="detail-value">Obtain photos of the Pearl River service truck for documentation and sales records</span>
+      <div class="task-card">
+        <div class="task-section-title">
+          <svg viewBox="0 0 24 24" fill="var(--nu-blue)" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Details
         </div>
         <div class="detail-row">
           <span class="detail-label">Customer</span>
-          <span class="detail-value">Pearl River Valley Electric Power Association</span>
+          <span class="detail-value">Pearl River</span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">Asset Type</span>
+          <span class="detail-label">Unit Type</span>
           <span class="detail-value">Service Truck</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">Date Created</span>
-          <span class="detail-value">April 12, 2026</span>
         </div>
         <div class="detail-row">
           <span class="detail-label">Assigned To</span>
@@ -373,53 +385,23 @@
         </div>
         <div class="detail-row">
           <span class="detail-label">Priority</span>
-          <span class="detail-value" style="color: #E65100; font-weight: 700;">Action Required</span>
+          <span class="detail-value">High — Needed for Sales Materials</span>
         </div>
       </div>
 
-      <div class="detail-card">
-        <h3>Photo Checklist</h3>
-        <ul class="checklist">
-          <li>
-            <span class="check-box"></span>
-            Front view of service truck (full body, straight on)
-          </li>
-          <li>
-            <span class="check-box"></span>
-            Driver side profile (full length)
-          </li>
-          <li>
-            <span class="check-box"></span>
-            Passenger side profile (full length)
-          </li>
-          <li>
-            <span class="check-box"></span>
-            Rear view showing compartments and equipment
-          </li>
-          <li>
-            <span class="check-box"></span>
-            Service body compartments (open, showing tool storage)
-          </li>
-          <li>
-            <span class="check-box"></span>
-            Crane or boom detail (if equipped)
-          </li>
-          <li>
-            <span class="check-box"></span>
-            VIN plate and mileage (for asset records)
-          </li>
-          <li>
-            <span class="check-box"></span>
-            Any custom modifications or Norris Utilities® branding
-          </li>
-        </ul>
-      </div>
-
-      <div class="notes-section">
-        <h3>Notes</h3>
-        <p>
-          Capture high-resolution images in good lighting conditions. Ensure the truck is clean and positioned in an open area for clear, unobstructed shots. Photos will be used for internal asset tracking, customer-facing documentation, and potential resale or trade-in records. Send all images to acnorris@norrisutilities.com or upload directly to the shared drive.
-        </p>
+      <div class="task-card">
+        <div class="task-section-title">
+          <svg viewBox="0 0 24 24" fill="var(--nu-blue)" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          </svg>
+          Photo Tips
+        </div>
+        <div class="notes-box">
+          <strong>Lighting:</strong> Shoot in natural daylight. Avoid harsh midday shadows. Early morning or late afternoon light works best.<br><br>
+          <strong>Angles:</strong> Keep the camera level with the truck. Stand back far enough to capture the full vehicle without distortion.<br><br>
+          <strong>Resolution:</strong> Use the highest resolution setting on your phone camera. Landscape orientation for profile and front/rear shots.<br><br>
+          <strong>Background:</strong> Park the truck in a clean, uncluttered area. Move any debris or other vehicles out of frame if possible.
+        </div>
       </div>
 
     </div>
