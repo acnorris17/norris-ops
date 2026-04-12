@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-12T09:07:10",
-  "active_count": 5,
+  "last_updated": "2026-04-12T09:22:10",
+  "active_count": 4,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -13,9 +13,9 @@
     "v4_builder": {
       "name": "Agent V4",
       "role": "The Builder",
-      "status": "active",
-      "last_run": "2026-04-12 09:04",
-      "message": "Building... 905 in queue"
+      "status": "idle",
+      "last_run": "2026-04-12 09:07",
+      "message": "Queue: 905 pending tasks"
     },
     "email_scout": {
       "name": "Email Scout",
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-12 09:05",
+      "last_run": "2026-04-12 09:20",
       "message": "All systems UP"
     },
     "backup": {
@@ -96,7 +96,7 @@
       "role": "iCloud Backup",
       "status": "idle",
       "last_run": "2026-04-12 02:00",
-      "message": "5,561 files protected",
+      "message": "5,562 files protected",
       "next_run": "Daily 2:00 AM"
     },
     "n8n": {
