@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: Follow Up on Last PO for Inventory Order — Norris Utilities®</title>
+  <title>Action Item: Follow Up on Last PO Order for Inventory — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -229,42 +231,62 @@
       margin-top: 2px;
     }
 
-    .contact-block {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-top: 16px;
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
-    .contact-icon {
-      width: 48px;
-      height: 48px;
-      min-width: 48px;
-      background: var(--nu-blue);
-      border-radius: 50%;
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      color: var(--nu-body-text);
+      line-height: 1.6;
+    }
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+    .check-box {
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    .contact-icon svg {
       width: 24px;
       height: 24px;
-      fill: var(--nu-white);
+      min-width: 24px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      margin-right: 14px;
+      margin-top: 2px;
+      font-size: 0.8rem;
+      color: var(--nu-blue);
     }
-    .contact-details {
-      font-family: var(--font-primary);
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
     }
-    .contact-details .name {
+    .info-item {
+      padding: 16px;
+      background: var(--nu-light-gray);
+      border-radius: 6px;
+    }
+    .info-label {
       font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--nu-blue);
+      margin-bottom: 4px;
+    }
+    .info-value {
       font-size: 1rem;
       color: var(--nu-dark-text);
-    }
-    .contact-details .role {
       font-weight: 400;
-      font-size: 0.9rem;
-      color: #666;
     }
 
     .status-bar {
@@ -305,12 +327,12 @@
     .nu-footer-tagline {
       font-style: italic;
       font-weight: 300;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--nu-cyan);
       margin-bottom: 12px;
     }
     .nu-footer-contact {
-      font-size: 1rem;
+      font-size: 1.05rem;
       line-height: 1.8;
     }
     .nu-footer-contact a {
@@ -326,7 +348,7 @@
       .action-container { padding: 40px 20px; }
       .action-title { font-size: 1.5rem; }
       .action-card { padding: 24px; }
-      .contact-block { flex-direction: column; text-align: center; }
+      .info-grid { grid-template-columns: 1fr; }
     }
 
     @media print {
@@ -348,7 +370,7 @@
     </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
-    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-tagline">A Legacy of Commitment&reg;</div>
   </header>
 
   <!-- WHITE CHEVRON TRANSITION -->
@@ -363,84 +385,111 @@
     <div class="action-container">
 
       <div class="action-badge">Action Required</div>
-      <h1 class="action-title"><span class="highlight">Follow Up</span> on Last PO for Inventory Order</h1>
-      <div class="action-date">Captured April 11, 2026 &mdash; Norris Utilities® reMarkable Action Item</div>
+      <h1 class="action-title"><span class="highlight">Follow Up</span> on Last PO Order for Inventory</h1>
+      <div class="action-date">Captured April 12, 2026 &mdash; Norris Utilities&reg; reMarkable Action Item</div>
 
       <!-- WHAT -->
       <div class="action-card">
         <h3>What Needs to Happen</h3>
-        <p>Follow up on the most recent purchase order submitted for inventory replenishment. Confirm the PO was received by the supplier, verify expected ship dates, and ensure the order is on track to arrive as planned. If there are any delays, backorders, or discrepancies, identify them now before they impact customer commitments.</p>
+        <p>Contact the supplier to get a status update on the most recent purchase order placed for inventory replenishment. Confirm the order is being processed, verify expected ship dates, and ensure quantities match what was originally ordered. If there are any delays, backorders, or substitutions, document them and determine the impact on current stock levels and pending customer commitments.</p>
       </div>
 
       <!-- WHY -->
       <div class="action-card">
         <h3>Why This Matters</h3>
-        <p>Maintaining adequate inventory is critical for Norris Utilities® to fulfill customer orders without delay. As the sole sales force, Aaron needs to know exactly what stock is incoming and when it will arrive so he can confidently commit delivery timelines to customers. A missed or delayed PO can mean lost sales and damaged relationships with utilities that depend on timely equipment delivery.</p>
+        <p>Inventory availability is the foundation of Norris Utilities&reg; customer service. When a customer needs FlexPro Armor bucket covers, Samson Rope, or any other product, the ability to ship same-day or next-day from stock on hand is a competitive advantage. A delayed or lost PO means empty shelves, missed delivery promises, and lost trust with customers who depend on Norris Utilities&reg; to deliver.</p>
+        <p>Following up promptly on POs also catches errors early &mdash; wrong quantities, incorrect SKUs, or pricing discrepancies are far easier to resolve before product ships than after.</p>
       </div>
 
-      <!-- STEPS -->
+      <!-- FOLLOW-UP STEPS -->
       <div class="action-card">
-        <h3>Steps to Complete</h3>
+        <h3>Follow-Up Steps</h3>
         <ol class="step-list">
           <li>
             <span class="step-number">1</span>
-            <span>Pull the most recent purchase order number and details from records &mdash; confirm supplier, line items, quantities, and dollar amounts</span>
+            <span>Locate the most recent PO number, date, and supplier from records (email, QuickBooks, or order confirmations)</span>
           </li>
           <li>
             <span class="step-number">2</span>
-            <span>Contact the supplier to confirm the PO was received and is being processed</span>
+            <span>Contact the supplier directly by phone or email to request a status update on the order</span>
           </li>
           <li>
             <span class="step-number">3</span>
-            <span>Request current estimated ship date and tracking information if available</span>
+            <span>Confirm all line items: SKUs, quantities, and unit pricing match the original PO</span>
           </li>
           <li>
             <span class="step-number">4</span>
-            <span>Ask about any backorders, partial shipments, or items that may be delayed beyond the original timeline</span>
+            <span>Get the expected ship date and tracking information if already shipped</span>
           </li>
           <li>
             <span class="step-number">5</span>
-            <span>Confirm payment terms and whether any invoices are outstanding that could hold the order</span>
+            <span>Ask about any backorders, delays, or substitutions &mdash; document everything</span>
           </li>
           <li>
             <span class="step-number">6</span>
-            <span>Report back to Aaron with a summary: what is confirmed, what is shipping, and any issues that need attention</span>
+            <span>Update internal inventory tracker with confirmed delivery timeline</span>
+          </li>
+          <li>
+            <span class="step-number">7</span>
+            <span>If any items are delayed, assess impact on pending customer orders and communicate proactively</span>
           </li>
         </ol>
       </div>
 
-      <!-- KEY DETAILS -->
+      <!-- KEY DETAILS TO VERIFY -->
       <div class="action-card">
         <h3>Key Details to Verify</h3>
-        <p>When speaking with the supplier, confirm the following for every line item on the PO:</p>
+        <ul class="checklist">
+          <li>
+            <span class="check-box"></span>
+            <span>PO number confirmed and on file with the supplier</span>
+          </li>
+          <li>
+            <span class="check-box"></span>
+            <span>All ordered quantities match the original PO (no partial fills without approval)</span>
+          </li>
+          <li>
+            <span class="check-box"></span>
+            <span>Pricing matches the agreed-upon rates &mdash; no unexpected surcharges or price increases</span>
+          </li>
+          <li>
+            <span class="check-box"></span>
+            <span>Ship date confirmed and within the expected delivery window</span>
+          </li>
+          <li>
+            <span class="check-box"></span>
+            <span>Shipping method and carrier confirmed (verify freight vs. ground if applicable)</span>
+          </li>
+          <li>
+            <span class="check-box"></span>
+            <span>Tracking number obtained (or estimated availability date for tracking)</span>
+          </li>
+          <li>
+            <span class="check-box"></span>
+            <span>No items on backorder or discontinued &mdash; if so, get revised ETA or alternative</span>
+          </li>
+        </ul>
+      </div>
 
-        <div class="contact-block">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 9h-2v2H9v-2H7v-2h2V7h2v2h2v2zm-2-8l5.5 5.5H13V3z"/></svg>
+      <!-- QUICK REFERENCE -->
+      <div class="action-card">
+        <h3>Quick Reference</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Priority</div>
+            <div class="info-value">High &mdash; inventory continuity</div>
           </div>
-          <div class="contact-details">
-            <div class="name">PO Number &amp; Date Submitted</div>
-            <div class="role">Confirm the supplier has the correct PO on file</div>
+          <div class="info-item">
+            <div class="info-label">Owner</div>
+            <div class="info-value">Aaron C. Norris</div>
           </div>
-        </div>
-
-        <div class="contact-block" style="margin-top: 12px;">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+          <div class="info-item">
+            <div class="info-label">Target Completion</div>
+            <div class="info-value">Week of April 13, 2026</div>
           </div>
-          <div class="contact-details">
-            <div class="name">Ship Date &amp; Tracking</div>
-            <div class="role">Get estimated or confirmed delivery date and carrier info</div>
-          </div>
-        </div>
-
-        <div class="contact-block" style="margin-top: 12px;">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          </div>
-          <div class="contact-details">
-            <div class="name">Quantities &amp; Line Items</div>
-            <div class="role">Verify all items and quantities match what was ordered</div>
+          <div class="info-item">
+            <div class="info-label">Method</div>
+            <div class="info-value">Phone call preferred, email follow-up</div>
           </div>
         </div>
       </div>
@@ -448,7 +497,7 @@
       <!-- STATUS -->
       <div class="status-bar">
         <div class="status-dot"></div>
-        <div class="status-text">Status: Pending &mdash; Awaiting follow-up with supplier on last PO</div>
+        <div class="status-text">Status: Pending &mdash; Follow-up call and confirmation needed on last PO</div>
       </div>
 
     </div>
@@ -456,9 +505,9 @@
 
   <!-- FOOTER -->
   <footer class="nu-footer">
-    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-tagline">A Legacy of Commitment&reg;</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities&reg;, LLC<br>
       <a href="tel:2055001343">205-500-1343</a> |
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
