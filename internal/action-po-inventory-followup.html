@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Item: PO Inventory Follow-Up — Norris Utilities®</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: var(--font-primary);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .action-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .action-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #cc6600 0%, #ff8800 100%);
+      color: var(--nu-white);
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .action-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .action-title span {
+      color: var(--nu-blue);
+    }
+
+    .action-date {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 32px;
+    }
+
+    .action-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 24px;
+    }
+
+    .action-card h3 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-blue);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .action-card p {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--nu-body-text);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .action-card p:last-child { margin-bottom: 0; }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      color: var(--nu-body-text);
+      line-height: 1.5;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '';
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      margin-right: 14px;
+      margin-top: 2px;
+    }
+
+    .priority-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      border-radius: 8px;
+    }
+    .priority-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ff8800;
+      flex-shrink: 0;
+    }
+    .priority-label {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-white);
+      letter-spacing: 0.03em;
+    }
+    .priority-value {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: var(--nu-cyan);
+      margin-left: auto;
+    }
+
+    .contact-block {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .contact-item {
+      flex: 1;
+      min-width: 200px;
+      background: var(--nu-light-gray);
+      border-radius: 6px;
+      padding: 16px 20px;
+    }
+    .contact-item .label {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .contact-item .value {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .action-container { padding: 40px 20px; }
+      .action-title { font-size: 1.5rem; }
+      .action-card { padding: 24px 20px; }
+      .contact-item { min-width: 100%; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .action-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div class="action-container">
+
+      <div class="action-badge">Action Required</div>
+
+      <h1 class="action-title"><span>Follow Up</span> on Remaining Inventory from Last Purchase Order</h1>
+      <div class="action-date">Captured April 12, 2026 &mdash; Norris Utilities® Action Tracker</div>
+
+      <div class="priority-bar">
+        <div class="priority-dot"></div>
+        <span class="priority-label">Priority: High</span>
+        <span class="priority-value">Inventory &amp; Fulfillment</span>
+      </div>
+
+      <div class="action-card">
+        <h3>Objective</h3>
+        <p>Contact the supplier to confirm the status of all outstanding items on the most recent purchase order. Determine expected delivery dates for any inventory that has not yet arrived and verify that the full order will be fulfilled as originally placed.</p>
+      </div>
+
+      <div class="action-card">
+        <h3>Follow-Up Checklist</h3>
+        <ul class="checklist">
+          <li>Pull the most recent PO number and review line items for any outstanding quantities</li>
+          <li>Contact the supplier directly &mdash; phone call preferred, email follow-up for documentation</li>
+          <li>Confirm which items have shipped and request tracking numbers if available</li>
+          <li>Get estimated delivery dates for any items still on backorder or pending production</li>
+          <li>Ask whether any items have been discontinued or substituted since the PO was placed</li>
+          <li>Confirm pricing matches original PO &mdash; flag any cost changes</li>
+          <li>Document all responses and update inventory tracking records</li>
+        </ul>
+      </div>
+
+      <div class="action-card">
+        <h3>Key Information to Gather</h3>
+        <div class="contact-block">
+          <div class="contact-item">
+            <div class="label">PO Status</div>
+            <div class="value">Partial / Complete / Backordered</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">Expected Arrival</div>
+            <div class="value">Get specific dates from supplier</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">Pricing Confirmation</div>
+            <div class="value">Match against original PO amounts</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">Tracking Numbers</div>
+            <div class="value">Request for any shipped items</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-card">
+        <h3>Notes</h3>
+        <p>Keeping inventory levels consistent is critical to fulfilling customer orders on time. If any items are delayed beyond the original lead time, evaluate whether to source from an alternate supplier or adjust customer commitments accordingly.</p>
+        <p>After follow-up is complete, update the internal inventory tracker and notify Caroline Butler if any customer orders are affected by delays.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
