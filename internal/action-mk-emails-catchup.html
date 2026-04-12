@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: Catch Up on MK Emails — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Action Item: MK Emails Catch-Up — Norris Utilities®</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
@@ -132,133 +131,154 @@
       padding: 60px 40px;
     }
 
-    .action-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #ff6b00 0%, #ff9500 100%);
-      color: var(--nu-white);
-      font-family: var(--font-primary);
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 4px;
-      margin-bottom: 20px;
+    .action-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 3px solid var(--nu-blue);
     }
-
+    .action-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .action-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
     .action-title {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 2rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
+      font-size: 1.6rem;
+      color: var(--nu-blue);
     }
     .action-title span {
-      color: var(--nu-blue);
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+    .action-source {
+      font-size: 0.85rem;
+      color: #888;
+      font-weight: 400;
+      margin-top: 4px;
     }
 
     .action-meta {
-      font-family: var(--font-primary);
-      font-size: 0.95rem;
-      color: #666;
-      margin-bottom: 32px;
-      padding-bottom: 24px;
-      border-bottom: 2px solid var(--nu-medium-gray);
-    }
-
-    .action-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
       margin-bottom: 36px;
     }
-    .action-section-title {
+    .meta-card {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      padding: 16px 20px;
+      border-left: 4px solid var(--nu-blue);
+    }
+    .meta-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .meta-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--nu-dark-text);
+    }
+    .meta-value.priority-high {
+      color: #cc3300;
+    }
+
+    .checklist {
+      margin-bottom: 36px;
+    }
+    .checklist-title {
       font-family: var(--font-primary);
       font-weight: 900;
       font-size: 1.2rem;
       color: var(--nu-blue);
-      margin-bottom: 12px;
-    }
-
-    .action-card {
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      padding: 24px;
-      border-left: 4px solid var(--nu-blue);
       margin-bottom: 16px;
     }
-    .action-card p {
-      font-family: var(--font-primary);
-      font-size: 1rem;
-      color: var(--nu-body-text);
-      line-height: 1.7;
+    .checklist-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
     }
-
-    .checklist {
-      list-style: none;
-      padding: 0;
-    }
-    .checklist li {
+    .checklist-item {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      padding: 14px 20px;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--nu-light-gray);
       border-radius: 8px;
       margin-bottom: 10px;
-      font-family: var(--font-primary);
-      font-size: 1rem;
-      color: var(--nu-body-text);
-      line-height: 1.5;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: background 0.2s ease;
+      cursor: pointer;
     }
-    .checklist li:hover {
-      transform: translateX(4px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    .checklist-item:hover {
+      background: var(--nu-medium-gray);
     }
     .check-box {
       width: 22px;
       height: 22px;
-      min-width: 22px;
       border: 2px solid var(--nu-blue);
       border-radius: 4px;
+      flex-shrink: 0;
       margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .check-box.checked {
+      background: var(--nu-blue);
+    }
+    .check-box.checked svg {
+      display: block;
+    }
+    .check-box svg {
+      display: none;
+      width: 14px;
+      height: 14px;
+      fill: white;
+    }
+    .check-text {
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      line-height: 1.5;
+    }
+    .check-text strong {
+      color: var(--nu-blue);
     }
 
-    .contact-card {
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      border-radius: 8px;
-      padding: 24px 28px;
+    .context-section {
+      background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 36px;
+      border: 1px solid rgba(0,0,255,0.08);
+    }
+    .context-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-blue);
       margin-bottom: 12px;
     }
-    .contact-card-name {
-      font-family: var(--font-primary);
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--nu-white);
-      margin-bottom: 4px;
-    }
-    .contact-card-role {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 0.9rem;
-      color: var(--nu-cyan);
-    }
-
-    .priority-note {
-      background: linear-gradient(135deg, rgba(0,0,255,0.04) 0%, rgba(6,208,255,0.04) 100%);
-      border: 1px solid rgba(0,0,255,0.12);
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-top: 8px;
-    }
-    .priority-note p {
-      font-family: var(--font-primary);
+    .context-text {
       font-size: 0.95rem;
+      line-height: 1.7;
       color: var(--nu-body-text);
-      line-height: 1.6;
-    }
-    .priority-note strong {
-      color: var(--nu-blue);
     }
 
     .nu-footer {
@@ -276,7 +296,7 @@
       margin-bottom: 12px;
     }
     .nu-footer-contact {
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.8;
     }
     .nu-footer-contact a {
@@ -290,7 +310,8 @@
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
       .action-container { padding: 40px 20px; }
-      .action-title { font-size: 1.5rem; }
+      .action-header { flex-direction: column; text-align: center; }
+      .action-meta { grid-template-columns: 1fr; }
     }
 
     @media print {
@@ -301,7 +322,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="nu-header">
     <div class="nu-phoenix-icon">
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -311,90 +331,97 @@
     </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
-    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-tagline">A Legacy of Commitment&reg;</div>
   </header>
 
-  <!-- WHITE CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
     <div class="action-container">
 
-      <div class="action-badge">Action Item</div>
-      <h1 class="action-title"><span>Catch Up</span> on MK Emails</h1>
-      <div class="action-meta">Source: reMarkable Notebook &nbsp;|&nbsp; Date: April 11, 2026 &nbsp;|&nbsp; Priority: High</div>
-
-      <!-- CONTEXT -->
-      <div class="action-section">
-        <h2 class="action-section-title">Context</h2>
-        <div class="action-card">
-          <p>MK Smith is the marketing contractor for Norris Utilities®. There is a backlog of emails that need review and response. This catch-up ensures nothing falls through the cracks on marketing deliverables, brand assets, campaign updates, and any outstanding requests from MK.</p>
+      <div class="action-header">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="action-title">Catch Up <span>on MK Emails &amp; Intro to Mel</span></div>
+          <div class="action-source">Source: reMarkable Action Item &mdash; April 12, 2026</div>
         </div>
       </div>
 
-      <!-- CONTACT -->
-      <div class="action-section">
-        <h2 class="action-section-title">Key Contact</h2>
-        <div class="contact-card">
-          <div class="contact-card-name">MK Smith</div>
-          <div class="contact-card-role">Marketing Contractor — Norris Utilities®</div>
+      <div class="action-meta">
+        <div class="meta-card">
+          <div class="meta-label">Assigned To</div>
+          <div class="meta-value">Aaron C. Norris</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Priority</div>
+          <div class="meta-value priority-high">High</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Category</div>
+          <div class="meta-value">Marketing / Email</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Contact</div>
+          <div class="meta-value">MK Smith</div>
         </div>
       </div>
 
-      <!-- CHECKLIST -->
-      <div class="action-section">
-        <h2 class="action-section-title">Action Checklist</h2>
-        <ul class="checklist">
-          <li>
-            <div class="check-box"></div>
-            <span>Review all unread and unanswered emails from MK Smith</span>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <span>Reply to any outstanding questions or approval requests</span>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <span>Confirm status of any pending marketing deliverables or campaigns</span>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <span>Send intro to Mel via email (per separate reMarkable note)</span>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <span>Follow up on any brand asset updates or collateral needs</span>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <span>Confirm next steps and align on upcoming marketing priorities</span>
-          </li>
-        </ul>
+      <div class="checklist">
+        <div class="checklist-title">Action <span>Steps</span></div>
+
+        <div class="checklist-item" onclick="this.querySelector('.check-box').classList.toggle('checked')">
+          <div class="check-box">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          </div>
+          <div class="check-text"><strong>Review all pending MK Smith emails</strong> &mdash; Read through and respond to any outstanding messages from MK regarding marketing projects and deliverables</div>
+        </div>
+
+        <div class="checklist-item" onclick="this.querySelector('.check-box').classList.toggle('checked')">
+          <div class="check-box">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          </div>
+          <div class="check-text"><strong>Send email introduction to Mel</strong> &mdash; Draft and send an introduction email connecting Mel with MK Smith per MK's request</div>
+        </div>
+
+        <div class="checklist-item" onclick="this.querySelector('.check-box').classList.toggle('checked')">
+          <div class="check-box">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          </div>
+          <div class="check-text"><strong>Address MK payment status</strong> &mdash; Review and resolve any outstanding payment items with MK Smith for marketing work completed</div>
+        </div>
+
+        <div class="checklist-item" onclick="this.querySelector('.check-box').classList.toggle('checked')">
+          <div class="check-box">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          </div>
+          <div class="check-text"><strong>Confirm all threads are current</strong> &mdash; Verify no MK emails remain unanswered and all action items from those threads are addressed</div>
+        </div>
       </div>
 
-      <!-- NOTES -->
-      <div class="action-section">
-        <h2 class="action-section-title">Notes</h2>
-        <div class="priority-note">
-          <p><strong>Reminder:</strong> All customer-facing marketing materials need Aaron's review before release. MK handles creative execution, but final approval stays with Aaron. Make sure any pending items from MK that are customer-facing get reviewed before sign-off.</p>
+      <div class="context-section">
+        <div class="context-title">Context</div>
+        <div class="context-text">
+          MK Smith is the marketing contractor for Norris Utilities&reg;. This action item covers three items that need attention: catching up on any backlog of MK's emails, sending an email introduction to Mel on MK's behalf, and resolving any open payment matters. These should be handled promptly to keep the marketing relationship on track and avoid further delays.
         </div>
       </div>
 
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="nu-footer">
-    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-tagline">A Legacy of Commitment&reg;</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities&reg;, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>
