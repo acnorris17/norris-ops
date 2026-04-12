@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Item: MK Catch-Up &amp; Mel Introduction — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .page-label {
+      display: inline-block;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      background: rgba(6, 208, 255, 0.1);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .page-title .highlight {
+      color: var(--nu-blue);
+    }
+
+    .page-meta {
+      font-family: var(--font-primary);
+      font-size: 0.95rem;
+      color: #777;
+      margin-bottom: 32px;
+    }
+
+    .action-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+    }
+
+    .action-card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 14px;
+    }
+    .action-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
+      color: var(--nu-white);
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .action-card-title {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--nu-dark-text);
+      flex-grow: 1;
+    }
+
+    .action-card-body {
+      padding-left: 48px;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--nu-body-text);
+    }
+    .action-card-body p {
+      margin-bottom: 10px;
+    }
+    .action-card-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .action-card-body ul li {
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+    .action-card-body ul li::before {
+      content: '\2022';
+      color: var(--nu-cyan);
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+    }
+
+    .status-badge {
+      display: inline-block;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-left: auto;
+    }
+    .status-pending {
+      background: #FFF3E0;
+      color: #E65100;
+    }
+
+    .context-box {
+      background: var(--nu-light-gray);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .context-box h3 {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .context-box p {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+      line-height: 1.6;
+    }
+
+    .email-draft {
+      background: #FAFAFA;
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--nu-body-text);
+    }
+    .email-draft .email-field {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+      font-size: 0.85rem;
+    }
+    .email-draft .email-body {
+      padding-top: 12px;
+      border-top: 1px solid var(--nu-medium-gray);
+      margin-top: 12px;
+    }
+    .email-draft .email-body p {
+      text-indent: 2em;
+      margin-bottom: 12px;
+    }
+    .email-draft .email-body p:first-child {
+      text-indent: 0;
+    }
+    .email-draft .email-sig {
+      margin-top: 16px;
+      text-indent: 0 !important;
+      line-height: 1.5;
+    }
+    .email-draft .email-sig p {
+      text-indent: 2em;
+      margin-bottom: 2px;
+    }
+
+    .section-divider {
+      height: 2px;
+      background: linear-gradient(to right, var(--nu-blue), var(--nu-cyan), transparent);
+      margin: 40px 0;
+      border: none;
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .action-card { padding: 20px; }
+      .action-card-body { padding-left: 0; padding-top: 12px; }
+      .email-draft { padding: 16px; }
+      .page-title { font-size: 1.5rem; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .action-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
+
+      <span class="page-label">Action Item</span>
+      <h1 class="page-title"><span class="highlight">MK</span> Catch-Up Emails &amp; Mel Introduction</h1>
+      <p class="page-meta">Captured April 12, 2026 &nbsp;|&nbsp; Assigned to: Aaron C. Norris &nbsp;|&nbsp; Priority: Action Required</p>
+
+      <!-- CONTEXT -->
+      <div class="context-box">
+        <h3>Context</h3>
+        <p>Send MK Smith a catch-up email covering current Norris Utilities® marketing priorities and introduce Mel via email so they can connect directly. MK is the marketing contractor and needs to stay aligned on brand direction, upcoming campaigns, and any new collateral needs. There is overlap in what MK and Mel both bring to the table and this connection has been on the list for a while.</p>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- ACTION 1: MK CATCH-UP -->
+      <div class="action-card">
+        <div class="action-card-header">
+          <div class="action-number">1</div>
+          <div class="action-card-title">Send MK Smith Catch-Up Email</div>
+          <span class="status-badge status-pending">Pending</span>
+        </div>
+        <div class="action-card-body">
+          <p>Reach out to MK with an update on where things stand. Key topics to cover:</p>
+          <ul>
+            <li>Current marketing priorities and any shifting focus areas</li>
+            <li>Upcoming collateral or campaign needs</li>
+            <li>Brand updates or new product lines requiring marketing support</li>
+            <li>Timeline expectations for next deliverables</li>
+          </ul>
+
+          <div class="email-draft">
+            <div class="email-field">To: MK Smith</div>
+            <div class="email-field">Subject: Catch-Up — Marketing Priorities &amp; New Introduction</div>
+            <div class="email-body">
+              <p>MK &mdash;</p>
+
+              <p>Wanted to send a quick update and make sure we're aligned on a few things moving forward.</p>
+
+              <p>We've got several items in motion right now and I want to make sure marketing stays ahead of the curve. Let's plan to connect this week or early next to walk through current priorities, any collateral needs, and where we stand on upcoming campaigns.</p>
+
+              <p>Also &mdash; I'm introducing you to Mel in a separate email. I'd like y'all to connect directly. More context in that thread.</p>
+
+              <p>Let me know your availability and we'll get something on the calendar.</p>
+
+              <div class="email-sig">
+                <p>Sincerely,</p>
+                <p>Aaron C. Norris</p>
+                <p>Founder &amp; CEO</p>
+                <p>Norris Utilities, LLC</p>
+                <p>Cell: 205-500-1343</p>
+                <p>acnorris@norrisutilities.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTION 2: MEL INTRODUCTION -->
+      <div class="action-card">
+        <div class="action-card-header">
+          <div class="action-number">2</div>
+          <div class="action-card-title">Send Introduction Email — MK Smith &amp; Mel</div>
+          <span class="status-badge status-pending">Pending</span>
+        </div>
+        <div class="action-card-body">
+          <p>Introduce MK and Mel via email so they can coordinate directly. Keep it brief, professional, and give both parties enough context to take it from there.</p>
+
+          <div class="email-draft">
+            <div class="email-field">To: MK Smith, Mel</div>
+            <div class="email-field">Subject: Introduction — MK Smith &amp; Mel</div>
+            <div class="email-body">
+              <p>MK, Mel &mdash;</p>
+
+              <p>I'd like to introduce y'all. MK handles marketing for Norris Utilities® and has been instrumental in building out our brand presence and marketing strategy. She knows the Norris Utilities® story inside and out.</p>
+
+              <p>Mel &mdash; I've been wanting to connect y'all for a while now. There is real overlap in what you both bring to the table and I believe this will be mutually advantageous.</p>
+
+              <p>MK &mdash; I'll let Mel share more background directly, but I think once y'all start talking you'll see the fit right away.</p>
+
+              <p>I'll let y'all take it from here. Happy to jump on a call together if that's helpful.</p>
+
+              <div class="email-sig">
+                <p>Sincerely,</p>
+                <p>Aaron C. Norris</p>
+                <p>Founder &amp; CEO</p>
+                <p>Norris Utilities, LLC</p>
+                <p>Cell: 205-500-1343</p>
+                <p>acnorris@norrisutilities.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- CHECKLIST SUMMARY -->
+      <div class="action-card" style="border-left: 4px solid var(--nu-blue);">
+        <div class="action-card-header">
+          <div class="action-card-title" style="color: var(--nu-blue);">Quick Checklist</div>
+        </div>
+        <div class="action-card-body" style="padding-left: 0;">
+          <ul>
+            <li>Draft and send catch-up email to MK Smith</li>
+            <li>Draft and send introduction email connecting MK and Mel</li>
+            <li>Confirm MK received both emails and is aligned on next steps</li>
+            <li>Schedule follow-up call with MK to review priorities</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
