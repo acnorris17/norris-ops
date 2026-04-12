@@ -126,7 +126,7 @@
     .nu-content-area > * { position: relative; z-index: 1; }
 
     .action-container {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 60px 40px;
     }
@@ -135,9 +135,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      margin-bottom: 32px;
-      padding-bottom: 24px;
-      border-bottom: 3px solid var(--nu-blue);
+      margin-bottom: 40px;
     }
     .action-icon {
       width: 56px;
@@ -152,7 +150,16 @@
     .action-icon svg {
       width: 28px;
       height: 28px;
-      fill: white;
+      fill: var(--nu-white);
+    }
+    .action-label {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: var(--nu-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
     }
     .action-title {
       font-family: var(--font-primary);
@@ -161,147 +168,145 @@
       color: var(--nu-dark-text);
       line-height: 1.3;
     }
-    .action-title span {
-      color: var(--nu-blue);
-    }
 
     .action-meta {
       display: flex;
+      gap: 24px;
       flex-wrap: wrap;
-      gap: 16px;
       margin-bottom: 36px;
-    }
-    .meta-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      padding: 20px 24px;
       background: var(--nu-light-gray);
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
+      border-radius: 10px;
+      border-left: 4px solid var(--nu-blue);
     }
-    .meta-tag svg {
-      width: 16px;
-      height: 16px;
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .meta-item svg {
+      width: 18px;
+      height: 18px;
       fill: var(--nu-blue);
+      flex-shrink: 0;
     }
-    .meta-tag.priority-high {
-      background: #FFF3E0;
-      color: #E65100;
+    .meta-label {
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #666;
     }
-    .meta-tag.priority-high svg {
-      fill: #E65100;
+    .meta-value {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
     }
 
     .steps-section {
       margin-bottom: 40px;
     }
-    .section-label {
+    .section-title {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: var(--nu-blue);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      margin-bottom: 20px;
     }
-    .section-label span {
+    .section-title span {
       color: var(--nu-dark-text);
       font-weight: 700;
     }
 
     .step-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
-      border-left: 4px solid var(--nu-blue);
-      border-radius: 0 8px 8px 0;
-      padding: 20px 24px;
-      margin-bottom: 16px;
+      border-radius: 10px;
+      margin-bottom: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .step-card:hover {
-      transform: translateX(4px);
+      transform: translateY(-1px);
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
     }
     .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      background: var(--nu-blue);
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--nu-blue), #0033CC);
       color: var(--nu-white);
       border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 900;
-      font-size: 0.85rem;
-      margin-right: 12px;
+      font-size: 0.95rem;
       flex-shrink: 0;
     }
-    .step-content {
-      display: flex;
-      align-items: flex-start;
-    }
-    .step-text {
-      flex: 1;
-    }
-    .step-text h3 {
+    .step-content h3 {
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--nu-dark-text);
       margin-bottom: 4px;
     }
-    .step-text p {
+    .step-content p {
       font-size: 0.95rem;
-      color: var(--nu-body-text);
+      color: #555;
       line-height: 1.5;
     }
 
-    .context-box {
-      background: linear-gradient(135deg, #F0F4FF 0%, #E8F4FE 100%);
-      border: 1px solid #C8D8F0;
-      border-radius: 10px;
-      padding: 24px 28px;
-      margin-bottom: 36px;
-    }
-    .context-box h3 {
-      font-weight: 900;
-      font-size: 1rem;
-      color: var(--nu-blue);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .context-box p {
-      font-size: 0.95rem;
-      color: var(--nu-body-text);
-      line-height: 1.6;
-    }
-
-    .checklist {
-      list-style: none;
-      padding: 0;
-    }
-    .checklist li {
+    .checkbox-row {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--nu-medium-gray);
+      padding: 14px 20px;
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .checkbox-row:hover {
+      background: var(--nu-medium-gray);
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--nu-blue);
+      cursor: pointer;
+    }
+    .checkbox-row input:checked + label {
+      text-decoration: line-through;
+      color: #999;
+    }
+    .checkbox-row label {
+      font-weight: 400;
       font-size: 0.95rem;
       color: var(--nu-dark-text);
+      cursor: pointer;
     }
-    .checklist li:last-child {
-      border-bottom: none;
+
+    .notes-box {
+      margin-top: 36px;
+      padding: 24px;
+      background: #FFFDE7;
+      border: 1px solid #FFD54F;
+      border-radius: 10px;
     }
-    .check-box {
-      width: 22px;
-      height: 22px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      flex-shrink: 0;
+    .notes-box h3 {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #E65100;
+      margin-bottom: 8px;
+    }
+    .notes-box p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
     }
 
     .nu-footer {
@@ -319,7 +324,7 @@
       margin-bottom: 12px;
     }
     .nu-footer-contact {
-      font-size: 0.95rem;
+      font-size: 1rem;
       line-height: 1.8;
     }
     .nu-footer-contact a {
@@ -333,15 +338,15 @@
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
       .action-container { padding: 40px 20px; }
-      .action-header { flex-direction: column; text-align: center; }
-      .action-title { font-size: 1.3rem; }
-      .action-meta { justify-content: center; }
+      .action-header { flex-direction: column; align-items: flex-start; }
+      .action-meta { flex-direction: column; gap: 12px; }
+      .nu-footer-contact { font-size: 0.95rem; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .step-card { box-shadow: none; border: 1px solid #ccc; border-left: 4px solid var(--nu-blue); }
+      .step-card { box-shadow: none; border: 1px solid #ccc; }
     }
   </style>
 </head>
@@ -378,88 +383,92 @@
             <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
         </div>
-        <div class="action-title"><span>Action Item:</span> Send Micah Emails &amp; Schedule Sign Online Meeting</div>
+        <div>
+          <div class="action-label">reMarkable Action Item</div>
+          <div class="action-title">Send Micah Emails &amp; Schedule Sign Online Trading Meeting</div>
+        </div>
       </div>
 
-      <!-- META TAGS -->
+      <!-- META -->
       <div class="action-meta">
-        <div class="meta-tag priority-high">
-          <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
-          High Priority
-        </div>
-        <div class="meta-tag">
+        <div class="meta-item">
           <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
-          April 11, 2026
+          <div>
+            <div class="meta-label">Date Captured</div>
+            <div class="meta-value">April 12, 2026</div>
+          </div>
         </div>
-        <div class="meta-tag">
+        <div class="meta-item">
           <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          Sign Online Trade Me Docs
+          <div>
+            <div class="meta-label">Priority</div>
+            <div class="meta-value">High</div>
+          </div>
+        </div>
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          <div>
+            <div class="meta-label">Contact</div>
+            <div class="meta-value">Micah</div>
+          </div>
         </div>
       </div>
 
-      <!-- CONTEXT -->
-      <div class="context-box">
-        <h3>Context</h3>
-        <p>Micah needs to receive the Sign Online Trade Me documentation package. After sending the emails with the required documents, schedule a meeting with Micah to walk through the Sign Online process and finalize signatures on the Trade Me docs.</p>
-      </div>
-
-      <!-- ACTION STEPS -->
+      <!-- STEPS -->
       <div class="steps-section">
-        <div class="section-label"><span>Action</span> Steps</div>
+        <div class="section-title">Action <span>Steps</span></div>
 
         <div class="step-card">
+          <div class="step-number">1</div>
           <div class="step-content">
-            <div class="step-number">1</div>
-            <div class="step-text">
-              <h3>Send Micah the Sign Online Trade Me Documents</h3>
-              <p>Email Micah the complete Trade Me documentation package for Sign Online. Include all relevant agreements and forms that require his review and signature.</p>
-            </div>
+            <h3>Send Emails to Micah</h3>
+            <p>Draft and send the necessary emails to Micah with all relevant details for the Sign Online Trading initiative.</p>
           </div>
         </div>
 
         <div class="step-card">
+          <div class="step-number">2</div>
           <div class="step-content">
-            <div class="step-number">2</div>
-            <div class="step-text">
-              <h3>Confirm Email Receipt</h3>
-              <p>Follow up to verify Micah received the emails and has access to all attached documents. Ensure nothing was missed or filtered.</p>
-            </div>
+            <h3>Schedule Meeting for Sign Online Trading</h3>
+            <p>Coordinate with Micah to schedule a meeting to discuss Sign Online Trading next steps, deliverables, and timeline.</p>
           </div>
         </div>
 
         <div class="step-card">
+          <div class="step-number">3</div>
           <div class="step-content">
-            <div class="step-number">3</div>
-            <div class="step-text">
-              <h3>Schedule Meeting with Micah</h3>
-              <p>Set up a meeting with Micah to review the Sign Online Trade Me docs together, answer any questions, and complete the signing process.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="step-card">
-          <div class="step-content">
-            <div class="step-number">4</div>
-            <div class="step-text">
-              <h3>Complete Signatures</h3>
-              <p>During or after the meeting, ensure all Trade Me documents are signed through Sign Online and copies are saved for both parties.</p>
-            </div>
+            <h3>Confirm Meeting Details</h3>
+            <p>Send a calendar invite with the agreed meeting date, time, and agenda so both parties are aligned before the call.</p>
           </div>
         </div>
       </div>
 
       <!-- CHECKLIST -->
       <div class="steps-section">
-        <div class="section-label"><span>Completion</span> Checklist</div>
-        <ul class="checklist">
-          <li><div class="check-box"></div> Trade Me documents compiled and attached</li>
-          <li><div class="check-box"></div> Emails sent to Micah with all documents</li>
-          <li><div class="check-box"></div> Receipt confirmed by Micah</li>
-          <li><div class="check-box"></div> Meeting scheduled on calendar</li>
-          <li><div class="check-box"></div> Meeting held — documents reviewed</li>
-          <li><div class="check-box"></div> All signatures completed via Sign Online</li>
-          <li><div class="check-box"></div> Signed copies filed and distributed</li>
-        </ul>
+        <div class="section-title">Completion <span>Checklist</span></div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="chk1">
+          <label for="chk1">Emails drafted and sent to Micah</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="chk2">
+          <label for="chk2">Meeting date and time confirmed with Micah</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="chk3">
+          <label for="chk3">Calendar invite sent with agenda</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="chk4">
+          <label for="chk4">Sign Online Trading materials prepared for meeting</label>
+        </div>
+      </div>
+
+      <!-- NOTES -->
+      <div class="notes-box">
+        <h3>Reminder</h3>
+        <p>This action item was captured from your reMarkable notebook on April 12, 2026. Complete both steps — send the emails first, then follow up to schedule the Sign Online Trading meeting with Micah.</p>
       </div>
 
     </div>
