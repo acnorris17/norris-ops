@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental vs For-Sale Listing Disclosure Comparison — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .page-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-blue);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .page-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .action-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .summary-box {
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f4fd 100%);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .summary-box p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--nu-dark-text);
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .col-header {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.3rem;
+      padding: 16px 24px;
+      border-radius: 8px 8px 0 0;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    .col-header.rental {
+      background: linear-gradient(135deg, #0033CC, #0055EE);
+      color: var(--nu-white);
+    }
+    .col-header.sale {
+      background: linear-gradient(135deg, #004400, #006600);
+      color: var(--nu-white);
+    }
+
+    .compare-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      overflow: hidden;
+    }
+    .compare-card .card-body {
+      padding: 24px;
+    }
+
+    .disclosure-item {
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .disclosure-item:last-child {
+      border-bottom: none;
+    }
+    .disclosure-item .label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .disclosure-item .detail {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .req-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .req-tag.required {
+      background: #ffe0e0;
+      color: #cc0000;
+    }
+    .req-tag.recommended {
+      background: #fff3d0;
+      color: #996600;
+    }
+    .req-tag.varies {
+      background: #e0e8ff;
+      color: #0033aa;
+    }
+
+    .section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .section-title .first { color: var(--nu-blue); }
+    .section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
+
+    .key-diff-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      font-size: 0.95rem;
+    }
+    .key-diff-table thead th {
+      background: linear-gradient(135deg, #1a1a3e, #2a2a5e);
+      color: var(--nu-white);
+      padding: 14px 18px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .key-diff-table thead th:first-child { border-radius: 8px 0 0 0; }
+    .key-diff-table thead th:last-child { border-radius: 0 8px 0 0; }
+    .key-diff-table tbody td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+    .key-diff-table tbody tr:nth-child(even) {
+      background: var(--nu-light-gray);
+    }
+    .key-diff-table tbody tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+    .key-diff-table tbody tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+    .callout {
+      background: #fff8e0;
+      border: 1px solid #f0d060;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+    .callout-title {
+      font-weight: 900;
+      font-size: 1rem;
+      color: #996600;
+      margin-bottom: 6px;
+    }
+    .callout p {
+      font-size: 0.95rem;
+      color: #664400;
+      line-height: 1.6;
+    }
+
+    .action-steps {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      padding: 28px 32px;
+      margin-bottom: 40px;
+    }
+    .action-steps ol {
+      margin-left: 20px;
+    }
+    .action-steps li {
+      padding: 8px 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .action-steps li strong {
+      color: var(--nu-dark-text);
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .key-diff-table { font-size: 0.85rem; }
+      .key-diff-table thead th,
+      .key-diff-table tbody td { padding: 10px 12px; }
+      .nu-footer-contact { font-size: 0.95rem; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .compare-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 60px 40px;">
+
+      <div style="text-align: center;">
+        <span class="action-badge">Action Item — April 2026</span>
+      </div>
+
+      <h1 class="page-title">Rental Listing vs. For-Sale Listing Disclosures</h1>
+      <p class="page-subtitle">Alabama requirements comparison — what must be disclosed and when</p>
+
+      <!-- SUMMARY -->
+      <div class="summary-box">
+        <p>Alabama law treats disclosure obligations differently depending on whether a property is listed for sale or for rent. Sellers face more stringent statutory disclosure requirements, while landlords have fewer mandated disclosures but still carry legal obligations under federal law, the Alabama Uniform Residential Landlord Tenant Act, and local ordinances. This comparison outlines the key differences to guide listing decisions.</p>
+      </div>
+
+      <!-- SIDE-BY-SIDE COMPARISON -->
+      <div class="comparison-grid">
+
+        <!-- RENTAL COLUMN -->
+        <div class="compare-card">
+          <div class="col-header rental">Rental Listing Disclosures</div>
+          <div class="card-body">
+            <div class="disclosure-item">
+              <div class="label">Lead-Based Paint (Pre-1978) <span class="req-tag required">Federal Required</span></div>
+              <div class="detail">Landlords must provide the EPA lead-based paint pamphlet and disclose any known lead-based paint or hazards before the lease is signed. Applies to all housing built before 1978.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Security Deposit Terms <span class="req-tag required">Required</span></div>
+              <div class="detail">Alabama Code § 35-9A-201: Landlords must disclose the amount held, the holding institution, and conditions for return. Maximum deposit is one month's rent.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Move-In / Move-Out Condition <span class="req-tag recommended">Recommended</span></div>
+              <div class="detail">Detailed written inspection at move-in and move-out protects both parties in deposit disputes. Not strictly required by statute but strongly advisable.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Owner/Agent Identity <span class="req-tag required">Required</span></div>
+              <div class="detail">Alabama Code § 35-9A-202: Landlord must disclose the name and address of the property owner or authorized management agent in writing.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Mold, Flood Zones, Environmental <span class="req-tag varies">Varies</span></div>
+              <div class="detail">Alabama has no specific state statute requiring mold or flood zone disclosure for rentals. However, known hazardous conditions that affect habitability may trigger liability under the implied warranty of habitability.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Sex Offender Registry <span class="req-tag varies">Varies</span></div>
+              <div class="detail">No Alabama law requires landlords to disclose proximity to registered sex offenders. Tenants may be directed to the Alabama Law Enforcement Agency registry.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Property Condition / Defects <span class="req-tag varies">Varies</span></div>
+              <div class="detail">No broad property condition disclosure form is mandated for rentals. Landlord must maintain habitable premises per Alabama Code § 35-9A-204 but no formal written disclosure of defects is required.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOR-SALE COLUMN -->
+        <div class="compare-card">
+          <div class="col-header sale">For-Sale Listing Disclosures</div>
+          <div class="card-body">
+            <div class="disclosure-item">
+              <div class="label">Lead-Based Paint (Pre-1978) <span class="req-tag required">Federal Required</span></div>
+              <div class="detail">Sellers must provide the EPA lead-based paint pamphlet, disclose known lead hazards, and allow a 10-day inspection period. Required in the purchase agreement.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Real Estate Condition Report <span class="req-tag varies">Caveat Emptor</span></div>
+              <div class="detail">Alabama is a "buyer beware" (caveat emptor) state. No mandatory seller disclosure form exists by statute. Sellers are not required to complete a property condition disclosure statement.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Known Material Defects <span class="req-tag required">Required</span></div>
+              <div class="detail">Despite caveat emptor, Alabama courts (per Moore v. Prudential, 2006) hold sellers liable for fraudulent concealment of known material defects. Active concealment or misrepresentation is actionable.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">HOA / Covenants <span class="req-tag recommended">Recommended</span></div>
+              <div class="detail">Sellers should disclose HOA membership, dues, restrictions, and provide governing documents. While not mandated by statute, failure to disclose can create contract disputes.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Flood Zone / Insurance <span class="req-tag varies">Varies</span></div>
+              <div class="detail">No Alabama statute mandates flood zone disclosure for residential sales. However, if the property is in a FEMA-designated flood zone, the lender will require flood insurance, effectively surfacing the issue.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Septic / Well / Utilities <span class="req-tag recommended">Recommended</span></div>
+              <div class="detail">Not mandated by Alabama statute, but considered best practice. Disclose septic system age, well water testing, and any utility easements. Buyers can request inspections.</div>
+            </div>
+            <div class="disclosure-item">
+              <div class="label">Environmental Hazards <span class="req-tag varies">Varies</span></div>
+              <div class="detail">No state requirement, but known contamination (underground storage tanks, asbestos, radon) should be disclosed to avoid fraudulent concealment claims. Federal Superfund liability can transfer.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY DIFFERENCES TABLE -->
+      <h2 class="section-title"><span class="first">Key</span> <span class="rest">Differences at a Glance</span></h2>
+
+      <table class="key-diff-table">
+        <thead>
+          <tr>
+            <th>Disclosure Area</th>
+            <th>Rental Listing</th>
+            <th>For-Sale Listing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Lead Paint (Pre-1978)</strong></td>
+            <td>Required — EPA pamphlet + known hazards</td>
+            <td>Required — EPA pamphlet + 10-day inspection period</td>
+          </tr>
+          <tr>
+            <td><strong>Formal Condition Disclosure</strong></td>
+            <td>Not required — no state form</td>
+            <td>Not required — Alabama is caveat emptor</td>
+          </tr>
+          <tr>
+            <td><strong>Known Defects</strong></td>
+            <td>Must maintain habitability; no written form</td>
+            <td>Must not fraudulently conceal known material defects</td>
+          </tr>
+          <tr>
+            <td><strong>Security Deposit / Earnest Money</strong></td>
+            <td>Must disclose amount, bank, return terms</td>
+            <td>Earnest money governed by purchase contract</td>
+          </tr>
+          <tr>
+            <td><strong>Owner/Agent Identity</strong></td>
+            <td>Required by statute (§ 35-9A-202)</td>
+            <td>Identified through listing agreement and closing docs</td>
+          </tr>
+          <tr>
+            <td><strong>Flood Zone</strong></td>
+            <td>Not required by state law</td>
+            <td>Not required, but lender will identify</td>
+          </tr>
+          <tr>
+            <td><strong>HOA / Restrictive Covenants</strong></td>
+            <td>Lease terms govern; no HOA disclosure law</td>
+            <td>Best practice to disclose; can cause title issues</td>
+          </tr>
+          <tr>
+            <td><strong>Legal Standard</strong></td>
+            <td>Implied warranty of habitability + lease terms</td>
+            <td>Caveat emptor — buyer assumes risk</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- CALLOUT -->
+      <div class="callout">
+        <div class="callout-title">Important Note — Alabama Is Caveat Emptor</div>
+        <p>Alabama does not require a formal seller disclosure statement like most other states. However, sellers who actively conceal known defects can face fraud claims. For rental properties, the landlord's ongoing duty to maintain habitable conditions creates continuing obligations that do not exist in a sale transaction after closing. Consult a licensed Alabama real estate attorney before listing to confirm current requirements for your specific property and municipality.</p>
+      </div>
+
+      <!-- NEXT STEPS -->
+      <h2 class="section-title"><span class="first">Recommended</span> <span class="rest">Next Steps</span></h2>
+
+      <div class="action-steps">
+        <ol>
+          <li><strong>Determine listing strategy</strong> — Decide whether the property will be listed as a rental or for sale, as this directly affects which disclosures are required.</li>
+          <li><strong>Lead paint assessment</strong> — If the property was built before 1978, obtain the EPA pamphlet ("Protect Your Family From Lead in Your Home") and document any known lead-based paint history.</li>
+          <li><strong>Document known conditions</strong> — Regardless of legal requirements, prepare a written summary of known material conditions (roof age, HVAC system, foundation, plumbing, electrical) to protect against future claims.</li>
+          <li><strong>Consult an attorney</strong> — Have a licensed Alabama real estate attorney review the listing approach and any disclosure documents before going to market.</li>
+          <li><strong>Check local ordinances</strong> — Birmingham, Huntsville, and other Alabama municipalities may have additional rental registration, inspection, or disclosure requirements beyond state law.</li>
+        </ol>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
