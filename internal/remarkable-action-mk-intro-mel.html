@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Item: MK Catch-Up &amp; Mel Introduction — Norris Utilities®</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: var(--font-primary);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .action-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .action-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .action-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .action-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--nu-white);
+    }
+    .action-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--nu-dark-text);
+    }
+    .action-title span {
+      color: var(--nu-blue);
+    }
+
+    .action-meta {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--nu-light-gray);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--nu-dark-text);
+    }
+    .meta-tag svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--nu-blue);
+    }
+    .meta-tag.priority-high {
+      background: #FFF3E0;
+      color: #E65100;
+    }
+    .meta-tag.priority-high svg {
+      fill: #E65100;
+    }
+
+    .task-card {
+      background: var(--nu-white);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 24px;
+    }
+    .task-card h3 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: var(--nu-blue);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .task-card h3 .card-num {
+      width: 28px;
+      height: 28px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 16px;
+    }
+    .contact-card {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      padding: 20px;
+      border-left: 4px solid var(--nu-blue);
+    }
+    .contact-name {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .contact-role {
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 400;
+    }
+
+    .notes-section {
+      background: #FFFDE7;
+      border-radius: 12px;
+      padding: 28px 32px;
+      border-left: 4px solid #FFC107;
+      margin-top: 32px;
+    }
+    .notes-section h3 {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 12px;
+    }
+    .notes-section p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--nu-body-text);
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .action-container { padding: 40px 20px; }
+      .action-title { font-size: 1.4rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .action-meta { gap: 12px; }
+      .task-card { padding: 24px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .task-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div class="action-container">
+
+      <div class="action-header">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        <div class="action-title"><span>Action Item:</span> MK Catch-Up Emails &amp; Mel Introduction</div>
+      </div>
+
+      <div class="action-meta">
+        <div class="meta-tag priority-high">
+          <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+          Priority Action
+        </div>
+        <div class="meta-tag">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+          April 12, 2026
+        </div>
+        <div class="meta-tag">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Source: reMarkable
+        </div>
+      </div>
+
+      <div class="task-card">
+        <h3><span class="card-num">1</span> Send MK Smith Catch-Up Email</h3>
+        <ul class="checklist">
+          <li>
+            <div class="check-box"></div>
+            <div>Draft catch-up email to MK Smith covering current marketing priorities and any outstanding items</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Include updates on recent Norris Utilities® projects and any new collateral needs</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Confirm MK's availability for upcoming work and align on deliverables timeline</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <h3><span class="card-num">2</span> Send Mel Introduction Email via MK</h3>
+        <ul class="checklist">
+          <li>
+            <div class="check-box"></div>
+            <div>Draft introduction email to Mel, CC MK Smith so MK has full context</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Briefly introduce Norris Utilities® and the scope of the relationship with MK</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Outline the purpose of the introduction and any next steps or meeting to schedule</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <h3>People Involved</h3>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-name">MK Smith</div>
+            <div class="contact-role">Marketing Contractor — Norris Utilities®</div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-name">Mel</div>
+            <div class="contact-role">New Contact — Introduction via Email</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notes-section">
+        <h3>Reminder</h3>
+        <p>Send both emails in the same session so MK has context before the Mel introduction lands. Use Aaron's standard email voice — greeting with em dash, indented paragraphs, close with "Sincerely," and full signature block. No filler words, no emojis.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris | Founder &amp; CEO<br>
+      Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a><br>
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
