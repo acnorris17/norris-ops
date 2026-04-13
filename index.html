@@ -1075,7 +1075,7 @@ function celebToast(msg){var t=document.getElementById('celebToast');if(!t)retur
 function celebrate(checkEl){var pos=gcp(checkEl);var type;do{type=Math.floor(Math.random()*10)}while(type===lastCelebType);lastCelebType=type;celebFns[type](pos);showStreak();incrementCompleted();celebToast(celebMsgs[Math.floor(Math.random()*celebMsgs.length)]);celebDing();fireCelebration()}
 
 function fireCelebration(taskName) {
-  const isAaron = localStorage.getItem('nu_role') === 'aaron';
+  const isAaron = sessionStorage.getItem('nu_role') === 'aaron';
   screenFlash();
   launchConfettiCannon();
   if (isAaron) {
@@ -1268,7 +1268,7 @@ return{toggleShipment:toggleShipment,undoShipment:undoShipment,toggleFollowup:to
 function updateGreeting(){
   var ct=new Date().toLocaleString('en-US',{timeZone:'America/Chicago',hour:'numeric',hour12:false});
   var h=parseInt(ct,10);
-  var role=sessionStorage.getItem('nu_role'),name=role==='cb'?'Caroline':'Aaron';
+  var role=sessionStorage.getItem('nu_role'),name=role==='cb'?'CB':'Aaron';
   var g;
   if(h>=4&&h<12)g='Good morning, '+name;
   else if(h>=12&&h<17)g='Good afternoon, '+name;
@@ -1354,12 +1354,12 @@ function escH(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replac
 
 /* === NOTES SYSTEM === */
 var NOTES_KEY='nu_portal_notes';
-function getCurrentUser(){return sessionStorage.getItem('nu_role')==='aaron'?'Aaron':'Caroline'}
+function getCurrentUser(){return sessionStorage.getItem('nu_role')==='aaron'?'Aaron':'CB'}
 function loadNotes(){try{return JSON.parse(localStorage.getItem(NOTES_KEY))||[]}catch(e){return[]}}
 function saveNotesData(n){localStorage.setItem(NOTES_KEY,JSON.stringify(n));renderAllNotes()}
 function addNote(tab){var inp=document.getElementById('note-input-'+tab);if(!inp)return;var txt=inp.value.trim();if(!txt)return;var notes=loadNotes();notes.unshift({id:Date.now(),tab:tab,author:getCurrentUser(),timestamp:new Date().toLocaleString('en-US',{timeZone:'America/Chicago'}),text:txt});saveNotesData(notes);inp.value=''}
-function deleteNote(id){var role=sessionStorage.getItem('nu_role'),notes=loadNotes();if(role==='aaron'){saveNotesData(notes.filter(function(n){return n.id!==id}))}else{saveNotesData(notes.filter(function(n){return!(n.id===id&&n.author==='Caroline')}))}}
-function renderAllNotes(){var notes=loadNotes();document.querySelectorAll('.tab-notes').forEach(function(sec){var tab=sec.dataset.tab;var tn=notes.filter(function(n){return n.tab===tab});var list=sec.querySelector('.notes-list');var cnt=sec.querySelector('.note-count');if(cnt)cnt.textContent='('+tn.length+')';if(!list)return;if(tn.length===0){list.innerHTML='<p style="color:#6c7293;font-size:13px;padding:8px 0">No notes yet.</p>';return}list.innerHTML=tn.map(function(n){var isA=n.author==='Aaron';var col=isA?'#0033cc':'#0f9d58';var canDel=sessionStorage.getItem('nu_role')==='aaron'||n.author==='Caroline';return'<div style="background:'+(isA?'rgba(0,51,204,0.04)':'rgba(15,157,88,0.04)')+';border-left:3px solid '+col+';border-radius:6px;padding:10px 14px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-weight:700;font-size:12px;color:'+col+'">'+(isA?'\uD83D\uDC64 Aaron':'\uD83D\uDC69 Caroline')+'</span><span style="font-size:11px;color:#6c7293">'+escH(n.timestamp)+'</span></div><p style="font-size:14px;line-height:1.5;margin:0">'+escH(n.text)+'</p>'+(canDel?'<button onclick="deleteNote('+n.id+')" style="background:none;border:none;color:#999;font-size:11px;cursor:pointer;margin-top:4px">Delete</button>':'')+'</div>'}).join('')})}
+function deleteNote(id){var role=sessionStorage.getItem('nu_role'),notes=loadNotes();if(role==='aaron'){saveNotesData(notes.filter(function(n){return n.id!==id}))}else{saveNotesData(notes.filter(function(n){return!(n.id===id&&n.author==='CB')}))}}
+function renderAllNotes(){var notes=loadNotes();document.querySelectorAll('.tab-notes').forEach(function(sec){var tab=sec.dataset.tab;var tn=notes.filter(function(n){return n.tab===tab});var list=sec.querySelector('.notes-list');var cnt=sec.querySelector('.note-count');if(cnt)cnt.textContent='('+tn.length+')';if(!list)return;if(tn.length===0){list.innerHTML='<p style="color:#6c7293;font-size:13px;padding:8px 0">No notes yet.</p>';return}list.innerHTML=tn.map(function(n){var isA=n.author==='Aaron';var col=isA?'#0033cc':'#0f9d58';var canDel=sessionStorage.getItem('nu_role')==='aaron'||n.author==='CB';return'<div style="background:'+(isA?'rgba(0,51,204,0.04)':'rgba(15,157,88,0.04)')+';border-left:3px solid '+col+';border-radius:6px;padding:10px 14px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-weight:700;font-size:12px;color:'+col+'">'+(isA?'\uD83D\uDC64 Aaron':'\uD83D\uDC69 CB')+'</span><span style="font-size:11px;color:#6c7293">'+escH(n.timestamp)+'</span></div><p style="font-size:14px;line-height:1.5;margin:0">'+escH(n.text)+'</p>'+(canDel?'<button onclick="deleteNote('+n.id+')" style="background:none;border:none;color:#999;font-size:11px;cursor:pointer;margin-top:4px">Delete</button>':'')+'</div>'}).join('')})}
 function toggleNotes(btn){var p=btn.nextElementSibling;p.style.display=p.style.display==='none'?'block':'none'}
 function exportNotes(){var notes=loadNotes();var exp={exported_at:new Date().toISOString(),exported_by:getCurrentUser(),total_notes:notes.length,notes_by_tab:{}};notes.forEach(function(n){if(!exp.notes_by_tab[n.tab])exp.notes_by_tab[n.tab]=[];exp.notes_by_tab[n.tab].push({author:n.author,timestamp:n.timestamp,text:n.text})});var j=JSON.stringify(exp,null,2);navigator.clipboard.writeText(j).then(function(){alert('Notes copied to clipboard! Paste into Claude for full context.')}).catch(function(){var b=new Blob([j],{type:'application/json'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='portal_notes_'+new Date().toISOString().split('T')[0]+'.json';a.click()})}
 renderAllNotes();
@@ -1370,7 +1370,7 @@ function nuNotesInit(tabId){
   var panel=document.getElementById("nnp-"+tabId);
   if(!panel||panel.dataset.init)return;
   panel.dataset.init="1";
-  var role=localStorage.getItem("nu_role")||"aaron";
+  var role=sessionStorage.getItem("nu_role")||"aaron";
   var key="nu_notes_"+tabId;
   var body=panel.querySelector(".nu-notes-body");
   var toggle=panel.querySelector(".nu-notes-toggle");
