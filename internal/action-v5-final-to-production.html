@@ -5,10 +5,9 @@
 <script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>V5 Final Production Release — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <title>Action Item: Finalize V5 for Production — Norris Utilities®</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap');
 
     :root {
       --nu-blue: #0000FF;
@@ -143,6 +142,20 @@
       padding: 60px 40px;
     }
 
+    .action-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--nu-blue), #0033CC);
+      color: var(--nu-white);
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
     .page-title {
       font-family: var(--font-primary);
       font-weight: 900;
@@ -150,12 +163,22 @@
       color: var(--nu-dark-text);
       margin-bottom: 8px;
     }
+    .page-title span { color: var(--nu-blue); }
+
     .page-subtitle {
       font-family: var(--font-primary);
       font-weight: 400;
       font-size: 1.1rem;
       color: #666;
-      margin-bottom: 40px;
+      margin-bottom: 12px;
+    }
+
+    .action-date {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 32px;
     }
 
     .status-banner {
@@ -245,27 +268,6 @@
       line-height: 1.5;
     }
     .checklist li:last-child { border-bottom: none; }
-    .check-box {
-      width: 22px;
-      height: 22px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .check-box.done {
-      background: var(--nu-blue);
-      position: relative;
-    }
-    .check-box.done::after {
-      content: '';
-      position: absolute;
-      top: 3px; left: 6px;
-      width: 6px; height: 10px;
-      border: solid white;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-    }
 
     .step-number {
       display: inline-flex;
@@ -280,6 +282,15 @@
       font-weight: 700;
       flex-shrink: 0;
       margin-top: 1px;
+    }
+
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
     }
 
     .comparison-table {
@@ -383,7 +394,7 @@
       .page-title { font-size: 1.5rem; }
       .comparison-table { font-size: 0.85rem; }
       .comparison-table th, .comparison-table td { padding: 10px 12px; }
-      .nu-footer-contact { font-size: 1rem; }
+      .status-banner { flex-direction: column; text-align: center; }
     }
 
     @media print {
@@ -416,8 +427,11 @@
   <main class="nu-content-area">
     <div class="content-wrapper">
 
-      <h1 class="page-title">Agent Runner V5 &mdash; Final Production Release</h1>
+      <div class="action-badge">Action Item</div>
+
+      <h1 class="page-title"><span>Finalize V5</span> for Production</h1>
       <p class="page-subtitle">Consolidate V3 + V4 into a single production-ready agent_runner.py</p>
+      <div class="action-date">Captured April 13, 2026 &mdash; reMarkable Note</div>
 
       <div class="status-banner">
         <div class="status-icon">V5</div>
@@ -431,7 +445,7 @@
         <div class="info-card">
           <h4>Current State</h4>
           <p><code>agent_runner.py</code> &mdash; V3, 598 lines<br>
-          <code>agent_runner_v4.py</code> &mdash; V4, 1,187 lines (active)</p>
+          <code>agent_runner_v4.py</code> &mdash; V4, 1,300 lines (active)</p>
         </div>
         <div class="info-card">
           <h4>Target State</h4>
@@ -439,12 +453,14 @@
           V3 and V4 archived to <code>backups/</code></p>
         </div>
         <div class="info-card">
-          <h4>Log File</h4>
-          <p>Rename <code>agent_v4.log</code> to <code>agent.log</code> &mdash; standardize all logging under one file</p>
+          <h4>Active Plist</h4>
+          <p><code>com.norrisutilities.agent-v4.plist</code> &mdash; rename to <code>com.norrisutilities.agent.plist</code> and update path</p>
         </div>
         <div class="info-card">
-          <h4>Launchd Plist</h4>
-          <p>Update any launchd plist pointing to <code>agent_runner_v4.py</code> to reference <code>agent_runner.py</code></p>
+          <h4>Related Plists</h4>
+          <p><code>agent-v4-brief.plist.disabled</code><br>
+          <code>agent-v4-eod.plist.disabled</code><br>
+          Rename to drop &ldquo;v4&rdquo; suffix</p>
         </div>
       </div>
 
@@ -552,7 +568,7 @@
             <div class="step-number">4</div>
             <div>
               <strong>Update launchd plists</strong><br>
-              Any <code>~/Library/LaunchAgents/</code> plist referencing <code>agent_runner_v4.py</code> must point to <code>agent_runner.py</code>. Unload, update, reload.
+              Rename <code>com.norrisutilities.agent-v4.plist</code> to <code>com.norrisutilities.agent.plist</code>. Update program path from <code>agent_runner_v4.py</code> to <code>agent_runner.py</code>. Unload old, load new. Also rename the disabled brief/eod plists to drop the &ldquo;v4&rdquo; suffix.
             </div>
           </li>
           <li>
@@ -573,17 +589,23 @@
             <div class="step-number">7</div>
             <div>
               <strong>Commit and push</strong><br>
-              <code>git add -A &amp;&amp; git commit -m &quot;V5 final production release &mdash; single agent_runner.py&quot; &amp;&amp; git push</code>
+              Stage all changes, commit with &ldquo;V5 final production release,&rdquo; and push to acnorris17/norris-ops
             </div>
           </li>
         </ol>
 
         <div class="command-block">
           <span class="comment"># Step 1: Back up</span><br>
-          <span class="cmd">cp</span> agent_runner.py backups/agent_runner_v3_$(date +%Y%m%d).py<br>
-          <span class="cmd">cp</span> agent_runner_v4.py backups/agent_runner_v4_$(date +%Y%m%d).py<br><br>
+          <span class="cmd">mkdir</span> -p backups<br>
+          <span class="cmd">cp</span> agent_runner.py backups/agent_runner_v3_20260413.py<br>
+          <span class="cmd">cp</span> agent_runner_v4.py backups/agent_runner_v4_20260413.py<br><br>
           <span class="comment"># Step 2: Promote V4 to agent_runner.py</span><br>
           <span class="cmd">cp</span> agent_runner_v4.py agent_runner.py<br><br>
+          <span class="comment"># Step 4: Rename launchd plists</span><br>
+          <span class="cmd">launchctl</span> unload ~/Library/LaunchAgents/com.norrisutilities.agent-v4.plist<br>
+          <span class="cmd">mv</span> ~/Library/LaunchAgents/com.norrisutilities.agent-v4.plist ~/Library/LaunchAgents/com.norrisutilities.agent.plist<br>
+          <span class="comment"># Edit the plist to update ProgramArguments path, then:</span><br>
+          <span class="cmd">launchctl</span> load ~/Library/LaunchAgents/com.norrisutilities.agent.plist<br><br>
           <span class="comment"># Step 5: Remove standalone V4</span><br>
           <span class="cmd">rm</span> agent_runner_v4.py<br><br>
           <span class="comment"># Step 6: Validate</span><br>
@@ -608,7 +630,7 @@
           </li>
           <li>
             <div class="check-box"></div>
-            <div>agent_runner.py contains V5 docstring header (not V3 or V4)</div>
+            <div><code>agent_runner.py</code> contains V5 docstring header (not V3 or V4)</div>
           </li>
           <li>
             <div class="check-box"></div>
@@ -616,7 +638,7 @@
           </li>
           <li>
             <div class="check-box"></div>
-            <div>Launchd plists updated and reloaded</div>
+            <div><code>com.norrisutilities.agent.plist</code> loaded and active (v4 plist removed)</div>
           </li>
           <li>
             <div class="check-box"></div>
