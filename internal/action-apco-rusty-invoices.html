@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: APCO Rusty Invoices — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Action Item: Handle APCO Rusty Invoices — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
@@ -39,6 +39,7 @@
       overflow: hidden;
       min-height: 280px;
     }
+
     .nu-header::before {
       content: '';
       position: absolute;
@@ -54,6 +55,7 @@
       z-index: 1;
       opacity: 0.6;
     }
+
     .nu-header::after {
       content: '';
       position: absolute;
@@ -62,6 +64,7 @@
       background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
       z-index: 1;
     }
+
     .nu-header * { position: relative; z-index: 2; }
 
     .nu-phoenix-icon {
@@ -71,6 +74,7 @@
       fill: var(--nu-white);
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
+
     .nu-logo-text {
       font-family: var(--font-primary);
       font-weight: 900;
@@ -81,6 +85,7 @@
       margin-bottom: 4px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
+
     .nu-logo-subtitle {
       font-family: var(--font-primary);
       font-weight: 900;
@@ -90,10 +95,11 @@
       text-transform: uppercase;
       margin-bottom: 20px;
     }
+
     .nu-tagline {
-      font-family: var(--font-primary);
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 1.3rem;
       color: rgba(255,255,255,0.9);
       letter-spacing: 0.05em;
@@ -127,96 +133,96 @@
     }
     .nu-content-area > * { position: relative; z-index: 1; }
 
-    .nu-section-title {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.5rem;
-      color: var(--nu-blue);
-      margin-bottom: 8px;
-    }
-    .nu-section-title span {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-
-    .content-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 40px;
-    }
-
-    .action-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-    }
-    .action-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+    .page-label {
+      display: inline-block;
+      background: var(--nu-blue);
       color: var(--nu-white);
-      padding: 8px 20px;
-      border-radius: 6px;
+      font-family: var(--font-primary);
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.06em;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-    }
-    .action-badge svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--nu-cyan);
-    }
-    .action-date {
-      font-size: 0.95rem;
-      color: #666;
-      font-weight: 400;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 16px;
     }
 
-    .action-title {
+    .page-title {
       font-family: var(--font-primary);
       font-weight: 900;
       font-size: 2rem;
       color: var(--nu-dark-text);
-      margin-bottom: 12px;
-      line-height: 1.3;
+      margin-bottom: 8px;
     }
-    .action-title em {
+    .page-title em {
       color: var(--nu-blue);
       font-style: normal;
     }
 
-    .action-summary {
-      font-size: 1.05rem;
-      color: var(--nu-body-text);
-      line-height: 1.7;
-      margin-bottom: 40px;
-      padding-bottom: 32px;
+    .page-meta {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
       border-bottom: 2px solid var(--nu-medium-gray);
+    }
+
+    .action-summary {
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f4ff 100%);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 28px;
+      margin-bottom: 36px;
+    }
+    .action-summary h3 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-blue);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .action-summary p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--nu-body-text);
+    }
+
+    .section-heading {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    .section-heading em {
+      color: var(--nu-blue);
+      font-style: normal;
+    }
+    .section-heading span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
     }
 
     .checklist {
       list-style: none;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
     .checklist li {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
-      padding: 16px 20px;
+      padding: 14px 18px;
       margin-bottom: 8px;
-      background: var(--nu-light-gray);
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
       border-radius: 8px;
-      border-left: 4px solid var(--nu-blue);
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.5;
-      transition: background 0.15s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .checklist li:hover {
-      background: #eeeef4;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
     .check-box {
       width: 22px;
@@ -224,48 +230,55 @@
       min-width: 22px;
       border: 2px solid var(--nu-blue);
       border-radius: 4px;
+      margin-right: 14px;
       margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s ease;
     }
-    .checklist li strong {
-      color: var(--nu-dark-text);
+    .check-box:hover {
+      background: rgba(0, 0, 255, 0.08);
     }
 
     .info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
     .info-card {
       background: var(--nu-white);
       border-radius: 8px;
-      padding: 24px;
+      padding: 22px 24px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
     }
-    .info-card h3 {
+    .info-card h4 {
       font-family: var(--font-primary);
       font-weight: 700;
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--nu-blue);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .info-card p {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--nu-body-text);
       line-height: 1.6;
     }
-    .info-card p strong {
+    .info-card .highlight {
+      font-weight: 700;
       color: var(--nu-dark-text);
     }
 
     .notes-section {
       background: var(--nu-light-gray);
       border-radius: 8px;
-      padding: 28px;
-      margin-bottom: 40px;
+      padding: 24px 28px;
+      margin-bottom: 36px;
     }
     .notes-section h3 {
       font-family: var(--font-primary);
@@ -274,10 +287,36 @@
       color: var(--nu-dark-text);
       margin-bottom: 12px;
     }
-    .notes-section p {
+    .notes-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    .notes-section ul li {
+      padding: 6px 0;
       font-size: 0.95rem;
-      line-height: 1.7;
       color: var(--nu-body-text);
+      line-height: 1.6;
+    }
+    .notes-section ul li::before {
+      content: '\2022';
+      color: var(--nu-blue);
+      font-weight: 700;
+      margin-right: 10px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .status-pending {
+      background: #FFF3E0;
+      color: #E65100;
     }
 
     .nu-footer {
@@ -288,9 +327,10 @@
       font-family: var(--font-primary);
     }
     .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.1rem;
+      font-weight: 400;
+      font-size: 1.2rem;
       color: var(--nu-cyan);
       margin-bottom: 12px;
     }
@@ -302,20 +342,23 @@
       color: var(--nu-cyan);
       text-decoration: none;
     }
+    .nu-footer-contact a:hover {
+      text-decoration: underline;
+    }
 
     @media (max-width: 768px) {
       .nu-header { padding: 40px 20px 60px; min-height: 200px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .content-wrapper { padding: 40px 20px; }
-      .action-title { font-size: 1.5rem; }
       .info-grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 1.5rem; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checklist li { box-shadow: none; border: 1px solid #ccc; }
     }
   </style>
 </head>
@@ -343,74 +386,78 @@
 
   <!-- MAIN CONTENT -->
   <main class="nu-content-area">
-    <div class="content-wrapper">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 60px 40px;">
 
-      <!-- Action Header -->
-      <div class="action-header">
-        <div class="action-badge">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-          Action Item
-        </div>
-        <div class="action-date">Captured April 11, 2026</div>
+      <span class="page-label">Action Item</span>
+      <h1 class="page-title"><em>Handle</em> APCO Rusty Invoices</h1>
+      <div class="page-meta">
+        <span class="status-badge status-pending">Pending</span>&emsp;
+        Captured: April 12, 2026 &emsp;|&emsp; Account: Alabama Power Company (APCO) &emsp;|&emsp; Contact: Rusty
       </div>
 
-      <h1 class="action-title">Handle <em>APCO Rusty</em> Invoices</h1>
+      <!-- SUMMARY -->
+      <div class="action-summary">
+        <h3>Summary</h3>
+        <p>Review and resolve outstanding invoices for Rusty at Alabama Power Company (APCO). Confirm all invoice amounts, verify payment status, and follow up on any unpaid balances to ensure the account stays current.</p>
+      </div>
 
-      <p class="action-summary">
-        Review and resolve outstanding invoices related to APCO and Rusty. Ensure all billing is accurate, payments are reconciled, and any discrepancies are addressed promptly. Follow up with APCO contacts to confirm receipt and payment status.
-      </p>
+      <!-- ACCOUNT INFO -->
+      <h2 class="section-heading"><em>Account</em> <span>Details</span></h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h4>Customer</h4>
+          <p class="highlight">Alabama Power Company (APCO)</p>
+          <p>Contact: Rusty</p>
+        </div>
+        <div class="info-card">
+          <h4>Priority</h4>
+          <p class="highlight">Follow Up Required</p>
+          <p>Ensure invoices are resolved promptly to maintain account standing</p>
+        </div>
+      </div>
 
-      <!-- Checklist -->
-      <div class="nu-section-title">Action <span>Checklist</span></div>
+      <!-- ACTION STEPS -->
+      <h2 class="section-heading"><em>Action</em> <span>Steps</span></h2>
       <ul class="checklist">
         <li>
           <div class="check-box"></div>
-          <div><strong>Pull all open APCO invoices</strong> — Gather every outstanding invoice tied to Rusty at APCO and verify amounts, dates, and PO numbers.</div>
+          <div>Pull all outstanding invoices billed to APCO / Rusty from accounting records</div>
         </li>
         <li>
           <div class="check-box"></div>
-          <div><strong>Confirm delivery and receipt</strong> — Verify that all invoiced products were received by APCO and confirm delivery documentation is on file.</div>
+          <div>Verify each invoice: confirm amounts, dates, PO numbers, and line items are correct</div>
         </li>
         <li>
           <div class="check-box"></div>
-          <div><strong>Reconcile payment status</strong> — Check which invoices have been paid, which are pending, and flag any overdue balances.</div>
+          <div>Cross-reference against payments received — identify any unpaid or partially paid invoices</div>
         </li>
         <li>
           <div class="check-box"></div>
-          <div><strong>Follow up with Rusty at APCO</strong> — Contact Rusty directly to discuss any unpaid invoices, resolve discrepancies, and confirm expected payment dates.</div>
+          <div>Contact Rusty at APCO to confirm receipt of invoices and resolve any discrepancies</div>
         </li>
         <li>
           <div class="check-box"></div>
-          <div><strong>Update records</strong> — Log all findings, payment commitments, and next steps in the Norris Utilities® tracking system.</div>
+          <div>If balances remain open, send updated invoice copies and request payment timeline</div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div>Update accounting records with current payment status for each invoice</div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div>File all correspondence and payment confirmations for the APCO account</div>
         </li>
       </ul>
 
-      <!-- Info Grid -->
-      <div class="info-grid">
-        <div class="info-card">
-          <h3>Customer</h3>
-          <p><strong>APCO (Alabama Power Company)</strong><br>Contact: Rusty<br>Account Type: Utility — Direct</p>
-        </div>
-        <div class="info-card">
-          <h3>Priority</h3>
-          <p><strong>High</strong><br>Outstanding invoices require prompt resolution to maintain cash flow and account standing.</p>
-        </div>
-        <div class="info-card">
-          <h3>Owner</h3>
-          <p><strong>Aaron C. Norris</strong><br>Founder &amp; CEO<br>205-500-1343</p>
-        </div>
-        <div class="info-card">
-          <h3>Source</h3>
-          <p><strong>reMarkable Notebook</strong><br>Captured from handwritten action items during daily review.</p>
-        </div>
-      </div>
-
-      <!-- Notes -->
+      <!-- NOTES -->
       <div class="notes-section">
         <h3>Notes</h3>
-        <p>
-          APCO is a key utility account. Maintaining clean invoice records and timely follow-up with Rusty ensures continued trust and positions Norris Utilities® for future orders. Resolve all open items before end of billing cycle.
-        </p>
+        <ul>
+          <li>APCO (Alabama Power Company) is a major utility account — keep the relationship strong</li>
+          <li>Rusty is the point of contact for invoice-related matters at APCO</li>
+          <li>Confirm whether Caroline Butler needs to send any follow-up documentation</li>
+          <li>Track all communications in case of future disputes or audits</li>
+        </ul>
       </div>
 
     </div>
@@ -420,9 +467,9 @@
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> |
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      Aaron C. Norris, Founder &amp; CEO &emsp;|&emsp; Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> &emsp;|&emsp;
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &emsp;|&emsp;
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>
