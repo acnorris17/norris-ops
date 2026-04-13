@@ -20,6 +20,59 @@ for f in $FILES; do
   fi
 done
 
+# --- AUTH GATE GUARD: auto-inject nu-auth-gate-v2 into staged internal/*.html ---
+# Mirrors agent_runner_v4.inject_auth_gate() so every internal/ page requires login,
+# no matter which writer produced it (agent_runner_v4, Claude Code session, manual edit).
+STAGED_INTERNAL=$(git diff --cached --name-only --diff-filter=ACM | grep "^internal/.*\.html$" || true)
+if [ -n "$STAGED_INTERNAL" ]; then
+  INJECTED=0
+  while IFS= read -r f; do
+    [ -z "$f" ] && continue
+    [ -f "$f" ] || continue
+    python3 - "$f" << 'PYEOF'
+import sys, re, os
+path = sys.argv[1]
+with open(path, 'r', encoding='utf-8') as fh:
+    content = fh.read()
+if 'nu-auth-gate-v2' in content or 'nu_auth_2026' in content:
+    sys.exit(0)
+m = re.search(r'(<head\b[^>]*>)', content, re.IGNORECASE)
+if not m:
+    sys.exit(0)
+snippet = (
+    "\n<!-- nu-auth-gate-v2 -->\n"
+    "<script>(function(){"
+    "if(sessionStorage.getItem('nu_auth_2026')==='granted')return;"
+    "var pw=prompt('Password required:');"
+    "if(pw==='norris2026'){"
+    "sessionStorage.setItem('nu_auth_2026','granted');"
+    "sessionStorage.setItem('nu_role','aaron');"
+    "}else if(pw==='legacy2026'){"
+    "sessionStorage.setItem('nu_auth_2026','granted');"
+    "sessionStorage.setItem('nu_role','cb');"
+    "}else{window.location.replace('../index.html');}"
+    "})();</script>"
+)
+new_content = content[:m.end()] + snippet + content[m.end():]
+with open(path, 'w', encoding='utf-8') as fh:
+    fh.write(new_content)
+sys.exit(10)
+PYEOF
+    PYEXIT=$?
+    if [ "$PYEXIT" -eq 10 ]; then
+      git add "$f"
+      INJECTED=$((INJECTED + 1))
+      echo "🛡️  Auto-injected nu-auth-gate-v2 into $f"
+    elif [ "$PYEXIT" -ne 0 ]; then
+      echo "❌ BLOCKED: auth-gate inject script failed for $f (exit $PYEXIT)"
+      ERRORS=$((ERRORS + 1))
+    fi
+  done <<< "$STAGED_INTERNAL"
+  if [ "$INJECTED" -gt 0 ]; then
+    echo "🛡️  Auth gate auto-injected into $INJECTED file(s) before commit."
+  fi
+fi
+
 # --- DUPLICATE GUARD: block new internal/*.html with >=80% name match to existing ---
 NEW_INTERNAL=$(git diff --cached --name-only --diff-filter=A | grep "^internal/.*\.html$" || true)
 if [ -n "$NEW_INTERNAL" ]; then
