@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project Roadmap — Norris Utilities&reg;</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/brand.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-height:1.5}
+
+.hdr{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 55%,#00aaff 80%,#06D0FF 100%);color:#fff;padding:44px 40px 70px;overflow:hidden}
+.hdr::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:48px;background:#fff;clip-path:polygon(0 100%,38% 0,100% 100%)}
+.phoenix-ghost{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:65%;max-width:620px;opacity:.07;pointer-events:none;z-index:0}
+.hdr-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto}
+.hdr h1{font-weight:900;font-size:2.25rem;letter-spacing:-.01em;margin-bottom:6px}
+.hdr .sub{font-weight:400;font-size:1rem;opacity:.95}
+.hdr .ts{margin-top:14px;font-size:.82rem;opacity:.9;font-weight:400}
+.hdr .back{position:absolute;top:18px;left:40px;color:#fff;text-decoration:none;font-size:.85rem;font-weight:700;opacity:.85;z-index:2}
+.hdr .back:hover{opacity:1}
+
+.wrap{max-width:1200px;margin:-24px auto 0;padding:0 24px 60px;position:relative;z-index:1}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.stat{background:#fff;border-radius:14px;border-left:4px solid #0033cc;padding:16px 18px;box-shadow:0 3px 14px rgba(0,0,0,.05)}
+.stat .v{font-size:1.85rem;font-weight:900;color:#0033cc;line-height:1}
+.stat.crit .v{color:#dc3545}
+.stat.blk .v{color:#dc3545}
+.stat.rdy .v{color:#28a745}
+.stat.prog .v{color:#e67e22}
+.stat .l{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#888;margin-top:6px}
+
+.section{margin:32px 0 8px}
+.section h2{font-weight:900;font-size:1.35rem;margin-bottom:4px}
+.section h2 .blue{color:#0033cc}
+.section h2 .dark{color:#1a1a1a}
+.section .desc{font-size:.86rem;color:#666;margin-bottom:14px}
+
+.items{display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:820px){.items{grid-template-columns:1fr 1fr}}
+
+.item{background:#fff;border-radius:12px;border-left:4px solid #0033cc;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;display:flex;flex-direction:column;gap:8px}
+.item.crit{border-left-color:#dc3545}
+.item.infra-crit{border-left-color:#dc3545}
+.item.rev{border-left-color:#e67e22}
+.item.portal{border-left-color:#0033cc}
+.item.infra{border-left-color:#6f42c1}
+
+.item .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.item h3{font-weight:900;font-size:1.02rem;color:#0a0e5c;line-height:1.25;flex:1;min-width:0}
+.item .badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-block;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
+.p-p0{background:#f8d7da;color:#721c24}
+.p-p1{background:#ffe5cc;color:#7a4100}
+.p-p2{background:#cce5ff;color:#004085}
+.s-progress{background:#fff3cd;color:#856404}
+.s-blocked{background:#f8d7da;color:#721c24}
+.s-ready{background:#d4edda;color:#155724}
+.s-done{background:#d1d3d4;color:#414549;text-decoration:line-through}
+
+.cat{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#888}
+.note{font-size:.88rem;color:#424750;line-height:1.5}
+.dep{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;color:#555;background:#f1f3f5;padding:5px 10px;border-radius:8px;width:fit-content}
+.dep .arr{color:#0033cc;font-size:1rem;line-height:1}
+.dep.blocks{background:#fde8ea;color:#721c24}
+.dep.blocks .arr{color:#dc3545}
+
+.money{font-weight:900;font-size:.9rem;color:#0033cc}
+.money.rev{color:#28a745}
+.money.cost{color:#e67e22}
+.fin-line{font-size:.8rem;color:#666;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-top:4px;border-top:1px dashed #e8e8e8;margin-top:4px}
+
+.ftr{background:linear-gradient(135deg,#000033 0%,#000066 100%);color:rgba(255,255,255,.85);padding:32px 40px;text-align:center;border-top:3px solid #0033cc;margin-top:40px}
+.ftr .tag{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:#06D0FF;font-size:1.1rem;margin-bottom:8px}
+.ftr .reg{font-size:.78rem;opacity:.75}
+
+.legend{background:#fff;border-radius:10px;padding:12px 16px;margin-bottom:22px;box-shadow:0 2px 8px rgba(0,0,0,.05);font-size:.78rem;color:#555;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.legend b{color:#0a0e5c}
+
+@media (max-width:600px){
+ .hdr{padding:34px 20px 60px}
+ .hdr h1{font-size:1.65rem}
+ .hdr .back{left:20px}
+ .wrap{padding:0 14px 40px}
+ .stats{grid-template-columns:1fr 1fr;gap:8px}
+ .stat .v{font-size:1.4rem}
+ .item{padding:14px}
+ .item h3{font-size:.97rem}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+ <a href="/index.html" class="back">&larr; Back to Portal</a>
+ <img src="/assets/phoenix-icon.svg" alt="" class="phoenix-ghost">
+ <div class="hdr-inner">
+  <h1>Project Roadmap</h1>
+  <div class="sub">Priority build queue &mdash; what&rsquo;s blocking what, what ships next.</div>
+  <div class="ts">Last updated: <span id="lu">April 13, 2026 &mdash; EOD</span></div>
+ </div>
+</header>
+
+<main class="wrap">
+
+ <section class="legend">
+  <b>Legend:</b>
+  <span><span class="pill p-p0">P0</span> critical path</span>
+  <span><span class="pill p-p1">P1</span> revenue</span>
+  <span><span class="pill p-p2">P2</span> portal/infra</span>
+  <span>&middot;</span>
+  <span><span class="pill s-ready">Ready</span></span>
+  <span><span class="pill s-progress">In Progress</span></span>
+  <span><span class="pill s-blocked">Blocked</span></span>
+  <span><span class="pill s-done">Done</span></span>
+ </section>
+
+ <section class="stats">
+  <div class="stat crit"><div class="v">4</div><div class="l">Critical (P0)</div></div>
+  <div class="stat prog"><div class="v">4</div><div class="l">In Progress</div></div>
+  <div class="stat blk"><div class="v">3</div><div class="l">Blocked</div></div>
+  <div class="stat rdy"><div class="v">9</div><div class="l">Ready</div></div>
+ </section>
+
+ <!-- ========= CRITICAL PATH ========= -->
+ <section class="section">
+  <h2><span class="blue">Critical</span> <span class="dark">Path</span></h2>
+  <div class="desc">These block everything else. Clear these first.</div>
+  <div class="items">
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>1. Shipping AI Agent</h3>
+     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-progress">In Progress</span></div>
+    </div>
+    <div class="cat">Critical Path &middot; Agent build</div>
+    <div class="note">Blocks ALL invoicing by CB. Must be 100% verified before CB creates a single QuickBooks invoice. Output must supply correct tracking number, recipient, products, and amounts.</div>
+    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocks: every invoice CB would create</span></div>
+    <div class="fin-line aaron-only"><span class="money rev">Unlocks entire A/R cycle</span><span>Input to BSS / Dominion / LineTec invoices</span></div>
+   </div>
+
+   <div class="item infra-crit">
+    <div class="row1">
+     <h3>2. Alabama Master Dealer License</h3>
+     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
+    </div>
+    <div class="cat">Critical Path &middot; Legal / compliance</div>
+    <div class="note">Not started. Required before any Skylift truck sells in Alabama. Surety bond via SuretyBondsDirect.com.</div>
+    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocks: all Skylift AL sales</span></div>
+    <div class="fin-line aaron-only"><span class="money cost">Bond: ~$500&ndash;$1,500</span><span class="money rev">Unlocks: $1,091,402.50 truck PO</span></div>
+   </div>
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>3. BSS Invoice 11</h3>
+     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Critical Path &middot; A/R send</div>
+    <div class="note">Unblocked now. Aaron sends today. Saved in Google Drive and iCloud.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Next: confirm receipt from Herb / Andy</span></div>
+    <div class="fin-line aaron-only"><span class="money rev">$8,039.27</span><span>Bay Shore Systems</span></div>
+   </div>
+
+  </div>
+ </section>
+
+ <!-- ========= PORTAL BUILDS ========= -->
+ <section class="section">
+  <h2><span class="blue">Portal</span> <span class="dark">Builds</span></h2>
+  <div class="desc">In build order.</div>
+  <div class="items">
+
+   <div class="item portal">
+    <div class="row1">
+     <h3>4. project-roadmap.html</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-progress">In Progress</span></div>
+    </div>
+    <div class="cat">Portal &middot; This page</div>
+    <div class="note">The page you&rsquo;re reading. Staged on <code>feature/project-roadmap</code> for review before merge.</div>
+   </div>
+
+   <div class="item portal">
+    <div class="row1">
+     <h3>5. change-log.html</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Portal &middot; History view</div>
+    <div class="note">Render the last 50 git commits on the ops repo as a reviewable timeline. Link from portal nav.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Separate from existing improvement_log.html</span></div>
+   </div>
+
+   <div class="item portal">
+    <div class="row1">
+     <h3>6. Contact detail modal</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Portal &middot; CB&rsquo;s CRM request</div>
+    <div class="note">Click a contact &rarr; see every invoice + interaction in one place. From the April 7 meeting: &ldquo;If I went to contacts and clicked on Donna Poll, it pulled up every invoice.&rdquo;</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Lives in existing Contacts tab</span></div>
+   </div>
+
+   <div class="item portal">
+    <div class="row1">
+     <h3>7. Fix pipeline_value stat</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Portal &middot; Data correction</div>
+    <div class="note">Dashboard shows $685K. Real pipeline closer to $2.5M. Recalculate from deals-pipeline source of truth.</div>
+   </div>
+
+   <div class="item portal">
+    <div class="row1">
+     <h3>8. CB Telegram Bot</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Portal &middot; Separate bot</div>
+    <div class="note">Dedicated business-only bot for Caroline. Separate from Aaron&rsquo;s Legacy bot. Needs design session.</div>
+   </div>
+
+  </div>
+ </section>
+
+ <!-- ========= INFRASTRUCTURE ========= -->
+ <section class="section">
+  <h2><span class="blue">Infrastructure</span></h2>
+  <div class="desc">Foundations that everything else rides on.</div>
+  <div class="items">
+
+   <div class="item infra">
+    <div class="row1">
+     <h3>9. sd_builder.py telegram_msg_id fix</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Infrastructure &middot; Regression</div>
+    <div class="note">telegram_msg_id regression in sd_builder.py. Scope: single file, single field.</div>
+   </div>
+
+   <div class="item infra">
+    <div class="row1">
+     <h3>10. norris-agent remote GitHub repo</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Infrastructure &middot; Git remote</div>
+    <div class="note">Local <code>~/norris-agent</code> currently has no remote. Create GitHub repo, push, establish the backup/sync path the ops repo already has.</div>
+   </div>
+
+   <div class="item infra-crit">
+    <div class="row1">
+     <h3>11. Time Machine backup on M1</h3>
+     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
+    </div>
+    <div class="cat">Infrastructure &middot; Disaster recovery</div>
+    <div class="note"><b>CRITICAL: no backup exists.</b> Blocks on external drive or NAS. If the M1 dies today, everything is lost. This is the single biggest infrastructure risk.</div>
+    <div class="dep blocks"><span class="arr">&#9888;</span><span>Nothing else matters if M1 dies</span></div>
+    <div class="fin-line aaron-only"><span class="money cost">Cost: ~$150&ndash;$400 external drive</span></div>
+   </div>
+
+   <div class="item infra">
+    <div class="row1">
+     <h3>12. reMarkable pipeline reconnect</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-blocked">Blocked</span></div>
+    </div>
+    <div class="cat">Infrastructure &middot; Agent input</div>
+    <div class="note">Pipeline currently disconnected. 37 open items waiting. Reconnect so new reMarkable notes flow into the task queue again.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Queued: 37 items</span></div>
+   </div>
+
+  </div>
+ </section>
+
+ <!-- ========= REVENUE ACTIONS ========= -->
+ <section class="section">
+  <h2><span class="blue">Revenue</span> <span class="dark">Actions</span></h2>
+  <div class="desc">Money on the table this week.</div>
+  <div class="items">
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>13. Rick Sutherland / EPB &mdash; revival email</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Revenue &middot; Today</div>
+    <div class="note">SkyTruck47 quoted December 4, 2025. Going cold. Send revival email today.</div>
+    <div class="fin-line aaron-only"><span class="money rev">Opportunity: $185,000</span><span>EPB Chattanooga</span></div>
+   </div>
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>14. Coy Crosby &mdash; April 8 RFP follow-up</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Revenue &middot; This week</div>
+    <div class="note">Material 42350802: 5&times; NU-BC-2851 @ $305 quoted. No response 13+ days after March 25 touch.</div>
+    <div class="fin-line aaron-only"><span class="money rev">Quote: $1,525</span><span>+ shipping &middot; Dominion Energy</span></div>
+   </div>
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>15. Coy Crosby &mdash; March 20 qty verify</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Revenue &middot; This week</div>
+    <div class="note">~5&times; NU-BC-2834 shipped March 20, not yet invoiced. Aaron says 5, records say 6. Verify quantity at UPS Store before invoicing.</div>
+    <div class="fin-line aaron-only"><span class="money rev">Est. $1,325</span><span>@ $265 per unit</span></div>
+   </div>
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>16. MK Skylift marketing materials</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-progress">In Progress</span></div>
+    </div>
+    <div class="cat">Revenue &middot; Urgent</div>
+    <div class="note">MK Smith behind schedule. Materials needed <b>before</b> trucks arrive &mdash; must sell all six. Skylift April Open Order Report received April 7.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>5&times; SBA40i-LW + 1&times; SBA47i-MH</span></div>
+    <div class="fin-line aaron-only"><span class="money rev">Total PO: $1,091,402.50</span><span>Must sell all before arrival</span></div>
+   </div>
+
+  </div>
+ </section>
+
+</main>
+
+<footer class="ftr">
+ <div class="tag">A Legacy of Commitment&reg;</div>
+ <div class="reg">Norris Utilities&reg; &middot; Birmingham, AL &middot; acnorris@norrisutilities.com</div>
+</footer>
+
+<script>
+(function(){
+  var r = sessionStorage.getItem('nu_role');
+  if (sessionStorage.getItem('nu_auth_2026') === 'granted' && (r === 'aaron' || r === 'cb')) {
+    if (r === 'cb') {
+      document.querySelectorAll('.aaron-only').forEach(function(el){ el.style.display = 'none'; });
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
