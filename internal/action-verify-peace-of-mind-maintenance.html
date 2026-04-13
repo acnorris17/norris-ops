@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Item: Verify Peace of Mind Maintenance Program — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: var(--font-primary);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+    .action-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+    .action-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #FF8C00, #FF6600);
+      color: var(--nu-white);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .action-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .action-title span {
+      color: var(--nu-blue);
+    }
+    .action-date {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 32px;
+    }
+    .action-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 24px;
+    }
+    .action-card h3 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-blue);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .action-card h3 span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+    .action-card p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--nu-body-text);
+      margin-bottom: 12px;
+    }
+    .action-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .action-card ul li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .action-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      background: var(--nu-cyan);
+      border-radius: 2px;
+      transform: rotate(45deg);
+    }
+    .checklist li::before {
+      content: '' !important;
+      width: 16px !important;
+      height: 16px !important;
+      background: var(--nu-white) !important;
+      border: 2px solid var(--nu-blue) !important;
+      border-radius: 3px !important;
+      transform: none !important;
+      top: 4px !important;
+    }
+    .priority-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #FFF3E0, #FFF8F0);
+      border-left: 4px solid #FF8C00;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 24px;
+    }
+    .priority-bar .icon {
+      font-size: 1.4rem;
+    }
+    .priority-bar .text {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+    }
+    .priority-bar .sub {
+      font-weight: 400;
+      color: #666;
+    }
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .action-container { padding: 40px 20px; }
+      .action-title { font-size: 1.5rem; }
+    }
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .action-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">U T I L I T I E S</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div class="action-container">
+
+      <div class="action-badge">Action Item</div>
+      <h1 class="action-title"><span>Verify</span> Peace of Mind Maintenance Program Requirement</h1>
+      <div class="action-date">Captured: April 13, 2026 | Source: reMarkable Notes</div>
+
+      <div class="priority-bar">
+        <div class="icon">&#9888;</div>
+        <div>
+          <div class="text">Medium Priority — Needs Clarification</div>
+          <div class="sub">Determine whether the Peace of Mind maintenance program is a contractual requirement or optional add-on</div>
+        </div>
+      </div>
+
+      <div class="action-card">
+        <h3>What <span>Needs to Happen</span></h3>
+        <p>Confirm whether the Peace of Mind maintenance program is a mandatory requirement for any current or pending equipment purchase, warranty compliance, or service agreement. This includes verifying whether the program is required by the OEM, required by the customer's internal policy, or simply a recommended option.</p>
+      </div>
+
+      <div class="action-card">
+        <h3>Steps <span>to Complete</span></h3>
+        <ul class="checklist">
+          <li>Review the original equipment purchase agreement or quote to check for maintenance program stipulations</li>
+          <li>Contact the OEM or dealer representative to confirm whether Peace of Mind enrollment is a warranty requirement</li>
+          <li>Determine if the customer has an internal policy requiring extended maintenance coverage on purchased equipment</li>
+          <li>Compare the cost of the Peace of Mind program against self-managing maintenance to evaluate the value proposition</li>
+          <li>Document the findings and make a recommendation on whether to enroll or decline</li>
+        </ul>
+      </div>
+
+      <div class="action-card">
+        <h3>Key <span>Questions to Answer</span></h3>
+        <ul>
+          <li>Is the Peace of Mind program required to maintain the manufacturer warranty?</li>
+          <li>Does the purchase contract or financing agreement mandate enrollment?</li>
+          <li>What does the program cover versus standard warranty?</li>
+          <li>What is the total cost of the program over the equipment lifecycle?</li>
+          <li>Are there penalties or coverage gaps if the program is not purchased?</li>
+        </ul>
+      </div>
+
+      <div class="action-card">
+        <h3>Expected <span>Outcome</span></h3>
+        <p>A clear, documented answer on whether the Peace of Mind maintenance program is required or optional. If required, identify by whom and under what terms. If optional, provide a cost-benefit summary so Aaron can make an informed decision on enrollment.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
