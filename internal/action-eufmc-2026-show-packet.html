@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EUFMC 2026 Show Packet — Norris Utilities®</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .nu-section-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    .nu-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nu-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .page-label {
+      display: inline-block;
+      background: linear-gradient(135deg, #1a1a3e, #2a2a5e);
+      color: var(--nu-cyan);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .email-meta {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 8px 16px;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+    .email-meta dt {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+    }
+    .email-meta dd {
+      color: var(--nu-body-text);
+    }
+    .email-meta dd a {
+      color: var(--nu-blue);
+      text-decoration: none;
+    }
+
+    .summary-box {
+      background: var(--nu-light-gray);
+      border-left: 4px solid var(--nu-blue);
+      padding: 20px 24px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 32px;
+    }
+    .summary-box p {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .key-details {
+      list-style: none;
+      padding: 0;
+    }
+    .key-details li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+    .key-details li:last-child { border-bottom: none; }
+    .key-details .bullet {
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      background: var(--nu-cyan);
+      border-radius: 50%;
+      margin-top: 8px;
+    }
+
+    .action-items {
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f4ff 100%);
+      border: 2px solid var(--nu-blue);
+      border-radius: 8px;
+      padding: 24px;
+      margin-top: 32px;
+    }
+    .action-items h3 {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-blue);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .action-items ol {
+      padding-left: 20px;
+    }
+    .action-items li {
+      padding: 8px 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .draft-section {
+      margin-top: 40px;
+    }
+    .draft-label {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 6px 16px;
+      border-radius: 4px 4px 0 0;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .draft-body {
+      background: #fafafa;
+      border: 1px solid var(--nu-medium-gray);
+      border-top: none;
+      border-radius: 0 4px 4px 4px;
+      padding: 32px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+    .draft-body .indent {
+      padding-left: 2em;
+    }
+    .draft-body .sig {
+      margin-top: 24px;
+      line-height: 1.6;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .contact-card .person {
+      background: var(--nu-light-gray);
+      padding: 16px;
+      border-radius: 8px;
+    }
+    .contact-card .person-name {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      font-size: 1rem;
+    }
+    .contact-card .person-role {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .contact-card .person a {
+      color: var(--nu-blue);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .email-meta { grid-template-columns: 1fr; }
+      .contact-card { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <!-- WHITE CHEVRON TRANSITION -->
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="nu-content-area">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 60px 40px;">
+
+      <span class="page-label">Incoming Email — Action Required</span>
+
+      <h1 class="nu-section-title" style="font-size: 2rem; margin-bottom: 24px;">EUFMC <span>2026 Show Packet</span></h1>
+
+      <!-- EMAIL META -->
+      <div class="nu-card" style="margin-bottom: 32px;">
+        <dl class="email-meta">
+          <dt>From</dt>
+          <dd>Ann Brown-Hailey &lt;<a href="mailto:abrownhailey@eufmc.com">abrownhailey@eufmc.com</a>&gt;</dd>
+          <dt>CC</dt>
+          <dd>Todd Carlson &lt;<a href="mailto:todd.carlson@sce.com">todd.carlson@sce.com</a>&gt;</dd>
+          <dt>Subject</dt>
+          <dd>EUFMC 2026 Show Packet</dd>
+          <dt>Date</dt>
+          <dd>April 13, 2026, 1:03 PM CT</dd>
+          <dt>Priority</dt>
+          <dd style="color: #cc6600; font-weight: 700;">Flagged — Unknown Domain</dd>
+        </dl>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="summary-box">
+        <p><strong>What this is:</strong> Ann Brown-Hailey, EUFMC Director of Administration, sent the official 2026 Show Packet to all exhibitor key contacts. The packet is attached to the email (PDF). This is the annual Electric Utility Fleet Managers Conference equipment show in Williamsburg, VA. Norris Utilities® is listed as an exhibiting company.</p>
+      </div>
+
+      <!-- KEY DETAILS -->
+      <h2 class="nu-section-title" style="margin-top: 32px;">Key <span>Details from the Email</span></h2>
+      <div class="nu-card" style="margin-top: 16px;">
+        <ul class="key-details">
+          <li><span class="bullet"></span><span><strong>Drive-Through Time Drawing:</strong> May 8, 2026, 11:00 AM ET via Microsoft Teams — a Teams invite should already be in your inbox</span></li>
+          <li><span class="bullet"></span><span><strong>Drive-Thru Start:</strong> 8:00 AM on show day (Monday)</span></li>
+          <li><span class="bullet"></span><span><strong>Shuttle Service:</strong> Continuous shuttles run Monday from Williamsburg Lodge and Williamsburg Woodlands Hotels, pausing 12:30 – 2:00 PM</span></li>
+          <li><span class="bullet"></span><span><strong>Parking:</strong> Limited parking in the adjacent Bavaria lot on Monday only — requires EUFMC badge</span></li>
+          <li><span class="bullet"></span><span><strong>No Personal Vehicles</strong> allowed in show booths on Monday</span></li>
+          <li><span class="bullet"></span><span><strong>Rideshare:</strong> Designated drop-off/pick-up location marked on the site map in the packet</span></li>
+          <li><span class="bullet"></span><span><strong>Safety Demonstrations:</strong> Scheduled in the afternoon</span></li>
+        </ul>
+      </div>
+
+      <!-- ACTION ITEMS -->
+      <div class="action-items">
+        <h3>Recommended Action Items</h3>
+        <ol>
+          <li><strong>Download and review the attached Show Packet PDF</strong> from the email — it contains the site map, booth assignment, and logistics details</li>
+          <li><strong>Check your calendar for the May 8 Teams meeting invite</strong> — this is the drawing for drive-through times; if missing, contact Ann</li>
+          <li><strong>Share the packet with Caroline (CB)</strong> so she can coordinate any travel or logistics</li>
+          <li><strong>Confirm booth setup plans</strong> — determine what equipment/materials to bring and arrange transport (no personal vehicles in booths)</li>
+          <li><strong>Reply to acknowledge receipt</strong> — draft below</li>
+        </ol>
+      </div>
+
+      <!-- CONTACTS -->
+      <h2 class="nu-section-title" style="margin-top: 40px;">Show <span>Contacts</span></h2>
+      <div class="contact-card">
+        <div class="person">
+          <div class="person-name">Ann Brown-Hailey</div>
+          <div class="person-role">Director of Administration, EUFMC</div>
+          <a href="tel:7572201795">757-220-1795</a><br>
+          <a href="mailto:abrownhailey@eufmc.com">abrownhailey@eufmc.com</a>
+        </div>
+        <div class="person">
+          <div class="person-name">Todd Carlson</div>
+          <div class="person-role">Equipment Show Coordinator, EUFMC</div>
+          <a href="mailto:todd.carlson@sce.com">todd.carlson@sce.com</a>
+        </div>
+      </div>
+
+      <!-- DRAFT REPLY -->
+      <div class="draft-section">
+        <h2 class="nu-section-title" style="margin-bottom: 16px;">Draft <span>Reply</span></h2>
+        <span class="draft-label">Email Draft — Ready for Review</span>
+        <div class="draft-body">Ann —
+
+<div class="indent">Thank you for sending the 2026 Show Packet. Received and reviewing now.</div>
+
+<div class="indent">We are looking forward to another great EUFMC event in Williamsburg. I will confirm attendance for the May 8 drive-through drawing as well.</div>
+
+<div class="indent">If anything is needed from Norris Utilities before the show, please do not hesitate to reach out.</div>
+
+Sincerely,
+<div class="sig">Aaron C. Norris
+Founder &amp; CEO
+Norris Utilities, LLC
+Cell: 205-500-1343
+acnorris@norrisutilities.com</div></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
