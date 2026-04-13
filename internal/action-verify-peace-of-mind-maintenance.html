@@ -5,9 +5,10 @@
 <script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: Verify Peace of Mind Maintenance Program — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Action Item: Confirm Peace of Mind Maintenance Program — Norris Utilities®</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap');
+
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -19,6 +20,7 @@
       --nu-body-text: #333333;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
@@ -28,6 +30,7 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
+
     .nu-header {
       position: relative;
       background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
@@ -60,6 +63,17 @@
       z-index: 1;
     }
     .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+    }
+    .nu-phoenix-icon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
     .nu-logo-text {
       font-family: var(--font-primary);
       font-weight: 900;
@@ -80,13 +94,14 @@
       margin-bottom: 20px;
     }
     .nu-tagline {
-      font-family: var(--font-primary);
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 1.3rem;
       color: rgba(255,255,255,0.9);
       letter-spacing: 0.05em;
     }
+
     .nu-chevron {
       position: relative;
       height: 50px;
@@ -98,6 +113,7 @@
       height: 50px;
       display: block;
     }
+
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
@@ -113,23 +129,21 @@
       z-index: 0;
     }
     .nu-content-area > * { position: relative; z-index: 1; }
-    .action-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 40px;
-    }
-    .action-badge {
+
+    .page-label {
       display: inline-block;
-      background: linear-gradient(135deg, #FF8C00, #FF6600);
+      background: linear-gradient(135deg, var(--nu-blue), #0033CC);
       color: var(--nu-white);
+      font-family: var(--font-primary);
       font-weight: 700;
       font-size: 0.8rem;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 6px 16px;
       border-radius: 4px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
+
     .action-title {
       font-family: var(--font-primary);
       font-weight: 900;
@@ -138,22 +152,27 @@
       margin-bottom: 8px;
       line-height: 1.3;
     }
-    .action-title span {
+    .action-title .highlight {
       color: var(--nu-blue);
     }
+
     .action-date {
+      font-family: var(--font-primary);
+      font-weight: 400;
       font-size: 0.95rem;
-      color: #666;
+      color: #888;
       margin-bottom: 32px;
     }
+
     .action-card {
       background: var(--nu-white);
       border-radius: 8px;
-      padding: 28px;
+      padding: 28px 32px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
       margin-bottom: 24px;
     }
+
     .action-card h3 {
       font-family: var(--font-primary);
       font-weight: 900;
@@ -161,72 +180,94 @@
       color: var(--nu-blue);
       margin-bottom: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
-    .action-card h3 span {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-    .action-card p {
+
+    .action-card p, .action-card li {
+      font-family: var(--font-primary);
+      font-weight: 400;
       font-size: 1rem;
-      line-height: 1.7;
       color: var(--nu-body-text);
-      margin-bottom: 12px;
+      line-height: 1.7;
     }
+
     .action-card ul {
       list-style: none;
       padding: 0;
     }
     .action-card ul li {
+      padding: 8px 0;
+      padding-left: 20px;
       position: relative;
-      padding-left: 24px;
-      margin-bottom: 10px;
-      font-size: 0.95rem;
-      line-height: 1.6;
+      border-bottom: 1px solid var(--nu-light-gray);
+    }
+    .action-card ul li:last-child {
+      border-bottom: none;
     }
     .action-card ul li::before {
-      content: '';
+      content: '\25C6';
+      color: var(--nu-cyan);
       position: absolute;
       left: 0;
-      top: 8px;
+      font-size: 0.7rem;
+      top: 11px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFF3E0;
+      color: #E65100;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      letter-spacing: 0.03em;
+    }
+    .status-badge .dot {
       width: 10px;
       height: 10px;
-      background: var(--nu-cyan);
-      border-radius: 2px;
-      transform: rotate(45deg);
+      background: #E65100;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
     }
-    .checklist li::before {
-      content: '' !important;
-      width: 16px !important;
-      height: 16px !important;
-      background: var(--nu-white) !important;
-      border: 2px solid var(--nu-blue) !important;
-      border-radius: 3px !important;
-      transform: none !important;
-      top: 4px !important;
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
+
     .priority-bar {
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #FFF3E0, #FFF8F0);
-      border-left: 4px solid #FF8C00;
-      padding: 16px 20px;
-      border-radius: 0 8px 8px 0;
+      gap: 16px;
+      background: var(--nu-light-gray);
+      padding: 16px 24px;
+      border-radius: 8px;
       margin-bottom: 24px;
     }
-    .priority-bar .icon {
-      font-size: 1.4rem;
-    }
-    .priority-bar .text {
+    .priority-bar .label {
+      font-family: var(--font-primary);
       font-weight: 700;
+      font-size: 0.85rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .priority-bar .value {
+      font-family: var(--font-primary);
+      font-weight: 900;
       font-size: 0.95rem;
       color: var(--nu-dark-text);
     }
-    .priority-bar .sub {
-      font-weight: 400;
-      color: #666;
+    .priority-bar .divider {
+      width: 1px;
+      height: 24px;
+      background: var(--nu-medium-gray);
     }
+
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.8);
@@ -235,8 +276,9 @@
       font-family: var(--font-primary);
     }
     .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 1.1rem;
       color: var(--nu-cyan);
       margin-bottom: 12px;
@@ -249,26 +291,36 @@
       color: var(--nu-cyan);
       text-decoration: none;
     }
+
     @media (max-width: 768px) {
       .nu-header { padding: 40px 20px 60px; min-height: 200px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .action-container { padding: 40px 20px; }
       .action-title { font-size: 1.5rem; }
+      .action-card { padding: 20px; }
+      .priority-bar { flex-wrap: wrap; gap: 12px; }
+      .priority-bar .divider { display: none; }
     }
+
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .action-card { box-shadow: none; border: 1px solid #ccc; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
     }
   </style>
 </head>
 <body>
 
   <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
     <div class="nu-logo-text">NORRIS</div>
-    <div class="nu-logo-subtitle">U T I L I T I E S</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
@@ -279,50 +331,66 @@
   </div>
 
   <main class="nu-content-area">
-    <div class="action-container">
+    <div style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
 
-      <div class="action-badge">Action Item</div>
-      <h1 class="action-title"><span>Verify</span> Peace of Mind Maintenance Program Requirement</h1>
-      <div class="action-date">Captured: April 13, 2026 | Source: reMarkable Notes</div>
+      <span class="page-label">Action Item</span>
+
+      <h1 class="action-title"><span class="highlight">Confirm</span> Peace of Mind Maintenance Program Requirement</h1>
+
+      <p class="action-date">Created: April 13, 2026</p>
+
+      <div class="status-badge">
+        <span class="dot"></span>
+        PENDING CONFIRMATION
+      </div>
 
       <div class="priority-bar">
-        <div class="icon">&#9888;</div>
         <div>
-          <div class="text">Medium Priority — Needs Clarification</div>
-          <div class="sub">Determine whether the Peace of Mind maintenance program is a contractual requirement or optional add-on</div>
+          <div class="label">Priority</div>
+          <div class="value">Medium</div>
+        </div>
+        <div class="divider"></div>
+        <div>
+          <div class="label">Category</div>
+          <div class="value">Maintenance / Service Agreement</div>
+        </div>
+        <div class="divider"></div>
+        <div>
+          <div class="label">Owner</div>
+          <div class="value">Aaron C. Norris</div>
         </div>
       </div>
 
       <div class="action-card">
-        <h3>What <span>Needs to Happen</span></h3>
-        <p>Confirm whether the Peace of Mind maintenance program is a mandatory requirement for any current or pending equipment purchase, warranty compliance, or service agreement. This includes verifying whether the program is required by the OEM, required by the customer's internal policy, or simply a recommended option.</p>
+        <h3>Task Summary</h3>
+        <p>Confirm whether the Peace of Mind maintenance program is required for the equipment or service agreement in question. This determination will impact ongoing service obligations, warranty coverage, and customer cost structure.</p>
       </div>
 
       <div class="action-card">
-        <h3>Steps <span>to Complete</span></h3>
-        <ul class="checklist">
-          <li>Review the original equipment purchase agreement or quote to check for maintenance program stipulations</li>
-          <li>Contact the OEM or dealer representative to confirm whether Peace of Mind enrollment is a warranty requirement</li>
-          <li>Determine if the customer has an internal policy requiring extended maintenance coverage on purchased equipment</li>
-          <li>Compare the cost of the Peace of Mind program against self-managing maintenance to evaluate the value proposition</li>
-          <li>Document the findings and make a recommendation on whether to enroll or decline</li>
-        </ul>
-      </div>
-
-      <div class="action-card">
-        <h3>Key <span>Questions to Answer</span></h3>
+        <h3>Key Questions to Resolve</h3>
         <ul>
-          <li>Is the Peace of Mind program required to maintain the manufacturer warranty?</li>
-          <li>Does the purchase contract or financing agreement mandate enrollment?</li>
-          <li>What does the program cover versus standard warranty?</li>
-          <li>What is the total cost of the program over the equipment lifecycle?</li>
-          <li>Are there penalties or coverage gaps if the program is not purchased?</li>
+          <li>Is the Peace of Mind maintenance program mandatory per the manufacturer or dealer agreement terms?</li>
+          <li>Does the customer's purchase or lease contract stipulate enrollment in the maintenance program?</li>
+          <li>What are the specific coverage benefits included in the Peace of Mind program (scheduled maintenance, parts, labor, emergency service)?</li>
+          <li>What is the cost to the customer if the program is required vs. optional?</li>
+          <li>Are there warranty implications if the customer declines the maintenance program?</li>
         </ul>
       </div>
 
       <div class="action-card">
-        <h3>Expected <span>Outcome</span></h3>
-        <p>A clear, documented answer on whether the Peace of Mind maintenance program is required or optional. If required, identify by whom and under what terms. If optional, provide a cost-benefit summary so Aaron can make an informed decision on enrollment.</p>
+        <h3>Recommended Next Steps</h3>
+        <ul>
+          <li>Review the original equipment purchase or lease agreement for maintenance program language</li>
+          <li>Contact the manufacturer or dealer representative to confirm program requirements</li>
+          <li>Obtain written confirmation of whether enrollment is mandatory or optional</li>
+          <li>Document the program terms, coverage details, and pricing for the customer file</li>
+          <li>Communicate findings to the customer with a clear recommendation</li>
+        </ul>
+      </div>
+
+      <div class="action-card">
+        <h3>Notes</h3>
+        <p>If the Peace of Mind maintenance program is confirmed as required, ensure all terms are documented and the customer is informed of their obligations. If optional, prepare a cost-benefit summary to help guide the customer's decision.</p>
       </div>
 
     </div>
