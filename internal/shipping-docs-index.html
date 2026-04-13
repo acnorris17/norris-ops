@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norris Utilities® — Shipping Documents</title>
+<script>
+(function(){
+  var p=sessionStorage.getItem('nu_auth');
+  if(p!=='legacy2026'&&p!=='norris2026'){
+    p=prompt('Password:');
+    if(p!=='legacy2026'&&p!=='norris2026'){document.body.innerHTML='<h2 style="text-align:center;margin-top:20vh;font-family:Arial">Access Denied</h2>';return;}
+    sessionStorage.setItem('nu_auth',p);
+  }
+})();
+</script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Helvetica Neue',Arial,sans-serif; background:#f0f2f5; color:#1a1a1a; }
+.header { background:linear-gradient(135deg,#0000FF,#06D0FF); padding:20px 32px; display:flex; align-items:center; justify-content:space-between; }
+.header h1 { color:white; font-size:20pt; font-weight:900; }
+.header p { color:rgba(255,255,255,.85); font-size:10pt; margin-top:3px; }
+.content { padding:24px 32px; max-width:1100px; margin:0 auto; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:16px; margin-top:20px; }
+.card { background:white; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,.1); overflow:hidden; transition:box-shadow .2s; }
+.card:hover { box-shadow:0 4px 12px rgba(0,0,0,.15); }
+.card-header { background:#0000FF; color:white; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; }
+.card-header .sd-name { font-size:10pt; font-weight:700; font-family:monospace; }
+.card-header .badge { background:rgba(255,255,255,.2); padding:2px 8px; border-radius:12px; font-size:8.5pt; }
+.card-body { padding:14px 16px; }
+.card-body .customer { font-size:13pt; font-weight:700; margin-bottom:4px; }
+.card-body .meta { font-size:9pt; color:#666; margin-bottom:10px; }
+.card-body .skus { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+.sku-tag { background:#f0f4ff; color:#0000FF; padding:3px 10px; border-radius:12px; font-size:8.5pt; font-weight:700; }
+.card-actions { display:flex; gap:8px; }
+.btn { flex:1; padding:8px; border-radius:4px; border:none; cursor:pointer; font-size:9.5pt; font-weight:700; text-align:center; text-decoration:none; display:block; }
+.btn-view { background:#0000FF; color:white; }
+.btn-print { background:#f0f0f0; color:#333; }
+.btn-view:hover { background:#0000cc; }
+.btn-print:hover { background:#e0e0e0; }
+.stats { display:flex; gap:24px; margin-bottom:4px; }
+.stat { background:white; border-radius:6px; padding:12px 20px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+.stat .num { font-size:22pt; font-weight:900; color:#0000FF; }
+.stat .lbl { font-size:9pt; color:#666; text-transform:uppercase; letter-spacing:.5px; }
+h2 { font-size:14pt; font-weight:700; color:#1a1a1a; margin-bottom:8px; }
+.filter-bar { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+.filter-btn { padding:6px 16px; border-radius:20px; border:2px solid #ddd; background:white; cursor:pointer; font-size:9.5pt; font-weight:600; }
+.filter-btn.active { border-color:#0000FF; color:#0000FF; background:#f0f4ff; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <h1>Shipping Documents</h1>
+    <p>Norris Utilities® — All SDs for 2026</p>
+  </div>
+  <div style="color:white;font-size:10pt;text-align:right">
+    <div style="font-size:18pt;font-weight:900" id="sd-count">13</div>
+    <div style="opacity:.8">Total SDs</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="stats">
+    <div class="stat"><div class="num">13</div><div class="lbl">Total SDs</div></div>
+    <div class="stat"><div class="num">2026</div><div class="lbl">Year</div></div>
+    <div class="stat"><div class="num" style="font-size:14pt">ops.norrisutilities.com</div><div class="lbl">Portal</div></div>
+  </div>
+
+  <div style="margin:16px 0 8px 0">
+    <h2>All Shipping Documents — Click to View or Print</h2>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-ABADIE-0331</span>
+        <span class="badge">Mar 31</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Wayne Abadie — Primoris T&D</div>
+        <div class="meta">AEP / Primoris territory</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2851</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-ABADIE-0331.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-ABADIE-0331.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-ABADIE-0407-BYB0001</span>
+        <span class="badge">Apr 7</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Wayne Abadie — Primoris T&D</div>
+        <div class="meta">PO# 0407-BYB0001 — 24×24 D-Shape Cover</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2828</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-ABADIE-0407-BYB0001.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-ABADIE-0407-BYB0001.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-AJ-0331-B-JeremyBrown</span>
+        <span class="badge">Mar 31</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Jeremy Brown — AJ Morris / Chain Electric</div>
+        <div class="meta">Mixed order — 2-Man + 1.5-Man</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2851</span><span class="sku-tag">NU-BC-2834</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-AJ-0331-B-JeremyBrown.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-AJ-0331-B-JeremyBrown.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-AJ-0331-ChainElectric</span>
+        <span class="badge">Mar 31</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">AJ Morris — Chain Electric</div>
+        <div class="meta">2-Man Bucket Covers</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2851</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-AJ-0331-ChainElectric.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-AJ-0331-ChainElectric.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-AJ-0401-ARCH</span>
+        <span class="badge">Apr 1</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">AJ Morris — Chain Electric (ARCH)</div>
+        <div class="meta">1.5-Man ARCH Covers</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2834</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-AJ-0401-ARCH.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-AJ-0401-ARCH.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-BEDWELL-0407</span>
+        <span class="badge">Apr 7</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Dave Bedwell — AEP Oklahoma</div>
+        <div class="meta">D-Shape Bucket Cover</div>
+        <div class="skus"><span class="sku-tag">NU-BC-DSHAPE</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-BEDWELL-0407.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-BEDWELL-0407.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-CROSBY-0325</span>
+        <span class="badge">Mar 25</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Coy Crosby — Dominion Energy</div>
+        <div class="meta">⚠️ NOT YET INVOICED in QB</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2851</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-CROSBY-0325.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-CROSBY-0325.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-JeremyBrown-0331</span>
+        <span class="badge">Mar 31</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Jeremy Brown</div>
+        <div class="meta">2-Man Bucket Covers</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2851</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-JeremyBrown-0331.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-JeremyBrown-0331.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-JeremyBrown-0401-ARCH</span>
+        <span class="badge">Apr 1</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Jeremy Brown (ARCH)</div>
+        <div class="meta">1.5-Man ARCH Covers</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2834</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-JeremyBrown-0401-ARCH.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-JeremyBrown-0401-ARCH.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-LINETEC-0402</span>
+        <span class="badge">Apr 2</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Richard Thornhill — LineTec Services</div>
+        <div class="meta">2-Man Bucket Cover</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2851</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-LINETEC-0402.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-LINETEC-0402.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-LINETEC-0406</span>
+        <span class="badge">Apr 6</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Richard Thornhill — LineTec Services</div>
+        <div class="meta">2-Man Bucket Cover</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2851</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-LINETEC-0406.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-LINETEC-0406.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-RICHARD-0413</span>
+        <span class="badge">Apr 13</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Richard — Apr 13, 2026</div>
+        <div class="meta">Latest SD</div>
+        <div class="skus"></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-RICHARD-0413.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-RICHARD-0413.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="sd-name">SD-2026-THORNHILL-DEPT732-0408</span>
+        <span class="badge">Apr 8</span>
+      </div>
+      <div class="card-body">
+        <div class="customer">Richard Thornhill — Dept 732</div>
+        <div class="meta">LineTec Services — Dept 732</div>
+        <div class="skus"><span class="sku-tag">NU-BC-2851</span></div>
+        <div class="card-actions">
+          <a class="btn btn-view" href="/shipping-docs/SD-2026-THORNHILL-DEPT732-0408.html" target="_blank">View SD</a>
+          <a class="btn btn-print" href="/shipping-docs/SD-2026-THORNHILL-DEPT732-0408.html" target="_blank" onclick="setTimeout(()=>{var w=window.open(this.href);setTimeout(()=>w.print(),800);},100);return false;">Print</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
