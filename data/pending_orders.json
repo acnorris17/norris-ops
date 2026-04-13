@@ -116,7 +116,25 @@
       "source": "gmail_scan",
       "sd_filename": "SD-2026-RICHARD-0413.html",
       "sd_url": "https://ops.norrisutilities.com/shipping-docs/SD-2026-RICHARD-0413.html"
+    },
+    {
+      "id": "19d877ee4fe775cb",
+      "customer": "Dominion Energy",
+      "company": "",
+      "email": "portal@taulia.com",
+      "po_number": "4501057807",
+      "products": [
+        "(see email)"
+      ],
+      "ship_to": "",
+      "subject": "Dominion Energy: New PO # 4501057807 is now available",
+      "date_received": "2026-04-13 10:38",
+      "date_detected": "2026-04-13T15:54:00.973435+00:00",
+      "status": "SD CREATED",
+      "source": "gmail_scan",
+      "sd_filename": "SD-2026-DOMINION-4501057807-0413.html",
+      "sd_url": "https://ops.norrisutilities.com/shipping-docs/SD-2026-DOMINION-4501057807-0413.html"
     }
   ],
-  "last_updated": "2026-04-13T15:23:59.971603+00:00"
+  "last_updated": "2026-04-13T15:54:07.061091+00:00"
 }
