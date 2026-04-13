@@ -1378,7 +1378,28 @@
       "source": "agent_runner_v4.py",
       "message": "\u2705 BUILD \u2014 <b>Task 122 complete</b>\n\ud83d\udccb [REMARKABLE_ACTION] reMarkable action item: Negotiate purchase of 7,098 sq ft estate at 4505 Buttewo\n\ud83d\udccd /Users/acnorris1/norris-agent/output/internal/task_122_output.md\n\ud83d\udc46 Open in browser: file:///Users/acnorris1/norris-agent/output/internal/task_122_output.md",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-12T19:23:25.067428",
+      "category": "ORDER",
+      "source": "order_monitor.py",
+      "message": "<b>STALE ORDER ALERT -- 6 order(s) waiting 3+ days</b>\n  Wayne Abadie -- 6d -- PO: W6237\n  Coy Crosby -- 6d -- PO: 42350802\n  Wayne Abadie -- 6d -- PO: \n  acnorris@norrisutilities.com -- 5d -- PO: \n  Jamie Eden -- 5d -- PO: \n  Richard Thornhill -- 4d -- PO: ",
+      "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-12T19:27:56.811362",
+      "category": "BUILD",
+      "source": "agent_runner_v4.py",
+      "message": "\u2705 BUILD \u2014 <b>Task 123 complete</b>\n\ud83d\udccb [REMARKABLE_ACTION] reMarkable action item: Handle APCO Rusty Invoices\n\ud83d\udccd /Users/acnorris1/norris-agent/output/internal/task_123_output.md\n\ud83d\udc46 Open in browser: file:///Users/acnorris1/norris-agent/output/internal/task_123_output.md",
+      "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-12T19:30:20.513170",
+      "category": "BUILD",
+      "source": "agent_runner_v4.py",
+      "message": "\u2705 BUILD \u2014 <b>Task 124 complete</b>\n\ud83d\udccb [REMARKABLE_ACTION] reMarkable action item: Use water intrusion issue as leverage point in negotiati\n\ud83d\udccd /Users/acnorris1/norris-agent/output/internal/task_124_output.md\n\ud83d\udc46 Open in browser: file:///Users/acnorris1/norris-agent/output/internal/task_124_output.md",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-12T18:55:04.100368"
+  "last_updated": "2026-04-12T19:30:20.513227"
 }
