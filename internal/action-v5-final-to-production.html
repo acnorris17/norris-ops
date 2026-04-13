@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V5 Final Production Release — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --nu-accent-gold: #C9A84C;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .nu-section-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .page-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 8px;
+    }
+    .page-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .status-banner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: linear-gradient(135deg, #0a1628 0%, #0d2847 100%);
+      color: var(--nu-white);
+      padding: 20px 28px;
+      border-radius: 10px;
+      margin-bottom: 36px;
+    }
+    .status-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--nu-cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      color: var(--nu-navy);
+      font-weight: 900;
+    }
+    .status-text h3 {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 2px;
+    }
+    .status-text p {
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .info-card {
+      background: var(--nu-light-gray);
+      border-radius: 10px;
+      padding: 22px 24px;
+      border-left: 4px solid var(--nu-blue);
+    }
+    .info-card h4 {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--nu-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .info-card p {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--nu-dark-text);
+      line-height: 1.5;
+    }
+    .info-card code {
+      background: rgba(0,0,255,0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--nu-blue);
+      font-family: 'SF Mono', 'Menlo', monospace;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .check-box.done {
+      background: var(--nu-blue);
+      position: relative;
+    }
+    .check-box.done::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 6px;
+      width: 6px; height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.95rem;
+    }
+    .comparison-table th {
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .comparison-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .comparison-table tr:nth-child(even) td {
+      background: var(--nu-light-gray);
+    }
+    .comparison-table .feature-new {
+      color: #0a7c42;
+      font-weight: 700;
+    }
+    .comparison-table .feature-improved {
+      color: var(--nu-blue);
+      font-weight: 700;
+    }
+
+    .command-block {
+      background: #0d1117;
+      color: #c9d1d9;
+      padding: 20px 24px;
+      border-radius: 8px;
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin: 12px 0 20px;
+      overflow-x: auto;
+    }
+    .command-block .comment { color: #8b949e; }
+    .command-block .cmd { color: #79c0ff; }
+    .command-block .flag { color: #7ee787; }
+
+    .risk-callout {
+      background: #fff8e6;
+      border-left: 4px solid #e6a817;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+    .risk-callout strong { color: #9a6700; }
+
+    .success-callout {
+      background: #eefbf3;
+      border-left: 4px solid #0a7c42;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+    .success-callout strong { color: #0a7c42; }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.15rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .content-wrapper { padding: 40px 20px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 1.5rem; }
+      .comparison-table { font-size: 0.85rem; }
+      .comparison-table th, .comparison-table td { padding: 10px 12px; }
+      .nu-footer-contact { font-size: 1rem; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .command-block { background: #f6f8fa !important; color: #24292e !important; border: 1px solid #d0d7de; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment&reg;</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div class="content-wrapper">
+
+      <h1 class="page-title">Agent Runner V5 &mdash; Final Production Release</h1>
+      <p class="page-subtitle">Consolidate V3 + V4 into a single production-ready agent_runner.py</p>
+
+      <div class="status-banner">
+        <div class="status-icon">V5</div>
+        <div class="status-text">
+          <h3>Production Deployment &mdash; Ready to Execute</h3>
+          <p>Merge all V4 improvements into agent_runner.py, retire V3 and V4 files, run validation tests</p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h4>Current State</h4>
+          <p><code>agent_runner.py</code> &mdash; V3, 598 lines<br>
+          <code>agent_runner_v4.py</code> &mdash; V4, 1,187 lines (active)</p>
+        </div>
+        <div class="info-card">
+          <h4>Target State</h4>
+          <p><code>agent_runner.py</code> &mdash; V5 (final), single production file<br>
+          V3 and V4 archived to <code>backups/</code></p>
+        </div>
+        <div class="info-card">
+          <h4>Log File</h4>
+          <p>Rename <code>agent_v4.log</code> to <code>agent.log</code> &mdash; standardize all logging under one file</p>
+        </div>
+        <div class="info-card">
+          <h4>Launchd Plist</h4>
+          <p>Update any launchd plist pointing to <code>agent_runner_v4.py</code> to reference <code>agent_runner.py</code></p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="nu-section-title">V4 <span>Improvements Carried Forward to V5</span></h2>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>V3</th>
+              <th>V5 (Final)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CLI Engine</td>
+              <td>Direct Anthropic API</td>
+              <td class="feature-improved">Claude Code CLI (Max plan, no API credits)</td>
+            </tr>
+            <tr>
+              <td>Telegram Typing</td>
+              <td>None</td>
+              <td class="feature-new">Threaded typing indicator during builds</td>
+            </tr>
+            <tr>
+              <td>HTML Extraction</td>
+              <td>Basic regex</td>
+              <td class="feature-improved">Multi-pattern extraction with edge case handling</td>
+            </tr>
+            <tr>
+              <td>Truncation Detection</td>
+              <td>None</td>
+              <td class="feature-new">Validates output ends with &lt;/html&gt;</td>
+            </tr>
+            <tr>
+              <td>Morning Brief</td>
+              <td>None</td>
+              <td class="feature-new">--brief command for 4:45 AM Telegram summary</td>
+            </tr>
+            <tr>
+              <td>EOD Recap</td>
+              <td>None</td>
+              <td class="feature-new">--eod command for 6:00 PM Telegram summary</td>
+            </tr>
+            <tr>
+              <td>Batch Retry</td>
+              <td>Manual</td>
+              <td class="feature-new">--retry-failed resets all failed tasks to pending</td>
+            </tr>
+            <tr>
+              <td>Feedback System</td>
+              <td>None</td>
+              <td class="feature-new">--feedback records Aaron's notes for future builds</td>
+            </tr>
+            <tr>
+              <td>Quiet Hours</td>
+              <td>None</td>
+              <td class="feature-new">Override for morning brief, silent 10 PM &ndash; 4 AM</td>
+            </tr>
+            <tr>
+              <td>Loop Interval</td>
+              <td>15 minutes</td>
+              <td class="feature-improved">30 minutes (configurable via config.json)</td>
+            </tr>
+            <tr>
+              <td>Notifications</td>
+              <td>Basic pass/fail</td>
+              <td class="feature-improved">Detailed with file:// links and build stats</td>
+            </tr>
+            <tr>
+              <td>Learnings</td>
+              <td>None</td>
+              <td class="feature-new">Persistent agent_learnings.json for build preferences</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2 class="nu-section-title">Deployment <span>Steps</span></h2>
+
+        <ol class="checklist">
+          <li>
+            <div class="step-number">1</div>
+            <div>
+              <strong>Back up current files</strong><br>
+              Copy <code>agent_runner.py</code> (V3) and <code>agent_runner_v4.py</code> to <code>backups/</code> with date-stamped filenames
+            </div>
+          </li>
+          <li>
+            <div class="step-number">2</div>
+            <div>
+              <strong>Promote V4 to production</strong><br>
+              Copy <code>agent_runner_v4.py</code> to <code>agent_runner.py</code>, update the docstring header to read &ldquo;v5&rdquo; and remove the &ldquo;v4 IMPROVEMENTS OVER v3&rdquo; section (all features are now baseline)
+            </div>
+          </li>
+          <li>
+            <div class="step-number">3</div>
+            <div>
+              <strong>Standardize log file</strong><br>
+              Change log filename from <code>agent_v4.log</code> to <code>agent.log</code> and update the logger name from <code>norris-agent-v4</code> to <code>norris-agent</code>
+            </div>
+          </li>
+          <li>
+            <div class="step-number">4</div>
+            <div>
+              <strong>Update launchd plists</strong><br>
+              Any <code>~/Library/LaunchAgents/</code> plist referencing <code>agent_runner_v4.py</code> must point to <code>agent_runner.py</code>. Unload, update, reload.
+            </div>
+          </li>
+          <li>
+            <div class="step-number">5</div>
+            <div>
+              <strong>Remove V4 standalone file</strong><br>
+              Delete <code>agent_runner_v4.py</code> from the project root (backup already in <code>backups/</code>)
+            </div>
+          </li>
+          <li>
+            <div class="step-number">6</div>
+            <div>
+              <strong>Validation tests</strong><br>
+              Run <code>--test-one</code> to process a single task, <code>--brief</code> to verify Telegram morning brief, <code>--eod</code> to verify EOD recap, and a 3-cycle continuous loop
+            </div>
+          </li>
+          <li>
+            <div class="step-number">7</div>
+            <div>
+              <strong>Commit and push</strong><br>
+              <code>git add -A &amp;&amp; git commit -m &quot;V5 final production release &mdash; single agent_runner.py&quot; &amp;&amp; git push</code>
+            </div>
+          </li>
+        </ol>
+
+        <div class="command-block">
+          <span class="comment"># Step 1: Back up</span><br>
+          <span class="cmd">cp</span> agent_runner.py backups/agent_runner_v3_$(date +%Y%m%d).py<br>
+          <span class="cmd">cp</span> agent_runner_v4.py backups/agent_runner_v4_$(date +%Y%m%d).py<br><br>
+          <span class="comment"># Step 2: Promote V4 to agent_runner.py</span><br>
+          <span class="cmd">cp</span> agent_runner_v4.py agent_runner.py<br><br>
+          <span class="comment"># Step 5: Remove standalone V4</span><br>
+          <span class="cmd">rm</span> agent_runner_v4.py<br><br>
+          <span class="comment"># Step 6: Validate</span><br>
+          <span class="cmd">python3</span> agent_runner.py <span class="flag">--test-one</span><br>
+          <span class="cmd">python3</span> agent_runner.py <span class="flag">--brief</span><br>
+          <span class="cmd">python3</span> agent_runner.py <span class="flag">--eod</span><br><br>
+          <span class="comment"># Step 7: Ship it</span><br>
+          <span class="cmd">git</span> add -A &amp;&amp; <span class="cmd">git</span> commit -m <span class="flag">"V5 final production release"</span> &amp;&amp; <span class="cmd">git</span> push
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="nu-section-title">Pre-Flight <span>Checklist</span></h2>
+        <ul class="checklist">
+          <li>
+            <div class="check-box"></div>
+            <div>V3 backup exists in <code>backups/agent_runner_v3_20260413.py</code></div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>V4 backup exists in <code>backups/agent_runner_v4_20260413.py</code></div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>agent_runner.py contains V5 docstring header (not V3 or V4)</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Log file writes to <code>logs/agent.log</code> (not <code>agent_v4.log</code>)</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Launchd plists updated and reloaded</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div><code>agent_runner_v4.py</code> removed from project root</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div><code>--test-one</code> passes &mdash; task processed, HTML validated, Telegram notified</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div><code>--brief</code> sends morning summary to Telegram</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div><code>--eod</code> sends end-of-day recap to Telegram</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>3-cycle continuous loop completes without errors</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Git commit pushed to acnorris17/norris-ops</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="risk-callout">
+        <strong>Before you start:</strong> Make sure no build cycle is currently running. Check with <code>ps aux | grep agent_runner</code> and stop any active processes before overwriting files.
+      </div>
+
+      <div class="success-callout">
+        <strong>After deployment:</strong> V5 is the only agent runner. One file, one log, one plist. All V4 features are now the permanent baseline. No more version suffixes.
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment&reg;</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities&reg;, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
