@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Process Inventory Order from Last PO — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --nu-accent-gold: #C9A84C;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .page-date {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+    .page-title {
+      text-align: center;
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+    }
+    .page-subtitle {
+      text-align: center;
+      font-size: 1.05rem;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .alert-banner {
+      background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
+      color: var(--nu-white);
+      padding: 16px 24px;
+      border-radius: 8px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .alert-banner .alert-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .alert-banner .alert-detail {
+      font-weight: 400;
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-top: 4px;
+    }
+
+    .order-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 24px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .order-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .order-card-header {
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .order-card-header h3 {
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+    .order-card-header .po-tag {
+      background: var(--nu-cyan);
+      color: var(--nu-navy);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .order-card-body {
+      padding: 24px;
+    }
+    .order-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+      font-size: 0.95rem;
+    }
+    .order-detail-row:last-child {
+      border-bottom: none;
+    }
+    .order-detail-label {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      min-width: 140px;
+    }
+    .order-detail-value {
+      text-align: right;
+      color: var(--nu-body-text);
+    }
+    .status-overdue {
+      color: #D32F2F;
+      font-weight: 700;
+    }
+    .status-pending {
+      color: #F57C00;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-top: 48px;
+      margin-bottom: 20px;
+    }
+    .section-title .blue { color: var(--nu-blue); }
+    .section-title .dark { color: var(--nu-dark-text); font-weight: 700; }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 20px;
+      background: var(--nu-light-gray);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      transition: background 0.15s ease;
+    }
+    .checklist li:hover {
+      background: var(--nu-medium-gray);
+    }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      margin-top: 1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .check-box.checked {
+      background: var(--nu-blue);
+    }
+    .check-box.checked::after {
+      content: '';
+      width: 6px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-top: -2px;
+    }
+    .checklist li.completed {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+
+    .sku-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .sku-table th {
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+    }
+    .sku-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .sku-table tr:nth-child(even) td {
+      background: var(--nu-light-gray);
+    }
+    .sku-table tr:hover td {
+      background: #e8f0ff;
+    }
+
+    .notes-box {
+      background: #FFFDE7;
+      border: 1px solid #FFF176;
+      border-left: 4px solid #FFD600;
+      padding: 16px 20px;
+      border-radius: 0 6px 6px 0;
+      margin-top: 16px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .notes-box strong {
+      color: var(--nu-dark-text);
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .page-title { font-size: 1.5rem; }
+      .order-card-header { flex-direction: column; gap: 8px; align-items: flex-start; }
+      .order-detail-row { flex-direction: column; gap: 2px; }
+      .order-detail-value { text-align: left; }
+      .sku-table { font-size: 0.8rem; }
+      .sku-table th, .sku-table td { padding: 8px 10px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .order-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .check-box { border-color: #333; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div style="max-width: 1000px; margin: 0 auto; padding: 60px 40px;">
+
+      <div class="page-date">April 13, 2026</div>
+      <h1 class="page-title">Process Inventory Order from Last PO</h1>
+      <p class="page-subtitle">reMarkable Action Item &mdash; Pending Purchase Orders Requiring Fulfillment</p>
+
+      <div class="alert-banner">
+        <span class="alert-icon">&#9888;</span>
+        <div>
+          2 purchase orders received March 30 remain unshipped (14 days overdue).
+          <div class="alert-detail">PO W6237 (Primoris) and PO 42350802 (Dominion Energy) need immediate processing.</div>
+        </div>
+      </div>
+
+      <!-- ORDER 1: Primoris -->
+      <div class="order-card">
+        <div class="order-card-header">
+          <h3>Wayne Abadie &mdash; Primoris</h3>
+          <span class="po-tag">PO W6237</span>
+        </div>
+        <div class="order-card-body">
+          <div class="order-detail-row">
+            <span class="order-detail-label">Items Ordered</span>
+            <span class="order-detail-value">2x FlexPro Armor 2-Man Bucket Cover (NU-BC-2851)</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Date Received</span>
+            <span class="order-detail-value">March 30, 2026</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Days Since Receipt</span>
+            <span class="order-detail-value status-overdue">14 days &mdash; OVERDUE</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Status</span>
+            <span class="order-detail-value status-overdue">NOT SHIPPED</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Margin</span>
+            <span class="order-detail-value">50% (FlexPro Armor standard)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORDER 2: Dominion Energy -->
+      <div class="order-card">
+        <div class="order-card-header">
+          <h3>Coy Crosby &mdash; Dominion Energy</h3>
+          <span class="po-tag">PO 42350802</span>
+        </div>
+        <div class="order-card-body">
+          <div class="order-detail-row">
+            <span class="order-detail-label">Items Ordered</span>
+            <span class="order-detail-value">5x FlexPro Armor 2-Man Bucket Cover (NU-BC-2851)</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Date Received</span>
+            <span class="order-detail-value">March 30, 2026</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Days Since Receipt</span>
+            <span class="order-detail-value status-overdue">14 days &mdash; OVERDUE</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Status</span>
+            <span class="order-detail-value status-overdue">NOT SHIPPED &mdash; No customer response</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Margin</span>
+            <span class="order-detail-value">50% (FlexPro Armor standard)</span>
+          </div>
+          <div class="notes-box">
+            <strong>Note:</strong> No response from Coy Crosby. Follow up to confirm shipping address before fulfillment.
+          </div>
+        </div>
+      </div>
+
+      <!-- ADDITIONAL: Quote Request -->
+      <div class="order-card" style="border-left: 4px solid #F57C00;">
+        <div class="order-card-header" style="background: linear-gradient(135deg, #E65100 0%, #F57C00 100%);">
+          <h3>Wayne Abadie &mdash; Quote Request</h3>
+          <span class="po-tag" style="background: #FFF176; color: #333;">QUOTE ONLY</span>
+        </div>
+        <div class="order-card-body">
+          <div class="order-detail-row">
+            <span class="order-detail-label">Item Requested</span>
+            <span class="order-detail-value">24x24 Blue Cover (custom size)</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Date Received</span>
+            <span class="order-detail-value">April 7, 2026</span>
+          </div>
+          <div class="order-detail-row">
+            <span class="order-detail-label">Status</span>
+            <span class="order-detail-value status-pending">PENDING QUOTE &mdash; Not an order yet</span>
+          </div>
+          <div class="notes-box">
+            <strong>Note:</strong> This is a quote request only, not a confirmed order. Price at 50% margin once cost from manufacturer is confirmed.
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title"><span class="blue">Processing</span> <span class="dark">Checklist</span></h2>
+
+      <ul class="checklist">
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>Verify current FlexPro Armor inventory on hand &mdash; confirm 7+ units (2-Man, 28"x51") available to fill both POs</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>Contact Coy Crosby at Dominion Energy to confirm shipping address for PO 42350802 (5 units)</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>Confirm shipping address on file for Wayne Abadie / Primoris (PO W6237, 2 units)</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>Generate invoices at 50% margin &mdash; Customer Price = Cost &divide; 0.50</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>Calculate shipping using Ben's Formula: ROUNDUP(ROUNDUP(RegCost, 0) &times; 1.10, 0)</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>Pack and label PO W6237 (2x NU-BC-2851) for Primoris &mdash; ship immediately</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>Pack and label PO 42350802 (5x NU-BC-2851) for Dominion Energy &mdash; ship once address confirmed</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>Send shipping confirmation emails with tracking numbers to both customers</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>Update pending_orders.json status from PENDING REVIEW to SHIPPED</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span>If inventory is low after fulfillment, place replenishment order with manufacturer</span>
+        </li>
+      </ul>
+
+      <h2 class="section-title"><span class="blue">SKU</span> <span class="dark">Reference</span></h2>
+
+      <table class="sku-table">
+        <thead>
+          <tr>
+            <th>SKU</th>
+            <th>Product</th>
+            <th>Dimensions</th>
+            <th>Margin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>NU-BC-2851</strong></td>
+            <td>FlexPro Armor 2-Man Bucket Cover</td>
+            <td>28" &times; 51"</td>
+            <td>50%</td>
+          </tr>
+          <tr>
+            <td>NU-BC-2834</td>
+            <td>FlexPro Armor 1.5-Man Bucket Cover</td>
+            <td>28" &times; 34"</td>
+            <td>50%</td>
+          </tr>
+          <tr>
+            <td>NU-BC-2851-C</td>
+            <td>FlexPro Armor 2-Man Combo Cover</td>
+            <td>28" &times; 51"</td>
+            <td>50%</td>
+          </tr>
+          <tr>
+            <td>NU-BC-2834-C</td>
+            <td>FlexPro Armor 1.5-Man Combo Cover</td>
+            <td>28" &times; 34"</td>
+            <td>50%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="notes-box" style="margin-top: 32px;">
+        <strong>Competitor Size Translation:</strong> If a customer references "24x48" from another supplier, that maps to our NU-BC-2851 (28"x51"). If they say "24x34," that maps to our NU-BC-2834 (28"x34"). Always quote our actual dimensions.
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
