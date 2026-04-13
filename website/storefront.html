@@ -19,6 +19,7 @@
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
       --nu-green: #00C853;
+      --nu-stripe: #635BFF;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -103,17 +104,18 @@
       align-items: center;
       gap: 8px;
       margin-top: 20px;
-      padding: 8px 20px;
+      padding: 10px 24px;
       background: rgba(255,255,255,0.12);
       border-radius: 30px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--nu-white);
       letter-spacing: 0.04em;
+      border: 1px solid rgba(255,255,255,0.2);
     }
     .header-secure svg {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       fill: var(--nu-cyan);
     }
 
@@ -138,6 +140,32 @@
       font-size: 1.05rem;
       color: #666;
       margin-bottom: 40px;
+    }
+
+    /* ══ STRIPE STATUS BAR ══ */
+    .stripe-status-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, #f7f7ff 0%, #eef0ff 100%);
+      border-bottom: 2px solid rgba(99, 91, 255, 0.15);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--nu-stripe);
+      letter-spacing: 0.02em;
+    }
+    .stripe-status-bar svg { height: 22px; width: auto; flex-shrink: 0; }
+    .stripe-status-bar .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--nu-green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
     /* ══ USP BAR ══ */
@@ -284,7 +312,10 @@
 
     /* ══ BUTTON STYLES ══ */
     .btn-buy {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       padding: 14px 28px;
       background: var(--nu-green);
       color: var(--nu-white);
@@ -310,8 +341,38 @@
     .btn-buy svg {
       width: 18px;
       height: 18px;
-      vertical-align: middle;
-      margin-right: 6px;
+      fill: currentColor;
+    }
+    .btn-stripe {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--nu-stripe);
+      color: var(--nu-white);
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    .btn-stripe:hover {
+      background: #4b44d4;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(99,91,255,0.4);
+    }
+    .btn-stripe svg {
+      width: 18px;
+      height: 18px;
       fill: currentColor;
     }
     .btn-quote {
@@ -415,13 +476,35 @@
       justify-content: center;
       gap: 6px;
       margin-top: 8px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: #888;
       font-weight: 400;
     }
     .stripe-badge svg {
       height: 14px;
       width: auto;
+    }
+
+    /* ══ STRIPE PAYMENT METHODS ══ */
+    .payment-methods {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .payment-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f5;
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #555;
+      letter-spacing: 0.02em;
     }
 
     /* ══ FLOATING CART ══ */
@@ -625,10 +708,13 @@
       text-align: center;
     }
     .btn-checkout {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       width: 100%;
       padding: 16px;
-      background: var(--nu-green);
+      background: var(--nu-stripe);
       color: var(--nu-white);
       border: none;
       border-radius: 6px;
@@ -638,21 +724,34 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.1s;
     }
-    .btn-checkout:hover { background: #00A844; }
+    .btn-checkout:hover { background: #4b44d4; transform: translateY(-1px); }
     .btn-checkout:disabled {
       background: #ccc;
       cursor: not-allowed;
     }
+    .btn-checkout svg { width: 20px; height: 20px; fill: currentColor; }
     .cart-stripe-badge {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       margin-top: 12px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: #888;
+    }
+    .cart-accepted-cards {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .cart-accepted-cards .payment-icon {
+      font-size: 0.65rem;
+      padding: 2px 6px;
     }
 
     /* ══ FEATURES ══ */
@@ -781,7 +880,258 @@
       letter-spacing: 0.03em;
     }
 
-    /* ══ ADDED TO CART TOAST ══ */
+    /* ══ CHECKOUT MODAL ══ */
+    .checkout-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .checkout-modal-overlay.open { display: flex; }
+    .checkout-modal {
+      background: var(--nu-white);
+      border-radius: 16px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: modalSlideIn 0.3s ease;
+    }
+    @keyframes modalSlideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .checkout-modal-header {
+      padding: 24px 28px 16px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .checkout-modal-header h2 {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--nu-dark-text);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .checkout-modal-close {
+      width: 32px; height: 32px;
+      border: none;
+      background: var(--nu-light-gray);
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .checkout-modal-body { padding: 24px 28px; }
+    .checkout-order-summary {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .checkout-order-summary h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .checkout-line-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 0.9rem;
+    }
+    .checkout-line-item .item-name {
+      color: var(--nu-dark-text);
+      font-weight: 600;
+    }
+    .checkout-line-item .item-qty {
+      color: #888;
+      font-size: 0.8rem;
+    }
+    .checkout-line-item .item-total {
+      font-weight: 900;
+      color: var(--nu-dark-text);
+    }
+    .checkout-divider {
+      border: none;
+      border-top: 1px solid var(--nu-medium-gray);
+      margin: 10px 0;
+    }
+    .checkout-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+    }
+    .checkout-total-row .label {
+      font-weight: 900;
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: var(--nu-dark-text);
+    }
+    .checkout-total-row .amount {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--nu-dark-text);
+    }
+    .checkout-form-section { margin-bottom: 20px; }
+    .checkout-form-section h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .checkout-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid var(--nu-medium-gray);
+      border-radius: 6px;
+      font-family: var(--font-primary);
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+    .checkout-input:focus {
+      outline: none;
+      border-color: var(--nu-stripe);
+    }
+    .checkout-input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    #stripe-card-element {
+      padding: 14px;
+      border: 2px solid var(--nu-medium-gray);
+      border-radius: 6px;
+      background: var(--nu-white);
+      transition: border-color 0.2s;
+      min-height: 44px;
+    }
+    #stripe-card-element.StripeElement--focus {
+      border-color: var(--nu-stripe);
+    }
+    #stripe-card-element.StripeElement--invalid {
+      border-color: #cc0000;
+    }
+    #card-errors {
+      color: #cc0000;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 6px;
+      min-height: 20px;
+    }
+    .btn-pay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      background: var(--nu-stripe);
+      color: var(--nu-white);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 20px;
+    }
+    .btn-pay:hover { background: #4b44d4; }
+    .btn-pay:disabled {
+      background: #a8a4e0;
+      cursor: not-allowed;
+    }
+    .btn-pay.processing {
+      background: #a8a4e0;
+      cursor: wait;
+    }
+    .checkout-powered-by {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: #888;
+    }
+    .checkout-secure-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-top: 8px;
+    }
+
+    /* ══ SUCCESS MESSAGE ══ */
+    .success-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 4000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .success-overlay.open { display: flex; }
+    .success-box {
+      background: var(--nu-white);
+      border-radius: 16px;
+      max-width: 440px;
+      width: 100%;
+      padding: 48px 36px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .success-check {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--nu-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .success-check svg { width: 32px; height: 32px; fill: white; }
+    .success-box h2 {
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 12px;
+    }
+    .success-box p {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .success-box .order-id {
+      font-weight: 900;
+      color: var(--nu-stripe);
+      font-size: 1rem;
+    }
+
+    /* ══ TOAST ══ */
     .toast {
       position: fixed;
       bottom: 100px;
@@ -819,8 +1169,8 @@
       margin-bottom: 16px;
     }
     .footer-info {
-      font-size: 0.95rem;
-      line-height: 1.8;
+      font-size: 1.05rem;
+      line-height: 2;
     }
     .footer-info a {
       color: var(--nu-cyan);
@@ -831,8 +1181,9 @@
       margin-top: 24px;
       padding-top: 16px;
       border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.8;
     }
 
     /* ══ SETUP BANNER (hidden in production) ══ */
@@ -866,10 +1217,14 @@
       .trust-bar { gap: 24px; }
       .cart-fab { bottom: 20px; right: 20px; width: 52px; height: 52px; }
       .cart-fab svg { width: 22px; height: 22px; }
+      .checkout-input-row { grid-template-columns: 1fr; }
+      .checkout-modal { border-radius: 12px; }
+      .stripe-status-bar { font-size: 0.8rem; gap: 8px; padding: 10px 16px; }
     }
 
     @media print {
-      .cart-fab, .cart-overlay, .cart-drawer, .toast, .setup-banner { display: none !important; }
+      .cart-fab, .cart-overlay, .cart-drawer, .toast, .setup-banner,
+      .checkout-modal-overlay, .success-overlay, .stripe-status-bar { display: none !important; }
     }
   </style>
 </head>
@@ -878,6 +1233,13 @@
   <!-- ══ STRIPE SETUP BANNER — Hidden when Stripe is configured ══ -->
   <div class="setup-banner" id="setupBanner">
     STRIPE SETUP NEEDED &mdash; Open your <a href="https://dashboard.stripe.com/payment-links" target="_blank">Stripe Dashboard</a>, create Payment Links for each product, then paste the URLs into the STRIPE_CONFIG section of this page. Cart will use email quotes until configured.
+  </div>
+
+  <!-- ══ STRIPE STATUS BAR ══ -->
+  <div class="stripe-status-bar" id="stripeStatusBar">
+    <svg viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 0h50a5 5 0 015 5v15a5 5 0 01-5 5H5a5 5 0 01-5-5V5a5 5 0 015-5z" fill="#635BFF"/><path d="M27.4 10.3c0-1.7 1.3-2.4 2.4-2.4.8 0 1.5.3 2 .8l.9-1c-.7-.7-1.7-1.1-2.9-1.1-2.4 0-4 1.6-4 3.7s1.6 3.7 4 3.7c1.1 0 2.1-.4 2.9-1.1l-.9-1c-.5.5-1.2.8-2 .8-1.1 0-2.4-.7-2.4-2.4zm-6.6-3.6h-1.5v7h1.5v-3.4c0-1.3.8-1.9 1.6-1.9.3 0 .6.1.9.2l.5-1.4c-.3-.2-.7-.3-1.1-.3-.9 0-1.5.4-1.9 1v-.9v-.3zm-4.8 0h-1.5v7h1.5v-7zm0-2.7h-1.7v1.5h1.7V4zm-6 9.9c-1.2 0-2.1-.9-2.1-2.2s.9-2.2 2.1-2.2c1.2 0 2.1.9 2.1 2.2s-.9 2.2-2.1 2.2zm3.6-5.2v-.9h-1.5v9.4h1.5v-3.4c.6.8 1.5 1.3 2.6 1.3 2 0 3.5-1.6 3.5-3.7s-1.5-3.6-3.5-3.6c-1.1 0-2 .5-2.6 1.3v-.4zm21.1.7c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1 .7 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.6-.3-2.1-.8l-.7 1c.7.6 1.7.9 2.7.9 1.8 0 2.9-.9 2.9-2.1 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1zm9-1.5h-2.4V5.1h-1.5v1.8h-1.4v1.3h1.4V12c0 1.5.6 2.4 2.3 2.4.6 0 1.3-.2 1.8-.5l-.4-1.2c-.4.2-.8.3-1.1.3-.6 0-1.1-.3-1.1-1.1V8.2h2.4V6.9zm5.1-.2c-.6 0-1.1.3-1.4.8v-.8h-1.5v7h1.5v-3.9c0-1.2.5-1.8 1.4-1.8.3 0 .6 0 .9.1l.4-1.4c-.3 0-.6-.1-.9-.1h-.4zm3.1 5.4c.7.8 1.7 1.2 2.8 1.2 1.7 0 2.8-.8 2.8-2.2 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1.1.8 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.7-.4-2.2-.8l-.6.9z" fill="#fff"/></svg>
+    <span class="status-dot" id="stripeStatusDot"></span>
+    <span id="stripeStatusText">Secure Payments Active</span>
   </div>
 
   <!-- ══ HEADER ══ -->
@@ -952,6 +1314,12 @@
             <svg viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 0h50a5 5 0 015 5v15a5 5 0 01-5 5H5a5 5 0 01-5-5V5a5 5 0 015-5z" fill="#635BFF"/><path d="M27.4 10.3c0-1.7 1.3-2.4 2.4-2.4.8 0 1.5.3 2 .8l.9-1c-.7-.7-1.7-1.1-2.9-1.1-2.4 0-4 1.6-4 3.7s1.6 3.7 4 3.7c1.1 0 2.1-.4 2.9-1.1l-.9-1c-.5.5-1.2.8-2 .8-1.1 0-2.4-.7-2.4-2.4zm-6.6-3.6h-1.5v7h1.5v-3.4c0-1.3.8-1.9 1.6-1.9.3 0 .6.1.9.2l.5-1.4c-.3-.2-.7-.3-1.1-.3-.9 0-1.5.4-1.9 1v-.9v-.3zm-4.8 0h-1.5v7h1.5v-7zm0-2.7h-1.7v1.5h1.7V4zm-6 9.9c-1.2 0-2.1-.9-2.1-2.2s.9-2.2 2.1-2.2c1.2 0 2.1.9 2.1 2.2s-.9 2.2-2.1 2.2zm3.6-5.2v-.9h-1.5v9.4h1.5v-3.4c.6.8 1.5 1.3 2.6 1.3 2 0 3.5-1.6 3.5-3.7s-1.5-3.6-3.5-3.6c-1.1 0-2 .5-2.6 1.3v-.4zm21.1.7c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1 .7 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.6-.3-2.1-.8l-.7 1c.7.6 1.7.9 2.7.9 1.8 0 2.9-.9 2.9-2.1 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1zm9-1.5h-2.4V5.1h-1.5v1.8h-1.4v1.3h1.4V12c0 1.5.6 2.4 2.3 2.4.6 0 1.3-.2 1.8-.5l-.4-1.2c-.4.2-.8.3-1.1.3-.6 0-1.1-.3-1.1-1.1V8.2h2.4V6.9zm5.1-.2c-.6 0-1.1.3-1.4.8v-.8h-1.5v7h1.5v-3.9c0-1.2.5-1.8 1.4-1.8.3 0 .6 0 .9.1l.4-1.4c-.3 0-.6-.1-.9-.1h-.4zm3.1 5.4c.7.8 1.7 1.2 2.8 1.2 1.7 0 2.8-.8 2.8-2.2 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1.1.8 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.7-.4-2.2-.8l-.6.9z" fill="#fff"/></svg>
             Secure payment by Stripe
           </div>
+          <div class="payment-methods">
+            <span class="payment-icon">VISA</span>
+            <span class="payment-icon">MC</span>
+            <span class="payment-icon">AMEX</span>
+            <span class="payment-icon">DISC</span>
+          </div>
         </div>
       </div>
 
@@ -981,6 +1349,12 @@
           <div class="stripe-badge">
             <svg viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 0h50a5 5 0 015 5v15a5 5 0 01-5 5H5a5 5 0 01-5-5V5a5 5 0 015-5z" fill="#635BFF"/><path d="M27.4 10.3c0-1.7 1.3-2.4 2.4-2.4.8 0 1.5.3 2 .8l.9-1c-.7-.7-1.7-1.1-2.9-1.1-2.4 0-4 1.6-4 3.7s1.6 3.7 4 3.7c1.1 0 2.1-.4 2.9-1.1l-.9-1c-.5.5-1.2.8-2 .8-1.1 0-2.4-.7-2.4-2.4zm-6.6-3.6h-1.5v7h1.5v-3.4c0-1.3.8-1.9 1.6-1.9.3 0 .6.1.9.2l.5-1.4c-.3-.2-.7-.3-1.1-.3-.9 0-1.5.4-1.9 1v-.9v-.3zm-4.8 0h-1.5v7h1.5v-7zm0-2.7h-1.7v1.5h1.7V4zm-6 9.9c-1.2 0-2.1-.9-2.1-2.2s.9-2.2 2.1-2.2c1.2 0 2.1.9 2.1 2.2s-.9 2.2-2.1 2.2zm3.6-5.2v-.9h-1.5v9.4h1.5v-3.4c.6.8 1.5 1.3 2.6 1.3 2 0 3.5-1.6 3.5-3.7s-1.5-3.6-3.5-3.6c-1.1 0-2 .5-2.6 1.3v-.4zm21.1.7c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1 .7 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.6-.3-2.1-.8l-.7 1c.7.6 1.7.9 2.7.9 1.8 0 2.9-.9 2.9-2.1 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1zm9-1.5h-2.4V5.1h-1.5v1.8h-1.4v1.3h1.4V12c0 1.5.6 2.4 2.3 2.4.6 0 1.3-.2 1.8-.5l-.4-1.2c-.4.2-.8.3-1.1.3-.6 0-1.1-.3-1.1-1.1V8.2h2.4V6.9zm5.1-.2c-.6 0-1.1.3-1.4.8v-.8h-1.5v7h1.5v-3.9c0-1.2.5-1.8 1.4-1.8.3 0 .6 0 .9.1l.4-1.4c-.3 0-.6-.1-.9-.1h-.4zm3.1 5.4c.7.8 1.7 1.2 2.8 1.2 1.7 0 2.8-.8 2.8-2.2 0-1.1-.8-1.7-2.1-1.9l-.6-.1c-.6-.1-1-.3-1-.7 0-.5.5-.7 1.2-.7.8 0 1.5.3 1.9.6l.6-1c-.6-.5-1.5-.8-2.5-.8-1.6 0-2.6.8-2.6 2 0 1.1.8 1.7 2.1 1.9l.6.1c.7.1 1.1.4 1.1.7 0 .5-.5.8-1.5.8-.9 0-1.7-.4-2.2-.8l-.6.9z" fill="#fff"/></svg>
             Secure payment by Stripe
+          </div>
+          <div class="payment-methods">
+            <span class="payment-icon">VISA</span>
+            <span class="payment-icon">MC</span>
+            <span class="payment-icon">AMEX</span>
+            <span class="payment-icon">DISC</span>
           </div>
         </div>
       </div>
@@ -1058,11 +1432,11 @@
     </div>
     <div class="trust-item">
       <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-      <span>All Major Cards</span>
+      <span>Visa, MC, Amex, Discover</span>
     </div>
     <div class="trust-item">
       <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-      <span>SSL Encrypted</span>
+      <span>256-bit SSL Encrypted</span>
     </div>
     <div class="trust-item">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
@@ -1205,44 +1579,207 @@
       </div>
       <div class="cart-shipping-note">Shipping calculated at checkout</div>
       <button class="btn-checkout" id="btnCheckout" onclick="proceedToCheckout()">
-        Proceed to Checkout
+        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        Secure Checkout
       </button>
       <div class="cart-stripe-badge">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="#888"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-        Secured by Stripe
+        Secured by Stripe &mdash; 256-bit encryption
       </div>
+      <div class="cart-accepted-cards">
+        <span class="payment-icon">VISA</span>
+        <span class="payment-icon">MC</span>
+        <span class="payment-icon">AMEX</span>
+        <span class="payment-icon">DISC</span>
+        <span class="payment-icon">ACH</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CHECKOUT MODAL ══ -->
+  <div class="checkout-modal-overlay" id="checkoutModal">
+    <div class="checkout-modal">
+      <div class="checkout-modal-header">
+        <h2>Secure Checkout</h2>
+        <button class="checkout-modal-close" onclick="closeCheckoutModal()">&#10005;</button>
+      </div>
+      <div class="checkout-modal-body">
+        <div class="checkout-order-summary" id="checkoutSummary"></div>
+
+        <div class="checkout-form-section">
+          <h3>Contact Information</h3>
+          <input class="checkout-input" type="text" id="checkout-name" placeholder="Full Name" required>
+          <input class="checkout-input" type="email" id="checkout-email" placeholder="Email Address" required>
+          <input class="checkout-input" type="tel" id="checkout-phone" placeholder="Phone Number">
+          <input class="checkout-input" type="text" id="checkout-company" placeholder="Company Name">
+        </div>
+
+        <div class="checkout-form-section">
+          <h3>Shipping Address</h3>
+          <input class="checkout-input" type="text" id="checkout-address" placeholder="Street Address" required>
+          <div class="checkout-input-row">
+            <input class="checkout-input" type="text" id="checkout-city" placeholder="City" required>
+            <input class="checkout-input" type="text" id="checkout-state" placeholder="State" required>
+          </div>
+          <input class="checkout-input" type="text" id="checkout-zip" placeholder="ZIP Code" required>
+        </div>
+
+        <div class="checkout-form-section" id="stripeCardSection">
+          <h3>Payment</h3>
+          <div id="stripe-card-element"></div>
+          <div id="card-errors" role="alert"></div>
+        </div>
+
+        <button class="btn-pay" id="btnPay" onclick="handlePayment()">
+          <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          <span id="payBtnText">Pay Now</span>
+        </button>
+
+        <div class="checkout-powered-by">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#888"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          Payments processed securely by Stripe
+        </div>
+        <div class="checkout-secure-note">
+          Your card information is encrypted and sent directly to Stripe. Norris Utilities never sees or stores your card number.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SUCCESS OVERLAY ══ -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-box">
+      <div class="success-check">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+      </div>
+      <h2>Order Confirmed</h2>
+      <p>Thank you for your purchase. A confirmation email has been sent to the address you provided.</p>
+      <p>Aaron will follow up within 1 business day with shipping details and tracking information.</p>
+      <p class="order-id" id="orderIdDisplay"></p>
+      <button class="btn-buy" style="max-width:300px; margin:20px auto 0; display:block;" onclick="closeSuccess()">Continue Shopping</button>
     </div>
   </div>
 
   <!-- ══ TOAST ══ -->
   <div class="toast" id="toast"></div>
 
+  <!-- ══ STRIPE.JS ══ -->
+  <script src="https://js.stripe.com/v3/"></script>
+
   <script>
-    /* ════════════════════════════════════════════════════════
+    /* ════════════════════════════════════════════════════════════
        STRIPE CONFIGURATION
-       ════════════════════════════════════════════════════════
-       HOW TO SET UP:
+       ════════════════════════════════════════════════════════════
+
+       HOW TO ACTIVATE STRIPE PAYMENTS:
+
+       OPTION A — PAYMENT LINKS (Easiest, no server needed):
        1. Log into https://dashboard.stripe.com
        2. Go to Payment Links (left sidebar)
        3. Create a Payment Link for each product below
-       4. Paste each URL into the 'stripeLink' field
+       4. Paste each URL into the 'stripeLink' field below
        5. Save this file and re-deploy
+       When stripeLink is set, "Buy Now" goes straight to Stripe.
 
-       When stripeLink is empty, checkout falls back to
-       an email-based order (mailto: to Aaron).
-       ════════════════════════════════════════════════════════ */
+       OPTION B — STRIPE CHECKOUT (Card form on this page):
+       1. Get your Publishable Key from Stripe Dashboard > Developers > API Keys
+       2. Paste it into STRIPE_PUBLISHABLE_KEY below
+       3. Set up a server endpoint that creates a PaymentIntent
+          (see Stripe docs: https://stripe.com/docs/payments/quickstart)
+       4. Put that endpoint URL in STRIPE_SERVER_URL below
+       When both are set, the checkout modal with card entry appears.
+
+       OPTION C — EMAIL FALLBACK (default):
+       When neither option is configured, checkout creates
+       an email order sent to Aaron automatically.
+
+       ════════════════════════════════════════════════════════════ */
+
+    var STRIPE_PUBLISHABLE_KEY = '';
+    var STRIPE_SERVER_URL = '';
+
     var STRIPE_CONFIG = {
       'NU-BC-2851': {
         name: '2-Man Bucket Cover',
         price: 275,
+        stripePriceId: '',
         stripeLink: ''
       },
       'NU-BC-2851-C': {
         name: '2-Man Combo with Bag',
         price: 305,
+        stripePriceId: '',
+        stripeLink: ''
+      },
+      'NU-BC-2834': {
+        name: '1.5-Man Bucket Cover',
+        price: 0,
+        stripePriceId: '',
+        stripeLink: ''
+      },
+      'NU-BC-2834-C': {
+        name: '1.5-Man Combo with Bag',
+        price: 0,
+        stripePriceId: '',
         stripeLink: ''
       }
     };
+
+    /* ══ STRIPE INITIALIZATION ══ */
+    var stripe = null;
+    var stripeElements = null;
+    var cardElement = null;
+    var stripeReady = false;
+    var paymentLinksReady = false;
+
+    (function initStripe() {
+      /* Check for Payment Links */
+      for (var sku in STRIPE_CONFIG) {
+        if (STRIPE_CONFIG[sku].stripeLink) {
+          paymentLinksReady = true;
+          break;
+        }
+      }
+
+      /* Initialize Stripe.js if publishable key is set */
+      if (STRIPE_PUBLISHABLE_KEY) {
+        try {
+          stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+          stripeElements = stripe.elements({
+            fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap' }]
+          });
+          cardElement = stripeElements.create('card', {
+            style: {
+              base: {
+                fontFamily: '"Lato", sans-serif',
+                fontSize: '16px',
+                color: '#1A1A2E',
+                '::placeholder': { color: '#aab7c4' }
+              },
+              invalid: { color: '#cc0000', iconColor: '#cc0000' }
+            },
+            hidePostalCode: true
+          });
+          stripeReady = true;
+        } catch (e) {
+          console.warn('Stripe initialization failed:', e);
+        }
+      }
+
+      /* Update status bar */
+      var statusDot = document.getElementById('stripeStatusDot');
+      var statusText = document.getElementById('stripeStatusText');
+      var statusBar = document.getElementById('stripeStatusBar');
+
+      if (stripeReady || paymentLinksReady) {
+        statusDot.style.background = '#00C853';
+        statusText.textContent = 'Secure Payments Active — Visa, Mastercard, Amex, Discover Accepted';
+      } else {
+        statusDot.style.background = '#FFD93D';
+        statusText.textContent = 'Secure Payments Ready — Configure Stripe to Accept Cards';
+        document.getElementById('setupBanner').classList.add('visible');
+      }
+    })();
 
     /* ══ CART STATE ══ */
     var cart = [];
@@ -1316,7 +1853,6 @@
       var fab = document.getElementById('cartFab');
       var countEl = document.getElementById('cartCount');
       var itemsEl = document.getElementById('cartItems');
-      var emptyEl = document.getElementById('cartEmpty');
       var footerEl = document.getElementById('cartFooter');
       var totalEl = document.getElementById('cartTotal');
 
@@ -1340,14 +1876,14 @@
           div.className = 'cart-item';
           div.innerHTML =
             '<div class="cart-item-info">' +
-              '<div class="cart-item-name">' + item.name + '</div>' +
-              '<div class="cart-item-sku">' + item.sku + '</div>' +
+              '<div class="cart-item-name">' + escapeHtml(item.name) + '</div>' +
+              '<div class="cart-item-sku">' + escapeHtml(item.sku) + '</div>' +
               '<div class="cart-item-qty">' +
-                '<button onclick="updateCartQty(\'' + item.sku + '\',-1)">&#8722;</button>' +
+                '<button onclick="updateCartQty(\'' + escapeHtml(item.sku) + '\',-1)">&#8722;</button>' +
                 '<span>' + item.qty + '</span>' +
-                '<button onclick="updateCartQty(\'' + item.sku + '\',1)">&#43;</button>' +
+                '<button onclick="updateCartQty(\'' + escapeHtml(item.sku) + '\',1)">&#43;</button>' +
               '</div>' +
-              '<button class="cart-item-remove" onclick="removeFromCart(\'' + item.sku + '\')">Remove</button>' +
+              '<button class="cart-item-remove" onclick="removeFromCart(\'' + escapeHtml(item.sku) + '\')">Remove</button>' +
             '</div>' +
             '<div class="cart-item-price">$' + (item.price * item.qty).toLocaleString() + '</div>';
           itemsEl.appendChild(div);
@@ -1355,6 +1891,14 @@
       }
 
       totalEl.textContent = '$' + getCartTotal().toLocaleString();
+
+      /* Update checkout button text */
+      var btnCheckout = document.getElementById('btnCheckout');
+      if (paymentLinksReady || stripeReady) {
+        btnCheckout.innerHTML = '<svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> Pay with Stripe';
+      } else {
+        btnCheckout.innerHTML = '<svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> Secure Checkout';
+      }
     }
 
     function openCart() {
@@ -1376,50 +1920,255 @@
       setTimeout(function() { toast.classList.remove('show'); }, 2500);
     }
 
-    /* ══ STRIPE CHECKOUT ══ */
+    function escapeHtml(str) {
+      var div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    /* ══ STRIPE CHECKOUT FLOW ══ */
     function proceedToCheckout() {
-      /* Check if any Stripe Payment Links are configured */
-      var hasStripe = false;
-      for (var sku in STRIPE_CONFIG) {
-        if (STRIPE_CONFIG[sku].stripeLink) { hasStripe = true; break; }
+      if (cart.length === 0) return;
+
+      /* PRIORITY 1: Stripe Payment Links */
+      if (paymentLinksReady && cart.length === 1) {
+        var item = cart[0];
+        var config = STRIPE_CONFIG[item.sku];
+        if (config && config.stripeLink) {
+          var link = config.stripeLink;
+          if (item.qty > 1) {
+            link += (link.indexOf('?') === -1 ? '?' : '&') + 'quantity=' + item.qty;
+          }
+          window.location.href = link;
+          return;
+        }
       }
 
-      if (hasStripe && cart.length === 1 && STRIPE_CONFIG[cart[0].sku] && STRIPE_CONFIG[cart[0].sku].stripeLink) {
-        /* Single product with Stripe link — redirect directly */
-        var link = STRIPE_CONFIG[cart[0].sku].stripeLink;
-        if (cart[0].qty > 1) {
-          link += (link.indexOf('?') === -1 ? '?' : '&') + 'quantity=' + cart[0].qty;
-        }
-        window.location.href = link;
+      /* PRIORITY 2: Stripe Elements (card form modal) */
+      if (stripeReady && STRIPE_SERVER_URL) {
+        closeCart();
+        openCheckoutModal();
         return;
       }
 
-      if (hasStripe && cart.length > 1) {
-        /* Multiple items — try first item link, note about remaining in email */
-        /* For multi-product Stripe checkout, a server-side session is needed.
-           Fall back to email order with Stripe payment note. */
+      /* PRIORITY 3: Payment Links for multi-item (redirect first item) */
+      if (paymentLinksReady) {
+        for (var i = 0; i < cart.length; i++) {
+          var cfg = STRIPE_CONFIG[cart[i].sku];
+          if (cfg && cfg.stripeLink) {
+            var lnk = cfg.stripeLink;
+            if (cart[i].qty > 1) {
+              lnk += (lnk.indexOf('?') === -1 ? '?' : '&') + 'quantity=' + cart[i].qty;
+            }
+            window.location.href = lnk;
+            return;
+          }
+        }
       }
 
-      /* Fallback: email-based order */
-      var subject = 'FlexPro Armor Online Order - ' + new Date().toLocaleDateString();
-      var lines = ['FLEXPRO ARMOR ORDER', '='.repeat(30), ''];
+      /* FALLBACK: Email-based order */
+      closeCart();
+      openCheckoutModal();
+    }
+
+    /* ══ CHECKOUT MODAL ══ */
+    function openCheckoutModal() {
+      var summary = document.getElementById('checkoutSummary');
+      var html = '<h3>Order Summary</h3>';
 
       for (var i = 0; i < cart.length; i++) {
         var item = cart[i];
-        lines.push(item.name + ' (' + item.sku + ')');
-        lines.push('  Qty: ' + item.qty + ' x $' + item.price + ' = $' + (item.qty * item.price).toLocaleString());
+        html += '<div class="checkout-line-item">' +
+          '<div><span class="item-name">' + escapeHtml(item.name) + '</span> <span class="item-qty">x' + item.qty + '</span></div>' +
+          '<span class="item-total">$' + (item.price * item.qty).toLocaleString() + '</span>' +
+          '</div>';
+      }
+
+      html += '<hr class="checkout-divider">';
+      html += '<div class="checkout-total-row">' +
+        '<span class="label">Subtotal</span>' +
+        '<span class="amount">$' + getCartTotal().toLocaleString() + '</span>' +
+        '</div>';
+      html += '<div style="font-size:0.8rem; color:#888; text-align:right;">Shipping calculated separately</div>';
+
+      summary.innerHTML = html;
+
+      /* Show/hide card section based on Stripe availability */
+      var cardSection = document.getElementById('stripeCardSection');
+      if (stripeReady && STRIPE_SERVER_URL) {
+        cardSection.style.display = 'block';
+        if (cardElement) {
+          cardElement.mount('#stripe-card-element');
+          cardElement.on('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            displayError.textContent = event.error ? event.error.message : '';
+          });
+        }
+        document.getElementById('payBtnText').textContent = 'Pay $' + getCartTotal().toLocaleString();
+      } else {
+        cardSection.style.display = 'none';
+        document.getElementById('payBtnText').textContent = 'Submit Order';
+      }
+
+      document.getElementById('checkoutModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.remove('open');
+      document.body.style.overflow = '';
+      if (cardElement) {
+        try { cardElement.unmount(); } catch (e) {}
+      }
+    }
+
+    /* ══ PAYMENT HANDLER ══ */
+    function handlePayment() {
+      var btn = document.getElementById('btnPay');
+      var nameVal = document.getElementById('checkout-name').value.trim();
+      var emailVal = document.getElementById('checkout-email').value.trim();
+      var phoneVal = document.getElementById('checkout-phone').value.trim();
+      var companyVal = document.getElementById('checkout-company').value.trim();
+      var addressVal = document.getElementById('checkout-address').value.trim();
+      var cityVal = document.getElementById('checkout-city').value.trim();
+      var stateVal = document.getElementById('checkout-state').value.trim();
+      var zipVal = document.getElementById('checkout-zip').value.trim();
+
+      /* Validate required fields */
+      if (!nameVal || !emailVal || !addressVal || !cityVal || !stateVal || !zipVal) {
+        showToast('Please fill in all required fields');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.classList.add('processing');
+      document.getElementById('payBtnText').textContent = 'Processing...';
+
+      /* Build order data */
+      var orderData = {
+        customer: {
+          name: nameVal,
+          email: emailVal,
+          phone: phoneVal,
+          company: companyVal
+        },
+        shipping: {
+          address: addressVal,
+          city: cityVal,
+          state: stateVal,
+          zip: zipVal
+        },
+        items: cart.map(function(item) {
+          return { sku: item.sku, name: item.name, price: item.price, qty: item.qty };
+        }),
+        total: getCartTotal(),
+        orderDate: new Date().toISOString()
+      };
+
+      /* STRIPE CARD PAYMENT */
+      if (stripeReady && STRIPE_SERVER_URL) {
+        fetch(STRIPE_SERVER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(orderData)
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+          if (data.clientSecret) {
+            return stripe.confirmCardPayment(data.clientSecret, {
+              payment_method: {
+                card: cardElement,
+                billing_details: {
+                  name: nameVal,
+                  email: emailVal,
+                  phone: phoneVal,
+                  address: {
+                    line1: addressVal,
+                    city: cityVal,
+                    state: stateVal,
+                    postal_code: zipVal,
+                    country: 'US'
+                  }
+                }
+              }
+            });
+          } else {
+            throw new Error(data.error || 'Server error creating payment');
+          }
+        })
+        .then(function(result) {
+          if (result.error) {
+            document.getElementById('card-errors').textContent = result.error.message;
+            btn.disabled = false;
+            btn.classList.remove('processing');
+            document.getElementById('payBtnText').textContent = 'Pay $' + getCartTotal().toLocaleString();
+          } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
+            showOrderSuccess('PI-' + result.paymentIntent.id.slice(-8).toUpperCase());
+          }
+        })
+        .catch(function(err) {
+          document.getElementById('card-errors').textContent = 'Payment failed. Please try again or contact us at 205-500-1343.';
+          btn.disabled = false;
+          btn.classList.remove('processing');
+          document.getElementById('payBtnText').textContent = 'Pay $' + getCartTotal().toLocaleString();
+        });
+        return;
+      }
+
+      /* EMAIL FALLBACK ORDER */
+      var orderId = 'NU-' + Date.now().toString(36).toUpperCase();
+      var subject = 'FlexPro Armor Order ' + orderId + ' - ' + (companyVal || nameVal);
+      var lines = [
+        'FLEXPRO ARMOR ORDER',
+        'Order ID: ' + orderId,
+        'Date: ' + new Date().toLocaleDateString(),
+        '==============================',
+        '',
+        'CUSTOMER:',
+        '  Name: ' + nameVal,
+        '  Email: ' + emailVal,
+        '  Phone: ' + (phoneVal || 'Not provided'),
+        '  Company: ' + (companyVal || 'Not provided'),
+        '',
+        'SHIPPING ADDRESS:',
+        '  ' + addressVal,
+        '  ' + cityVal + ', ' + stateVal + ' ' + zipVal,
+        '',
+        'ITEMS ORDERED:',
+        '=============================='
+      ];
+
+      for (var j = 0; j < cart.length; j++) {
+        var ci = cart[j];
+        lines.push('  ' + ci.name + ' (' + ci.sku + ')');
+        lines.push('  Qty: ' + ci.qty + ' x $' + ci.price + ' = $' + (ci.qty * ci.price).toLocaleString());
         lines.push('');
       }
 
       lines.push('SUBTOTAL: $' + getCartTotal().toLocaleString());
-      lines.push('(Shipping to be calculated)');
+      lines.push('SHIPPING: To be calculated');
       lines.push('');
-      lines.push('Please reply with shipping address and preferred payment method.');
+      lines.push('PAYMENT: Pending — customer will receive invoice or Stripe payment link.');
+      lines.push('');
+      lines.push('Please reply to confirm order and provide shipping cost + payment link.');
 
       window.location.href = 'mailto:acnorris@norrisutilities.com?subject=' +
         encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
 
-      closeCart();
+      showOrderSuccess(orderId);
+    }
+
+    function showOrderSuccess(orderId) {
+      closeCheckoutModal();
+      document.getElementById('orderIdDisplay').textContent = 'Order ID: ' + orderId;
+      document.getElementById('successOverlay').classList.add('open');
+      cart = [];
+      updateCartUI();
+    }
+
+    function closeSuccess() {
+      document.getElementById('successOverlay').classList.remove('open');
+      document.body.style.overflow = '';
     }
 
     /* ══ QUOTE FORM ══ */
@@ -1429,7 +2178,7 @@
       var email = document.getElementById('email').value;
       var phone = document.getElementById('phone').value || 'Not provided';
       var message = document.getElementById('message').value || 'No details provided';
-      var shipping = document.getElementById('shipping').value || 'Not provided';
+      var shippingAddr = document.getElementById('shipping').value || 'Not provided';
 
       var subject = 'FlexPro Armor Quote Request - ' + company;
       var body = 'FLEXPRO ARMOR QUOTE REQUEST\n'
@@ -1441,7 +2190,7 @@
         + 'REQUEST DETAILS:\n'
         + message + '\n\n'
         + 'SHIPPING ADDRESS:\n'
-        + shipping;
+        + shippingAddr;
 
       window.location.href = 'mailto:acnorris@norrisutilities.com'
         + '?subject=' + encodeURIComponent(subject)
@@ -1449,17 +2198,6 @@
 
       return false;
     }
-
-    /* ══ SETUP CHECK ══ */
-    (function() {
-      var configured = false;
-      for (var sku in STRIPE_CONFIG) {
-        if (STRIPE_CONFIG[sku].stripeLink) { configured = true; break; }
-      }
-      if (!configured) {
-        document.getElementById('setupBanner').classList.add('visible');
-      }
-    })();
   </script>
 
 </body>
