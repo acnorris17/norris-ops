@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Item: Receive &amp; Process Inventory from Last PO — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: var(--font-primary);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .page-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .action-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .action-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+      color: var(--nu-white);
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .action-badge svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--nu-white);
+    }
+    .action-title {
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--nu-dark-text);
+      line-height: 1.3;
+    }
+    .action-title span {
+      color: var(--nu-blue);
+    }
+
+    .status-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+      color: var(--nu-white);
+      padding: 16px 24px;
+      border-radius: 10px;
+      margin-bottom: 32px;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .status-banner svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--nu-white);
+      flex-shrink: 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .info-card {
+      background: var(--nu-light-gray);
+      border-radius: 10px;
+      padding: 24px;
+      border-left: 4px solid var(--nu-blue);
+    }
+    .info-card.highlight {
+      border-left-color: var(--nu-cyan);
+      background: linear-gradient(135deg, #f0f8ff 0%, var(--nu-light-gray) 100%);
+    }
+    .info-label {
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .info-value {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
+    }
+
+    .section-block {
+      margin-bottom: 36px;
+    }
+    .section-heading {
+      font-weight: 900;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    .section-heading span:first-child {
+      color: var(--nu-blue);
+    }
+    .section-heading span:last-child {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    .context-box {
+      background: var(--nu-light-gray);
+      border-radius: 10px;
+      padding: 28px;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    .context-box p {
+      margin-bottom: 12px;
+    }
+    .context-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .steps-list {
+      list-style: none;
+      counter-reset: step-counter;
+    }
+    .steps-list li {
+      counter-increment: step-counter;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .steps-list li:last-child {
+      border-bottom: none;
+    }
+    .steps-list li::before {
+      content: counter(step-counter);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .step-content {
+      padding-top: 6px;
+    }
+    .step-content strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .step-content span {
+      font-size: 0.92rem;
+      color: #666;
+    }
+
+    .checklist {
+      list-style: none;
+      margin-top: 24px;
+    }
+    .checklist li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+    }
+    .checklist li .check-box {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .note-box {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      border-left: 4px solid #2e7d32;
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin-top: 32px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .note-box strong {
+      color: #1b5e20;
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .page-container { padding: 40px 20px; }
+      .action-header { flex-direction: column; align-items: flex-start; }
+      .action-title { font-size: 1.4rem; }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div class="page-container">
+
+      <div class="action-header">
+        <div class="action-badge">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          Action Item
+        </div>
+        <h1 class="action-title"><span>Receive</span> &amp; Process Inventory from Last PO</h1>
+      </div>
+
+      <div class="status-banner">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zM18 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        Inventory arriving — receive shipment, verify contents against PO, update stock records, and store properly.
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-label">Action Type</div>
+          <div class="info-value">Inventory Receiving</div>
+        </div>
+        <div class="info-card highlight">
+          <div class="info-label">Priority</div>
+          <div class="info-value">High — Time-Sensitive</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Date Created</div>
+          <div class="info-value">April 13, 2026</div>
+        </div>
+        <div class="info-card highlight">
+          <div class="info-label">Status</div>
+          <div class="info-value">Pending — Awaiting Receipt</div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h2 class="section-heading"><span>Action </span><span>Details</span></h2>
+        <div class="context-box">
+          <p>Inventory from the most recent purchase order is expected to arrive. When the shipment comes in, it must be received properly: inspect the packaging for damage, verify every item and quantity against the original PO, and check for any backorders or shortages.</p>
+          <p>Once verified, update the internal inventory records with the new stock counts. Any discrepancies between what was ordered and what was received must be documented and reported to the supplier immediately. Do not put product into storage until it has been fully checked in.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h2 class="section-heading"><span>Receiving </span><span>Process</span></h2>
+        <ol class="steps-list">
+          <li>
+            <div class="step-content">
+              <strong>Inspect Shipment on Arrival</strong>
+              <span>Check all boxes and packaging for visible damage before signing the delivery receipt. Photograph any damage immediately. Note the carrier name, tracking number, and number of boxes received.</span>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Pull the Original PO</strong>
+              <span>Retrieve the purchase order that corresponds to this shipment. Have the PO number, line items, quantities, and expected pricing ready for cross-reference.</span>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Verify Contents Against PO</strong>
+              <span>Open each box and count every item. Compare part numbers, descriptions, and quantities to the PO line by line. Mark each line item as received, short, or over-shipped.</span>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Document Any Discrepancies</strong>
+              <span>If quantities do not match, items are damaged, or wrong product was shipped, document it with photos and notes. Contact the supplier the same day to file a claim or request a corrective shipment.</span>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Update Inventory Records</strong>
+              <span>Enter the received quantities into the inventory tracking system. Update stock counts, note lot numbers or serial numbers if applicable, and record the date received.</span>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Store Product Properly</strong>
+              <span>Move verified inventory to the correct storage location. Ensure items are organized, labeled, and accessible for fulfillment. FlexPro Armor covers should be stored flat or hanging to prevent creasing.</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="section-block">
+        <h2 class="section-heading"><span>Receiving </span><span>Checklist</span></h2>
+        <ul class="checklist">
+          <li><div class="check-box"></div>Delivery receipt signed with noted exceptions</li>
+          <li><div class="check-box"></div>All boxes counted and inspected for external damage</li>
+          <li><div class="check-box"></div>Contents verified against PO line by line</li>
+          <li><div class="check-box"></div>Discrepancies documented and reported to supplier</li>
+          <li><div class="check-box"></div>Inventory records updated with received quantities</li>
+          <li><div class="check-box"></div>Product stored in correct location</li>
+          <li><div class="check-box"></div>Packing slip filed with PO documentation</li>
+        </ul>
+      </div>
+
+      <div class="note-box">
+        <strong>Reminder:</strong> Do not assume the shipment is complete until every line item on the PO has been physically verified. If the supplier sent a partial shipment, confirm the remaining items have a ship date. Keep the PO open until every item has been received and accounted for.
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
