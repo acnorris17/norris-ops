@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-13T09:39:59",
+  "last_updated": "2026-04-13T10:54:02",
   "documents": [
     {
       "id": "SD-2026-ABADIE-0331",
@@ -260,6 +260,42 @@
           }
         ],
         "subtotal": 1525,
+        "shipping": null,
+        "total": null
+      }
+    },
+    {
+      "id": "SD-2026-DOMINION-4501057807-0413",
+      "filename": "SD-2026-DOMINION-4501057807-0413.html",
+      "customer": "Dominion Energy",
+      "company": "&#9888;&#65039; VERIFY: Ship-to address needed",
+      "date": "04/13/2026",
+      "file": "shipping-docs/SD-2026-DOMINION-4501057807-0413.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "4501057807",
+      "products": [
+        {
+          "sku": "&#9888;&#65039; TBD",
+          "name": "(see email)",
+          "qty": 1
+        }
+      ],
+      "shipTo": "",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "&#9888;&#65039; TBD",
+            "name": "(see email)",
+            "qty": 1,
+            "unit_price": 0
+          }
+        ],
+        "subtotal": 0,
         "shipping": null,
         "total": null
       }
