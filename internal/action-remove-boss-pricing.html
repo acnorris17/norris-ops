@@ -5,7 +5,7 @@
 <script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: Remove Boss Online Store Pricing — Norris Utilities®</title>
+  <title>Action: Remove Pricing from Boss Online Store — Norris Utilities®</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
@@ -127,171 +127,156 @@
     }
     .nu-content-area > * { position: relative; z-index: 1; }
 
-    .action-container {
+    .content-wrapper {
       max-width: 900px;
       margin: 0 auto;
       padding: 60px 40px;
     }
 
-    .action-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
+    .action-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #cc3300 0%, #ff4400 100%);
+      color: var(--nu-white);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
     }
-    .action-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .action-icon svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--nu-white);
-    }
-    .action-title {
+
+    .page-title {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.8rem;
+      font-size: 2rem;
       color: var(--nu-dark-text);
+      margin-bottom: 8px;
     }
-    .action-title span {
-      color: var(--nu-blue);
-    }
+    .page-title span { color: var(--nu-blue); }
 
-    .meta-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
+    .page-subtitle {
+      font-size: 1.05rem;
+      color: #666;
       margin-bottom: 40px;
-      padding: 20px 24px;
-      background: var(--nu-light-gray);
-      border-radius: 10px;
-      border-left: 4px solid var(--nu-blue);
-    }
-    .meta-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.95rem;
-    }
-    .meta-label {
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .meta-value {
-      color: var(--nu-body-text);
-    }
-    .status-badge {
-      display: inline-block;
-      background: #FFF3CD;
-      color: #856404;
-      padding: 3px 12px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.02em;
+      line-height: 1.6;
     }
 
-    .section-card {
+    .action-card {
       background: var(--nu-white);
-      border-radius: 10px;
-      padding: 28px;
-      margin-bottom: 24px;
+      border-radius: 8px;
+      padding: 32px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 24px;
     }
-    .section-card h2 {
+    .action-card h3 {
       font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.2rem;
-      color: var(--nu-blue);
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--nu-light-gray);
-    }
-    .section-card h2 span {
-      color: var(--nu-dark-text);
       font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 16px;
     }
+    .action-card h3 span { color: var(--nu-blue); }
 
-    .checklist {
+    .action-card p, .action-card li {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--nu-body-text);
+    }
+    .action-card ul {
       list-style: none;
       padding: 0;
     }
-    .checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 0;
+    .action-card ul li {
+      padding: 8px 0 8px 24px;
+      position: relative;
       border-bottom: 1px solid var(--nu-light-gray);
-      font-size: 1rem;
-      line-height: 1.5;
     }
-    .checklist li:last-child {
-      border-bottom: none;
-    }
-    .check-box {
-      width: 22px;
-      height: 22px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .context-note {
-      background: #EBF5FF;
-      border-left: 4px solid var(--nu-cyan);
-      padding: 16px 20px;
-      border-radius: 0 8px 8px 0;
-      margin-top: 16px;
-      font-size: 0.95rem;
-      color: var(--nu-dark-text);
-      line-height: 1.6;
-    }
-    .context-note strong {
-      color: var(--nu-blue);
-    }
-
-    .contact-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px;
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    .contact-avatar {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #1a1a3e, #2a2a5e);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .action-card ul li:last-child { border-bottom: none; }
+    .action-card ul li::before {
+      content: '\25B6';
       color: var(--nu-cyan);
-      font-weight: 900;
+      position: absolute;
+      left: 0;
+      font-size: 0.7rem;
+      top: 12px;
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      background: var(--nu-light-gray);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 6px;
+      padding: 10px 18px;
       font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-    .contact-info {
-      font-size: 0.95rem;
-    }
-    .contact-name {
       font-weight: 700;
       color: var(--nu-dark-text);
     }
-    .contact-role {
-      color: #666;
-      font-size: 0.85rem;
+    .contact-chip .role {
+      font-weight: 400;
+      color: #888;
+      margin-left: 8px;
     }
+
+    .priority-banner {
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 20px 28px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .priority-banner .label {
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--nu-cyan);
+      white-space: nowrap;
+    }
+    .priority-banner .desc {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      font-weight: 900;
+      font-size: 0.85rem;
+      border-radius: 50%;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .steps-list {
+      list-style: none;
+      padding: 0;
+    }
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .steps-list li:last-child { border-bottom: none; }
 
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
@@ -308,7 +293,7 @@
       margin-bottom: 12px;
     }
     .nu-footer-contact {
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.8;
     }
     .nu-footer-contact a {
@@ -321,16 +306,16 @@
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .action-container { padding: 40px 20px; }
-      .action-title { font-size: 1.4rem; }
-      .meta-bar { flex-direction: column; gap: 12px; }
-      .contact-card { flex-direction: column; text-align: center; }
+      .content-wrapper { padding: 40px 20px; }
+      .page-title { font-size: 1.5rem; }
+      .contact-row { flex-direction: column; gap: 12px; }
+      .priority-banner { flex-direction: column; gap: 8px; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .section-card { box-shadow: none; border: 1px solid #ccc; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .action-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
     }
   </style>
 </head>
@@ -355,96 +340,61 @@
   </div>
 
   <main class="nu-content-area">
-    <div class="action-container">
+    <div class="content-wrapper">
 
-      <div class="action-header">
-        <div class="action-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2z"/>
-          </svg>
-        </div>
-        <div class="action-title"><span>Action Item:</span> Remove Pricing from Boss Online Store</div>
+      <div class="action-badge">Action Required</div>
+
+      <h1 class="page-title"><span>Remove</span> Pricing from Boss Online Store</h1>
+      <p class="page-subtitle">Boss Products online store currently displays pricing that needs to be removed to protect Norris Utilities® dealer margins and pricing strategy. Coordinate with Troy Gongwer and Thayne Grove to have all pricing pulled from the Boss online storefront.</p>
+
+      <div class="priority-banner">
+        <div class="label">Priority</div>
+        <div class="desc">Visible pricing on the Boss online store undercuts dealer pricing control. This should be addressed as soon as possible to prevent customer confusion and protect margin integrity.</div>
       </div>
 
-      <div class="meta-bar">
-        <div class="meta-item">
-          <span class="meta-label">Source:</span>
-          <span class="meta-value">reMarkable Notes</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Date:</span>
-          <span class="meta-value">April 12, 2026</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Priority:</span>
-          <span class="status-badge">ACTION REQUIRED</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Vendor:</span>
-          <span class="meta-value">BOSS Products</span>
+      <div class="action-card">
+        <h3><span>Action</span> Steps</h3>
+        <ol class="steps-list">
+          <li>
+            <span class="step-number">1</span>
+            <div>Contact Troy Gongwer and Thayne Grove at Boss Products — CC both on all communications per standard protocol.</div>
+          </li>
+          <li>
+            <span class="step-number">2</span>
+            <div>Request removal of all retail/MSRP pricing from the Boss Products online store for items distributed through Norris Utilities®.</div>
+          </li>
+          <li>
+            <span class="step-number">3</span>
+            <div>Confirm whether pricing is displayed site-wide or only on specific product pages — clarify scope of the removal request.</div>
+          </li>
+          <li>
+            <span class="step-number">4</span>
+            <div>Request a "Contact Dealer for Pricing" or "Request a Quote" prompt in place of displayed prices.</div>
+          </li>
+          <li>
+            <span class="step-number">5</span>
+            <div>Verify the changes are live on the Boss online store once Troy/Thayne confirm completion.</div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="action-card">
+        <h3><span>Key</span> Contacts at Boss Products</h3>
+        <p style="margin-bottom: 12px; font-size: 0.9rem; color: #888;">CC both contacts on every email per Norris Utilities® communication protocol.</p>
+        <div class="contact-row">
+          <div class="contact-chip">Troy Gongwer <span class="role">Boss Products</span></div>
+          <div class="contact-chip">Thayne Grove <span class="role">Boss Products</span></div>
         </div>
       </div>
 
-      <div class="section-card">
-        <h2>Task <span>Overview</span></h2>
-        <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 16px;">
-          Remove all visible pricing from the Boss Products online store. Pricing should not be publicly displayed to end users or competitors. Customers will need to contact Norris Utilities® directly for quotes, protecting margin integrity and allowing for customized pricing by account.
-        </p>
-        <div class="context-note">
-          <strong>Key Contacts at BOSS Products:</strong> Troy Gongwer and Thayne Grove must both be CC'd on all communications regarding this change. Do not send to one without the other.
-        </div>
-      </div>
-
-      <div class="section-card">
-        <h2>Steps <span>to Complete</span></h2>
-        <ul class="checklist">
-          <li>
-            <div class="check-box"></div>
-            <div>Log in to the Boss Products online store admin panel and identify all product listings that currently display pricing</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Remove or hide all retail, wholesale, and MSRP price fields from every product page</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Replace price displays with a "Contact for Pricing" or "Request a Quote" call-to-action linking to Aaron's direct contact</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Verify that no cached or indexed pricing remains visible on the storefront</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Email Troy Gongwer and Thayne Grove at BOSS Products confirming the pricing has been removed and the store is updated</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Spot-check the store on both desktop and mobile to confirm no pricing is visible anywhere</div>
-          </li>
+      <div class="action-card">
+        <h3><span>Why</span> This Matters</h3>
+        <ul>
+          <li>Published pricing allows end-users to bypass dealers and negotiate directly, eroding margin.</li>
+          <li>Norris Utilities® pricing strategy depends on controlled quoting through Aaron or authorized channels.</li>
+          <li>Competitors can use visible pricing to undercut or price-match without adding value.</li>
+          <li>Removing pricing drives customers to contact Norris Utilities® directly, creating sales opportunities.</li>
         </ul>
-      </div>
-
-      <div class="section-card">
-        <h2>Relevant <span>Contacts</span></h2>
-        <div class="contact-card">
-          <div class="contact-avatar">TG</div>
-          <div class="contact-info">
-            <div class="contact-name">Troy Gongwer</div>
-            <div class="contact-role">BOSS Products — CC on all communications</div>
-          </div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-avatar">TG</div>
-          <div class="contact-info">
-            <div class="contact-name">Thayne Grove</div>
-            <div class="contact-role">BOSS Products — CC on all communications</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="context-note" style="margin-top: 32px;">
-        <strong>Reminder:</strong> All Boss Products communications must CC both Troy Gongwer and Thayne Grove. No exceptions.
       </div>
 
     </div>
