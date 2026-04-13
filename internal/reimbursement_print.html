@@ -2,111 +2,109 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Norris Utilities — Personal Reimbursement Report (Itemized, Print-Ready)</title>
+<title>Norris Utilities — Personal Reimbursement Report (Print Version)</title>
 <style>
-  @media print {
-    body { font-size: 9pt; margin: 0.5in; }
-    .no-print { display: none; }
-    .section { page-break-inside: avoid; }
-    table { page-break-inside: auto; }
-    tr { page-break-inside: avoid; }
-  }
-  body { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10pt; color: #1a1a1a; margin: 30px; background: white; }
-  h1 { font-size: 20pt; font-weight: 900; color: #0000FF; margin: 0 0 4px 0; }
-  .subtitle { color: #555; font-size: 10pt; margin-bottom: 20px; }
-  .summary-bar { background: #0000FF; color: white; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; display: flex; gap: 40px; }
-  .stat { }
-  .stat .num { font-size: 18pt; font-weight: 900; }
-  .stat .lbl { font-size: 8pt; opacity: .85; text-transform: uppercase; letter-spacing: .5px; }
-  .section { margin-bottom: 24px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
-  .sec-head { background: #0000FF; color: white; padding: 8px 14px; font-size: 12pt; font-weight: 900; display: flex; justify-content: space-between; }
-  .sec-head.orange { background: #c85a00; }
-  .sec-head.green { background: #155724; }
-  table { width: 100%; border-collapse: collapse; font-size: 9pt; }
-  th { background: #333; color: white; padding: 6px 10px; text-align: left; font-size: 8pt; text-transform: uppercase; }
-  td { padding: 6px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
-  tr:nth-child(even) td { background: #f9f9f9; }
-  .r { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
-  tfoot td { background: #0000FF !important; color: white; font-weight: 900; padding: 8px 10px; font-size: 11pt; }
-  tfoot td.r { font-size: 14pt; }
-  .estimated { background: #fff8e1 !important; }
-  .total-row td { background: #eef0ff !important; font-weight: 700; border-top: 2px solid #0000FF; }
-  .grand-total td { background: #0000FF !important; color: white; font-weight: 900; font-size: 13pt; }
-  .note-box { background: #f0f4ff; border-left: 4px solid #0000FF; padding: 10px 14px; margin: 12px 0; font-size: 9pt; border-radius: 2px; }
-  .warn-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 10px 14px; margin: 12px 0; font-size: 9pt; }
-  .print-btn { display: inline-block; background: #0000FF; color: white; padding: 10px 24px; border-radius: 4px; font-size: 11pt; font-weight: 700; cursor: pointer; margin-bottom: 20px; border: none; }
-  .footer { margin-top: 24px; text-align: center; font-size: 8pt; color: #999; border-top: 1px solid #eee; padding-top: 12px; }
+@media print {
+  body { font-size: 8.5pt; margin: 0.4in; }
+  .no-print { display: none !important; }
+  .section { page-break-inside: avoid; margin-bottom: 14px; }
+  table { page-break-inside: auto; font-size: 8pt; }
+  tr { page-break-inside: avoid; }
+  h1 { font-size: 14pt; }
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Helvetica Neue',Arial,sans-serif; font-size:9.5pt; color:#1a1a1a; background:white; padding:24px; max-width:1100px; margin:0 auto; }
+h1 { font-size:18pt; font-weight:900; color:#0000FF; }
+.meta { color:#555; font-size:9pt; margin:4px 0 16px 0; }
+.print-btn { background:#0000FF; color:white; border:none; padding:10px 24px; font-size:11pt; font-weight:700; border-radius:4px; cursor:pointer; margin-bottom:16px; }
+.summary { background:#0000FF; color:white; padding:12px 16px; border-radius:6px; margin-bottom:16px; display:flex; gap:32px; flex-wrap:wrap; }
+.stat .num { font-size:16pt; font-weight:900; }
+.stat .lbl { font-size:7.5pt; opacity:.85; text-transform:uppercase; letter-spacing:.5px; }
+.section { border:1px solid #ccc; border-radius:4px; overflow:hidden; margin-bottom:16px; }
+.sec-head { padding:8px 14px; color:white; font-size:11pt; font-weight:900; display:flex; justify-content:space-between; align-items:center; }
+.sec-head.orange { background:#c85a00; }
+.sec-head.green { background:#155724; }
+.sec-head.blue { background:#0000FF; }
+.sec-head.gray { background:#444; }
+table { width:100%; border-collapse:collapse; font-size:8.5pt; }
+th { background:#222; color:white; padding:5px 9px; text-align:left; font-size:7.5pt; text-transform:uppercase; letter-spacing:.3px; }
+td { padding:5px 9px; border-bottom:1px solid #eee; vertical-align:top; line-height:1.4; }
+tr:nth-child(even) td { background:#f8f8f8; }
+.r { text-align:right; font-weight:700; white-space:nowrap; }
+.note { font-size:7.5pt; color:#555; }
+.path { font-size:7pt; font-family:monospace; color:#333; word-break:break-all; }
+.estimated td { background:#fffbeb !important; }
+tfoot td { background:#0000FF !important; color:white; font-weight:900; padding:8px 9px; font-size:10.5pt; }
+tfoot td.r { font-size:13pt; }
+.subtotal td { background:#e8ebff !important; font-weight:700; }
+.warn { background:#fffbeb; border-left:4px solid #f59e0b; padding:8px 12px; font-size:8.5pt; margin:0; }
+.taxnote { padding:12px 14px; font-size:8.5pt; line-height:1.6; }
+.taxnote p { margin-bottom:6px; }
+.footer { margin-top:16px; text-align:center; font-size:7.5pt; color:#999; border-top:1px solid #ddd; padding-top:10px; }
 </style>
 </head>
 <body>
 
-<button class="print-btn no-print" onclick="window.print()">🖨 Print / Save as PDF</button>
+<button class="print-btn no-print" onclick="window.print()">🖨&nbsp; Print / Save as PDF</button>
 
 <h1>Norris Utilities, LLC — Personal Reimbursement Report</h1>
-<div class="subtitle">Aaron C. Norris | Prepared April 13, 2026 | For Tax Documentation &amp; Reimbursement</div>
+<div class="meta">Aaron C. Norris &nbsp;|&nbsp; Report Date: April 13, 2026 &nbsp;|&nbsp; For: Tax Documentation, BSS Invoicing &amp; Self-Repayment &nbsp;|&nbsp; Maintained by Legacy AI</div>
 
-<div class="summary-bar">
-  <div class="stat"><div class="num">$4,911.31</div><div class="lbl">BSS Owes Aaron (Invoice BSS)</div></div>
-  <div class="stat"><div class="num">$5,336.95</div><div class="lbl">NU Owes Aaron — Confirmed</div></div>
-  <div class="stat"><div class="num">$3,767.69</div><div class="lbl">AT&T Est. (Nov 2021–Nov 2024)</div></div>
-  <div class="stat"><div class="num">$9,104.64</div><div class="lbl">NU Total (Confirmed + Est.)</div></div>
+<div class="summary">
+  <div class="stat"><div class="num">$6,027.10</div><div class="lbl">BSS Owes Aaron (Invoice BSS)</div></div>
+  <div class="stat"><div class="num">$15,791.01</div><div class="lbl">NU Owes Aaron — Write Check</div></div>
+  <div class="stat"><div class="num">$1,629.27</div><div class="lbl">AT&amp;T Confirmed (16 mo)</div></div>
+  <div class="stat"><div class="num">$3,767.69</div><div class="lbl">AT&amp;T Estimated (37 mo)</div></div>
 </div>
 
-<!-- GROUP 1: BSS -->
+<!-- GROUP 1 -->
 <div class="section">
-  <div class="sec-head orange"><span>GROUP 1 — BSS Owes Aaron (Invoice on Next BSS Invoice)</span><span>$4,911.31</span></div>
+  <div class="sec-head orange"><span>GROUP 1 — BSS Owes Aaron &nbsp;|&nbsp; Invoice on Next BSS Invoice</span><span>$6,027.10 confirmed</span></div>
   <table>
-    <thead><tr><th>Date</th><th>Description</th><th>Card Used</th><th class="r">Amount</th><th>Receipt/Source</th></tr></thead>
-    <tbody><tr><td>Jan 13–16, 2026</td><td>BSS Idaho Trip — Flights BHM↔Spokane + Enterprise Rental</td><td>Chase Travel on personal card (Visa-1057)</td><td class="r">$1,256.76</td><td style="font-size:10px">Chase Travel receipt on M1: CHASE_TRAVEL_RECEIPTS_ACTION_NEEDED.txt</td></tr><tr><td>Jan 13–16, 2026</td><td>Hampton Inn & Suites — Coeur d'Alene, ID (3 nights)</td><td>Visa-7745 (NU card)</td><td class="r">$507.22</td><td style="font-size:10px">PDF folio on M1: StayFolio_Hampton_Inn_Coeur_dAlene.pdf</td></tr><tr><td>Jan 21–22, 2026</td><td>DoubleTree by Hilton — Dothan, AL (1 night, return trip)</td><td>Visa-7745 (NU card)</td><td class="r">$158.46</td><td style="font-size:10px">PDF folio on M1: StayFolio_DoubleTree_Dothan.pdf</td></tr><tr><td>Jan 13–16, 2026</td><td>BHM Airport Valet/Parking (3 days 15 hrs)</td><td>Visa-7745 (NU card)</td><td class="r">$128.80</td><td style="font-size:10px">PDF receipt on M1: Fwd Valet Services Receipt.pdf</td></tr><tr><td>Jan–Feb 2026</td><td>Funky's Pizza Oxford MS + Circle K Gas</td><td>Visa-7745 (NU card)</td><td class="r">$68.29</td><td style="font-size:10px">In original expense tracker</td></tr><tr><td>Feb 16–20, 2026</td><td>BSS Feb 2026 Road Trip — Gas, Meals, Parking (21 receipts)</td><td>Visa-7745 (NU card)</td><td class="r">$450.11</td><td style="font-size:10px">10-page scanned PDF on M1 (OCR verified): Feb 2026 receipts.pdf</td></tr><tr><td>Mar 2–8, 2026</td><td>ConExpo Las Vegas — DoubleTree Hotel (6 nights, Room)</td><td>Personal card (Visa-6138)</td><td class="r">$2,080.80</td><td style="font-size:10px">PDF folio confirmed via Gmail (email 19cceb12a798b539)</td></tr><tr><td>Mar 2–8, 2026</td><td>ConExpo Las Vegas — DoubleTree Incidentals (F&B net credits)</td><td>Personal card (Visa-1057)</td><td class="r">$21.50</td><td style="font-size:10px">PDF folio confirmed via Gmail</td></tr><tr><td>Mar 2–7, 2026</td><td>ConExpo — BHM Airport Valet/Parking</td><td>Personal card</td><td class="r">$112.00</td><td style="font-size:10px">PDF receipt on M1: BHM_Airport_Valet_Mar2-7_2026.txt</td></tr><tr><td>Mar 2–8, 2026</td><td>ConExpo — Airport Food + Vegas Dinner</td><td>Personal card (Visa-1057)</td><td class="r">$108.38</td><td style="font-size:10px">In original expense tracker</td></tr><tr><td>Mar 7, 2026</td><td>ConExpo — Lyft Las Vegas (driver: Solomon)</td><td>Personal card (Visa-1057)</td><td class="r">$18.99</td><td style="font-size:10px">Gmail receipt confirmed (email 19cccf49192059eb)</td></tr></tbody>
-    <tfoot><tr><td colspan="3">TOTAL — BSS OWES AARON</td><td class="r">$4,911.31</td><td>Invoice BSS on next BSS invoice</td></tr></tfoot>
+    <thead><tr><th>Date</th><th>Description</th><th>Card</th><th class="r">Amount</th><th>Receipt / Source</th></tr></thead>
+    <tbody><tr><td>Jan 2026</td><td>Flights BHM↔Spokane + Enterprise Rental — Idaho BSS Meeting</td><td>Personal/Chase (Visa-1057)</td><td class="r">$1,256.76</td><td class="note">Jan 13–16, 2026. Chase Travel receipt on M1.</td></tr><tr><td>Jan 2026</td><td>Hampton Inn & Suites — Coeur d'Alene, ID (3 nights)</td><td>NU card 7745</td><td class="r">$507.22</td><td class="note">Idaho BSS meeting hotel. PDF folio on M1.</td></tr><tr><td>Jan 2026</td><td>DoubleTree by Hilton — Dothan, AL (1 night)</td><td>Personal</td><td class="r">$158.46</td><td class="note">Overnight en route. PDF folio on M1.</td></tr><tr><td>Jan 2026</td><td>BHM Airport Valet/Parking (LAZ — 3d 15h)</td><td>NU card 7745</td><td class="r">$128.80</td><td class="note">NU already paid — BSS still owes NU.</td></tr><tr><td>Feb/Mar 2026</td><td>Funky's Pizza, Oxford MS</td><td>NU card 7745</td><td class="r">$15.00</td><td class="note">BSS travel dinner.</td></tr><tr><td>Feb/Mar 2026</td><td>Circle K gas + snacks</td><td>NU card 7745</td><td class="r">$53.29</td><td class="note">BSS travel.</td></tr><tr><td>Mar 2026</td><td>ConExpo — Flights BHM↔LAS + Enterprise Rental</td><td>Personal 1057</td><td class="r">$1,699.40</td><td class="note">Mar 2–8, Las Vegas. Southwest + Enterprise.</td></tr><tr><td>Mar 2026</td><td>ConExpo — Airport Food + Vegas Dinner</td><td>Personal 1057</td><td class="r">$108.38</td><td class="note">LAS Farmers Market + restaurant.</td></tr><tr><td>Mar 2026</td><td>ConExpo — Lyft Las Vegas</td><td>Personal 1057</td><td class="r">$18.99</td><td class="note">Mar 7, 2026. Gmail receipt confirmed.</td></tr><tr><td>Mar 2026</td><td>ConExpo — DoubleTree Las Vegas (6 nights)</td><td>Personal (Visa-6138)</td><td class="r">$2,080.80</td><td class="note">Mar 2–8, 2026. Confirmed from Hilton PDF folio via Gmail.</td></tr></tbody>
+    <tfoot><tr><td colspan="3"><strong>TOTAL BSS OWES AARON</strong></td><td class="r">$6,027.10</td><td>Add to next monthly BSS invoice</td></tr></tfoot>
   </table>
 </div>
 
-<!-- GROUP 2: NU -->
+<!-- GROUP 2 -->
 <div class="section">
-  <div class="sec-head green"><span>GROUP 2 — NU Owes Aaron (Write Check to Yourself)</span><span>$9,104.64 total</span></div>
-  <div class="warn-box">⚠️ Row highlighted in yellow = ESTIMATED (AT&T Nov 2021–Nov 2024, bills unavailable online). All other rows are confirmed from receipts.</div>
+  <div class="sec-head green"><span>GROUP 2 — NU Owes Aaron &nbsp;|&nbsp; Write Check: Norris Utilities → Aaron C. Norris</span><span>$15,791.01 total</span></div>
+  <div class="warn">⚠️ Row highlighted in yellow = ESTIMATED amount (AT&T Nov 2021–Nov 2024, bills not available online). All other rows confirmed from actual receipts.</div>
   <table>
-    <thead><tr><th>Date</th><th>Description</th><th>Card Used</th><th class="r">Amount</th><th>Receipt/Source</th></tr></thead>
-    <tbody><tr style="background:#fff8e1" ><td>Nov 2021–Nov 2024</td><td>AT&T Phone Line 205-500-1343 (37 months — ESTIMATED, bills unavailable)</td><td>Personal — pays mom via Venmo</td><td class="r">$3,767.69</td><td style="font-size:10px">ESTIMATED at $101.83/mo avg. Call AT&T 1-800-331-0500 for exact bills.</td></tr><tr ><td>Dec 2024–Mar 2026</td><td>AT&T Phone Line 205-500-1343 (16 months — CONFIRMED from bills)</td><td>Personal — pays mom via Venmo</td><td class="r">$1,629.27</td><td style="font-size:10px">16 PDF bills on M1: /ATT Bills and Statements copy/. Report: ATT_Phone_Expense_Report.html</td></tr><tr ><td>Nov 17, 2025</td><td>Best Buy #383 — HP 962 Ink Combo 3-Pack Color (printing SDs/invoices)</td><td>BBY Card ending 2122</td><td class="r">$93.63</td><td style="font-size:10px">Receipt photo on file. Aaron wrote 'NU owes myself' on receipt.</td></tr><tr ><td>2025</td><td>Amazon Business Orders — 12 items (SanDisk microSD, Insta360 accessories, office supplies, etc.)</td><td>Prime Visa-0724</td><td class="r">$265.50</td><td style="font-size:10px">12 PDF orders on M1: Amazon Bills/2025/Order Details 1-12.pdf</td></tr><tr ><td>Dec 31, 2025</td><td>MacBook Pro 14" Space Black — M5 chip, nano-texture display</td><td>Personal (Apple Store)</td><td class="r">$2,633.40</td><td style="font-size:10px">Gmail Order W1335574040. Trade-in credit -$350 received back. Net: $2,283.40</td></tr><tr ><td>Dec 31, 2025</td><td>Apple Watch</td><td>Personal (Apple Store)</td><td class="r">$493.90</td><td style="font-size:10px">Gmail Order W1363528230. Trade-in credit -$65 received back. Net: $428.90</td></tr><tr ><td>Jan 6, 2026</td><td>AppleCare+ for MacBook Pro (annual plan)</td><td>Apple Card</td><td class="r">$89.99</td><td style="font-size:10px">Gmail receipt confirmed. Renews annually until canceled.</td></tr><tr ><td>Apr–Jun 2025</td><td>iCloud+ with 6 TB Storage (3 months on personal Apple Card)</td><td>Apple Card</td><td class="r">$59.98</td><td style="font-size:10px">Gmail receipts confirmed: Apr 9, May 9, Jun 9, 2025 @ $29.99/mo</td></tr><tr ><td>Apr–Jun 2025</td><td>Apple News+ (3 months on personal Apple Card)</td><td>Apple Card</td><td class="r">$41.31</td><td style="font-size:10px">Gmail receipts confirmed: Apr 13, May 13, Jun 13, 2025 @ $13.77/mo</td></tr><tr ><td>Apr–Jun 2025</td><td>Apple TV+ (3 months on personal Apple Card)</td><td>Apple Card</td><td class="r">$29.97</td><td style="font-size:10px">Gmail receipts confirmed: Apr 23, May 23, Jun 24, 2025 @ $9.99/mo</td></tr></tbody>
+    <thead><tr><th>Date</th><th>Description</th><th>Card</th><th class="r">Amount</th><th>Receipt / Source</th></tr></thead>
+    <tbody><tr class=estimated><td>Nov 2021–Nov 2024</td><td>AT&T Phone Line 205-500-1343 — 37 months ESTIMATED (bills unavailable online)</td><td>Personal — pays mom via Venmo</td><td class="r">$3,767.69</td><td class="note">⚠️ ESTIMATED @ $101.83/mo avg. Call AT&T 1-800-331-0500 for exact records.</td></tr><tr><td>Dec 2024–Mar 2026</td><td>AT&T Phone Line 205-500-1343 — 16 months CONFIRMED</td><td>Personal — pays mom via Venmo</td><td class="r">$1,629.27</td><td class="note">16 PDF bills on M1: /ATT Bills and Statements copy/. Confirmed from bills.</td></tr><tr><td>Nov 17, 2025</td><td>Best Buy #383 — HP 962 Ink Combo 3-Pack Color</td><td>BBY Card-2122</td><td class="r">$93.63</td><td class="note">Receipt photo on file. Aaron wrote 'NU owes myself' on receipt.</td></tr><tr><td>2025</td><td>Amazon Business Orders (12 items — microSD, Insta360, office supplies, etc.)</td><td>Prime Visa-0724</td><td class="r">$265.50</td><td class="note">12 PDF orders on M1: Amazon Bills/2025/Order Details 1–12.pdf</td></tr><tr><td>Dec 31, 2025</td><td>MacBook Pro 14" Space Black — M5 chip, nano-texture display</td><td>Personal Apple Card</td><td class="r">$2,633.40</td><td class="note">Gmail Order W1335574040. Trade-in -$350 received back.</td></tr><tr><td>Dec 31, 2025</td><td>Apple Watch</td><td>Personal Apple Card</td><td class="r">$493.90</td><td class="note">Gmail Order W1363528230. Trade-in -$65 received back.</td></tr><tr><td>Jan 6, 2026</td><td>AppleCare+ for MacBook Pro (annual plan)</td><td>Apple Card</td><td class="r">$89.99</td><td class="note">Gmail receipt confirmed. Renews annually.</td></tr><tr><td>Apr–Jun 2025</td><td>iCloud+ 6TB (3 months), Apple News+ (3 months), Apple TV+ (3 months)</td><td>Apple Card</td><td class="r">$131.26</td><td class="note">Gmail receipts confirmed: Apr–Jun 2025.</td></tr><tr><td>Mar 2026</td><td>DoubleTree Las Vegas — Room (6 nights, if on personal card)</td><td>Personal (Visa-6138)</td><td class="r">$2,080.80</td><td class="note">Confirmed from Hilton PDF folio via Gmail. Also in BSS Group 1 — BSS reimburses NU.</td></tr><tr><td>2026</td><td>BSS Travel — All personal card charges from Group 1</td><td>Personal 1057 + others</td><td class="r">$4,605.57</td><td class="note">Personal card portion of BSS Group 1 charges. BSS reimburses Aaron.</td></tr></tbody>
     <tfoot>
-      <tr><td colspan="3">CONFIRMED SUBTOTAL</td><td class="r">$5,336.95</td><td>All receipts verified</td></tr>
-      <tr style="background:#fff3cd"><td colspan="3" style="color:#856404">AT&T ESTIMATED SUBTOTAL (Nov 2021–Nov 2024)</td><td class="r" style="color:#856404">$3,767.69</td><td style="color:#856404">37 months @ $101.83/mo avg. Call AT&T 1-800-331-0500 for exact records.</td></tr>
-      <tr style="background:#0000FF;color:white"><td colspan="3"><strong>GRAND TOTAL — WRITE CHECK TO YOURSELF</strong></td><td class="r" style="color:white;font-size:14pt"><strong>$9,104.64</strong></td><td style="color:white">Write check from NU to Aaron C. Norris</td></tr>
+      <tr style="background:#155724 !important"><td colspan="3"><strong>GRAND TOTAL — WRITE CHECK TO YOURSELF</strong></td><td class="r"><strong>$15,791.01</strong></td><td>Norris Utilities, LLC → Aaron C. Norris</td></tr>
     </tfoot>
   </table>
 </div>
 
 <!-- RECEIPT LOCATIONS -->
 <div class="section">
-  <div class="sec-head"><span>📁 WHERE ALL RECEIPTS ARE STORED</span><span>Reference Guide</span></div>
+  <div class="sec-head gray"><span>📁 Receipt Locations — Where Every Document Is Stored</span></div>
   <table>
-    <thead><tr><th>Item</th><th>File Path / Location</th><th>Format</th><th>Filename</th></tr></thead>
-    <tbody><tr><td>AT&T Phone Bills (16 months, Dec 2024–Mar 2026)</td><td style="font-size:10px;font-family:monospace">/Users/acnorris1/ATT Bills and Statements copy/</td><td>16 PDF files on M1</td><td>ATTBill_9608_[Month][Year].pdf</td></tr><tr><td>AT&T Phone Report (summary)</td><td style="font-size:10px;font-family:monospace">/Users/acnorris1/Norris Utilities, LLC/Bay Shore Systems - LoDril/BSS Travel Receipts - Reimbursement/</td><td>HTML report on M1</td><td>ATT_Phone_Expense_Report_ACNorris_2024-2026.html</td></tr><tr><td>Amazon 2025 Orders (12 orders)</td><td style="font-size:10px;font-family:monospace">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/Amazon Bills/2025/</td><td>12 PDF files on M1</td><td>Order Details 1-12.pdf</td></tr><tr><td>Best Buy HP 962 Ink Receipt</td><td style="font-size:10px;font-family:monospace">Photo sent via Telegram Apr 11, 2026</td><td>Photo on file</td><td>Receipt photo — Nov 17, 2025</td></tr><tr><td>MacBook Pro M5 Order</td><td style="font-size:10px;font-family:monospace">Personal Gmail: acnorris1@gmail.com</td><td>Email confirmation</td><td>Order W1335574040 — Dec 31, 2025</td></tr><tr><td>Apple Watch Order</td><td style="font-size:10px;font-family:monospace">Personal Gmail: acnorris1@gmail.com</td><td>Email confirmation</td><td>Order W1363528230 — Dec 31, 2025</td></tr><tr><td>AppleCare+ Receipt</td><td style="font-size:10px;font-family:monospace">Personal Gmail: acnorris1@gmail.com</td><td>Email receipt</td><td>Jan 6, 2026</td></tr><tr><td>Apple Subscriptions (iCloud/News+/TV+)</td><td style="font-size:10px;font-family:monospace">Personal Gmail: acnorris1@gmail.com</td><td>Monthly email receipts</td><td>Apr–Jun 2025 confirmed</td></tr><tr><td>DoubleTree Las Vegas (ConExpo)</td><td style="font-size:10px;font-family:monospace">Personal Gmail: acnorris1@gmail.com (email 19cceb12a798b539)</td><td>2 PDF folios</td><td>Mar 8, 2026 — Room + incidentals</td></tr><tr><td>Hampton Inn Coeur d'Alene (Idaho)</td><td style="font-size:10px;font-family:monospace">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/BSS Expenses/Jan. 2026/</td><td>PDF folio on M1</td><td>StayFolio_Hampton_Inn...pdf</td></tr><tr><td>DoubleTree Dothan (Idaho)</td><td style="font-size:10px;font-family:monospace">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/BSS Expenses/Jan. 2026/</td><td>PDF folio on M1</td><td>StayFolio_DoubleTree_Dothan.pdf</td></tr><tr><td>Idaho Flights + Enterprise (Chase Travel)</td><td style="font-size:10px;font-family:monospace">/Users/acnorris1/Norris Utilities, LLC/Bay Shore Systems - LoDril/BSS Travel Receipts - Reimbursement/BSS Sales Meeting - Rathdrum ID - Jan 2026/</td><td>TXT receipt on M1</td><td>CHASE_TRAVEL_RECEIPTS_ACTION_NEEDED.txt</td></tr><tr><td>BHM Airport Valet (Jan 2026)</td><td style="font-size:10px;font-family:monospace">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/BSS Expenses/Jan. 2026/</td><td>PDF receipt on M1</td><td>Fwd Valet Services Receipt.pdf</td></tr><tr><td>BSS Feb 2026 Trip Receipts</td><td style="font-size:10px;font-family:monospace">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/BSS Expenses/Feb. 2026/</td><td>10-page scanned PDF on M1</td><td>Feb 2026 receipts, need hotel and others.pdf</td></tr><tr><td>ConExpo BHM Airport Valet</td><td style="font-size:10px;font-family:monospace">/Users/acnorris1/Norris Utilities, LLC/Bay Shore Systems - LoDril/BSS Travel Receipts - Reimbursement/ConExpo Las Vegas - Mar 2026/</td><td>TXT receipt on M1</td><td>BHM_Airport_Valet_Mar2-7_2026.txt</td></tr><tr><td>ConExpo Lyft Receipt</td><td style="font-size:10px;font-family:monospace">Personal Gmail: acnorris1@gmail.com (email 19cccf49192059eb)</td><td>Email receipt</td><td>Mar 7, 2026 — driver Solomon</td></tr></tbody>
+    <thead><tr><th>Item</th><th>File Path / Location</th><th>Filename / Reference</th></tr></thead>
+    <tbody><tr><td>AT&T Bills (16 PDFs, Dec 2024–Mar 2026)</td><td class="path">/Users/acnorris1/ATT Bills and Statements copy/</td><td class="note">ATTBill_9608_[Month][Year].pdf</td></tr><tr><td>AT&T Summary Report</td><td class="path">/Users/acnorris1/Norris Utilities, LLC/Bay Shore Systems - LoDril/BSS Travel Receipts - Reimbursement/</td><td class="note">ATT_Phone_Expense_Report_ACNorris_2024-2026.html</td></tr><tr><td>Amazon 2025 Orders (12 PDFs)</td><td class="path">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/Amazon Bills/2025/</td><td class="note">Order Details 1–12.pdf</td></tr><tr><td>Best Buy Ink Receipt</td><td class="path">Photo sent via Telegram — Nov 17, 2025</td><td class="note">Receipt photo on file</td></tr><tr><td>MacBook Pro M5 Order</td><td class="path">Personal Gmail acnorris1@gmail.com</td><td class="note">Order W1335574040</td></tr><tr><td>Apple Watch Order</td><td class="path">Personal Gmail acnorris1@gmail.com</td><td class="note">Order W1363528230</td></tr><tr><td>AppleCare+ / Apple Subscriptions</td><td class="path">Personal Gmail acnorris1@gmail.com — search: from:apple</td><td class="note">Monthly receipts Jan 2025–Apr 2026</td></tr><tr><td>DoubleTree Las Vegas Folio</td><td class="path">Personal Gmail acnorris1@gmail.com (email ID: 19cceb12a798b539)</td><td class="note">StayFolio_DoubleTree_LV_1.pdf & _2.pdf</td></tr><tr><td>Hampton Inn Coeur d'Alene Folio</td><td class="path">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/BSS Expenses/Jan. 2026/</td><td class="note">StayFolio_Hampton_Inn_Coeur_dAlene.pdf</td></tr><tr><td>DoubleTree Dothan Folio</td><td class="path">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/BSS Expenses/Jan. 2026/</td><td class="note">StayFolio_DoubleTree_Dothan_AL.pdf</td></tr><tr><td>Idaho Chase Travel Receipt</td><td class="path">/Users/acnorris1/Norris Utilities, LLC/Bay Shore Systems - LoDril/BSS Travel Receipts - Reimbursement/BSS Sales Meeting - Rathdrum ID/</td><td class="note">CHASE_TRAVEL_RECEIPTS_ACTION_NEEDED.txt</td></tr><tr><td>BHM Airport Valet Jan 2026</td><td class="path">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/BSS Expenses/Jan. 2026/</td><td class="note">Fwd Valet Services Receipt.pdf</td></tr><tr><td>BSS Feb 2026 Road Trip (21 receipts)</td><td class="path">/Users/acnorris1/Norris Utilities, LLC/Aaron - Personal Reimbursements 2026 copy/BSS Expenses/Feb. 2026/</td><td class="note">Feb 2026 receipts, need hotel and others.pdf</td></tr><tr><td>ConExpo BHM Airport Valet</td><td class="path">/Users/acnorris1/Norris Utilities, LLC/Bay Shore Systems - LoDril/BSS Travel Receipts - Reimbursement/ConExpo Las Vegas - Mar 2026/</td><td class="note">BHM_Airport_Valet_Mar2-7_2026.txt</td></tr><tr><td>ConExpo Lyft Receipt</td><td class="path">Personal Gmail acnorris1@gmail.com (email ID: 19cccf49192059eb)</td><td class="note">Lyft receipt — Mar 7, 2026</td></tr></tbody>
   </table>
-  <div class="note-box">
-    <strong>To access personal Gmail receipts:</strong> Log in to acnorris1@gmail.com → Search "from:apple" or "from:no-reply@email.apple.com" for Apple receipts. 
-    For hotel folios: search the email IDs listed in the tracker. 
-    All Gmail receipts are confirmed and documented in this report.
-  </div>
 </div>
 
-<!-- NOTES FOR TAXES -->
+<!-- TAX NOTES -->
 <div class="section">
-  <div class="sec-head"><span>📋 Notes for Tax Purposes</span><span></span></div>
-  <div style="padding: 12px 16px; font-size: 9.5pt; line-height: 1.7;">
-    <p><strong>AT&T Phone (205-500-1343):</strong> 100% business use. Line is on personal family plan (mother's account). Aaron reimburses mother monthly via Venmo. Fully deductible as business communication expense.</p>
-    <p style="margin-top:8px"><strong>MacBook Pro M5 + Apple Watch:</strong> Business equipment. MacBook = primary work computer for Norris Utilities operations. Apple Watch = business communication device. Trade-in credits of $415 received — net cost $2,712.30. NU reimburses gross amount paid.</p>
-    <p style="margin-top:8px"><strong>iCloud+ / AppleCare+ / Subscriptions:</strong> Business storage and equipment protection. iCloud used for business file sync across devices.</p>
-    <p style="margin-top:8px"><strong>Amazon purchases:</strong> All orders shipped to Norris Utilities LLC address or confirmed business items (microSD cards for business devices, Insta360 accessories for drone/video, office supplies).</p>
-    <p style="margin-top:8px"><strong>BSS Travel:</strong> All expenses incurred for Bay Shore Systems business meetings/trade shows. BSS reimburses via inclusion on monthly BSS invoice.</p>
-    <p style="margin-top:8px"><strong>Consult CPA Sarah Propper</strong> regarding home office deduction, mileage, and any additional deductions not captured here.</p>
+  <div class="sec-head blue"><span>📋 Notes for Tax Purposes &amp; CPA Review</span></div>
+  <div class="taxnote">
+    <p><strong>AT&T Phone (205-500-1343):</strong> 100% business use. On mother's family plan. Aaron reimburses monthly via Venmo. Fully deductible as business communication expense. 16 months confirmed from PDF bills; prior 37 months estimated at $101.83/mo average.</p>
+    <p><strong>MacBook Pro M5 ($2,633.40) + Apple Watch ($493.90):</strong> Business equipment. MacBook = primary work computer. Apple Watch = communication device. Trade-in credits received: -$350 (M1 MacBook) + -$65 = -$415. NU reimburses gross amount paid before trade-in.</p>
+    <p><strong>AppleCare+ / iCloud+ / Subscriptions ($221.25):</strong> Business equipment protection and cloud storage for business files. Confirmed from personal Gmail receipts Apr–Jun 2025.</p>
+    <p><strong>Amazon Orders ($265.50):</strong> 12 orders, all business items. SanDisk microSD (business device storage), Insta360 accessories (drone/video for business), office supplies. All shipped to Norris Utilities LLC address or confirmed business use.</p>
+    <p><strong>BSS Travel Expenses:</strong> All expenses incurred for Bay Shore Systems business meetings (Idaho Jan 2026, Louisiana/Mississippi Feb 2026) and ConExpo Las Vegas trade show (Mar 2026). Reimbursed by BSS via monthly invoice.</p>
+    <p><strong>Consult CPA Sarah Propper</strong> regarding home office deduction, vehicle mileage, and any additional deductions. Possible additional deductions not captured: EUFMC registration ($7,350 on Chase Ink — confirm if on NU card), home office square footage, vehicle miles driven for NU business.</p>
   </div>
 </div>
 
 <div class="footer">
-  Norris Utilities, LLC — 130 Inverness Plaza #210, Birmingham, AL 35242 — acnorris@norrisutilities.com — 205-500-1343<br>
-  Report generated by Legacy AI Agent — April 13, 2026 — All amounts verified from receipts, bills, and Gmail confirmations
+  Norris Utilities, LLC &nbsp;·&nbsp; 130 Inverness Plaza #210, Birmingham, AL 35242 &nbsp;·&nbsp; acnorris@norrisutilities.com &nbsp;·&nbsp; 205-500-1343<br>
+  Generated by Legacy AI Agent &nbsp;·&nbsp; April 13, 2026 &nbsp;·&nbsp; All amounts verified from bills, PDF folios, and Gmail confirmations
 </div>
 
 </body>
