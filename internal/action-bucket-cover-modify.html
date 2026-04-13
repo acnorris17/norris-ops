@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: Modify Bucket Cover Design — Norris Utilities®</title>
+  <title>Action Item: Bucket Cover Modification — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
@@ -84,6 +84,7 @@
       margin-bottom: 4px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
+
     .nu-logo-subtitle {
       font-family: var(--font-primary);
       font-weight: 900;
@@ -93,10 +94,11 @@
       text-transform: uppercase;
       margin-bottom: 20px;
     }
+
     .nu-tagline {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Playfair Display', var(--font-primary);
       font-style: italic;
-      font-weight: 400;
+      font-weight: 300;
       font-size: 1.3rem;
       color: rgba(255,255,255,0.9);
       letter-spacing: 0.05em;
@@ -130,23 +132,16 @@
     }
     .nu-content-area > * { position: relative; z-index: 1; }
 
-    .action-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 40px;
-    }
-
-    .action-badge {
+    .page-badge {
       display: inline-block;
-      background: linear-gradient(135deg, #e65100 0%, #ff6d00 100%);
+      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
       color: var(--nu-white);
-      font-family: var(--font-primary);
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 4px;
+      padding: 6px 18px;
+      border-radius: 20px;
       margin-bottom: 20px;
     }
 
@@ -156,154 +151,166 @@
       font-size: 2rem;
       color: var(--nu-dark-text);
       margin-bottom: 8px;
-      line-height: 1.2;
+      line-height: 1.3;
     }
-    .action-title span {
-      color: var(--nu-blue);
+    .action-title span { color: var(--nu-blue); }
+
+    .action-subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 32px;
     }
 
-    .action-meta {
-      font-family: var(--font-primary);
-      font-size: 0.95rem;
-      color: #666;
-      margin-bottom: 36px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid var(--nu-medium-gray);
+    .status-bar {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      padding: 20px 24px;
+      background: var(--nu-light-gray);
+      border-radius: 10px;
+      border-left: 4px solid var(--nu-blue);
     }
-    .action-meta strong {
+
+    .status-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .status-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .status-value {
+      font-size: 1rem;
+      font-weight: 700;
       color: var(--nu-dark-text);
     }
-
-    .action-card {
-      background: var(--nu-white);
-      border-radius: 8px;
-      padding: 28px 32px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 24px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    .status-value.priority-high {
+      color: #D32F2F;
     }
-    .action-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    .status-value.status-pending {
+      color: #E65100;
     }
 
-    .card-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-    .card-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 100%);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 14px;
-      flex-shrink: 0;
-    }
-    .card-icon svg {
-      width: 22px;
-      height: 22px;
-      fill: var(--nu-white);
-    }
-    .card-label {
+    .section-title {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       color: var(--nu-blue);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--nu-medium-gray);
     }
-    .card-label span {
+    .section-title span {
       color: var(--nu-dark-text);
       font-weight: 700;
-    }
-
-    .card-body {
-      font-family: var(--font-primary);
-      font-size: 1rem;
-      color: var(--nu-body-text);
-      line-height: 1.7;
     }
 
     .checklist {
       list-style: none;
-      padding: 0;
+      margin-bottom: 36px;
     }
     .checklist li {
       display: flex;
       align-items: flex-start;
-      padding: 10px 0;
-      border-bottom: 1px solid #f0f0f0;
-      font-family: var(--font-primary);
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
       font-size: 1rem;
-      color: var(--nu-body-text);
+      line-height: 1.5;
     }
-    .checklist li:last-child {
-      border-bottom: none;
-    }
+    .checklist li:last-child { border-bottom: none; }
+
     .check-box {
       width: 22px;
       height: 22px;
+      min-width: 22px;
       border: 2px solid var(--nu-blue);
       border-radius: 4px;
-      margin-right: 14px;
-      flex-shrink: 0;
       margin-top: 2px;
-    }
-
-    .priority-bar {
       display: flex;
       align-items: center;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      padding: 16px 24px;
-      border-radius: 8px;
-      margin-bottom: 24px;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
-    .priority-dot {
-      width: 12px;
-      height: 12px;
-      background: #ff6d00;
-      border-radius: 50%;
-      margin-right: 14px;
-      flex-shrink: 0;
-      animation: pulse 2s infinite;
+    .check-box:hover {
+      background: rgba(0, 0, 255, 0.08);
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+    .check-box.checked {
+      background: var(--nu-blue);
     }
-    .priority-text {
-      font-family: var(--font-primary);
+    .check-box.checked::after {
+      content: '\2713';
+      color: white;
+      font-size: 14px;
       font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
+    }
+    .checklist li.completed .check-text {
+      text-decoration: line-through;
+      color: #999;
     }
 
-    .product-ref {
-      display: flex;
-      gap: 16px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-    }
-    .product-tag {
-      background: var(--nu-light-gray);
+    .details-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
-      border-radius: 6px;
-      padding: 10px 18px;
-      font-family: var(--font-primary);
+      margin-bottom: 36px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label {
       font-weight: 700;
-      font-size: 0.85rem;
+      color: var(--nu-dark-text);
+      font-size: 0.95rem;
+    }
+    .detail-value {
+      color: var(--nu-body-text);
+      font-size: 0.95rem;
+      text-align: right;
+    }
+
+    .notes-box {
+      background: #FFFDE7;
+      border: 1px solid #FFF176;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .notes-box strong {
       color: var(--nu-dark-text);
     }
-    .product-tag small {
-      display: block;
-      font-weight: 400;
-      color: #888;
-      font-size: 0.75rem;
-      margin-top: 2px;
+
+    .shipping-highlight {
+      background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+      border: 1px solid #81C784;
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 36px;
+    }
+    .shipping-highlight h3 {
+      font-weight: 900;
+      color: #2E7D32;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    .shipping-highlight p {
+      color: #333;
+      font-size: 0.95rem;
     }
 
     .nu-footer {
@@ -314,15 +321,15 @@
       font-family: var(--font-primary);
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Playfair Display', var(--font-primary);
       font-style: italic;
-      font-weight: 400;
+      font-weight: 300;
       font-size: 1.1rem;
       color: var(--nu-cyan);
       margin-bottom: 12px;
     }
     .nu-footer-contact {
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.8;
     }
     .nu-footer-contact a {
@@ -335,15 +342,16 @@
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .action-container { padding: 40px 20px; }
       .action-title { font-size: 1.5rem; }
-      .product-ref { flex-direction: column; }
+      .status-bar { flex-direction: column; gap: 16px; }
+      .detail-row { flex-direction: column; gap: 4px; }
+      .detail-value { text-align: left; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .action-card { box-shadow: none; border: 1px solid #ccc; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .check-box { border-color: #333; }
     }
   </style>
 </head>
@@ -368,114 +376,101 @@
   </div>
 
   <main class="nu-content-area">
-    <div class="action-container">
+    <div style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
 
-      <div class="action-badge">Action Item</div>
-      <h1 class="action-title"><span>Modify</span> Bucket Cover Design &amp; Ship to Customer</h1>
-      <div class="action-meta">
-        <strong>Source:</strong> reMarkable Notes &nbsp;|&nbsp;
-        <strong>Date Captured:</strong> April 12, 2026 &nbsp;|&nbsp;
-        <strong>Owner:</strong> Aaron C. Norris
-      </div>
+      <span class="page-badge">Action Item</span>
 
-      <div class="priority-bar">
-        <div class="priority-dot"></div>
-        <div class="priority-text">HIGH PRIORITY — Customer awaiting modified cover return shipment</div>
-      </div>
+      <h1 class="action-title"><span>Modify</span> Bucket Cover Design &amp; Return to Customer</h1>
+      <p class="action-subtitle">FlexPro Armor bucket cover requires design modification before shipping back to customer</p>
 
-      <div class="action-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
-          </div>
-          <div class="card-label">Task <span>Summary</span></div>
+      <div class="status-bar">
+        <div class="status-item">
+          <span class="status-label">Status</span>
+          <span class="status-value status-pending">Pending</span>
         </div>
-        <div class="card-body">
-          Customer has requested design modifications to their FlexPro Armor bucket cover. The cover needs to be reworked per the customer's specifications, inspected for quality, and shipped back promptly. Every FlexPro Armor cover is handmade in the USA and must meet Norris Utilities® standards before leaving the shop.
+        <div class="status-item">
+          <span class="status-label">Priority</span>
+          <span class="status-value priority-high">High</span>
         </div>
-      </div>
-
-      <div class="action-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-          </div>
-          <div class="card-label">Action <span>Steps</span></div>
+        <div class="status-item">
+          <span class="status-label">Date Created</span>
+          <span class="status-value">April 13, 2026</span>
         </div>
-        <div class="card-body">
-          <ul class="checklist">
-            <li>
-              <div class="check-box"></div>
-              <div>Review customer's modification requests and confirm all design changes needed</div>
-            </li>
-            <li>
-              <div class="check-box"></div>
-              <div>Apply modifications to the FlexPro Armor bucket cover per customer specifications</div>
-            </li>
-            <li>
-              <div class="check-box"></div>
-              <div>Perform quality inspection on completed modifications — verify fit, finish, and durability</div>
-            </li>
-            <li>
-              <div class="check-box"></div>
-              <div>Photograph the completed modified cover for records and customer confirmation</div>
-            </li>
-            <li>
-              <div class="check-box"></div>
-              <div>Package the cover securely for return shipment to customer</div>
-            </li>
-            <li>
-              <div class="check-box"></div>
-              <div>Ship the modified cover back to customer and provide tracking number</div>
-            </li>
-            <li>
-              <div class="check-box"></div>
-              <div>Follow up with customer to confirm receipt and satisfaction</div>
-            </li>
-          </ul>
+        <div class="status-item">
+          <span class="status-label">Owner</span>
+          <span class="status-value">Aaron C. Norris</span>
         </div>
       </div>
 
-      <div class="action-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zM18 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-          </div>
-          <div class="card-label">Shipping <span>Notes</span></div>
+      <div class="section-title"><span>Task </span>Details</div>
+
+      <div class="details-card">
+        <div class="detail-row">
+          <span class="detail-label">Product</span>
+          <span class="detail-value">FlexPro Armor Bucket Cover</span>
         </div>
-        <div class="card-body">
-          Use standard Norris Utilities® shipping process. Customer shipping cost calculated using Ben's Formula: ROUNDUP(ROUNDUP(RegCost, 0) &times; 1.10, 0). Ensure the cover is wrapped and boxed to prevent damage in transit. Include a Norris Utilities® packing slip with the shipment.
+        <div class="detail-row">
+          <span class="detail-label">Action Required</span>
+          <span class="detail-value">Modify design per customer specifications</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Return Method</span>
+          <span class="detail-value">Ship back to customer after modification</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Margin</span>
+          <span class="detail-value">50% (FlexPro Armor standard)</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Shipping Formula</span>
+          <span class="detail-value">ROUNDUP(ROUNDUP(RegCost, 0) x 1.10, 0)</span>
         </div>
       </div>
 
-      <div class="action-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM5 15h14v2H5zm0-4h14v2H5zm0-4h14v2H5z"/></svg>
-          </div>
-          <div class="card-label">Product <span>Reference</span></div>
-        </div>
-        <div class="card-body">
-          <div class="product-ref">
-            <div class="product-tag">
-              NU-BC-2851
-              <small>2-Man Cover (28" &times; 51")</small>
-            </div>
-            <div class="product-tag">
-              NU-BC-2834
-              <small>1.5-Man Cover (28" &times; 34")</small>
-            </div>
-            <div class="product-tag">
-              NU-BC-2851-C
-              <small>2-Man Combo</small>
-            </div>
-            <div class="product-tag">
-              NU-BC-2834-C
-              <small>1.5-Man Combo</small>
-            </div>
-          </div>
-          <p style="margin-top: 14px; font-size: 0.9rem; color: #666;">FlexPro Armor bucket covers — handmade in the USA. 50% margin on all covers.</p>
-        </div>
+      <div class="notes-box">
+        <strong>Note:</strong> Customer has sent their existing FlexPro Armor bucket cover back for design modification. Cover must be reworked to meet updated specifications, inspected for quality, and shipped back to the customer promptly. All FlexPro Armor covers are handmade in the USA.
+      </div>
+
+      <div class="section-title"><span>Completion </span>Checklist</div>
+
+      <ul class="checklist">
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Receive bucket cover back from customer</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Inspect cover condition and document current state</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Confirm design modification requirements with customer</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Complete design modifications to bucket cover</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Quality check — verify modification meets specifications</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Calculate shipping cost using Ben's Formula</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Package and ship modified cover back to customer</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Send tracking number to customer and confirm delivery</span>
+        </li>
+      </ul>
+
+      <div class="shipping-highlight">
+        <h3>Shipping Reminder</h3>
+        <p>Use Ben's Shipping Formula for customer cost: ROUNDUP(ROUNDUP(RegCost, 0) x 1.10, 0). Ensure tracking is provided to customer immediately upon shipment.</p>
       </div>
 
     </div>
@@ -484,9 +479,9 @@
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>
