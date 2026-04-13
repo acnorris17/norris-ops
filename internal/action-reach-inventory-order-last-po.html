@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: Reach Inventory Order from Last PO — Norris Utilities®</title>
+  <title>Inventory Order — Last PO Follow-Up — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
@@ -17,6 +17,7 @@
       --nu-medium-gray: #E8E8EC;
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
+      --nu-accent-gold: #C9A84C;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -126,167 +127,119 @@
     }
     .nu-content-area > * { position: relative; z-index: 1; }
 
-    .content-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 40px;
+    .page-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .page-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+    .page-date {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 32px;
     }
 
-    .action-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .action-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      border-left: 5px solid var(--nu-blue);
       margin-bottom: 24px;
     }
-    .action-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--nu-blue);
+    .action-card h3 {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 16px;
+    }
+    .action-card p {
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      color: var(--nu-body-text);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 100%);
       color: var(--nu-white);
-      padding: 8px 18px;
+      padding: 6px 18px;
       border-radius: 20px;
+      font-family: var(--font-primary);
       font-weight: 700;
       font-size: 0.85rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-    }
-    .action-badge svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--nu-white);
-    }
-    .action-date {
-      font-size: 0.9rem;
-      color: #888;
-      font-weight: 400;
-    }
-
-    .action-title {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.8rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 16px;
-      line-height: 1.3;
-    }
-    .action-title span {
-      color: var(--nu-blue);
-    }
-
-    .action-summary {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--nu-body-text);
-      margin-bottom: 32px;
-    }
-
-    .priority-strip {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      padding: 16px 24px;
-      border-radius: 8px;
-      margin-bottom: 40px;
-    }
-    .priority-dot {
-      width: 12px;
-      height: 12px;
-      background: #FFB800;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .priority-text {
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.03em;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-    .info-card {
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      padding: 24px;
-      border-left: 4px solid var(--nu-blue);
-    }
-    .info-card-label {
-      font-weight: 700;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--nu-blue);
-      margin-bottom: 6px;
-    }
-    .info-card-value {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .info-card-detail {
-      font-size: 0.9rem;
-      color: #666;
-      margin-top: 4px;
-    }
-
-    .section-label {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.3rem;
-      margin-bottom: 16px;
-    }
-    .section-label span:first-child {
-      color: var(--nu-blue);
-    }
-    .section-label span:last-child {
-      color: var(--nu-dark-text);
+      margin-bottom: 24px;
     }
 
     .checklist {
       list-style: none;
-      margin-bottom: 40px;
+      padding: 0;
+      margin: 0;
     }
     .checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--nu-light-gray);
+      font-family: var(--font-primary);
       font-size: 1rem;
+      color: var(--nu-body-text);
+      padding: 12px 0 12px 36px;
+      border-bottom: 1px solid var(--nu-light-gray);
+      position: relative;
       line-height: 1.5;
+    }
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      background: var(--nu-white);
     }
     .checklist li:last-child {
       border-bottom: none;
     }
-    .check-box {
-      width: 22px;
-      height: 22px;
-      min-width: 22px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      margin-top: 2px;
-    }
 
-    .notes-section {
+    .info-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .info-block {
+      flex: 1;
+      min-width: 220px;
       background: var(--nu-light-gray);
       border-radius: 8px;
-      padding: 28px;
-      margin-bottom: 40px;
+      padding: 20px 24px;
     }
-    .notes-section p {
+    .info-block-label {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--nu-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .info-block-value {
+      font-family: var(--font-primary);
+      font-weight: 400;
       font-size: 1rem;
-      line-height: 1.7;
-      color: var(--nu-body-text);
+      color: var(--nu-dark-text);
     }
 
     .nu-footer {
@@ -318,21 +271,19 @@
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .content-wrapper { padding: 40px 20px; }
-      .action-title { font-size: 1.5rem; }
-      .info-grid { grid-template-columns: 1fr; }
-      .action-header { flex-wrap: wrap; }
+      .info-row { flex-direction: column; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-      .priority-dot { animation: none; }
+      .action-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="nu-header">
     <div class="nu-phoenix-icon">
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -345,99 +296,69 @@
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
+  <!-- WHITE CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
+  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
-    <div class="content-wrapper">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 60px 40px;">
 
-      <div class="action-header">
-        <div class="action-badge">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          Action Item
-        </div>
-        <div class="action-date">Captured April 12, 2026</div>
+      <span class="status-badge">Action Required</span>
+      <h1 class="page-title">Reach <span>Inventory Order from Last PO</span></h1>
+      <p class="page-date">April 12, 2026</p>
+
+      <!-- CONTEXT -->
+      <div class="action-card">
+        <h3>Action Summary</h3>
+        <p>Locate and review the most recent purchase order on file. Confirm what inventory was ordered, verify quantities received versus quantities ordered, and identify any outstanding items that still need to ship or be reordered.</p>
+        <p>This ensures Norris Utilities® maintains accurate stock levels and avoids gaps in product availability for customers.</p>
       </div>
 
-      <h1 class="action-title"><span>Reach</span> Inventory Order from Last PO</h1>
-
-      <p class="action-summary">
-        Reach out to the supplier regarding the inventory order placed on the most recent purchase order. Confirm the order was received, verify current fulfillment status, and get updated ship dates for any items still pending. Ensure inventory levels are on track to meet upcoming customer demand.
-      </p>
-
-      <div class="priority-strip">
-        <div class="priority-dot"></div>
-        <div class="priority-text">PRIORITY: Contact supplier to confirm inventory order status and delivery timeline</div>
-      </div>
-
-      <div class="info-grid">
-        <div class="info-card">
-          <div class="info-card-label">Task Owner</div>
-          <div class="info-card-value">Aaron C. Norris</div>
-          <div class="info-card-detail">Founder &amp; CEO</div>
+      <!-- KEY DETAILS -->
+      <div class="info-row">
+        <div class="info-block">
+          <div class="info-block-label">Priority</div>
+          <div class="info-block-value">High — Inventory impacts customer fulfillment</div>
         </div>
-        <div class="info-card">
-          <div class="info-card-label">Due Date</div>
-          <div class="info-card-value">Week of April 13, 2026</div>
-          <div class="info-card-detail">Follow up early next week</div>
+        <div class="info-block">
+          <div class="info-block-label">Owner</div>
+          <div class="info-block-value">Aaron C. Norris</div>
         </div>
-        <div class="info-card">
-          <div class="info-card-label">Category</div>
-          <div class="info-card-value">Inventory / Purchasing</div>
-          <div class="info-card-detail">Supply chain &amp; stock replenishment</div>
-        </div>
-        <div class="info-card">
-          <div class="info-card-label">Source</div>
-          <div class="info-card-value">reMarkable Notes</div>
-          <div class="info-card-detail">Captured from handwritten action items</div>
+        <div class="info-block">
+          <div class="info-block-label">Date Captured</div>
+          <div class="info-block-value">April 12, 2026</div>
         </div>
       </div>
 
-      <div class="section-label"><span>Action </span><span>Checklist</span></div>
-      <ul class="checklist">
-        <li>
-          <div class="check-box"></div>
-          <div>Locate the most recent purchase order number and pull the full line-item detail</div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div>Call or email the supplier to confirm they received and acknowledged the PO</div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div>Get current fulfillment status — shipped, in production, or backordered</div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div>Confirm expected ship date and request tracking number if already in transit</div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div>Verify quantities match original order — flag any partial shipments or substitutions</div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div>If any items are delayed, get a firm revised ETA and document it</div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div>Update internal inventory tracker with confirmed delivery dates and quantities</div>
-        </li>
-      </ul>
+      <!-- CHECKLIST -->
+      <div class="action-card">
+        <h3>Steps to Complete</h3>
+        <ul class="checklist">
+          <li>Pull up the last purchase order from vendor records or email history</li>
+          <li>Confirm PO number, vendor name, and order date</li>
+          <li>Compare items ordered against items received in current inventory</li>
+          <li>Identify any short-shipped or back-ordered items</li>
+          <li>Contact vendor to confirm status of any outstanding items</li>
+          <li>Place reorder if stock levels are below minimum thresholds</li>
+          <li>Update inventory tracking with current counts and expected delivery dates</li>
+        </ul>
+      </div>
 
-      <div class="section-label"><span>Context </span><span>&amp; Notes</span></div>
-      <div class="notes-section">
-        <p>
-          This action is about reaching back to the supplier on the last inventory purchase order to make sure nothing has stalled. The goal is to confirm the order is moving, get a clear timeline for delivery, and flag anything that could affect stock levels or customer fulfillment. If items are delayed or quantities changed, get that documented so planning can adjust before it becomes a problem.
-        </p>
+      <!-- NOTES -->
+      <div class="action-card">
+        <h3>Notes</h3>
+        <p>Check email and any saved PO documents for the most recent order. If the PO was placed with a FlexPro Armor supplier, verify against the 50% margin pricing structure. For Samson Rope orders, confirm against the 30% margin. Ensure shipping costs align with Ben's Formula: ROUNDUP(ROUNDUP(RegCost, 0) x 1.10, 0).</p>
+        <p>If Caroline has records of the last PO, coordinate with her to cross-reference received inventory against the original order.</p>
       </div>
 
     </div>
   </main>
 
+  <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
