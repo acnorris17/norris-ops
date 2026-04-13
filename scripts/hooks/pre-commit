@@ -1,0 +1,60 @@
+#!/bin/bash
+# PRE-COMMIT GUARD — Blocks commits with known brand violations
+ERRORS=0
+
+# Check staged HTML files only
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep "\.html$")
+
+for f in $FILES; do
+  # FlexPro Armor Guard (wrong product name — correct is FlexPro Armor®)
+  if grep -qi "FlexPro Armor Guard" "$f" 2>/dev/null; then
+    echo "❌ BLOCKED: 'FlexPro Armor Guard' found in $f (correct name is 'FlexPro Armor®')"
+    ERRORS=$((ERRORS + 1))
+  fi
+  # Active Gridco reference (dead deal) — skip if marked CLOSED/archived
+  if grep -qi "Gridco" "$f" 2>/dev/null; then
+    active_gridco=$(grep -i "Gridco" "$f" 2>/dev/null | grep -cvi "DEAD\|dead\|CLOSED\|closed\|archived")
+    if [ "$active_gridco" -gt 0 ]; then
+      echo "⚠️  WARNING: Active Gridco reference in $f — this deal is dead. Verify it's marked inactive."
+    fi
+  fi
+done
+
+# --- DUPLICATE GUARD: block new internal/*.html with >=80% name match to existing ---
+NEW_INTERNAL=$(git diff --cached --name-only --diff-filter=A | grep "^internal/.*\.html$" || true)
+if [ -n "$NEW_INTERNAL" ]; then
+  while IFS= read -r newfile; do
+    [ -z "$newfile" ] && continue
+    dup=$(python3 -c "
+import os
+from difflib import SequenceMatcher
+new_name = os.path.basename('$newfile')
+threshold = 0.80
+best_ratio = 0.0
+best_match = None
+for existing in os.listdir('internal'):
+    if not existing.endswith('.html') or existing == new_name:
+        continue
+    r = SequenceMatcher(None, new_name.lower(), existing.lower()).ratio()
+    if r >= threshold and r > best_ratio:
+        best_ratio = r
+        best_match = existing
+if best_match:
+    print(f'{best_match}|{best_ratio:.2f}')
+")
+    if [ -n "$dup" ]; then
+      existing_name="${dup%|*}"
+      ratio="${dup#*|}"
+      echo "❌ BLOCKED: New file '$newfile' has name similarity $ratio to existing 'internal/$existing_name'."
+      echo "   Update the existing file instead of creating a near-duplicate."
+      ERRORS=$((ERRORS + 1))
+    fi
+  done <<< "$NEW_INTERNAL"
+fi
+
+if [ "$ERRORS" -gt 0 ]; then
+  echo ""
+  echo "Commit BLOCKED — $ERRORS brand violations found. Fix before committing."
+  exit 1
+fi
+exit 0
