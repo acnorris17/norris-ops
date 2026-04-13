@@ -5,7 +5,7 @@
 <script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Negotiation Leverage Analysis — 4505 Buttewoods — Norris Utilities®</title>
+  <title>Negotiation Strategy — $900K Rejected Offer — 4505 Buttewoods — Norris Utilities®</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
@@ -147,6 +147,32 @@
       color: #888;
     }
 
+    .status-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #8B0000 0%, #CC0000 100%);
+      border-radius: 8px;
+      padding: 16px 24px;
+      margin-bottom: 48px;
+      color: var(--nu-white);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+    }
+    .status-banner .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #FF4444;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
     .leverage-meter {
       display: flex;
       align-items: center;
@@ -162,7 +188,6 @@
       flex-shrink: 0;
       width: 120px;
       height: 120px;
-      position: relative;
     }
     .meter-graphic svg {
       width: 100%;
@@ -195,6 +220,84 @@
     .section-title .first { color: var(--nu-blue); }
     .section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
 
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .num-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .num-value {
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 4px;
+    }
+    .num-value.red { color: #CC0000; }
+    .num-value.green { color: #00884a; }
+    .num-label {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .scenario-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 48px;
+      font-size: 0.95rem;
+    }
+    .scenario-table thead th {
+      background: linear-gradient(135deg, #0a0e5c 0%, #001166 100%);
+      color: var(--nu-white);
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .scenario-table thead th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+    .scenario-table thead th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+    .scenario-table tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      vertical-align: top;
+    }
+    .scenario-table tbody tr:hover {
+      background: var(--nu-light-gray);
+    }
+    .scenario-table .highlight-row {
+      background: rgba(0, 0, 255, 0.04);
+      font-weight: 700;
+    }
+    .scenario-table .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .tag-recommended { background: #e6f5ec; color: #00884a; }
+    .tag-aggressive { background: #ffe6e6; color: #CC0000; }
+    .tag-conservative { background: #fff5e0; color: #cc8800; }
+    .tag-walkaway { background: #f0f0f0; color: #666; }
+
     .leverage-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -216,7 +319,6 @@
     }
     .lev-card.strong { border-top-color: #00884a; }
     .lev-card.moderate { border-top-color: #cc8800; }
-    .lev-card.risk { border-top-color: #cc0000; }
 
     .lev-header {
       display: flex;
@@ -238,18 +340,8 @@
       border-radius: 20px;
       flex-shrink: 0;
     }
-    .lev-strength.high {
-      background: #e6f5ec;
-      color: #00884a;
-    }
-    .lev-strength.medium {
-      background: #fff5e0;
-      color: #cc8800;
-    }
-    .lev-strength.low {
-      background: #ffe6e6;
-      color: #cc0000;
-    }
+    .lev-strength.high { background: #e6f5ec; color: #00884a; }
+    .lev-strength.medium { background: #fff5e0; color: #cc8800; }
     .lev-body {
       font-weight: 400;
       font-size: 0.95rem;
@@ -315,32 +407,25 @@
       margin-bottom: 4px;
     }
 
-    .numbers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 48px;
-    }
-    .num-card {
+    .talk-track {
       background: var(--nu-white);
       border-radius: 8px;
-      padding: 24px;
-      text-align: center;
+      padding: 24px 28px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      border: 1px solid var(--nu-medium-gray);
+      border-left: 4px solid var(--nu-cyan);
+      margin-bottom: 48px;
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--nu-dark-text);
     }
-    .num-value {
-      font-weight: 900;
-      font-size: 1.6rem;
+    .talk-track .attribution {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.85rem;
       color: var(--nu-blue);
-      margin-bottom: 4px;
-    }
-    .num-label {
-      font-weight: 400;
-      font-size: 0.8rem;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+      margin-top: 12px;
+      display: block;
     }
 
     .risk-section {
@@ -442,6 +527,57 @@
       margin-top: 2px;
     }
 
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 48px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--nu-blue), var(--nu-cyan));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      padding: 16px 0;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -33px;
+      top: 22px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--nu-blue);
+      border: 3px solid var(--nu-white);
+      box-shadow: 0 0 0 2px var(--nu-blue);
+    }
+    .timeline-date {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--nu-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .timeline-desc {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+      line-height: 1.6;
+    }
+
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.8);
@@ -474,6 +610,9 @@
       .leverage-grid { grid-template-columns: 1fr; }
       .numbers-grid { grid-template-columns: repeat(2, 1fr); }
       .page-title { font-size: 1.5rem; }
+      .scenario-table { font-size: 0.85rem; }
+      .scenario-table thead th,
+      .scenario-table tbody td { padding: 10px 8px; }
     }
 
     @media print {
@@ -507,11 +646,17 @@
     <div style="max-width: 1200px; margin: 0 auto; padding: 60px 40px;">
 
       <div class="page-header">
-        <h1 class="page-title"><span class="blue">Negotiation</span> Leverage Analysis</h1>
-        <p class="page-date">4505 Buttewoods Estate &mdash; 7,098 Sq Ft on 2.11 Acres &mdash; Updated April 13, 2026</p>
+        <h1 class="page-title"><span class="blue">Negotiation Strategy</span> &mdash; $900,000 Offer Rejected</h1>
+        <p class="page-date">4505 Buttewoods Lane &mdash; 7,098 Sq Ft on 2.11 Acres &mdash; Updated April 13, 2026</p>
       </div>
 
-      <!-- OVERALL LEVERAGE ASSESSMENT -->
+      <!-- STATUS -->
+      <div class="status-banner">
+        <div class="dot"></div>
+        $900,000 Offer Rejected by Seller &mdash; Counter-Strategy Required
+      </div>
+
+      <!-- OVERALL POSITION -->
       <div class="leverage-meter">
         <div class="meter-graphic">
           <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
@@ -524,17 +669,21 @@
           </svg>
         </div>
         <div>
-          <div class="meter-label">Buyer Leverage: Strong</div>
-          <div class="meter-sublabel">Multiple leverage points favor the buyer in this transaction</div>
+          <div class="meter-label">Buyer Leverage: Still Strong</div>
+          <div class="meter-sublabel">Rejection does not change underlying fundamentals</div>
           <div class="meter-desc">
-            The combination of documented water intrusion, Alabama disclosure obligations, insurance complications, and remediation costs creates a strong negotiating position. The seller's options narrow once a material defect is on the record.
+            The $900,000 offer was rejected, but the seller's leverage has not improved. Water intrusion remains a material defect on the record, disclosure obligations still apply, and every day on market reduces the seller's position. The rejection signals the seller's price expectation — your next move should close the gap strategically, not emotionally.
           </div>
         </div>
       </div>
 
       <!-- KEY NUMBERS -->
-      <h2 class="section-title"><span class="first">Key</span> <span class="rest">Numbers at a Glance</span></h2>
+      <h2 class="section-title"><span class="first">Deal</span> <span class="rest">Numbers at a Glance</span></h2>
       <div class="numbers-grid">
+        <div class="num-card">
+          <div class="num-value red">$900,000</div>
+          <div class="num-label">Offer Rejected</div>
+        </div>
         <div class="num-card">
           <div class="num-value">7,098</div>
           <div class="num-label">Square Feet</div>
@@ -545,22 +694,100 @@
         </div>
         <div class="num-card">
           <div class="num-value">$15K&ndash;$45K</div>
-          <div class="num-label">Est. Remediation Range</div>
+          <div class="num-label">Remediation Cost Range</div>
         </div>
         <div class="num-card">
-          <div class="num-value">1.25&ndash;1.5x</div>
-          <div class="num-label">Target Reduction Multiplier</div>
+          <div class="num-value green">$127&ndash;$141/sf</div>
+          <div class="num-label">Target Price Per Sq Ft</div>
         </div>
         <div class="num-card">
           <div class="num-value">100%</div>
-          <div class="num-label">Disclosure Obligation</div>
+          <div class="num-label">Seller Disclosure Obligation</div>
         </div>
       </div>
 
-      <!-- LEVERAGE POINTS -->
-      <h2 class="section-title"><span class="first">Leverage</span> <span class="rest">Points Identified</span></h2>
-      <div class="leverage-grid">
+      <!-- COUNTER-OFFER SCENARIOS -->
+      <h2 class="section-title"><span class="first">Counter-Offer</span> <span class="rest">Scenarios</span></h2>
+      <table class="scenario-table">
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>Offer Amount</th>
+            <th>Price/Sq Ft</th>
+            <th>Concession</th>
+            <th>Strategy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-aggressive">Aggressive</span></td>
+            <td>$900,000 (hold firm)</td>
+            <td>$126.79/sf</td>
+            <td>None &mdash; resubmit with deadline</td>
+            <td>Resubmit identical offer with 72-hour expiration and updated remediation estimates attached. Forces a decision.</td>
+          </tr>
+          <tr class="highlight-row">
+            <td><span class="tag tag-recommended">Recommended</span></td>
+            <td>$925,000</td>
+            <td>$130.32/sf</td>
+            <td>$25,000 increase</td>
+            <td>Show good faith with a modest bump. Pair with seller-funded remediation or equivalent credit at closing. Net effective price stays near $900K.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-conservative">Conservative</span></td>
+            <td>$940,000</td>
+            <td>$132.43/sf</td>
+            <td>$40,000 increase</td>
+            <td>Larger concession in exchange for $45,000 remediation credit at closing, seller pays for independent re-inspection, and transferable waterproofing warranty.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-walkaway">Walk-Away</span></td>
+            <td>Above $950,000</td>
+            <td>&gt;$133.84/sf</td>
+            <td>&mdash;</td>
+            <td>Without full remediation credit, anything above $950K does not account for the risk. Walk away and let time work in your favor.</td>
+          </tr>
+        </tbody>
+      </table>
 
+      <!-- WHY $925K IS THE MOVE -->
+      <h2 class="section-title"><span class="first">Why</span> <span class="rest">$925,000 Is the Right Number</span></h2>
+      <div class="strategy-box">
+        <h3>The Logic Behind the Recommended Offer</h3>
+        <ol class="strategy-steps">
+          <li>
+            <span class="step-title">Shows Good Faith Without Caving</span>
+            A $25,000 move signals that you are serious and willing to negotiate, but you are not bidding against yourself. It tells the seller: this buyer is reasonable, engaged, and informed.
+          </li>
+          <li>
+            <span class="step-title">Preserves the Remediation Argument</span>
+            At $925,000, the remediation cost ($15K&ndash;$45K) still justifies a seller credit or seller-funded repair. Your net effective cost stays in the $880K&ndash;$910K range — right where the first offer was.
+          </li>
+          <li>
+            <span class="step-title">Creates Room for One More Round</span>
+            If the seller counters at $950K&ndash;$960K, you can split the difference and land around $940K with concessions. You have given yourself two moves instead of one.
+          </li>
+          <li>
+            <span class="step-title">Pressures With Facts, Not Emotion</span>
+            Attach the remediation estimates and inspection report to the offer. Let the documentation do the heavy lifting. The seller's agent sees the same numbers you do — and knows the next buyer will see them too.
+          </li>
+          <li>
+            <span class="step-title">Include a Deadline</span>
+            Set a 5-business-day response window. Urgency prevents the seller from sitting indefinitely. If no response, the offer expires and you are free to walk — or re-engage at a lower number after more time on market.
+          </li>
+        </ol>
+      </div>
+
+      <!-- TALK TRACK -->
+      <h2 class="section-title"><span class="first">Suggested</span> <span class="rest">Talk Track</span></h2>
+      <div class="talk-track">
+        &ldquo;We appreciate the seller's consideration of our initial offer. After reviewing the inspection findings and obtaining independent remediation estimates, we remain very interested in the property at a price that reflects its current condition. We are prepared to increase our offer to $925,000, with the understanding that the seller will provide a remediation credit of $35,000 at closing to address the documented water intrusion. This is a fair offer that accounts for the work required and protects both parties. We would appreciate a response within five business days.&rdquo;
+        <span class="attribution">&mdash; Framework for agent or direct communication</span>
+      </div>
+
+      <!-- LEVERAGE POINTS (UNCHANGED) -->
+      <h2 class="section-title"><span class="first">Active</span> <span class="rest">Leverage Points</span></h2>
+      <div class="leverage-grid">
         <div class="lev-card strong">
           <div class="lev-header">
             <div class="lev-title">Water Intrusion — Material Defect</div>
@@ -569,154 +796,151 @@
           <div class="lev-body">
             Documented water intrusion is a material defect under Alabama real estate law. Remediation costs for a 7,098 sq ft property range from $15,000 to $45,000+ depending on scope. This is a dollar-for-dollar justification for a price reduction.
           </div>
-          <div class="lev-action">Action: Obtain two independent contractor estimates to establish a documented cost basis for your counter-offer.</div>
+          <div class="lev-action">Action: Attach contractor estimates to the counter-offer. Let the numbers speak for themselves.</div>
         </div>
 
         <div class="lev-card strong">
           <div class="lev-header">
-            <div class="lev-title">Alabama Disclosure Obligation</div>
+            <div class="lev-title">Seller Must Disclose to Every Future Buyer</div>
             <span class="lev-strength high">High</span>
           </div>
           <div class="lev-body">
-            Once a seller is aware of a material defect in Alabama, they are legally required to disclose it to every future prospective buyer. The seller cannot walk away from you and find an uninformed buyer — the issue follows the property.
+            Alabama law requires disclosure of known material defects. The seller cannot reject your offer and find an uninformed buyer. Every future buyer will see the same inspection findings and make the same argument.
           </div>
-          <div class="lev-action">Action: Reference disclosure requirements in your counter-offer to reinforce the seller's limited alternatives.</div>
+          <div class="lev-action">Action: This is your strongest silent leverage. You do not need to say it explicitly — the seller's agent already knows.</div>
         </div>
 
         <div class="lev-card strong">
           <div class="lev-header">
-            <div class="lev-title">Insurance &amp; Lending Complications</div>
+            <div class="lev-title">Insurance &amp; Lending Risk</div>
             <span class="lev-strength high">High</span>
           </div>
           <div class="lev-body">
-            Properties with known water intrusion face higher premiums or outright coverage denials from homeowner's insurance carriers. Lenders may flag the issue during appraisal and require remediation before loan approval — a closing risk the seller needs to help resolve.
+            Properties with known water intrusion face higher insurance premiums or coverage denials. Lenders may require remediation before loan approval. This is not just your problem — it is a closing risk for the seller with any buyer.
           </div>
-          <div class="lev-action">Action: If financing, communicate that the lender's appraiser may require remediation as a condition of closing.</div>
+          <div class="lev-action">Action: If financing, mention that your lender's appraiser may flag the issue and require remediation as a condition of closing.</div>
         </div>
 
         <div class="lev-card moderate">
           <div class="lev-header">
-            <div class="lev-title">Reduced Buyer Pool</div>
+            <div class="lev-title">Time on Market Works Against the Seller</div>
             <span class="lev-strength medium">Moderate</span>
           </div>
           <div class="lev-body">
-            With water intrusion on the disclosure, any future buyer will discover this issue in inspection. The longer the property sits on the market with a known defect, the weaker the seller's negotiating position becomes. Fewer willing buyers means less competition.
+            Every week this property sits with a known defect on the disclosure, the seller's position weakens. Price reductions become expected. You are a willing, qualified buyer at a fair price — the seller's best outcome is to negotiate with you now.
           </div>
-          <div class="lev-action">Action: Be patient. Time works in your favor — but show willingness to close to keep the seller engaged.</div>
+          <div class="lev-action">Action: Be patient. If the counter-offer is rejected, wait 2&ndash;3 weeks before re-engaging at a lower number.</div>
         </div>
 
         <div class="lev-card moderate">
           <div class="lev-header">
-            <div class="lev-title">Hidden Damage Potential</div>
+            <div class="lev-title">Hidden Damage Risk</div>
             <span class="lev-strength medium">Moderate</span>
           </div>
           <div class="lev-body">
-            Visible water intrusion is often the tip of the iceberg. Elevated moisture readings behind walls can indicate mold growth, wood rot, and foundation compromise that are not visible during a standard walkthrough. The full scope may exceed initial estimates.
+            Visible water intrusion is often the beginning. Elevated moisture behind walls can indicate mold, wood rot, and foundation compromise. The full remediation scope may exceed initial estimates — and that risk premium justifies additional reduction.
           </div>
-          <div class="lev-action">Action: Request invasive moisture testing if readings are elevated. Do not cap your ask at visible damage alone.</div>
+          <div class="lev-action">Action: Request invasive moisture testing if elevated readings exist. Do not cap your negotiation at visible damage alone.</div>
         </div>
 
         <div class="lev-card moderate">
           <div class="lev-header">
-            <div class="lev-title">Structural &amp; Long-Term Risk</div>
+            <div class="lev-title">Rejection Reveals Seller's Expectations</div>
             <span class="lev-strength medium">Moderate</span>
           </div>
           <div class="lev-body">
-            Unresolved water intrusion creates compounding problems: mold remediation costs escalate, wood structural members weaken over time, and foundation issues worsen with each rain cycle. The cost to remediate next year is higher than the cost today.
+            The rejection itself is information. If the seller rejected without a counter-offer, they believe they can do better. If they countered, you know their floor. Either way, you now have a data point to calibrate your next move.
           </div>
-          <div class="lev-action">Action: Frame the urgency to the seller — resolving now protects both parties and keeps the deal on track.</div>
+          <div class="lev-action">Action: If no counter was provided, your $925K offer with deadline forces one — or forces a decision.</div>
         </div>
-
       </div>
 
-      <!-- NEGOTIATION STRATEGY -->
-      <h2 class="section-title"><span class="first">Recommended</span> <span class="rest">Negotiation Strategy</span></h2>
-      <div class="strategy-box">
-        <h3>Step-by-Step Approach</h3>
-        <ol class="strategy-steps">
-          <li>
-            <span class="step-title">Document Everything</span>
-            Compile the inspection report, moisture readings, and photographs. Get written estimates from two licensed, independent remediation contractors. This is the foundation of your negotiating position.
-          </li>
-          <li>
-            <span class="step-title">Present Findings Factually</span>
-            Share the inspection report and contractor estimates with the seller's agent. Frame the conversation around facts — not accusations. This is a material condition that adjusts property value, not a personal attack on the seller.
-          </li>
-          <li>
-            <span class="step-title">Submit Revised Offer</span>
-            Calculate your counter-offer using 1.25x to 1.5x the highest contractor estimate as the price reduction. The multiplier accounts for the inconvenience, risk of undiscovered damage, and the time cost of overseeing remediation work.
-          </li>
-          <li>
-            <span class="step-title">Offer an Alternative Path</span>
-            If the seller resists a price reduction, propose that the seller complete all remediation using a licensed contractor of your choosing before closing. Require a re-inspection and clearance before the final walkthrough.
-          </li>
-          <li>
-            <span class="step-title">Hold Firm — Time Is on Your Side</span>
-            The disclosure obligation means the seller faces this same negotiation with every future buyer. You are a willing buyer at a fair price that reflects the true condition of the property. Stay professional, stay patient.
-          </li>
-        </ol>
+      <!-- RECOMMENDED TIMELINE -->
+      <h2 class="section-title"><span class="first">Recommended</span> <span class="rest">Timeline</span></h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">Week 1 (Now)</div>
+          <div class="timeline-title">Submit $925,000 Counter-Offer</div>
+          <div class="timeline-desc">Include remediation estimates, inspection report, and $35,000 credit request. Set 5-business-day response window.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Week 1&ndash;2</div>
+          <div class="timeline-title">Await Seller Response</div>
+          <div class="timeline-desc">If seller counters in the $950K&ndash;$960K range, you have room to negotiate to $940K with concessions. If no response, the offer expires.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Week 3&ndash;4 (If No Deal)</div>
+          <div class="timeline-title">Strategic Silence</div>
+          <div class="timeline-desc">Let the property sit. Do not re-engage for at least two weeks. Each passing week adds pressure as the seller accumulates carrying costs and the defect remains on disclosure.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Week 5&ndash;6 (If No Deal)</div>
+          <div class="timeline-title">Re-Engage at $910,000&ndash;$920,000</div>
+          <div class="timeline-desc">Come back with a lower offer than your previous counter. Justify with additional time on market and any new comparable sales data. The seller now knows you are patient and informed.</div>
+        </div>
       </div>
 
-      <!-- RISKS TO MONITOR -->
+      <!-- RISKS -->
       <h2 class="section-title"><span class="first">Risks</span> <span class="rest">to Monitor</span></h2>
       <div class="risk-section">
         <div class="risk-item">
           <div class="risk-icon warn">!</div>
           <div>
-            <div class="risk-title">Overplaying the Hand</div>
-            <div class="risk-desc">If the initial ask is too aggressive, the seller may reject outright and wait for another buyer. Mitigate this by keeping communication professional and solution-oriented. Show genuine willingness to close at the right number.</div>
+            <div class="risk-title">Competing Offer from Cash Buyer</div>
+            <div class="risk-desc">A cash buyer may accept the property as-is at a higher price, bypassing the remediation argument. Mitigate by staying engaged and responsive — do not let silence drag beyond the recommended timeline.</div>
           </div>
         </div>
         <div class="risk-item">
           <div class="risk-icon caution">!</div>
           <div>
-            <div class="risk-title">Seller-Arranged Cosmetic Fix</div>
-            <div class="risk-desc">The seller may attempt a low-cost cosmetic repair rather than a proper remediation. Insist on a contractor of your choosing or require documentation of the scope of work, materials used, and a warranty from a licensed professional.</div>
+            <div class="risk-title">Seller Completes Cosmetic Repair</div>
+            <div class="risk-desc">The seller may attempt a quick, low-cost fix and relist at a higher price. Insist on professional remediation with documentation and warranty from a licensed contractor. Cosmetic fixes do not eliminate the underlying defect.</div>
           </div>
         </div>
         <div class="risk-item">
           <div class="risk-icon danger">!</div>
           <div>
-            <div class="risk-title">Scope Exceeds Estimates</div>
-            <div class="risk-desc">If invasive testing reveals damage beyond the initial inspection, costs could exceed the estimate range. Build a contingency into your offer — the 1.5x multiplier partially accounts for this, but severe structural issues may require re-evaluation.</div>
+            <div class="risk-title">Remediation Costs Exceed Estimates</div>
+            <div class="risk-desc">If invasive testing reveals worse damage, costs could exceed the $45K estimate. Your walk-away threshold of $950K with full credit protects against this — but be prepared to re-evaluate if scope changes significantly.</div>
           </div>
         </div>
         <div class="risk-item">
           <div class="risk-icon warn">!</div>
           <div>
-            <div class="risk-title">Appraisal Complication</div>
-            <div class="risk-desc">If financing, the lender's appraiser may assign a lower value due to the water intrusion. This could reduce the loan amount, requiring either a larger down payment or a further price reduction from the seller. Be prepared for this conversation.</div>
+            <div class="risk-title">Emotional Attachment Inflates Price</div>
+            <div class="risk-desc">If you love the property, the seller's agent may sense it and hold firm on price. Keep communications factual and professional. Express interest in the property, not attachment to it.</div>
           </div>
         </div>
       </div>
 
-      <!-- ACTION ITEMS CHECKLIST -->
-      <h2 class="section-title"><span class="first">Action</span> <span class="rest">Items — Next Steps</span></h2>
+      <!-- ACTION ITEMS -->
+      <h2 class="section-title"><span class="first">Action</span> <span class="rest">Items &mdash; Immediate Next Steps</span></h2>
       <ul class="checklist">
-        <li><div class="check-box"></div><span>Obtain two independent remediation estimates from licensed Alabama contractors</span></li>
-        <li><div class="check-box"></div><span>Request invasive moisture testing if elevated readings are present behind walls</span></li>
-        <li><div class="check-box"></div><span>Compile all inspection documentation: report, photos, moisture readings, contractor estimates</span></li>
-        <li><div class="check-box"></div><span>Calculate target price reduction: highest estimate &times; 1.25 to 1.5</span></li>
-        <li><div class="check-box"></div><span>Draft counter-offer language referencing water intrusion findings and remediation costs</span></li>
-        <li><div class="check-box"></div><span>Decide primary strategy: price reduction vs. seller-funded repair vs. combination approach</span></li>
-        <li><div class="check-box"></div><span>Check with lender on appraisal requirements related to known water intrusion</span></li>
-        <li><div class="check-box"></div><span>Contact insurance carrier to understand coverage implications and premium impact</span></li>
-        <li><div class="check-box"></div><span>Follow up with H2O Waterproofing on transfer process and associated fees</span></li>
+        <li><div class="check-box"></div><span>Confirm two independent remediation estimates are in hand (target: $30K&ndash;$45K range)</span></li>
+        <li><div class="check-box"></div><span>Draft $925,000 counter-offer with $35,000 remediation credit request</span></li>
+        <li><div class="check-box"></div><span>Include 5-business-day response deadline in the offer</span></li>
+        <li><div class="check-box"></div><span>Attach inspection report and contractor estimates as exhibits</span></li>
+        <li><div class="check-box"></div><span>Confirm with lender that appraisal requirements are understood (if financing)</span></li>
+        <li><div class="check-box"></div><span>Contact insurance carrier for preliminary coverage quote on the property</span></li>
+        <li><div class="check-box"></div><span>Determine walk-away number: $950,000 max without full remediation credit</span></li>
+        <li><div class="check-box"></div><span>If rejected again, execute strategic silence for 2&ndash;3 weeks before re-engaging</span></li>
+        <li><div class="check-box"></div><span>Follow up with H2O Waterproofing on warranty transfer process and fees</span></li>
       </ul>
 
       <!-- BOTTOM LINE -->
       <div class="bottom-line-box">
         <h3>The Bottom Line</h3>
         <p>
-          You hold strong leverage in this negotiation. Water intrusion is one of the most powerful negotiation tools in residential real estate because it combines high remediation costs, legal disclosure requirements, insurance complications, and a shrinking buyer pool — all working in your favor simultaneously.
+          The $900,000 rejection does not change your leverage — it only reveals the seller's expectations. Your position remains strong: documented water intrusion, Alabama disclosure obligations, insurance complications, and a shrinking buyer pool all work in your favor. The rejection is a data point, not a defeat.
         </p>
-        <p>The goal is not to antagonize the seller. The goal is to arrive at a fair price that reflects the true condition of the property. Stay factual, stay patient, and stay willing to close.</p>
+        <p>The recommended path forward:</p>
         <ul>
-          <li>Document the defect with independent professional estimates</li>
-          <li>Present findings factually — let the numbers speak</li>
-          <li>Target a reduction of 1.25x to 1.5x the highest remediation estimate</li>
-          <li>Use disclosure obligations and insurance concerns as supporting leverage</li>
-          <li>Keep the door open — the seller's best option is to negotiate with you now</li>
+          <li>Move to $925,000 with a $35,000 remediation credit — net effective price near $890K</li>
+          <li>Set a 5-business-day deadline to force a decision</li>
+          <li>If countered in the $950K&ndash;$960K range, negotiate to $940K with concessions</li>
+          <li>Walk away above $950K without full remediation credit — other properties exist</li>
+          <li>If no deal, go silent for 2&ndash;3 weeks and re-engage at a lower number</li>
+          <li>Stay factual, stay patient, and never bid against yourself</li>
         </ul>
       </div>
 
