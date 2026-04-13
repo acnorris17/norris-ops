@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- nu-auth-gate-v2 -->
-<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: Cash Payment Compliance Check — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Action Item: Cash Payment Inquiry — Norris Utilities®</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
@@ -65,13 +62,7 @@
     }
     .nu-header * { position: relative; z-index: 2; }
 
-    .nu-phoenix-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 16px;
-      fill: var(--nu-white);
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
-    }
+    .nu-phoenix-icon { width: 80px; height: 80px; margin: 0 auto 16px; }
     .nu-logo-text {
       font-family: var(--font-primary);
       font-weight: 900;
@@ -100,17 +91,8 @@
       letter-spacing: 0.05em;
     }
 
-    .nu-chevron {
-      position: relative;
-      height: 50px;
-      margin-top: -50px;
-      z-index: 10;
-    }
-    .nu-chevron svg {
-      width: 100%;
-      height: 50px;
-      display: block;
-    }
+    .nu-chevron { position: relative; height: 50px; margin-top: -50px; z-index: 10; }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
     .nu-content-area {
       position: relative;
@@ -128,225 +110,123 @@
     }
     .nu-content-area > * { position: relative; z-index: 1; }
 
+    .action-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
     .action-badge {
       display: inline-block;
-      background: linear-gradient(135deg, #e8f0fe 0%, #d0e4ff 100%);
-      color: var(--nu-blue);
+      background: linear-gradient(135deg, var(--nu-blue), #0033CC);
+      color: var(--nu-white);
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 6px 16px;
-      border-radius: 20px;
-      margin-bottom: 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
     }
 
     .action-title {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: var(--nu-dark-text);
       margin-bottom: 8px;
-      line-height: 1.3;
     }
     .action-title span { color: var(--nu-blue); }
 
     .action-date {
       font-size: 0.95rem;
-      color: #666;
+      color: #888;
       margin-bottom: 32px;
     }
 
-    .status-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: #fff8e6;
-      border-left: 4px solid #f0a500;
-      padding: 14px 20px;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 36px;
-    }
-    .status-bar .icon { font-size: 1.3rem; }
-    .status-bar .text {
-      font-weight: 700;
-      color: #7a5a00;
-      font-size: 0.95rem;
-    }
-
-    .section-block {
-      background: var(--nu-light-gray);
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 24px;
-    }
-    .section-block h3 {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--nu-blue);
-      margin-bottom: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .section-block h3 span {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-    .section-block p, .section-block li {
-      font-size: 1rem;
-      line-height: 1.75;
-      color: var(--nu-body-text);
-    }
-    .section-block ul {
-      list-style: none;
-      padding: 0;
-    }
-    .section-block ul li {
-      padding: 6px 0 6px 24px;
-      position: relative;
-    }
-    .section-block ul li::before {
-      content: '\2022';
-      color: var(--nu-blue);
-      font-weight: 900;
-      position: absolute;
-      left: 6px;
-    }
-
-    .ruling-card {
+    .action-card {
       background: var(--nu-white);
-      border: 2px solid var(--nu-blue);
-      border-radius: 12px;
-      padding: 28px 32px;
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
       margin-bottom: 24px;
-    }
-    .ruling-card h3 {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--nu-blue);
-      margin-bottom: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .ruling-card p, .ruling-card li {
-      font-size: 1rem;
-      line-height: 1.75;
-      color: var(--nu-body-text);
-    }
-    .ruling-card ul {
-      list-style: none;
-      padding: 0;
-    }
-    .ruling-card ul li {
-      padding: 8px 0 8px 24px;
-      position: relative;
-    }
-    .ruling-card ul li::before {
-      content: '\2022';
-      color: var(--nu-blue);
-      font-weight: 900;
-      position: absolute;
-      left: 6px;
     }
 
-    .alert-block {
-      background: #fff0f0;
-      border-left: 4px solid #cc0000;
-      border-radius: 0 12px 12px 0;
-      padding: 24px 28px;
-      margin-bottom: 24px;
-    }
-    .alert-block h3 {
-      font-family: var(--font-primary);
-      font-weight: 900;
+    .action-card h3 {
+      font-weight: 700;
       font-size: 1.1rem;
-      color: #cc0000;
-      margin-bottom: 10px;
-    }
-    .alert-block p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: #4a0000;
-    }
-
-    .safe-block {
-      background: #f0fff0;
-      border-left: 4px solid #009900;
-      border-radius: 0 12px 12px 0;
-      padding: 24px 28px;
-      margin-bottom: 24px;
-    }
-    .safe-block h3 {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: #009900;
-      margin-bottom: 10px;
-    }
-    .safe-block p, .safe-block li {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: #1a3d1a;
-    }
-    .safe-block ul {
-      list-style: none;
-      padding: 0;
-    }
-    .safe-block ul li {
-      padding: 4px 0 4px 24px;
-      position: relative;
-    }
-    .safe-block ul li::before {
-      content: '\2713';
-      color: #009900;
-      font-weight: 900;
-      position: absolute;
-      left: 4px;
-    }
-
-    .next-steps {
-      background: linear-gradient(135deg, #f0f4ff 0%, #e6ecff 100%);
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-top: 32px;
-    }
-    .next-steps h3 {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.15rem;
       color: var(--nu-blue);
-      margin-bottom: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--nu-light-gray);
     }
-    .step-item {
+
+    .action-card p {
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    .checklist { list-style: none; padding: 0; }
+    .checklist li {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
-      padding: 10px 0;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--nu-light-gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
-    .step-num {
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 0.85rem;
-      flex-shrink: 0;
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      margin-right: 14px;
       margin-top: 2px;
     }
-    .step-text {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: var(--nu-body-text);
+
+    .key-points {
+      background: var(--nu-light-gray);
+      border-left: 4px solid var(--nu-blue);
+      padding: 20px 24px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 20px;
     }
-    .step-text strong { color: var(--nu-dark-text); }
+    .key-points h4 {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      margin-bottom: 10px;
+    }
+    .key-points ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+    .key-points li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .warning-box {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-left: 4px solid #FFA000;
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-top: 20px;
+    }
+    .warning-box h4 {
+      color: #E65100;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .warning-box p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+      color: #5D4037;
+    }
 
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
@@ -363,7 +243,7 @@
       margin-bottom: 12px;
     }
     .nu-footer-contact {
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.8;
     }
     .nu-footer-contact a {
@@ -376,19 +256,20 @@
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .section-block, .ruling-card, .alert-block, .safe-block, .next-steps { padding: 20px 22px; }
-      .action-title { font-size: 1.5rem; }
+      .action-container { padding: 40px 20px; }
+      .action-title { font-size: 1.4rem; }
+      .action-card { padding: 24px 20px; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .action-card { box-shadow: none; border: 1px solid #ccc; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="nu-header">
     <div class="nu-phoenix-icon">
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -398,93 +279,71 @@
     </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
-    <div class="nu-tagline">A Legacy of Commitment&reg;</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
-  <!-- WHITE CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
-    <div style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
+    <div class="action-container">
 
-      <div class="action-badge">Action Item &mdash; Internal</div>
-      <h1 class="action-title"><span>Cash Payment</span> vs. 1099 Compliance Check</h1>
-      <p class="action-date">Captured: April 12, 2026 &nbsp;|&nbsp; Priority: Review Before Next Payment</p>
+      <div class="action-badge">Action Item</div>
+      <h1 class="action-title"><span>Cash Payment</span> — Check Feasibility vs. 1099</h1>
+      <div class="action-date">Captured April 13, 2026 — Norris Utilities®</div>
 
-      <div class="status-bar">
-        <span class="icon">&#9888;</span>
-        <span class="text">Requires review before making any cash payments &mdash; IRS rules apply</span>
+      <div class="action-card">
+        <h3>Task Summary</h3>
+        <p>Determine whether it is possible and advisable to pay her in cash rather than issuing a 1099 for contractor compensation. This requires understanding IRS reporting thresholds, state labor law requirements, and the practical implications for Norris Utilities® bookkeeping.</p>
       </div>
 
-      <!-- THE QUESTION -->
-      <div class="section-block">
-        <h3>The <span>Question</span></h3>
-        <p>Can Norris Utilities&reg; pay a worker in cash without issuing a 1099-NEC? This applies to any independent contractor or service provider currently being considered for a cash arrangement.</p>
-      </div>
-
-      <!-- IRS RULES -->
-      <div class="ruling-card">
-        <h3>IRS Rules on Cash Payments</h3>
-        <ul>
-          <li>Cash payments are legal &mdash; but the IRS still requires reporting if total payments to a single person reach <strong>$600 or more</strong> in a calendar year (Form 1099-NEC).</li>
-          <li>Paying cash does not eliminate the 1099 requirement. The method of payment (cash, check, Venmo, Zelle) does not matter &mdash; only the total dollar amount matters.</li>
-          <li>If the worker is paid <strong>under $600 total</strong> for the entire calendar year, no 1099-NEC is required. The worker still owes taxes on the income, but Norris Utilities&reg; has no filing obligation.</li>
-          <li>If the worker is a <strong>corporation</strong> (S-Corp or C-Corp), a 1099-NEC is generally not required regardless of amount (with limited exceptions for legal/medical services).</li>
+      <div class="action-card">
+        <h3>Action Steps</h3>
+        <ul class="checklist">
+          <li>Confirm total expected payments for the calendar year 2026 — if $600 or more, a 1099-NEC is required by the IRS regardless of payment method (cash, check, or direct deposit)</li>
+          <li>Verify that paying in cash does not change the 1099 reporting obligation — the IRS requires reporting based on total amount paid, not the method of payment</li>
+          <li>Consult with your CPA or accountant to confirm Alabama-specific requirements for cash payments to contractors</li>
+          <li>If total payments will be under $600 for the year, cash payment without a 1099 is permissible — but still should be documented internally</li>
+          <li>Regardless of payment method, keep written records: date, amount, description of work performed, and recipient name</li>
+          <li>Get a signed receipt for every cash payment made</li>
         </ul>
       </div>
 
-      <!-- RISK -->
-      <div class="alert-block">
-        <h3>Risk of Paying Cash Without a 1099</h3>
-        <p>If total payments hit $600+ and no 1099-NEC is filed, the IRS can impose penalties of <strong>$60&ndash;$310 per form</strong> (2026 rates), with higher penalties for intentional disregard. Alabama follows the same threshold. Additionally, if the worker later claims unemployment or disability and references Norris Utilities&reg; as an employer, it could trigger a misclassification audit.</p>
+      <div class="action-card">
+        <h3>Key Considerations</h3>
+        <div class="key-points">
+          <h4>IRS Rules at a Glance</h4>
+          <ul>
+            <li><strong>$600 threshold:</strong> If you pay any non-employee $600 or more in a tax year, you must file a 1099-NEC — this applies whether you pay by cash, check, or bank transfer</li>
+            <li><strong>Cash is not a loophole:</strong> The payment method does not exempt you from reporting requirements</li>
+            <li><strong>Record keeping:</strong> The IRS expects businesses to maintain records of all payments to contractors regardless of amount</li>
+            <li><strong>Worker classification:</strong> Ensure she is properly classified as an independent contractor, not an employee — misclassification carries significant penalties</li>
+          </ul>
+        </div>
+
+        <div class="warning-box">
+          <h4>Important</h4>
+          <p>Paying in cash to avoid issuing a 1099 when one is legally required is a violation of IRS reporting rules and can result in penalties. If total payments will reach $600 or more this year, a 1099-NEC must be filed regardless of how payment is made. Confirm the expected total and consult your accountant before proceeding.</p>
+        </div>
       </div>
 
-      <!-- WHEN IT'S FINE -->
-      <div class="safe-block">
-        <h3>When Cash Payment Without 1099 Is Fine</h3>
-        <ul>
-          <li>Total payments to the individual will stay under $600 for all of 2026</li>
-          <li>The worker is a corporation (get a W-9 to confirm entity type)</li>
-          <li>The payment is for a personal expense, not a Norris Utilities&reg; business expense</li>
-        </ul>
-      </div>
-
-      <!-- NEXT STEPS -->
-      <div class="next-steps">
-        <h3>Recommended Next Steps</h3>
-        <div class="step-item">
-          <div class="step-num">1</div>
-          <div class="step-text"><strong>Get a W-9 from the worker.</strong> This confirms their legal name, SSN or EIN, and entity type. Keep it on file. This protects Norris Utilities&reg; regardless of payment method.</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <div class="step-text"><strong>Estimate total payments for 2026.</strong> If you expect to pay her $600 or more this year, plan on filing a 1099-NEC by January 31, 2027. Cash or not, the form is required.</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <div class="step-text"><strong>Track every payment.</strong> Record the date, amount, and purpose of each cash payment. A simple note in the books is sufficient. Caroline can maintain a running log.</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">4</div>
-          <div class="step-text"><strong>Confirm with Patrick Lavette or your CPA.</strong> For amounts approaching $600, a 2-minute call to confirm the filing plan is worth the peace of mind.</div>
-        </div>
+      <div class="action-card">
+        <h3>Recommended Next Step</h3>
+        <p>Call your CPA or accountant to confirm the total expected payments for this person in 2026. If the total will be under $600, cash payment is fine — just keep receipts. If $600 or more, a 1099-NEC is required no matter the payment method, and you should continue the current process.</p>
       </div>
 
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="nu-footer">
-    <div class="nu-footer-tagline">A Legacy of Commitment&reg;</div>
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities&reg;, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>
