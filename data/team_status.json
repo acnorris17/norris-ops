@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-12T18:52:20",
-  "active_count": 5,
+  "last_updated": "2026-04-12T19:07:20",
+  "active_count": 3,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -13,9 +13,9 @@
     "v4_builder": {
       "name": "Agent V4",
       "role": "The Builder",
-      "status": "active",
-      "last_run": "2026-04-12 18:50",
-      "message": "Building... 873 in queue"
+      "status": "idle",
+      "last_run": "2026-04-12 18:55",
+      "message": "Queue: 872 pending tasks"
     },
     "email_scout": {
       "name": "Email Scout",
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-12 18:50",
+      "last_run": "2026-04-12 19:05",
       "message": "All systems UP"
     },
     "backup": {
@@ -96,7 +96,7 @@
       "role": "iCloud Backup",
       "status": "idle",
       "last_run": "2026-04-12 02:00",
-      "message": "5,620 files protected",
+      "message": "5,623 files protected",
       "next_run": "Daily 2:00 AM"
     },
     "n8n": {
@@ -116,9 +116,9 @@
     "caroline": {
       "name": "Caroline Butler",
       "role": "Operations",
-      "status": "active",
+      "status": "idle",
       "last_run": "Always on",
-      "message": "Operations lead"
+      "message": "Off the clock"
     }
   }
 }
