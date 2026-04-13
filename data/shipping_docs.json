@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-13T09:09:33",
+  "last_updated": "2026-04-13T09:23:47",
   "documents": [
     {
       "id": "SD-2026-ABADIE-0331",
@@ -404,6 +404,42 @@
           }
         ],
         "subtotal": 305,
+        "shipping": null,
+        "total": null
+      }
+    },
+    {
+      "id": "SD-2026-RICHARD-0413",
+      "filename": "SD-2026-RICHARD-0413.html",
+      "customer": "Richard Thornhill",
+      "company": "&#9888;&#65039; VERIFY: Ship-to address needed",
+      "date": "04/13/2026",
+      "file": "shipping-docs/SD-2026-RICHARD-0413.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "",
+      "products": [
+        {
+          "sku": "&#9888;&#65039; TBD",
+          "name": "(see email)",
+          "qty": 1
+        }
+      ],
+      "shipTo": "",
+      "notes": "",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "&#9888;&#65039; TBD",
+            "name": "(see email)",
+            "qty": 1,
+            "unit_price": 0
+          }
+        ],
+        "subtotal": 0,
         "shipping": null,
         "total": null
       }
