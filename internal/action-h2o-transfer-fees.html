@@ -5,9 +5,9 @@
 <script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: H2O Waterproofing Transfer Process &amp; Fees — Norris Utilities®</title>
+  <title>Action Item: H2O Transfer Process &amp; Fees — Norris Utilities®</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap');
 
     :root {
       --nu-blue: #0000FF;
@@ -127,60 +127,68 @@
     }
     .nu-content-area > * { position: relative; z-index: 1; }
 
-    .action-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 40px;
-    }
-
-    .action-badge {
+    .action-banner {
       display: inline-block;
-      background: linear-gradient(135deg, #ff6b00, #ff9500);
+      background: linear-gradient(135deg, var(--nu-blue), #0033CC);
       color: var(--nu-white);
+      padding: 6px 18px;
+      border-radius: 4px;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 4px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
-    .action-title {
+    .page-title {
       font-family: var(--font-primary);
       font-weight: 900;
       font-size: 2rem;
       color: var(--nu-dark-text);
       margin-bottom: 8px;
-      line-height: 1.3;
     }
-    .action-title span {
+    .page-title .highlight {
       color: var(--nu-blue);
     }
 
-    .action-date {
-      font-size: 0.95rem;
-      color: #888;
-      margin-bottom: 32px;
+    .page-subtitle {
+      font-size: 1.05rem;
+      color: #666;
+      margin-bottom: 40px;
     }
 
-    .action-card {
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .nu-card {
       background: var(--nu-white);
       border-radius: 8px;
-      padding: 32px;
+      padding: 24px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 24px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nu-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
 
-    .action-card h3 {
+    .card-header {
       font-family: var(--font-primary);
       font-weight: 900;
       font-size: 1.1rem;
       color: var(--nu-blue);
       margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--nu-cyan);
+    }
+    .card-header span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
     }
 
     .checklist {
@@ -188,74 +196,82 @@
       padding: 0;
     }
     .checklist li {
-      display: flex;
-      align-items: flex-start;
-      padding: 12px 0;
+      padding: 10px 0 10px 32px;
+      position: relative;
       border-bottom: 1px solid var(--nu-light-gray);
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.5;
     }
     .checklist li:last-child {
       border-bottom: none;
     }
-    .check-box {
-      width: 22px;
-      height: 22px;
-      min-width: 22px;
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 18px;
+      height: 18px;
       border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      margin-right: 14px;
-      margin-top: 2px;
+      border-radius: 3px;
+      background: var(--nu-white);
     }
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 8px;
+    .full-width {
+      grid-column: 1 / -1;
     }
-    .info-item {
-      padding: 16px;
-      background: var(--nu-light-gray);
-      border-radius: 6px;
+
+    .meta-row {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
     }
-    .info-label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #666;
     }
-    .info-value {
-      font-size: 1rem;
+    .meta-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--nu-blue);
+      flex-shrink: 0;
+    }
+    .meta-value {
       font-weight: 700;
       color: var(--nu-dark-text);
     }
 
-    .notes-area {
-      background: var(--nu-light-gray);
-      border-radius: 6px;
-      padding: 20px;
-      margin-top: 12px;
-      min-height: 100px;
-      border: 1px dashed #ccc;
-      font-style: italic;
-      color: #999;
-      font-size: 0.95rem;
-    }
-
-    .priority-high {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #fff3e0;
-      color: #e65100;
-      font-weight: 700;
-      font-size: 0.85rem;
+    .priority-badge {
+      display: inline-block;
+      background: #FFF3E0;
+      color: #E65100;
       padding: 4px 12px;
       border-radius: 4px;
-      margin-left: 12px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+
+    .notes-section {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 40px;
+      border-left: 4px solid var(--nu-cyan);
+    }
+    .notes-section h3 {
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--nu-blue);
+      margin-bottom: 10px;
+    }
+    .notes-section p {
+      font-size: 0.95rem;
+      line-height: 1.7;
     }
 
     .nu-footer {
@@ -273,7 +289,7 @@
       margin-bottom: 12px;
     }
     .nu-footer-contact {
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.8;
     }
     .nu-footer-contact a {
@@ -286,16 +302,14 @@
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .action-container { padding: 40px 20px; }
-      .action-title { font-size: 1.5rem; }
       .info-grid { grid-template-columns: 1fr; }
-      .action-card { padding: 24px; }
+      .meta-row { flex-direction: column; gap: 12px; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .action-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
     }
   </style>
 </head>
@@ -320,89 +334,71 @@
   </div>
 
   <main class="nu-content-area">
-    <div class="action-container">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 60px 40px;">
 
-      <div class="action-badge">Action Item</div>
-      <h1 class="action-title"><span>H2O Waterproofing</span> — Transfer Process &amp; Fees</h1>
-      <div class="action-date">Created: April 13, 2026</div>
+      <span class="action-banner">Action Item</span>
+      <h1 class="page-title"><span class="highlight">H2O</span> Transfer Process &amp; Fee Inquiry</h1>
+      <p class="page-subtitle">Gather complete transfer process details and associated fees from H2O</p>
 
-      <div class="action-card">
-        <h3>Contact Information</h3>
-        <div class="info-grid">
-          <div class="info-item">
-            <div class="info-label">Company</div>
-            <div class="info-value">H2O Waterproofing</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Subject</div>
-            <div class="info-value">Transfer Process &amp; Fee Schedule</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Status</div>
-            <div class="info-value" style="color: #e65100;">Pending</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Priority</div>
-            <div class="info-value" style="color: #e65100;">Follow Up Required</div>
-          </div>
+      <div class="meta-row">
+        <div class="meta-item">
+          <svg class="meta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H5V8h14v11z"/></svg>
+          <span>Created:</span>
+          <span class="meta-value">April 13, 2026</span>
+        </div>
+        <div class="meta-item">
+          <svg class="meta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16zm1-13h-2v6l5.25 3.15.75-1.23-4-2.42V7z"/></svg>
+          <span>Status:</span>
+          <span class="priority-badge">Pending</span>
+        </div>
+        <div class="meta-item">
+          <svg class="meta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <span>Assigned:</span>
+          <span class="meta-value">Aaron C. Norris</span>
         </div>
       </div>
 
-      <div class="action-card">
-        <h3>Action Steps</h3>
-        <ul class="checklist">
-          <li>
-            <div class="check-box"></div>
-            <div>Contact H2O Waterproofing to request details on their transfer process</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Get a written breakdown of all transfer fees and associated costs</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Ask about timeline requirements and any deadlines for the transfer</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Confirm what documentation or paperwork is needed to initiate the transfer</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Request written confirmation of all terms for records</div>
-          </li>
-        </ul>
+      <div class="info-grid">
+
+        <div class="nu-card">
+          <div class="card-header">Transfer <span>Process Questions</span></div>
+          <ul class="checklist">
+            <li>What is the step-by-step process to initiate a transfer with H2O?</li>
+            <li>What documentation or forms are required to complete the transfer?</li>
+            <li>What is the typical timeline from initiation to completion?</li>
+            <li>Are there any eligibility requirements or restrictions on transfers?</li>
+            <li>Who is the primary point of contact at H2O for transfer requests?</li>
+          </ul>
+        </div>
+
+        <div class="nu-card">
+          <div class="card-header">Fee <span>Structure Questions</span></div>
+          <ul class="checklist">
+            <li>What are the total fees associated with a transfer?</li>
+            <li>Are there one-time transfer fees vs. recurring charges?</li>
+            <li>Are fees fixed or do they vary based on account size or type?</li>
+            <li>Are there any penalty fees for early or partial transfers?</li>
+            <li>Can fees be waived or reduced under any circumstances?</li>
+          </ul>
+        </div>
+
+        <div class="nu-card full-width">
+          <div class="card-header">Next <span>Steps</span></div>
+          <ul class="checklist">
+            <li>Contact H2O directly to request transfer process documentation</li>
+            <li>Ask for a complete fee schedule in writing</li>
+            <li>Confirm any deadlines or blackout dates that could affect timing</li>
+            <li>Get clarification on any tax implications of the transfer</li>
+            <li>Document all findings and compare against current arrangement</li>
+            <li>Review findings with financial advisor before proceeding</li>
+          </ul>
+        </div>
+
       </div>
 
-      <div class="action-card">
-        <h3>Key Questions to Ask</h3>
-        <ul class="checklist">
-          <li>
-            <div class="check-box"></div>
-            <div>What is the total fee for the transfer?</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Are there any additional or hidden costs beyond the transfer fee?</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>What is the step-by-step process from start to completion?</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>How long does the transfer process typically take?</div>
-          </li>
-          <li>
-            <div class="check-box"></div>
-            <div>Can they provide all fee details and terms in writing?</div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="action-card">
+      <div class="notes-section">
         <h3>Notes</h3>
-        <div class="notes-area">Space for notes after speaking with H2O Waterproofing...</div>
+        <p>This action item originated from a reMarkable note review. Contact H2O to obtain their complete transfer process guide, including all applicable fees, timelines, and required documentation. Ensure all information is received in writing for record-keeping and comparison purposes before making any decisions.</p>
       </div>
 
     </div>
