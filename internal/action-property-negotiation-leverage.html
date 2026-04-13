@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Negotiation Leverage Analysis — 4505 Buttewoods — Norris Utilities®</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+    }
+    .nu-phoenix-icon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: var(--font-primary);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .page-title {
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 8px;
+    }
+    .page-title .blue { color: var(--nu-blue); }
+    .page-date {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #888;
+    }
+
+    .leverage-meter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #001166 100%);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 48px;
+      color: var(--nu-white);
+    }
+    .meter-graphic {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      position: relative;
+    }
+    .meter-graphic svg {
+      width: 100%;
+      height: 100%;
+    }
+    .meter-label {
+      font-weight: 900;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+    .meter-sublabel {
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .meter-desc {
+      font-weight: 400;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.85);
+      max-width: 500px;
+    }
+
+    .section-title {
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+    }
+    .section-title .first { color: var(--nu-blue); }
+    .section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
+
+    .leverage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .lev-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      border-top: 4px solid var(--nu-blue);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .lev-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .lev-card.strong { border-top-color: #00884a; }
+    .lev-card.moderate { border-top-color: #cc8800; }
+    .lev-card.risk { border-top-color: #cc0000; }
+
+    .lev-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .lev-title {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+    }
+    .lev-strength {
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+    .lev-strength.high {
+      background: #e6f5ec;
+      color: #00884a;
+    }
+    .lev-strength.medium {
+      background: #fff5e0;
+      color: #cc8800;
+    }
+    .lev-strength.low {
+      background: #ffe6e6;
+      color: #cc0000;
+    }
+    .lev-body {
+      font-weight: 400;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--nu-body-text);
+      margin-bottom: 12px;
+    }
+    .lev-action {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--nu-blue);
+      padding-top: 12px;
+      border-top: 1px solid var(--nu-medium-gray);
+    }
+
+    .strategy-box {
+      background: var(--nu-light-gray);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 48px;
+    }
+    .strategy-box h3 {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 16px;
+    }
+    .strategy-steps {
+      list-style: none;
+      counter-reset: step-counter;
+    }
+    .strategy-steps li {
+      counter-increment: step-counter;
+      position: relative;
+      padding: 14px 0 14px 52px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .strategy-steps li:last-child { border-bottom: none; }
+    .strategy-steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
+      color: var(--nu-white);
+      font-weight: 900;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 36px;
+    }
+    .step-title {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .num-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .num-value {
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--nu-blue);
+      margin-bottom: 4px;
+    }
+    .num-label {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .risk-section {
+      margin-bottom: 48px;
+    }
+    .risk-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      align-items: flex-start;
+    }
+    .risk-item:last-child { border-bottom: none; }
+    .risk-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-white);
+    }
+    .risk-icon.warn { background: #cc8800; }
+    .risk-icon.danger { background: #cc0000; }
+    .risk-icon.caution { background: #cc4400; }
+    .risk-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .risk-desc {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+      line-height: 1.6;
+    }
+
+    .bottom-line-box {
+      background: linear-gradient(135deg, #0a0e5c 0%, #001166 100%);
+      border-radius: 12px;
+      padding: 32px;
+      color: var(--nu-white);
+      margin-bottom: 48px;
+    }
+    .bottom-line-box h3 {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--nu-cyan);
+      margin-bottom: 16px;
+    }
+    .bottom-line-box p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 12px;
+    }
+    .bottom-line-box ul {
+      list-style: none;
+      padding: 0;
+    }
+    .bottom-line-box ul li {
+      padding: 8px 0 8px 20px;
+      position: relative;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
+    .bottom-line-box ul li::before {
+      content: '\2022';
+      position: absolute;
+      left: 0;
+      color: var(--nu-cyan);
+      font-weight: 700;
+    }
+
+    .checklist {
+      list-style: none;
+      margin-bottom: 48px;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-box {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      margin-right: 14px;
+      margin-top: 2px;
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 48px 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.2rem;
+      color: var(--nu-cyan);
+      margin-bottom: 16px;
+    }
+    .nu-footer-contact {
+      font-size: 1rem;
+      line-height: 2;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .leverage-meter { flex-direction: column; text-align: center; }
+      .leverage-grid { grid-template-columns: 1fr; }
+      .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+      .page-title { font-size: 1.5rem; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .lev-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment&reg;</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 60px 40px;">
+
+      <div class="page-header">
+        <h1 class="page-title"><span class="blue">Negotiation</span> Leverage Analysis</h1>
+        <p class="page-date">4505 Buttewoods Estate &mdash; 7,098 Sq Ft &mdash; Prepared April 12, 2026</p>
+      </div>
+
+      <!-- OVERALL LEVERAGE ASSESSMENT -->
+      <div class="leverage-meter">
+        <div class="meter-graphic">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="10"/>
+            <circle cx="60" cy="60" r="54" fill="none" stroke="#06D0FF" stroke-width="10"
+              stroke-dasharray="271" stroke-dashoffset="54" stroke-linecap="round"
+              transform="rotate(-90 60 60)"/>
+            <text x="60" y="56" text-anchor="middle" fill="white" font-family="Lato, sans-serif" font-weight="900" font-size="28">80</text>
+            <text x="60" y="74" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="Lato, sans-serif" font-weight="400" font-size="11">/ 100</text>
+          </svg>
+        </div>
+        <div>
+          <div class="meter-label">Buyer Leverage: Strong</div>
+          <div class="meter-sublabel">Multiple leverage points favor the buyer in this transaction</div>
+          <div class="meter-desc">
+            The combination of documented water intrusion, Alabama disclosure obligations, insurance complications, and remediation costs creates a strong negotiating position. The seller's options narrow once a material defect is on the record.
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY NUMBERS -->
+      <h2 class="section-title"><span class="first">Key</span> <span class="rest">Numbers at a Glance</span></h2>
+      <div class="numbers-grid">
+        <div class="num-card">
+          <div class="num-value">7,098</div>
+          <div class="num-label">Square Feet</div>
+        </div>
+        <div class="num-card">
+          <div class="num-value">$15K&ndash;$45K</div>
+          <div class="num-label">Est. Remediation Range</div>
+        </div>
+        <div class="num-card">
+          <div class="num-value">1.25&ndash;1.5x</div>
+          <div class="num-label">Target Reduction Multiplier</div>
+        </div>
+        <div class="num-card">
+          <div class="num-value">100%</div>
+          <div class="num-label">Disclosure Obligation</div>
+        </div>
+      </div>
+
+      <!-- LEVERAGE POINTS -->
+      <h2 class="section-title"><span class="first">Leverage</span> <span class="rest">Points Identified</span></h2>
+      <div class="leverage-grid">
+
+        <div class="lev-card strong">
+          <div class="lev-header">
+            <div class="lev-title">Water Intrusion — Material Defect</div>
+            <span class="lev-strength high">High</span>
+          </div>
+          <div class="lev-body">
+            Documented water intrusion is a material defect under Alabama real estate law. Remediation costs for a 7,098 sq ft property range from $15,000 to $45,000+ depending on scope. This is a dollar-for-dollar justification for a price reduction.
+          </div>
+          <div class="lev-action">Action: Obtain two independent contractor estimates to establish a documented cost basis for your counter-offer.</div>
+        </div>
+
+        <div class="lev-card strong">
+          <div class="lev-header">
+            <div class="lev-title">Alabama Disclosure Obligation</div>
+            <span class="lev-strength high">High</span>
+          </div>
+          <div class="lev-body">
+            Once a seller is aware of a material defect in Alabama, they are legally required to disclose it to every future prospective buyer. The seller cannot walk away from you and find an uninformed buyer — the issue follows the property.
+          </div>
+          <div class="lev-action">Action: Reference disclosure requirements in your counter-offer to reinforce the seller's limited alternatives.</div>
+        </div>
+
+        <div class="lev-card strong">
+          <div class="lev-header">
+            <div class="lev-title">Insurance &amp; Lending Complications</div>
+            <span class="lev-strength high">High</span>
+          </div>
+          <div class="lev-body">
+            Properties with known water intrusion face higher premiums or outright coverage denials from homeowner's insurance carriers. Lenders may flag the issue during appraisal and require remediation before loan approval — a closing risk the seller needs to help resolve.
+          </div>
+          <div class="lev-action">Action: If financing, communicate that the lender's appraiser may require remediation as a condition of closing.</div>
+        </div>
+
+        <div class="lev-card moderate">
+          <div class="lev-header">
+            <div class="lev-title">Reduced Buyer Pool</div>
+            <span class="lev-strength medium">Moderate</span>
+          </div>
+          <div class="lev-body">
+            With water intrusion on the disclosure, any future buyer will discover this issue in inspection. The longer the property sits on the market with a known defect, the weaker the seller's negotiating position becomes. Fewer willing buyers means less competition.
+          </div>
+          <div class="lev-action">Action: Be patient. Time works in your favor — but show willingness to close to keep the seller engaged.</div>
+        </div>
+
+        <div class="lev-card moderate">
+          <div class="lev-header">
+            <div class="lev-title">Hidden Damage Potential</div>
+            <span class="lev-strength medium">Moderate</span>
+          </div>
+          <div class="lev-body">
+            Visible water intrusion is often the tip of the iceberg. Elevated moisture readings behind walls can indicate mold growth, wood rot, and foundation compromise that are not visible during a standard walkthrough. The full scope may exceed initial estimates.
+          </div>
+          <div class="lev-action">Action: Request invasive moisture testing if readings are elevated. Do not cap your ask at visible damage alone.</div>
+        </div>
+
+        <div class="lev-card moderate">
+          <div class="lev-header">
+            <div class="lev-title">Structural &amp; Long-Term Risk</div>
+            <span class="lev-strength medium">Moderate</span>
+          </div>
+          <div class="lev-body">
+            Unresolved water intrusion creates compounding problems: mold remediation costs escalate, wood structural members weaken over time, and foundation issues worsen with each rain cycle. The cost to remediate next year is higher than the cost today.
+          </div>
+          <div class="lev-action">Action: Frame the urgency to the seller — resolving now protects both parties and keeps the deal on track.</div>
+        </div>
+
+      </div>
+
+      <!-- NEGOTIATION STRATEGY -->
+      <h2 class="section-title"><span class="first">Recommended</span> <span class="rest">Negotiation Strategy</span></h2>
+      <div class="strategy-box">
+        <h3>Step-by-Step Approach</h3>
+        <ol class="strategy-steps">
+          <li>
+            <span class="step-title">Document Everything</span>
+            Compile the inspection report, moisture readings, and photographs. Get written estimates from two licensed, independent remediation contractors. This is the foundation of your negotiating position.
+          </li>
+          <li>
+            <span class="step-title">Present Findings Factually</span>
+            Share the inspection report and contractor estimates with the seller's agent. Frame the conversation around facts — not accusations. This is a material condition that adjusts property value, not a personal attack on the seller.
+          </li>
+          <li>
+            <span class="step-title">Submit Revised Offer</span>
+            Calculate your counter-offer using 1.25x to 1.5x the highest contractor estimate as the price reduction. The multiplier accounts for the inconvenience, risk of undiscovered damage, and the time cost of overseeing remediation work.
+          </li>
+          <li>
+            <span class="step-title">Offer an Alternative Path</span>
+            If the seller resists a price reduction, propose that the seller complete all remediation using a licensed contractor of your choosing before closing. Require a re-inspection and clearance before the final walkthrough.
+          </li>
+          <li>
+            <span class="step-title">Hold Firm — Time Is on Your Side</span>
+            The disclosure obligation means the seller faces this same negotiation with every future buyer. You are a willing buyer at a fair price that reflects the true condition of the property. Stay professional, stay patient.
+          </li>
+        </ol>
+      </div>
+
+      <!-- RISKS TO MONITOR -->
+      <h2 class="section-title"><span class="first">Risks</span> <span class="rest">to Monitor</span></h2>
+      <div class="risk-section">
+        <div class="risk-item">
+          <div class="risk-icon warn">!</div>
+          <div>
+            <div class="risk-title">Overplaying the Hand</div>
+            <div class="risk-desc">If the initial ask is too aggressive, the seller may reject outright and wait for another buyer. Mitigate this by keeping communication professional and solution-oriented. Show genuine willingness to close at the right number.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-icon caution">!</div>
+          <div>
+            <div class="risk-title">Seller-Arranged Cosmetic Fix</div>
+            <div class="risk-desc">The seller may attempt a low-cost cosmetic repair rather than a proper remediation. Insist on a contractor of your choosing or require documentation of the scope of work, materials used, and a warranty from a licensed professional.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-icon danger">!</div>
+          <div>
+            <div class="risk-title">Scope Exceeds Estimates</div>
+            <div class="risk-desc">If invasive testing reveals damage beyond the initial inspection, costs could exceed the estimate range. Build a contingency into your offer — the 1.5x multiplier partially accounts for this, but severe structural issues may require re-evaluation.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-icon warn">!</div>
+          <div>
+            <div class="risk-title">Appraisal Complication</div>
+            <div class="risk-desc">If financing, the lender's appraiser may assign a lower value due to the water intrusion. This could reduce the loan amount, requiring either a larger down payment or a further price reduction from the seller. Be prepared for this conversation.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTION ITEMS CHECKLIST -->
+      <h2 class="section-title"><span class="first">Action</span> <span class="rest">Items — Next Steps</span></h2>
+      <ul class="checklist">
+        <li><div class="check-box"></div><span>Obtain two independent remediation estimates from licensed Alabama contractors</span></li>
+        <li><div class="check-box"></div><span>Request invasive moisture testing if elevated readings are present behind walls</span></li>
+        <li><div class="check-box"></div><span>Compile all inspection documentation: report, photos, moisture readings, contractor estimates</span></li>
+        <li><div class="check-box"></div><span>Calculate target price reduction: highest estimate &times; 1.25 to 1.5</span></li>
+        <li><div class="check-box"></div><span>Draft counter-offer language referencing water intrusion findings and remediation costs</span></li>
+        <li><div class="check-box"></div><span>Decide primary strategy: price reduction vs. seller-funded repair vs. combination approach</span></li>
+        <li><div class="check-box"></div><span>Check with lender on appraisal requirements related to known water intrusion</span></li>
+        <li><div class="check-box"></div><span>Contact insurance carrier to understand coverage implications and premium impact</span></li>
+        <li><div class="check-box"></div><span>Follow up with H2O Waterproofing on transfer process and associated fees</span></li>
+      </ul>
+
+      <!-- BOTTOM LINE -->
+      <div class="bottom-line-box">
+        <h3>The Bottom Line</h3>
+        <p>
+          You hold strong leverage in this negotiation. Water intrusion is one of the most powerful negotiation tools in residential real estate because it combines high remediation costs, legal disclosure requirements, insurance complications, and a shrinking buyer pool — all working in your favor simultaneously.
+        </p>
+        <p>The goal is not to antagonize the seller. The goal is to arrive at a fair price that reflects the true condition of the property. Stay factual, stay patient, and stay willing to close.</p>
+        <ul>
+          <li>Document the defect with independent professional estimates</li>
+          <li>Present findings factually — let the numbers speak</li>
+          <li>Target a reduction of 1.25x to 1.5x the highest remediation estimate</li>
+          <li>Use disclosure obligations and insurance concerns as supporting leverage</li>
+          <li>Keep the door open — the seller's best option is to negotiate with you now</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment&reg;</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO &mdash; Norris Utilities&reg;, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
