@@ -98,7 +98,25 @@
       "date_detected": "2026-04-08T16:09:50.614222+00:00",
       "status": "PENDING REVIEW",
       "source": "gmail_scan"
+    },
+    {
+      "id": "19d872e028f6408a",
+      "customer": "Richard Thornhill",
+      "company": "",
+      "email": "rthornhill@ltspower.com",
+      "po_number": "",
+      "products": [
+        "(see email)"
+      ],
+      "ship_to": "",
+      "subject": "Linetec Order",
+      "date_received": "2026-04-13 09:10",
+      "date_detected": "2026-04-13T14:23:46.116284+00:00",
+      "status": "SD CREATED",
+      "source": "gmail_scan",
+      "sd_filename": "SD-2026-RICHARD-0413.html",
+      "sd_url": "https://ops.norrisutilities.com/shipping-docs/SD-2026-RICHARD-0413.html"
     }
   ],
-  "last_updated": "2026-04-13T13:53:45.065050+00:00"
+  "last_updated": "2026-04-13T14:23:55.546953+00:00"
 }
