@@ -38,7 +38,7 @@
       padding: 48px 40px 80px;
       text-align: center;
       overflow: hidden;
-      min-height: 360px;
+      min-height: 380px;
     }
     .nu-header::before {
       content: '';
@@ -78,12 +78,13 @@
       border: 1px solid rgba(255,255,255,0.3);
       color: var(--nu-white);
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 6px 20px;
+      padding: 8px 24px;
       border-radius: 20px;
       margin-bottom: 16px;
+      backdrop-filter: blur(4px);
     }
     .nu-logo-text {
       font-weight: 900;
@@ -96,7 +97,7 @@
     }
     .header-client-name {
       font-weight: 900;
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: var(--nu-white);
       letter-spacing: 0.06em;
       margin: 12px 0 6px;
@@ -104,48 +105,45 @@
     }
     .header-product-name {
       font-weight: 700;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       color: rgba(255,255,255,0.9);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .header-sub {
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--nu-cyan);
       letter-spacing: 0.03em;
     }
 
-    /* ══ CHEVRON ══ */
+    /* ══ CHEVRON (asymmetric apex ~38%) ══ */
     .nu-chevron { position: relative; height: 50px; margin-top: -50px; z-index: 10; }
     .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
     /* ══ ACCOUNT BAR ══ */
     .account-bar {
       background: var(--nu-navy);
-      padding: 20px 24px;
+      padding: 22px 24px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      gap: 32px;
+      gap: 36px;
     }
-    .account-stat {
-      text-align: center;
-      color: var(--nu-white);
-    }
+    .account-stat { text-align: center; color: var(--nu-white); }
     .account-stat-value {
       font-weight: 900;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       color: var(--nu-cyan);
       display: block;
     }
     .account-stat-label {
       font-weight: 400;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.6);
@@ -176,8 +174,8 @@
       text-transform: uppercase;
     }
     .usp-icon {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: rgba(6, 208, 255, 0.15);
       border: 2px solid var(--nu-cyan);
@@ -237,7 +235,7 @@
     }
     .intro-text h2 {
       font-weight: 900;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       color: var(--nu-dark-text);
       margin-bottom: 16px;
     }
@@ -276,7 +274,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      min-height: 320px;
+      min-height: 340px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -378,7 +376,7 @@
       color: var(--nu-white);
       font-size: 0.7rem;
       font-weight: 900;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -489,8 +487,8 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
     .fleet-icon {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 10px;
       background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
       display: flex;
@@ -508,21 +506,21 @@
       letter-spacing: 0.03em;
     }
     .fleet-card p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #555;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     /* ══ TESTIMONIAL BAR ══ */
     .testimonial-bar {
       background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
-      padding: 48px 24px;
+      padding: 56px 24px;
       text-align: center;
     }
     .testimonial-quote {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       color: var(--nu-white);
       max-width: 800px;
       margin: 0 auto 16px;
@@ -531,10 +529,62 @@
     .testimonial-attr {
       font-family: var(--font-primary);
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--nu-cyan);
       text-transform: uppercase;
       letter-spacing: 0.1em;
+    }
+
+    /* ══ COMPETITIVE EDGE SECTION ══ */
+    .edge-bar {
+      background: var(--nu-white);
+      padding: 48px 24px;
+      border-top: 3px solid var(--nu-blue);
+      border-bottom: 3px solid var(--nu-blue);
+    }
+    .edge-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .edge-title {
+      font-weight: 900;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .edge-title span { color: var(--nu-blue); }
+    .edge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .edge-cell {
+      padding: 28px 24px;
+      text-align: center;
+      border-right: 1px solid var(--nu-medium-gray);
+    }
+    .edge-cell:last-child { border-right: none; }
+    .edge-cell-value {
+      font-weight: 900;
+      font-size: 2.4rem;
+      color: var(--nu-blue);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .edge-cell-label {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--nu-dark-text);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .edge-cell-desc {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.5;
     }
 
     /* ══ QUOTE FORM ══ */
@@ -606,20 +656,20 @@
     /* ══ FOOTER ══ */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      padding: 48px 24px 32px;
+      padding: 52px 24px 36px;
       text-align: center;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.85);
     }
     .footer-tagline {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       color: var(--nu-cyan);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .footer-info {
-      font-size: 1.05rem;
-      line-height: 2;
+      font-size: 1.15rem;
+      line-height: 2.1;
     }
     .footer-info a {
       color: var(--nu-cyan);
@@ -627,12 +677,12 @@
     }
     .footer-info a:hover { text-decoration: underline; }
     .footer-legal {
-      margin-top: 24px;
-      padding-top: 16px;
+      margin-top: 28px;
+      padding-top: 18px;
       border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.8;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.9;
     }
 
     /* ══ RESPONSIVE ══ */
@@ -653,6 +703,11 @@
       .account-bar { gap: 20px; }
       .account-stat-value { font-size: 1.2rem; }
       .testimonial-quote { font-size: 1.1rem; }
+      .edge-grid { grid-template-columns: 1fr; }
+      .edge-cell { border-right: none; border-bottom: 1px solid var(--nu-medium-gray); padding: 20px 16px; }
+      .edge-cell:last-child { border-bottom: none; }
+      .footer-info { font-size: 1.05rem; }
+      .footer-legal { font-size: 0.9rem; }
     }
 
     @media print {
@@ -761,6 +816,30 @@
       </div>
     </div>
   </section>
+
+  <!-- ══ COMPETITIVE EDGE ══ -->
+  <div class="edge-bar">
+    <div class="edge-inner">
+      <div class="edge-title"><span>The FlexPro Armor</span> Advantage</div>
+      <div class="edge-grid">
+        <div class="edge-cell">
+          <span class="edge-cell-value">28"</span>
+          <div class="edge-cell-label">True-Width Coverage</div>
+          <div class="edge-cell-desc">Our covers measure a full 28 inches wide. Competitors advertise 24-inch covers that leave buckets exposed. FlexPro Armor delivers the coverage your crews need.</div>
+        </div>
+        <div class="edge-cell">
+          <span class="edge-cell-value">D</span>
+          <div class="edge-cell-label">Patented D-Shape Fit</div>
+          <div class="edge-cell-desc">Aerial lift buckets are D-shaped, not rectangular. FlexPro Armor is the first to market with a cover that matches the actual bucket profile for a secure fit.</div>
+        </div>
+        <div class="edge-cell">
+          <span class="edge-cell-value">1</span>
+          <div class="edge-cell-label">Direct Point of Contact</div>
+          <div class="edge-cell-desc">Fleet orders are handled personally by Aaron C. Norris, Founder &amp; CEO. No call centers, no ticket queues. One call gets it done.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ══ PRODUCTS ══ -->
   <section class="section-dark">
