@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: H2O Waterproofing Confirmation — Norris Utilities®</title>
+  <title>Action Item: H2O Waterproofing — Norris Utilities®</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
@@ -152,78 +152,81 @@
       height: 28px;
       fill: var(--nu-white);
     }
-    .action-title {
-      font-family: var(--font-primary);
+    .action-label {
       font-weight: 900;
-      font-size: 1.8rem;
-      color: var(--nu-dark-text);
-      line-height: 1.2;
-    }
-    .action-title span {
-      color: var(--nu-blue);
-    }
-
-    .status-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-    }
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-family: var(--font-primary);
-      font-weight: 700;
       font-size: 0.85rem;
-      letter-spacing: 0.03em;
-    }
-    .status-pending {
-      background: #FFF3E0;
-      color: #E65100;
-      border: 1px solid #FFCC80;
-    }
-    .status-priority {
-      background: #E3F2FD;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       color: var(--nu-blue);
-      border: 1px solid #90CAF9;
+      margin-bottom: 4px;
     }
-    .status-date {
-      background: var(--nu-light-gray);
-      color: var(--nu-body-text);
-      border: 1px solid var(--nu-medium-gray);
+    .action-title {
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--nu-dark-text);
+      line-height: 1.3;
     }
 
-    .action-card {
-      background: var(--nu-white);
+    .priority-badge {
+      display: inline-block;
+      background: #DC2626;
+      color: var(--nu-white);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 32px;
+    }
+
+    .detail-card {
+      background: var(--nu-light-gray);
       border-radius: 12px;
       padding: 32px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-      border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--nu-blue);
     }
-    .card-label {
-      font-family: var(--font-primary);
+    .detail-card h3 {
       font-weight: 900;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      font-size: 1.1rem;
       color: var(--nu-blue);
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .detail-card h3 span {
+      color: var(--nu-dark-text);
     }
 
-    .task-description {
-      font-family: var(--font-primary);
-      font-size: 1.05rem;
-      color: var(--nu-body-text);
-      line-height: 1.8;
+    .detail-row {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    .detail-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #666;
+      width: 160px;
+      flex-shrink: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .detail-value {
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      line-height: 1.5;
     }
 
     .checklist {
       list-style: none;
+      margin: 0;
       padding: 0;
     }
     .checklist li {
@@ -232,10 +235,8 @@
       gap: 12px;
       padding: 14px 0;
       border-bottom: 1px solid var(--nu-medium-gray);
-      font-family: var(--font-primary);
       font-size: 1rem;
-      color: var(--nu-body-text);
-      line-height: 1.5;
+      color: var(--nu-dark-text);
     }
     .checklist li:last-child {
       border-bottom: none;
@@ -249,37 +250,34 @@
       margin-top: 2px;
     }
 
-    .contact-info {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 8px 16px;
-      font-family: var(--font-primary);
+    .notes-card {
+      background: #FFFBEB;
+      border-left: 4px solid #F59E0B;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .notes-card h3 {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #B45309;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .notes-card p {
       font-size: 1rem;
-    }
-    .contact-label {
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .contact-value {
-      color: var(--nu-body-text);
+      color: #92400E;
+      line-height: 1.7;
     }
 
-    .notes-area {
-      width: 100%;
-      min-height: 120px;
-      border: 2px dashed var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 16px;
-      font-family: var(--font-primary);
-      font-size: 1rem;
-      color: var(--nu-body-text);
-      background: var(--nu-light-gray);
-      resize: vertical;
-    }
-    .notes-area:focus {
-      outline: none;
-      border-color: var(--nu-blue);
-      background: var(--nu-white);
+    .timestamp {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--nu-medium-gray);
     }
 
     .nu-footer {
@@ -292,7 +290,7 @@
     .nu-footer-tagline {
       font-style: italic;
       font-weight: 300;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--nu-cyan);
       margin-bottom: 12px;
     }
@@ -304,9 +302,6 @@
       color: var(--nu-cyan);
       text-decoration: none;
     }
-    .nu-footer-contact a:hover {
-      text-decoration: underline;
-    }
 
     @media (max-width: 768px) {
       .nu-header { padding: 40px 20px 60px; min-height: 200px; }
@@ -314,16 +309,16 @@
       .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
       .action-container { padding: 40px 20px; }
-      .action-title { font-size: 1.4rem; }
-      .action-card { padding: 24px; }
-      .contact-info { grid-template-columns: 1fr; }
+      .action-title { font-size: 1.3rem; }
+      .detail-row { flex-direction: column; gap: 4px; }
+      .detail-label { width: auto; }
+      .detail-card { padding: 24px; }
+      .notes-card { padding: 24px; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .action-card { box-shadow: none; border: 1px solid #ccc; }
-      .notes-area { border-style: solid; }
     }
   </style>
 </head>
@@ -353,66 +348,74 @@
       <div class="action-header">
         <div class="action-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/>
+            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/>
           </svg>
         </div>
-        <h1 class="action-title"><span>Action</span> Item: H2O Waterproofing — Written Confirmation</h1>
-      </div>
-
-      <div class="status-bar">
-        <span class="status-badge status-pending">&#9679; Pending</span>
-        <span class="status-badge status-priority">High Priority</span>
-        <span class="status-badge status-date">Created: April 12, 2026</span>
-      </div>
-
-      <div class="action-card">
-        <div class="card-label">Task Summary</div>
-        <div class="task-description">
-          Call H2O Waterproofing and obtain written confirmation of the work they have completed or are scheduled to complete. This confirmation should be documented in writing (email or letter) for Norris Utilities® records.
+        <div>
+          <div class="action-label">Action Item</div>
+          <div class="action-title">Call H2O Waterproofing Before Closing — Get Written Confirmation</div>
         </div>
       </div>
 
-      <div class="action-card">
-        <div class="card-label">Action Checklist</div>
+      <div class="priority-badge">High Priority — Pre-Closing Required</div>
+
+      <div class="detail-card">
+        <h3>Task <span>Details</span></h3>
+        <div class="detail-row">
+          <div class="detail-label">Action</div>
+          <div class="detail-value">Contact H2O Waterproofing to discuss waterproofing scope, warranty terms, and any existing work or recommendations for the property</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Timing</div>
+          <div class="detail-value">Must be completed before closing date — do not proceed to close without written documentation in hand</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Deliverable</div>
+          <div class="detail-value">Obtain written confirmation from H2O Waterproofing covering scope of work, warranty coverage, and any conditions or limitations</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Status</div>
+          <div class="detail-value" style="font-weight: 700; color: #DC2626;">Pending — Not Yet Contacted</div>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <h3>Pre-Call <span>Checklist</span></h3>
         <ul class="checklist">
           <li>
             <div class="check-box"></div>
-            <span>Call H2O Waterproofing to discuss work status and scope</span>
+            <div>Call H2O Waterproofing and introduce yourself as the prospective buyer</div>
           </li>
           <li>
             <div class="check-box"></div>
-            <span>Request written confirmation of all work completed to date</span>
+            <div>Ask about any existing waterproofing work performed on the property</div>
           </li>
           <li>
             <div class="check-box"></div>
-            <span>Confirm scope of any remaining or scheduled work</span>
+            <div>Request details on warranty terms — what is covered, duration, and transferability to new owner</div>
           </li>
           <li>
             <div class="check-box"></div>
-            <span>Obtain written documentation via email or formal letter</span>
+            <div>Ask about any known issues, recommended maintenance, or additional work needed</div>
           </li>
           <li>
             <div class="check-box"></div>
-            <span>File confirmation in records for future reference</span>
+            <div>Request all information in writing — email or formal letter on company letterhead</div>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div>Confirm written documentation received and filed before proceeding to closing</div>
           </li>
         </ul>
       </div>
 
-      <div class="action-card">
-        <div class="card-label">Vendor Contact</div>
-        <div class="contact-info">
-          <div class="contact-label">Company:</div>
-          <div class="contact-value">H2O Waterproofing</div>
-          <div class="contact-label">Action:</div>
-          <div class="contact-value">Call and request written confirmation of work</div>
-          <div class="contact-label">Requested By:</div>
-          <div class="contact-value">Aaron C. Norris</div>
-        </div>
+      <div class="notes-card">
+        <h3>Important Notes</h3>
+        <p>Do not close on the property until you have received written confirmation from H2O Waterproofing. Verbal assurances are not sufficient — you need documentation in hand that can be referenced after closing if any waterproofing issues arise. Keep a copy with your closing documents.</p>
       </div>
 
-      <div class="action-card">
-        <div class="card-label">Notes</div>
-        <textarea class="notes-area" placeholder="Add call notes, confirmation details, and follow-up items here..."></textarea>
+      <div class="timestamp">
+        Action item captured April 13, 2026 — Source: reMarkable notebook
       </div>
 
     </div>
