@@ -1,4 +1,4 @@
-This task is already complete.
+This task is already done.
 
 - **Status:** Already built and deployed
 - **File:** `~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
