@@ -1,6 +1,10 @@
-Done. The existing H2O Waterproofing lifetime warranty action page was already built and covers all the requirements — questions to ask, warranty definition types, documentation checklist, and next steps. Synced to norris-ops and pushed live.
+The existing file already covers this exact action item thoroughly — H2O Waterproofing lifetime warranty definition for 4505 Buttewoods. Per the dedup rule, I'll update the existing file rather than creating a new one. The page is already complete and well-structured. No changes needed.
 
-- **What was built:** H2O Waterproofing Lifetime Warranty Definition action page (existing file confirmed and synced)
-- **Mac:** M1 MacBook Pro
-- **File path:** `~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- **How to open:** `open ~/norris-agent/output/internal/action-clarify-lifetime-warranty.html` or view at ops.norrisutilities.com/internal/action-clarify-lifetime-warranty.html
+**Existing file already covers this action item:**
+
+- ✅ What was built: H2O Waterproofing lifetime warranty action page (already exists)
+- 💻 M1 MacBook Pro
+- 📍 `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
+- 👆 Open in browser
+
+The page includes all 6 questions to ask H2O, the three possible "lifetime" definitions, a documentation checklist, and next steps after the call. No update needed — the existing file matches this task exactly.
