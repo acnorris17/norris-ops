@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-13",
+  "last_updated": "2026-04-14",
   "invoicing_queue": [
     {
       "order_id": "S001",
@@ -102,11 +102,11 @@
       "ship_to_street": "3606 N FRAZIER ST",
       "ship_to_city_st_zip": "CONROE, TX 773031431",
       "matched_sd_file": "SD-2026-ABADIE-0331.html",
-      "matched_sd_name": "Primoris T&D Services",
+      "matched_customer": "Primoris T&D Services",
       "confidence": 1.0,
       "needs_review": false,
       "status": "ready_for_cb",
-      "scanned_at": "2026-04-13T14:28:36.525777+00:00",
+      "scanned_at": "2026-04-14T11:11:33.632268+00:00",
       "qb_action": "Add shipping line to QB invoice: $71.00 for tracking 1Z2W49000396543854 (NU paid $44.14, UPS list $63.06)"
     },
     {
@@ -121,11 +121,11 @@
       "ship_to_street": "1308 W PINE ST",
       "ship_to_city_st_zip": "HATTIESBURG, MS 394016338",
       "matched_sd_file": "SD-2026-AJ-0331-ChainElectric.html",
-      "matched_sd_name": "AJ Morris",
+      "matched_customer": "AJ Morris",
       "confidence": 1.0,
       "needs_review": false,
       "status": "ready_for_cb",
-      "scanned_at": "2026-04-13T14:28:38.533069+00:00",
+      "scanned_at": "2026-04-14T11:11:35.427664+00:00",
       "qb_action": "Add shipping line to QB invoice: $46.00 for tracking 1Z2W49000395813055 (NU paid $28.19, UPS list $40.27)"
     },
     {
@@ -140,11 +140,11 @@
       "ship_to_street": "192 OLD WIRE RD",
       "ship_to_city_st_zip": "WEST COLUMBIA, SC 291722860",
       "matched_sd_file": "SD-2026-CROSBY-0325.html",
-      "matched_sd_name": "Coy Crosby",
+      "matched_customer": "Coy Crosby",
       "confidence": 0.9,
       "needs_review": false,
       "status": "ready_for_cb",
-      "scanned_at": "2026-04-13T14:28:40.504277+00:00",
+      "scanned_at": "2026-04-14T11:11:37.329138+00:00",
       "qb_action": "Add shipping line to QB invoice: $51.00 for tracking 1Z2W49000395006856 (NU paid $31.86, UPS list $45.52)"
     }
   ]

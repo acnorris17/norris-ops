@@ -89,5 +89,63 @@
     "Negotiate with any vendor",
     "Invoice blocked orders \u2014 blocked means blocked until Aaron explicitly unblocks"
   ],
-  "shipping_receipt_queue": []
+  "shipping_receipt_queue": [
+    {
+      "tracking": "1Z2W49000396543854",
+      "receipt_date": "2026-04-08",
+      "receipt_thread_id": "19d6ef1d16f5b669",
+      "ship_method": "Ground Commercial",
+      "nu_cost": 44.14,
+      "reg_cost": 63.06,
+      "customer_charge": 71,
+      "ship_to_name": "PRIMORIS T&D SERVICES",
+      "ship_to_street": "3606 N FRAZIER ST",
+      "ship_to_city_st_zip": "CONROE, TX 773031431",
+      "matched_sd_file": "SD-2026-ABADIE-0331.html",
+      "matched_sd_name": "Primoris T&D Services",
+      "confidence": 1.0,
+      "needs_review": false,
+      "status": "ready_for_cb",
+      "scanned_at": "2026-04-13T14:28:36.525777+00:00",
+      "qb_action": "Add shipping line to QB invoice: $71.00 for tracking 1Z2W49000396543854 (NU paid $44.14, UPS list $63.06)"
+    },
+    {
+      "tracking": "1Z2W49000395813055",
+      "receipt_date": "2026-04-01",
+      "receipt_thread_id": "19d49adf2801a5ab",
+      "ship_method": "Ground Commercial",
+      "nu_cost": 28.19,
+      "reg_cost": 40.27,
+      "customer_charge": 46,
+      "ship_to_name": "CHAIN ELECTRIC",
+      "ship_to_street": "1308 W PINE ST",
+      "ship_to_city_st_zip": "HATTIESBURG, MS 394016338",
+      "matched_sd_file": "SD-2026-AJ-0331-ChainElectric.html",
+      "matched_sd_name": "AJ Morris",
+      "confidence": 1.0,
+      "needs_review": false,
+      "status": "ready_for_cb",
+      "scanned_at": "2026-04-13T14:28:38.533069+00:00",
+      "qb_action": "Add shipping line to QB invoice: $46.00 for tracking 1Z2W49000395813055 (NU paid $28.19, UPS list $40.27)"
+    },
+    {
+      "tracking": "1Z2W49000395006856",
+      "receipt_date": "2026-03-20",
+      "receipt_thread_id": "19d0bc5a0c48ad48",
+      "ship_method": "Ground Commercial",
+      "nu_cost": 31.86,
+      "reg_cost": 45.52,
+      "customer_charge": 51,
+      "ship_to_name": "DOMINION ENERGY",
+      "ship_to_street": "192 OLD WIRE RD",
+      "ship_to_city_st_zip": "WEST COLUMBIA, SC 291722860",
+      "matched_sd_file": "SD-2026-CROSBY-0325.html",
+      "matched_sd_name": "Coy Crosby",
+      "confidence": 0.9,
+      "needs_review": false,
+      "status": "ready_for_cb",
+      "scanned_at": "2026-04-13T14:28:40.504277+00:00",
+      "qb_action": "Add shipping line to QB invoice: $51.00 for tracking 1Z2W49000395006856 (NU paid $31.86, UPS list $45.52)"
+    }
+  ]
 }
