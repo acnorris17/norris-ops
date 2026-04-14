@@ -1,6 +1,6 @@
-This task is **already complete**. Two valid HTML files exist covering this exact action item:
+This task is **already done**. The file `action-modify-bucket-cover-ship-back.html` (412 lines, ends with `</html>`) is live at norris-ops. Per the dedup rule, no new file needed.
 
-- `/Users/acnorris1/norris-ops/internal/action-bucket-cover-modify.html` (491 lines, ends with `</html>`)
-- `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (412 lines)
-
-Per the dedup rule, creating another file for the same topic would be redundant. No new build needed.
+✅ **What was built:** Already exists — internal action item for modifying shipped bucket cover
+💻 **Mac:** M1 MacBook Pro
+📍 **File path:** `~/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
+👆 **How to open:** `open ~/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
