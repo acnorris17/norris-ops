@@ -1,9 +1,9 @@
-The existing file already covers this exact action item thoroughly — it has the H2O Waterproofing lifetime warranty questions, definitions grid, documentation checklist, and follow-up steps. No updates needed.
+The existing file is already comprehensive and well-built. It covers exactly this topic — getting the lifetime warranty definition from H2O Waterproofing. The file is complete, follows the design system, and has all the right content.
 
-**Existing file already handles this task:**
-- ✅ `action-clarify-lifetime-warranty.html` — complete action page for getting H2O Waterproofing's lifetime warranty definition
+This is a duplicate task — the page already exists and is thorough. No changes needed.
+
+**Result:**
+- ✅ Page already exists and covers this action item fully
 - 💻 M1 MacBook Pro
 - 📍 `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- 👆 Open in any browser
-
-The page includes all six questions to ask H2O, the three possible "lifetime" definitions, a documentation checklist, and after-call next steps — all tied to the 4505 Buttewoods closing. No changes were needed since the content is already complete and accurate.
+- 👆 Open in browser — includes H2O contact info, 6 questions to ask, warranty type definitions, documentation checklist, and post-call next steps
