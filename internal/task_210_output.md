@@ -1,10 +1,9 @@
-The existing file `action-clarify-lifetime-warranty.html` already covers this exact topic comprehensively — H2O Waterproofing lifetime warranty definition with all the right questions, definitions, and checklists. The page is complete, well-built, and follows the design system. No update needed.
+Already built and deployed — no changes needed.
 
-This is a duplicate task from the reMarkable. The action item page already exists and is live.
+**Status:** Duplicate task. The action item page already exists and is live.
 
-**Status:** Already built and deployed.
 - **File:** `/Users/acnorris1/norris-ops/internal/action-clarify-lifetime-warranty.html`
 - **Live at:** ops.norrisutilities.com/internal/action-clarify-lifetime-warranty.html
-- **Contents:** H2O Waterproofing contact info, 6 questions to ask, 3 warranty type definitions, documentation checklist, and follow-up steps — all specific to 4505 Buttewoods closing
+- **Contents:** H2O Waterproofing contact info, questions to ask about lifetime warranty definition, warranty type definitions, documentation checklist, and follow-up steps
 
-No changes made — the existing page already has everything this action item needs.
+The reMarkable has re-queued this action item, but the page covering it is already complete (575 lines, 20KB). No rebuild necessary.
