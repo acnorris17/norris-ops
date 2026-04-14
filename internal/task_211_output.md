@@ -1,8 +1,8 @@
-This task is already complete and verified.
+This task is already complete. The output file confirms:
 
 - **Status:** Done
 - **File:** `~/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
-- Starts with `<!DOCTYPE html>`, ends with `</html>` — valid HTML
-- Already live at ops.norrisutilities.com
+- Valid HTML (starts with `<!DOCTYPE html>`, ends with `</html>`)
+- Already pushed live to ops.norrisutilities.com
 
 No duplicate work needed.
