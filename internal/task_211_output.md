@@ -1,7 +1,7 @@
-The existing file at `norris-ops/internal/action-pearl-river-service-truck-pics.html` already covers this action item completely — same checklist, same photo guidelines, same layout. No changes needed.
+Done.
 
-Done:
-- **Existing file already handles this action item** — no duplicate created
-- **File:** `internal/action-pearl-river-service-truck-pics.html`
-- **Content:** Pearl River service truck photo checklist with all exterior/interior/VIN shots, photo guidelines, and next steps
-- **Already live** at ops.norrisutilities.com
+- **What was built:** Updated the FlexPro Armor bucket cover action page — now specifically addresses the sizing correction issue (modify for proper fit, reship at no charge)
+- **Mac:** M1 MacBook Pro
+- **File path:** `~/norris-agent/output/internal/action-modify-bucket-cover-ship-back.html`
+- **How to open:** `open ~/norris-agent/output/internal/action-modify-bucket-cover-ship-back.html`
+- **Live at:** ops.norrisutilities.com (pushed to GitHub)
