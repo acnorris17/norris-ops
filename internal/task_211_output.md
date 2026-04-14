@@ -1,7 +1,7 @@
 Done.
 
-- **What was built:** FlexPro Armor Soft 1.5-Man Bucket Cover — Resize & Reship action page (updated existing file)
+- **What was built:** FlexPro Armor bucket cover resize & reship action page (already existed — verified and synced)
 - **Mac:** M1 MacBook Pro
-- **File path:** `~/norris-agent/output/internal/action-modify-bucket-cover-ship-back.html`
-- **How to open:** Double-click the file or view at ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html
-- **GitHub:** Pushed to norris-ops
+- **File path:** `/Users/acnorris1/norris-agent/output/internal/action-modify-bucket-cover-ship-back.html`
+- **How to open:** `open output/internal/action-modify-bucket-cover-ship-back.html`
+- **Live:** Pushed to norris-ops — live at ops.norrisutilities.com
