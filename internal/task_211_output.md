@@ -1,6 +1,7 @@
-File is verified — 412 lines, ends with `</html>`, already live at norris-ops.
+This task is already done. The output file confirms it's been built, verified (412 lines, ends with `</html>`), and pushed to norris-ops.
 
-✅ **Already done** — internal action item for modifying the shipped bucket cover and shipping back for proper sizing
-💻 M1 MacBook Pro
-📍 `~/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
-👆 `open ~/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
+- **Status:** Already complete
+- **File:** `~/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
+- **Open:** `open ~/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
+
+No work needed — this was previously built and deployed.
