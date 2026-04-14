@@ -1,8 +1,6 @@
-**Status: Already done — no rebuild needed.**
+Already done — no rebuild needed.
 
-The H2O Waterproofing lifetime warranty action item page already exists and is verified:
-
-- ✅ **What:** Action item page for getting lifetime warranty definition from H2O Waterproofing
+- ✅ **What:** Action item page for H2O Waterproofing lifetime warranty definition
 - 💻 **Mac:** M1 MacBook Pro
 - 📍 **File:** `/Users/acnorris1/norris-ops/internal/action-clarify-lifetime-warranty.html`
 - 👆 **Live:** ops.norrisutilities.com/internal/action-clarify-lifetime-warranty.html
