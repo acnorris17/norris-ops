@@ -1,14 +1,7 @@
-No changes detected — the file is already synced and up to date in norris-ops.
+Done.
 
-**Result:**
-
-- **Existing file found:** `action-clarify-lifetime-warranty.html` already covers this exact action item (get H2O Waterproofing's lifetime warranty definition)
-- **Content includes:** 6 specific questions to ask H2O, two warranty options compared, industry benchmarks, draft warranty language, and 6 next steps
-- **No new file created** — dedup rule applied, existing file is complete
-- **norris-ops sync:** File already present and current
-
-**Output:**
-- ✅ H2O Waterproofing lifetime warranty action page (already built)
-- 💻 M1 MacBook Pro
-- 📍 `~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- 👆 Open in browser to review the questions to ask H2O and the warranty comparison
+- **Updated:** `action-clarify-lifetime-warranty.html` — now properly framed as 4505 Buttewoods due diligence (was incorrectly mixed with FlexPro Armor warranty)
+- **Key content:** H2O Waterproofing contact (205-956-2426), 6 questions to ask, 3 possible "lifetime" definitions, documentation checklist, post-call next steps
+- **M1 Mac** | `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
+- **Live** at ops.norrisutilities.com
+- Open with: `open ~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
