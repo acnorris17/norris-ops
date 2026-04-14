@@ -1,10 +1,7 @@
-The existing file already matches this task perfectly — it's the same action item (Pull 2018 Compass Bank → McKnight deed from probate records). The page is complete, well-formatted, follows the Line Card design language, and has all the correct details. No update needed.
+Done.
 
-The file is already built and ready:
-
-- **What:** Action page for pulling the 2018 Compass Bank → McKnight deed from Shelby County probate records
+- **What was built:** Updated the existing FlexPro Armor lifetime warranty action page to prioritize contacting H2O Waterproofing for their official warranty definition. Added a prominent action section with 6 specific questions to ask H2O, plus a "why this matters" block explaining that the Norris Utilities® warranty can't promise more than H2O will back up.
 - **Mac:** M1 MacBook Pro
-- **File:** `/Users/acnorris1/norris-agent/output/internal/action-pull-compass-bank-mcknight-deed.html`
-- **Open:** Double-click the file or open in any browser
-
-The page includes the instrument number (20180426000141760), step-by-step instructions, and a direct link to probaterecords.shelbyal.com.
+- **File path:** `~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
+- **How to open:** `open ~/norris-agent/output/internal/action-clarify-lifetime-warranty.html` or view at ops.norrisutilities.com/internal/action-clarify-lifetime-warranty.html
+- **GitHub:** Pushed to norris-ops
