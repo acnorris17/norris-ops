@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Draft — Brianna Caldwell Decline — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+    :root {
+      --nu-blue: #0000FF;
+      --nu-cyan: #06D0FF;
+      --nu-navy: #000033;
+      --nu-white: #FFFFFF;
+      --nu-light-gray: #F5F5F7;
+      --nu-medium-gray: #E8E8EC;
+      --nu-dark-text: #1A1A2E;
+      --nu-body-text: #333333;
+      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      color: var(--nu-body-text);
+      background: var(--nu-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nu-header {
+      position: relative;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .nu-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    .nu-header::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    }
+    .nu-logo-text {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: var(--nu-white);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nu-logo-subtitle {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-white);
+      letter-spacing: 0.8em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nu-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+
+    .nu-chevron {
+      position: relative;
+      height: 50px;
+      margin-top: -50px;
+      z-index: 10;
+    }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
+
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .email-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .email-meta {
+      background: var(--nu-light-gray);
+      border-left: 4px solid var(--nu-blue);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      border-radius: 0 8px 8px 0;
+    }
+    .email-meta-row {
+      display: flex;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+    .email-meta-row:last-child { margin-bottom: 0; }
+    .email-meta-label {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      min-width: 80px;
+    }
+    .email-meta-value {
+      color: var(--nu-body-text);
+    }
+
+    .email-status {
+      display: inline-block;
+      background: #FFF3CD;
+      color: #856404;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 24px;
+    }
+
+    .email-context {
+      background: #F0F4FF;
+      border: 1px solid #D0DAFF;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .email-context h3 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .email-context p {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .email-body {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 36px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .email-body p {
+      text-indent: 2em;
+      margin-bottom: 1.2em;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--nu-body-text);
+    }
+    .email-body p:first-of-type {
+      text-indent: 0;
+    }
+    .email-greeting {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 1.2em;
+      color: var(--nu-dark-text);
+    }
+    .email-closing {
+      text-indent: 0 !important;
+      margin-bottom: 0.3em !important;
+    }
+    .email-signature {
+      text-indent: 2em !important;
+      margin-bottom: 0.2em !important;
+      font-weight: 700;
+      color: var(--nu-dark-text);
+    }
+    .email-sig-block {
+      text-indent: 2em !important;
+      margin-bottom: 0.1em !important;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .copy-btn {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 12px 28px;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 24px;
+    }
+    .copy-btn:hover {
+      background: #0000CC;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,255,0.3);
+    }
+    .copy-btn.copied {
+      background: #28a745;
+    }
+
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      margin-bottom: 12px;
+    }
+    .nu-footer-contact {
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .email-container { padding: 40px 20px; }
+      .email-body { padding: 24px 20px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .copy-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nu-header">
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+  </header>
+
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <main class="nu-content-area">
+    <div class="email-container">
+
+      <span class="email-status">DRAFT — PENDING REVIEW</span>
+
+      <div class="email-meta">
+        <div class="email-meta-row">
+          <span class="email-meta-label">To:</span>
+          <span class="email-meta-value">brianna_caldwell@socialnetworksacademy.com</span>
+        </div>
+        <div class="email-meta-row">
+          <span class="email-meta-label">Subject:</span>
+          <span class="email-meta-value">Re: Aaron - hi</span>
+        </div>
+        <div class="email-meta-row">
+          <span class="email-meta-label">Thread:</span>
+          <span class="email-meta-value">Follow-up #2 from Brianna Caldwell, Lend Nest Group — unsolicited working capital pitch</span>
+        </div>
+        <div class="email-meta-row">
+          <span class="email-meta-label">Date:</span>
+          <span class="email-meta-value">April 14, 2026</span>
+        </div>
+      </div>
+
+      <div class="email-context">
+        <h3>Context</h3>
+        <p>Brianna Caldwell (Business Support Manager, Lend Nest Group) sent two unsolicited emails pitching working capital financing — up to $4.5M, no credit check, no P&amp;Ls. Second email references a 561-score company they helped. This is a cold outreach, not an existing business relationship. Recommended action: polite decline, request removal from list.</p>
+      </div>
+
+      <div class="email-body" id="emailBody">
+        <p class="email-greeting">Brianna —</p>
+
+        <p>I appreciate you reaching out, but we are not in the market for outside capital at this time.</p>
+
+        <p>Please remove me from your mailing list.</p>
+
+        <p class="email-closing">Sincerely,</p>
+        <p class="email-signature">Aaron C. Norris</p>
+        <p class="email-sig-block">Founder &amp; CEO</p>
+        <p class="email-sig-block">Norris Utilities, LLC</p>
+        <p class="email-sig-block">Cell: 205-500-1343</p>
+        <p class="email-sig-block">acnorris@norrisutilities.com</p>
+      </div>
+
+      <button class="copy-btn" onclick="copyEmail()">Copy Email Text</button>
+
+    </div>
+  </main>
+
+  <footer class="nu-footer">
+    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-contact">
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+  </footer>
+
+  <script>
+    function copyEmail() {
+      const lines = [
+        "Brianna —",
+        "",
+        "   I appreciate you reaching out, but we are not in the market for outside capital at this time.",
+        "",
+        "   Please remove me from your mailing list.",
+        "",
+        "Sincerely,",
+        "   Aaron C. Norris",
+        "   Founder & CEO",
+        "   Norris Utilities, LLC",
+        "   Cell: 205-500-1343",
+        "   acnorris@norrisutilities.com"
+      ];
+      navigator.clipboard.writeText(lines.join("\n")).then(function() {
+        var btn = document.querySelector('.copy-btn');
+        btn.textContent = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(function() {
+          btn.textContent = "Copy Email Text";
+          btn.classList.remove("copied");
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
