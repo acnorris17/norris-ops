@@ -1,6 +1,7 @@
-The existing file `action-clarify-lifetime-warranty.html` already covers this exact topic thoroughly — H2O Waterproofing lifetime warranty definition for the 4505 Buttewoods closing. It includes all the key questions to ask, warranty definition types, documentation checklist, and next steps. Per the dedup rule, no new file needed.
+File was already synced — working tree is clean, nothing new to push.
 
-The file is already built and complete at:
+**Done.** The action page for the H2O Waterproofing lifetime warranty definition already exists and is complete:
+
+- **What:** Action page with call script, 6 key questions to ask H2O, three possible "lifetime" definitions, documentation checklist, and post-call next steps
 - **File:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- **Content:** H2O Waterproofing lifetime warranty definition action page with 6 questions to ask, 3 possible warranty definitions, documentation checklist, and post-call action steps
-- **Status:** Already exists, no update needed — covers the same reMarkable action item
+- **Status:** Already live at norris-ops, no changes needed — the existing page fully covers this action item.
