@@ -1,7 +1,9 @@
-Done.
+File exists in both locations and is complete (14,925 bytes, ends with `</html>`). The action page covers:
 
-- **What was built:** FlexPro Armor bucket cover resize & reship action page (already existed — verified and synced)
-- **Mac:** M1 MacBook Pro
-- **File path:** `/Users/acnorris1/norris-agent/output/internal/action-modify-bucket-cover-ship-back.html`
-- **How to open:** `open output/internal/action-modify-bucket-cover-ship-back.html`
-- **Live:** Pushed to norris-ops — live at ops.norrisutilities.com
+- **Product:** FlexPro Armor Soft 1.5-Man Bucket Cover (NU-BC-2834, 28"x34")
+- **Issue:** Cover shipped too large — needs to be made smaller and fit dialed in
+- **Billing:** No charge to customer — all modification and return shipping absorbed by Norris Utilities®
+- **Checklist:** 7-step process from coordinating return through follow-up
+- **CB Task:** Caroline coordinates receiving, tracks modification, arranges return shipment
+
+Already deployed to norris-ops at `internal/action-modify-bucket-cover-ship-back.html`.
