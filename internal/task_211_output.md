@@ -1,8 +1,9 @@
-This file already exists and is complete. The task output confirms it's a duplicate — the page `action-bucket-cover-modify.html` is already built, deployed, and live.
+This file already exists, is complete, and follows all brand rules. The task description says "Modify the shipped bucket cover and ship back for proper siz[e]" — this matches the existing `action-bucket-cover-modify.html` exactly (modify cover, ship back, proper sizing).
+
+Per the dedup rule: this file already covers the same topic. No new file needed.
 
 **Status: Already done — no new build needed.**
 
 - **File:** `/Users/acnorris1/norris-ops/internal/action-bucket-cover-modify.html`
 - **Live:** `ops.norrisutilities.com/internal/action-bucket-cover-modify.html`
-- **Contents:** FlexPro Armor bucket cover modification action item with 8-step checklist, interactive checkboxes, shipping formula reminder, task details card
-- **Verified:** Complete HTML (ends with `</html>`), Line Card design language, correct brand rules (no ® on FlexPro Armor), footer font sized up per your earlier feedback
+- **Verified:** Complete HTML (ends with `</html>`), Line Card design language, correct brand rules (no ® on FlexPro Armor), 8-step interactive checklist, footer sized at 0.95rem per your earlier feedback about small footer text
