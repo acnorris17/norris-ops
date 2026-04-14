@@ -2015,7 +2015,14 @@
       "source": "agent_runner_v4.py",
       "message": "\u2705 BUILD \u2014 <b>Task 204 complete</b>\n\ud83d\udccb [REMARKABLE_ACTION] reMarkable action item: Call H2O Waterproofing before closing to get written con\n\ud83d\udccd /Users/acnorris1/norris-agent/output/internal/task_204_output.md\n\ud83d\udc46 Open in browser: file:///Users/acnorris1/norris-agent/output/internal/task_204_output.md",
       "telegram_sent": true
+    },
+    {
+      "timestamp": "2026-04-13T19:24:41.395258",
+      "category": "ORDER",
+      "source": "order_monitor.py",
+      "message": "<b>STALE ORDER ALERT -- 6 order(s) waiting 3+ days</b>\n  Wayne Abadie -- 7d -- PO: W6237\n  Coy Crosby -- 7d -- PO: 42350802\n  Wayne Abadie -- 7d -- PO: \n  acnorris@norrisutilities.com -- 6d -- PO: \n  Jamie Eden -- 6d -- PO: \n  Richard Thornhill -- 5d -- PO: ",
+      "telegram_sent": true
     }
   ],
-  "last_updated": "2026-04-13T19:02:03.897467"
+  "last_updated": "2026-04-13T19:24:41.395279"
 }
