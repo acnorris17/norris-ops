@@ -1,10 +1,10 @@
-No changes to the file in norris-ops (already up to date there). 
+The existing file `action-clarify-lifetime-warranty.html` already covers this exact topic comprehensively — H2O Waterproofing lifetime warranty definition with all the right questions, definitions, and checklists. The page is complete, well-built, and follows the design system. No update needed.
 
-Here's the report:
+This is a duplicate task from the reMarkable. The action item page already exists and is live.
 
-- **What was built:** H2O Waterproofing Lifetime Warranty Definition action page (already existed — dedup rule applied, no duplicate created)
-- **Mac:** M1 MacBook Pro
-- **File path:** `~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- **How to open:** `open ~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
+**Status:** Already built and deployed.
+- **File:** `/Users/acnorris1/norris-ops/internal/action-clarify-lifetime-warranty.html`
+- **Live at:** ops.norrisutilities.com/internal/action-clarify-lifetime-warranty.html
+- **Contents:** H2O Waterproofing contact info, 6 questions to ask, 3 warranty type definitions, documentation checklist, and follow-up steps — all specific to 4505 Buttewoods closing
 
-The page includes: priority banner, H2O contact info with phone number, 6 specific questions to ask, 3-column grid explaining different "lifetime" definitions, documentation checklist, and post-call next steps.
+No changes made — the existing page already has everything this action item needs.
