@@ -1,9 +1,8 @@
-This task is already done — no new build needed.
+Both files exist and are complete (end with `</html>`).
 
-**Status: Already complete.**
+**Status: Already complete — no new build needed.**
 
-- **Existing files:**
-  - `/Users/acnorris1/norris-ops/internal/action-bucket-cover-modify.html` (491 lines)
-  - `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (412 lines)
-- Both are complete HTML (end with `</html>`), follow Line Card design language, and have correct brand rules (no ® on FlexPro Armor).
-- Per the dedup rule: these files already cover this exact topic. Creating another would be redundant.
+- `/Users/acnorris1/norris-ops/internal/action-bucket-cover-modify.html` (491 lines)
+- `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (412 lines)
+
+Per the dedup rule, creating another file for the same topic would be redundant. Both files are valid, complete HTML following the Line Card design language.
