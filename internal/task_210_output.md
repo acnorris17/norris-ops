@@ -1,1 +1,1 @@
-✅ Duplicate detected and skipped. The H2O Waterproofing warranty action item page already exists at `~/norris-ops/internal/action-clarify-lifetime-warranty.html` (575 lines, deployed). No new build needed.
+Already done — the H2O Waterproofing lifetime warranty action item page exists at `~/norris-ops/internal/action-clarify-lifetime-warranty.html` (575 lines, ends with `</html>`, deployed). No new build needed.
