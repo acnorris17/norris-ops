@@ -1,9 +1,8 @@
-This file already exists and is complete. It's a well-built action item page for the bucket cover resize/reship task, already deployed to both locations and pushed to GitHub.
+This task is already done. The HTML file exists at both locations, is properly built with the full design system, and is already deployed to GitHub.
 
-Per the dedup rule, no new file needed — the existing `action-modify-bucket-cover-ship-back.html` covers this exact topic.
+Per the dedup rule, no new file is needed — `action-modify-bucket-cover-ship-back.html` already covers this exact topic.
 
-**Status:** Already done.
-- ✅ Action item page for FlexPro Armor 1.5-Man bucket cover resize & reship
+- ✅ Action item page for FlexPro Armor bucket cover modify & reship — already built and live
 - 💻 M1 MacBook Pro
 - 📍 `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
-- 👆 Open at `ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html`
+- 👆 `ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html`
