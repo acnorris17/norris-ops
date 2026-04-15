@@ -1,6 +1,7 @@
-The file already exists and is complete — `action-clarify-lifetime-warranty.html` covers this exact H2O Waterproofing lifetime warranty action item with all 6 questions, the 3 warranty definitions, documentation checklist, and post-call next steps. Dedup rule applied — no new file needed.
+File already exists and is complete — 576 lines, ends with `</html>`, follows the Line Card design language, and is already live in norris-ops.
 
-**Existing file:**
-- ✅ H2O Waterproofing lifetime warranty call script
+**Dedup rule applied — no new file needed.**
+
+- ✅ H2O Waterproofing lifetime warranty call script (6 questions, 3 warranty definitions, documentation checklist, post-call next steps)
 - 📍 `~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- Already live in norris-ops
+- Already deployed to `~/norris-ops/internal/action-clarify-lifetime-warranty.html`
