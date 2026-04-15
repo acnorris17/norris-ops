@@ -1,7 +1,7 @@
-This task is already done. The HTML file exists at both locations:
+This task is already done. The file exists in both locations:
 
-- **norris-agent:** `/Users/acnorris1/norris-agent/output/internal/action-modify-bucket-cover-ship-back.html` (14KB, built Apr 14)
-- **norris-ops:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (pushed Apr 14)
+- **norris-agent:** `/Users/acnorris1/norris-agent/output/internal/action-modify-bucket-cover-ship-back.html` (14KB)
+- **norris-ops:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (15KB, pushed Apr 14)
 
 Per the dedup rule, no new file needed — the existing file covers this exact action item (FlexPro Armor bucket cover modify & reship).
 
