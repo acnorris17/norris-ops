@@ -1,7 +1,7 @@
-This file already exists and covers this exact action item — "Get H2O Waterproofing Lifetime Warranty Definition." The previous task output correctly identified this.
+Existing file already covers this exact action item — `action-clarify-lifetime-warranty.html` has the full H2O Waterproofing lifetime warranty definition task with all the questions, definitions, checklist, and next steps.
 
-**Status: Already complete — no new build needed.**
+**No new file created** per the dedup rule. The existing page at:
 
-- **File:** `/Users/acnorris1/norris-ops/internal/Action - Get H2O Waterproofing Warranty Document.html`
-- Already deployed to ops.norrisutilities.com
-- Per the dedup rule, no duplicate file created
+- **File:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
+- **Content:** H2O Waterproofing warranty definition action item — call script, 6 key questions, 3 possible warranty definitions, documentation checklist, and post-call steps
+- **Status:** Complete and ready to use
