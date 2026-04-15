@@ -1,10 +1,8 @@
-This file already exists and is complete — 413 lines, fully built with the Line Card design language, all brand rules applied, and proper content from the reMarkable action item. Per the dedup rule, no new file needed.
+This task is already complete. The file was built on April 14 and is live.
 
-**Already done:**
 - **File:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
-- **Live at:** ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html
-- 14.9 KB, built April 14, follows all brand rules
-- Covers the SOFT 1.5-Man Bucket Cover resize & reship action item with task details, process checklist, and internal notes
-- Footer text set to 1.05rem per Aaron's feedback about text being too small
+- **Live:** ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html
+- 14.9 KB, Line Card design, all brand rules applied, footer text sized up per your feedback
+- Covers the SOFT 1.5-Man Bucket Cover resize & reship action item
 
-No changes needed — this task is complete.
+No new file needed — dedup rule matched the existing build.
