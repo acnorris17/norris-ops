@@ -1,6 +1,6 @@
 {
-  "compiled_at": "2026-04-15T03:10:49.888693",
-  "count": 231,
+  "compiled_at": "2026-04-15T11:11:21.230634",
+  "count": 236,
   "items": [
     {
       "notebook": "To Do List 4-22-24",
@@ -816,6 +816,20 @@
     },
     {
       "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List",
+      "text": "Catch up on MK Emails including intro to Mel via email, checking if can pay her cash (not 1099), and YouTube Channel and Highway Video",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "MK Emails (catch up) - Intro to Mel via email - Can I pay her cash (not 1099)? - YouTube Channel and Highway Video",
+      "scanned_at": "2026-04-15T16:10:56.357220+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
       "page": 2,
       "customer": "Business Development & Operations",
       "text": "Follow up with Service Electric",
@@ -1230,6 +1244,20 @@
       "deadline": null,
       "raw": "Terex Bucket Cover follow-up- Brand Template (Beau)",
       "scanned_at": "2026-04-14T20:16:14.919647+00:00",
+      "category": "CUSTOMER",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 2,
+      "customer": "General Business Tasks",
+      "text": "Follow up with Spencer regarding Tradeshows & ICUE",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Spencer: Tradeshows & ICUE",
+      "scanned_at": "2026-04-15T16:11:21.107704+00:00",
       "category": "CUSTOMER",
       "assigned_to": "aaron",
       "completed": false
@@ -2621,20 +2649,6 @@
       "completed": false
     },
     {
-      "notebook": "To Do List 4-22-24",
-      "page": 2,
-      "customer": "Business Development & Operations",
-      "text": "Get bucket cover pricing out to Jason Adamski, Florence Utilities, B&B, Chain, MDR, ABM",
-      "priority": "medium",
-      "has_deadline": false,
-      "deadline": null,
-      "raw": "Get Bucket Cover Pricing Out: Jason Adamski, Florence Utilities, B&B, Chain, MDR, ABM",
-      "scanned_at": "2026-04-14T20:09:56.826321+00:00",
-      "category": "FINANCIAL",
-      "assigned_to": "aaron",
-      "completed": false
-    },
-    {
       "notebook": "Bucket Cover Notes 8-12-25",
       "page": 3,
       "customer": "SOFT 1.5-Man Bucket Cover Project",
@@ -2734,6 +2748,20 @@
     },
     {
       "notebook": "To Do List 4-22-24",
+      "page": 2,
+      "customer": "General Business Tasks",
+      "text": "Get Bucket Cover pricing out to Jason Adamski, Florence Utilities, B&B, Chain, MDR, ABM",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Get Bucket Cover Pricing Out: Jason Adamski, Florence Utilities, B&B, Chain, MDR, ABM",
+      "scanned_at": "2026-04-15T16:11:21.107704+00:00",
+      "category": "FINANCIAL",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
       "page": 1,
       "customer": "Tide Pride Account Management",
       "text": "Follow up with Stone & Son for bucket cover and get reel trailer with power pack quote",
@@ -2798,6 +2826,48 @@
       "deadline": null,
       "raw": "MDR (notes from meeting on 11/29/23): CZ equivalent pole trailer Lite Dirt Tarp",
       "scanned_at": "2026-04-10T20:11:27.503347+00:00",
+      "category": "CUSTOMER",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List",
+      "text": "Follow up Stone & Son for Bucket Cover and get Reel Trailer w/ Power Pack quote",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Stone & Son - Bucket Cover Follow-up - Reel Trailer w/ Power Pack, quote",
+      "scanned_at": "2026-04-15T16:10:56.357220+00:00",
+      "category": "CUSTOMER",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List",
+      "text": "Follow up Vulcan Reel Trailer",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Vulcan - Reel Trailer",
+      "scanned_at": "2026-04-15T16:10:56.357220+00:00",
+      "category": "CUSTOMER",
+      "assigned_to": "aaron",
+      "completed": false
+    },
+    {
+      "notebook": "To Do List 4-22-24",
+      "page": 1,
+      "customer": "To Do List",
+      "text": "Follow up Reel Cover with H&D email Scott and email Logan at Condux Tesmec",
+      "priority": "low",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Reel Cover Follow-up: H&D email (Scott) - Condux Tesmec - email Logan",
+      "scanned_at": "2026-04-15T16:10:56.357220+00:00",
       "category": "CUSTOMER",
       "assigned_to": "aaron",
       "completed": false
