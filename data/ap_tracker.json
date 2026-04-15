@@ -83,8 +83,20 @@
       "from": "LS Admin <lsadmin@bcsk12.org>",
       "status": "open",
       "added": "2026-04-06T15:08:38.286475"
+    },
+    {
+      "email_id": "19d86f48078aed45",
+      "vendor": "Metro Marketing / MK Smith",
+      "invoice_number": "",
+      "amount": 0.0,
+      "due_date": "2026-05-13",
+      "email_date": "2026-04-13 08:10",
+      "subject": "Receipt for your payment to Metro Marketing",
+      "from": "Metro Marketing Agency <office@metromarketingagency.com>",
+      "status": "open",
+      "added": "2026-04-15T07:00:04.234656"
     }
   ],
-  "last_scan": "2026-04-11T07:00:01.725102",
-  "scan_count": 6
+  "last_scan": "2026-04-15T07:00:04.357874",
+  "scan_count": 7
 }
