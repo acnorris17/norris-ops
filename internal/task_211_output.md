@@ -1,6 +1,6 @@
-This task is already done. The HTML file exists at both locations, is properly built with the full design system, and is already deployed to GitHub.
+This file already exists and is fully built with the complete design system. Per the dedup rule, no new file is needed.
 
-Per the dedup rule, no new file is needed — `action-modify-bucket-cover-ship-back.html` already covers this exact topic.
+This task is already done. The HTML file `action-modify-bucket-cover-ship-back.html` already exists at both locations and covers this exact action item — FlexPro Armor bucket cover resize & reship.
 
 - ✅ Action item page for FlexPro Armor bucket cover modify & reship — already built and live
 - 💻 M1 MacBook Pro
