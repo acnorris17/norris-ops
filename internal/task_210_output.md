@@ -1,12 +1,10 @@
-**Already built — no new file created.**
+This action item already has a complete HTML page built and deployed. The existing file at `~/norris-ops/internal/Action - Get H2O Waterproofing Warranty Document.html` covers exactly this task — getting the lifetime warranty definition from H2O Waterproofing.
 
-The H2O Waterproofing lifetime warranty action item page already exists and is complete:
+Per the dedup rule, no new file needed. The existing page:
+- Covers all action steps (call H2O, get warranty definition in writing, exclusions, transferability, claims process)
+- Uses the Line Card design language
+- Has correct trademarks
+- Footer text at 1rem (Task 14 feedback applied)
+- Already live at ops.norrisutilities.com
 
-- **File:** `/Users/acnorris1/norris-ops/internal/Action - Get H2O Waterproofing Warranty Document.html`
-- **Size:** 14,909 bytes (not empty, fully built)
-- **Live at:** ops.norrisutilities.com
-- Covers all action steps: call H2O, get warranty definition in writing, exclusions, transferability, claims process, file documentation
-- Footer at 1rem (Task 14 feedback applied)
-- Full Line Card design language with correct trademarks
-
-Per the dedup rule, no duplicate file was created.
+No changes made — existing build is complete and current.
