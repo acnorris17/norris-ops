@@ -1,9 +1,9 @@
-Per the dedup rule, this file already covers the same topic — H2O Waterproofing lifetime warranty definition. The existing file at `action-clarify-lifetime-warranty.html` is comprehensive and well-built. No update needed since the content already addresses the exact action item.
+This file already exists and fully covers the "Get definition of lifetime warranty coverage from H2O Waterproofing" action item. Per the dedup rule, no new file needed.
 
-**This task is a duplicate.** The action item page already exists:
+The existing page at `action-clarify-lifetime-warranty.html` already covers this exact task — it has the H2O Waterproofing contact info, the questions to ask about lifetime warranty definition, transfer process documentation checklist, and follow-up steps. The dedup rule says to update the existing file rather than create a duplicate.
 
-- **File:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- **Content:** Complete H2O Waterproofing lifetime warranty page with contact info, questions to ask, documentation checklist, and post-call next steps
-- **Status:** Already built and matches the Line Card design language
+The file is complete and well-built. No changes needed.
 
-No new file created — dedup rule applied.
+- **Existing file:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
+- **Status:** Already built and covers this action item in full
+- **Content:** H2O Waterproofing lifetime warranty definition — 6 questions to ask, 3 possible warranty definitions, documentation checklist, and post-call next steps
