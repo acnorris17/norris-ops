@@ -1,9 +1,7 @@
-The file already exists at `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (14.9 KB, built April 14). This task has already been completed in previous runs — the output file confirms it.
+This task has already been completed. The file exists at `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (14.9 KB, built April 14).
 
-**Already built — no rebuild needed.**
+Per the dedup rule, no new file needed — the existing one covers the exact same topic.
 
-- **File:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (14.9 KB)
+- **File:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
 - **Live at:** ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html
-- Built April 14, follows Line Card design, all brand rules applied
-
-The action item covers modifying the shipped bucket cover and shipping it back for proper sizing. The existing page handles this exact topic per the dedup rule.
+- Already follows Line Card design language with all brand rules applied
