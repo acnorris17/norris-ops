@@ -1774,5 +1774,23 @@
     "_captured_at": "2026-04-11T04:30:17.641304",
     "_source": "followup_drafter",
     "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "Issues with iship emails not being received",
+    "days_waiting": 8,
+    "status": "draft_ready",
+    "_captured_at": "2026-04-15T04:30:24.710582",
+    "_source": "followup_drafter",
+    "_category": "followup"
+  },
+  {
+    "customer": "Thayne Grove",
+    "subject": "Invoice 6651",
+    "days_waiting": 6,
+    "status": "draft_ready",
+    "_captured_at": "2026-04-15T04:30:32.266986",
+    "_source": "followup_drafter",
+    "_category": "followup"
   }
 ]
