@@ -1,7 +1,9 @@
-File already exists and is complete — 576 lines, ends with `</html>`, follows the Line Card design language, and is already live in norris-ops.
+The file already exists and is complete. This task was already built — the existing file `action-clarify-lifetime-warranty.html` is the H2O Waterproofing lifetime warranty definition page, fully built with the Line Card design language.
 
-**Dedup rule applied — no new file needed.**
+No new file needed — dedup rule applies. The existing page covers this exact topic:
 
-- ✅ H2O Waterproofing lifetime warranty call script (6 questions, 3 warranty definitions, documentation checklist, post-call next steps)
-- 📍 `~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- Already deployed to `~/norris-ops/internal/action-clarify-lifetime-warranty.html`
+- **What was built:** H2O Waterproofing lifetime warranty call script with 6 questions, 3 warranty definitions, documentation checklist, and post-call next steps
+- **File:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
+- **Deployed:** `~/norris-ops/internal/action-clarify-lifetime-warranty.html`
+
+The page is already live and complete (ends with `</html>`). Task 210 is already done.
