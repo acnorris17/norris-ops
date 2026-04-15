@@ -1,7 +1,9 @@
-This task is already done. The file exists, starts with `<!DOCTYPE html>`, ends with `</html>`, and is 14.9KB — already live at ops.norrisutilities.com.
+This task is already done and verified:
 
-- **Status:** Already complete
+- **Status:** Complete
 - **File:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
-- Verified: valid HTML, non-empty, pushed to GitHub
+- **Size:** 14.9 KB
+- Starts with `<!DOCTYPE html>`, ends with `</html>`
+- Already pushed to GitHub / live at ops.norrisutilities.com
 
 No duplicate work needed.
