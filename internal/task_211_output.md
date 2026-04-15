@@ -1,11 +1,7 @@
-This task is already done. The file exists in both locations:
+This task is already done. The file `action-modify-bucket-cover-ship-back.html` already exists in both locations and was pushed to norris-ops on Apr 14.
 
-- **norris-agent:** `/Users/acnorris1/norris-agent/output/internal/action-modify-bucket-cover-ship-back.html` (14KB)
-- **norris-ops:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (15KB, pushed Apr 14)
+- **Status:** Already built and live
+- **File:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
+- **URL:** `ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html`
 
-Per the dedup rule, no new file needed — the existing file covers this exact action item (FlexPro Armor bucket cover modify & reship).
-
-- ✅ Already built and live
-- 💻 M1 MacBook Pro
-- 📍 `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
-- 👆 `ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html`
+No new file needed per the dedup rule.
