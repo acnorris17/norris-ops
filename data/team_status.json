@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-15T03:46:35",
-  "active_count": 3,
+  "last_updated": "2026-04-15T04:01:35",
+  "active_count": 4,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -15,7 +15,7 @@
       "role": "The Builder",
       "status": "idle",
       "last_run": "2026-04-15 03:41",
-      "message": "Queue: 10823 pending tasks"
+      "message": "Queue: 10827 pending tasks"
     },
     "email_scout": {
       "name": "Email Scout",
@@ -47,8 +47,8 @@
     "morning_herald": {
       "name": "Morning Herald",
       "role": "Morning Briefing",
-      "status": "idle",
-      "last_run": "2026-04-11 03:55",
+      "status": "active",
+      "last_run": "2026-04-15 03:55",
       "message": "Brief delivered!",
       "next_run": "Daily 4:45 AM"
     },
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-15 03:42",
+      "last_run": "2026-04-15 03:57",
       "message": "All systems UP"
     },
     "backup": {
