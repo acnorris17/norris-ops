@@ -1,10 +1,10 @@
-**Dedup rule applied** — this action item is already fully covered by the existing file `output/internal/action-clarify-lifetime-warranty.html`.
+This action item is already fully covered by the existing file. No new build needed.
 
-That page already has everything you need:
-- H2O Waterproofing contact: **(205) 956-2426**
-- 6 specific questions to ask (warranty definition, transferability, maintenance requirements, covered items)
+**Dedup rule applied** — `output/internal/action-clarify-lifetime-warranty.html` already contains:
+- H2O Waterproofing contact info: (205) 956-2426
+- 6 specific questions to ask about warranty definition, transferability, maintenance requirements, and covered items
 - 3 possible "lifetime" definitions to watch for
-- Documentation checklist for closing on 4505 Buttewoods
+- Documentation checklist for 4505 Buttewoods
 - Post-call next steps
 
-No new file created — existing page is complete and ready to use.
+The file is complete (ends with `</html>`) and follows the Line Card design language. No duplicate file created.
