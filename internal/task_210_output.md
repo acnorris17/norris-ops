@@ -1,9 +1,6 @@
-File exists, 575 lines, ends with `</html>`. Already built and complete.
+This action item already has a complete, existing page at `action-clarify-lifetime-warranty.html` (575 lines, fully built). Per the dedup rule, no new file is needed — the existing page covers everything: H2O Waterproofing contact info, the 6 questions to ask, warranty definition types, documentation checklist, and follow-up steps.
 
-This action item is already covered by the existing file:
-
-- **File:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- **Status:** Already built — 575 lines, complete HTML ending with `</html>`
-- **Content:** H2O Waterproofing lifetime warranty definition tracker with questions to ask, possible warranty definitions, documentation checklist, and follow-up steps
-
-Per the dedup rule, no new file needed. The existing page fully covers this task.
+**Status: Already built.**
+- File: `output/internal/action-clarify-lifetime-warranty.html`
+- 575 lines, complete, ends with `</html>`
+- Covers the H2O Waterproofing lifetime warranty definition task in full
