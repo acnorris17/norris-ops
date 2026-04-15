@@ -1,7 +1,9 @@
-This file is already complete and covers this exact action item — H2O Waterproofing lifetime warranty definition. It follows the Line Card design language, uses brand colors, and ends with `</html>`.
+The existing file already covers this exact topic thoroughly — H2O Waterproofing lifetime warranty definition for 4505 Buttewoods. The page is complete, well-structured, and follows the Line Card design language. The footer text is already sized at `1.05rem` (addressing Aaron's prior feedback about footer text being too small).
 
-**Dedup rule applied:** Existing file `action-clarify-lifetime-warranty.html` already covers this topic. No new file created.
+This is a duplicate task — the page already exists and is comprehensive. No update needed.
 
-- **Existing file:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- Covers H2O Waterproofing warranty questions, contact info, documentation checklist
-- 20KB, complete HTML with Line Card design language
+**Result:**
+- The action item page for "Get definition of lifetime warranty coverage from H2O Waterproofing" already exists
+- File: `~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
+- It covers all the key points: calling H2O, getting the warranty definition in writing, transfer process, documentation checklist, and negotiation leverage
+- Per the dedup rule, no new file created — existing file is already complete and current
