@@ -1,6 +1,8 @@
-Done. The action item page for getting H2O Waterproofing's lifetime warranty definition already exists at `action-clarify-lifetime-warranty.html`. It's comprehensive — covers the call script, all 6 questions to ask, the three possible definitions of "lifetime," documentation checklist, and next steps. No duplicate file created per the dedup rule.
+This file already exists and is complete — full HTML with the Line Card design language, all 6 questions to ask H2O Waterproofing, three possible "lifetime" definitions, documentation checklist, and next steps. No duplicate needed per the dedup rule.
 
-- **What was built:** Task output logged; existing page verified as complete
+The file is already deployed to norris-ops as well.
+
+- **What was built:** Action item page for H2O Waterproofing lifetime warranty definition (already exists)
 - **Mac:** M1 MacBook Pro
-- **File:** `~/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- **How to open:** Double-click to open in browser, or find it on ops.norrisutilities.com/internal/
+- **File:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
+- **How to open:** Double-click to open in browser, or visit ops.norrisutilities.com/internal/action-clarify-lifetime-warranty.html
