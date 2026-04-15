@@ -1,9 +1,7 @@
-The existing file already covers this exact action item — "Get Lifetime Warranty Coverage Definition from H2O Waterproofing." It's well-built, follows the design system, and has all the right steps. This is a duplicate task from the reMarkable queue.
+This action item already has a complete, polished page in norris-ops. The existing file covers everything: the H2O Waterproofing lifetime warranty definition request, all the questions to ask (coverage scope, exclusions, transferability, claims process), and the instruction to get it all in writing before closing.
 
-No changes needed — the file is already complete and live.
+- **Status:** Already built and live
+- **File:** `norris-ops/internal/Action - Get H2O Waterproofing Warranty Document.html`
+- **Content:** 6-step action checklist — call H2O, get warranty definition in writing, ask about exclusions/transferability/claims, file the document
 
-- **Existing file:** `/Users/acnorris1/norris-ops/internal/Action - Get H2O Waterproofing Warranty Document.html`
-- **Content:** Full action item with 6 steps — call H2O, get definition in writing, ask about exclusions, transferability, claims process, and file it
-- **Status:** Already deployed to ops.norrisutilities.com
-
-This task is a repeat of one already built. The existing page covers "Get definition of lifetime warranty coverage from H2O Waterproofing" exactly.
+No new file needed — dedup rule caught the match.
