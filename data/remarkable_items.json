@@ -10174,7 +10174,194 @@
       "deadline": null,
       "raw": "CPA - capture ALL business expenses from 2021 and 2022 that were spent via \"personal funds\"",
       "scanned_at": "2026-04-14T20:16:14.919647+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 1,
+      "customer": "Boss Products",
+      "text": "Get new \"Large 1.5-man\" bucket cover with UCC, size 26.5\" x 52\"",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "New \"Large 1.5-man\" bucket cover with UCC",
+      "scanned_at": "2026-04-15T08:04:55.064265+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 1,
+      "customer": "Boss Products",
+      "text": "Get updates on bucket cover bags (1.5-man, 2-man, D-Shape)",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Bucket Cover Bags; 1.5-man, 2-man, D-Shape",
+      "scanned_at": "2026-04-15T08:04:55.064265+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 1,
+      "customer": "Boss Products",
+      "text": "Get exact size for Auger Cover for 18\" - 20\" Auger or talk to Troy",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Auger Cover for 18\" - 20\" Auger size (or whatever exact size I talk to Troy about when we last spoke)",
+      "scanned_at": "2026-04-15T08:04:55.064265+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 1,
+      "customer": "Boss Products",
+      "text": "Complete 1.5-Man Bucket Cover with Upper Control Cover for Altec AT40G - prototype V5 needs completion",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "1.5-Man Bucket Cover with Upper Control Cover for Altec AT40G. (We are on \"Prototype V5\" now and have been for nearly a year. We need to get this completed too.)",
+      "scanned_at": "2026-04-15T08:04:55.064265+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 2,
+      "customer": "Troy - Email Notes 8/13/24",
+      "text": "Modify original D-shape bucket cover according to MS Power's spec requirements and ship back",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Please modify this bucket cover, according to MS Power's spec requirements and ship it back to me",
+      "scanned_at": "2026-04-15T08:05:24.130261+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 2,
+      "customer": "Troy - Email Notes 8/13/24",
+      "text": "Modify 3 more D-Bucket covers within NU's inventory while first modification is being done",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Please modify 3 more of the D-Bucket covers within NU's inventory at your location, while this is being done",
+      "scanned_at": "2026-04-15T08:05:24.130261+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 3,
+      "customer": "SOFT 1.5-Man Bucket Cover",
+      "text": "Modify the shipped bucket cover to get proper fit and finish",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Please modify the one I shipped back to you so we can try and get this dialed in",
+      "scanned_at": "2026-04-15T08:05:51.900257+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 3,
+      "customer": "Cooperative Energy Small D-Shape Bucket Cover",
+      "text": "Create cover for D-Shape bucket that is 35 x 77 inches for old 2006 TM105",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "They have a D-Shape Bucket that is 35\" x 77\"... it's an OLD 2006 TM105. This won't be a normal item we need to have made. However, I need to have them covered",
+      "scanned_at": "2026-04-15T08:05:51.900257+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 3,
+      "customer": "Cooperative Energy Small D-Shape Bucket Cover",
+      "text": "Add upper control cover to the D-shape bucket cover",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "We will need to add upper control cover to it as well",
+      "scanned_at": "2026-04-15T08:05:51.900257+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Mississippi Power",
+      "text": "Finalize V5 as the final version to take to production",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "I really want V5 to be the \"finally version\" to take to production. (Fingers crossed.)",
+      "scanned_at": "2026-04-15T08:06:15.039164+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Dielectric Tank Cover Project",
+      "text": "Add tension strap hole at opposite end for future builds to prevent sagging",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "we need to also add a hole at the opposite end of where the \"tension strap hole\" is. This way you/we/the customer can slide PVC pipe/pole/etc through it to support the middle from sagging.",
+      "scanned_at": "2026-04-15T08:06:15.039164+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Dielectric Tank Cover Project",
+      "text": "Modify other covers MS Power purchased to include tension strap hole",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "when we go to modify the other ones MS Power purchased",
+      "scanned_at": "2026-04-15T08:06:15.039164+00:00"
+    },
+    {
+      "notebook": "Bucket Cover Notes 8-12-25",
+      "page": 4,
+      "customer": "Inventory and Orders",
+      "text": "Follow up on last PO order for inventory restocking",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "I'm looking forward to reaching in the inventory I order on the last PO! (I'm anxiously waiting on that order, as I'm out of many products that I hoped to \"never\" be out of... mainly the 28\" x 51\"!)",
+      "scanned_at": "2026-04-15T08:06:15.039164+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Real Estate Investment - Buttewoods Lane Property",
+      "text": "Negotiate purchase of 7,098 sq ft estate on 2.11 acres from Israeli investors",
+      "priority": "high",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Master Negotiation Dossier prepared for Aaron & Caroline Norris",
+      "scanned_at": "2026-04-15T08:07:04.118964+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Real Estate Investment - Buttewoods Lane Property",
+      "text": "Use leverage points in negotiation - property never sold above $425,000, county appraisal below asking price",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Your strongest leverage points",
+      "scanned_at": "2026-04-15T08:07:04.118964+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 1,
+      "customer": "Real Estate Investment - Buttewoods Lane Property",
+      "text": "Address water intrusion issue disclosure discrepancy between rental and sale listings",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "The water intrusion issue is disclosed in the rental listing but omitted from the for-sale listing",
+      "scanned_at": "2026-04-15T08:07:04.118964+00:00"
+    },
+    {
+      "notebook": "Buttewood Home",
+      "page": 9,
+      "customer": "Real Estate Research - Buttewood Property",
+      "text": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 20180426000141760) from probaterecords.shelbyai.com",
+      "priority": "medium",
+      "has_deadline": false,
+      "deadline": null,
+      "raw": "Pull the 2018 Compass Bank \u2192 McKnight deed (Instrument 20180426000141760) from probaterecords.shelbyai.com",
+      "scanned_at": "2026-04-15T08:09:20.944996+00:00"
     }
   ],
-  "last_updated": "2026-04-14T20:18:50.761957+00:00"
+  "last_updated": "2026-04-15T08:10:49.772221+00:00"
 }
