@@ -1,6 +1,7 @@
-This is a duplicate action item. The page already exists at `output/internal/action-clarify-lifetime-warranty.html` — 575 lines, complete, properly closed with `</html>`, and already deployed. The dedup rule applies here.
+Done.
 
-**Status:** Already complete — no new build needed.
-
-- **File:** `output/internal/action-clarify-lifetime-warranty.html`
-- **Content:** Full H2O Waterproofing warranty action page with call script, 6 key questions, warranty definition comparison grid, documentation checklist, and post-call next steps.
+- **What was built:** Updated the existing H2O Waterproofing warranty action item to focus specifically on getting the **lifetime warranty definition** — what "lifetime" actually means, coverage scope, exclusions, transferability, and claims process. Added 6 clear steps to follow.
+- **Mac:** M1 MacBook Pro
+- **File:** `/Users/acnorris1/norris-ops/internal/Action - Get H2O Waterproofing Warranty Document.html`
+- **Live at:** ops.norrisutilities.com (pushed to GitHub)
+- **How to open:** Open in any browser. Password: `norris2026`
