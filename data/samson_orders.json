@@ -1,5 +1,5 @@
 {
-  "last_scan": "2026-04-11 13:00 UTC",
+  "last_scan": "2026-04-15 13:00 UTC",
   "invoices": {
     "322183": {
       "invoice_number": "322183",
@@ -205,6 +205,11 @@
     },
     {
       "time": "2026-04-11 13:00 UTC",
+      "new_invoices": 0,
+      "uninvoiced_count": 8
+    },
+    {
+      "time": "2026-04-15 13:00 UTC",
       "new_invoices": 0,
       "uninvoiced_count": 8
     }
