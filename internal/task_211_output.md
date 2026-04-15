@@ -1,9 +1,3 @@
-This task is already done and verified:
+This task is already complete. The file `action-modify-bucket-cover-ship-back.html` already exists at `/Users/acnorris1/norris-ops/internal/` and was previously built, verified (14,491 bytes, proper HTML), and pushed to GitHub.
 
-- **Status:** Complete
-- **File:** `output/internal/action-modify-bucket-cover-ship-back.html`
-- **Size:** 14,491 bytes
-- Starts with `<!DOCTYPE html>`, ends with `</html>`
-- Already pushed to GitHub and live at ops.norrisutilities.com
-
-No duplicate work needed.
+No duplicate work needed — the action item page is already live at ops.norrisutilities.com.
