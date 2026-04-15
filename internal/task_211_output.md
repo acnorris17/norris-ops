@@ -1,8 +1,8 @@
-This file already exists, is complete, follows all brand rules, and is already live. The page covers the action item for modifying the shipped bucket cover and shipping it back for proper sizing.
+This task is already complete. The HTML file exists at `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (14.9 KB, last updated April 14) and is already live.
 
-There's also a duplicate at `action-bucket-cover-modify.html`. Per the dedup rule, the existing file is the canonical one.
+There's also a duplicate at `action-bucket-cover-modify.html` — per the dedup rule, the first file is canonical.
 
-**This task is already complete:**
+**Already done:**
 - **File:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
 - **Live at:** ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html
-- Follows Line Card design language, all brand rules, correct FlexPro Armor naming (no registered mark), footer text at 1.05rem (Aaron's feedback about small footer text applied). No changes needed.
+- Follows Line Card design, all brand rules applied, FlexPro Armor (no ®), footer text sized per Aaron's feedback. No rebuild needed.
