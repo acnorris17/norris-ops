@@ -1,3 +1,5 @@
-The file already exists and is live. Per the dedup rule, no new file needed.
+**Status: Already complete (dedup rule applied)**
 
-**Status:** Already complete. The action item page for H2O Waterproofing lifetime warranty coverage is live at `norris-ops/internal/Action - Get H2O Waterproofing Warranty Document.html` (14.9 KB, last updated today). This same action has been caught by the dedup rule across 10+ prior tasks — all pointing to the same deliverable.
+- Existing file: `norris-ops/internal/Action - Get H2O Waterproofing Warranty Document.html` (14.9 KB)
+- Live at ops.norrisutilities.com
+- No new file needed — same H2O Waterproofing warranty action item already tracked
