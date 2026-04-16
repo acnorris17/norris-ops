@@ -1,5 +1,8 @@
-This task is already done. The file exists at `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` — 14,925 bytes, complete (ends with `</html>`), built on April 14.
+This task is already done.
 
-Per the dedup rule, no new file is needed. The existing file covers this exact reMarkable action item (SOFT 1.5-Man Bucket Cover — modify for proper sizing and ship back).
+- ✅ **Already built:** Action item page for modifying the shipped bucket cover and shipping back for proper sizing
+- 💻 M1 MacBook Pro
+- 📍 `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` — 14,925 bytes, ends with `</html>`
+- 👆 Already live on ops.norrisutilities.com
 
-This task is already done. The file exists at `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` — 14,925 bytes, properly ends with `</html>`, built on April 14. Per the dedup rule, no new file is needed.
+Per the dedup rule, no new file needed — the existing file covers this exact reMarkable action item.
