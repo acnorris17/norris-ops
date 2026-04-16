@@ -1,10 +1,8 @@
-The deliverable for this task already exists. Per the persistent dedup rule, I'm not creating a duplicate.
+The deliverable already exists and the dedup rule applies — I won't create a duplicate.
 
-✅ **Already built** — `action-modify-bucket-cover-ship-back.html` (736 lines, full Line Card design with auth gate)
+✅ **Already built** — `action-modify-bucket-cover-ship-back.html` (26,360 bytes, complete Line Card design)
 💻 M1 MacBook Pro
 📍 `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
-👆 Opens at `ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html` (password: `norris2026`)
+👆 `ops.norrisutilities.com/internal/action-modify-bucket-cover-ship-back.html`
 
-Task 211 has passed 3× today already (per the build history shown). The dedup rule says: scan for ≥80% similar filename; if match exists, UPDATE not duplicate. The existing file is the intended deliverable — no rebuild needed.
-
-If you want me to **update** the existing file with new info (latest cover dimensions, ship date, vendor contact, etc.), tell me what to change and I'll edit in place.
+Task 211 has passed multiple times. Per the persistent dedup rule (scan for ≥80% filename match → update, don't duplicate), no rebuild is needed. If you want the existing file **updated** with new details (cover size correction, ship date, vendor), tell me what to change.
