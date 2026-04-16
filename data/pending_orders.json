@@ -134,7 +134,61 @@
       "source": "gmail_scan",
       "sd_filename": "SD-2026-DOMINION-4501057807-0413.html",
       "sd_url": "https://ops.norrisutilities.com/shipping-docs/SD-2026-DOMINION-4501057807-0413.html"
+    },
+    {
+      "id": "19d96fe9fa11d50b",
+      "customer": "edevans@eufmc.com",
+      "company": "",
+      "email": "edevans@eufmc.com",
+      "po_number": "",
+      "products": [
+        "(see email)"
+      ],
+      "ship_to": "",
+      "subject": "EUFMC 2026 Matches Fleet Registration Record",
+      "date_received": "2026-04-16 10:52",
+      "date_detected": "2026-04-16T18:21:53.403351+00:00",
+      "status": "SD CREATED",
+      "source": "gmail_scan",
+      "sd_filename": "SD-2026-EDEVANSEUFMCCOM-0416.html",
+      "sd_url": "https://ops.norrisutilities.com/shipping-docs/SD-2026-EDEVANSEUFMCCOM-0416.html"
+    },
+    {
+      "id": "19d9140c7edec30e",
+      "customer": "GHK Admin",
+      "company": "",
+      "email": "GHKadmin@avpc.org",
+      "po_number": "",
+      "products": [
+        "(see email)"
+      ],
+      "ship_to": "",
+      "subject": "Bake Sale and Pricing",
+      "date_received": "2026-04-15 08:07",
+      "date_detected": "2026-04-16T18:21:53.403510+00:00",
+      "status": "SD CREATED",
+      "source": "gmail_scan",
+      "sd_filename": "SD-2026-GHK-0416.html",
+      "sd_url": "https://ops.norrisutilities.com/shipping-docs/SD-2026-GHK-0416.html"
+    },
+    {
+      "id": "19d93557f3a27b4e",
+      "customer": "Carlos Zapata",
+      "company": "",
+      "email": "czapata@globaltec.cl",
+      "po_number": "",
+      "products": [
+        "(see email)"
+      ],
+      "ship_to": "",
+      "subject": "Bay Shore Systems: Quotation Request \u2013 DH60 Excavator L\u014dDril \u2013 LTx 2x500kV Tineo\u2013Ancud Project \u2013 GLOBALTEC",
+      "date_received": "2026-04-15 17:46",
+      "date_detected": "2026-04-16T18:21:54.297270+00:00",
+      "status": "SD CREATED",
+      "source": "gmail_scan",
+      "sd_filename": "SD-2026-CARLOS-0416.html",
+      "sd_url": "https://ops.norrisutilities.com/shipping-docs/SD-2026-CARLOS-0416.html"
     }
   ],
-  "last_updated": "2026-04-16T18:03:46.695199+00:00"
+  "last_updated": "2026-04-16T18:22:23.307487+00:00"
 }
