@@ -1,11 +1,9 @@
-Producing the complete HTML file for this action item. The task runner saves output to the task output file.
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item — H2O Waterproofing Lifetime Warranty Definition — Norris Utilities®</title>
+  <title>Action — H2O Waterproofing Lifetime Warranty Definition — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -17,7 +15,6 @@ Producing the complete HTML file for this action item. The task runner saves out
       --nu-medium-gray: #E8E8EC;
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
-      --nu-accent-gold: #C9A84C;
       --nu-amber: #F59E0B;
       --nu-red: #DC2626;
       --nu-green: #059669;
@@ -34,7 +31,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ══ HEADER ══ */
+    /* HEADER */
     .nu-header {
       position: relative;
       background: linear-gradient(135deg, #0a0e5c 0%, #0033CC 30%, #0066EE 60%, #00AAFF 85%, var(--nu-cyan) 100%);
@@ -70,7 +67,6 @@ Producing the complete HTML file for this action item. The task runner saves out
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
     .nu-logo-text {
-      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3rem;
       color: var(--nu-white);
@@ -80,7 +76,6 @@ Producing the complete HTML file for this action item. The task runner saves out
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
-      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 1.3rem;
       color: var(--nu-white);
@@ -98,7 +93,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       letter-spacing: 0.04em;
     }
 
-    /* ══ WHITE ASYMMETRIC CHEVRON ══ */
+    /* WHITE ASYMMETRIC CHEVRON */
     .nu-chevron {
       position: relative;
       height: 52px;
@@ -107,7 +102,7 @@ Producing the complete HTML file for this action item. The task runner saves out
     }
     .nu-chevron svg { width: 100%; height: 52px; display: block; }
 
-    /* ══ CONTENT AREA with ghost phoenix watermark ══ */
+    /* CONTENT */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
@@ -132,7 +127,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       padding: 50px 40px 80px;
     }
 
-    /* ══ ACTION BANNER ══ */
+    /* ACTION BANNER */
     .nu-action-banner {
       background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
       border-left: 6px solid var(--nu-amber);
@@ -143,10 +138,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       align-items: center;
       gap: 18px;
     }
-    .nu-action-banner-icon {
-      font-size: 2rem;
-      line-height: 1;
-    }
+    .nu-action-banner-icon { font-size: 2rem; line-height: 1; }
     .nu-action-banner-content h2 {
       font-weight: 900;
       color: #92400E;
@@ -158,26 +150,19 @@ Producing the complete HTML file for this action item. The task runner saves out
     .nu-action-banner-content p {
       color: #78350F;
       font-size: 0.95rem;
-      font-weight: 400;
     }
 
-    /* ══ SECTION TITLE ══ */
+    /* SECTION TITLE */
     .nu-section-title {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       margin-bottom: 18px;
       letter-spacing: -0.01em;
     }
-    .nu-section-title .lead {
-      color: #0033CC;
-    }
-    .nu-section-title .rest {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
+    .nu-section-title .lead { color: #0033CC; }
+    .nu-section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
 
-    /* ══ CARDS ══ */
+    /* CARDS */
     .nu-card {
       background: var(--nu-white);
       border-radius: 10px;
@@ -197,10 +182,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       font-size: 0.98rem;
       margin-bottom: 12px;
     }
-    .nu-card ul {
-      list-style: none;
-      padding: 0;
-    }
+    .nu-card ul { list-style: none; padding: 0; }
     .nu-card ul li {
       padding: 8px 0 8px 22px;
       position: relative;
@@ -217,7 +199,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       font-weight: 900;
     }
 
-    /* ══ GRID ══ */
+    /* GRID */
     .nu-grid-2 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -225,7 +207,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       margin-bottom: 32px;
     }
 
-    /* ══ QUESTION LIST ══ */
+    /* QUESTIONS */
     .nu-questions {
       background: var(--nu-white);
       border-radius: 10px;
@@ -266,7 +248,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       font-style: italic;
     }
 
-    /* ══ CHEVRON BADGES ══ */
+    /* BADGES */
     .nu-badge {
       display: inline-flex;
       align-items: center;
@@ -280,7 +262,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       letter-spacing: 0.02em;
     }
 
-    /* ══ CONTACT CARD ══ */
+    /* CONTACT CARD */
     .nu-contact-card {
       background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
       border: 2px solid #BFDBFE;
@@ -296,7 +278,7 @@ Producing the complete HTML file for this action item. The task runner saves out
     }
     .nu-contact-row {
       display: grid;
-      grid-template-columns: 140px 1fr;
+      grid-template-columns: 160px 1fr;
       padding: 8px 0;
       border-bottom: 1px solid rgba(30, 64, 175, 0.1);
     }
@@ -311,7 +293,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       font-size: 0.95rem;
     }
 
-    /* ══ SCRIPT BLOCK ══ */
+    /* EMAIL SCRIPT */
     .nu-script {
       background: #F8FAFC;
       border: 1px solid var(--nu-medium-gray);
@@ -323,29 +305,13 @@ Producing the complete HTML file for this action item. The task runner saves out
       line-height: 1.75;
       color: var(--nu-dark-text);
     }
-    .nu-script .salutation {
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .nu-script p {
-      margin-bottom: 12px;
-      text-indent: 1.2em;
-    }
-    .nu-script .signoff {
-      margin-top: 16px;
-      font-weight: 400;
-    }
-    .nu-script .signature {
-      margin-top: 2px;
-      margin-left: 1.2em;
-      font-weight: 700;
-    }
+    .nu-script .salutation { font-weight: 700; margin-bottom: 10px; }
+    .nu-script p { margin-bottom: 12px; text-indent: 1.2em; }
+    .nu-script .signoff { margin-top: 16px; }
+    .nu-script .signature { margin-top: 2px; margin-left: 1.2em; font-weight: 700; }
 
-    /* ══ CHECKLIST ══ */
-    .nu-checklist {
-      list-style: none;
-      padding: 0;
-    }
+    /* CHECKLIST */
+    .nu-checklist { list-style: none; padding: 0; }
     .nu-checklist li {
       padding: 12px 0 12px 40px;
       position: relative;
@@ -366,7 +332,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       background: var(--nu-white);
     }
 
-    /* ══ WHY IT MATTERS ══ */
+    /* WHY */
     .nu-why {
       background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
       border-left: 6px solid var(--nu-red);
@@ -389,7 +355,7 @@ Producing the complete HTML file for this action item. The task runner saves out
     }
     .nu-why p:last-child { margin-bottom: 0; }
 
-    /* ══ STATUS PILL ══ */
+    /* STATUS PILL */
     .nu-status {
       display: inline-block;
       padding: 6px 14px;
@@ -399,12 +365,9 @@ Producing the complete HTML file for this action item. The task runner saves out
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
-    .nu-status-open {
-      background: #FEF3C7;
-      color: #92400E;
-    }
+    .nu-status-open { background: #FEF3C7; color: #92400E; }
 
-    /* ══ META ROW ══ */
+    /* META */
     .nu-meta {
       display: flex;
       flex-wrap: wrap;
@@ -424,7 +387,7 @@ Producing the complete HTML file for this action item. The task runner saves out
       margin-right: 6px;
     }
 
-    /* ══ FOOTER ══ */
+    /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
@@ -440,16 +403,12 @@ Producing the complete HTML file for this action item. The task runner saves out
       margin-bottom: 16px;
     }
     .nu-footer-contact {
-      font-size: 0.95rem;
-      line-height: 1.9;
+      font-size: 1rem;
+      line-height: 1.95;
     }
-    .nu-footer-contact a {
-      color: var(--nu-cyan);
-      text-decoration: none;
-    }
+    .nu-footer-contact a { color: var(--nu-cyan); text-decoration: none; }
     .nu-footer-contact a:hover { text-decoration: underline; }
 
-    /* ══ RESPONSIVE ══ */
     @media (max-width: 768px) {
       .nu-header { padding: 40px 20px 70px; min-height: 200px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
@@ -471,7 +430,6 @@ Producing the complete HTML file for this action item. The task runner saves out
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="nu-header">
     <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Phoenix Icon">
       <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="#FFFFFF" opacity="0.92"/>
@@ -482,18 +440,15 @@ Producing the complete HTML file for this action item. The task runner saves out
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
-  <!-- WHITE ASYMMETRIC CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 52" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,0 L547,52 L1440,0 L1440,52 L0,52 Z" fill="#FFFFFF"/>
     </svg>
   </div>
 
-  <!-- MAIN -->
   <main class="nu-content-area">
     <div class="nu-container">
 
-      <!-- ACTION BANNER -->
       <div class="nu-action-banner">
         <div class="nu-action-banner-icon">📋</div>
         <div class="nu-action-banner-content">
@@ -502,12 +457,10 @@ Producing the complete HTML file for this action item. The task runner saves out
         </div>
       </div>
 
-      <!-- TITLE -->
       <h1 class="nu-section-title">
         <span class="lead">Clarify</span> <span class="rest">H2O Waterproofing Lifetime Warranty</span>
       </h1>
 
-      <!-- META -->
       <div class="nu-meta">
         <div class="nu-meta-item"><strong>Source:</strong> reMarkable notebook</div>
         <div class="nu-meta-item"><strong>Owner:</strong> Aaron C. Norris</div>
@@ -515,31 +468,28 @@ Producing the complete HTML file for this action item. The task runner saves out
         <div class="nu-meta-item"><strong>Status:</strong> <span class="nu-status nu-status-open">Open</span></div>
       </div>
 
-      <!-- WHY IT MATTERS -->
       <div class="nu-why">
         <h3>Why This Matters</h3>
         <p>H2O Waterproofing treats every FlexPro Armor bucket cover Norris Utilities® sells. "Lifetime warranty" is a phrase we use in marketing and sales conversations, but we have not yet locked down the exact terms in writing.</p>
         <p>Before Aaron or Caroline Butler quotes the lifetime warranty to a dealer, distributor, or end user, we need the written definition from H2O so every promise we make matches what H2O will actually honor.</p>
       </div>
 
-      <!-- WHAT WE NEED -->
       <div class="nu-card">
         <h3>What We Need From H2O Waterproofing</h3>
         <ul>
-          <li>The formal definition of "lifetime" — is it the lifetime of the bucket cover, the original purchaser, or the treatment itself?</li>
-          <li>What specifically is covered — the waterproofing performance, the coating adhesion, re-treatment, or product replacement.</li>
+          <li>The formal definition of "lifetime" — lifetime of the bucket cover, the original purchaser, or the treatment itself.</li>
+          <li>What is specifically covered — waterproofing performance, coating adhesion, re-treatment, or full product replacement.</li>
           <li>What voids coverage — UV exposure limits, chemical contact, abrasion, modification, laundering, or field repair.</li>
-          <li>Transferability — does the warranty follow the bucket cover if the end user sells or transfers it, or only the original purchaser.</li>
+          <li>Transferability — does the warranty follow the bucket cover if the end user sells it, or only the original purchaser.</li>
           <li>Claim process — who the customer contacts, required documentation, turnaround time, and whether inspection is required.</li>
           <li>Exclusions and dollar caps — labor, freight both ways, replacement vs. re-treatment, any consequential damage language.</li>
-          <li>Written documentation we can attach to quotes and list on the FlexPro Armor line card.</li>
+          <li>Written documentation on H2O letterhead we can attach to quotes and list on the FlexPro Armor line card.</li>
         </ul>
       </div>
 
-      <!-- QUESTIONS TO ASK -->
       <div class="nu-questions">
         <h3 style="font-weight: 900; color: var(--nu-dark-text); font-size: 1.15rem; margin-bottom: 6px;">Seven Questions for the H2O Call</h3>
-        <p style="color: #64748B; font-size: 0.92rem; margin-bottom: 18px;">Ask these in order. Take written notes and request a follow-up email confirming each answer.</p>
+        <p style="color: #64748B; font-size: 0.92rem; margin-bottom: 18px;">Ask in order. Take written notes and request a follow-up email confirming each answer.</p>
 
         <div class="nu-question-item">
           <div class="nu-question-num">1</div>
@@ -584,7 +534,6 @@ Producing the complete HTML file for this action item. The task runner saves out
         </div>
       </div>
 
-      <!-- H2O CONTACT -->
       <div class="nu-contact-card">
         <h3>H2O Waterproofing — Primary Contact</h3>
         <div class="nu-contact-row">
@@ -605,7 +554,6 @@ Producing the complete HTML file for this action item. The task runner saves out
         </div>
       </div>
 
-      <!-- EMAIL SCRIPT -->
       <div class="nu-card">
         <h3>Follow-Up Email — Drop-In Draft</h3>
         <p style="font-size: 0.92rem; color: #64748B;">Send this immediately after the phone call to lock the answers into writing.</p>
@@ -625,7 +573,6 @@ Producing the complete HTML file for this action item. The task runner saves out
         </div>
       </div>
 
-      <!-- CHECKLIST -->
       <div class="nu-card">
         <h3>Close-Out Checklist</h3>
         <ul class="nu-checklist">
@@ -640,7 +587,6 @@ Producing the complete HTML file for this action item. The task runner saves out
         </ul>
       </div>
 
-      <!-- DOWNSTREAM -->
       <div class="nu-grid-2">
         <div class="nu-card">
           <h3>Downstream Updates Once Confirmed</h3>
@@ -659,7 +605,6 @@ Producing the complete HTML file for this action item. The task runner saves out
         </div>
       </div>
 
-      <!-- CATEGORY BADGES -->
       <div style="margin-top: 8px;">
         <span class="nu-badge">FLEXPRO ARMOR</span>
         <span class="nu-badge">WARRANTY</span>
@@ -670,7 +615,6 @@ Producing the complete HTML file for this action item. The task runner saves out
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
