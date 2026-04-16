@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-16T07:17:11",
-  "active_count": 5,
+  "last_updated": "2026-04-16T07:32:12",
+  "active_count": 4,
   "total_count": 15,
   "agents": {
     "legacy": {
@@ -38,7 +38,7 @@
     "money_watcher": {
       "name": "Money Watcher",
       "role": "A/P Scanner",
-      "status": "active",
+      "status": "idle",
       "last_run": "2026-04-16 07:00",
       "message": "8 vendor invoices tracked",
       "items": 8,
@@ -88,7 +88,7 @@
       "name": "Watchdog",
       "role": "Gateway Guard",
       "status": "active",
-      "last_run": "2026-04-16 07:13",
+      "last_run": "2026-04-16 07:28",
       "message": "All systems UP"
     },
     "backup": {
