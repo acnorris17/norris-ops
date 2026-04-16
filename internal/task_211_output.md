@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: Bucket Cover Resize &amp; Return — Norris Utilities®</title>
+  <title>Action — Modify &amp; Re-Ship Bucket Cover for Proper Sizing — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -16,9 +16,12 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-status-red: #D32F2F;
-      --nu-status-amber: #F57C00;
-      --nu-status-green: #2E7D32;
+      --nu-amber: #C9731A;
+      --nu-amber-light: #FEF3E7;
+      --nu-red: #B4231A;
+      --nu-red-light: #FDECEB;
+      --nu-green: #0E7C3A;
+      --nu-green-light: #E7F5EC;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -35,7 +38,7 @@
     /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
       padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
@@ -44,27 +47,32 @@
     .nu-header::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 80px);
       z-index: 1;
+      opacity: 0.7;
     }
     .nu-header::after {
       content: '';
       position: absolute;
       top: -50%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6,208,255,0.18) 0%, transparent 70%);
       z-index: 1;
     }
-    .nu-header * { position: relative; z-index: 2; }
+    .nu-header > * { position: relative; z-index: 2; }
 
-    .nu-phoenix-icon {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 14px;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.35));
+    .nu-phoenix-watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      max-width: 420px;
+      opacity: 0.07;
+      z-index: 1;
+      pointer-events: none;
     }
     .nu-logo-text {
       font-family: var(--font-primary);
@@ -73,15 +81,15 @@
       color: var(--nu-white);
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--nu-white);
-      letter-spacing: 0.75em;
+      letter-spacing: 0.7em;
       text-transform: uppercase;
       margin-bottom: 18px;
     }
@@ -93,376 +101,353 @@
       color: rgba(255,255,255,0.95);
       letter-spacing: 0.04em;
     }
+    .nu-doc-label {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 6px 18px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      color: var(--nu-white);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
 
     /* CHEVRON */
-    .nu-chevron {
-      position: relative;
-      height: 50px;
-      margin-top: -50px;
-      z-index: 10;
-    }
+    .nu-chevron { position: relative; height: 50px; margin-top: -50px; z-index: 10; }
     .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
     /* CONTENT */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
-      padding: 0;
+      padding: 50px 0 60px;
     }
-    .nu-content-area::before {
-      content: '';
-      position: absolute;
-      top: 180px; left: 50%;
-      transform: translateX(-50%);
-      width: 65%; max-width: 600px; aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(0,0,255,0.07) 0%, transparent 70%);
-      z-index: 0;
-      pointer-events: none;
-    }
-    .nu-container {
-      position: relative;
-      z-index: 1;
+    .nu-wrap {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 50px 40px 60px;
+      padding: 0 32px;
     }
 
-    /* TASK HEADER BLOCK */
-    .task-meta-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 28px;
-      align-items: center;
+    /* TITLE BLOCK */
+    .nu-title-block {
+      text-align: center;
+      margin-bottom: 40px;
     }
-    .task-id-pill {
-      background: var(--nu-navy);
-      color: var(--nu-white);
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .task-source-pill {
-      background: var(--nu-cyan);
-      color: var(--nu-navy);
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-    }
-    .task-priority-pill {
-      background: var(--nu-status-amber);
-      color: var(--nu-white);
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .task-status-pill {
-      background: var(--nu-status-red);
-      color: var(--nu-white);
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .page-title {
-      font-family: var(--font-primary);
+    .nu-eyebrow {
+      color: var(--nu-blue);
       font-weight: 900;
-      font-size: 2.4rem;
-      line-height: 1.15;
-      color: var(--nu-dark-text);
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
       margin-bottom: 10px;
     }
-    .page-title .blue-word { color: var(--nu-blue); }
-    .page-subtitle {
-      font-size: 1.1rem;
-      color: var(--nu-body-text);
-      margin-bottom: 36px;
-      font-weight: 300;
-    }
-
-    /* SECTION HEADERS */
-    .nu-section {
-      margin-bottom: 36px;
-    }
-    .nu-section-title {
-      font-family: var(--font-primary);
+    .nu-page-title {
       font-weight: 900;
-      font-size: 1.5rem;
+      font-size: 2.3rem;
       color: var(--nu-dark-text);
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 3px solid var(--nu-medium-gray);
-      position: relative;
+      line-height: 1.2;
+      margin-bottom: 12px;
     }
-    .nu-section-title::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: -3px;
-      width: 80px; height: 3px;
-      background: var(--nu-blue);
-    }
-    .nu-section-title .blue-word { color: var(--nu-blue); }
-
-    /* ACTION ITEM CARD */
-    .action-card {
-      background: var(--nu-white);
-      border-left: 5px solid var(--nu-blue);
-      border-radius: 6px;
-      padding: 24px 28px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      margin-bottom: 18px;
-    }
-    .action-card.urgent { border-left-color: var(--nu-status-red); }
-    .action-card h3 {
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
-    }
-    .action-card p {
-      font-size: 0.98rem;
-      line-height: 1.65;
-      color: var(--nu-body-text);
-    }
-    .action-card .source-line {
-      font-size: 0.82rem;
-      color: #777;
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px dashed var(--nu-medium-gray);
-      font-style: italic;
+    .nu-page-title span { color: var(--nu-blue); }
+    .nu-page-sub {
+      color: #5b5b6a;
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto;
     }
 
-    /* CHECKLIST */
-    .checklist {
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      padding: 24px 28px;
+    /* META STRIP */
+    .nu-meta-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      box-shadow: 0 6px 24px rgba(0,0,51,0.12);
     }
-    .checklist-item {
-      display: flex;
-      align-items: flex-start;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      gap: 14px;
+    .nu-meta-cell {
+      padding: 18px 22px;
+      color: var(--nu-white);
+      border-right: 1px solid rgba(255,255,255,0.08);
     }
-    .checklist-item:last-child { border-bottom: none; }
-    .checklist-box {
-      flex-shrink: 0;
-      width: 22px;
-      height: 22px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      margin-top: 2px;
-      background: var(--nu-white);
-    }
-    .checklist-body h4 {
+    .nu-meta-cell:last-child { border-right: none; }
+    .nu-meta-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
       font-weight: 700;
-      font-size: 1rem;
-      color: var(--nu-dark-text);
       margin-bottom: 4px;
     }
-    .checklist-body p {
-      font-size: 0.92rem;
-      color: var(--nu-body-text);
+    .nu-meta-value {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--nu-white);
+    }
+
+    /* SECTION */
+    .nu-section { margin-bottom: 38px; }
+    .nu-section-title {
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+      color: var(--nu-dark-text);
+    }
+    .nu-section-title .first { color: var(--nu-blue); }
+
+    /* ALERT CARD */
+    .nu-alert {
+      display: flex;
+      gap: 18px;
+      padding: 22px 24px;
+      border-radius: 10px;
+      border-left: 6px solid var(--nu-amber);
+      background: var(--nu-amber-light);
+      margin-bottom: 32px;
+    }
+    .nu-alert-icon {
+      flex-shrink: 0;
+      width: 42px; height: 42px;
+      background: var(--nu-amber);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+    }
+    .nu-alert-body h3 {
+      font-weight: 900;
+      color: #7a4410;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .nu-alert-body p { color: #663a10; font-size: 0.97rem; }
+
+    /* STEP GRID */
+    .nu-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .nu-step {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 10px;
+      padding: 24px 22px;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nu-step:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .nu-step-num {
+      position: absolute;
+      top: -14px; left: 22px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 10px rgba(0,0,255,0.25);
+    }
+    .nu-step h4 {
+      font-weight: 900;
+      color: var(--nu-dark-text);
+      font-size: 1.05rem;
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+    .nu-step p {
+      font-size: 0.93rem;
+      color: #555;
       line-height: 1.55;
     }
-    .checklist-body .owner {
+    .nu-step-meta {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--nu-medium-gray);
+      font-size: 0.82rem;
+      color: #777;
+    }
+    .nu-step-meta strong { color: var(--nu-blue); font-weight: 700; }
+
+    /* SIZE TABLE */
+    .nu-size-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    table.nu-sizes {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table.nu-sizes thead {
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
+    }
+    table.nu-sizes th {
+      padding: 14px 18px;
+      text-align: left;
+      color: var(--nu-white);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    table.nu-sizes td {
+      padding: 14px 18px;
+      border-top: 1px solid var(--nu-medium-gray);
+      font-size: 0.94rem;
+      color: var(--nu-body-text);
+    }
+    table.nu-sizes tr.highlight { background: #EEF4FF; }
+    table.nu-sizes tr.highlight td { font-weight: 700; color: var(--nu-dark-text); }
+    .nu-pill {
       display: inline-block;
-      margin-top: 6px;
-      font-size: 0.78rem;
+      padding: 3px 10px;
       background: var(--nu-blue);
       color: var(--nu-white);
-      padding: 3px 10px;
-      border-radius: 3px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-    }
-
-    /* DETAIL GRID */
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-    }
-    .detail-cell {
-      background: var(--nu-light-gray);
-      border-radius: 6px;
-      padding: 18px 20px;
-      border-top: 3px solid var(--nu-cyan);
-    }
-    .detail-cell .label {
+      border-radius: 999px;
       font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #666;
       font-weight: 700;
-      margin-bottom: 6px;
+      letter-spacing: 0.06em;
     }
-    .detail-cell .value {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .detail-cell .value.small {
-      font-size: 0.92rem;
-      font-weight: 400;
-    }
+    .nu-pill.cyan { background: var(--nu-cyan); color: var(--nu-navy); }
 
-    /* TIMELINE */
-    .timeline {
-      position: relative;
-      padding-left: 28px;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 8px; top: 6px; bottom: 6px;
-      width: 3px;
-      background: linear-gradient(180deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
-      border-radius: 2px;
-    }
-    .timeline-event {
-      position: relative;
-      padding: 0 0 22px 0;
-    }
-    .timeline-event::before {
-      content: '';
-      position: absolute;
-      left: -28px; top: 5px;
-      width: 16px; height: 16px;
+    /* CHECKLIST */
+    .nu-checklist {
       background: var(--nu-white);
-      border: 3px solid var(--nu-blue);
-      border-radius: 50%;
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 10px;
+      padding: 24px 28px;
     }
-    .timeline-event.done::before { background: var(--nu-blue); }
-    .timeline-event.pending::before { border-color: var(--nu-status-amber); }
-    .timeline-event .when {
-      font-weight: 700;
-      font-size: 0.85rem;
+    .nu-checklist ul { list-style: none; }
+    .nu-checklist li {
+      padding: 12px 0 12px 38px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      position: relative;
+      font-size: 0.98rem;
+      color: var(--nu-body-text);
+    }
+    .nu-checklist li:last-child { border-bottom: none; }
+    .nu-checklist li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 14px;
+      width: 22px; height: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      background: var(--nu-white);
+    }
+    .nu-checklist li strong { color: var(--nu-dark-text); font-weight: 700; }
+
+    /* TWO COLUMN */
+    .nu-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 32px;
+    }
+    .nu-info-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 10px;
+      padding: 22px 24px;
+    }
+    .nu-info-card h4 {
       color: var(--nu-blue);
-      letter-spacing: 0.04em;
+      font-weight: 900;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
-    .timeline-event .what {
+    .nu-info-card dl { display: grid; gap: 8px; }
+    .nu-info-card dt {
+      font-size: 0.78rem;
+      color: #888;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nu-info-card dd {
       font-size: 0.98rem;
       color: var(--nu-dark-text);
-      margin-top: 2px;
-      font-weight: 400;
-    }
-
-    /* CALLOUT */
-    .callout {
-      background: linear-gradient(135deg, #001f66 0%, #000033 100%);
-      color: var(--nu-white);
-      padding: 28px 32px;
-      border-radius: 8px;
-      margin: 28px 0;
-    }
-    .callout h3 {
-      color: var(--nu-cyan);
-      font-weight: 900;
-      font-size: 1.1rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .callout p {
-      font-size: 1rem;
-      line-height: 1.65;
-      color: rgba(255,255,255,0.92);
-    }
-
-    /* BUTTON ROW */
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 16px;
-    }
-    .nu-btn-primary, .nu-btn-secondary {
-      display: inline-block;
-      padding: 12px 26px;
-      border-radius: 4px;
-      font-family: var(--font-primary);
       font-weight: 700;
-      font-size: 0.92rem;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      margin-bottom: 4px;
     }
-    .nu-btn-primary {
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      border: 2px solid var(--nu-blue);
+
+    /* NOTE BOX */
+    .nu-note {
+      background: var(--nu-green-light);
+      border-left: 6px solid var(--nu-green);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-top: 24px;
     }
-    .nu-btn-primary:hover {
-      background: #0000CC;
-      box-shadow: 0 4px 12px rgba(0,0,255,0.3);
-    }
-    .nu-btn-secondary {
-      background: transparent;
-      color: var(--nu-blue);
-      border: 2px solid var(--nu-blue);
-    }
-    .nu-btn-secondary:hover {
-      background: var(--nu-blue);
-      color: var(--nu-white);
-    }
+    .nu-note strong { color: #0a5c2a; }
+    .nu-note p { color: #1a4128; font-size: 0.95rem; }
 
     /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: rgba(255,255,255,0.85);
-      padding: 42px 40px;
+      color: rgba(255,255,255,0.82);
+      padding: 44px 40px;
       text-align: center;
-      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
     .nu-footer-contact {
-      font-size: 0.95rem;
-      line-height: 1.8;
+      font-size: 0.98rem;
+      line-height: 1.85;
     }
-    .nu-footer-contact a {
-      color: var(--nu-cyan);
-      text-decoration: none;
-    }
+    .nu-footer-contact a { color: var(--nu-cyan); text-decoration: none; }
     .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-meta {
+      margin-top: 18px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
-      .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 36px 22px 40px; }
-      .page-title { font-size: 1.75rem; }
-      .action-card, .checklist, .callout { padding: 20px; }
+      .nu-header { padding: 44px 20px 64px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1.05rem; }
+      .nu-wrap { padding: 0 20px; }
+      .nu-page-title { font-size: 1.6rem; }
+      .nu-two-col { grid-template-columns: 1fr; }
+      .nu-meta-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nu-footer { padding: 32px 20px; }
     }
 
     @media print {
-      body { background: white; }
-      .nu-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .button-row { display: none; }
+      body { background: #fff; }
+      .nu-header, .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-step:hover { transform: none; box-shadow: none; }
     }
   </style>
 </head>
@@ -470,192 +455,222 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <div class="nu-phoenix-icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
-      </svg>
-    </div>
+    <svg class="nu-phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
+    </svg>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-doc-label">Internal Action Item</div>
   </header>
 
   <!-- CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+      <path d="M0,0 L548,50 L1440,0 L1440,50 L0,50 Z" fill="#ffffff"/>
     </svg>
   </div>
 
   <!-- CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-container">
+    <div class="nu-wrap">
 
-      <!-- Meta Bar -->
-      <div class="task-meta-bar">
-        <span class="task-id-pill">Task 211</span>
-        <span class="task-source-pill">reMarkable Action</span>
-        <span class="task-priority-pill">High Priority</span>
-        <span class="task-status-pill">Open</span>
+      <!-- TITLE -->
+      <div class="nu-title-block">
+        <div class="nu-eyebrow">reMarkable Action Item</div>
+        <h1 class="nu-page-title">Modify &amp; Re-Ship <span>Bucket Cover</span> for Proper Sizing</h1>
+        <p class="nu-page-sub">Customer-shipped FlexPro Armor cover requires resize rework at the shop before reshipment. This document captures the rework steps, the correct sizing reference, and the return-ship checklist.</p>
       </div>
 
-      <!-- Title -->
-      <h1 class="page-title"><span class="blue-word">Action Item:</span> Modify Shipped Bucket Cover &amp; Return for Proper Sizing</h1>
-      <p class="page-subtitle">Internal production &amp; logistics action — captured from Aaron's reMarkable notes on 2026-04-16.</p>
-
-      <!-- Action Detail -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="blue-word">Action</span> Summary</h2>
-        <div class="action-card urgent">
-          <h3>Modify the shipped bucket cover and ship back for proper sizing</h3>
-          <p>A FlexPro Armor bucket cover was shipped to a customer with a sizing issue. The unit needs to be returned, modified at our production partner, and re-shipped to the customer in the corrected size so the cover fits the customer's bucket as specified on their original order.</p>
-          <div class="source-line">Source: reMarkable daily notebook — action item captured 2026-04-16</div>
+      <!-- META STRIP -->
+      <div class="nu-meta-strip">
+        <div class="nu-meta-cell">
+          <div class="nu-meta-label">Source</div>
+          <div class="nu-meta-value">reMarkable Notebook</div>
         </div>
-      </section>
-
-      <!-- Key Details -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="blue-word">Key</span> Details</h2>
-        <div class="detail-grid">
-          <div class="detail-cell">
-            <div class="label">Product</div>
-            <div class="value">FlexPro Armor Bucket Cover</div>
-          </div>
-          <div class="detail-cell">
-            <div class="label">Issue Type</div>
-            <div class="value">Sizing — Modification Required</div>
-          </div>
-          <div class="detail-cell">
-            <div class="label">Action Type</div>
-            <div class="value">Return → Modify → Re-ship</div>
-          </div>
-          <div class="detail-cell">
-            <div class="label">Priority</div>
-            <div class="value">High — Customer Waiting</div>
-          </div>
-          <div class="detail-cell">
-            <div class="label">Captured</div>
-            <div class="value">2026-04-16</div>
-          </div>
-          <div class="detail-cell">
-            <div class="label">Owner</div>
-            <div class="value">Aaron C. Norris</div>
-          </div>
-          <div class="detail-cell">
-            <div class="label">Support</div>
-            <div class="value">Caroline Butler (CB)</div>
-          </div>
-          <div class="detail-cell">
-            <div class="label">SKU Reference</div>
-            <div class="value small">Verify against NU-BC-2851 / NU-BC-2834 (and Combo variants)</div>
-          </div>
+        <div class="nu-meta-cell">
+          <div class="nu-meta-label">Priority</div>
+          <div class="nu-meta-value">High — Customer Waiting</div>
         </div>
-      </section>
-
-      <!-- Callout -->
-      <div class="callout">
-        <h3>Why this matters</h3>
-        <p>FlexPro Armor carries a 50% margin and is our flagship handmade product. A sizing miss turns a revenue win into a logistics cost and a customer-service moment. Resolving this quickly — and confirming the corrected dimensions against the customer's bucket — protects both the relationship and the margin.</p>
+        <div class="nu-meta-cell">
+          <div class="nu-meta-label">Product</div>
+          <div class="nu-meta-value">FlexPro Armor Cover</div>
+        </div>
+        <div class="nu-meta-cell">
+          <div class="nu-meta-label">Owner</div>
+          <div class="nu-meta-value">Aaron C. Norris</div>
+        </div>
+        <div class="nu-meta-cell">
+          <div class="nu-meta-label">Logged</div>
+          <div class="nu-meta-value">2026-04-16</div>
+        </div>
       </div>
 
-      <!-- Execution Checklist -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="blue-word">Execution</span> Checklist</h2>
-        <div class="checklist">
+      <!-- ALERT -->
+      <div class="nu-alert">
+        <div class="nu-alert-icon">!</div>
+        <div class="nu-alert-body">
+          <h3>Cover does not match bucket dimensions</h3>
+          <p>The unit currently with the customer is the wrong size for their bucket. It must come back to the shop, be modified to the correct SKU dimensions, and re-shipped. Verify the bucket measurements before reworking — do not guess.</p>
+        </div>
+      </div>
 
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-body">
-              <h4>1. Confirm correct dimensions with customer</h4>
-              <p>Call or email the customer to verify the exact bucket dimensions (inside length × inside width × depth). Confirm bucket make/model and ask for a phone photo of the tag if possible. Match against our standard SKUs (NU-BC-2851, NU-BC-2834) or flag as custom.</p>
-              <span class="owner">Owner: Aaron (CB on follow-up)</span>
-            </div>
+      <!-- STEPS -->
+      <div class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Action</span> Steps</h2>
+        <div class="nu-steps">
+
+          <div class="nu-step">
+            <div class="nu-step-num">1</div>
+            <h4>Confirm bucket dimensions</h4>
+            <p>Get exact bucket measurements from the customer: top inside length, top inside width, and depth. Photograph the bucket if possible.</p>
+            <div class="nu-step-meta"><strong>Owner:</strong> Aaron / CB &nbsp;·&nbsp; <strong>Method:</strong> Phone + text photo</div>
           </div>
 
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-body">
-              <h4>2. Issue return shipping label</h4>
-              <p>CB to generate a prepaid return label and email it to the customer the same day dimensions are confirmed. Include clear pack/ship instructions — cover folded, original box if available, no additional packing required.</p>
-              <span class="owner">Owner: Caroline Butler</span>
-            </div>
+          <div class="nu-step">
+            <div class="nu-step-num">2</div>
+            <h4>Issue return shipping label</h4>
+            <p>Generate a prepaid return label for the incorrect cover. Include it in a follow-up email with clear pack-and-drop instructions.</p>
+            <div class="nu-step-meta"><strong>Carrier:</strong> FedEx Ground &nbsp;·&nbsp; <strong>Cost:</strong> Absorbed — rework charge</div>
           </div>
 
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-body">
-              <h4>3. Coordinate modification with production partner</h4>
-              <p>Notify the FlexPro Armor production partner of the incoming return and the required modification. Confirm turnaround time and whether the modification is possible or a full rebuild is more cost-effective. Get it in writing.</p>
-              <span class="owner">Owner: Aaron</span>
-            </div>
+          <div class="nu-step">
+            <div class="nu-step-num">3</div>
+            <h4>Receive cover at shop</h4>
+            <p>Inspect the returned cover for wear or damage. Confirm the SKU tag and label. Flag the job in the rework queue with the customer name.</p>
+            <div class="nu-step-meta"><strong>Turnaround target:</strong> 48 hours from receipt</div>
           </div>
 
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-body">
-              <h4>4. Log the incident against the order</h4>
-              <p>Update the order record and capture the root cause — was the original size mis-ordered, mis-measured, or mis-built? This closes the loop on whether we or the customer own the sizing error and guides how we handle cost.</p>
-              <span class="owner">Owner: Aaron</span>
-            </div>
+          <div class="nu-step">
+            <div class="nu-step-num">4</div>
+            <h4>Resize to correct SKU</h4>
+            <p>Cross-check against the size table below. Modify the cover to match the confirmed bucket dimensions. All stitching to factory spec — no shortcuts on the corner reinforcements.</p>
+            <div class="nu-step-meta"><strong>Spec:</strong> FlexPro Armor handmade-USA standard</div>
           </div>
 
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-body">
-              <h4>5. Re-ship modified cover &amp; notify customer</h4>
-              <p>Once modified, ship the cover back to the customer with tracking. Email the customer the tracking number and a short note confirming the corrected size. Follow up 48 hours after delivery to confirm proper fit on their bucket.</p>
-              <span class="owner">Owner: CB ships, Aaron follows up</span>
-            </div>
+          <div class="nu-step">
+            <div class="nu-step-num">5</div>
+            <h4>QC inspection</h4>
+            <p>Test-fit against a matching bucket shell or reference template. Photograph the final cover next to a tape measure, capturing top opening, depth, and corner construction.</p>
+            <div class="nu-step-meta"><strong>Evidence:</strong> Save photos to customer file</div>
           </div>
 
-          <div class="checklist-item">
-            <div class="checklist-box"></div>
-            <div class="checklist-body">
-              <h4>6. Close the task &amp; update measurement SOP if needed</h4>
-              <p>Close Task 211 in the tracker. If root cause was an internal measurement or intake error, update the FlexPro Armor order intake SOP so this sizing issue is prevented on the next order. Share the update with CB.</p>
-              <span class="owner">Owner: Aaron</span>
-            </div>
+          <div class="nu-step">
+            <div class="nu-step-num">6</div>
+            <h4>Re-ship with apology note</h4>
+            <p>Pack with a handwritten note from Aaron. Ship via the same carrier used on the original order. Email tracking the moment the label prints — do not wait for pickup.</p>
+            <div class="nu-step-meta"><strong>Shipping:</strong> Ben's Formula — ROUNDUP(ROUNDUP(RegCost,0) × 1.10, 0)</div>
           </div>
 
         </div>
-      </section>
+      </div>
 
-      <!-- Timeline -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="blue-word">Status</span> Timeline</h2>
-        <div class="timeline">
-          <div class="timeline-event done">
-            <div class="when">2026-04-16 — Captured</div>
-            <div class="what">Action item written to reMarkable notebook and synced to Norris Utilities® internal task queue as Task 211.</div>
+      <!-- SIZE REFERENCE -->
+      <div class="nu-section">
+        <h2 class="nu-section-title"><span class="first">FlexPro</span> Armor Size Reference</h2>
+        <div class="nu-size-card">
+          <table class="nu-sizes">
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Configuration</th>
+                <th>Dimensions (W × L)</th>
+                <th>Competitor Equivalent</th>
+                <th>Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight">
+                <td><span class="nu-pill">NU-BC-2851</span></td>
+                <td>2-Man Platform</td>
+                <td>28" × 51"</td>
+                <td>Competitor "24 × 48"</td>
+                <td>Most common rework target</td>
+              </tr>
+              <tr>
+                <td><span class="nu-pill">NU-BC-2834</span></td>
+                <td>1.5-Man Platform</td>
+                <td>28" × 34"</td>
+                <td>Competitor "24 × 34"</td>
+                <td>Standard single-man bucket</td>
+              </tr>
+              <tr>
+                <td><span class="nu-pill cyan">NU-BC-2851-C</span></td>
+                <td>2-Man Combo</td>
+                <td>28" × 51"</td>
+                <td>—</td>
+                <td>Cover + accessory kit</td>
+              </tr>
+              <tr>
+                <td><span class="nu-pill cyan">NU-BC-2834-C</span></td>
+                <td>1.5-Man Combo</td>
+                <td>28" × 34"</td>
+                <td>—</td>
+                <td>Cover + accessory kit</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="nu-note">
+          <p><strong>Sizing rule:</strong> Competitor "24 × 48" translates to NU-BC-2851 (28" × 51"). Competitor "24 × 34" translates to NU-BC-2834 (28" × 34"). Never match by the printed number — always match to the Norris Utilities® SKU.</p>
+        </div>
+      </div>
+
+      <!-- DETAILS TWO COLUMN -->
+      <div class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Rework</span> Details</h2>
+        <div class="nu-two-col">
+          <div class="nu-info-card">
+            <h4>Original Shipment</h4>
+            <dl>
+              <dt>Product</dt>
+              <dd>FlexPro Armor Bucket Cover</dd>
+              <dt>Issue</dt>
+              <dd>Dimensions do not match customer bucket</dd>
+              <dt>Status</dt>
+              <dd>Outbound — with customer</dd>
+              <dt>Next action</dt>
+              <dd>Pull back for resize</dd>
+            </dl>
           </div>
-          <div class="timeline-event pending">
-            <div class="when">Next — Confirm Dimensions</div>
-            <div class="what">Contact customer to verify correct bucket dimensions before issuing return label or notifying production partner.</div>
-          </div>
-          <div class="timeline-event pending">
-            <div class="when">Then — Return Inbound</div>
-            <div class="what">Return label issued, customer ships cover back to the FlexPro Armor production partner for modification.</div>
-          </div>
-          <div class="timeline-event pending">
-            <div class="when">Then — Re-ship</div>
-            <div class="what">Modified cover shipped back to customer with tracking. Post-delivery fit confirmation follow-up scheduled.</div>
-          </div>
-          <div class="timeline-event pending">
-            <div class="when">Close — Task Complete</div>
-            <div class="what">Task 211 closed in tracker once customer confirms proper fit. SOP updated if root cause was internal.</div>
+          <div class="nu-info-card">
+            <h4>Shop Workflow</h4>
+            <dl>
+              <dt>Receive / log</dt>
+              <dd>Shop receiving station</dd>
+              <dt>Rework</dt>
+              <dd>In-house, handmade USA</dd>
+              <dt>QC</dt>
+              <dd>Test-fit + photo documentation</dd>
+              <dt>Margin</dt>
+              <dd>Hold at 50% — rework absorbed on our side</dd>
+            </dl>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Button Row -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="blue-word">Quick</span> Links</h2>
-        <div class="button-row">
-          <a href="mailto:acnorris@norrisutilities.com?subject=Task%20211%20Update%20—%20Bucket%20Cover%20Resize" class="nu-btn-primary">Email Aaron an Update</a>
-          <a href="tel:2055001343" class="nu-btn-secondary">Call 205-500-1343</a>
+      <!-- CHECKLIST -->
+      <div class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Close-Out</span> Checklist</h2>
+        <div class="nu-checklist">
+          <ul>
+            <li><strong>Customer bucket dimensions confirmed</strong> — written down, photographed, matched to SKU</li>
+            <li><strong>Return label sent</strong> — with plain-English drop instructions and a thank-you note</li>
+            <li><strong>Returned cover received &amp; inspected</strong> — logged against the original order</li>
+            <li><strong>Cover resized to correct SKU</strong> — to factory spec, reinforced corners intact</li>
+            <li><strong>QC photos on file</strong> — tape-measure shot saved to the customer folder</li>
+            <li><strong>Reship tracking sent</strong> — email out the same hour the label prints</li>
+            <li><strong>Follow-up scheduled</strong> — call customer 48 hours after delivery to confirm fit</li>
+            <li><strong>Lesson logged</strong> — what went wrong, what we're changing to prevent it</li>
+          </ul>
         </div>
-      </section>
+      </div>
+
+      <!-- CLOSING NOTE -->
+      <div class="nu-note">
+        <p><strong>Why this matters:</strong> FlexPro Armor sells on fit, feel, and follow-through. A wrong-size cover becomes a referral when we make the rework painless for the customer. Absorb the cost, move fast, communicate clearly — that's the Norris Utilities® standard.</p>
+      </div>
 
     </div>
   </main>
@@ -669,6 +684,7 @@
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
+    <div class="nu-footer-meta">Internal Document · FlexPro Armor Rework · 2026-04-16</div>
   </footer>
 
 </body>
