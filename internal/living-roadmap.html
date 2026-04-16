@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Norris Utilities — Living Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{--nu-deep:#0a0e5c;--nu-blue:#0033cc;--nu-mid:#0066ee;--nu-light:#00aaff;--nu-cyan:#06D0FF;--bg:#f5f6fa;--card:#fff;--border:#e2e5ef;--text:#1a1a2e;--muted:#6b7194;--done:#16a34a;--active:#2563eb;--blocked:#dc2626;--waiting:#94a3b8;--warn:#eab308}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.hdr{background:linear-gradient(135deg,var(--nu-deep),var(--nu-blue),var(--nu-mid),var(--nu-light),var(--nu-cyan));padding:20px 28px;color:#fff;position:relative}
+.hdr h1{font-size:20px;font-weight:900;letter-spacing:1px}
+.hdr .sub{font-family:'Playfair Display',serif;font-style:italic;opacity:.8;font-size:13px;margin-top:2px}
+.hdr .meta{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;font-size:12px}
+.hdr .pill{background:rgba(0,0,0,.25);padding:4px 12px;border-radius:20px}
+.toolbar{display:flex;gap:8px;padding:12px 28px;background:#fff;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
+.toolbar select,.toolbar input{font-family:'Lato',sans-serif;font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:#fff}
+.toolbar input[type=text]{width:200px}
+.toolbar .btn{padding:6px 14px;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:pointer;font-size:13px;font-family:'Lato',sans-serif;transition:all .15s}
+.toolbar .btn:hover{background:var(--nu-blue);color:#fff;border-color:var(--nu-blue)}
+.toolbar .btn.active{background:var(--nu-blue);color:#fff;border-color:var(--nu-blue)}
+.board{padding:20px 28px;display:flex;gap:16px;overflow-x:auto;min-height:calc(100vh - 180px);align-items:flex-start}
+.col{min-width:280px;max-width:320px;flex:1;background:#eef0f7;border-radius:10px;padding:12px}
+.col-title{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:1px;padding:0 4px 8px;display:flex;align-items:center;gap:6px}
+.col-title .cnt{background:rgba(0,0,0,.12);padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700}
+.col[data-status=done] .col-title{color:var(--done)}
+.col[data-status=active] .col-title{color:var(--active)}
+.col[data-status=blocked] .col-title{color:var(--blocked)}
+.col[data-status=waiting] .col-title{color:var(--waiting)}
+.task{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;cursor:grab;transition:box-shadow .15s,transform .15s;position:relative}
+.task:active{cursor:grabbing;box-shadow:0 4px 16px rgba(0,0,0,.15);transform:scale(1.02);z-index:10}
+.task.dragging{opacity:.4}
+.task .t-name{font-size:14px;font-weight:700;line-height:1.3;margin-bottom:4px}
+.task .t-detail{font-size:12px;color:var(--muted);line-height:1.4}
+.task .t-meta{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.tag.p-urgent{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+.tag.p-high{background:#fefce8;color:#a16207;border:1px solid #fde68a}
+.tag.p-medium{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe}
+.tag.p-low{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+.tag.owner{background:#f8f8fc;color:#6b7194;border:1px solid #e2e5ef}
+.task .note-toggle{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.task .note-toggle:hover{background:var(--nu-blue);color:#fff;border-color:var(--nu-blue)}
+.task .note-area{margin-top:8px;display:none}
+.task .note-area.open{display:block}
+.task .note-area textarea{width:100%;border:1px solid var(--border);border-radius:6px;padding:8px;font-family:'Lato',sans-serif;font-size:12px;resize:vertical;min-height:60px}
+.task .note-area .note-save{margin-top:4px;padding:4px 10px;font-size:11px;border:1px solid var(--nu-blue);color:var(--nu-blue);background:#fff;border-radius:4px;cursor:pointer}
+.task .note-area .note-save:hover{background:var(--nu-blue);color:#fff}
+.task .note-display{margin-top:6px;padding:6px 8px;background:#f8f8fc;border-radius:4px;font-size:11px;color:var(--muted);line-height:1.4;white-space:pre-wrap}
+.dep-line{font-size:11px;color:var(--nu-blue);margin-top:4px}
+.add-task{width:100%;padding:8px;border:1px dashed var(--border);border-radius:8px;background:transparent;cursor:pointer;font-size:12px;color:var(--muted);font-family:'Lato',sans-serif;margin-top:4px}
+.add-task:hover{border-color:var(--nu-blue);color:var(--nu-blue)}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:90%;max-width:480px;max-height:80vh;overflow-y:auto}
+.modal h3{font-size:16px;font-weight:900;margin-bottom:16px}
+.modal label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin:12px 0 4px;text-transform:uppercase;letter-spacing:.5px}
+.modal input,.modal select,.modal textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-family:'Lato',sans-serif;font-size:13px}
+.modal textarea{min-height:80px;resize:vertical}
+.modal .modal-actions{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+.modal .modal-actions .btn{padding:8px 20px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:700;border:none}
+.modal .modal-actions .btn-save{background:var(--nu-blue);color:#fff}
+.modal .modal-actions .btn-cancel{background:#eef0f7;color:var(--text)}
+.footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);font-family:'Playfair Display',serif;font-style:italic}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>LIVING ROADMAP — Norris Utilities&reg;</h1>
+<div class="sub">A Legacy of Commitment&reg;</div>
+<div class="meta">
+<span class="pill" id="stat-total">0 items</span>
+<span class="pill" id="stat-done">0 done</span>
+<span class="pill" id="stat-blocked">0 blocked</span>
+<span class="pill" id="stat-updated">Updated: April 14, 2026</span>
+</div>
+</div>
+<div class="toolbar">
+<select id="filter-priority"><option value="">All priorities</option><option value="urgent">Urgent</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+<select id="filter-owner"><option value="">All owners</option><option value="Aaron">Aaron</option><option value="CC (M1)">CC (M1)</option><option value="Claude">Claude</option><option value="CB">CB</option><option value="Legacy">Legacy</option><option value="Autonomous">Autonomous</option></select>
+<select id="filter-component"><option value="">All components</option><option value="Portal">Portal</option><option value="Legacy Agent">Legacy Agent</option><option value="Shipping Agent">Shipping Agent</option><option value="Memory">Memory</option><option value="reMarkable">reMarkable</option><option value="Cloudflare">Cloudflare</option><option value="Website">Website</option><option value="Pricing">Pricing</option></select>
+<input type="text" id="search" placeholder="Search tasks...">
+<button class="btn" id="btn-add">+ Add task</button>
+<button class="btn" id="btn-export">Export JSON</button>
+</div>
+<div class="board" id="board"></div>
+<div class="modal-overlay" id="modal">
+<div class="modal">
+<h3 id="modal-title">Add task</h3>
+<label>Name</label><input id="m-name" placeholder="Task name">
+<label>Detail</label><textarea id="m-detail" placeholder="What needs to happen"></textarea>
+<label>Status</label><select id="m-status"><option value="active">In progress</option><option value="blocked">Blocked</option><option value="waiting">Not started</option><option value="done">Done</option></select>
+<label>Priority</label><select id="m-priority"><option value="urgent">Urgent</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+<label>Owner</label><select id="m-owner"><option value="Aaron">Aaron</option><option value="CC (M1)">CC (M1)</option><option value="Claude">Claude</option><option value="CB">CB</option><option value="Legacy">Legacy</option><option value="Autonomous">Autonomous</option></select>
+<label>Component</label><select id="m-component"><option value="Portal">Portal</option><option value="Legacy Agent">Legacy Agent</option><option value="Shipping Agent">Shipping Agent</option><option value="Memory">Memory</option><option value="reMarkable">reMarkable</option><option value="Cloudflare">Cloudflare</option><option value="Website">Website</option><option value="Pricing">Pricing</option></select>
+<label>Depends on (task name)</label><input id="m-depends" placeholder="Leave blank if none">
+<div class="modal-actions">
+<button class="btn btn-cancel" id="btn-cancel">Cancel</button>
+<button class="btn btn-save" id="btn-save">Save</button>
+</div>
+</div>
+</div>
+<div class="footer">Norris Utilities&reg; &mdash; A Legacy of Commitment&reg; &mdash; Would Wayne be proud of this?</div>
+<script>
+const STORAGE_KEY='nu_roadmap_tasks';
+let editingId=null;
+const defaultTasks=[
+{id:'t1',name:'Update OpenClaw to v2026.4.9',detail:'openclaw update, gateway install --force, gateway start. 5 min.',status:'waiting',priority:'urgent',owner:'Aaron',component:'Legacy Agent',depends:'',note:'',order:0},
+{id:'t2',name:'Living Roadmap visualization',detail:'Interactive visual tool — TODAY main deliverable. 5+ hours invested.',status:'active',priority:'urgent',owner:'Claude',component:'Portal',depends:'',note:'',order:1},
+{id:'t3',name:'Shipping Agent confirm-write',detail:'7 READY orders = $7,610. Say "confirm write" → data flows → CB invoices.',status:'active',priority:'urgent',owner:'Aaron',component:'Shipping Agent',depends:'',note:'',order:2},
+{id:'t4',name:'Cloudflare setup',detail:'Nameserver swap from Squarespace. Dedicated session open. 30-60 min.',status:'waiting',priority:'urgent',owner:'Aaron',component:'Cloudflare',depends:'',note:'',order:3},
+{id:'t5',name:'Wire LEGACY_MEMORY.md auto-update',detail:'All channels auto-write to memory. Fix Legacy query behavior. Critical.',status:'blocked',priority:'urgent',owner:'CC (M1)',component:'Memory',depends:'',note:'LEGACY_MEMORY.md is manual. Must wire Claude sessions + Legacy comms + NorrisPalace + G Brain all writing to it automatically.',order:4},
+{id:'t6',name:'reMarkable pipeline reconnect',detail:'Fix crash or build better solution. 37 stuck items. In-person delivery notes must flow to Shipments.',status:'blocked',priority:'high',owner:'CC (M1)',component:'reMarkable',depends:'',note:'Crashed April 3 SIGKILL. Must handle: scan → OCR → extract → create portal records → update task tracker → morning brief.',order:5},
+{id:'t7',name:'SD auto-print pipeline',detail:'SD creates → auto-print 1 copy (Draft, Color, no headers) unless Aaron says "don\'t print."',status:'waiting',priority:'high',owner:'CC (M1)',component:'Shipping Agent',depends:'Shipping Agent confirm-write',note:'Physical SD on printer = Aaron knows to act and ship.',order:6},
+{id:'t8',name:'Separate Telegram notification chat',detail:'Route ops notifications to second chat. Legacy chat = Legacy + Aaron only. Legacy still sees them.',status:'waiting',priority:'high',owner:'CC (M1)',component:'Legacy Agent',depends:'',note:'',order:7},
+{id:'t9',name:'Time Machine backup on M1',detail:'Buy Samsung T7 1TB SSD (~$60 Amazon). Plug in. System Settings → Time Machine → Add. EXISTENTIAL RISK.',status:'waiting',priority:'high',owner:'Aaron',component:'Legacy Agent',depends:'',note:'If M1 dies, ALL agent files, LaunchAgents, NorrisPalace, G Brain — everything gone permanently.',order:8},
+{id:'t10',name:'Gridco grep-and-destroy (tracking)',detail:'Tracking task: search every file on M1 for Gridco/Cunningham references and remove. Keeps resurfacing.',status:'waiting',priority:'medium',owner:'CC (M1)',component:'Portal',depends:'',note:'',order:9},
+{id:'t11',name:'End-to-end shipping pipeline',detail:'Order→SD→ship→track→verify→portal+Sheet+SD sync→CB invoice. THE revenue engine.',status:'active',priority:'urgent',owner:'CC (M1)',component:'Shipping Agent',depends:'Shipping Agent confirm-write',note:'This is THE most critically important system. All pieces exist but not connected end-to-end.',order:10},
+{id:'t12',name:'Portal Shipments tab READY/PENDING/BLOCKED badges',detail:'Wire shipping data to show status badges per order. CB needs visual clarity.',status:'waiting',priority:'high',owner:'CC (M1)',component:'Portal',depends:'Shipping Agent confirm-write',note:'',order:11},
+{id:'t13',name:'Shipping Log Google Sheet write-back',detail:'Shipping Agent writes verified data to the Google Sheet automatically.',status:'waiting',priority:'high',owner:'CC (M1)',component:'Shipping Agent',depends:'Shipping Agent confirm-write',note:'GAP 2 in shipping_processor.py.',order:12},
+{id:'t14',name:'Contact database import',detail:'Separate project folder handles accuracy. Results brought in when ready.',status:'waiting',priority:'medium',owner:'Aaron',component:'Pricing',depends:'',note:'Separate project — not blocking this overall project.',order:13},
+{id:'t15',name:'Samson Rope pricing tool',detail:'Separate project folder. 30% = cost from Samson, actual margins 30-60%+ by category.',status:'waiting',priority:'medium',owner:'Aaron',component:'Pricing',depends:'',note:'MSP Ordering Portal depends on this completing first.',order:14},
+{id:'t16',name:'Website autonomous build',detail:'Agents run in background building/improving website from existing files. Gets better over time in loop.',status:'waiting',priority:'low',owner:'Autonomous',component:'Website',depends:'Cloudflare setup',note:'Low priority. All Method Marketing materials + drafts available.',order:15},
+{id:'t17',name:'change-log.html for portal',detail:'Build the Change Log / Living Roadmap embed page. Tab currently empty.',status:'waiting',priority:'medium',owner:'CC (M1)',component:'Portal',depends:'',note:'',order:16},
+{id:'t18',name:'NorrisPalace + G Brain audit',detail:'Why is Legacy memory still terrible? Audit query behavior. Fix the habit loop.',status:'blocked',priority:'urgent',owner:'CC (M1)',component:'Memory',depends:'Wire LEGACY_MEMORY.md auto-update',note:'Infrastructure exists but Legacy may not query consistently before responding.',order:17},
+{id:'t19',name:'CB full celebrations show',detail:'CB gets full show — phoenix rise, particles, chime, everything Aaron gets.',status:'done',priority:'medium',owner:'CC (M1)',component:'Portal',depends:'',note:'Unlocked April 14. No longer secret.',order:18},
+{id:'t20',name:'Portal project-roadmap.html deploy',detail:'Deploy pre-built project roadmap HTML to internal/project-roadmap.html with auth gate.',status:'active',priority:'high',owner:'CC (M1)',component:'Portal',depends:'',note:'Feature branch being deployed April 14.',order:19}
+];
+function loadTasks(){try{const s=localStorage.getItem(STORAGE_KEY);if(s){const d=JSON.parse(s);if(d&&d.length)return d}}catch(e){}return JSON.parse(JSON.stringify(defaultTasks))}
+function saveTasks(t){localStorage.setItem(STORAGE_KEY,JSON.stringify(t))}
+let tasks=loadTasks();
+function render(){
+const board=document.getElementById('board');
+const fp=document.getElementById('filter-priority').value;
+const fo=document.getElementById('filter-owner').value;
+const fc=document.getElementById('filter-component').value;
+const sq=document.getElementById('search').value.toLowerCase();
+let filtered=tasks.filter(t=>{
+if(fp&&t.priority!==fp)return false;
+if(fo&&t.owner!==fo)return false;
+if(fc&&t.component!==fc)return false;
+if(sq&&!t.name.toLowerCase().includes(sq)&&!t.detail.toLowerCase().includes(sq))return false;
+return true;
+});
+const cols=[
+{status:'blocked',label:'Blocked',items:filtered.filter(t=>t.status==='blocked')},
+{status:'active',label:'In progress',items:filtered.filter(t=>t.status==='active')},
+{status:'waiting',label:'Not started',items:filtered.filter(t=>t.status==='waiting')},
+{status:'done',label:'Done',items:filtered.filter(t=>t.status==='done')}
+];
+board.innerHTML='';
+cols.forEach(c=>{
+c.items.sort((a,b)=>{const po={urgent:0,high:1,medium:2,low:3};return(po[a.priority]||9)-(po[b.priority]||9)||a.order-b.order});
+const col=document.createElement('div');
+col.className='col';col.dataset.status=c.status;
+col.innerHTML=`<div class="col-title">${c.label} <span class="cnt">${c.items.length}</span></div>`;
+col.addEventListener('dragover',e=>{e.preventDefault();col.style.background='#dde0ed'});
+col.addEventListener('dragleave',()=>{col.style.background=''});
+col.addEventListener('drop',e=>{
+e.preventDefault();col.style.background='';
+const id=e.dataTransfer.getData('text/plain');
+const task=tasks.find(t=>t.id===id);
+if(task){task.status=c.status;saveTasks(tasks);render()}
+});
+c.items.forEach(t=>{
+const el=document.createElement('div');
+el.className='task';el.draggable=true;el.dataset.id=t.id;
+const noteHtml=t.note?`<div class="note-display">${t.note}</div>`:'';
+const depHtml=t.depends?`<div class="dep-line">Depends on: ${t.depends}</div>`:'';
+el.innerHTML=`
+<div class="note-toggle" title="Add note" data-id="${t.id}">+</div>
+<div class="t-name">${t.name}</div>
+<div class="t-detail">${t.detail}</div>
+${depHtml}${noteHtml}
+<div class="t-meta">
+<span class="tag p-${t.priority}">${t.priority}</span>
+<span class="tag owner">${t.owner}</span>
+<span class="tag owner">${t.component}</span>
+</div>
+<div class="note-area" id="note-${t.id}">
+<textarea placeholder="Add a note...">${t.note||''}</textarea>
+<button class="note-save" data-id="${t.id}">Save note</button>
+</div>`;
+el.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',t.id);el.classList.add('dragging')});
+el.addEventListener('dragend',()=>{el.classList.remove('dragging')});
+el.addEventListener('dblclick',()=>{openEdit(t.id)});
+col.appendChild(el);
+});
+const addBtn=document.createElement('button');
+addBtn.className='add-task';addBtn.textContent='+ Add task here';
+addBtn.addEventListener('click',()=>{document.getElementById('m-status').value=c.status;openModal()});
+col.appendChild(addBtn);
+board.appendChild(col);
+});
+document.getElementById('stat-total').textContent=tasks.length+' items';
+document.getElementById('stat-done').textContent=tasks.filter(t=>t.status==='done').length+' done';
+document.getElementById('stat-blocked').textContent=tasks.filter(t=>t.status==='blocked').length+' blocked';
+}
+document.addEventListener('click',e=>{
+if(e.target.classList.contains('note-toggle')){
+const id=e.target.dataset.id;
+const area=document.getElementById('note-'+id);
+if(area)area.classList.toggle('open');
+}
+if(e.target.classList.contains('note-save')){
+const id=e.target.dataset.id;
+const area=document.getElementById('note-'+id);
+const ta=area.querySelector('textarea');
+const task=tasks.find(t=>t.id===id);
+if(task){task.note=ta.value;saveTasks(tasks);render()}
+}
+});
+function openModal(){editingId=null;document.getElementById('modal-title').textContent='Add task';
+['m-name','m-detail','m-depends'].forEach(id=>document.getElementById(id).value='');
+document.getElementById('m-priority').value='high';
+document.getElementById('m-owner').value='Aaron';
+document.getElementById('m-component').value='Portal';
+document.getElementById('modal').classList.add('open');
+}
+function openEdit(id){
+const t=tasks.find(x=>x.id===id);if(!t)return;
+editingId=id;
+document.getElementById('modal-title').textContent='Edit task';
+document.getElementById('m-name').value=t.name;
+document.getElementById('m-detail').value=t.detail;
+document.getElementById('m-status').value=t.status;
+document.getElementById('m-priority').value=t.priority;
+document.getElementById('m-owner').value=t.owner;
+document.getElementById('m-component').value=t.component;
+document.getElementById('m-depends').value=t.depends||'';
+document.getElementById('modal').classList.add('open');
+}
+document.getElementById('btn-add').addEventListener('click',openModal);
+document.getElementById('btn-cancel').addEventListener('click',()=>document.getElementById('modal').classList.remove('open'));
+document.getElementById('btn-save').addEventListener('click',()=>{
+const name=document.getElementById('m-name').value.trim();
+if(!name)return;
+if(editingId){
+const t=tasks.find(x=>x.id===editingId);
+if(t){t.name=name;t.detail=document.getElementById('m-detail').value;t.status=document.getElementById('m-status').value;t.priority=document.getElementById('m-priority').value;t.owner=document.getElementById('m-owner').value;t.component=document.getElementById('m-component').value;t.depends=document.getElementById('m-depends').value}
+}else{
+tasks.push({id:'t'+Date.now(),name,detail:document.getElementById('m-detail').value,status:document.getElementById('m-status').value,priority:document.getElementById('m-priority').value,owner:document.getElementById('m-owner').value,component:document.getElementById('m-component').value,depends:document.getElementById('m-depends').value,note:'',order:tasks.length});
+}
+saveTasks(tasks);document.getElementById('modal').classList.remove('open');render();
+});
+document.getElementById('btn-export').addEventListener('click',()=>{
+const blob=new Blob([JSON.stringify(tasks,null,2)],{type:'application/json'});
+const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='roadmap_export_'+new Date().toISOString().slice(0,10)+'.json';a.click();
+});
+['filter-priority','filter-owner','filter-component'].forEach(id=>document.getElementById(id).addEventListener('change',render));
+document.getElementById('search').addEventListener('input',render);
+render();
+</script>
+</body>
+</html>

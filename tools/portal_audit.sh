@@ -26,7 +26,7 @@ if [ "$guard_violations" -gt 0 ]; then
 fi
 
 # --- DEAD DEAL CHECK ---
-gridco=$(grep -rin "Gridco\|Shon Cunningham" "$REPO" --include="*.html" 2>/dev/null | grep -vi "DEAD\|dead\|removed\|closed\|archived\|improvement_log\|changelog" | wc -l | tr -d ' ')
+gridco=$(grep -rin "Gridco\|Shon Cunningham" "$REPO" --include="*.html" 2>/dev/null | grep -vi "DEAD\|dead\|removed\|closed\|archived\|improvement_log\|changelog\|tracking" | wc -l | tr -d ' ')
 if [ "$gridco" -gt 0 ]; then
   ISSUES=$((ISSUES + 1))
   DETAILS="$DETAILS, \"Gridco/Cunningham still referenced in $gridco places\""

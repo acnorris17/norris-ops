@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legacy Project — Living Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lato',sans-serif;background:#0a0e1a;color:#e8eaf0;min-height:100vh}
+.header{background:linear-gradient(135deg,#0a0e5c,#0033cc,#0066ee,#00aaff,#06D0FF);padding:24px 32px;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;top:0;right:-50px;width:200px;height:100%;background:rgba(255,255,255,0.06);transform:skewX(-15deg)}
+.header h1{font-size:22px;font-weight:900;color:#fff;letter-spacing:1px}
+.header .sub{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.8);font-size:14px;margin-top:4px}
+.header .stats{display:flex;gap:24px;margin-top:12px;flex-wrap:wrap}
+.header .stat{background:rgba(0,0,0,0.25);border-radius:8px;padding:8px 16px;font-size:13px;color:#fff}
+.header .stat strong{font-size:20px;display:block;color:#06D0FF}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:24px 32px;max-width:1400px;margin:0 auto}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+.card{background:#111627;border:1px solid #1e2744;border-radius:12px;padding:20px;position:relative;transition:border-color .2s}
+.card:hover{border-color:#0066ee}
+.card.full{grid-column:1/-1}
+.card h2{font-size:15px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.badge.done{background:#0a3d1a;color:#4ade80;border:1px solid #166534}
+.badge.active{background:#1a2a4a;color:#60a5fa;border:1px solid #1e40af}
+.badge.blocked{background:#3b1111;color:#f87171;border:1px solid #991b1b}
+.badge.waiting{background:#1a1a2e;color:#94a3b8;border:1px solid #334155}
+.badge.crashed{background:#3b1111;color:#f87171;border:1px solid #991b1b;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+
+.progress-bar{height:6px;background:#1e2744;border-radius:3px;margin:8px 0 12px;overflow:hidden}
+.progress-bar .fill{height:100%;border-radius:3px;transition:width .5s ease}
+.fill.green{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.fill.blue{background:linear-gradient(90deg,#0066ee,#06D0FF)}
+.fill.red{background:linear-gradient(90deg,#dc2626,#f87171)}
+.fill.yellow{background:linear-gradient(90deg,#eab308,#facc15)}
+
+.item{padding:8px 0;border-bottom:1px solid #1e2744;font-size:13px;line-height:1.5}
+.item:last-child{border-bottom:none}
+.item .label{color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.item .value{color:#e8eaf0}
+.item .value.warn{color:#f87171}
+.item .value.good{color:#4ade80}
+.item .value.info{color:#60a5fa}
+
+.blocker{padding:10px 14px;margin:6px 0;border-radius:8px;font-size:13px;line-height:1.5}
+.blocker.critical{background:#1a0505;border-left:4px solid #dc2626}
+.blocker.high{background:#1a1005;border-left:4px solid #eab308}
+.blocker.medium{background:#051a1a;border-left:4px solid #06D0FF}
+.blocker .b-title{font-weight:700;margin-bottom:2px}
+.blocker .b-detail{color:#94a3b8;font-size:12px}
+
+.action{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #1e2744;font-size:13px}
+.action:last-child{border-bottom:none}
+.action .num{background:#0033cc;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0;margin-top:2px}
+.action .num.done-num{background:#166534}
+.action .a-text{flex:1}
+.action .a-title{font-weight:700;color:#e8eaf0}
+.action .a-detail{color:#94a3b8;font-size:12px;margin-top:2px}
+.action .a-owner{display:inline-block;background:#1e2744;color:#60a5fa;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:700;margin-left:6px}
+
+.dep-map{font-family:'Lato',monospace;font-size:12px;color:#60a5fa;background:#0a0e1a;padding:12px;border-radius:8px;border:1px solid #1e2744;line-height:1.8;overflow-x:auto;white-space:pre}
+.dep-map .node{color:#06D0FF;font-weight:700}
+.dep-map .arrow{color:#334155}
+
+.footer{text-align:center;padding:24px;font-size:12px;color:#475569;font-family:'Playfair Display',serif;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>LEGACY / AI AGENT — PROJECT DASHBOARD</h1>
+  <div class="sub">A Legacy of Commitment&reg; &mdash; Updated April 14, 2026</div>
+  <div class="stats">
+    <div class="stat"><strong>~45%</strong>Overall Progress</div>
+    <div class="stat"><strong>10</strong>Components</div>
+    <div class="stat"><strong>7</strong>Active Blockers</div>
+    <div class="stat"><strong>$7,610+</strong>Ready to Invoice</div>
+    <div class="stat"><strong>$2.5M+</strong>Pipeline Active</div>
+  </div>
+</div>
+
+<div class="grid">
+
+  <!-- COMPONENT STATUS -->
+  <div class="card full">
+    <h2>Component Status</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead><tr style="border-bottom:2px solid #1e2744;text-align:left">
+        <th style="padding:8px;color:#94a3b8;font-size:11px;text-transform:uppercase">Component</th>
+        <th style="padding:8px;color:#94a3b8;font-size:11px;text-transform:uppercase">Status</th>
+        <th style="padding:8px;color:#94a3b8;font-size:11px;text-transform:uppercase">Progress</th>
+        <th style="padding:8px;color:#94a3b8;font-size:11px;text-transform:uppercase">Current Blocker</th>
+        <th style="padding:8px;color:#94a3b8;font-size:11px;text-transform:uppercase">Owner</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #1e2744">
+          <td style="padding:8px;font-weight:700">Ops Portal</td>
+          <td style="padding:8px"><span class="badge active">In Progress</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill blue" style="width:65%"></div></div> 65%</td>
+          <td style="padding:8px;color:#f87171;font-size:12px">Cloudflare auth, Shipments data</td>
+          <td style="padding:8px">Aaron + CC</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1e2744">
+          <td style="padding:8px;font-weight:700">Legacy Agent</td>
+          <td style="padding:8px"><span class="badge active">In Progress</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill blue" style="width:55%"></div></div> 55%</td>
+          <td style="padding:8px;color:#f87171;font-size:12px">Memory auto-sync broken, update needed</td>
+          <td style="padding:8px">CC (M1)</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1e2744">
+          <td style="padding:8px;font-weight:700">Shipping AI Agent</td>
+          <td style="padding:8px"><span class="badge active">In Progress</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill yellow" style="width:70%"></div></div> 70%</td>
+          <td style="padding:8px;color:#eab308;font-size:12px">Awaiting confirm-write ($7,610)</td>
+          <td style="padding:8px">Aaron → CC</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1e2744">
+          <td style="padding:8px;font-weight:700">NorrisPalace</td>
+          <td style="padding:8px"><span class="badge done">Built</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill green" style="width:90%"></div></div> 90%</td>
+          <td style="padding:8px;color:#94a3b8;font-size:12px">Legacy doesn't query consistently</td>
+          <td style="padding:8px">CC (M1)</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1e2744">
+          <td style="padding:8px;font-weight:700">G Brain</td>
+          <td style="padding:8px"><span class="badge done">Built</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill green" style="width:90%"></div></div> 90%</td>
+          <td style="padding:8px;color:#94a3b8;font-size:12px">Same — query consistency</td>
+          <td style="padding:8px">CC (M1)</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1e2744">
+          <td style="padding:8px;font-weight:700">reMarkable Pipeline</td>
+          <td style="padding:8px"><span class="badge crashed">Crashed</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill red" style="width:20%"></div></div> 20%</td>
+          <td style="padding:8px;color:#f87171;font-size:12px">SIGKILL Apr 3 — 37 items stuck</td>
+          <td style="padding:8px">CC (M1)</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1e2744">
+          <td style="padding:8px;font-weight:700">Living Roadmap</td>
+          <td style="padding:8px"><span class="badge active">In Progress</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill blue" style="width:40%"></div></div> 40%</td>
+          <td style="padding:8px;color:#eab308;font-size:12px">TODAY'S MAIN DELIVERABLE</td>
+          <td style="padding:8px">Claude.ai</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1e2744">
+          <td style="padding:8px;font-weight:700">Discord</td>
+          <td style="padding:8px"><span class="badge waiting">Unused</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill green" style="width:100%"></div></div> Live</td>
+          <td style="padding:8px;color:#94a3b8;font-size:12px">Aaron never introduced to it</td>
+          <td style="padding:8px">Low priority</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1e2744">
+          <td style="padding:8px;font-weight:700">Website</td>
+          <td style="padding:8px"><span class="badge waiting">Low Priority</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill blue" style="width:10%"></div></div> 10%</td>
+          <td style="padding:8px;color:#94a3b8;font-size:12px">Needs Cloudflare first + agents</td>
+          <td style="padding:8px">Autonomous</td>
+        </tr>
+        <tr>
+          <td style="padding:8px;font-weight:700">Pricing/Products</td>
+          <td style="padding:8px"><span class="badge active">Separate Projects</span></td>
+          <td style="padding:8px"><div class="progress-bar" style="width:120px;display:inline-block;vertical-align:middle"><div class="fill blue" style="width:50%"></div></div> 50%</td>
+          <td style="padding:8px;color:#94a3b8;font-size:12px">Contacts, Samson, FlexPro in own folders</td>
+          <td style="padding:8px">Aaron</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BLOCKERS -->
+  <div class="card">
+    <h2>&#x1F6A8; Active Blockers</h2>
+    <div class="blocker critical">
+      <div class="b-title">Memory systems not auto-updating</div>
+      <div class="b-detail">LEGACY_MEMORY.md manual. Legacy doesn't query Palace/Brain consistently. Aaron repeats context endlessly.</div>
+    </div>
+    <div class="blocker critical">
+      <div class="b-title">Shipping pipeline not end-to-end</div>
+      <div class="b-detail">$7,610 READY but needs confirm-write. SD auto-print missing. No auto-sync portal↔Sheet↔SD.</div>
+    </div>
+    <div class="blocker high">
+      <div class="b-title">Cloudflare not configured</div>
+      <div class="b-detail">JS password gate is weak. Blocks true auth + website. Session open TODAY.</div>
+    </div>
+    <div class="blocker high">
+      <div class="b-title">reMarkable pipeline crashed</div>
+      <div class="b-detail">37 items stuck. In-person delivery notes don't flow. SIGKILL April 3.</div>
+    </div>
+    <div class="blocker high">
+      <div class="b-title">No Time Machine backup on M1</div>
+      <div class="b-detail">84 files, 27 LaunchAgents, all memory — zero backup. Buy Samsung T7 SSD ($60).</div>
+    </div>
+    <div class="blocker medium">
+      <div class="b-title">Gridco/Cunningham persistent (tracking)</div>
+      <div class="b-detail">Dead deal keeps resurfacing. Need grep-and-destroy across ALL M1 files.</div>
+    </div>
+    <div class="blocker medium">
+      <div class="b-title">Telegram notification noise</div>
+      <div class="b-detail">All notifications in Legacy's direct chat. Need separate ops notification channel.</div>
+    </div>
+  </div>
+
+  <!-- NEXT ACTIONS -->
+  <div class="card">
+    <h2>&#x1F3AF; Next Actions</h2>
+    <div class="action">
+      <div class="num">1</div>
+      <div class="a-text">
+        <div class="a-title">Update OpenClaw to v2026.4.9 <span class="a-owner">Aaron</span></div>
+        <div class="a-detail">openclaw update → gateway install --force → gateway start. 5 min.</div>
+      </div>
+    </div>
+    <div class="action">
+      <div class="num">2</div>
+      <div class="a-text">
+        <div class="a-title">Living Roadmap visualization <span class="a-owner">Claude</span></div>
+        <div class="a-detail">Interactive visual tool. TODAY's main deliverable. 5+ hours invested.</div>
+      </div>
+    </div>
+    <div class="action">
+      <div class="num">3</div>
+      <div class="a-text">
+        <div class="a-title">Shipping Agent confirm-write <span class="a-owner">Aaron</span></div>
+        <div class="a-detail">7 READY orders = $7,610. Say "confirm write" → data flows → CB invoices.</div>
+      </div>
+    </div>
+    <div class="action">
+      <div class="num">4</div>
+      <div class="a-text">
+        <div class="a-title">Cloudflare setup <span class="a-owner">Aaron</span></div>
+        <div class="a-detail">Dedicated session open. Nameserver swap from Squarespace. 30-60 min.</div>
+      </div>
+    </div>
+    <div class="action">
+      <div class="num">5</div>
+      <div class="a-text">
+        <div class="a-title">Wire LEGACY_MEMORY.md auto-update <span class="a-owner">CC (M1)</span></div>
+        <div class="a-detail">All channels → auto-write to memory. Fix Legacy's query behavior. 1-2 hours.</div>
+      </div>
+    </div>
+    <div class="action">
+      <div class="num">6</div>
+      <div class="a-text">
+        <div class="a-title">reMarkable pipeline reconnect <span class="a-owner">CC (M1)</span></div>
+        <div class="a-detail">Fix crash or build better. 37 stuck items. In Legacy master fix prompt.</div>
+      </div>
+    </div>
+    <div class="action">
+      <div class="num">7</div>
+      <div class="a-text">
+        <div class="a-title">SD auto-print pipeline <span class="a-owner">CC (M1)</span></div>
+        <div class="a-detail">SD creates → auto-print 1 copy (Draft, Color, no headers) unless "don't print."</div>
+      </div>
+    </div>
+    <div class="action">
+      <div class="num">8</div>
+      <div class="a-text">
+        <div class="a-title">Separate Telegram notifications <span class="a-owner">CC (M1)</span></div>
+        <div class="a-detail">Route ops notifications to second chat. Legacy chat = Legacy + Aaron only.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEPENDENCY MAP -->
+  <div class="card full">
+    <h2>&#x1F517; Dependency Map</h2>
+    <div class="dep-map"><span class="node">Memory Fix</span> <span class="arrow">────→</span> <span class="node">Legacy Performance</span> <span class="arrow">────→</span> Everything improves
+    │
+    <span class="node">Shipping Agent</span> <span class="arrow">──→</span> <span class="node">SD Auto-Print</span> <span class="arrow">──→</span> <span class="node">Portal Shipments</span> <span class="arrow">──→</span> <span class="node">CB Invoicing</span> <span class="arrow">──→</span> <span style="color:#4ade80;font-weight:700">$$$ REVENUE</span>
+    │                                          │
+    └── <span class="node">Shipping Log Sheet</span> <span class="arrow">──────────────────┘</span>
+
+    <span class="node">Cloudflare</span> <span class="arrow">────→</span> <span class="node">True Auth</span> <span class="arrow">────→</span> <span class="node">Website Rebuild</span> (low priority, autonomous agents)
+
+    <span class="node">reMarkable Fix</span> <span class="arrow">──→</span> <span class="node">In-Person Orders</span> <span class="arrow">──→</span> <span class="node">SD Pipeline</span> (connects to Shipping Agent above)
+
+    <span class="node">Samson Project</span> <span class="arrow">──→</span> <span class="node">MSP Portal</span> (separate project folder, results brought in)
+    <span class="node">Contacts Project</span> <span class="arrow">──→</span> <span class="node">Portal CRM</span> (separate project folder, results brought in)
+    <span class="node">FlexPro Project</span> <span class="arrow">──→</span> <span class="node">Pricing Page</span> (separate project folder, results brought in)</div>
+  </div>
+
+  <!-- REVENUE AT STAKE -->
+  <div class="card">
+    <h2>&#x1F4B0; Revenue at Stake</h2>
+    <div class="item"><div class="label">Ready to Invoice (7 orders)</div><div class="value good">$7,610+</div></div>
+    <div class="item"><div class="label">Pending Verification</div><div class="value info">~$2,890 (Crosby Mar 20 + Abadie BYB0001)</div></div>
+    <div class="item"><div class="label">Active Pipeline</div><div class="value info">$2.5M+</div></div>
+    <div class="item"><div class="label">Highest Priority Deal</div><div class="value warn">Bill Kugler / Terex — $500K+ OEM</div></div>
+    <div class="item"><div class="label">Coldest Deal</div><div class="value warn">Rick Sutherland / EPB — $185K, 130+ days</div></div>
+    <div class="item"><div class="label">Skylift PO</div><div class="value info">$1,091,402 — trucks must sell before arrival</div></div>
+  </div>
+
+  <!-- SESSIONS OPEN TODAY -->
+  <div class="card">
+    <h2>&#x1F4BB; Active Sessions (April 14)</h2>
+    <div class="item"><div class="label">This Session</div><div class="value info">Living Memory Build + Roadmap Visualization</div></div>
+    <div class="item"><div class="label">Shipping Agent</div><div class="value info">Dry-run complete, awaiting confirm-write</div></div>
+    <div class="item"><div class="label">Legacy SD Process</div><div class="value info">12-phase master fix running</div></div>
+    <div class="item"><div class="label">Cloudflare</div><div class="value info">Ready to execute — waiting on Aaron</div></div>
+    <div class="item"><div class="label">Portal Ops</div><div class="value info">project-roadmap.html deployment</div></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Norris Utilities&reg; &mdash; A Legacy of Commitment&reg; &mdash; Would Wayne be proud of this?
+</div>
+
+</body>
+</html>
