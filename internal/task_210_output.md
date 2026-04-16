@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- nu-auth-gate-v2 -->
-<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>H2O Waterproofing — Lifetime Warranty Definition — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Action Brief: H2O Waterproofing Lifetime Warranty Definition — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
-
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -19,6 +15,9 @@
       --nu-medium-gray: #E8E8EC;
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
+      --nu-accent-gold: #C9A84C;
+      --nu-alert-amber: #F59E0B;
+      --nu-success-green: #10B981;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -27,15 +26,16 @@
     body {
       font-family: var(--font-primary);
       color: var(--nu-body-text);
-      background: var(--nu-white);
+      background: var(--nu-light-gray);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ══ HEADER ══ */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 40%, var(--nu-cyan) 100%);
-      padding: 60px 40px 80px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      padding: 60px 40px 90px;
       text-align: center;
       overflow: hidden;
       min-height: 280px;
@@ -45,61 +45,71 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
-        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
-        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
-      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.6;
     }
     .nu-header::after {
       content: '';
       position: absolute;
       top: -50%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
     .nu-header * { position: relative; z-index: 2; }
 
-    .nu-phoenix-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 16px;
-      fill: var(--nu-white);
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    .nu-phoenix-watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      opacity: 0.07;
+      z-index: 1;
+    }
+
+    .nu-eyebrow {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      color: var(--nu-cyan);
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid rgba(6,208,255,0.4);
+      border-radius: 2px;
+      margin-bottom: 16px;
+      background: rgba(0,0,0,0.15);
     }
     .nu-logo-text {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 3.2rem;
+      font-size: 2.8rem;
       color: var(--nu-white);
-      letter-spacing: 0.35em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.4rem;
+      font-size: 1.1rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.75em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      padding-left: 0.75em;
     }
     .nu-tagline {
-      font-family: var(--font-primary);
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.3rem;
-      color: rgba(255,255,255,0.9);
-      letter-spacing: 0.05em;
+      font-weight: 400;
+      font-size: 1.15rem;
+      color: var(--nu-cyan);
+      letter-spacing: 0.02em;
     }
 
+    /* ══ WHITE CHEVRON ══ */
     .nu-chevron {
       position: relative;
       height: 50px;
@@ -112,456 +122,680 @@
       display: block;
     }
 
+    /* ══ CONTENT ══ */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
     }
-    .nu-content-area::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
+    .nu-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 40px;
     }
-    .nu-content-area > * { position: relative; z-index: 1; }
 
-    .page-title {
-      font-family: var(--font-primary);
+    .nu-page-title {
       font-weight: 900;
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--nu-dark-text);
+      line-height: 1.15;
       margin-bottom: 8px;
-      text-align: center;
     }
-    .page-subtitle {
-      font-family: var(--font-primary);
-      font-weight: 400;
-      font-size: 1.1rem;
-      color: #666;
-      text-align: center;
+    .nu-page-title .blue { color: #0033cc; }
+    .nu-page-subtitle {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    /* ══ STATUS STRIP ══ */
+    .status-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      border-radius: 8px;
+      overflow: hidden;
       margin-bottom: 40px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.12);
     }
-
-    .nu-section-title {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.5rem;
-      color: var(--nu-blue);
-      margin-bottom: 8px;
-    }
-    .nu-section-title span {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-
-    .priority-banner {
-      background: linear-gradient(135deg, #8b0000 0%, #cc0000 100%);
+    .status-cell {
+      padding: 20px 22px;
       color: var(--nu-white);
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 32px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
+      border-right: 1px solid rgba(255,255,255,0.1);
     }
-    .priority-banner .icon {
-      font-size: 2.4rem;
-      flex-shrink: 0;
-    }
-    .priority-banner h2 {
-      font-weight: 900;
-      font-size: 1.15rem;
-      letter-spacing: 0.04em;
+    .status-cell:last-child { border-right: none; }
+    .status-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
       margin-bottom: 6px;
     }
-    .priority-banner p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.92);
+    .status-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--nu-white);
+    }
+    .status-value.amber { color: var(--nu-alert-amber); }
+
+    /* ══ SECTION ══ */
+    .section {
+      margin-bottom: 48px;
+    }
+    .section-title {
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--nu-cyan);
+    }
+    .section-title .first { color: #0033cc; }
+    .section-title .rest { color: var(--nu-dark-text); }
+
+    .lead-block {
+      background: linear-gradient(135deg, #f8fbff 0%, #eef5ff 100%);
+      border-left: 4px solid var(--nu-blue);
+      padding: 22px 26px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 24px;
+    }
+    .lead-block p {
+      font-size: 1.02rem;
+      color: var(--nu-dark-text);
+      line-height: 1.7;
     }
 
-    .contact-card {
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 36px;
-      display: flex;
-      align-items: center;
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 24px;
     }
-    .contact-card .phone-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--nu-cyan);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+    @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+    .info-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     }
-    .contact-card .phone-icon svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--nu-navy);
+    .info-card h3 {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: #0033cc;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .info-card p { font-size: 0.95rem; line-height: 1.65; }
+    .info-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .info-card ul li {
+      padding: 6px 0 6px 22px;
+      position: relative;
+      font-size: 0.95rem;
+    }
+    .info-card ul li::before {
+      content: '•';
+      color: var(--nu-cyan);
+      font-weight: 900;
+      font-size: 1.3rem;
+      position: absolute;
+      left: 6px;
+      top: 2px;
+    }
+
+    /* ══ QUESTION TABLE ══ */
+    .q-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--nu-white);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .q-table thead {
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033cc 100%);
+      color: var(--nu-white);
+    }
+    .q-table th {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .q-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      vertical-align: top;
+      font-size: 0.95rem;
+    }
+    .q-table tr:last-child td { border-bottom: none; }
+    .q-table tr:nth-child(even) td { background: #fafbfd; }
+    .q-table td.num {
+      font-weight: 900;
+      color: var(--nu-blue);
+      width: 50px;
+      text-align: center;
+    }
+
+    /* ══ CONTACT CARD ══ */
+    .contact-card {
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
+      color: var(--nu-white);
+      border-radius: 10px;
+      padding: 32px;
+      box-shadow: 0 6px 24px rgba(0,0,80,0.25);
     }
     .contact-card h3 {
       font-weight: 900;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      color: var(--nu-white);
+    }
+    .contact-card .sub {
+      color: var(--nu-cyan);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 14px;
+    }
+    .contact-item {
+      background: rgba(255,255,255,0.08);
+      padding: 14px 16px;
+      border-radius: 6px;
+      border-left: 3px solid var(--nu-cyan);
+    }
+    .contact-item .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
       margin-bottom: 4px;
     }
-    .contact-card .phone-number {
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: var(--nu-cyan);
-      letter-spacing: 0.04em;
+    .contact-item .val {
+      font-size: 0.95rem;
+      font-weight: 700;
     }
-    .contact-card .context {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.75);
-      margin-top: 4px;
+    .contact-item .val a {
+      color: var(--nu-white);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(6,208,255,0.5);
     }
 
-    .action-section {
-      background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 36px;
-      border-left: 4px solid var(--nu-blue);
-    }
-    .action-section h3 {
-      font-weight: 900;
-      font-size: 1.1rem;
+    /* ══ SCRIPT BOX ══ */
+    .script-box {
+      background: #fefefe;
+      border: 2px solid var(--nu-medium-gray);
+      border-left: 6px solid var(--nu-cyan);
+      padding: 24px 28px;
+      border-radius: 4px 8px 8px 4px;
+      font-size: 0.98rem;
+      line-height: 1.75;
       color: var(--nu-dark-text);
-      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     }
-    .action-list {
+    .script-box .opener {
+      font-weight: 700;
+      color: #0033cc;
+      margin-bottom: 10px;
+    }
+    .script-box .closer {
+      margin-top: 14px;
+      font-style: italic;
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    /* ══ NEXT STEPS ══ */
+    .steps-list {
       list-style: none;
+      counter-reset: step;
       padding: 0;
     }
-    .action-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 0;
-      font-size: 0.95rem;
+    .steps-list li {
+      counter-increment: step;
+      position: relative;
+      padding: 16px 20px 16px 72px;
+      margin-bottom: 12px;
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      font-size: 0.97rem;
       line-height: 1.6;
-      border-bottom: 1px solid rgba(0,0,255,0.08);
     }
-    .action-list li:last-child { border-bottom: none; }
-    .action-number {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      min-width: 28px;
-      background: var(--nu-blue);
+    .steps-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 18px; top: 50%;
+      transform: translateY(-50%);
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
       color: var(--nu-white);
       border-radius: 50%;
-      font-weight: 900;
-      font-size: 0.8rem;
-    }
-
-    .context-block {
-      background: var(--nu-light-gray);
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 36px;
-      border-left: 4px solid var(--nu-cyan);
-    }
-    .context-block h3 {
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 12px;
-    }
-    .context-block p {
-      font-size: 0.95rem;
-      line-height: 1.8;
-      margin-bottom: 10px;
-    }
-    .context-block p:last-child { margin-bottom: 0; }
-
-    .definition-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 36px;
-    }
-    .def-card {
-      background: var(--nu-white);
-      border-radius: 10px;
-      padding: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      border: 2px solid var(--nu-medium-gray);
-      text-align: center;
-    }
-    .def-card h4 {
-      font-weight: 900;
-      font-size: 0.95rem;
-      color: var(--nu-blue);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .def-card p {
-      font-size: 0.88rem;
-      line-height: 1.6;
-      color: var(--nu-body-text);
-    }
-    .def-card.highlight {
-      border-color: var(--nu-blue);
-      background: linear-gradient(180deg, #f0f4ff 0%, var(--nu-white) 100%);
-    }
-
-    .checklist {
-      list-style: none;
-      padding: 0;
-    }
-    .checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 8px 0;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    .checklist li .check {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 22px;
-      height: 22px;
-      min-width: 22px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      margin-top: 2px;
-    }
-
-    .why-banner {
-      background: linear-gradient(135deg, #1a3e1a 0%, #2a5e2a 100%);
-      color: var(--nu-white);
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 36px;
-      text-align: center;
-    }
-    .why-banner h2 {
       font-weight: 900;
-      font-size: 1.2rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 10px;
-      color: #7fff7f;
+      font-size: 1.1rem;
     }
-    .why-banner p {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.92);
-      max-width: 700px;
-      margin: 0 auto;
+    .steps-list li strong { color: #0033cc; }
+
+    /* ══ PRIORITY BADGE ══ */
+    .priority-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--nu-alert-amber);
+      color: #4b2d00;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .priority-badge .dot {
+      width: 8px; height: 8px;
+      background: #4b2d00;
+      border-radius: 50%;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
     }
 
+    /* ══ WHY IT MATTERS ══ */
+    .why-block {
+      background: linear-gradient(135deg, #fff9ed 0%, #fff4d6 100%);
+      border: 1px solid #f0d890;
+      border-radius: 8px;
+      padding: 22px 26px;
+      margin-bottom: 24px;
+    }
+    .why-block h4 {
+      font-weight: 900;
+      color: #8a6400;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .why-block p { color: #5c4400; font-size: 0.97rem; }
+
+    /* ══ FOOTER ══ */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: rgba(255,255,255,0.8);
-      padding: 40px;
+      color: rgba(255,255,255,0.85);
+      padding: 44px 40px;
       text-align: center;
       font-family: var(--font-primary);
     }
     .nu-footer-tagline {
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.1rem;
+      font-weight: 400;
+      font-size: 1.2rem;
       color: var(--nu-cyan);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .nu-footer-contact {
-      font-size: 1.05rem;
-      line-height: 1.8;
+      font-size: 0.95rem;
+      line-height: 1.85;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
     }
+    .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-meta {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+    }
 
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-header { padding: 40px 20px 70px; min-height: 220px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-logo-subtitle { font-size: 0.9rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .priority-banner { flex-direction: column; text-align: center; }
-      .contact-card { flex-direction: column; text-align: center; }
-      .definition-grid { grid-template-columns: 1fr; }
-      .page-title { font-size: 1.5rem; }
+      .nu-container { padding: 40px 22px; }
+      .nu-page-title { font-size: 1.6rem; }
+      .status-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .status-cell:last-child { border-bottom: none; }
     }
 
     @media print {
+      body { background: white; }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .contact-card, .status-strip, .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="nu-header">
-    <div class="nu-phoenix-icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
-      </svg>
-    </div>
+    <svg class="nu-phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
+    </svg>
+    <div class="nu-eyebrow">Internal Action Brief</div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
+  <!-- WHITE CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L720,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
+  <!-- CONTENT -->
   <main class="nu-content-area">
-    <div style="max-width: 1000px; margin: 0 auto; padding: 60px 40px;">
+    <div class="nu-container">
 
-      <h1 class="page-title">H2O Waterproofing — Lifetime Warranty Definition</h1>
-      <p class="page-subtitle">Due Diligence Action Item for 4505 Buttewoods Closing</p>
+      <div class="priority-badge">
+        <span class="dot"></span>
+        Priority: Open Action — reMarkable Capture
+      </div>
 
-      <div class="priority-banner">
-        <div class="icon">&#9888;</div>
-        <div>
-          <h2>MUST COMPLETE BEFORE CLOSING</h2>
-          <p>Call H2O Waterproofing and get their definition of "lifetime warranty" in writing. This is critical due diligence — you need to know exactly what their warranty covers, how long it lasts, and whether it transfers to you as the new property owner at 4505 Buttewoods.</p>
+      <h1 class="nu-page-title">
+        <span class="blue">Action Brief:</span> Define H2O Waterproofing's<br>
+        Lifetime Warranty Coverage
+      </h1>
+      <p class="nu-page-subtitle">
+        Capture the exact written definition of H2O Waterproofing's "lifetime warranty" so Norris Utilities® can
+        compare it directly against the FlexPro Armor warranty terms before it comes up in a customer conversation.
+      </p>
+
+      <!-- STATUS STRIP -->
+      <div class="status-strip">
+        <div class="status-cell">
+          <div class="status-label">Source</div>
+          <div class="status-value">reMarkable Capture</div>
+        </div>
+        <div class="status-cell">
+          <div class="status-label">Owner</div>
+          <div class="status-value">Aaron C. Norris</div>
+        </div>
+        <div class="status-cell">
+          <div class="status-label">Status</div>
+          <div class="status-value amber">Awaiting Contact</div>
+        </div>
+        <div class="status-cell">
+          <div class="status-label">Date Logged</div>
+          <div class="status-value">April 16, 2026</div>
         </div>
       </div>
 
-      <div class="contact-card">
-        <div class="phone-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/></svg>
+      <!-- WHY IT MATTERS -->
+      <div class="section">
+        <div class="section-title">
+          <span class="first">Why</span> <span class="rest">This Matters</span>
         </div>
-        <div>
+
+        <div class="lead-block">
+          <p>
+            H2O Waterproofing markets a "lifetime warranty" on their bucket cover line. The word "lifetime" is used
+            loosely across the industry — it can mean the lifetime of the original buyer, the lifetime of the cover
+            in service, or a defined limited term dressed up in marketing language. Before FlexPro Armor goes head-to-head
+            on a bid or a demo day, we need their definition in writing so our warranty positioning is factual, fair,
+            and defensible.
+          </p>
+        </div>
+
+        <div class="why-block">
+          <h4>Business Impact</h4>
+          <p>
+            Customers (Irby, Sheffield Utilities, EPB Chattanooga, Gridco) ask warranty questions at purchase, renewal,
+            and after any field damage. If H2O's "lifetime" is actually a limited-term policy with exclusions, we want
+            a side-by-side comparison ready. If it's genuinely open-ended, we adjust FlexPro Armor's warranty messaging
+            and decide whether to match, beat, or differentiate on coverage scope rather than duration.
+          </p>
+        </div>
+      </div>
+
+      <!-- OBJECTIVE -->
+      <div class="section">
+        <div class="section-title">
+          <span class="first">Objective</span> <span class="rest">of This Call / Email</span>
+        </div>
+
+        <div class="two-col">
+          <div class="info-card">
+            <h3>Primary Goal</h3>
+            <p>
+              Obtain the <strong>written warranty document</strong> from H2O Waterproofing covering their bucket cover
+              line. We want the actual policy PDF or web page, not a verbal summary.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3>Secondary Goal</h3>
+            <p>
+              If no written document is produced, capture their on-the-record definition via email reply — in their
+              own words — so we have a dated, sourced statement to quote from.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUESTIONS TO ASK -->
+      <div class="section">
+        <div class="section-title">
+          <span class="first">Questions</span> <span class="rest">to Ask H2O Waterproofing</span>
+        </div>
+
+        <table class="q-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Question</th>
+              <th>What We Learn</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="num">1</td>
+              <td>How do you define "lifetime" — lifetime of the product, lifetime of the original purchaser, or a specific number of years?</td>
+              <td>Clarifies whether "lifetime" is open-ended or capped.</td>
+            </tr>
+            <tr>
+              <td class="num">2</td>
+              <td>Is the warranty transferable if the bucket truck is sold or re-assigned to another fleet?</td>
+              <td>Relevant for utility co-ops and contractors rotating equipment.</td>
+            </tr>
+            <tr>
+              <td class="num">3</td>
+              <td>What specifically is covered — fabric, stitching, hardware, waterproofing, or all components?</td>
+              <td>Reveals scope, which usually is narrower than "lifetime" implies.</td>
+            </tr>
+            <tr>
+              <td class="num">4</td>
+              <td>What voids the warranty — UV exposure, chemical contact, field modifications, normal wear?</td>
+              <td>Exclusions are where most "lifetime" warranties collapse.</td>
+            </tr>
+            <tr>
+              <td class="num">5</td>
+              <td>Is repair, replacement, or refund the remedy — and does the customer pay freight or labor?</td>
+              <td>Determines real cost to the end user if a claim is filed.</td>
+            </tr>
+            <tr>
+              <td class="num">6</td>
+              <td>What is your average turnaround time from claim filed to repaired/replaced cover back in service?</td>
+              <td>Downtime cost matters more than warranty length for fleet operators.</td>
+            </tr>
+            <tr>
+              <td class="num">7</td>
+              <td>Can you send the full written warranty policy as a PDF for our files?</td>
+              <td>Gives us the authoritative source to compare against.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- EMAIL SCRIPT -->
+      <div class="section">
+        <div class="section-title">
+          <span class="first">Email</span> <span class="rest">Script — First Contact</span>
+        </div>
+
+        <div class="script-box">
+          <div class="opener">Subject: Warranty Question — Bucket Cover Lifetime Coverage</div>
+          <p>Team at H2O Waterproofing —</p>
+          <br>
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;I'm Aaron Norris with Norris Utilities®. We distribute bucket covers in the utility
+            equipment space and I'd like to understand your warranty structure in more detail before any overlap comes
+            up in the field.
+          </p>
+          <br>
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;A few specific questions I'd appreciate clarity on:
+          </p>
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;• How you define "lifetime" in your warranty — by product lifetime, original
+            purchaser, or a fixed term<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;• Whether the warranty transfers with the equipment<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;• What components are covered and what voids coverage<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;• Whether the remedy is repair, replacement, or refund — and who pays freight
+          </p>
+          <br>
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;If you have the written warranty document as a PDF, that would be the cleanest way
+            to share it. Happy to take a quick call if that's easier on your end.
+          </p>
+          <br>
+          <p>Sincerely,</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;Aaron C. Norris</p>
+          <div class="closer">
+            [Use standard Aaron sig block: Founder & CEO / Norris Utilities, LLC / 205-500-1343 / acnorris@norrisutilities.com]
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="section">
+        <div class="section-title">
+          <span class="first">Contact</span> <span class="rest">& Research Starting Points</span>
+        </div>
+
+        <div class="contact-card">
           <h3>H2O Waterproofing</h3>
-          <div class="phone-number">(205) 956-2426</div>
-          <div class="context">Waterproofing contractor — performed work at 4505 Buttewoods</div>
+          <div class="sub">Initial Outreach Targets</div>
+          <p>
+            Aaron to identify the correct warranty contact at H2O Waterproofing. Start with whoever signs their
+            customer-facing sell sheets or whoever handles their public-facing web inquiries. If a general info inbox
+            is the only route, send the email above and ask them to route it to the person responsible for warranty
+            claims.
+          </p>
+          <div class="contact-grid">
+            <div class="contact-item">
+              <div class="label">Likely Contact</div>
+              <div class="val">Warranty / Customer Service</div>
+            </div>
+            <div class="contact-item">
+              <div class="label">Fallback</div>
+              <div class="val">Sales — request warranty hand-off</div>
+            </div>
+            <div class="contact-item">
+              <div class="label">Delivery Format</div>
+              <div class="val">Request PDF policy</div>
+            </div>
+            <div class="contact-item">
+              <div class="label">Log Destination</div>
+              <div class="val">FlexPro Armor competitive file</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <h2 class="nu-section-title">Questions <span>to Ask H2O Waterproofing</span></h2>
-
-      <div class="action-section">
-        <h3>Get All of These Answered — In Writing</h3>
-        <ul class="action-list">
-          <li>
-            <span class="action-number">1</span>
-            <span><strong>What does "lifetime" mean in your warranty?</strong> Life of the original homeowner who paid for the work? Life of the structure? A set number of years? Get the exact definition.</span>
-          </li>
-          <li>
-            <span class="action-number">2</span>
-            <span><strong>Confirm the work was done at 4505 Buttewoods.</strong> Get written confirmation that H2O Waterproofing performed waterproofing work at this specific address, including the date of service and scope of work.</span>
-          </li>
-          <li>
-            <span class="action-number">3</span>
-            <span><strong>Get a copy of the actual warranty document.</strong> Not a verbal summary — the full written warranty that spells out terms, conditions, and exclusions.</span>
-          </li>
-          <li>
-            <span class="action-number">4</span>
-            <span><strong>What is the warranty transfer process?</strong> Does the warranty transfer automatically to a new property owner, or is there a formal transfer process? Are there any transfer fees?</span>
-          </li>
-          <li>
-            <span class="action-number">5</span>
-            <span><strong>Is the "Peace of Mind" maintenance program required?</strong> Some waterproofing companies void the warranty if the homeowner does not maintain an annual inspection or maintenance program. Find out if H2O requires this for the warranty to remain valid.</span>
-          </li>
-          <li>
-            <span class="action-number">6</span>
-            <span><strong>What specific failures does the warranty cover?</strong> Water intrusion through treated areas, foundation cracks, drainage system failures, sump pump failures — get the complete list of covered and excluded items.</span>
-          </li>
-        </ul>
-      </div>
-
-      <h2 class="nu-section-title">Possible <span>"Lifetime" Definitions</span></h2>
-      <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem;">Waterproofing companies use "lifetime warranty" in different ways. Here are the three most common definitions — find out which one H2O uses.</p>
-
-      <div class="definition-grid">
-        <div class="def-card">
-          <h4>Life of Original Owner</h4>
-          <p>Warranty is valid only while the person who paid for the waterproofing work owns the home. Expires on sale of the property unless formally transferred.</p>
+      <!-- NEXT STEPS -->
+      <div class="section">
+        <div class="section-title">
+          <span class="first">Next</span> <span class="rest">Steps</span>
         </div>
-        <div class="def-card highlight">
-          <h4>Transferable Lifetime</h4>
-          <p>Warranty follows the property regardless of ownership changes. This is the best-case scenario for a buyer. May require a transfer fee or notification to the company.</p>
+
+        <ol class="steps-list">
+          <li>
+            <strong>Send outreach email</strong> to H2O Waterproofing using the script above. CC acnorris@norrisutilities.com
+            to keep a clean record in Gmail.
+          </li>
+          <li>
+            <strong>Request the written warranty PDF</strong> specifically. Verbal answers over the phone are useful but
+            not quotable — we need the document to quote from in customer conversations.
+          </li>
+          <li>
+            <strong>Log H2O's response</strong> in the FlexPro Armor competitive file on the ops portal so Caroline can
+            see the side-by-side comparison without having to dig through email.
+          </li>
+          <li>
+            <strong>Build the comparison table</strong> — FlexPro Armor warranty vs. H2O Waterproofing warranty across
+            definition, transferability, covered components, exclusions, remedy, and turnaround.
+          </li>
+          <li>
+            <strong>Brief Caroline Butler</strong> once the comparison is done so she can speak to it on inbound calls
+            without needing Aaron's review on every conversation.
+          </li>
+          <li>
+            <strong>Follow-up cadence</strong> — if no response within five business days, send a short nudge. If still
+            no response within ten business days, escalate to a phone call and document what's obtainable from their
+            public materials instead.
+          </li>
+        </ol>
+      </div>
+
+      <!-- REFERENCE -->
+      <div class="section">
+        <div class="section-title">
+          <span class="first">Reference</span> <span class="rest">— FlexPro Armor Warranty Baseline</span>
         </div>
-        <div class="def-card">
-          <h4>Limited Time Period</h4>
-          <p>Some companies say "lifetime" but actually mean 25, 30, or 50 years. The warranty document will specify the actual duration.</p>
+
+        <div class="two-col">
+          <div class="info-card">
+            <h3>What FlexPro Armor Offers</h3>
+            <ul>
+              <li>Handmade in the USA, heavy-duty fabric construction</li>
+              <li>Designed for fleet-grade utility use — Skylift, Terex, and cross-fitment</li>
+              <li>SKUs: NU-BC-2851, NU-BC-2834, NU-BC-2851-C, NU-BC-2834-C</li>
+              <li>Standard 50% margin — Norris Utilities® direct and dealer channels</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>What We're Building Toward</h3>
+            <ul>
+              <li>A published FlexPro Armor warranty statement matched or exceeded against H2O's definition</li>
+              <li>A one-page warranty comparison sheet for sales conversations</li>
+              <li>Clean, defensible language — no "lifetime" claims we can't back in writing</li>
+              <li>Caroline enabled to answer warranty questions without escalation</li>
+            </ul>
+          </div>
         </div>
-      </div>
-
-      <div class="why-banner">
-        <h2>WHY THIS MATTERS FOR 4505 BUTTEWOODS</h2>
-        <p>If H2O Waterproofing's warranty does not transfer to a new owner — or if it requires a paid maintenance program to stay valid — that changes the value of what you are buying. A transferable lifetime warranty on the waterproofing adds real value to the property. A non-transferable warranty that dies on closing is worth nothing to you. Get this clarified before you sign.</p>
-      </div>
-
-      <h2 class="nu-section-title">Documentation <span>Checklist</span></h2>
-
-      <div class="context-block">
-        <h3>Get These Documents from H2O Before Closing</h3>
-        <ul class="checklist">
-          <li>
-            <span class="check"></span>
-            <span>Written confirmation of work performed at 4505 Buttewoods (date, scope, areas treated)</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Full written warranty document with terms, conditions, and exclusions</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Written definition of what "lifetime" means in their warranty</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Transfer process documentation — steps, fees, and timeline for transferring warranty to new owner</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Clarification on whether "Peace of Mind" maintenance program is required for warranty validity</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Contact information for future warranty claims after ownership transfer</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="action-section" style="border-left-color: var(--nu-cyan);">
-        <h3>After the Call</h3>
-        <ul class="action-list">
-          <li>
-            <span class="action-number">1</span>
-            <span>Save all documents H2O provides — warranty certificate, confirmation letter, transfer forms</span>
-          </li>
-          <li>
-            <span class="action-number">2</span>
-            <span>If the warranty is transferable, complete the transfer paperwork before or at closing</span>
-          </li>
-          <li>
-            <span class="action-number">3</span>
-            <span>If there is a required maintenance program, factor the annual cost into the home ownership budget</span>
-          </li>
-          <li>
-            <span class="action-number">4</span>
-            <span>If the warranty is NOT transferable, use this in negotiations — it reduces the value of the waterproofing work from the seller's perspective</span>
-          </li>
-        </ul>
       </div>
 
     </div>
   </main>
 
+  <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
@@ -569,6 +803,9 @@
       <a href="tel:2055001343">205-500-1343</a> |
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+    <div class="nu-footer-meta">
+      INTERNAL ACTION BRIEF — NOT FOR EXTERNAL DISTRIBUTION — GENERATED 2026-04-16
     </div>
   </footer>
 
