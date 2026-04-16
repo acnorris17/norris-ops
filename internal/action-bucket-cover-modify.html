@@ -5,7 +5,7 @@
 <script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item: Bucket Cover Modification — Norris Utilities®</title>
+  <title>Action Item: Bucket Cover Size Modification — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
@@ -382,8 +382,8 @@
 
       <span class="page-badge">Action Item</span>
 
-      <h1 class="action-title"><span>Modify</span> Bucket Cover Design &amp; Return to Customer</h1>
-      <p class="action-subtitle">FlexPro Armor bucket cover requires design modification before shipping back to customer</p>
+      <h1 class="action-title"><span>Modify</span> Shipped Bucket Cover for Proper Size &amp; Return</h1>
+      <p class="action-subtitle">FlexPro Armor bucket cover requires resizing adjustment before shipping back to customer</p>
 
       <div class="status-bar">
         <div class="status-item">
@@ -396,7 +396,7 @@
         </div>
         <div class="status-item">
           <span class="status-label">Date Created</span>
-          <span class="status-value">April 13, 2026</span>
+          <span class="status-value">April 16, 2026</span>
         </div>
         <div class="status-item">
           <span class="status-label">Owner</span>
@@ -412,12 +412,20 @@
           <span class="detail-value">FlexPro Armor Bucket Cover</span>
         </div>
         <div class="detail-row">
+          <span class="detail-label">Issue</span>
+          <span class="detail-value">Shipped cover does not match customer's required bucket dimensions</span>
+        </div>
+        <div class="detail-row">
           <span class="detail-label">Action Required</span>
-          <span class="detail-value">Modify design per customer specifications</span>
+          <span class="detail-value">Resize cover to proper fit, then ship back to customer</span>
         </div>
         <div class="detail-row">
           <span class="detail-label">Return Method</span>
-          <span class="detail-value">Ship back to customer after modification</span>
+          <span class="detail-value">Ship back to customer after resizing</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">SKU Reference</span>
+          <span class="detail-value">NU-BC-2851 (2-Man, 28"×51") · NU-BC-2834 (1.5-Man, 28"×34")</span>
         </div>
         <div class="detail-row">
           <span class="detail-label">Margin</span>
@@ -425,12 +433,12 @@
         </div>
         <div class="detail-row">
           <span class="detail-label">Shipping Formula</span>
-          <span class="detail-value">ROUNDUP(ROUNDUP(RegCost, 0) x 1.10, 0)</span>
+          <span class="detail-value">ROUNDUP(ROUNDUP(RegCost, 0) × 1.10, 0)</span>
         </div>
       </div>
 
       <div class="notes-box">
-        <strong>Note:</strong> Customer has sent their existing FlexPro Armor bucket cover back for design modification. Cover must be reworked to meet updated specifications, inspected for quality, and shipped back to the customer promptly. All FlexPro Armor covers are handmade in the USA.
+        <strong>Note:</strong> The bucket cover shipped to the customer does not fit their bucket properly. Customer is returning the cover for size modification. Confirm exact bucket dimensions in writing before rework begins. Re-sew to correct dimensions, pressure-test fit against documented measurements, then ship back. All FlexPro Armor covers are handmade in the USA.
       </div>
 
       <div class="section-title"><span>Completion </span>Checklist</div>
@@ -438,27 +446,35 @@
       <ul class="checklist">
         <li>
           <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
-          <span class="check-text">Receive bucket cover back from customer</span>
+          <span class="check-text">Confirm return tracking and receive cover back from customer</span>
         </li>
         <li>
           <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
-          <span class="check-text">Inspect cover condition and document current state</span>
+          <span class="check-text">Get exact bucket dimensions from customer in writing (width × length × depth)</span>
         </li>
         <li>
           <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
-          <span class="check-text">Confirm design modification requirements with customer</span>
+          <span class="check-text">Measure existing cover and document current dimensions vs. target dimensions</span>
         </li>
         <li>
           <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
-          <span class="check-text">Complete design modifications to bucket cover</span>
+          <span class="check-text">Inspect cover condition — note any wear, damage, or hardware issues</span>
         </li>
         <li>
           <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
-          <span class="check-text">Quality check — verify modification meets specifications</span>
+          <span class="check-text">Complete resizing — re-sew seams, re-set straps, trim to proper fit</span>
         </li>
         <li>
           <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
-          <span class="check-text">Calculate shipping cost using Ben's Formula</span>
+          <span class="check-text">Quality check — verify resized dimensions match customer specs within tolerance</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Photograph finished cover and document final measurements for file</span>
+        </li>
+        <li>
+          <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
+          <span class="check-text">Calculate return shipping cost using Ben's Formula</span>
         </li>
         <li>
           <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
@@ -466,7 +482,7 @@
         </li>
         <li>
           <div class="check-box" onclick="this.classList.toggle('checked'); this.parentElement.classList.toggle('completed');"></div>
-          <span class="check-text">Send tracking number to customer and confirm delivery</span>
+          <span class="check-text">Send tracking number to customer and confirm delivery &amp; fit</span>
         </li>
       </ul>
 
