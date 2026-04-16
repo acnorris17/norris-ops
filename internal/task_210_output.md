@@ -1,14 +1,8 @@
-The existing file already covers this exact action item completely. The page at `output/internal/action-clarify-lifetime-warranty.html` includes:
+This file already exists and is complete — 576 lines, ends with `</html>`, covers all the H2O Waterproofing warranty questions thoroughly. It's already deployed to norris-ops.
 
-- H2O Waterproofing contact info: (205) 956-2426
-- All 5 questions from the reMarkable notes (lifetime definition, confirmation of work at 4505 Buttewoods, warranty document copy, transfer process/fees, Peace of Mind maintenance requirement)
-- Three possible "lifetime" definitions explained
-- Full documentation checklist
-- Post-call next steps
+Per the dedup rule, no new file needed.
 
-Per the dedup rule, no new file needed — this one already exists and is comprehensive.
-
-**Existing file:**
-- **File:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html`
-- **Status:** Already built, complete, no updates required
-- **Key action:** Call H2O Waterproofing at (205) 956-2426 before closing on 4505 Buttewoods to get lifetime warranty definition in writing
+- **Status:** Already built, complete, deployed
+- **File:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html` (20,105 bytes)
+- **Live at:** `ops.norrisutilities.com/internal/action-clarify-lifetime-warranty.html`
+- **Content:** H2O Waterproofing contact (205-956-2426), 6 questions to ask, 3 possible "lifetime" definitions, documentation checklist, post-call next steps — all tied to the 4505 Buttewoods closing
