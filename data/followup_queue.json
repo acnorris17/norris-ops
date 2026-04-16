@@ -1810,5 +1810,85 @@
     "_captured_at": "2026-04-16T04:30:50.266487",
     "_source": "followup_drafter",
     "_category": "followup"
+  },
+  {
+    "customer": "Brianna Caldwell",
+    "subject": "Aaron - hi",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.723133",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "Quotes for C.W. Matthews Contracting Co.",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.724973",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Primary Search Home Inspections",
+    "subject": "Your Home Inspection Report",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.725979",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "GHK Director",
+    "subject": "GHK Luau & Auction",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.726942",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Chad Franklin (via dotloop)",
+    "subject": "Please review 955k with 400k down 720 Dogwood Offer",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.727904",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Gridco",
+    "subject": "Q1 Delivered. Here's What's Ahead.",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.728888",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "",
+    "subject": "EUFMC 2026 Show Packet",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.729858",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Wayne Crosby",
+    "subject": "Acknowledge receipt of Dominion PO:4501057807",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.730815",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "iShip Emails Not Being Received",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.731783",
+    "_source": "email_scanner",
+    "_category": "followup"
+  },
+  {
+    "customer": "Chad Franklin (via dotloop)",
+    "subject": "Please review 5 documents for 720 Dogwood Cir, Birmingham AL 35244",
+    "days_waiting": 0,
+    "_captured_at": "2026-04-16T12:35:12.732765",
+    "_source": "email_scanner",
+    "_category": "followup"
   }
 ]

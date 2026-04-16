@@ -1,99 +1,149 @@
 {
-  "last_scan": "2026-04-10T09:53:55",
+  "last_scan": "2026-04-16T17:35:04",
   "needs_response": [
     {
       "from": "Aaron C. Norris",
-      "subject": "Issues with iship emails not being received",
-      "days_waiting": 8,
-      "date": "2026-04-02",
-      "snippet": "Issues with iship emails not being received"
-    },
-    {
-      "from": "Thayne Grove",
-      "subject": "Invoice 6651",
-      "days_waiting": 6,
-      "date": "2026-04-03",
-      "snippet": "Invoice 6651"
-    },
-    {
-      "from": "GHK Admin",
-      "subject": "Support God's House",
-      "days_waiting": 3,
-      "date": "2026-04-07",
-      "snippet": "Support God's House"
+      "subject": "iShip Emails Not Being Received",
+      "days_waiting": 7,
+      "date": "2026-04-09",
+      "snippet": "iShip Emails Not Being Received"
     },
     {
       "from": "Aaron C. Norris",
-      "subject": "LPL Financial / Carnegie Account Portal Link",
+      "subject": "Quotes for C.W. Matthews Contracting Co.",
+      "days_waiting": 7,
+      "date": "2026-04-09",
+      "snippet": "Quotes for C.W. Matthews Contracting Co."
+    },
+    {
+      "from": "Chad Franklin (via dotloop)",
+      "subject": "Please review 5 documents for 720 Dogwood Cir, Birmingham AL 35244",
       "days_waiting": 3,
-      "date": "2026-04-07",
-      "snippet": "LPL Financial / Carnegie Account Portal Link"
+      "date": "2026-04-13",
+      "snippet": "Please review 5 documents for 720 Dogwood Cir, Birmingham AL 35244"
     },
     {
-      "from": "Wayne Abadie",
-      "subject": "QUOTE 24X24 BLUE COVER",
+      "from": "abrownhailey@eufmc.com",
+      "subject": "EUFMC 2026 Show Packet",
+      "days_waiting": 3,
+      "date": "2026-04-13",
+      "snippet": "EUFMC 2026 Show Packet"
+    },
+    {
+      "from": "Gridco",
+      "subject": "Q1 Delivered. Here's What's Ahead.",
+      "days_waiting": 3,
+      "date": "2026-04-13",
+      "snippet": "Q1 Delivered. Here's What's Ahead."
+    },
+    {
+      "from": "Chad Franklin (via dotloop)",
+      "subject": "Please review 955k with 400k down 720 Dogwood Offer",
+      "days_waiting": 3,
+      "date": "2026-04-13",
+      "snippet": "Please review 955k with 400k down 720 Dogwood Offer"
+    },
+    {
+      "from": "GHK Director",
+      "subject": "GHK Luau & Auction",
+      "days_waiting": 3,
+      "date": "2026-04-13",
+      "snippet": "GHK Luau & Auction"
+    },
+    {
+      "from": "Primary Search Home Inspections",
+      "subject": "Your Home Inspection Report",
       "days_waiting": 2,
-      "date": "2026-04-07",
-      "snippet": "QUOTE 24X24 BLUE COVER"
+      "date": "2026-04-13",
+      "snippet": "Your Home Inspection Report"
     },
     {
-      "from": "Sam Hastie",
-      "subject": "Time off",
-      "days_waiting": 1,
-      "date": "2026-04-08",
-      "snippet": "Time off"
+      "from": "Brianna Caldwell",
+      "subject": "Aaron - hi",
+      "days_waiting": 2,
+      "date": "2026-04-14",
+      "snippet": "Aaron - hi"
     },
     {
-      "from": "The UPS Store #0255",
-      "subject": "Shipments for those dates you asked about.",
-      "days_waiting": 1,
-      "date": "2026-04-08",
-      "snippet": "Shipments for those dates you asked about."
+      "from": "Wayne Crosby",
+      "subject": "Acknowledge receipt of Dominion PO:4501057807",
+      "days_waiting": 0,
+      "date": "2026-04-16",
+      "snippet": "Acknowledge receipt of Dominion PO:4501057807"
     }
   ],
-  "followups_due": [],
+  "followups_due": [
+    {
+      "to": "\ud83d\udea8 PRIORITY \u2014 Coy Crosby / Dominion Energy Fleet RFP (8:41 AM",
+      "subject": "\ud83d\udea8 PRIORITY \u2014 Coy Crosby / Dominion Energy Fleet RFP (8:41 AM)",
+      "sent_date": "2026-04-08",
+      "days_no_reply": 8
+    },
+    {
+      "to": "Steadmont March 2026",
+      "subject": "Steadmont March 2026",
+      "sent_date": "2026-04-09",
+      "days_no_reply": 7
+    },
+    {
+      "to": "Quotes for C.W. Matthews Contracting Co.",
+      "subject": "Quotes for C.W. Matthews Contracting Co.",
+      "sent_date": "2026-04-09",
+      "days_no_reply": 7
+    }
+  ],
   "vendor_emails": [
     {
       "from": "BSS (Bay Shore Systems)",
-      "subject": "Time off",
-      "date": "2026-04-08"
+      "subject": "Re: Bay Shore Systems: Quotation Request \u2013 DH60 Excavator L\u014dDril \u2013 LTx 2x500kV Tineo\u2013Ancud Project \u2013 GLOBALTEC",
+      "date": "2026-04-15"
     },
     {
       "from": "BSS (Bay Shore Systems)",
-      "subject": "IT Alert: #878 degraded Epicor service has been Restored",
-      "date": "2026-04-08"
+      "subject": "Rig availability updates",
+      "date": "2026-04-15"
     },
     {
       "from": "BSS (Bay Shore Systems)",
-      "subject": "IT Alert: #878 Service Degradation on Epicor",
-      "date": "2026-04-08"
+      "subject": "Invoice 10, Dec. '25, Jan. and Feb. '26",
+      "date": "2026-04-15"
     },
     {
       "from": "BSS (Bay Shore Systems)",
-      "subject": "28th Annual Bay Shore Systems Golf Tournament!",
-      "date": "2026-04-08"
+      "subject": "Re: Website Leads - USA",
+      "date": "2026-04-14"
     }
   ],
   "invoices_statements": [
     {
       "from": "Chad Franklin (via dotloop)",
-      "subject": "Chad needs you to sign 4.8.2026 Contract & Offer 720 Dogwood in 720 Dogwood Cir, Birmingham AL 35244",
-      "date": "2026-04-09"
+      "subject": "Please review 720 Dogwood Circle Slab Quote",
+      "date": "2026-04-15"
+    },
+    {
+      "from": "Chad Franklin (via dotloop)",
+      "subject": "Please review 720 Dogwood Circle Slab Quote",
+      "date": "2026-04-13"
+    },
+    {
+      "from": "Wayne Crosby",
+      "subject": "Acknowledge receipt of Dominion PO:4501057807",
+      "date": "2026-04-16"
     },
     {
       "from": "Chad Franklin (via dotloop)",
       "subject": "Please review 5 documents for 720 Dogwood Cir, Birmingham AL 35244",
-      "date": "2026-04-08"
+      "date": "2026-04-13"
     },
     {
-      "from": "Thayne Grove",
-      "subject": "Invoice 6651",
-      "date": "2026-04-03"
+      "from": "Metro Marketing Agency",
+      "subject": "Receipt for your payment to Metro Marketing",
+      "date": "2026-04-13"
     },
     {
-      "from": "Squarespace",
-      "subject": "Form Submission - Request Equipment Quote  - rental patriot 50",
-      "date": "2026-04-03"
+      "from": "natalie.xu@mason-led.com",
+      "subject": "Re: Polar star series led high bay lights  == Mason LED",
+      "date": "2026-04-13"
     }
   ]
 }
