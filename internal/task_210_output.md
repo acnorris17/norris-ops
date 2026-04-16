@@ -1,8 +1,8 @@
-The existing `action-clarify-lifetime-warranty.html` already covers this task fully (20,105 bytes, comprehensive content). Per the dedup rule, I'll output the existing complete HTML content.
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>H2O Waterproofing — Lifetime Warranty Definition — Norris Utilities®</title>
@@ -367,21 +367,21 @@ The existing `action-clarify-lifetime-warranty.html` already covers this task fu
 
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: rgba(255,255,255,0.85);
-      padding: 48px 40px;
+      color: rgba(255,255,255,0.8);
+      padding: 40px;
       text-align: center;
       font-family: var(--font-primary);
     }
     .nu-footer-tagline {
       font-style: italic;
       font-weight: 300;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       color: var(--nu-cyan);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .nu-footer-contact {
-      font-size: 1.1rem;
-      line-height: 1.9;
+      font-size: 1.05rem;
+      line-height: 1.8;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
