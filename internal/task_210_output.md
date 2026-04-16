@@ -1,8 +1,11 @@
-This file already exists and is complete — 576 lines, ends with `</html>`, covers all the H2O Waterproofing warranty questions thoroughly. It's already deployed to norris-ops.
+This task has already been completed. The file exists and is fully built.
 
-Per the dedup rule, no new file needed.
+**Already done — no new build needed.**
 
-- **Status:** Already built, complete, deployed
-- **File:** `/Users/acnorris1/norris-agent/output/internal/action-clarify-lifetime-warranty.html` (20,105 bytes)
-- **Live at:** `ops.norrisutilities.com/internal/action-clarify-lifetime-warranty.html`
-- **Content:** H2O Waterproofing contact (205-956-2426), 6 questions to ask, 3 possible "lifetime" definitions, documentation checklist, post-call next steps — all tied to the 4505 Buttewoods closing
+The existing file covers this exact action item:
+
+- **File:** `output/internal/action-clarify-lifetime-warranty.html` (576 lines, complete)
+- **Content:** H2O Waterproofing warranty deep-dive — contact info (205-956-2426), 6 questions to ask (including "what does lifetime mean"), 3 possible warranty definitions, documentation checklist, post-call next steps
+- **Property:** Tied to 4505 Buttewoods closing due diligence
+
+Per the dedup rule, no new file created.
