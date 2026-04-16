@@ -1,11 +1,11 @@
-The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` already covers this exact task per the dedup rule. Outputting the canonical HTML content (without the runtime-injected auth gate script).
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>H2O Waterproofing — Lifetime Warranty Definition — Norris Utilities®</title>
+  <title>H2O Waterproofing — Lifetime Warranty Definition — Norris Utilities&reg;</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
@@ -49,9 +49,8 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
         linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
         linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
-      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px);
+      background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px;
       z-index: 1;
       opacity: 0.6;
     }
@@ -60,69 +59,64 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
       position: absolute;
       top: -50%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6,208,255,0.15) 0%, transparent 70%);
       z-index: 1;
     }
     .nu-header * { position: relative; z-index: 2; }
 
     .nu-phoenix-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 16px;
+      width: 72px; height: 72px;
+      margin: 0 auto 14px;
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
     .nu-logo-text {
       font-weight: 900;
-      font-size: 3.2rem;
+      font-size: 3rem;
       color: var(--nu-white);
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      margin-bottom: 4px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
       font-weight: 900;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--nu-white);
       letter-spacing: 0.8em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .nu-tagline {
       font-style: italic;
       font-weight: 300;
-      font-size: 1.3rem;
-      color: rgba(255,255,255,0.9);
-      letter-spacing: 0.05em;
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.92);
     }
 
-    .nu-chevron {
-      position: relative;
-      height: 50px;
-      margin-top: -50px;
-      z-index: 10;
-    }
-    .nu-chevron svg {
-      width: 100%;
-      height: 50px;
-      display: block;
-    }
+    .nu-chevron { position: relative; height: 50px; margin-top: -50px; z-index: 10; }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
-    .nu-content-area {
-      position: relative;
-      background: var(--nu-white);
+    .nu-content-area { position: relative; background: var(--nu-white); }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
     }
+    .nu-content-area > * { position: relative; z-index: 1; }
 
     .page-title {
       font-weight: 900;
       font-size: 2rem;
       color: var(--nu-dark-text);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       line-height: 1.2;
     }
     .page-subtitle {
-      font-size: 1.05rem;
-      color: var(--nu-body-text);
+      font-size: 1rem;
+      color: #666;
       margin-bottom: 32px;
       font-weight: 400;
     }
@@ -131,8 +125,8 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
       font-weight: 900;
       font-size: 1.5rem;
       color: var(--nu-blue);
-      margin-bottom: 16px;
-      margin-top: 8px;
+      margin-bottom: 10px;
+      margin-top: 12px;
     }
     .nu-section-title span {
       color: var(--nu-dark-text);
@@ -141,28 +135,27 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
 
     .priority-banner {
       display: flex;
-      align-items: center;
-      gap: 20px;
-      background: linear-gradient(135deg, #b30000 0%, #cc1a1a 100%);
+      gap: 18px;
+      align-items: flex-start;
+      background: linear-gradient(135deg, #b30000 0%, #e63946 100%);
       color: var(--nu-white);
-      padding: 24px 32px;
+      padding: 24px 28px;
       border-radius: 12px;
-      margin-bottom: 36px;
-      box-shadow: 0 6px 20px rgba(179,0,0,0.2);
+      margin-bottom: 32px;
     }
     .priority-banner .icon {
-      font-size: 2.5rem;
+      font-size: 2rem;
       line-height: 1;
     }
     .priority-banner h2 {
       font-weight: 900;
-      font-size: 1.2rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
     }
     .priority-banner p {
       font-size: 0.95rem;
-      line-height: 1.6;
+      line-height: 1.65;
       color: rgba(255,255,255,0.95);
     }
 
@@ -170,56 +163,53 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
       display: flex;
       align-items: center;
       gap: 20px;
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: var(--nu-white);
-      padding: 24px 32px;
+      background: var(--nu-white);
+      border: 2px solid var(--nu-blue);
       border-radius: 12px;
-      margin-bottom: 36px;
+      padding: 22px 26px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.05);
     }
     .contact-card .phone-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--nu-cyan);
+      width: 48px; height: 48px;
+      flex-shrink: 0;
+      background: var(--nu-blue);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      padding: 10px;
     }
-    .contact-card .phone-icon svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--nu-navy);
-    }
+    .contact-card .phone-icon svg { width: 100%; height: 100%; fill: var(--nu-white); }
     .contact-card h3 {
       font-weight: 900;
       font-size: 1.2rem;
-      margin-bottom: 4px;
+      color: var(--nu-dark-text);
+      margin-bottom: 2px;
     }
     .contact-card .phone-number {
-      font-size: 1.4rem;
       font-weight: 900;
-      color: var(--nu-cyan);
-      letter-spacing: 0.04em;
+      font-size: 1.35rem;
+      color: var(--nu-blue);
+      margin-bottom: 4px;
     }
     .contact-card .context {
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.75);
-      margin-top: 4px;
+      color: #666;
     }
 
     .action-section {
-      background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
+      background: var(--nu-light-gray);
       border-radius: 12px;
       padding: 28px 32px;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
       border-left: 4px solid var(--nu-blue);
     }
     .action-section h3 {
       font-weight: 900;
       font-size: 1.1rem;
       color: var(--nu-dark-text);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .action-list {
       list-style: none;
@@ -227,8 +217,7 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
     }
     .action-list li {
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
+      gap: 14px;
       padding: 12px 0;
       font-size: 0.95rem;
       line-height: 1.6;
@@ -295,10 +284,7 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
       background: linear-gradient(180deg, #f0f4ff 0%, var(--nu-white) 100%);
     }
 
-    .checklist {
-      list-style: none;
-      padding: 0;
-    }
+    .checklist { list-style: none; padding: 0; }
     .checklist li {
       display: flex;
       align-items: flex-start;
@@ -311,9 +297,7 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 22px;
-      height: 22px;
-      min-width: 22px;
+      width: 22px; height: 22px; min-width: 22px;
       border: 2px solid var(--nu-blue);
       border-radius: 4px;
       margin-top: 2px;
@@ -351,7 +335,7 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
     .nu-footer-tagline {
       font-style: italic;
       font-weight: 300;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--nu-cyan);
       margin-bottom: 12px;
     }
@@ -392,7 +376,7 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
     </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
-    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-tagline">A Legacy of Commitment&reg;</div>
   </header>
 
   <div class="nu-chevron">
@@ -411,7 +395,7 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
         <div class="icon">&#9888;</div>
         <div>
           <h2>MUST COMPLETE BEFORE CLOSING</h2>
-          <p>Call H2O Waterproofing and get their definition of "lifetime warranty" in writing. This is critical due diligence — you need to know exactly what their warranty covers, how long it lasts, and whether it transfers to you as the new property owner at 4505 Buttewoods.</p>
+          <p>Call H2O Waterproofing and get their definition of "lifetime warranty" in writing. This is critical due diligence — you need to know exactly what the warranty covers, how long it lasts, and whether it transfers to you as the new owner at 4505 Buttewoods.</p>
         </div>
       </div>
 
@@ -437,38 +421,42 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
           </li>
           <li>
             <span class="action-number">2</span>
-            <span><strong>Confirm the work was done at 4505 Buttewoods.</strong> Get written confirmation that H2O Waterproofing performed waterproofing work at this specific address, including the date of service and scope of work.</span>
+            <span><strong>Confirm the work was performed at 4505 Buttewoods.</strong> Get written confirmation that H2O performed waterproofing at this specific address — date of service, scope of work, areas treated.</span>
           </li>
           <li>
             <span class="action-number">3</span>
-            <span><strong>Get a copy of the actual warranty document.</strong> Not a verbal summary — the full written warranty that spells out terms, conditions, and exclusions.</span>
+            <span><strong>Send a copy of the actual warranty document.</strong> Not a verbal summary — the full written warranty spelling out terms, conditions, and exclusions.</span>
           </li>
           <li>
             <span class="action-number">4</span>
-            <span><strong>What is the warranty transfer process?</strong> Does the warranty transfer automatically to a new property owner, or is there a formal transfer process? Are there any transfer fees?</span>
+            <span><strong>What is the warranty transfer process?</strong> Does it transfer automatically to a new owner, or is there a formal transfer? Are there transfer fees? What is the timeline?</span>
           </li>
           <li>
             <span class="action-number">5</span>
-            <span><strong>Is the "Peace of Mind" maintenance program required?</strong> Some waterproofing companies void the warranty if the homeowner does not maintain an annual inspection or maintenance program. Find out if H2O requires this for the warranty to remain valid.</span>
+            <span><strong>Is the "Peace of Mind" maintenance program required?</strong> Some waterproofers void the warranty if the homeowner does not maintain annual inspections. Find out whether H2O requires this for the warranty to remain valid.</span>
           </li>
           <li>
             <span class="action-number">6</span>
-            <span><strong>What specific failures does the warranty cover?</strong> Water intrusion through treated areas, foundation cracks, drainage system failures, sump pump failures — get the complete list of covered and excluded items.</span>
+            <span><strong>What specific failures does the warranty cover?</strong> Water intrusion through treated areas, foundation cracks, drainage failures, sump pump failures — get the complete list of covered items and every exclusion.</span>
+          </li>
+          <li>
+            <span class="action-number">7</span>
+            <span><strong>Who do I call if a claim needs to be filed?</strong> Name, direct line, and email of the warranty claims contact at H2O — so it is clear where the call goes years from now.</span>
           </li>
         </ul>
       </div>
 
       <h2 class="nu-section-title">Possible <span>"Lifetime" Definitions</span></h2>
-      <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem;">Waterproofing companies use "lifetime warranty" in different ways. Here are the three most common definitions — find out which one H2O uses.</p>
+      <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem;">Waterproofing companies use "lifetime warranty" in different ways. Here are the three most common — find out which one H2O uses.</p>
 
       <div class="definition-grid">
         <div class="def-card">
           <h4>Life of Original Owner</h4>
-          <p>Warranty is valid only while the person who paid for the waterproofing work owns the home. Expires on sale of the property unless formally transferred.</p>
+          <p>Valid only while the person who paid for the work owns the home. Expires on sale unless formally transferred.</p>
         </div>
         <div class="def-card highlight">
           <h4>Transferable Lifetime</h4>
-          <p>Warranty follows the property regardless of ownership changes. This is the best-case scenario for a buyer. May require a transfer fee or notification to the company.</p>
+          <p>Warranty follows the property regardless of ownership changes. Best-case scenario for a buyer. May require a transfer fee or written notice to the company.</p>
         </div>
         <div class="def-card">
           <h4>Limited Time Period</h4>
@@ -478,7 +466,7 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
 
       <div class="why-banner">
         <h2>WHY THIS MATTERS FOR 4505 BUTTEWOODS</h2>
-        <p>If H2O Waterproofing's warranty does not transfer to a new owner — or if it requires a paid maintenance program to stay valid — that changes the value of what you are buying. A transferable lifetime warranty on the waterproofing adds real value to the property. A non-transferable warranty that dies on closing is worth nothing to you. Get this clarified before you sign.</p>
+        <p>If H2O's warranty does not transfer to a new owner — or if it requires a paid maintenance program to stay valid — that changes the value of what you are buying. A transferable lifetime warranty on the waterproofing adds real value to the property. A non-transferable warranty that dies at closing is worth nothing to you. Get this clarified before you sign.</p>
       </div>
 
       <h2 class="nu-section-title">Documentation <span>Checklist</span></h2>
@@ -486,52 +474,23 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
       <div class="context-block">
         <h3>Get These Documents from H2O Before Closing</h3>
         <ul class="checklist">
-          <li>
-            <span class="check"></span>
-            <span>Written confirmation of work performed at 4505 Buttewoods (date, scope, areas treated)</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Full written warranty document with terms, conditions, and exclusions</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Written definition of what "lifetime" means in their warranty</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Transfer process documentation — steps, fees, and timeline for transferring warranty to new owner</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Clarification on whether "Peace of Mind" maintenance program is required for warranty validity</span>
-          </li>
-          <li>
-            <span class="check"></span>
-            <span>Contact information for future warranty claims after ownership transfer</span>
-          </li>
+          <li><span class="check"></span><span>Written confirmation of work performed at 4505 Buttewoods (date, scope, areas treated)</span></li>
+          <li><span class="check"></span><span>Full written warranty document with terms, conditions, and exclusions</span></li>
+          <li><span class="check"></span><span>Written definition of what "lifetime" means in their warranty</span></li>
+          <li><span class="check"></span><span>Transfer process documentation — steps, fees, and timeline for transferring warranty to new owner</span></li>
+          <li><span class="check"></span><span>Clarification on whether "Peace of Mind" maintenance program is required for warranty validity</span></li>
+          <li><span class="check"></span><span>Contact information for future warranty claims after ownership transfer</span></li>
         </ul>
       </div>
 
       <div class="action-section" style="border-left-color: var(--nu-cyan);">
         <h3>After the Call</h3>
         <ul class="action-list">
-          <li>
-            <span class="action-number">1</span>
-            <span>Save all documents H2O provides — warranty certificate, confirmation letter, transfer forms</span>
-          </li>
-          <li>
-            <span class="action-number">2</span>
-            <span>If the warranty is transferable, complete the transfer paperwork before or at closing</span>
-          </li>
-          <li>
-            <span class="action-number">3</span>
-            <span>If there is a required maintenance program, factor the annual cost into the home ownership budget</span>
-          </li>
-          <li>
-            <span class="action-number">4</span>
-            <span>If the warranty is NOT transferable, use this in negotiations — it reduces the value of the waterproofing work from the seller's perspective</span>
-          </li>
+          <li><span class="action-number">1</span><span>Save every document H2O provides — warranty certificate, confirmation letter, transfer forms — to the 4505 Buttewoods closing file.</span></li>
+          <li><span class="action-number">2</span><span>If the warranty is transferable, complete the transfer paperwork before or at closing. Do not leave it for later.</span></li>
+          <li><span class="action-number">3</span><span>If a maintenance program is required, factor the annual cost into the home ownership budget.</span></li>
+          <li><span class="action-number">4</span><span>If the warranty is NOT transferable, use that in negotiations — it reduces the value of the waterproofing work from the seller's perspective.</span></li>
+          <li><span class="action-number">5</span><span>Forward the final warranty package to the closing attorney so it is referenced in the closing documents.</span></li>
         </ul>
       </div>
 
@@ -539,9 +498,9 @@ The existing file `~/norris-ops/internal/action-clarify-lifetime-warranty.html` 
   </main>
 
   <footer class="nu-footer">
-    <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-tagline">A Legacy of Commitment&reg;</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities&reg;, LLC<br>
       <a href="tel:2055001343">205-500-1343</a> |
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
