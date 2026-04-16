@@ -1,6 +1,7 @@
-This task has already been built and deployed. The file exists at `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (14,925 bytes). Per the dedup rule, no new file is needed.
+This task has already been built and deployed. The file exists at `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html` (per the dedup rule and the existing task output).
 
-- **Already built:** Action item page for modifying the SOFT 1.5-Man bucket cover and shipping back for proper sizing
+No new file needed — it's already live on ops.norrisutilities.com.
+
+- **Status:** Already built and deployed
+- **File:** `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
 - **M1 MacBook Pro**
-- `/Users/acnorris1/norris-ops/internal/action-modify-bucket-cover-ship-back.html`
-- Already live on ops.norrisutilities.com
