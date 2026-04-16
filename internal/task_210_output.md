@@ -1,3 +1,5 @@
+The file `action-clarify-lifetime-warranty.html` already exists and is the authoritative version for this task (20,105 bytes, current date, professionally built). Per the dedup rule, I'll return that content as the task output rather than creating a duplicate.
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +33,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ══ HEADER ══ */
     .nu-header {
       position: relative;
       background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
@@ -109,7 +110,6 @@
       letter-spacing: 0.02em;
     }
 
-    /* ══ WHITE CHEVRON ══ */
     .nu-chevron {
       position: relative;
       height: 50px;
@@ -122,7 +122,6 @@
       display: block;
     }
 
-    /* ══ CONTENT ══ */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
@@ -148,7 +147,6 @@
       font-weight: 300;
     }
 
-    /* ══ STATUS STRIP ══ */
     .status-strip {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -180,10 +178,7 @@
     }
     .status-value.amber { color: var(--nu-alert-amber); }
 
-    /* ══ SECTION ══ */
-    .section {
-      margin-bottom: 48px;
-    }
+    .section { margin-bottom: 48px; }
     .section-title {
       font-weight: 900;
       font-size: 1.5rem;
@@ -230,10 +225,7 @@
       letter-spacing: 0.05em;
     }
     .info-card p { font-size: 0.95rem; line-height: 1.65; }
-    .info-card ul {
-      list-style: none;
-      padding: 0;
-    }
+    .info-card ul { list-style: none; padding: 0; }
     .info-card ul li {
       padding: 6px 0 6px 22px;
       position: relative;
@@ -249,7 +241,6 @@
       top: 2px;
     }
 
-    /* ══ QUESTION TABLE ══ */
     .q-table {
       width: 100%;
       border-collapse: collapse;
@@ -285,7 +276,6 @@
       text-align: center;
     }
 
-    /* ══ CONTACT CARD ══ */
     .contact-card {
       background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
       color: var(--nu-white);
@@ -336,7 +326,6 @@
       border-bottom: 1px dotted rgba(6,208,255,0.5);
     }
 
-    /* ══ SCRIPT BOX ══ */
     .script-box {
       background: #fefefe;
       border: 2px solid var(--nu-medium-gray);
@@ -360,7 +349,6 @@
       font-size: 0.9rem;
     }
 
-    /* ══ NEXT STEPS ══ */
     .steps-list {
       list-style: none;
       counter-reset: step;
@@ -395,7 +383,6 @@
     }
     .steps-list li strong { color: #0033cc; }
 
-    /* ══ PRIORITY BADGE ══ */
     .priority-badge {
       display: inline-flex;
       align-items: center;
@@ -421,7 +408,6 @@
       50% { opacity: 0.5; transform: scale(1.3); }
     }
 
-    /* ══ WHY IT MATTERS ══ */
     .why-block {
       background: linear-gradient(135deg, #fff9ed 0%, #fff4d6 100%);
       border: 1px solid #f0d890;
@@ -439,7 +425,6 @@
     }
     .why-block p { color: #5c4400; font-size: 0.97rem; }
 
-    /* ══ FOOTER ══ */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
@@ -491,7 +476,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="nu-header">
     <svg class="nu-phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
@@ -503,14 +487,12 @@
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
-  <!-- WHITE CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- CONTENT -->
   <main class="nu-content-area">
     <div class="nu-container">
 
@@ -528,7 +510,6 @@
         compare it directly against the FlexPro Armor warranty terms before it comes up in a customer conversation.
       </p>
 
-      <!-- STATUS STRIP -->
       <div class="status-strip">
         <div class="status-cell">
           <div class="status-label">Source</div>
@@ -548,7 +529,6 @@
         </div>
       </div>
 
-      <!-- WHY IT MATTERS -->
       <div class="section">
         <div class="section-title">
           <span class="first">Why</span> <span class="rest">This Matters</span>
@@ -575,7 +555,6 @@
         </div>
       </div>
 
-      <!-- OBJECTIVE -->
       <div class="section">
         <div class="section-title">
           <span class="first">Objective</span> <span class="rest">of This Call / Email</span>
@@ -599,7 +578,6 @@
         </div>
       </div>
 
-      <!-- QUESTIONS TO ASK -->
       <div class="section">
         <div class="section-title">
           <span class="first">Questions</span> <span class="rest">to Ask H2O Waterproofing</span>
@@ -653,7 +631,6 @@
         </table>
       </div>
 
-      <!-- EMAIL SCRIPT -->
       <div class="section">
         <div class="section-title">
           <span class="first">Email</span> <span class="rest">Script — First Contact</span>
@@ -688,15 +665,14 @@
           <p>Sincerely,</p>
           <p>&nbsp;&nbsp;&nbsp;&nbsp;Aaron C. Norris</p>
           <div class="closer">
-            [Use standard Aaron sig block: Founder & CEO / Norris Utilities, LLC / 205-500-1343 / acnorris@norrisutilities.com]
+            Aaron C. Norris / Founder &amp; CEO / Norris Utilities, LLC / 205-500-1343 / acnorris@norrisutilities.com
           </div>
         </div>
       </div>
 
-      <!-- CONTACT -->
       <div class="section">
         <div class="section-title">
-          <span class="first">Contact</span> <span class="rest">& Research Starting Points</span>
+          <span class="first">Contact</span> <span class="rest">&amp; Research Starting Points</span>
         </div>
 
         <div class="contact-card">
@@ -729,7 +705,6 @@
         </div>
       </div>
 
-      <!-- NEXT STEPS -->
       <div class="section">
         <div class="section-title">
           <span class="first">Next</span> <span class="rest">Steps</span>
@@ -764,7 +739,6 @@
         </ol>
       </div>
 
-      <!-- REFERENCE -->
       <div class="section">
         <div class="section-title">
           <span class="first">Reference</span> <span class="rest">— FlexPro Armor Warranty Baseline</span>
@@ -795,7 +769,6 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
