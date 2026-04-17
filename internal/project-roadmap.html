@@ -100,7 +100,7 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
  <div class="hdr-inner">
   <h1>Project Roadmap</h1>
   <div class="sub">Priority build queue &mdash; what&rsquo;s blocking what, what ships next.</div>
-  <div class="ts">Last updated: <span id="lu">April 13, 2026 &mdash; EOD</span></div>
+  <div class="ts">Last updated: <span id="lu">April 17, 2026 &mdash; V5 prep lock</span></div>
  </div>
 </header>
 
@@ -119,9 +119,9 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
  </section>
 
  <section class="stats">
-  <div class="stat crit"><div class="v">4</div><div class="l">Critical (P0)</div></div>
-  <div class="stat prog"><div class="v">4</div><div class="l">In Progress</div></div>
-  <div class="stat blk"><div class="v">3</div><div class="l">Blocked</div></div>
+  <div class="stat crit"><div class="v">8</div><div class="l">Critical (P0)</div></div>
+  <div class="stat prog"><div class="v">6</div><div class="l">In Progress</div></div>
+  <div class="stat blk"><div class="v">7</div><div class="l">Blocked</div></div>
   <div class="stat rdy"><div class="v">9</div><div class="l">Ready</div></div>
  </section>
 
@@ -316,6 +316,75 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
     <div class="note">MK Smith behind schedule. Materials needed <b>before</b> trucks arrive &mdash; must sell all six. Skylift April Open Order Report received April 7.</div>
     <div class="dep"><span class="arr">&rarr;</span><span>5&times; SBA40i-LW + 1&times; SBA47i-MH</span></div>
     <div class="fin-line aaron-only"><span class="money rev">Total PO: $1,091,402.50</span><span>Must sell all before arrival</span></div>
+   </div>
+
+  </div>
+ </section>
+
+ <!-- ========= V5 PREP — NEW LOCKS (April 17, 2026) ========= -->
+ <section class="section">
+  <h2><span class="blue">V5 Prep</span> <span class="dark">&mdash; New Locks (April 17)</span></h2>
+  <div class="desc">Captured during the Shipping Agent V5 prep session. 6 new items, 18 rulings locked into LEGACY_LIVING_MEMORY.md.</div>
+  <div class="items">
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>17. Telegram Notification Reorganization</h3>
+     <div class="badges"><span class="pill p-p0">URGENT</span><span class="pill s-progress">Active</span></div>
+    </div>
+    <div class="cat">Legacy Agent &middot; Current sprint &middot; Owner: CC (M1)</div>
+    <div class="note">4 dedicated Telegram topics: <b>nu-legacy-main</b> (Legacy + Aaron only), <b>nu-shipping-agent</b> (SA), <b>nu-ops-notifications</b> (morning brief, email, automation), <b>nu-critical-alerts</b> (blockers/outages only). Every script calling <code>send_telegram</code> routed by category.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Depends: Aaron creates the 4 Telegram topics; CC wires all scripts.</span></div>
+   </div>
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>18. Memory Systems Health Dashboard</h3>
+     <div class="badges"><span class="pill p-p0">HIGH</span><span class="pill s-progress">Active</span></div>
+    </div>
+    <div class="cat">Memory &middot; Current sprint &middot; Owner: CC (M1)</div>
+    <div class="note">New portal page at <code>ops.norrisutilities.com/internal/memory-health.html</code>. Shows status (🟢🟡🔴), last sync, gaps, fix-session link for each component: LEGACY_MEMORY.md, NorrisPalace, G Brain, reMarkable, cross-channel sync, query habit, Living Roadmap Sheet, Portal Roadmap. Aaron&rsquo;s one-stop lookup.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Depends: none.</span></div>
+   </div>
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>19. Truth Sources Lockdown</h3>
+     <div class="badges"><span class="pill p-p0">HIGH</span><span class="pill s-blocked">Waiting</span></div>
+    </div>
+    <div class="cat">Infrastructure &middot; After V5 &middot; Owner: CC (M1)</div>
+    <div class="note">Build <code>~/nu-brain/truth_sources.json</code> manifest (mirrored to Drive). Migrate every hard-coded path in every script/agent/tool to reference <code>truth_source_path(key)</code> helper. Deploy daily audit <code>verify_truth_sources.py</code>. Add pre-commit hook blocking new hard-coded paths. M5-write / M1-read-only boundaries enforced in code.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Depends: V5 complete.</span></div>
+   </div>
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>20. Legacy Rules Lockdown Session</h3>
+     <div class="badges"><span class="pill p-p0">HIGH</span><span class="pill s-blocked">Waiting</span></div>
+    </div>
+    <div class="cat">Legacy Agent &middot; After V5 &middot; Owner: CC (M1)</div>
+    <div class="note">Audit every established rule from March 17&ndash;present. Encode into <code>~/.openclaw/config/legacy_rules.yaml</code> AND <code>LEGACY_MEMORY.md</code> IMMUTABLE RULES section. Verify Legacy queries them before every response. Includes: investigation principle, M5-write/M1-read flow, truth source routing, all 18 V5 rulings, dealer formula, PO-never-halts-SD.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Depends: V5 complete.</span></div>
+   </div>
+
+   <div class="item infra">
+    <div class="row1">
+     <h3>21. G Brain iCloud &rarr; Drive migration</h3>
+     <div class="badges"><span class="pill p-p2">MEDIUM</span><span class="pill s-blocked">Waiting</span></div>
+    </div>
+    <div class="cat">Memory &middot; After Truth Sources &middot; Owner: CC (M1)</div>
+    <div class="note">Move G Brain storage from iCloud to Google Drive. Consistent with truth-source principle (M5 = source, M1 = read).</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Depends: Truth Sources Lockdown complete.</span></div>
+   </div>
+
+   <div class="item infra">
+    <div class="row1">
+     <h3>22. Customer Payment Terms Audit</h3>
+     <div class="badges"><span class="pill p-p2">LOW</span><span class="pill s-blocked">Backlog</span></div>
+    </div>
+    <div class="cat">SA &middot; Future &middot; Owner: Aaron/CB + CC (M1)</div>
+    <div class="note">Aaron or CB exports QB customer payment terms. SA ingests, flags discrepancies vs default &ldquo;Due on Receipt&rdquo;. CB updates QB where Aaron approves Net-30/Net-60. Deferred from V5.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Depends: none.</span></div>
    </div>
 
   </div>
