@@ -1890,5 +1890,23 @@
     "_captured_at": "2026-04-16T12:35:12.732765",
     "_source": "email_scanner",
     "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "iShip Emails Not Being Received",
+    "days_waiting": 7,
+    "status": "draft_ready",
+    "_captured_at": "2026-04-17T04:30:20.178301",
+    "_source": "followup_drafter",
+    "_category": "followup"
+  },
+  {
+    "customer": "Aaron C. Norris",
+    "subject": "Quotes for C.W. Matthews Contracting Co.",
+    "days_waiting": 7,
+    "status": "draft_ready",
+    "_captured_at": "2026-04-17T04:30:38.735102",
+    "_source": "followup_drafter",
+    "_category": "followup"
   }
 ]
