@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Health Dashboard &mdash; Norris Utilities&reg;</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Lato',sans-serif; background:#f5f7fa; color:#1a1a1a; }
+
+  header {
+    background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 25%,#0066ee 50%,#00aaff 75%,#06D0FF 100%);
+    color:white; padding:28px 24px 56px; position:relative; overflow:hidden;
+  }
+  header h1 { font-weight:900; font-size:32px; letter-spacing:0.5px; }
+  header p  { font-weight:700; opacity:0.92; margin-top:4px; }
+  header::after {
+    content:""; position:absolute; bottom:-1px; left:0; right:0; height:28px;
+    background:white; clip-path:polygon(0 100%,38% 0,100% 100%);
+  }
+
+  main { max-width:1100px; margin:0 auto; padding:24px 20px 80px; }
+  h2.section { margin:20px 0 12px; font-weight:700; font-size:24px; }
+  h2.section span.lead { color:#0033cc; }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+  .card {
+    background:white; border-radius:10px; padding:18px 18px 16px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06); border-left:4px solid #bbb;
+  }
+  .card h3 { font-weight:900; font-size:16px; color:#0a0e5c; margin-bottom:4px; }
+  .card .subtitle { font-size:12px; color:#666; margin-bottom:10px; }
+  .card .status { font-size:12px; font-weight:700; padding:3px 8px; border-radius:4px; display:inline-block; }
+  .status.pending { background:#fff4d6; color:#8a6200; }
+  .status.live    { background:#d8f5dc; color:#14632a; }
+  .status.degraded{ background:#ffe0e0; color:#9c1515; }
+  .card p.body { font-size:13px; color:#333; margin-top:10px; line-height:1.45; }
+
+  footer {
+    margin-top:40px; padding:24px; text-align:center;
+    background:linear-gradient(180deg,#0a0e5c 0%,#050732 100%); color:#cde8ff;
+  }
+  footer .tag { font-family:'Playfair Display',serif; font-style:italic; color:#06D0FF; font-size:18px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Memory Health Dashboard</h1>
+  <p>Component status across the Norris Utilities&reg; memory backbone</p>
+</header>
+<main>
+  <h2 class="section"><span class="lead">Memory</span> Components</h2>
+  <p style="margin-bottom:14px; color:#555; font-size:13px;">Scaffold only &mdash; populated live by Roadmap Item #2.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>LEGACY_LIVING_MEMORY</h3>
+      <div class="subtitle">Drive&nbsp;&middot;&nbsp;00_Living_Memory</div>
+      <span class="status pending">pending build</span>
+      <p class="body">Master session log. Symlinked into norris-agent as of V5 launch. Live read count, last-write timestamp, divergence flags to land here.</p>
+    </div>
+    <div class="card">
+      <h3>NorrisPalace</h3>
+      <div class="subtitle">Per-conversation store</div>
+      <span class="status pending">pending build</span>
+      <p class="body">Palace JSON index + per-conversation files. To surface sync lag and orphan records.</p>
+    </div>
+    <div class="card">
+      <h3>G Brain (NU Brain)</h3>
+      <div class="subtitle">PGLite &middot; MCP: nu-brain</div>
+      <span class="status pending">pending build</span>
+      <p class="body">Structured knowledge store installed 2026-04-13. Card will show MCP reachability + row counts per table.</p>
+    </div>
+    <div class="card">
+      <h3>reMarkable</h3>
+      <div class="subtitle">Handwritten intake</div>
+      <span class="status pending">pending build</span>
+      <p class="body">Pipeline previously crashed; Hunt Ladder step 8 degrades gracefully. Will show last successful sync.</p>
+    </div>
+    <div class="card">
+      <h3>Cross-Channel Sync</h3>
+      <div class="subtitle">Email &times; Telegram &times; reMarkable</div>
+      <span class="status pending">pending build</span>
+      <p class="body">Dedup signal coverage + merge events from Section H. Surface false positives + merged-into counts.</p>
+    </div>
+    <div class="card">
+      <h3>Query Habit</h3>
+      <div class="subtitle">Did SA read before it wrote?</div>
+      <span class="status pending">pending build</span>
+      <p class="body">Ratio of lookup-before-write operations. Confidence indicator for SA sourcing discipline.</p>
+    </div>
+    <div class="card">
+      <h3>Roadmap Sheet</h3>
+      <div class="subtitle">Living Roadmap Google Sheet</div>
+      <span class="status pending">pending build</span>
+      <p class="body">Row counts by status (DONE, in_progress, pending), last append, owner distribution.</p>
+    </div>
+    <div class="card">
+      <h3>Portal Roadmap</h3>
+      <div class="subtitle">ops.norrisutilities.com</div>
+      <span class="status pending">pending build</span>
+      <p class="body">Portal-side roadmap rendering health + nightly audit pass rate.</p>
+    </div>
+  </div>
+</main>
+<footer>
+  <p class="tag">A Legacy of Commitment&reg;</p>
+  <p style="margin-top:6px; font-size:12px;">Norris Utilities&reg; &middot; Memory Health Dashboard &middot; scaffold v0.1</p>
+</footer>
+</body>
+</html>
