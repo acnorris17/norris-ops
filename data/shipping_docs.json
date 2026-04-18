@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-17T15:36:37",
+  "last_updated": "2026-04-18T12:48:50",
   "documents": [
     {
       "id": "SD-2026-ABADIE-0331",
@@ -89,12 +89,12 @@
       "products": [
         {
           "sku": "NU-BC-2851",
-          "name": "FlexPro Armor® 2-Man Bucket Cover",
+          "name": "FlexPro Armor\u00ae 2-Man Bucket Cover",
           "qty": 5
         },
         {
           "sku": "NU-BC-2834",
-          "name": "FlexPro Armor® 1.5-Man Bucket Cover",
+          "name": "FlexPro Armor\u00ae 1.5-Man Bucket Cover",
           "qty": 5
         }
       ],
@@ -104,13 +104,13 @@
         "line_items": [
           {
             "sku": "NU-BC-2851",
-            "name": "FlexPro Armor® 2-Man Bucket Cover",
+            "name": "FlexPro Armor\u00ae 2-Man Bucket Cover",
             "qty": 5,
             "unit_price": 305
           },
           {
             "sku": "NU-BC-2834",
-            "name": "FlexPro Armor® 1.5-Man Bucket Cover",
+            "name": "FlexPro Armor\u00ae 1.5-Man Bucket Cover",
             "qty": 5,
             "unit_price": 265
           }
@@ -118,7 +118,8 @@
         "subtotal": 2850,
         "shipping": null,
         "total": null
-      }
+      },
+      "cb_internal_note": "AJ MORRIS INVOICE \u2014 USE THESE UNIT PRICES (Aaron-locked April 18, 2026):\n2-Man (NU-BC-2851): $275 [list $305, $30 courtesy off per unit]\n1.5-Man reg (NU-BC-2834): $255 [list $265, $10 courtesy off per unit]\n1.5-Man ARCH (NU-BC-2834-F): $275 [list $305, $30 courtesy off per unit]\n\nQB INVOICE METHOD: Bill at list, apply single -$700 courtesy line.\nShip charges: Hattiesburg $236 + Searcy $301 = $537 total, combined line.\nInvoice covers BOTH locations \u2014 single invoice to AJ Morris / Chain Electric.\nFinal total: $8,930.48 including 4% CC fee.\n\nBACKGROUND: AJ originally ordered 5x 2-Man + 5x 1.5-Man to one location. Aaron ended up shipping 15 units to each of TWO locations (AJ Hattiesburg + Jeremy Brown Searcy). Overage is Aaron's call \u2014 bill as specified. Do not question the qty discrepancy on this one.\n\nSTATUS: Aaron approved. OK to invoice."
     },
     {
       "id": "SD-2026-AJ-0331-ChainElectric",
@@ -154,7 +155,8 @@
         "subtotal": 1525,
         "shipping": null,
         "total": null
-      }
+      },
+      "cb_internal_note": "AJ MORRIS INVOICE \u2014 USE THESE UNIT PRICES (Aaron-locked April 18, 2026):\n2-Man (NU-BC-2851): $275 [list $305, $30 courtesy off per unit]\n1.5-Man reg (NU-BC-2834): $255 [list $265, $10 courtesy off per unit]\n1.5-Man ARCH (NU-BC-2834-F): $275 [list $305, $30 courtesy off per unit]\n\nQB INVOICE METHOD: Bill at list, apply single -$700 courtesy line.\nShip charges: Hattiesburg $236 + Searcy $301 = $537 total, combined line.\nInvoice covers BOTH locations \u2014 single invoice to AJ Morris / Chain Electric.\nFinal total: $8,930.48 including 4% CC fee.\n\nBACKGROUND: AJ originally ordered 5x 2-Man + 5x 1.5-Man to one location. Aaron ended up shipping 15 units to each of TWO locations (AJ Hattiesburg + Jeremy Brown Searcy). Overage is Aaron's call \u2014 bill as specified. Do not question the qty discrepancy on this one.\n\nSTATUS: Aaron approved. OK to invoice."
     },
     {
       "id": "SD-2026-AJ-0401-ARCH",
@@ -171,7 +173,7 @@
       "po": "Verbal",
       "products": [
         {
-          "sku": "NU-BC-2834-ARCH",
+          "sku": "NU-BC-2834-F",
           "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
           "qty": 5
         }
@@ -181,16 +183,17 @@
       "internal_pricing": {
         "line_items": [
           {
-            "sku": "NU-BC-2834-ARCH",
+            "sku": "NU-BC-2834-F",
             "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
             "qty": 5,
-            "unit_price": 0
+            "unit_price": 305
           }
         ],
-        "subtotal": 0,
+        "subtotal": 1525,
         "shipping": null,
         "total": null
-      }
+      },
+      "cb_internal_note": "AJ MORRIS INVOICE \u2014 USE THESE UNIT PRICES (Aaron-locked April 18, 2026):\n2-Man (NU-BC-2851): $275 [list $305, $30 courtesy off per unit]\n1.5-Man reg (NU-BC-2834): $255 [list $265, $10 courtesy off per unit]\n1.5-Man ARCH (NU-BC-2834-F): $275 [list $305, $30 courtesy off per unit]\n\nQB INVOICE METHOD: Bill at list, apply single -$700 courtesy line.\nShip charges: Hattiesburg $236 + Searcy $301 = $537 total, combined line.\nInvoice covers BOTH locations \u2014 single invoice to AJ Morris / Chain Electric.\nFinal total: $8,930.48 including 4% CC fee.\n\nBACKGROUND: AJ originally ordered 5x 2-Man + 5x 1.5-Man to one location. Aaron ended up shipping 15 units to each of TWO locations (AJ Hattiesburg + Jeremy Brown Searcy). Overage is Aaron's call \u2014 bill as specified. Do not question the qty discrepancy on this one.\n\nSTATUS: Aaron approved. OK to invoice."
     },
     {
       "id": "SD-2026-BEDWELL-0407",
@@ -415,7 +418,7 @@
       "company": "2631 Ridgewood Rd",
       "date": "03/31/2026",
       "file": "shipping-docs/SD-2026-JeremyBrown-0331.html",
-      "status": "pending",
+      "status": "superseded",
       "approved": false,
       "invoiced": false,
       "invoiceNumber": null,
@@ -429,7 +432,7 @@
         }
       ],
       "shipTo": "Searcy, AR 72143",
-      "notes": "",
+      "notes": "SUPERSEDED by SD-2026-AJ-0331-B-JeremyBrown \u2014 do not invoice",
       "internal_pricing": {
         "line_items": [
           {
@@ -459,7 +462,7 @@
       "po": "Verbal",
       "products": [
         {
-          "sku": "NU-BC-2834-ARCH",
+          "sku": "NU-BC-2834-F",
           "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
           "qty": 5
         }
@@ -469,16 +472,17 @@
       "internal_pricing": {
         "line_items": [
           {
-            "sku": "NU-BC-2834-ARCH",
+            "sku": "NU-BC-2834-F",
             "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
             "qty": 5,
-            "unit_price": 0
+            "unit_price": 305
           }
         ],
-        "subtotal": 0,
+        "subtotal": 1525,
         "shipping": null,
         "total": null
-      }
+      },
+      "cb_internal_note": "AJ MORRIS INVOICE \u2014 USE THESE UNIT PRICES (Aaron-locked April 18, 2026):\n2-Man (NU-BC-2851): $275 [list $305, $30 courtesy off per unit]\n1.5-Man reg (NU-BC-2834): $255 [list $265, $10 courtesy off per unit]\n1.5-Man ARCH (NU-BC-2834-F): $275 [list $305, $30 courtesy off per unit]\n\nQB INVOICE METHOD: Bill at list, apply single -$700 courtesy line.\nShip charges: Hattiesburg $236 + Searcy $301 = $537 total, combined line.\nInvoice covers BOTH locations \u2014 single invoice to AJ Morris / Chain Electric.\nFinal total: $8,930.48 including 4% CC fee.\n\nBACKGROUND: AJ originally ordered 5x 2-Man + 5x 1.5-Man to one location. Aaron ended up shipping 15 units to each of TWO locations (AJ Hattiesburg + Jeremy Brown Searcy). Overage is Aaron's call \u2014 bill as specified. Do not question the qty discrepancy on this one.\n\nSTATUS: Aaron approved. OK to invoice."
     },
     {
       "id": "SD-2026-LINETEC-0402",
@@ -703,6 +707,43 @@
           }
         ],
         "subtotal": 1445,
+        "shipping": null,
+        "total": null
+      }
+    },
+    {
+      "id": "SD-2026-AJ-BOSS-0401-Hattiesburg",
+      "filename": "SD-2026-AJ-BOSS-0401-Hattiesburg.html",
+      "customer": "AJ Morris",
+      "company": "Chain Electric Company",
+      "date": "04/01/2026",
+      "file": "shipping-docs/SD-2026-AJ-BOSS-0401-Hattiesburg.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": "Boss drop-ship \u2014 tracking unknown (see invoices 6775/6776/6777)",
+      "po": "Verbal",
+      "products": [
+        {
+          "sku": "NU-BC-2834",
+          "name": "FlexPro Armor\u00ae 1.5-Man Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "shipTo": "1308 W Pine St, Hattiesburg, MS 39401",
+      "notes": "BOSS PRODUCTS DROP-SHIP \u2014 Boss shipped direct to AJ. Tracking from Boss invoices 6775/6776/6777 (resend requested from Thayne).",
+      "cb_internal_note": "AJ MORRIS INVOICE \u2014 USE THESE UNIT PRICES (Aaron-locked April 18, 2026):\n2-Man (NU-BC-2851): $275 [list $305, $30 courtesy off per unit]\n1.5-Man reg (NU-BC-2834): $255 [list $265, $10 courtesy off per unit]\n1.5-Man ARCH (NU-BC-2834-F): $275 [list $305, $30 courtesy off per unit]\n\nQB INVOICE METHOD: Bill at list, apply single -$700 courtesy line.\nShip charges: Hattiesburg $236 + Searcy $301 = $537 total, combined line.\nInvoice covers BOTH locations \u2014 single invoice to AJ Morris / Chain Electric.\nFinal total: $8,930.48 including 4% CC fee.\n\nBACKGROUND: AJ originally ordered 5x 2-Man + 5x 1.5-Man to one location. Aaron ended up shipping 15 units to each of TWO locations (AJ Hattiesburg + Jeremy Brown Searcy). Overage is Aaron's call \u2014 bill as specified. Do not question the qty discrepancy on this one.\n\nSTATUS: Aaron approved. OK to invoice.",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2834",
+            "name": "FlexPro Armor\u00ae 1.5-Man Bucket Cover",
+            "qty": 5,
+            "unit_price": 265
+          }
+        ],
+        "subtotal": 1325,
         "shipping": null,
         "total": null
       }
