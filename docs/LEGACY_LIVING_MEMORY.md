@@ -389,6 +389,20 @@ Captured during the Claude.ai V5 prep session. Do not re-debate. SA = Shipping A
 17. **Payment terms audit deferred** from V5 to future roadmap.
 18. **M5 = source / M1 = agent host.** Legacy system prompt encodes the flow. Truth Sources manifest tags boundaries.
 
+## LOCKED RULINGS 19–23: V5 ORDER PROCESS RULES (April 18, 2026)
+
+Locked by Aaron during Chain Electric/AJ Morris reconciliation. Apply to ALL orders going forward. V5 retroactive update required — see Section 7.
+
+19. **Multi-ship-to orders** — one parent order record (ORD-YYYY-NAME-MMDD), one SD per ship-to destination, all linked via `parent_order_id`. Single QB invoice to POC rolls up all child SDs. Memo lists each ship-to with contents.
+20. **Fulfillment source tagging** — every SD requires `fulfillment_source`: `"nu_stock"` (Aaron's inventory via UPS Store), `"vendor_dropship"` (Boss or vendor ships direct — requires vendor_name, vendor_invoice_number, vendor_ship_date, vendor_freight_cost), or `"mixed"` (split into two SDs preferred).
+21. **SKU substitution logging** — when a product subs for another (stock-out or otherwise), SD gets: `original_sku`, `substituted_sku`, `substitution_reason`. Track across all orders for pattern analysis.
+22. **Courtesy pricing mechanism** — QB invoice line items always show LIST PRICE. Discounts applied as single `courtesy_adjustment` negative line. SD `internal_pricing` records effective unit price for margin tracking. Never override list on line items — preserves pricing integrity.
+23. **CB internal notes** — all invoiceable SDs get `cb_internal_note`. Visible in portal Shipments tab (CB role only). NEVER rendered on customer-facing SD PDF. Format: locked unit prices, QB invoice method, special instructions, approval status.
+
+**First application:** Chain Electric/AJ Morris — ORD-2026-CHAIN-0324. Invoice $8,930.48 sent April 18, 2026. ARCH baseline $275 locked. Boss invoices 6775/6776/6777 resend pending from Thayne Grove.
+
+---
+
 ## DEALER PRICING RULE + DISTRIBUTOR RETRACTION (April 17, 2026 — evening)
 
 Captured after Aaron confirmed NU has only Dealers. Retires the old "30% off dealer / 40% off distributor" rule across all memory locations.
@@ -505,6 +519,17 @@ Captured after Aaron confirmed NU has only Dealers. Retires the old "30% off dea
 - Impact: Dead deal appearing in outputs despite multiple scrub attempts.
 - Path: Run comprehensive grep across ALL files on M1 (norris-ops, norris-agent, nu-brain, norris-intel, .openclaw) and destroy every reference.
 - Owner: Claude Code (M1)
+
+**🔵 V5 RETROACTIVE UPDATE REQUIRED (April 18, 2026)**
+- Rulings 19–23 (multi-ship-to, fulfillment source, SKU substitution, courtesy pricing, CB notes) are now locked.
+- All existing V5 scripts must be updated to require/handle these fields:
+  • shipping_ai_agent.py CANONICAL_FIELDS + migrate() ✅ DONE
+  • sd_builder.py build_sd() signature + validation ✅ DONE
+  • Section J (SD builder UI/logic) — add required field prompts for fulfillment_source + cb_internal_note
+  • Section S (portal Shipments tab) — render cb_internal_note for CB role; hide from Aaron/customer views
+  • Section T (invoice lifecycle) — implement courtesy_adjustment line on QB invoice build; validate list-price-only on line items
+- Owner: Claude Code (M1) via bridge — next dedicated V5 session
+- Priority: HIGH — blocks correct invoicing for any multi-ship-to or vendor-dropship order
 
 ---
 
