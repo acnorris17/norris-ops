@@ -938,3 +938,54 @@ D14 (partial): recover_all.sh still needs writing
 
 D16 UPDATED: ask_claude.py default = claude-opus-4-7, --model haiku flag for simple tasks,
 Norris system prompt required, cost logging required, budget cap $120/mo.
+# 2026-04-19 EVENING FINAL — Complete Session Record
+
+## COMPLETED TONIGHT
+- NC v3.1 end-to-end verified (task ran 4s, 16:02:31→16:02:35)
+- D10 config drift closed: c9d097e main, 3b7cb75 feature
+- NC LaunchAgent installed + cc-main preflight wrapper: 05d544a
+- ask_claude.py shipped: 6121a97 (⚠️ not safe to use until D16 complete)
+- Recovery cheat sheet v1 (Desktop + Drive)
+- Model selection rule locked: Opus 4.7 default, Sonnet 4.6 --model sonnet, NO Haiku
+- SA v5 readiness report: Option C attempted via bridge — SESSION_CONTEXT_MISSING (expected). Option A (Aaron manual paste) = D15-PREFLIGHT tomorrow morning.
+- Living Memory committed: 4804b8d, 6a3a9cd, 6a3a9cd+corrections
+
+## DECISIONS LOCKED
+- Opus 4.7 (claude-opus-4-7) = default for ALL builds, drafts, customer work, analysis, quotes, emails
+- Sonnet 4.6 (claude-sonnet-4-6) = --model sonnet for searches/triage/summarizing
+- Haiku 4.5 removed from toolkit entirely
+- $120/mo API budget cap; daily Telegram alert if projecting >$100/mo
+- NC drives CC only, never Claude.ai browser
+- SA v5 CC window stays open overnight, untouched
+- D15-PRIORITY is absolute first action tomorrow
+
+## TOMORROW ORDER (locked)
+1. D15-PREFLIGHT: Aaron opens SA v5 CC window, copies readiness report, pastes to Legacy
+2. D15-PRIORITY: Aaron reviews report, decides GO/HOLD/ISSUE/RECONCILE
+3. SA v5 Section V production write
+4. D16: ask_claude.py Opus default + --model sonnet flag + Norris system prompt + cost logging
+5. D17: budget guardrails + daily cost Telegram alert
+6. D14 completion: recover_all.sh script
+7. D12: Legacy "route to CC via NC" skill
+8. D13: CC outbox → Telegram formatter
+
+## BLOCKERS / OPEN
+- D11: NC idle-detection false-negative (cosmetic, investigate next session)
+- CC auth may need refresh after reboot (manual step)
+- openclaw status sometimes flaky post-reboot (manual fallback: openclaw gateway install --force && openclaw gateway start)
+- Time Machine backup still not running (biggest data risk — buy external drive)
+
+## META-LESSONS LOCKED
+- Handoff v1 was stale before ink dried — Legacy built ask_claude.py after v1 written. v3 captures everything.
+- Legacy racing ahead is pattern: deterministic builds OK, builds requiring Aaron decisions must gate.
+- Model tier correction (Haiku→Sonnet) from Aaron: "all my work is heavy builds." Opus default correct.
+- Wayne standard > API savings. Accepted $80-120/mo cost envelope.
+- Three agents (Legacy, Claude, Aaron) staying in lanes = the thing that actually worked today.
+
+## ALL COMMITS TONIGHT (main branch)
+- 3b7cb75: D10 config drift closed (feature branch)
+- c9d097e: Default timeout 120s
+- 05d544a: NC LaunchAgent + nc_bridge_start.sh wrapper
+- 6121a97: ask_claude.py (NOT safe until D16)
+- 6a3a9cd: Model rule locked (with Sonnet correction)
+- 4804b8d: D14/D16/D17 new items
