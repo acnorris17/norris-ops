@@ -657,3 +657,67 @@ TRIGGER: After every chat session ends in this project folder
 
 *Norris Utilities® — A Legacy of Commitment®*
 *The standard: Would Wayne be proud of this?*
+
+---
+
+# LIVING MEMORY UPDATE — NorrisControl v2.0 Upgrade
+## Session Date: April 19, 2026 (Sunday)
+## Session Type: Claude.ai review of Legacy's CC rebuild prompt, upgrade to v2.0
+## Author: Claude Opus 4.7 (reviewed and accepted by Legacy)
+
+### COMPLETED
+- Reviewed Legacy's v1.0 NorrisControl CC rebuild prompt (April 19, 2026)
+- Graded v1 as B — buildable but not production-integrated with existing stack
+- Produced v2.0 upgraded prompt: NORRISCONTROL_CC_REBUILD_PROMPT_v2.md
+- Identified and resolved 13 gaps in v1
+
+### DECISIONS
+1. Final product name: **NorrisControl**. "Peekaboo" = research codename only. File: `norris_control.py`.
+2. Architecture: tmux-first, GUI-fallback. `tmux send-keys` + `capture-pane` is deterministic.
+3. Inbox/outbox format: JSONL at `~/norris-agent/claude_inbox.jsonl` / `claude_outbox.jsonl`. Schema locked (see v2 prompt §6). Supersedes undefined `claude_inbox.txt / claude_outbox.txt`.
+4. Completion detection via tmux capture + idle pattern regex. No OCR in primary path. Pattern stored in config: `^(>|\$|╭─|Human:|❯)\s*$`
+5. Clipboard save-and-restore mandatory on GUI paste. Pure tmux mode bypasses clipboard entirely.
+6. Rate limit: 20 tasks / 60-min window, SQLite-backed at `~/norris-agent/state/norriscontrol_rate.db`.
+7. Multi-session targeting: `target_session` mandatory in task JSON. Parallel is v2+ upgrade.
+8. Telegram chat ID 8758078447 = only notification surface. Emoji OK in Telegram; banned in logs/outbox.
+9. Living Memory drafts batched every 10 tasks + on bridge shutdown.
+10. NorrisPalace logging non-blocking. Stages to `~/norris-agent/run/norrispalace_queue.jsonl` if np unavailable.
+11. Destructive command gate: blocks `rm -rf`, `dd if=`, `mkfs`, `> /dev/sd`, `format`, `killall` unless `allow_destructive: true`.
+12. PID file + heartbeat at `~/norris-agent/run/`. Heartbeat every 10s. Morning brief watches staleness >5 min.
+13. Config file with defaults at `~/norris-agent/config/norriscontrol.json`. Never crashes on missing config.
+
+### 13 GAPS CLOSED (v1 → v2)
+| # | Gap in v1 | v2 resolution |
+|---|---|---|
+| 1 | OCR used tesseract (brew dep) | OCR removed from primary path; Shortcuts-based Vision if needed |
+| 2 | No tmux architecture | tmux is primary; GUI is fallback |
+| 3 | pbcopy overwrote clipboard with no restore | `with_clipboard()` context manager |
+| 4 | No task_bridge.py contract | JSONL schema defined, atomic file locking |
+| 5 | No Telegram integration | All status events → chat ID 8758078447 |
+| 6 | Completion detection via OCR | tmux capture-pane + idle pattern + stability window |
+| 7 | No Living Memory hook | Batched drafts every 10 tasks + shutdown |
+| 8 | No NorrisPalace logging | Every task state → automation wing, non-blocking |
+| 9 | No multi-session support | `target_session` mandatory in task JSON |
+| 10 | No PID/heartbeat | Both implemented; double-start prevention |
+| 11 | No rate limiting | SQLite; 20/hour default; override flag |
+| 12 | Outbox format undefined | Structured JSON schema with status/duration/output/error |
+| 13 | Naming inconsistency | Locked: NorrisControl everywhere |
+
+### NEXT
+1. Aaron pastes v2 prompt into fresh CC session on M1 (Opus 4.7, max effort, `cc` alias)
+2. CC builds NorrisControl v2.0 per post-build checklist (§22)
+3. `nc test` — all 20 tests must pass
+4. `nc permissions` — Accessibility + Screen Recording + Automation all granted
+5. Live end-to-end dry run → real run per §22
+6. Confirm: Telegram ping received, outbox correct, NorrisPalace record written, Living Memory draft in Gmail
+7. Commit to `github.com/acnorris17/norris-agent`
+8. Mark COMPLETE in `~/norris-agent/task_queue.md`
+
+### FILES
+- `~/norris-agent/docs/NORRISCONTROL_CC_REBUILD_PROMPT_v2.md`
+- `~/Library/CloudStorage/GoogleDrive-.../Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v2.md`
+- `~/.openclaw/workspace/NORRISCONTROL_CC_REBUILD_PROMPT_v2.md`
+
+### WAYNE STANDARD NOTE
+v2 explicitly embeds the Wayne standard in §21. Every function, every log line, every error message must pass: would Wayne be proud of this? No cryptic errors, no TODO comments in shipped code, readable at 4 AM without coffee.
+
