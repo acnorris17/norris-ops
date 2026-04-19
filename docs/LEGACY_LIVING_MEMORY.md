@@ -872,3 +872,32 @@ D1 — already done | D6 — done (setopt added to ~/.zshrc)
 ### Handoff prompt saved
 Drive: Legacy Project/02_Handoffs/HANDOFF_PROMPT_2026-04-19_CLOSEOUT.md
 M1: ~/norris-agent/docs/HANDOFF_PROMPT_2026-04-19_CLOSEOUT.md
+
+## ADDITIONAL CLOSE-OUT ITEMS — April 19, 2026 (Claude final review)
+
+### Cross-agent architecture validation
+Tonight's parallel work (Legacy running pipelines while Claude helped Aaron with git)
+worked exactly as v3 separation-of-concerns intended. No conflicts, no memory corruption.
+This validates the architecture. NC = mechanical, Legacy = intelligence, Claude = spec/verification.
+
+### D10 (NEW) — Feature branch config drift
+FLAGGED: feature/shipping-agent-v5 working tree has config/norriscontrol.json at OLD
+idle pattern. Main branch has tuned version (commit 5beafa5). Before SA v5 merges to
+main: cherry-pick 5beafa5 forward OR resolve during merge conflict. Do not let stale
+feature-branch config overwrite the tuned main branch version.
+
+### Stash correction
+Claude's advice said "preserve stash@{0}" — but Legacy had already dropped it before
+this advice arrived. Stash list is EMPTY. The daily_journal entries from 15:11 are
+already captured in the working tree's newer versions. Nothing lost.
+
+### D items final state
+D1 ✅ done (stale prompt files already cleared)
+D2 — patch proposed, awaiting Aaron review
+D4c — validate cc_idle_pattern vs real cc-main (before D9)
+D5 — secret masker tune (low priority)
+D6 ✅ done (setopt interactive_comments in ~/.zshrc)
+D7 — SA V5 (Aaron's main focus)
+D8 — create cc-main (gates D9)
+D9 — first production bridge run (after D4c + D8)
+D10 (new) — cherry-pick 5beafa5 to feature branch before SA v5 merge
