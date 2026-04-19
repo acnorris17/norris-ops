@@ -754,3 +754,11 @@ language in the Telegram message described v2 improvements and was misleading.
 Claude's caution was warranted. v3.1 is confirmed correct — verified by grep.
 
 ### Stop refining. Build v3.1. Learn from the actual build.
+
+## NorrisControl FINAL version: v3-1 (April 19, 2026)
+- Canonical filename: NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md (hyphen, not dot)
+- 33 tests required (not 28)
+- 12 post-build checklist steps
+- Test #29 (tmux_paste_multiline_atomic) is the critical bracketed paste verification
+- v2 archived; v3-1 is the only version to build from
+- STOP REFINING. Build v3-1. Learn from the actual build.
