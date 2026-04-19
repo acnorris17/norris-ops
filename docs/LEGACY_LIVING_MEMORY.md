@@ -1036,3 +1036,25 @@ PENDING spec: Abadie/Primoris (NU-BC-2828 $235)
 DONE: AJ Morris/Chain Electric $8,930.48 sent April 18
 
 Monday first move: confirm ready list, push Boss Products on Pickle+Myers SKUs.
+
+## P/N RULE + BCB + INVOICE CORRECTIONS (April 19, 2026)
+
+### P/N TERMINOLOGY — PERMANENT
+Aaron uses P/N (Part Number) not SKU. Correction flag if any agent says SKU.
+Ops portal, pricing master, SD generator, all output: P/N not SKU.
+
+### BCB DEFINITION LOCKED
+BCB = Bucket Cover Bag ($55 storage accessory). NOT Shield, NOT Combo.
+Master has labeling inconsistency (NU-BCB-2851-SL called "Shield 2-Man" in memory).
+1.5-Man BCB P/N unknown — pull from Boss paperwork Monday (likely NU-BCB-2834-SL @ $55).
+
+### STALE FLAGS PURGED
+"Blocked pending Boss SKU" was STALE DATA from April 7 snapshots.
+P/Ns have been in master since April 7 per 2026 Price List (§5).
+Darrell Pickle and Sammy Myers are NOT blocked. Ready to invoice.
+
+### INVOICE BLITZ ~$10,100
+READY: Thornhill $305 | Benz $305 | Coy April 8 $1,525 | Myers $915 | Wayne W6237 $610
+PENDING MINOR: Pickle $1,765 (need 1.5-Man BCB P/N — 30 sec Monday)
+PENDING VERIFICATION: Coy March 20 ~$1,590 (qty) | Wayne BYB0001 $235 (1-Man size confirm) | Chain Electric $2,850 (confirm drop ship received)
+Chain Electric AJ Morris: $8,930.48 already invoiced April 18 ✅
