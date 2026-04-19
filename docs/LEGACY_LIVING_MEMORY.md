@@ -1011,3 +1011,16 @@ Norris system prompt required, cost logging required, budget cap $120/mo.
 - KEEP OPEN: SA v5 CC window ("Build Shipping AI Agent V5 production system")
 - SAFE TO CLOSE: All others
 - cc-main: runs in background via LaunchAgent, invisible, survives all closures
+
+## AARON'S "DONE" BAR — THIS WEEK (locked April 19, 2026)
+Five completions = success this week, in order:
+1. SA v5 ships (production confirm-write)
+2. Invoicing caught up — all ready orders billed
+3. Ops portal COMPLETE — CB says "everything I need is here"
+4. reMarkable pipeline verified end-to-end
+5. SD process flawless — auto-linked to QuickBooks
+
+AFTER these five only → Samson Rope Ordering System.
+Infrastructure (D12/D13/D16/D14) builds ONLY when it accelerates the five.
+BLOCK any V6 suggestions before V5 is stable.
+Aaron's stated feeling: "always building, nothing gets done." Respect it. Push completion.
