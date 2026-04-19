@@ -23,92 +23,151 @@
   }
 
   main { max-width:1100px; margin:0 auto; padding:24px 20px 80px; }
+
+  .summary-bar {
+    display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;
+    padding:16px 20px; background:white; border-radius:10px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06);
+  }
+  .summary-item { text-align:center; }
+  .summary-item .count { font-size:28px; font-weight:900; color:#0a0e5c; }
+  .summary-item .label { font-size:12px; color:#666; margin-top:2px; }
+  .summary-item.green .count { color:#14632a; }
+  .summary-item.yellow .count { color:#8a6200; }
+  .summary-item.red .count { color:#9c1515; }
+
   h2.section { margin:20px 0 12px; font-weight:700; font-size:24px; }
   h2.section span.lead { color:#0033cc; }
 
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
   .card {
     background:white; border-radius:10px; padding:18px 18px 16px;
     box-shadow:0 1px 3px rgba(0,0,0,0.06); border-left:4px solid #bbb;
   }
-  .card h3 { font-weight:900; font-size:16px; color:#0a0e5c; margin-bottom:4px; }
+  .card.green  { border-left-color:#28a745; }
+  .card.yellow { border-left-color:#ffc107; }
+  .card.red    { border-left-color:#dc3545; }
+
+  .card-header { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .status-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+  .status-dot.green  { background:#28a745; box-shadow:0 0 6px rgba(40,167,69,0.5); }
+  .status-dot.yellow { background:#ffc107; box-shadow:0 0 6px rgba(255,193,7,0.5); }
+  .status-dot.red    { background:#dc3545; box-shadow:0 0 6px rgba(220,53,69,0.5); }
+
+  .card h3 { font-weight:900; font-size:16px; color:#0a0e5c; margin:0; }
   .card .subtitle { font-size:12px; color:#666; margin-bottom:10px; }
-  .card .status { font-size:12px; font-weight:700; padding:3px 8px; border-radius:4px; display:inline-block; }
-  .status.pending { background:#fff4d6; color:#8a6200; }
-  .status.live    { background:#d8f5dc; color:#14632a; }
-  .status.degraded{ background:#ffe0e0; color:#9c1515; }
-  .card p.body { font-size:13px; color:#333; margin-top:10px; line-height:1.45; }
+
+  .stats-row { display:flex; gap:16px; flex-wrap:wrap; margin:10px 0; }
+  .stat { }
+  .stat .val { font-weight:900; font-size:18px; color:#0033cc; }
+  .stat .lbl { font-size:11px; color:#888; text-transform:uppercase; }
+
+  .last-sync { font-size:12px; color:#555; margin-top:8px; padding-top:8px; border-top:1px solid #eee; }
+  .last-sync strong { color:#0a0e5c; }
+
+  .card p.notes { font-size:13px; color:#333; margin-top:10px; line-height:1.45; }
 
   footer {
     margin-top:40px; padding:24px; text-align:center;
     background:linear-gradient(180deg,#0a0e5c 0%,#050732 100%); color:#cde8ff;
   }
   footer .tag { font-family:'Playfair Display',serif; font-style:italic; color:#06D0FF; font-size:18px; }
+  .gen-time { font-size:11px; color:#888; margin-top:16px; }
 </style>
 </head>
 <body>
 <header>
   <h1>Memory Health Dashboard</h1>
-  <p>Component status across the Norris Utilities&reg; memory backbone</p>
+  <p>Live status across the Norris Utilities&reg; memory backbone</p>
 </header>
 <main>
+  <div class="summary-bar">
+    <div class="summary-item green"><div class="count">2</div><div class="label">Healthy</div></div>
+    <div class="summary-item yellow"><div class="count">3</div><div class="label">Aging</div></div>
+    <div class="summary-item red"><div class="count">0</div><div class="label">Critical</div></div>
+    <div class="summary-item"><div class="count">166</div><div class="label">G Brain Pages</div></div>
+    <div class="summary-item"><div class="count">671</div><div class="label">Palace Records</div></div>
+  </div>
+
   <h2 class="section"><span class="lead">Memory</span> Components</h2>
-  <p style="margin-bottom:14px; color:#555; font-size:13px;">Scaffold only &mdash; populated live by Roadmap Item #2.</p>
 
   <div class="grid">
-    <div class="card">
-      <h3>LEGACY_LIVING_MEMORY</h3>
-      <div class="subtitle">Drive&nbsp;&middot;&nbsp;00_Living_Memory</div>
-      <span class="status pending">pending build</span>
-      <p class="body">Master session log. Symlinked into norris-agent as of V5 launch. Live read count, last-write timestamp, divergence flags to land here.</p>
+    <div class="card green">
+      <div class="card-header">
+        <span class="status-dot green"></span>
+        <h3>G Brain (NU Brain)</h3>
+      </div>
+      <div class="subtitle">PGLite &middot; MCP: nu-brain &middot; ~/.bun/bin/gbrain</div>
+      <div class="stats-row">
+        <div class="stat"><div class="val">166</div><div class="lbl">Pages</div></div>
+        <div class="stat"><div class="val">958</div><div class="lbl">Chunks</div></div>
+        <div class="stat"><div class="val">8</div><div class="lbl">Tags</div></div>
+        <div class="stat"><div class="val">2</div><div class="lbl">Timeline</div></div>
+      </div>
+      <div class="last-sync"><strong>Last sync:</strong> 2026-04-19 11:00 &mdash; 100% embeddings, 0 errors</div>
+      <p class="notes">Structured knowledge store. Last import: 12 pages imported, 78 skipped (unchanged), 36 chunks created.</p>
     </div>
-    <div class="card">
-      <h3>NorrisPalace</h3>
-      <div class="subtitle">Per-conversation store</div>
-      <span class="status pending">pending build</span>
-      <p class="body">Palace JSON index + per-conversation files. To surface sync lag and orphan records.</p>
+
+    <div class="card green">
+      <div class="card-header">
+        <span class="status-dot green"></span>
+        <h3>Living Roadmap</h3>
+      </div>
+      <div class="subtitle">~/norris-ops/docs/LEGACY_LIVING_MEMORY.md</div>
+      <div class="stats-row">
+        <div class="stat"><div class="val">659</div><div class="lbl">Lines</div></div>
+      </div>
+      <div class="last-sync"><strong>Last updated:</strong> 2026-04-18 12:59</div>
+      <p class="notes">Master session log with locked rulings, decisions, and version history.</p>
     </div>
-    <div class="card">
-      <h3>G Brain (NU Brain)</h3>
-      <div class="subtitle">PGLite &middot; MCP: nu-brain</div>
-      <span class="status pending">pending build</span>
-      <p class="body">Structured knowledge store installed 2026-04-13. Card will show MCP reachability + row counts per table.</p>
+
+    <div class="card yellow">
+      <div class="card-header">
+        <span class="status-dot yellow"></span>
+        <h3>NorrisPalace</h3>
+      </div>
+      <div class="subtitle">~/norris-agent/palace/ &middot; Per-conversation store</div>
+      <div class="stats-row">
+        <div class="stat"><div class="val">53</div><div class="lbl">Conversations</div></div>
+        <div class="stat"><div class="val">106</div><div class="lbl">Customers</div></div>
+        <div class="stat"><div class="val">512</div><div class="lbl">Rules</div></div>
+      </div>
+      <div class="last-sync"><strong>Last updated:</strong> 2026-04-17 15:20 &mdash; 2 days ago</div>
+      <p class="notes">Palace JSON index + per-conversation files. Index is 231KB.</p>
     </div>
-    <div class="card">
-      <h3>reMarkable</h3>
-      <div class="subtitle">Handwritten intake</div>
-      <span class="status pending">pending build</span>
-      <p class="body">Pipeline previously crashed; Hunt Ladder step 8 degrades gracefully. Will show last successful sync.</p>
+
+    <div class="card yellow">
+      <div class="card-header">
+        <span class="status-dot yellow"></span>
+        <h3>reMarkable Pipeline</h3>
+      </div>
+      <div class="subtitle">~/norris-ops/data/remarkable_items.json</div>
+      <div class="stats-row">
+        <div class="stat"><div class="val">1,248</div><div class="lbl">Items</div></div>
+      </div>
+      <div class="last-sync"><strong>Last sync:</strong> 2026-04-17 15:48 &mdash; 2 days ago</div>
+      <p class="notes">Handwritten intake pipeline. Hunt Ladder step 8 degrades gracefully if sync fails.</p>
     </div>
-    <div class="card">
-      <h3>Cross-Channel Sync</h3>
-      <div class="subtitle">Email &times; Telegram &times; reMarkable</div>
-      <span class="status pending">pending build</span>
-      <p class="body">Dedup signal coverage + merge events from Section H. Surface false positives + merged-into counts.</p>
-    </div>
-    <div class="card">
-      <h3>Query Habit</h3>
-      <div class="subtitle">Did SA read before it wrote?</div>
-      <span class="status pending">pending build</span>
-      <p class="body">Ratio of lookup-before-write operations. Confidence indicator for SA sourcing discipline.</p>
-    </div>
-    <div class="card">
-      <h3>Roadmap Sheet</h3>
-      <div class="subtitle">Living Roadmap Google Sheet</div>
-      <span class="status pending">pending build</span>
-      <p class="body">Row counts by status (DONE, in_progress, pending), last append, owner distribution.</p>
-    </div>
-    <div class="card">
-      <h3>Portal Roadmap</h3>
-      <div class="subtitle">ops.norrisutilities.com</div>
-      <span class="status pending">pending build</span>
-      <p class="body">Portal-side roadmap rendering health + nightly audit pass rate.</p>
+
+    <div class="card yellow">
+      <div class="card-header">
+        <span class="status-dot yellow"></span>
+        <h3>LEGACY_MEMORY.md</h3>
+      </div>
+      <div class="subtitle">~/.openclaw/workspace/MEMORY.md</div>
+      <div class="stats-row">
+        <div class="stat"><div class="val">126</div><div class="lbl">Lines</div></div>
+      </div>
+      <div class="last-sync"><strong>Last updated:</strong> 2026-04-14 07:27 &mdash; 5 days ago</div>
+      <p class="notes">OpenClaw workspace memory file. Consider migrating entries to G Brain or Living Roadmap.</p>
     </div>
   </div>
+
+  <p class="gen-time">Dashboard generated: 2026-04-19 11:25 CDT</p>
 </main>
 <footer>
   <p class="tag">A Legacy of Commitment&reg;</p>
-  <p style="margin-top:6px; font-size:12px;">Norris Utilities&reg; &middot; Memory Health Dashboard &middot; scaffold v0.1</p>
+  <p style="margin-top:6px; font-size:12px;">Norris Utilities&reg; &middot; Memory Health Dashboard &middot; v1.0</p>
 </footer>
 </body>
 </html>
