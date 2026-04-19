@@ -325,6 +325,38 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 .nu-notes-row button{background:#0033cc;color:#fff;border:none;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:.83rem;font-weight:700;}
 .nu-notes-export-btn{font-size:.74rem;color:#0033cc;cursor:pointer;text-decoration:underline;display:inline-block;margin-top:5px;}
 </style>
+<style id="contact-modal-style">
+.contact-modal-overlay{position:fixed;inset:0;z-index:10001;background:rgba(10,14,92,0.85);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.contact-modal-overlay.active{opacity:1;visibility:visible}
+.contact-modal{background:#fff;border-radius:16px;width:95%;max-width:700px;max-height:90vh;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);transform:scale(0.95);transition:transform .3s}
+.contact-modal-overlay.active .contact-modal{transform:scale(1)}
+.contact-modal-header{background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 50%,#06D0FF 100%);padding:24px 28px;position:relative}
+.contact-modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.contact-modal-close:hover{background:rgba(255,255,255,0.3)}
+.contact-modal-name{font-family:'Lato',sans-serif;font-size:24px;font-weight:900;color:#fff;margin:0 0 4px}
+.contact-modal-company{font-size:14px;color:rgba(255,255,255,0.8);font-weight:600}
+.contact-modal-info{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px}
+.contact-modal-info-item{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,0.9)}
+.contact-modal-info-item svg{flex-shrink:0;opacity:0.8}
+.contact-modal-body{padding:24px 28px;max-height:calc(90vh - 200px);overflow-y:auto}
+.contact-modal-section{margin-bottom:24px}
+.contact-modal-section:last-child{margin-bottom:0}
+.contact-modal-section-title{font-size:14px;font-weight:900;color:#0033cc;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.contact-invoice-list{display:flex;flex-direction:column;gap:10px}
+.contact-invoice-card{background:#f8f9fc;border-radius:10px;padding:14px 18px;border-left:4px solid #06D0FF;transition:all .2s}
+.contact-invoice-card:hover{background:#eef5ff;transform:translateX(4px)}
+.contact-invoice-id{font-size:13px;font-weight:900;color:#0a0e5c}
+.contact-invoice-date{font-size:12px;color:#666;margin-left:12px}
+.contact-invoice-products{font-size:13px;color:#333;margin-top:6px;line-height:1.5}
+.contact-invoice-total{font-size:14px;font-weight:900;color:#0033cc;margin-top:8px}
+.contact-modal-total{background:linear-gradient(135deg,#e8f0ff,#f0f8ff);border:2px solid #0033cc;border-radius:12px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.contact-modal-total-label{font-size:14px;font-weight:700;color:#0a0e5c}
+.contact-modal-total-value{font-size:24px;font-weight:900;color:#0033cc}
+.contact-no-invoices{text-align:center;padding:32px 20px;color:#666;font-size:14px}
+.contact-no-invoices svg{display:block;margin:0 auto 12px;opacity:0.3}
+#contactTable tbody tr{cursor:pointer;transition:background .2s}
+#contactTable tbody tr:hover{background:linear-gradient(90deg,rgba(0,51,204,0.04),rgba(6,208,255,0.04))}
+</style>
 </head>
 <body>
 
@@ -1417,6 +1449,138 @@ function nuNotesInit(tabId){
 document.addEventListener("DOMContentLoaded",function(){
   ["dashboard","shipments","ap","followups","contacts","cbtasks","samson","pogenerator","tools","docs"].forEach(nuNotesInit);
 });
+</script>
+
+<!-- CONTACT DETAIL MODAL -->
+<div class="contact-modal-overlay" id="contactModalOverlay" onclick="if(event.target===this)closeContactModal()">
+  <div class="contact-modal">
+    <div class="contact-modal-header">
+      <button class="contact-modal-close" onclick="closeContactModal()">&times;</button>
+      <div class="contact-modal-name" id="cmName"></div>
+      <div class="contact-modal-company" id="cmCompany"></div>
+      <div class="contact-modal-info">
+        <div class="contact-modal-info-item" id="cmPhone" style="display:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span></span></div>
+        <div class="contact-modal-info-item" id="cmEmail" style="display:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span></span></div>
+      </div>
+    </div>
+    <div class="contact-modal-body" id="cmBody"></div>
+  </div>
+</div>
+
+<script id="contact-modal-js">
+(function(){
+  var shippingDocs=null;
+
+  function loadShippingDocs(){
+    if(shippingDocs)return Promise.resolve(shippingDocs);
+    return fetch('/data/shipping_docs.json')
+      .then(function(r){return r.json()})
+      .then(function(data){shippingDocs=data;return data})
+      .catch(function(){shippingDocs={documents:[]};return shippingDocs});
+  }
+
+  function normalizeContactName(name){
+    return(name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+  }
+
+  function findInvoicesForContact(contactName,docs){
+    var normalName=normalizeContactName(contactName);
+    var matches=[];
+    (docs.documents||[]).forEach(function(doc){
+      if(doc.status==='demo'||doc.status==='superseded')return;
+      var custNorm=normalizeContactName(doc.customer);
+      if(custNorm.indexOf(normalName)>-1||normalName.indexOf(custNorm)>-1||
+         custNorm.split('/').some(function(p){return normalizeContactName(p)===normalName})||
+         normalName.split('/').some(function(p){return normalizeContactName(p)===custNorm})){
+        matches.push(doc);
+      }
+    });
+    return matches;
+  }
+
+  function formatCurrency(amt){
+    if(amt===null||amt===undefined||isNaN(amt))return'$0.00';
+    return'$'+Number(amt).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+
+  function escH(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+  function renderInvoiceCard(doc){
+    var products=(doc.products||[]).map(function(p){
+      return escH(p.qty+'x '+p.name);
+    }).join('<br>');
+    var subtotal=doc.internal_pricing?doc.internal_pricing.subtotal:0;
+    return'<div class="contact-invoice-card">'+
+      '<span class="contact-invoice-id">'+escH(doc.id)+'</span>'+
+      '<span class="contact-invoice-date">'+escH(doc.date)+'</span>'+
+      '<div class="contact-invoice-products">'+products+'</div>'+
+      '<div class="contact-invoice-total">Subtotal: '+formatCurrency(subtotal)+'</div>'+
+    '</div>';
+  }
+
+  window.openContactModal=function(row){
+    var cells=row.querySelectorAll('td');
+    var name=cells[1]?cells[1].textContent.trim():'';
+    var title=cells[2]?cells[2].textContent.trim():'';
+    var company=cells[3]?cells[3].textContent.trim():'';
+    var phone=cells[4]?cells[4].textContent.trim():'';
+    var email=cells[5]?cells[5].textContent.trim():'';
+
+    document.getElementById('cmName').textContent=name;
+    document.getElementById('cmCompany').textContent=(title?title+' at ':'')+company;
+
+    var phoneEl=document.getElementById('cmPhone');
+    var emailEl=document.getElementById('cmEmail');
+    if(phone&&phone!=='\u2014'){
+      phoneEl.querySelector('span').textContent=phone;
+      phoneEl.style.display='flex';
+    }else{phoneEl.style.display='none';}
+    if(email&&email!=='\u2014'){
+      emailEl.querySelector('span').textContent=email;
+      emailEl.style.display='flex';
+    }else{emailEl.style.display='none';}
+
+    var body=document.getElementById('cmBody');
+    body.innerHTML='<div style="text-align:center;padding:40px;color:#666">Loading invoices...</div>';
+    document.getElementById('contactModalOverlay').classList.add('active');
+
+    loadShippingDocs().then(function(docs){
+      var invoices=findInvoicesForContact(name,docs);
+      if(invoices.length===0){
+        body.innerHTML='<div class="contact-no-invoices">'+
+          '<svg width="48" height="48" viewBox="0 0 24 24" fill="#ccc"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>'+
+          'No shipping docs or invoices found for this contact.</div>';
+        return;
+      }
+      var totalBilled=invoices.reduce(function(sum,doc){
+        return sum+(doc.internal_pricing?doc.internal_pricing.subtotal||0:0);
+      },0);
+      var html='<div class="contact-modal-section">'+
+        '<div class="contact-modal-section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0033cc"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>Shipping Docs &amp; Invoices ('+invoices.length+')</div>'+
+        '<div class="contact-invoice-list">'+invoices.map(renderInvoiceCard).join('')+'</div>'+
+      '</div>'+
+      '<div class="contact-modal-total">'+
+        '<span class="contact-modal-total-label">Total Billed (Subtotals)</span>'+
+        '<span class="contact-modal-total-value">'+formatCurrency(totalBilled)+'</span>'+
+      '</div>';
+      body.innerHTML=html;
+    });
+  };
+
+  window.closeContactModal=function(){
+    document.getElementById('contactModalOverlay').classList.remove('active');
+  };
+
+  document.addEventListener('DOMContentLoaded',function(){
+    var table=document.getElementById('contactTable');
+    if(!table)return;
+    var tbody=table.querySelector('tbody');
+    if(!tbody)return;
+    tbody.querySelectorAll('tr').forEach(function(row){
+      row.addEventListener('click',function(){openContactModal(row);});
+    });
+  });
+})();
 </script>
 </body>
 </html>
