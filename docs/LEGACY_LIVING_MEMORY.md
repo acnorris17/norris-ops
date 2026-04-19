@@ -1058,3 +1058,100 @@ READY: Thornhill $305 | Benz $305 | Coy April 8 $1,525 | Myers $915 | Wayne W623
 PENDING MINOR: Pickle $1,765 (need 1.5-Man BCB P/N — 30 sec Monday)
 PENDING VERIFICATION: Coy March 20 ~$1,590 (qty) | Wayne BYB0001 $235 (1-Man size confirm) | Chain Electric $2,850 (confirm drop ship received)
 Chain Electric AJ Morris: $8,930.48 already invoiced April 18 ✅
+# 2026-04-19 EVENING FINAL v4 — Complete Session Record
+# Authoritative. Supersedes v1, v2, v3.
+
+## COMPLETED TONIGHT (VERIFIED)
+### NC v3.1 Infrastructure
+- End-to-end live test: 16:02:31 → CC executed 16:02:35 (4s)
+- Output confirmed: "NorrisControl live test — Legacy to CC bridge verified"
+- NC LaunchAgent: 05d544a on main, PID 65371 stable 60+ sec
+- nc_bridge_start.sh wrapper with cc-main preflight
+- Old nohup PID 63297 killed and replaced
+- Survives: reboot, sleep, Legacy restart
+
+### Commits on main:
+- 0962449 session ledger
+- c9d097e default idle timeout 30→120s
+- 05d544a NC LaunchAgent + wrapper
+- 6121a97 ask_claude.py (Path A, needs D16 fix)
+- 88fbda9, 4804b8d, 6a3a9cd, 728615e, abb4ad1, 41e705d, 33c7d35, f77428e Living Memory
+
+### Commit on feature/shipping-agent-v5:
+- 3b7cb75 idle pattern sync (D10 closed)
+
+## PERMANENT RULES LOCKED TONIGHT
+
+### 1. P/N (not SKU) — PERMANENT
+All code, files, invoices, SD, portal, UI, agent replies use P/N.
+Exception: external integrations (QB field names) only if can't rename.
+Stale "SKU" = correction flag. Fix immediately.
+
+### 2. Model selection — PERMANENT
+- DEFAULT: claude-opus-4-7 (all builds, drafts, customer work)
+- LIGHTER (explicit): claude-sonnet-4-6 via --model sonnet
+- REMOVED: Haiku 4.5
+- Budget cap: $120/mo. Daily Telegram alert if projecting >$100/mo.
+
+### 3. BCB = Bucket Cover Bag ($55 storage accessory)
+NOT Shield. NOT Combo.
+1.5-Man BCB P/N: pull from Boss paperwork Monday (likely NU-BCB-2834-SL @ $55)
+Existing master has mislabel on 2-Man BCB ("SL" suffix means Bag not Shield)
+
+### 4. NC drives CC ONLY — not Claude.ai
+
+### 5. Aaron's week objective (April 20-26)
+Five completions in order, THEN Samson:
+1. SA v5 ships | 2. Invoicing blitz ~$10,100 | 3. Ops portal COMPLETE
+4. reMarkable verified e2e | 5. SD process FLAWLESS
+
+### 6. Stale flag rule
+"Blocked pending X" must be cross-checked against current master.
+P/N master (2026 Price List) authoritative since April 7.
+"Blocked pending Boss SKU" in shipments.json = STALE — purge next session.
+
+## INVOICING READY THIS WEEK (~$10,100)
+- Thornhill/LineTec: $305 (PO DEPT468R) — READY
+- Benz/SWEPCO: $305 (Truck #860377) — READY
+- Coy Crosby/Dominion April 8: $1,525 (5× NU-BC-2851) — READY
+- Coy Crosby/Dominion March 20: ~$1,590 (verify qty at UPS Store)
+- Sammy Myers/AEP: $915 (2× ARCH + 1× Combo) — READY, NOT BLOCKED
+- Wayne Primoris W6237: $610 (2× 2-Man) — READY
+- Wayne Primoris BYB0001: $235 (confirm 1-Man size w/ Wayne)
+- Darrell Pickle/Florence: $1,765 (pending 1.5-Man BCB P/N lookup — 30 sec Monday)
+- Chain Electric/AJ Morris: ALREADY INVOICED $8,930.48 on April 18 ✅
+
+ZERO blocked on vendors. Darrell needs one P/N from Boss paperwork Monday.
+
+## OPEN ROADMAP
+🚨 PRIORITY #1: SA v5 GO/HOLD/ISSUE/RECONCILE → Section V ships
+🚨 PRIORITY #2: Invoicing blitz (~$10,100)
+🚨 PRIORITY #3: D16 ask_claude.py (Opus default + Norris prompt + cost logging)
+HIGH: D14 recover_all.sh | D12 route-to-CC | D13 outbox formatter | D17 budget guardrails
+MEDIUM: Stale flag purge in shipments.json | P/N cleanup in master | 1.5-Man BCB P/N addition
+LOW: D11 idle detection | D1 D2 D5 D6 carried
+PENDING: Rick+Coy drafts | BSS Invoice 11 | Alabama license | Time Machine | Telegram 3-group
+
+## WHAT FAILED / CLAUDE ERRORS
+1. Claimed Legacy auto-restarts on reboot without verifying
+2. Conflated claude_bridge.py (old) with nc_bridge.py (new)
+3. Contradicted Terminal close-out advice within 15 min
+4. Read stale "blocked" flags as current truth (Pickle, Myers)
+5. Said "SKU" after P/N rule was stated
+6. Recommended Haiku first, corrected to Sonnet after pushback
+Root cause: status flags read without cross-checking master data.
+
+## WHAT FAILED / LEGACY PATTERNS
+1. Racing ahead: ask_claude.py shipped Opus default, no system prompt
+2. gog CLI Gmail draft unavailable — Claude.ai drafts worked (2 fired)
+3. SA v5 readiness report Option C failed (bridge CC lacks SA v5 context)
+
+## CURRENT RUNNING STATE
+- openclaw gateway: ✅ running
+- com.norrisutilities.nc-bridge: ✅ PID 65371
+- com.norrisutilities.claudebridge: ✅ (old bridge still running)
+- cc-main tmux: ✅ alive, CC idle at ❯
+- SA v5 CC window: OPEN overnight, untouched, gated on Aaron GO
+- Stash: EMPTY
+- Gmail drafts: 5+ living memory drafts in DRAFTS folder
+- Claude.ai draft: r-5665872137675202246 (Claude.ai fired directly)
