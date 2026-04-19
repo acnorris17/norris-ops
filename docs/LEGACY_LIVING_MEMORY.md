@@ -1173,3 +1173,11 @@ SHIPPED / INVOICED (QB+PDF delivered) / PAID — three distinct states, never co
 
 Chain Electric AJ Morris: SHIPPED ✅ INVOICED ❌ — QB invoice needed Monday.
 Revised blitz: ~$16,180 (Chain Electric back in).
+
+## §4 SYNC PROTOCOL — ALL THREE AGENTS (locked April 19, 2026 — FINAL)
+See MEMORY.md for full text. Summary:
+1. READ FIRST: authoritative source before any status claim. Flags are historical.
+2. THREE ZONES: internal(Legacy)/drafts(approve)/sends(Aaron/CB)
+3. HANDOFF CHECKPOINT: verifiable facts, not state claims
+4. CORRECTION DISCIPLINE: fix source, propagate to all 8 locations
+5. DAILY OPENING RITUAL: §4 rules + handoff + 6 verification questions before work
