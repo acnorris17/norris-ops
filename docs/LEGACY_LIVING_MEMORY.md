@@ -728,3 +728,29 @@ v2 explicitly embeds the Wayne standard in §21. Every function, every log line,
 - Commit message locked: "NorrisControl v3.0 — tmux-first mechanical layer with clean separation of concerns"
 - v3 is the authoritative prompt. v1 and v2 are superseded.
 - Location: Google Drive → Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v3.md
+
+## NorrisControl v3.1 FINAL — Bug fixes (April 19, 2026)
+
+### Critical bug fixed: Multi-line prompt handling
+tmux send-keys with embedded newlines sends Ctrl-J, which CC interprets as Enter-submit
+per line. Fixed via bracketed paste using tmux load-buffer + paste-buffer -p.
+All pane targeting now uses explicit session:0.0 notation.
+
+### Additional fixes in v3.1
+- Output directory rotation: keep last 500 files or 30 days
+- Telegram subprocess timeout: 5-second hard cap — broken helper cannot stall a task
+- Input Monitoring permission check added (macOS 13+ requires separately from Accessibility)
+- Post-build idle-pattern validation step added to §22 checklist
+- Commit message: "NorrisControl v3.1 — bracketed paste fix, output rotation, telegram timeout, input monitoring"
+
+### File locations (v3.1 supersedes all prior versions)
+- Google Drive: Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v3.1.md
+- M1: ~/norris-agent/docs/NORRISCONTROL_CC_REBUILD_PROMPT_v3.1.md
+- OpenClaw workspace: NORRISCONTROL_CC_REBUILD_PROMPT_v3.1.md
+
+### Note on version confusion
+Legacy's v3 file content WAS correct (separation of concerns applied). Summary
+language in the Telegram message described v2 improvements and was misleading.
+Claude's caution was warranted. v3.1 is confirmed correct — verified by grep.
+
+### Stop refining. Build v3.1. Learn from the actual build.
