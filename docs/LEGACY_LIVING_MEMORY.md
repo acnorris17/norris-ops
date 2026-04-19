@@ -799,3 +799,13 @@ Claude's caution was warranted. v3.1 is confirmed correct — verified by grep.
 Google Drive → Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md
 M1: ~/norris-agent/docs/NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md
 Size: 34,919 bytes | 33 tests | 12 post-build steps | Spec CLOSED.
+
+## NorrisControl v3.1 BUILD COMPLETE — April 19, 2026
+- Commit: 8a35e99 (pushed to feature/shipping-agent-v5 on norris-agent)
+- 9 files, 3,529 lines, 33/33 tests PASS
+- tmux_paste_multiline_atomic: PASS — bracketed paste bug fix verified
+- Kill channel: PASS — aborts in ~2s
+- Live dry run + real run: PASS
+- CC idle pattern: validated as-is — default regex works against bash prompt
+- Aaron should validate against real cc-main output (spec §22.4) before first production run
+- nc alias active in ~/.zprofile
