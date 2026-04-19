@@ -1155,3 +1155,8 @@ Root cause: status flags read without cross-checking master data.
 - Stash: EMPTY
 - Gmail drafts: 5+ living memory drafts in DRAFTS folder
 - Claude.ai draft: r-5665872137675202246 (Claude.ai fired directly)
+
+## INVOICE CORRECTION (April 19, 2026 late evening)
+Chain Electric / AJ Morris: ALREADY INVOICED $8,930.48 on April 18 ✅
+REMOVE from Monday invoice blitz list.
+Adjusted blitz total: ~$7,250 (Thornhill + Benz + Coy + Myers + Pickle + Abadie)
