@@ -989,3 +989,25 @@ Norris system prompt required, cost logging required, budget cap $120/mo.
 - 6121a97: ask_claude.py (NOT safe until D16)
 - 6a3a9cd: Model rule locked (with Sonnet correction)
 - 4804b8d: D14/D16/D17 new items
+
+## FINAL CORRECTIONS — April 19, 2026 (v3 close-out)
+
+### Model rule CORRECTED: Haiku → Sonnet, Haiku DROPPED
+- Tier 1 DEFAULT: Opus 4.7 (claude-opus-4-7) — all builds, drafts, analysis
+- Tier 2 LIGHTER (--model sonnet): Sonnet 4.6 (claude-sonnet-4-6) — medium tasks
+- Haiku 4.5 REMOVED from toolkit — too lightweight for NU quality standard
+- Cost estimate: ~$80/mo with Opus+Sonnet mix — under $120/mo cap
+
+### Priority order corrected (SA V5 is #1, D16 is #2)
+- FIRST: D15-PREFLIGHT → Aaron pastes SA v5 readiness report → D15-PRIORITY (SA ships)
+- THEN: D16 → D14 → D12 → D13
+
+### Handoff v3 saved
+- Desktop: HANDOFF_2026-04-19_EVENING_CLOSEOUT.md ✅
+- Drive: 02_Handoffs + 05_Prompts_&_Guides ✅
+- M1: ~/norris-agent/docs/ ✅
+
+### Terminal windows at close-out
+- KEEP OPEN: SA v5 CC window ("Build Shipping AI Agent V5 production system")
+- SAFE TO CLOSE: All others
+- cc-main: runs in background via LaunchAgent, invisible, survives all closures
