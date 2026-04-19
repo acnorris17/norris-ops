@@ -1024,3 +1024,15 @@ AFTER these five only → Samson Rope Ordering System.
 Infrastructure (D12/D13/D16/D14) builds ONLY when it accelerates the five.
 BLOCK any V6 suggestions before V5 is stable.
 Aaron's stated feeling: "always building, nothing gets done." Respect it. Push completion.
+
+## WEEK OBJECTIVE + OPEN INVOICES (April 20-26, 2026)
+Five completions in order (ONLY these matter this week):
+1. SA v5 ships | 2. Invoicing blitz | 3. Ops portal complete | 4. reMarkable e2e | 5. SD flawless
+
+OPEN INVOICES Monday AM:
+READY: Thornhill/LineTec ($275), Benz/SWEPCO ($275), Coy Crosby/Dominion ($1,525+)
+BLOCKED on Boss SKUs: Pickle/Florence Electric, Myers/AEP
+PENDING spec: Abadie/Primoris (NU-BC-2828 $235)
+DONE: AJ Morris/Chain Electric $8,930.48 sent April 18
+
+Monday first move: confirm ready list, push Boss Products on Pickle+Myers SKUs.
