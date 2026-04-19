@@ -854,3 +854,21 @@ Owner: Legacy + Claude Code. Not today.
 - Logs: ~/norris-agent/logs/norriscontrol.log
 - Config: ~/norris-agent/config/norriscontrol.json (tune cc_idle_pattern here)
 - telegram_send.py: ~/norris-agent/scripts/telegram_send.py (token in .env)
+
+## FINAL SESSION CLOSE-OUT STATE — April 19, 2026 ~3:30 PM CDT
+
+### Git state
+- main: clean, pushed — 0962449 (ledger), 5beafa5 (tuned config), 61468bc (telegram_send), 4eadfce (NC v3.1)
+- feature/shipping-agent-v5: SA v5 data files in working tree (normal, Legacy pipelines)
+- Stash: EMPTY — stash@{0} dropped (daily_journal entries already in working tree newer versions)
+- Config idle pattern: tuned (\$\s*$|%\s*$|...) — DO NOT REVERT
+
+### Open D items (priority order)
+D7 — SA V5 (HIGH) | D2 — task_queue rotation patch awaiting Aaron review (MEDIUM)
+D4c — validate cc_idle_pattern vs real CC output (MEDIUM) | D8 — create cc-main (MEDIUM)
+D9 — first production bridge run after D4c+D8 | D5 — secret masker tune (LOW)
+D1 — already done | D6 — done (setopt added to ~/.zshrc)
+
+### Handoff prompt saved
+Drive: Legacy Project/02_Handoffs/HANDOFF_PROMPT_2026-04-19_CLOSEOUT.md
+M1: ~/norris-agent/docs/HANDOFF_PROMPT_2026-04-19_CLOSEOUT.md
