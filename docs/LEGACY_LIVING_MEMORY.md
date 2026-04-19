@@ -1160,3 +1160,16 @@ Root cause: status flags read without cross-checking master data.
 Chain Electric / AJ Morris: ALREADY INVOICED $8,930.48 on April 18 ✅
 REMOVE from Monday invoice blitz list.
 Adjusted blitz total: ~$7,250 (Thornhill + Benz + Coy + Myers + Pickle + Abadie)
+
+## THREE ZONES + ORDER STATES (locked April 19, 2026 — final rules)
+Zone 1 (Legacy acts): internal records, portal, task queue, saved drafts
+Zone 2 (Aaron approves): email/invoice/quote drafts before send
+Zone 3 (Aaron/CB only): customer-facing sends — NEVER Legacy
+
+"EXECUTE" ≠ send to customer. Only explicit "send to [name]" authorizes Zone 3.
+Invoices must carry QB PDF, not Legacy-built PDF.
+
+SHIPPED / INVOICED (QB+PDF delivered) / PAID — three distinct states, never conflate.
+
+Chain Electric AJ Morris: SHIPPED ✅ INVOICED ❌ — QB invoice needed Monday.
+Revised blitz: ~$16,180 (Chain Electric back in).
