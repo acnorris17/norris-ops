@@ -809,3 +809,48 @@ Size: 34,919 bytes | 33 tests | 12 post-build steps | Spec CLOSED.
 - CC idle pattern: validated as-is — default regex works against bash prompt
 - Aaron should validate against real cc-main output (spec §22.4) before first production run
 - nc alias active in ~/.zprofile
+
+## BLOCKER: task_queue.md 93,332-line runaway (April 19, 2026)
+task_bridge is auto-appending to ~/norris-agent/task_queue.md without rotation.
+93,332 lines as of today. NorrisControl v3.1 completion entry is in the file but
+uncommitted because of this diff. Do NOT commit task_queue.md as-is.
+Dedicated session needed: investigate rotation policy in task_bridge.py,
+add log rotation / archive mechanism, then commit the clean v3.1 entry.
+Owner: Legacy + Claude Code. Not today.
+
+---
+
+# SESSION CLOSE-OUT — April 19, 2026
+
+## COMPLETED (full session)
+- change-log.html, contact detail modal, memory health dashboard, pipeline $2.5M+, norris-agent GitHub remote, reMarkable pipeline reconnect, bridge LaunchAgent
+- NorrisControl v3.1: 9 files, 3,529 lines, 33/33 tests PASS, on main (4eadfce, 61468bc, 5beafa5)
+- telegram_send.py: built, token found, live test verified, on main
+- NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md: canonical spec, Drive + M1 + workspace
+- Spec iterated v1→v2→v3→v3.1: each pass caught real gaps, bracketed paste bug was the critical fix
+
+## OPEN BLOCKERS (Legacy-owned)
+- D2: task_queue.md 361K lines — patch proposed, awaiting Aaron review
+- D4c: validate cc_idle_pattern vs real cc-main output before bridge production run
+- Roadmap item #17: Telegram reorg (Aaron creates 3 groups, Legacy wires scripts)
+- Rules sync (Wayne std, time awareness, no-rebuilds, Samson CC emails) — this week
+- Opus model update in bridge — next M1 session
+- Gridco/Cunningham — still in 4 portal places
+
+## AARON-BLOCKED ITEMS
+- Alabama Dealer License (~$500-1,500 surety bond) — blocks $1.09M Skylift AL
+- BSS Invoice 11 ($8,039.27) — Aaron sends to Andy Barron
+- Time Machine backup — EXISTENTIAL, buy external drive
+- Telegram 3 groups — create then Legacy wires
+- Rick Sutherland revival email — draft ready, approve to send
+- Coy Crosby RFP follow-up — draft ready, approve to send
+
+## KEY SYSTEM PATHS (NorrisControl)
+- nc alias: ~/.zprofile (source to activate)
+- Inbox: ~/norris-agent/claude_inbox.jsonl
+- Outbox: ~/norris-agent/claude_outbox.jsonl
+- Kill channel: ~/norris-agent/claude_inbox.kill
+- Full outputs: ~/norris-agent/run/outputs/
+- Logs: ~/norris-agent/logs/norriscontrol.log
+- Config: ~/norris-agent/config/norriscontrol.json (tune cc_idle_pattern here)
+- telegram_send.py: ~/norris-agent/scripts/telegram_send.py (token in .env)
