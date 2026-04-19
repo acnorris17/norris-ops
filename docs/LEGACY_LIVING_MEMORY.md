@@ -901,3 +901,30 @@ D7 — SA V5 (Aaron's main focus)
 D8 — create cc-main (gates D9)
 D9 — first production bridge run (after D4c + D8)
 D10 (new) — cherry-pick 5beafa5 to feature branch before SA v5 merge
+
+## FINAL CLOSE-OUT — April 19, 2026 (complete)
+
+### WHAT ACTUALLY SHIPPED TONIGHT (commits on main)
+- NC v3.1 + LaunchAgent: 05d544a — nc_bridge_start.sh, cc-main preflight, KeepAlive
+- Default timeout 120s: c9d097e
+- D10 config drift closed: 3b7cb75 (feature branch) + cherry-picked to main
+- Recovery cheat sheet v1: Desktop + Drive (recover_all.sh pending = D14 partial)
+- ask_claude.py: 6121a97 — BUILT BUT NOT SAFE TO USE (Opus default ~$95/mo)
+- LaunchAgent PID 65371 stable
+
+### ask_claude.py STATUS: DO NOT WIRE TO ANYTHING
+Not connected to any automation, cron, skill, or LaunchAgent (verified by grep).
+Must complete D16 (Haiku default + Norris system prompt) before any use.
+
+### NEW D ITEMS
+D16 (CRITICAL, TOMORROW FIRST): ask_claude.py Haiku 4.5 default + Norris system prompt
+D17 (after D16): ask_claude.py cost guardrails — Opus call cap, spend logging, budget alert
+D14 (partial): recover_all.sh still needs writing
+
+### TOMORROW PRIORITY ORDER
+1. D16 — fix ask_claude.py (blocks Path A)
+2. D17 — cost guardrails
+3. D12 — Legacy "route to CC" skill
+4. D13 — CC outbox → Telegram formatter
+5. D14 — recover_all.sh
+6. D15 — SA v5 Section V (the proof-of-concept run)
