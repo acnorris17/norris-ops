@@ -721,3 +721,10 @@ TRIGGER: After every chat session ends in this project folder
 ### WAYNE STANDARD NOTE
 v2 explicitly embeds the Wayne standard in §21. Every function, every log line, every error message must pass: would Wayne be proud of this? No cryptic errors, no TODO comments in shipped code, readable at 4 AM without coffee.
 
+
+## NorrisControl v3.0 FINAL — Additional fixes (April 19, 2026)
+- Test count: 20 → 28 (8 additional tests added)
+- Session crash recovery: error loudly as tmux_session_died, do NOT auto-recreate
+- Commit message locked: "NorrisControl v3.0 — tmux-first mechanical layer with clean separation of concerns"
+- v3 is the authoritative prompt. v1 and v2 are superseded.
+- Location: Google Drive → Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v3.md
