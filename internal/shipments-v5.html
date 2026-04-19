@@ -5664,4 +5664,144 @@ LineTec Services / LTS Power
           <td><span style="background:#d8f5dc;color:#14632a;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700">🟢 READY_TO_INVOICE</span></td>
           <td>—</td>
         </tr></tbody></table>
+
+<!-- V5 Section S: CB Internal Note Rendering | Section T: Courtesy Adjustment -->
+<style>
+  .cb-internal-note {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-size: 11px;
+    line-height: 1.5;
+    border-radius: 0 4px 4px 0;
+    white-space: pre-wrap;
+  }
+  .cb-internal-note-label {
+    font-weight: 700;
+    color: #856404;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cb-note-row {
+    background: #fffbf0 !important;
+  }
+  .cb-note-row:hover {
+    background: #fff3cd !important;
+  }
+  .courtesy-adjustment-line {
+    color: #dc3545;
+    font-weight: 700;
+  }
+  .courtesy-adjustment-amount {
+    color: #dc3545;
+    font-weight: 700;
+  }
+  .invoice-line-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .invoice-line-item.courtesy {
+    background: #fff5f5;
+    margin-top: 4px;
+    padding: 6px 8px;
+    border-radius: 4px;
+  }
+</style>
+
+<script>
+(function() {
+  const role = sessionStorage.getItem('nu_role');
+
+  // V5 Section S: CB Internal Note (only for CB role)
+  if (role === 'cb') {
+    fetch('../data/shipping_docs.json')
+      .then(r => r.json())
+      .then(data => {
+        const docs = data.documents || [];
+        const noteMap = {};
+        docs.forEach(doc => {
+          if (doc.cb_internal_note) {
+            noteMap[doc.id] = doc.cb_internal_note;
+          }
+        });
+
+        document.querySelectorAll('tbody tr').forEach(row => {
+          const codeEl = row.querySelector('td:first-child code');
+          if (!codeEl) return;
+          const sdId = codeEl.textContent.trim();
+          if (noteMap[sdId]) {
+            row.classList.add('cb-note-row');
+            const noteRow = document.createElement('tr');
+            noteRow.innerHTML = '<td colspan="9" style="padding:0 10px 10px 10px;background:#fffbf0">' +
+              '<div class="cb-internal-note">' +
+              '<span class="cb-internal-note-label">CB Note:</span>' +
+              noteMap[sdId].replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>') +
+              '</div></td>';
+            row.parentNode.insertBefore(noteRow, row.nextSibling);
+          }
+        });
+      })
+      .catch(e => console.error('V5 cb_internal_note fetch failed:', e));
+  }
+
+  // V5 Section T: Courtesy Adjustment in Invoice Lifecycle
+  window.renderCourtesyAdjustment = function(sdData) {
+    if (!sdData || !sdData.courtesy_adjustment || sdData.courtesy_adjustment === 0) {
+      return '';
+    }
+    const amt = Math.abs(sdData.courtesy_adjustment);
+    return '<div class="invoice-line-item courtesy">' +
+      '<span class="courtesy-adjustment-line">Valued-Partner Courtesy Adjustment</span>' +
+      '<span class="courtesy-adjustment-amount">-$' + amt.toFixed(2) + '</span>' +
+      '</div>';
+  };
+
+  window.calculateInvoiceTotal = function(lineItems, shipping, courtesyAdjustment) {
+    let total = 0;
+    if (lineItems && Array.isArray(lineItems)) {
+      lineItems.forEach(item => {
+        total += (item.qty || 0) * (item.unit_price || 0);
+      });
+    }
+    if (shipping) total += shipping;
+    if (courtesyAdjustment) total -= Math.abs(courtesyAdjustment);
+    return total;
+  };
+
+  window.buildInvoiceLineItems = function(sdData) {
+    let html = '';
+    const pricing = sdData.internal_pricing || {};
+    const items = pricing.line_items || [];
+
+    items.forEach(item => {
+      const lineTotal = (item.qty || 0) * (item.unit_price || 0);
+      html += '<div class="invoice-line-item">' +
+        '<span>' + (item.qty || 0) + 'x ' + (item.name || item.sku) + '</span>' +
+        '<span>$' + lineTotal.toFixed(2) + '</span>' +
+        '</div>';
+    });
+
+    if (pricing.shipping) {
+      html += '<div class="invoice-line-item">' +
+        '<span>Shipping</span>' +
+        '<span>$' + pricing.shipping.toFixed(2) + '</span>' +
+        '</div>';
+    }
+
+    // V5 Rule 4: Courtesy adjustment as negative line
+    html += window.renderCourtesyAdjustment(sdData);
+
+    const total = window.calculateInvoiceTotal(items, pricing.shipping, sdData.courtesy_adjustment);
+    html += '<div class="invoice-line-item" style="font-weight:700;border-top:2px solid #333;margin-top:8px;padding-top:8px">' +
+      '<span>Total</span>' +
+      '<span>$' + total.toFixed(2) + '</span>' +
+      '</div>';
+
+    return html;
+  };
+})();
+</script>
 </body></html>
