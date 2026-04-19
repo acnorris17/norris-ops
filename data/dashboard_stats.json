@@ -1,10 +1,36 @@
 {
   "uninvoiced_count": 46,
   "overdue_followups": 3,
-  "pipeline_value": "$1.8M+",
+  "pipeline_value": "$2.5M+",
   "skylift_trucks": 6,
   "telegram_messages": 500,
-  "last_updated": "2026-04-17T15:48:04",
+  "last_updated": "2026-04-19T11:17:29",
   "critical_items": [],
-  "deals": []
+  "deals": [
+    {
+      "name": "Skylift 6 Trucks",
+      "value": 1091402,
+      "status": "active"
+    },
+    {
+      "name": "Terex / Bill Kugler OEM",
+      "value": 500000,
+      "status": "pursuing"
+    },
+    {
+      "name": "EPB / Rick Sutherland",
+      "value": 185000,
+      "status": "cold"
+    },
+    {
+      "name": "Dominion Energy ongoing",
+      "value": 50000,
+      "status": "active"
+    },
+    {
+      "name": "BSS RCOO (Irby)",
+      "value": 0,
+      "status": "tbd"
+    }
+  ]
 }
