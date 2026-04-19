@@ -928,3 +928,13 @@ D14 (partial): recover_all.sh still needs writing
 4. D13 — CC outbox → Telegram formatter
 5. D14 — recover_all.sh
 6. D15 — SA v5 Section V (the proof-of-concept run)
+
+## MODEL SELECTION RULE — PERMANENT (April 19, 2026)
+- Opus 4.7 = default for ALL builds, code, drafts, quotes, emails, analysis
+- Haiku 4.5 = explicit --model haiku flag only, for simple triage/lookups
+- ask_claude.py default = claude-opus-4-7 (NOT Haiku — reverses earlier cost recommendation)
+- Budget cap: $120/mo accepted (Wayne standard quality > API savings)
+- Norris system prompt required on ALL ask_claude.py calls
+
+D16 UPDATED: ask_claude.py default = claude-opus-4-7, --model haiku flag for simple tasks,
+Norris system prompt required, cost logging required, budget cap $120/mo.
