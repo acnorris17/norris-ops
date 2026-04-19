@@ -762,3 +762,40 @@ Claude's caution was warranted. v3.1 is confirmed correct — verified by grep.
 - Test #29 (tmux_paste_multiline_atomic) is the critical bracketed paste verification
 - v2 archived; v3-1 is the only version to build from
 - STOP REFINING. Build v3-1. Learn from the actual build.
+
+---
+
+## LIVING MEMORY UPDATE — NorrisControl v3.1 FINAL (April 19, 2026)
+## Author: Claude Opus 4.7
+
+### COMPLETED
+- Flagged coordination issue: Legacy had saved v2 to Drive/M1 (not v3). RESOLVED — Legacy re-synced to official v3.1 (34,919 bytes) before this note was written.
+- Critical bug found in v3.0: tmux send-keys with multi-line content fires Ctrl-J per newline → CC submits line-by-line. Fixed via bracketed paste (tmux load-buffer + paste-buffer -p).
+- v3.1 produced. Spec declared closed. Build teaches more than further review.
+
+### DECISIONS (v3.0 → v3.1)
+1. Paste: bracketed paste via tmux paste buffer. tmux send-keys restricted to single keystrokes only — never content.
+2. Explicit pane targeting: session:window.pane (e.g. cc-main:0.0). target_pane in task JSON, defaults to 0.0.
+3. Outputs retention: 30-day / 500-file cap. Runs at bridge start, every 100 tasks, shutdown.
+4. Telegram 5s subprocess timeout via run_with_timeout(). Task never fails due to Telegram issue.
+5. Input Monitoring permission check (macOS 13+).
+6. Post-build idle-pattern validation step added (real CC output vs config regex).
+7. Spec closed at v3.1. No v3.2.
+
+### v3.0 → v3.1 DELTA
+| # | v3.0 | v3.1 |
+|---|---|---|
+| 1 | tmux send-keys for content | tmux_paste() via load-buffer + paste-buffer -p |
+| 2 | Session targeting only | Session AND pane (session:window.pane) |
+| 3 | Outputs unbounded | 30-day / 500-file retention |
+| 4 | Telegram could stall task | 5s subprocess timeout |
+| 5 | 3 permission checks | 4 (+ Input Monitoring macOS 13+) |
+| 6 | 28 tests | 33 tests |
+| 7 | 10 post-build steps | 12 steps |
+| 8 | Commit: "v3.0 — tmux-first mechanical layer" | Commit: "v3.1 — bracketed paste fix + output rotation + subprocess hardening" |
+| 9 | Config: no subprocess_timeout_sec | Config: +subprocess_timeout_sec, +outputs_retention, +default_target_pane |
+
+### AUTHORITATIVE FILE
+Google Drive → Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md
+M1: ~/norris-agent/docs/NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md
+Size: 34,919 bytes | 33 tests | 12 post-build steps | Spec CLOSED.
