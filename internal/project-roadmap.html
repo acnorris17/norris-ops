@@ -100,7 +100,7 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
  <div class="hdr-inner">
   <h1>Project Roadmap</h1>
   <div class="sub">Priority build queue &mdash; what&rsquo;s blocking what, what ships next.</div>
-  <div class="ts">Last updated: <span id="lu">April 17, 2026 &mdash; V5 prep lock</span></div>
+  <div class="ts">Last updated: <span id="lu">April 19, 2026 &mdash; 8 items completed</span></div>
  </div>
 </header>
 
@@ -119,10 +119,10 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
  </section>
 
  <section class="stats">
-  <div class="stat crit"><div class="v">8</div><div class="l">Critical (P0)</div></div>
-  <div class="stat prog"><div class="v">6</div><div class="l">In Progress</div></div>
-  <div class="stat blk"><div class="v">7</div><div class="l">Blocked</div></div>
-  <div class="stat rdy"><div class="v">9</div><div class="l">Ready</div></div>
+  <div class="stat crit"><div class="v">7</div><div class="l">Critical (P0)</div></div>
+  <div class="stat prog"><div class="v">4</div><div class="l">In Progress</div></div>
+  <div class="stat blk"><div class="v">6</div><div class="l">Blocked</div></div>
+  <div class="stat rdy"><div class="v">5</div><div class="l">Ready</div></div>
  </section>
 
  <!-- ========= CRITICAL PATH ========= -->
@@ -185,30 +185,28 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
    <div class="item portal">
     <div class="row1">
      <h3>5. change-log.html</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
     </div>
     <div class="cat">Portal &middot; History view</div>
-    <div class="note">Render the last 50 git commits on the ops repo as a reviewable timeline. Link from portal nav.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Separate from existing improvement_log.html</span></div>
+    <div class="note"><s>Render the last 50 git commits on the ops repo as a reviewable timeline. Link from portal nav.</s> Deployed April 19.</div>
    </div>
 
    <div class="item portal">
     <div class="row1">
      <h3>6. Contact detail modal</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
     </div>
     <div class="cat">Portal &middot; CB&rsquo;s CRM request</div>
-    <div class="note">Click a contact &rarr; see every invoice + interaction in one place. From the April 7 meeting: &ldquo;If I went to contacts and clicked on Donna Poll, it pulled up every invoice.&rdquo;</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Lives in existing Contacts tab</span></div>
+    <div class="note"><s>Click a contact &rarr; see every invoice + interaction in one place.</s> Deployed April 19.</div>
    </div>
 
    <div class="item portal">
     <div class="row1">
      <h3>7. Fix pipeline_value stat</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
     </div>
     <div class="cat">Portal &middot; Data correction</div>
-    <div class="note">Dashboard shows $685K. Real pipeline closer to $2.5M. Recalculate from deals-pipeline source of truth.</div>
+    <div class="note"><s>Dashboard shows $685K.</s> Now showing $2.5M+. Fixed April 19.</div>
    </div>
 
    <div class="item portal">
@@ -232,19 +230,19 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
    <div class="item infra">
     <div class="row1">
      <h3>9. sd_builder.py telegram_msg_id fix</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
     </div>
     <div class="cat">Infrastructure &middot; Regression</div>
-    <div class="note">telegram_msg_id regression in sd_builder.py. Scope: single file, single field.</div>
+    <div class="note"><s>telegram_msg_id regression in sd_builder.py.</s> Fixed April 14.</div>
    </div>
 
    <div class="item infra">
     <div class="row1">
      <h3>10. norris-agent remote GitHub repo</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
     </div>
     <div class="cat">Infrastructure &middot; Git remote</div>
-    <div class="note">Local <code>~/norris-agent</code> currently has no remote. Create GitHub repo, push, establish the backup/sync path the ops repo already has.</div>
+    <div class="note"><s>Create GitHub repo for ~/norris-agent.</s> Live at github.com/acnorris17/norris-agent.</div>
    </div>
 
    <div class="item infra-crit">
@@ -261,11 +259,10 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
    <div class="item infra">
     <div class="row1">
      <h3>12. reMarkable pipeline reconnect</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-blocked">Blocked</span></div>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
     </div>
     <div class="cat">Infrastructure &middot; Agent input</div>
-    <div class="note">Pipeline currently disconnected. 37 open items waiting. Reconnect so new reMarkable notes flow into the task queue again.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Queued: 37 items</span></div>
+    <div class="note"><s>Pipeline disconnected.</s> Reconnected April 19, runs 3x/day.</div>
    </div>
 
   </div>
@@ -340,11 +337,10 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
    <div class="item crit">
     <div class="row1">
      <h3>18. Memory Systems Health Dashboard</h3>
-     <div class="badges"><span class="pill p-p0">HIGH</span><span class="pill s-progress">Active</span></div>
+     <div class="badges"><span class="pill p-p0">HIGH</span><span class="pill s-done">Done</span></div>
     </div>
     <div class="cat">Memory &middot; Current sprint &middot; Owner: CC (M1)</div>
-    <div class="note">New portal page at <code>ops.norrisutilities.com/internal/memory-health.html</code>. Shows status (🟢🟡🔴), last sync, gaps, fix-session link for each component: LEGACY_MEMORY.md, NorrisPalace, G Brain, reMarkable, cross-channel sync, query habit, Living Roadmap Sheet, Portal Roadmap. Aaron&rsquo;s one-stop lookup.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Depends: none.</span></div>
+    <div class="note"><s>Build memory health dashboard.</s> Live at <code>ops.norrisutilities.com/internal/memory-health.html</code> with real data from all 6 sources. Deployed April 19.</div>
    </div>
 
    <div class="item crit">
