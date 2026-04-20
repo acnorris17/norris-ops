@@ -100,7 +100,7 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
  <div class="hdr-inner">
   <h1>Project Roadmap</h1>
   <div class="sub">Priority build queue &mdash; what&rsquo;s blocking what, what ships next.</div>
-  <div class="ts">Last updated: <span id="lu">April 19, 2026 &mdash; 8 items completed</span></div>
+  <div class="ts">Last updated: April 20, 2026 &mdash; V5, Chain Electric, invoicing breakout, Cloudflare ZT, NorrisPalace rules</span></div>
  </div>
 </header>
 
@@ -441,7 +441,18 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
     <div class="note">Gmail [LIVING_MEMORY_UPDATE] draft pipeline + bridge LaunchAgent 15-min cycle deployed April 18. Auto-sync reliability ~50%. Target: 90%+ cross-channel sync across 8 locations.</div>
    </div>
 
-  </div>
+  
+   <div class="item infra-crit">
+    <div class="row1">
+     <h3>Cloudflare Zero Trust &mdash; norrisops.com</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
+    </div>
+    <div class="cat">Infrastructure &middot; Done April 20, 2026</div>
+    <div class="note">Identity-based auth live on norrisops.com. 2 Access apps (Shared + Aaron Only), 30-day rolling session. Mirror via ~/norris-agent/scripts/sync_norrisops_pages.sh post-commit hook. Commit 75b90a058144, wrangler 67fa74ae. Replaces JS password gate. ops.norrisutilities.com held 2-4 weeks parallel fallback.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Next: build sync_norrisops_pages.sh post-commit hook (referenced but not yet built)</span></div>
+   </div>
+
+</div>
  </div>
 
  <!-- ═══ NEW SECTION: INVOICING BACKLOG ═══ -->
@@ -483,21 +494,20 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
    <div class="item crit">
     <div class="row1">
      <h3>Pickle / Florence Electric &mdash; Mixed ARCH/BCB/1.5-Man</h3>
-     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
     </div>
     <div class="cat">Revenue &middot; SKU unconfirmed</div>
-    <div class="note">3&times; NU-BC-2834 + 1&times; NU-BC-2834-C + 2&times; NU-BC-2834-F + 1.5-Man BCB accessory. 1.5-Man BCB P/N unknown &mdash; pull from Boss Products paperwork. P/Ns confirmed in master since April 7 but BCB P/N missing.</div>
-    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocked: 1.5-Man BCB P/N (30-second lookup from Boss paperwork)</span></div>
+    <div class="note">3&times; NU-BC-2834 (1.5-Man 28&rdquo;&times;34&rdquo;) @ $265 = $795 &middot; 1&times; NU-BC-2834-C (Combo) @ $305 &middot; 2&times; NU-BC-2834-F (ARCH) @ $305 = $610. P/Ns confirmed in master since April 7. Tracking: 1Z2W49000328351797, delivered Mar 23. Contact: Darrell Pickle &mdash; Dpickle@florenceal.org</div>
     <div class="fin-line aaron-only"><span class="money rev">$1,765</span></div>
    </div>
 
    <div class="item crit">
     <div class="row1">
      <h3>Myers / AEP Roanoke &mdash; ARCH + Combo</h3>
-     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
     </div>
     <div class="cat">Revenue &middot; SKU unconfirmed</div>
-    <div class="note">2&times; NU-BC-2834-F + 1&times; NU-BC-2834-C. P/Ns in master since April 7 per reconciliation. G Brain shows $915 ready to invoice.</div>
+    <div class="note">2&times; NU-BC-2834-F (ARCH) @ $305 = $610 &middot; 1&times; NU-BC-2834-C (Combo) @ $305. Ship to: 1800 Loch Haven Drive, Roanoke VA 24019. Tracking: 1Z2W49000395012652, delivered Mar 24. <strong>UPS label note:</strong> UPS log shows &ldquo;Chain Electric / Abshire&rdquo; for this tracking &mdash; clerical UPS Store alias. &ldquo;Abshire&rdquo; = Sammy Myers canonical alias. SA V5 must flag destination mismatches automatically.</div>
     <div class="fin-line aaron-only"><span class="money rev">$915</span></div>
    </div>
 
