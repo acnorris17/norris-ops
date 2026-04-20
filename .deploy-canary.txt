@@ -1,0 +1,3 @@
+deploy canary — used to smoke-test the norris-ops → Cloudflare Pages mirror
+created: 2026-04-20
+last-touch: 2026-04-20 14:08 (mirror-script dry-run)
