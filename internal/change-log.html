@@ -5,7 +5,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Change Log — Norris Utilities® Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<script>
+(function(){
+  if(sessionStorage.getItem('nu_auth_2026')==='granted')return;
+  // Check URL hash for quick auth (e.g. #pw=norris2026)
+  var h=location.hash.replace('#','');
+  if(h==='pw=norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');history.replaceState(null,'',location.pathname);return;}
+  if(h==='pw=legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');history.replaceState(null,'',location.pathname);return;}
+  // Fallback to prompt (works on most browsers on same domain)
+  var pw=window.prompt('Password required:');
+  if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}
+  else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}
+  else{document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#333"><div style="text-align:center"><h2>Access Denied</h2><p>Incorrect password. <a href="/index.html">Return to portal</a></p></div></div>';}
+})();
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Lato',sans-serif;background:#f5f6fa;color:#1a1a1a;line-height:1.5}
