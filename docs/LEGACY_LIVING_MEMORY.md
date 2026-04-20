@@ -1187,12 +1187,12 @@ See MEMORY.md for full text. Summary:
 ## CLOUDFLARE ZERO TRUST — LIVE (April 20, 2026)
 ### Status: BLOCKER RESOLVED ✅
 
-**New canonical URL:** nu-ops.com (Cloudflare Pages, auto-deploys from acnorris17/norris-ops on push to main)
+**New canonical URL:** norrisops.com (Cloudflare Pages, auto-deploys from acnorris17/norris-ops on push to main)
 **Old URL:** ops.norrisutilities.com — remains live on Squarespace DNS → GitHub Pages. READ-ONLY FALLBACK. DO NOT TOUCH.
 
 ### Infrastructure
 - Cloudflare Pages: deploys from acnorris17/norris-ops (same repo, same behavior as GitHub Pages)
-- Cloudflare Zero Trust: ACTIVE on nu-ops.com
+- Cloudflare Zero Trust: ACTIVE on norrisops.com
 - JS auth gates (norris2026/legacy2026): SUPERSEDED by Cloudflare Access but kept as belt-and-suspenders until explicit removal approved by Aaron
 
 ### Access Policies
