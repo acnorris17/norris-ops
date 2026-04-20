@@ -1219,3 +1219,33 @@ BSS expense groups detailed (Groups 1/2/3 + DoubleTree TBD).
 Alabama Dealer License + Time Machine both marked URGENT.
 Notes Intelligence Agent + Session Summary Protocol + Personal Gmail added.
 13 TIMELINE rows logged to Google Sheet. CB Telegram Bot design-session requirement noted.
+
+## April 20, 2026 — Reconciliation + NorrisPalace Rules Lock
+
+### Status Corrections
+- Pickle / Florence Electric: BLOCKED → READY TO INVOICE. P/Ns confirmed April 8. $1,710 + shipping. Tracking 1Z2W49000328351797 delivered Mar 23.
+- Myers / AEP Roanoke: BLOCKED → READY TO INVOICE. P/Ns confirmed April 8. $915 + shipping. Tracking 1Z2W49000395012652. UPS label shows "Chain Electric / Abshire" — clerical error. Abshire = Sammy Myers canonical alias. Recorded as SA V5 test case for cross-check requirement.
+- Cloudflare Zero Trust card added to project-roadmap.html Infrastructure section.
+
+### 9 NorrisPalace Keys Written
+1. rules/terminology-locked-apr19 — P/N not SKU, BCB=Bag, cover sizes, FlexPro Hand Made
+2. rules/customer-aliases-canonical — 9 aliases locked
+3. rules/pricing-v5-locked — Full P/N price list, dealer formula, Samson margins, Chain Electric benchmark
+4. rules/branding-v5-locked — FlexPro no ®, trademarks, colors, fonts, email rules
+5. rules/sd-v5-locked — Required fields, source priority, junk→delete, investigation standard
+6. rules/portal-v5-locked — CB celebrations identical, MSP DO NOT LAUNCH
+7. rules/cloudflare-zero-trust-norrisops — Account/Zone/App IDs, service token, canonical path
+8. rules/do-not-resurface — Gridco, Terry Mayfield, Wayne bench, MSP
+9. facts/personal-gmail-connected — acnorris1@gmail.com IS connected, stop asking
+10. rules/model-default-apr19 — claude-opus-4-7 default, Sonnet explicit, Haiku removed
+
+### Path Canonicalization
+sync_norrisops_pages.sh canonical path: ~/norris-agent/scripts/ (post-commit hook confirmed)
+File does NOT yet exist at either location — NEEDS_AARON to provide or approve build.
+
+### .env Reconciliation
+9/11 Cloudflare keys present. MISSING: CF_SERVICE_TOKEN_CLIENT_ID + CF_SERVICE_TOKEN_CLIENT_SECRET.
+These are the service token credentials. Aaron created them during setup. FLAG: Aaron must add these to .env or confirm they are not needed for current use cases.
+
+### .gitignore
+.wrangler/ added to .gitignore (commit 5d1ebdb).
