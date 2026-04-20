@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-20T07:15:18",
+  "last_updated": "2026-04-20T07:18:38",
   "documents": [
     {
       "id": "SD-2026-ABADIE-0331",
@@ -789,10 +789,10 @@
         }
       ],
       "shipTo": "101 W Township St, Fayetteville, AR 72703",
-      "notes": "REPEAT ORDER \u2014 second cover, tore up the March 20 one. Truck #860377 on invoice.",
+      "notes": "CC customer \u2014 4% fee on invoice. Repeat order. Truck #860377.",
       "parent_order_id": null,
       "fulfillment_source": "nu_stock",
-      "cb_internal_note": "Jimmy Benz SWEPCO. 1x NU-BC-2851 @ $305. Truck #860377 on invoice. SECOND order \u2014 first was March 20. Ship to 101 W Township St, Fayetteville AR 72703. March 20 order also needs QB invoice ($305 + shipping).",
+      "cb_internal_note": "Jimmy Benz SWEPCO \u2014 CC CUSTOMER (4% fee applies). 1x NU-BC-2851 @ $305. Truck #860377 on invoice. SECOND order \u2014 first was March 20 (also needs QB invoice). Ship to: 101 W Township St, Fayetteville AR 72703. QB invoice: list $305 + shipping + 4% CC fee on subtotal. Ben's Formula for shipping: ROUNDUP(ROUNDUP(RegCost,0)*1.10,0). STATUS: Aaron approved. OK to invoice after shipment confirmed.",
       "internal_pricing": {
         "line_items": [
           {
@@ -805,7 +805,9 @@
         "subtotal": 305,
         "shipping": null,
         "total": null
-      }
+      },
+      "cc_customer": true,
+      "courtesy_adjustment": null
     }
   ]
 }
