@@ -332,8 +332,8 @@ body.role-cb #tab-samson th:nth-child(4),body.role-cb #tab-samson tbody td:nth-c
 <div class="celeb-layer" id="celebLayer"></div>
 <div class="celeb-toast" id="celebToast"></div>
 
-<!-- ==================== LOGIN GATE ==================== -->
-<div class="login-overlay" id="loginOverlay">
+<!-- ==================== LOGIN GATE (hidden by default; cfIdentityBootstrap reveals on identity failure) ==================== -->
+<div class="login-overlay" id="loginOverlay" style="display:none">
   <div class="login-box">
     <img src="logo-blue.png" alt="Norris Utilities&reg; Phoenix Icon&reg;" class="login-phoenix">
     <div class="login-title">Norris Utilities&reg;</div>
@@ -1073,22 +1073,19 @@ function celebToast(msg){var t=document.getElementById('celebToast');if(!t)retur
 /* ═══════════════════════════════════════════════════
    NORRIS UTILITIES® CELEBRATIONS ENGINE v2.0
    Phoenix Rise + Particle Cannon + Confetti Storm
-   Completion Chime (Aaron only)
-   SECRET FROM CB — CB sees confetti + banner only
+   Identical celebrations for all authenticated users —
+   CB and Aaron get the full engine.
    ═══════════════════════════════════════════════════ */
 
 /* Bridge: old celebrate(checkEl) calls route into v2 engine */
 function celebrate(checkEl){var pos=gcp(checkEl);var type;do{type=Math.floor(Math.random()*10)}while(type===lastCelebType);lastCelebType=type;celebFns[type](pos);showStreak();incrementCompleted();celebToast(celebMsgs[Math.floor(Math.random()*celebMsgs.length)]);celebDing();fireCelebration()}
 
 function fireCelebration(taskName) {
-  const isAaron = sessionStorage.getItem('nu_role') === 'aaron';
   screenFlash();
   launchConfettiCannon();
-  if (isAaron) {
-    setTimeout(() => phoenixRise(), 300);
-    setTimeout(() => particleExplosion(), 500);
-    setTimeout(() => playCompletionChime(), 100);
-  }
+  setTimeout(() => phoenixRise(), 300);
+  setTimeout(() => particleExplosion(), 500);
+  setTimeout(() => playCompletionChime(), 100);
   showCompletionBanner(taskName);
 }
 
@@ -1267,8 +1264,21 @@ function sortFollowups(m){var ct=document.getElementById('followupCards'),cards=
 
 return{toggleShipment:toggleShipment,undoShipment:undoShipment,toggleFollowup:toggleFollowup,undoFollowup:undoFollowup,toggleCB:toggleCB,addQBTask:addQBTask,restoreShipments:restoreShipments,restoreFollowups:restoreFollowups,restoreCB:restoreCB,renderQBCards:renderQBCards,filterShipments:filterShipments,filterAPRows:filterAPRows,sortFollowups:sortFollowups,sortContacts:sortContacts,initAPSort:initAPSort,saveTodayCount:saveTodayCount}})();
 
-/* === PASSWORD GATE (Two-Tier Access) === */
-(function(){var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026',RK='nu_role';var storedRole=sessionStorage.getItem(RK);if(sessionStorage.getItem(K)==='granted'&&storedRole){o.classList.add('hidden');p.style.display='block';if(storedRole==='cb')document.body.classList.add('role-cb')}function a(){var pw=i.value,role=null;if(pw==='norris2026')role='aaron';else if(pw==='legacy2026')role='cb';if(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem(RK,role);o.classList.add('hidden');p.style.display='block';if(role==='cb')document.body.classList.add('role-cb');if(typeof updateGreeting==='function')updateGreeting()}else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})})();
+/* === CLOUDFLARE ACCESS IDENTITY BOOTSTRAP + PASSWORD GATE FALLBACK === */
+(function(){
+  var o=document.getElementById('loginOverlay'),p=document.getElementById('portalContent'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError'),K='nu_auth_2026',RK='nu_role';
+  function grant(role){sessionStorage.setItem(K,'granted');sessionStorage.setItem(RK,role);o.classList.add('hidden');o.style.display='none';p.style.display='block';if(role==='cb')document.body.classList.add('role-cb');if(typeof updateGreeting==='function')updateGreeting()}
+  function revealGate(){o.style.display='';o.classList.remove('hidden');p.style.display='none'}
+  var storedRole=sessionStorage.getItem(RK);
+  if(sessionStorage.getItem(K)==='granted'&&storedRole){o.classList.add('hidden');o.style.display='none';p.style.display='block';if(storedRole==='cb')document.body.classList.add('role-cb');return}
+  function cfIdentityBootstrap(){
+    var ctrl=new AbortController();var tid=setTimeout(function(){ctrl.abort()},5000);
+    fetch('/cdn-cgi/access/get-identity',{signal:ctrl.signal,credentials:'same-origin'}).then(function(r){clearTimeout(tid);if(!r.ok)throw new Error('status '+r.status);return r.json()}).then(function(j){var email=(j&&j.email||'').toLowerCase();if(email==='acnorris@norrisutilities.com')grant('aaron');else if(email==='cbutler@norrisutilities.com')grant('cb');else revealGate()}).catch(function(err){clearTimeout(tid);revealGate()})
+  }
+  cfIdentityBootstrap();
+  function a(){var pw=i.value,role=null;if(pw==='norris2026')role='aaron';else if(pw==='legacy2026')role='cb';if(role){grant(role)}else{i.classList.add('error');e.textContent='Access Denied.';setTimeout(function(){i.classList.remove('error')},500)}}
+  b.addEventListener('click',a);i.addEventListener('keydown',function(ev){if(ev.key==='Enter')a()})
+})();
 
 /* === GREETING (Central Time, called after login resolves) === */
 function updateGreeting(){
