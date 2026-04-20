@@ -9,381 +9,313 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/brand.css">
 <style>
+/* ═══════════════════════════════════════════════════════════════
+   LIVE ROADMAP v1 — styles
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+ --nu-blue:#0000FF; --nu-cyan:#06D0FF; --nu-navy:#0a0e5c;
+ --nu-primary:#0033cc; --nu-mid:#0066ee; --nu-bright:#00aaff;
+ --bg:#f5f6fa; --card:#fff; --text:#1a1a1a; --muted:#666; --border:#e8e8e8;
+ --shadow:0 2px 8px rgba(0,0,0,.06);
+ --shadow-lg:0 8px 24px rgba(0,0,0,.12);
+ --red:#dc3545; --green:#28a745; --amber:#e67e22; --violet:#6f42c1;
+}
+body.dark{
+ --bg:#0d1018; --card:#161a26; --text:#e7e9f0; --muted:#8892a6; --border:#2a2f42;
+ --shadow:0 2px 10px rgba(0,0,0,.5);
+ --shadow-lg:0 12px 32px rgba(0,0,0,.6);
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-height:1.5}
+html,body{background:var(--bg);color:var(--text)}
+body{font-family:'Lato',Arial,sans-serif;line-height:1.5;transition:background .25s,color .25s}
 
+/* ── Header ─────────────────────────────────────────────── */
 .hdr{position:relative;background:linear-gradient(135deg,#0a0e5c 0%,#0033cc 30%,#0066ee 55%,#00aaff 80%,#06D0FF 100%);color:#fff;padding:44px 40px 70px;overflow:hidden}
-.hdr::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:48px;background:#fff;clip-path:polygon(0 100%,38% 0,100% 100%)}
+.hdr::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:48px;background:var(--bg);clip-path:polygon(0 100%,38% 0,100% 100%);transition:background .25s}
 .phoenix-ghost{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:65%;max-width:620px;opacity:.07;pointer-events:none;z-index:0}
 .hdr-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto}
 .hdr h1{font-weight:900;font-size:2.25rem;letter-spacing:-.01em;margin-bottom:6px}
 .hdr .sub{font-weight:400;font-size:1rem;opacity:.95}
-.hdr .ts{margin-top:14px;font-size:.82rem;opacity:.9;font-weight:400}
-.hdr .back{position:absolute;top:18px;left:40px;color:#fff;text-decoration:none;font-size:.85rem;font-weight:700;opacity:.85;z-index:2}
+.hdr .meta-row{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:.82rem}
+.hdr .pill-meta{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:4px 11px;border-radius:999px;font-weight:700;letter-spacing:.02em}
+.hdr .pill-meta code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.8em}
+.hdr-top{position:absolute;top:18px;left:40px;right:40px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+.hdr .back{color:#fff;text-decoration:none;font-size:.85rem;font-weight:700;opacity:.85}
 .hdr .back:hover{opacity:1}
+.hdr-tools{display:flex;gap:8px;align-items:center}
+.hdr-tools button,.hdr-tools a{background:rgba(0,0,0,.18);color:#fff;border:1px solid rgba(255,255,255,.28);padding:5px 11px;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;text-decoration:none;letter-spacing:.02em}
+.hdr-tools button:hover,.hdr-tools a:hover{background:rgba(0,0,0,.32)}
 
+/* ── Main wrap ──────────────────────────────────────────── */
 .wrap{max-width:1200px;margin:-24px auto 0;padding:0 24px 60px;position:relative;z-index:1}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.stat{background:#fff;border-radius:14px;border-left:4px solid #0033cc;padding:16px 18px;box-shadow:0 3px 14px rgba(0,0,0,.05)}
-.stat .v{font-size:1.85rem;font-weight:900;color:#0033cc;line-height:1}
-.stat.crit .v{color:#dc3545}
-.stat.blk .v{color:#dc3545}
-.stat.rdy .v{color:#28a745}
-.stat.prog .v{color:#e67e22}
-.stat .l{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#888;margin-top:6px}
+/* ── Stats ─────────────────────────────────────────────── */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:22px}
+.stat{background:var(--card);border-radius:14px;border-left:4px solid var(--nu-primary);padding:14px 16px;box-shadow:var(--shadow);transition:transform .15s}
+.stat:hover{transform:translateY(-2px)}
+.stat .v{font-size:1.8rem;font-weight:900;color:var(--nu-primary);line-height:1}
+.stat.urgent{border-left-color:var(--red)} .stat.urgent .v{color:var(--red)}
+.stat.blocked{border-left-color:var(--red)} .stat.blocked .v{color:var(--red)}
+.stat.active{border-left-color:var(--amber)} .stat.active .v{color:var(--amber)}
+.stat.done{border-left-color:var(--green)} .stat.done .v{color:var(--green)}
+.stat.notstarted{border-left-color:var(--violet)} .stat.notstarted .v{color:var(--violet)}
+.stat.ready{border-left-color:var(--nu-cyan)} .stat.ready .v{color:var(--nu-bright)}
+.stat .l{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:5px}
 
-.section{margin:32px 0 8px}
-.section h2{font-weight:900;font-size:1.35rem;margin-bottom:4px}
-.section h2 .blue{color:#0033cc}
-.section h2 .dark{color:#1a1a1a}
-.section .desc{font-size:.86rem;color:#666;margin-bottom:14px}
+/* ── Tabs ─────────────────────────────────────────────── */
+.tabs{display:flex;gap:4px;margin-bottom:18px;border-bottom:2px solid var(--border);overflow-x:auto}
+.tab{background:transparent;border:0;padding:12px 18px;font-family:inherit;font-weight:700;font-size:.92rem;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .15s,border-color .15s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--nu-primary);border-bottom-color:var(--nu-primary)}
+body.dark .tab.active{color:var(--nu-bright);border-bottom-color:var(--nu-bright)}
+
+.view{display:none}
+.view.active{display:block;animation:fadeIn .25s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Search / filter bar ─────────────────────────────────── */
+.filter-bar{background:var(--card);border-radius:12px;padding:14px;box-shadow:var(--shadow);margin-bottom:18px;display:grid;gap:10px}
+.filter-bar input[type=search]{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.95rem;background:var(--bg);color:var(--text)}
+.filter-bar input[type=search]:focus{outline:0;border-color:var(--nu-primary)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-right:6px}
+.chip{display:inline-block;padding:4px 11px;border-radius:999px;font-size:.72rem;font-weight:700;border:1px solid var(--border);background:var(--bg);color:var(--muted);cursor:pointer;user-select:none;transition:all .12s}
+.chip:hover{border-color:var(--nu-primary);color:var(--text)}
+.chip.active{background:var(--nu-primary);color:#fff;border-color:var(--nu-primary)}
+
+/* ── Section / card ─────────────────────────────────────── */
+.section-block{margin:22px 0 8px}
+.section-block h2{font-weight:900;font-size:1.25rem;margin-bottom:6px}
+.section-block h2 .blue{color:var(--nu-primary)} .section-block h2 .dark{color:var(--text)}
+body.dark .section-block h2 .blue{color:var(--nu-bright)}
+.section-block .desc{font-size:.84rem;color:var(--muted);margin-bottom:12px}
+
+.kanban{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.col{background:var(--card);border-radius:12px;padding:12px;box-shadow:var(--shadow);min-height:120px}
+.col h3{font-size:.82rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.col h3 .count{color:var(--nu-primary);margin-left:6px}
+body.dark .col h3 .count{color:var(--nu-bright)}
 
 .items{display:grid;grid-template-columns:1fr;gap:10px}
-@media (min-width:820px){.items{grid-template-columns:1fr 1fr}}
+@media (min-width:820px){.view#view-all .items{grid-template-columns:1fr 1fr}}
+.item{background:var(--card);border-radius:12px;border-left:4px solid var(--nu-primary);padding:14px 16px;box-shadow:var(--shadow);cursor:pointer;display:flex;flex-direction:column;gap:7px;transition:transform .15s,box-shadow .15s}
+.item:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.item.s-URGENT{border-left-color:var(--red)}
+.item.s-BLOCKED{border-left-color:var(--red)}
+.item.s-ACTIVE{border-left-color:var(--amber)}
+.item.s-DONE{border-left-color:var(--green);opacity:.82}
+.item.s-NOT_STARTED{border-left-color:var(--nu-cyan)}
+.item.s-DO_NOT{border-left-color:#888;opacity:.5}
+.item .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
+.item h4{font-weight:900;font-size:.98rem;color:var(--nu-navy);line-height:1.25;flex:1;min-width:0}
+body.dark .item h4{color:var(--nu-bright)}
+.item.s-DONE h4{text-decoration:line-through;color:var(--muted)}
+.badges{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-block;padding:2px 9px;border-radius:12px;font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
+.pill.p-P0{background:#f8d7da;color:#721c24}
+.pill.p-P1{background:#ffe5cc;color:#7a4100}
+.pill.p-P2{background:#cce5ff;color:#004085}
+.pill.st-ACTIVE{background:#fff3cd;color:#856404}
+.pill.st-BLOCKED{background:#f8d7da;color:#721c24}
+.pill.st-URGENT{background:#f8d7da;color:#721c24;animation:pulse 1.6s infinite}
+.pill.st-DONE{background:#d1d3d4;color:#414549}
+.pill.st-NOT_STARTED{background:#d4edda;color:#155724}
+.pill.st-DO_NOT{background:#e1e1e1;color:#555}
+.pill.ready{background:#cfe9fb;color:#0c4d7a}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.cat{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.note{font-size:.85rem;color:var(--text);line-height:1.5}
+body.dark .note{color:#c9d0df}
+.dep{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;font-weight:700;color:var(--muted);background:var(--bg);padding:4px 9px;border-radius:8px;width:fit-content;border:1px solid var(--border)}
+.dep.blocks{background:#fde8ea;color:#721c24;border-color:#f5c2c7}
+body.dark .dep.blocks{background:#3a1a1e;color:#f0a6ad;border-color:#5a2a30}
+.money{font-weight:900;font-size:.84rem;color:var(--nu-primary)}
+body.dark .money{color:var(--nu-bright)}
+.money.rev{color:var(--green)}
+.money.cost{color:var(--amber)}
+.fin-line{font-size:.76rem;color:var(--muted);display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding-top:5px;border-top:1px dashed var(--border);margin-top:3px}
 
-.item{background:#fff;border-radius:12px;border-left:4px solid #0033cc;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;display:flex;flex-direction:column;gap:8px}
-.item.crit{border-left-color:#dc3545}
-.item.infra-crit{border-left-color:#dc3545}
-.item.rev{border-left-color:#e67e22}
-.item.portal{border-left-color:#0033cc}
-.item.infra{border-left-color:#6f42c1}
+/* ── Dependency SVG view ──────────────────────────────── */
+.chains-wrap{display:grid;gap:22px}
+.chain-card{background:var(--card);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.chain-card h3{font-weight:900;font-size:1.05rem;margin-bottom:4px;color:var(--nu-primary)}
+body.dark .chain-card h3{color:var(--nu-bright)}
+.chain-card .chain-meta{font-size:.78rem;color:var(--muted);margin-bottom:12px}
+.chain-svg{width:100%;height:auto;display:block}
+.chain-node rect{fill:var(--bg);stroke:var(--nu-primary);stroke-width:2;rx:8;transition:fill .2s}
+body.dark .chain-node rect{fill:var(--card);stroke:var(--nu-bright)}
+.chain-node text{font-family:'Lato',sans-serif;font-weight:700;fill:var(--text);font-size:13px}
+.chain-node.s-URGENT rect,.chain-node.s-BLOCKED rect{stroke:var(--red)}
+.chain-node.s-ACTIVE rect{stroke:var(--amber)}
+.chain-node.s-DONE rect{stroke:var(--green)}
+.chain-line{fill:none;stroke:var(--nu-primary);stroke-width:2.2;stroke-dasharray:600;stroke-dashoffset:600;animation:draw-in 1.2s ease-out forwards;marker-end:url(#arrow)}
+body.dark .chain-line{stroke:var(--nu-bright)}
+@keyframes draw-in{to{stroke-dashoffset:0}}
 
-.item .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
-.item h3{font-weight:900;font-size:1.02rem;color:#0a0e5c;line-height:1.25;flex:1;min-width:0}
-.item .badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.pill{display:inline-block;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
-.p-p0{background:#f8d7da;color:#721c24}
-.p-p1{background:#ffe5cc;color:#7a4100}
-.p-p2{background:#cce5ff;color:#004085}
-.s-progress{background:#fff3cd;color:#856404}
-.s-blocked{background:#f8d7da;color:#721c24}
-.s-ready{background:#d4edda;color:#155724}
-.s-done{background:#d1d3d4;color:#414549;text-decoration:line-through}
+/* ── Timeline view ──────────────────────────────────────── */
+.timeline{position:relative;padding-left:30px;border-left:2px solid var(--border)}
+.tl-item{position:relative;margin-bottom:16px;padding:12px 14px;background:var(--card);border-radius:10px;box-shadow:var(--shadow)}
+.tl-item::before{content:"";position:absolute;left:-38px;top:18px;width:12px;height:12px;border-radius:50%;background:var(--nu-primary);border:3px solid var(--card)}
+.tl-item.s-DONE::before{background:var(--green)}
+.tl-item.s-ACTIVE::before{background:var(--amber)}
+.tl-item.s-URGENT::before,.tl-item.s-BLOCKED::before{background:var(--red)}
+.tl-item .date{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.tl-item h5{font-weight:900;font-size:.96rem;color:var(--text);margin-bottom:3px}
+.tl-item .tl-note{font-size:.82rem;color:var(--muted)}
 
-.cat{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#888}
-.note{font-size:.88rem;color:#424750;line-height:1.5}
-.dep{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;color:#555;background:#f1f3f5;padding:5px 10px;border-radius:8px;width:fit-content}
-.dep .arr{color:#0033cc;font-size:1rem;line-height:1}
-.dep.blocks{background:#fde8ea;color:#721c24}
-.dep.blocks .arr{color:#dc3545}
+/* ── Drawer ──────────────────────────────────────────── */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:98}
+.drawer-backdrop.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:var(--card);box-shadow:-8px 0 24px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .25s;z-index:99;overflow-y:auto;display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawer header{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.drawer header h3{font-size:1rem;font-weight:900;color:var(--nu-primary);margin:0;flex:1;min-width:0;word-break:break-word}
+body.dark .drawer header h3{color:var(--nu-bright)}
+.drawer .close-x{background:transparent;border:0;font-size:1.4rem;cursor:pointer;color:var(--muted);line-height:1}
+.drawer .close-x:hover{color:var(--text)}
+.drawer .body{padding:16px 18px;font-size:.88rem}
+.drawer .body dl{display:grid;grid-template-columns:88px 1fr;gap:6px 10px;margin-bottom:14px}
+.drawer .body dt{font-weight:700;color:var(--muted);text-transform:uppercase;font-size:.7rem;letter-spacing:.05em;align-self:center}
+.drawer .body dd{color:var(--text);word-break:break-word}
+.drawer .body .drawer-note{background:var(--bg);border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:.85rem;line-height:1.5;border:1px solid var(--border)}
+.drawer .body .drawer-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.drawer .body .drawer-actions a{background:var(--nu-primary);color:#fff;text-decoration:none;padding:7px 12px;border-radius:8px;font-size:.78rem;font-weight:700}
+.drawer .body .drawer-actions a:hover{background:var(--nu-navy)}
+.drawer .body pre{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:.72rem;overflow:auto;max-height:240px;color:var(--text)}
 
-.money{font-weight:900;font-size:.9rem;color:#0033cc}
-.money.rev{color:#28a745}
-.money.cost{color:#e67e22}
-.fin-line{font-size:.8rem;color:#666;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-top:4px;border-top:1px dashed #e8e8e8;margin-top:4px}
-
-.ftr{background:linear-gradient(135deg,#000033 0%,#000066 100%);color:rgba(255,255,255,.85);padding:32px 40px;text-align:center;border-top:3px solid #0033cc;margin-top:40px}
-.ftr .tag{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:#06D0FF;font-size:1.1rem;margin-bottom:8px}
+/* ── Footer ─────────────────────────────────────────── */
+.ftr{background:linear-gradient(135deg,#000033 0%,#000066 100%);color:rgba(255,255,255,.85);padding:32px 40px;text-align:center;border-top:3px solid var(--nu-primary);margin-top:40px}
+.ftr .tag{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--nu-cyan);font-size:1.1rem;margin-bottom:8px}
 .ftr .reg{font-size:.78rem;opacity:.75}
 
-.legend{background:#fff;border-radius:10px;padding:12px 16px;margin-bottom:22px;box-shadow:0 2px 8px rgba(0,0,0,.05);font-size:.78rem;color:#555;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-.legend b{color:#0a0e5c}
+/* ── Empty / utility ───────────────────────────────── */
+.empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:.9rem;background:var(--card);border-radius:12px;border:1px dashed var(--border)}
 
-@media (max-width:600px){
+/* ── Mobile ───────────────────────────────────────── */
+@media (max-width:720px){
  .hdr{padding:34px 20px 60px}
- .hdr h1{font-size:1.65rem}
- .hdr .back{left:20px}
+ .hdr h1{font-size:1.6rem}
+ .hdr-top{left:20px;right:20px}
  .wrap{padding:0 14px 40px}
- .stats{grid-template-columns:1fr 1fr;gap:8px}
+ .stats{grid-template-columns:repeat(3,1fr);gap:8px}
  .stat .v{font-size:1.4rem}
- .item{padding:14px}
- .item h3{font-size:.97rem}
+ .item{padding:12px}
+ .item h4{font-size:.94rem}
+ .tab{padding:10px 12px;font-size:.84rem}
 }
+@media (max-width:480px){
+ .stats{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ── Print ───────────────────────────────────────── */
+@media print{
+ body{background:#fff;color:#000}
+ .hdr{background:#fff;color:#000;padding:12px 0 18px;border-bottom:2px solid #000}
+ .hdr::after,.phoenix-ghost,.hdr-top{display:none}
+ .hdr h1{color:#000;font-size:1.6rem}
+ .tabs,.filter-bar,.drawer,.drawer-backdrop{display:none !important}
+ .view{display:block !important;page-break-inside:avoid}
+ .stats{grid-template-columns:repeat(6,1fr)}
+ .stat{box-shadow:none;border:1px solid #ccc;color:#000}
+ .item{box-shadow:none;border:1px solid #ccc;break-inside:avoid;background:#fff;color:#000}
+ .item h4{color:#000}
+ .ftr{background:#fff;color:#000;border-top:1px solid #ccc}
+}
+
+/* ── aaron-only role gate (existing behavior) ────────── */
+.aaron-only{display:block}
+body.cb-role .aaron-only{display:none}
 </style>
 </head>
 <body>
 
 <header class="hdr">
- <a href="/index.html" class="back">&larr; Back to Portal</a>
+ <div class="hdr-top">
+  <a href="/index.html" class="back">&larr; Back to Portal</a>
+  <div class="hdr-tools">
+   <button id="darkToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+   <button id="printBtn" title="Print / save as PDF">Print</button>
+  </div>
+ </div>
  <img src="/assets/phoenix-icon.svg" alt="" class="phoenix-ghost">
  <div class="hdr-inner">
   <h1>Project Roadmap</h1>
-  <div class="sub">Priority build queue &mdash; what&rsquo;s blocking what, what ships next.</div>
-  <div class="ts">Last updated: April 20, 2026 &mdash; V5, Chain Electric, invoicing breakout, Cloudflare ZT, NorrisPalace rules</span></div>
+  <div class="sub">Live build queue &mdash; dependency chains, sprint board, and active work.</div>
+  <div class="meta-row">
+   <span class="pill-meta" id="liveClock">--:--:--</span>
+   <span class="pill-meta" id="lastUpdated">Updated: —</span>
+   <span class="pill-meta" id="commitPill">Commit: —</span>
+   <span class="pill-meta" id="versionPill">v—</span>
+   <span class="pill-meta" id="itemCountPill">— items</span>
+  </div>
  </div>
 </header>
 
 <main class="wrap">
 
- <section class="legend">
-  <b>Legend:</b>
-  <span><span class="pill p-p0">P0</span> critical path</span>
-  <span><span class="pill p-p1">P1</span> revenue</span>
-  <span><span class="pill p-p2">P2</span> portal/infra</span>
-  <span>&middot;</span>
-  <span><span class="pill s-ready">Ready</span></span>
-  <span><span class="pill s-progress">In Progress</span></span>
-  <span><span class="pill s-blocked">Blocked</span></span>
-  <span><span class="pill s-done">Done</span></span>
+ <!-- ── STAT CARDS ────────────────────────────────── -->
+ <section class="stats" id="statCards" aria-label="Roadmap statistics">
+  <div class="stat urgent" data-stat="urgent"><div class="v">—</div><div class="l">Urgent</div></div>
+  <div class="stat blocked" data-stat="blocked"><div class="v">—</div><div class="l">Blocked</div></div>
+  <div class="stat active" data-stat="active"><div class="v">—</div><div class="l">Active</div></div>
+  <div class="stat ready" data-stat="ready"><div class="v">—</div><div class="l">Ready</div></div>
+  <div class="stat notstarted" data-stat="not_started"><div class="v">—</div><div class="l">Not Started</div></div>
+  <div class="stat done" data-stat="done"><div class="v">—</div><div class="l">Done</div></div>
  </section>
 
- <section class="stats">
-  <div class="stat crit"><div class="v">7</div><div class="l">Critical (P0)</div></div>
-  <div class="stat prog"><div class="v">4</div><div class="l">In Progress</div></div>
-  <div class="stat blk"><div class="v">6</div><div class="l">Blocked</div></div>
-  <div class="stat rdy"><div class="v">5</div><div class="l">Ready</div></div>
+ <!-- ── TABS ──────────────────────────────────────── -->
+ <nav class="tabs" role="tablist">
+  <button class="tab active" data-view="view-sprints" role="tab">Sprint Board</button>
+  <button class="tab" data-view="view-chains" role="tab">Dependency Chains</button>
+  <button class="tab" data-view="view-timeline" role="tab">Timeline</button>
+  <button class="tab" data-view="view-all" role="tab">All Items</button>
+ </nav>
+
+ <!-- ── VIEW: SPRINT BOARD (Kanban by sprint) ─────── -->
+ <section class="view active" id="view-sprints" role="tabpanel"></section>
+
+ <!-- ── VIEW: DEPENDENCY CHAINS ───────────────────── -->
+ <section class="view" id="view-chains" role="tabpanel">
+  <div class="chains-wrap" id="chainsWrap"></div>
  </section>
 
- <!-- ========= CRITICAL PATH ========= -->
- <section class="section">
-  <h2><span class="blue">Critical</span> <span class="dark">Path</span></h2>
-  <div class="desc">These block everything else. Clear these first.</div>
-  <div class="items">
+ <!-- ── VIEW: TIMELINE ────────────────────────────── -->
+ <section class="view" id="view-timeline" role="tabpanel">
+  <div class="timeline" id="timelineWrap"></div>
+ </section>
 
-   <div class="item crit">
-    <div class="row1">
-     <h3>1. Shipping AI Agent</h3>
-     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-progress">In Progress</span></div>
-    </div>
-    <div class="cat">Critical Path &middot; Agent build</div>
-    <div class="note">V5 = 1,301 lines, 23 sections. Running on M1 PID 91997. Section U gate re-run pending. 5 locked process rules from Chain Electric: (1) multi-ship-to → child SDs under parent order ID, (2) tag fulfillment source, (3) SKU substitutions logged with reason, (4) courtesy_adjustment as separate invoice line, (5) cb_internal_note on every SD.</div>
-    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocks: every invoice CB would create</span></div>
-    <div class="fin-line aaron-only"><span class="money rev">Unlocks entire A/R cycle</span><span>Input to BSS / Dominion / LineTec invoices</span></div>
+ <!-- ── VIEW: ALL ITEMS ───────────────────────────── -->
+ <section class="view" id="view-all" role="tabpanel">
+  <div class="filter-bar">
+   <input type="search" id="searchBox" placeholder="Search titles, notes, owners, ids…" aria-label="Search items">
+   <div class="chips" data-chip-group="status">
+    <span class="chip-label">Status</span>
+    <button class="chip active" data-filter="status" data-value="">All</button>
+    <button class="chip" data-filter="status" data-value="URGENT">Urgent</button>
+    <button class="chip" data-filter="status" data-value="BLOCKED">Blocked</button>
+    <button class="chip" data-filter="status" data-value="ACTIVE">Active</button>
+    <button class="chip" data-filter="status" data-value="NOT_STARTED">Not Started</button>
+    <button class="chip" data-filter="status" data-value="DONE">Done</button>
    </div>
-
-   <div class="item infra-crit">
-    <div class="row1">
-     <h3>2. Alabama Master Dealer License &#9888;&#65039; URGENT</h3>
-     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
-    </div>
-    <div class="cat">Critical Path &middot; Legal / compliance</div>
-    <div class="note">Not started. Required before any Skylift truck sells in Alabama. Surety bond via SuretyBondsDirect.com.</div>
-    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocks: all Skylift AL sales</span></div>
-    <div class="fin-line aaron-only"><span class="money cost">Bond: ~$500&ndash;$1,500</span><span class="money rev">Unlocks: $1,091,402.50 truck PO</span></div>
+   <div class="chips" data-chip-group="priority">
+    <span class="chip-label">Priority</span>
+    <button class="chip active" data-filter="priority" data-value="">All</button>
+    <button class="chip" data-filter="priority" data-value="P0">P0</button>
+    <button class="chip" data-filter="priority" data-value="P1">P1</button>
+    <button class="chip" data-filter="priority" data-value="P2">P2</button>
    </div>
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>3. BSS Invoice 11</h3>
-     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Critical Path &middot; A/R send</div>
-    <div class="note">Unblocked now. Aaron sends today. Saved in Google Drive and iCloud.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Next: confirm receipt from Herb / Andy</span></div>
-    <div class="fin-line aaron-only"><span class="money rev">$8,039.27</span><span>Bay Shore Systems</span></div>
+   <div class="chips" data-chip-group="section">
+    <span class="chip-label">Section</span>
+    <button class="chip active" data-filter="section" data-value="">All</button>
+    <!-- sections injected by JS -->
    </div>
-
+   <div class="chips" data-chip-group="sprint">
+    <span class="chip-label">Sprint</span>
+    <button class="chip active" data-filter="sprint" data-value="">All</button>
+    <!-- sprints injected by JS -->
+   </div>
   </div>
- </section>
-
- <!-- ========= PORTAL BUILDS ========= -->
- <section class="section">
-  <h2><span class="blue">Portal</span> <span class="dark">Builds</span></h2>
-  <div class="desc">In build order.</div>
-  <div class="items">
-
-   <div class="item portal">
-    <div class="row1">
-     <h3>4. project-roadmap.html</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-progress">In Progress</span></div>
-    </div>
-    <div class="cat">Portal &middot; This page</div>
-    <div class="note">The page you&rsquo;re reading. Staged on <code>feature/project-roadmap</code> for review before merge.</div>
-   </div>
-
-   <div class="item portal">
-    <div class="row1">
-     <h3>5. change-log.html</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
-    </div>
-    <div class="cat">Portal &middot; History view</div>
-    <div class="note"><s>Render the last 50 git commits on the ops repo as a reviewable timeline. Link from portal nav.</s> Deployed April 19.</div>
-   </div>
-
-   <div class="item portal">
-    <div class="row1">
-     <h3>6. Contact detail modal</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
-    </div>
-    <div class="cat">Portal &middot; CB&rsquo;s CRM request</div>
-    <div class="note"><s>Click a contact &rarr; see every invoice + interaction in one place.</s> Deployed April 19.</div>
-   </div>
-
-   <div class="item portal">
-    <div class="row1">
-     <h3>7. Fix pipeline_value stat</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
-    </div>
-    <div class="cat">Portal &middot; Data correction</div>
-    <div class="note"><s>Dashboard shows $685K.</s> Now showing $2.5M+. Fixed April 19.</div>
-   </div>
-
-   <div class="item portal">
-    <div class="row1">
-     <h3>8. CB Telegram Bot</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Portal &middot; Separate bot</div>
-    <div class="note">Dedicated business-only bot for Caroline. Separate from Aaron&rsquo;s Legacy bot. Needs design session.</div>
-   </div>
-
-  </div>
- </section>
-
- <!-- ========= INFRASTRUCTURE ========= -->
- <section class="section">
-  <h2><span class="blue">Infrastructure</span></h2>
-  <div class="desc">Foundations that everything else rides on.</div>
-  <div class="items">
-
-   <div class="item infra">
-    <div class="row1">
-     <h3>9. sd_builder.py telegram_msg_id fix</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
-    </div>
-    <div class="cat">Infrastructure &middot; Regression</div>
-    <div class="note"><s>telegram_msg_id regression in sd_builder.py.</s> Fixed April 14.</div>
-   </div>
-
-   <div class="item infra">
-    <div class="row1">
-     <h3>10. norris-agent remote GitHub repo</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
-    </div>
-    <div class="cat">Infrastructure &middot; Git remote</div>
-    <div class="note"><s>Create GitHub repo for ~/norris-agent.</s> Live at github.com/acnorris17/norris-agent.</div>
-   </div>
-
-   <div class="item infra-crit">
-    <div class="row1">
-     <h3>11. Time Machine backup on M1 &#9888;&#65039; URGENT RISK</h3>
-     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
-    </div>
-    <div class="cat">Infrastructure &middot; Disaster recovery</div>
-    <div class="note"><b>CRITICAL: no backup exists.</b> Blocks on external drive or NAS. If the M1 dies today, everything is lost. This is the single biggest infrastructure risk.</div>
-    <div class="dep blocks"><span class="arr">&#9888;</span><span>Nothing else matters if M1 dies</span></div>
-    <div class="fin-line aaron-only"><span class="money cost">Cost: ~$150&ndash;$400 external drive</span></div>
-   </div>
-
-   <div class="item infra">
-    <div class="row1">
-     <h3>12. reMarkable pipeline reconnect</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
-    </div>
-    <div class="cat">Infrastructure &middot; Agent input</div>
-    <div class="note"><s>Pipeline disconnected.</s> Reconnected April 19, runs 3x/day.</div>
-   </div>
-
-  </div>
- </section>
-
- <!-- ========= REVENUE ACTIONS ========= -->
- <section class="section">
-  <h2><span class="blue">Revenue</span> <span class="dark">Actions</span></h2>
-  <div class="desc">Money on the table this week.</div>
-  <div class="items">
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>13. Rick Sutherland / EPB &mdash; revival email</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Revenue &middot; Today</div>
-    <div class="note">SkyTruck47 quoted December 4, 2025. Going cold. Send revival email today.</div>
-    <div class="fin-line aaron-only"><span class="money rev">Opportunity: $185,000</span><span>EPB Chattanooga</span></div>
-   </div>
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>14. Coy Crosby &mdash; April 8 RFP follow-up</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Revenue &middot; This week</div>
-    <div class="note">Material 42350802: 5&times; NU-BC-2851 @ $305 quoted. No response 13+ days after March 25 touch.</div>
-    <div class="fin-line aaron-only"><span class="money rev">Quote: $1,525</span><span>+ shipping &middot; Dominion Energy</span></div>
-   </div>
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>15. Coy Crosby &mdash; March 20 qty verify</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Revenue &middot; This week</div>
-    <div class="note">~5&times; NU-BC-2834 shipped March 20, not yet invoiced. Aaron says 5, records say 6. Verify quantity at UPS Store before invoicing.</div>
-    <div class="fin-line aaron-only"><span class="money rev">Est. $1,325</span><span>@ $265 per unit</span></div>
-   </div>
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>16. MK Skylift marketing materials</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-progress">In Progress</span></div>
-    </div>
-    <div class="cat">Revenue &middot; Urgent</div>
-    <div class="note">MK Smith behind schedule. Materials needed <b>before</b> trucks arrive &mdash; must sell all six. Skylift April Open Order Report received April 7.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>5&times; SBA40i-LW + 1&times; SBA47i-MH</span></div>
-    <div class="fin-line aaron-only"><span class="money rev">Total PO: $1,091,402.50</span><span>Must sell all before arrival</span></div>
-   </div>
-
-  </div>
- </section>
-
- <!-- ========= V5 PREP — NEW LOCKS (April 17, 2026) ========= -->
- <section class="section">
-  <h2><span class="blue">V5 Prep</span> <span class="dark">&mdash; New Locks (April 17)</span></h2>
-  <div class="desc">Captured during the Shipping Agent V5 prep session. 6 new items, 18 rulings locked into LEGACY_LIVING_MEMORY.md.</div>
-  <div class="items">
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>17. Telegram Notification Reorganization</h3>
-     <div class="badges"><span class="pill p-p0">URGENT</span><span class="pill s-progress">Active</span></div>
-    </div>
-    <div class="cat">Legacy Agent &middot; Current sprint &middot; Owner: CC (M1)</div>
-    <div class="note">4 dedicated Telegram topics: <b>nu-legacy-main</b> (Legacy + Aaron only), <b>nu-shipping-agent</b> (SA), <b>nu-ops-notifications</b> (morning brief, email, automation), <b>nu-critical-alerts</b> (blockers/outages only). Every script calling <code>send_telegram</code> routed by category.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Depends: Aaron creates the 4 Telegram topics; CC wires all scripts.</span></div>
-   </div>
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>18. Memory Systems Health Dashboard</h3>
-     <div class="badges"><span class="pill p-p0">HIGH</span><span class="pill s-done">Done</span></div>
-    </div>
-    <div class="cat">Memory &middot; Current sprint &middot; Owner: CC (M1)</div>
-    <div class="note"><s>Build memory health dashboard.</s> Live at <code>ops.norrisutilities.com/internal/memory-health.html</code> with real data from all 6 sources. Deployed April 19.</div>
-   </div>
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>19. Truth Sources Lockdown</h3>
-     <div class="badges"><span class="pill p-p0">HIGH</span><span class="pill s-blocked">Waiting</span></div>
-    </div>
-    <div class="cat">Infrastructure &middot; After V5 &middot; Owner: CC (M1)</div>
-    <div class="note">Build <code>~/nu-brain/truth_sources.json</code> manifest (mirrored to Drive). Migrate every hard-coded path in every script/agent/tool to reference <code>truth_source_path(key)</code> helper. Deploy daily audit <code>verify_truth_sources.py</code>. Add pre-commit hook blocking new hard-coded paths. M5-write / M1-read-only boundaries enforced in code.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Depends: V5 complete.</span></div>
-   </div>
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>20. Legacy Rules Lockdown Session</h3>
-     <div class="badges"><span class="pill p-p0">HIGH</span><span class="pill s-blocked">Waiting</span></div>
-    </div>
-    <div class="cat">Legacy Agent &middot; After V5 &middot; Owner: CC (M1)</div>
-    <div class="note">Audit every established rule from March 17&ndash;present. Encode into <code>~/.openclaw/config/legacy_rules.yaml</code> AND <code>LEGACY_MEMORY.md</code> IMMUTABLE RULES section. Verify Legacy queries them before every response. Includes: investigation principle, M5-write/M1-read flow, truth source routing, all 18 V5 rulings, dealer formula, PO-never-halts-SD.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Depends: V5 complete.</span></div>
-   </div>
-
-   <div class="item infra">
-    <div class="row1">
-     <h3>21. G Brain iCloud &rarr; Drive migration</h3>
-     <div class="badges"><span class="pill p-p2">MEDIUM</span><span class="pill s-blocked">Waiting</span></div>
-    </div>
-    <div class="cat">Memory &middot; After Truth Sources &middot; Owner: CC (M1)</div>
-    <div class="note">Move G Brain storage from iCloud to Google Drive. Consistent with truth-source principle (M5 = source, M1 = read).</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Depends: Truth Sources Lockdown complete.</span></div>
-   </div>
-
-   <div class="item infra">
-    <div class="row1">
-     <h3>22. Customer Payment Terms Audit</h3>
-     <div class="badges"><span class="pill p-p2">LOW</span><span class="pill s-blocked">Backlog</span></div>
-    </div>
-    <div class="cat">SA &middot; Future &middot; Owner: Aaron/CB + CC (M1)</div>
-    <div class="note">Aaron or CB exports QB customer payment terms. SA ingests, flags discrepancies vs default &ldquo;Due on Receipt&rdquo;. CB updates QB where Aaron approves Net-30/Net-60. Deferred from V5.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Depends: none.</span></div>
-   </div>
-
-  </div>
+  <div class="items" id="allItemsWrap"></div>
  </section>
 
 </main>
@@ -393,184 +325,471 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
  <div class="reg">Norris Utilities&reg; &middot; Birmingham, AL &middot; acnorris@norrisutilities.com</div>
 </footer>
 
+<!-- ── Drawer ─────────────────────────────────────── -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+ <header>
+  <h3 id="drawerTitle">Item</h3>
+  <button class="close-x" id="drawerClose" aria-label="Close">&times;</button>
+ </header>
+ <div class="body" id="drawerBody"></div>
+</aside>
+
+<!-- Celebrations on DONE -->
+<script src="/celebrations.js"></script>
+
 <script>
+/* ═══════════════════════════════════════════════════════════════════
+   LIVE ROADMAP v1 — app logic
+   ═══════════════════════════════════════════════════════════════════ */
 (function(){
-  var r = sessionStorage.getItem('nu_role');
-  if (sessionStorage.getItem('nu_auth_2026') === 'granted' && (r === 'aaron' || r === 'cb')) {
-    if (r === 'cb') {
-      document.querySelectorAll('.aaron-only').forEach(function(el){ el.style.display = 'none'; });
-    }
+ 'use strict';
+
+ /* ── role gate (existing behavior) ─────────────────── */
+ var role = sessionStorage.getItem('nu_role');
+ if (role === 'cb') document.body.classList.add('cb-role');
+
+ /* ── DOM refs ─────────────────────────────────────── */
+ var $ = function(sel){ return document.querySelector(sel); };
+ var $$ = function(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); };
+
+ var STATE = {
+  data: null,
+  filters: { status:'', priority:'', section:'', sprint:'', q:'' }
+ };
+
+ /* ── LIVE CLOCK ───────────────────────────────────── */
+ function tickClock(){
+  var now = new Date();
+  var h = String(now.getHours()).padStart(2,'0');
+  var m = String(now.getMinutes()).padStart(2,'0');
+  var s = String(now.getSeconds()).padStart(2,'0');
+  var el = $('#liveClock'); if (el) el.textContent = h+':'+m+':'+s;
+ }
+ setInterval(tickClock, 1000); tickClock();
+
+ /* ── DARK MODE ────────────────────────────────────── */
+ function applyDark(on){
+  document.body.classList.toggle('dark', on);
+  var btn = $('#darkToggle');
+  if (btn) btn.textContent = on ? '☀️' : '🌙';
+ }
+ (function initDark(){
+  var pref = localStorage.getItem('nu_roadmap_dark');
+  var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var on = pref === '1' ? true : pref === '0' ? false : systemDark;
+  applyDark(on);
+  var btn = $('#darkToggle');
+  if (btn) btn.addEventListener('click', function(){
+   var next = !document.body.classList.contains('dark');
+   applyDark(next);
+   localStorage.setItem('nu_roadmap_dark', next ? '1':'0');
+  });
+ })();
+
+ /* ── PRINT ────────────────────────────────────────── */
+ var printBtn = $('#printBtn');
+ if (printBtn) printBtn.addEventListener('click', function(){ window.print(); });
+
+ /* ── TAB SWITCH ───────────────────────────────────── */
+ $$('.tab').forEach(function(btn){
+  btn.addEventListener('click', function(){
+   $$('.tab').forEach(function(b){ b.classList.remove('active'); });
+   btn.classList.add('active');
+   $$('.view').forEach(function(v){ v.classList.remove('active'); });
+   var tgt = $('#' + btn.dataset.view);
+   if (tgt) tgt.classList.add('active');
+   if (btn.dataset.view === 'view-chains') renderChains();
+  });
+ });
+
+ /* ── FETCH + INIT ─────────────────────────────────── */
+ function fetchJSON(url){
+  return fetch(url, { cache:'no-store' }).then(function(r){
+   if (!r.ok) throw new Error('fetch failed: '+r.status);
+   return r.json();
+  });
+ }
+
+ fetchJSON('/data/roadmap.json')
+  .then(function(data){
+   STATE.data = data;
+   hydrate();
+  })
+  .catch(function(err){
+   console.error(err);
+   var wrap = $('.wrap');
+   if (wrap){
+    var e = document.createElement('div');
+    e.className = 'empty';
+    e.textContent = 'Could not load /data/roadmap.json — ' + err.message;
+    wrap.appendChild(e);
+   }
+  });
+
+ function hydrate(){
+  var d = STATE.data;
+  if (!d) return;
+  var md = d.metadata || {};
+  var s = md.stats || {};
+
+  // Stat cards
+  setStat('urgent', s.urgent);
+  setStat('blocked', s.blocked);
+  setStat('active', s.active);
+  setStat('not_started', s.not_started);
+  setStat('done', s.done);
+  var readyCount = (d.items || []).filter(function(i){ return i.ready === true && i.status !== 'DONE'; }).length;
+  setStat('ready', readyCount);
+
+  // Meta pills
+  setText('#lastUpdated', 'Updated: ' + formatDate(md.last_updated));
+  setText('#commitPill', 'Commit: ' + (md.commit ? md.commit.slice(0,8) : '—'));
+  setText('#versionPill', 'v' + (md.version || '?'));
+  setText('#itemCountPill', (md.item_count || (d.items||[]).length) + ' items');
+
+  // Section + Sprint chips
+  injectChips('section', d.sections || []);
+  injectChips('sprint', (d.sprints || []).map(function(sp){ return sp.id; }), d.sprints || []);
+
+  // Render default view
+  renderSprints();
+  renderAll();
+  renderTimeline();
+  // chains deferred until tab selected (for animation freshness)
+ }
+
+ function setStat(key, val){
+  var el = document.querySelector('.stat[data-stat="'+key+'"] .v');
+  if (el) el.textContent = val == null ? '—' : val;
+ }
+ function setText(sel, val){ var el = $(sel); if (el) el.textContent = val; }
+ function formatDate(iso){
+  if (!iso) return '—';
+  try{ var d = new Date(iso); return d.toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'}); }
+  catch(e){ return iso; }
+ }
+
+ function injectChips(group, values, sprintMeta){
+  var container = document.querySelector('[data-chip-group="'+group+'"]');
+  if (!container) return;
+  values.forEach(function(v){
+   if (!v) return;
+   if (container.querySelector('[data-value="'+v+'"]')) return;
+   var btn = document.createElement('button');
+   btn.className = 'chip';
+   btn.dataset.filter = group;
+   btn.dataset.value = v;
+   if (group === 'sprint' && sprintMeta){
+    var meta = sprintMeta.find(function(sp){ return sp.id === v; });
+    btn.textContent = meta ? meta.label : v;
+   } else {
+    btn.textContent = v;
+   }
+   container.appendChild(btn);
+  });
+ }
+
+ /* ── FILTER WIRING ────────────────────────────────── */
+ document.addEventListener('click', function(e){
+  var chip = e.target.closest('.chip');
+  if (!chip) return;
+  var filter = chip.dataset.filter;
+  var value = chip.dataset.value;
+  STATE.filters[filter] = value;
+  $$('.chip[data-filter="'+filter+'"]').forEach(function(c){ c.classList.remove('active'); });
+  chip.classList.add('active');
+  renderAll();
+ });
+ var sb = $('#searchBox');
+ if (sb) sb.addEventListener('input', function(e){
+  STATE.filters.q = (e.target.value || '').toLowerCase();
+  renderAll();
+ });
+
+ function matchesFilters(it){
+  var f = STATE.filters;
+  if (f.status && it.status !== f.status) return false;
+  if (f.priority && it.priority !== f.priority) return false;
+  if (f.section && it.section !== f.section) return false;
+  if (f.sprint && it.sprint !== f.sprint) return false;
+  if (f.q){
+   var hay = [it.id, it.title, it.note, it.owner, it.category, it.section].filter(Boolean).join(' ').toLowerCase();
+   if (hay.indexOf(f.q) === -1) return false;
   }
+  return true;
+ }
+
+ /* ── CARD RENDER ──────────────────────────────────── */
+ function itemCardHTML(it){
+  var status = it.status || 'NOT_STARTED';
+  var pri = it.priority || '';
+  var badges = '';
+  if (pri) badges += '<span class="pill p-'+pri+'">'+pri+'</span>';
+  badges += '<span class="pill st-'+status+'">'+status.replace('_',' ')+'</span>';
+  if (it.ready && status !== 'DONE') badges += '<span class="pill ready">READY</span>';
+
+  var depHTML = '';
+  if (it.blocks && it.blocks.length){
+   depHTML += '<div class="dep blocks"><span>&#9888;</span><span>Blocks: '+it.blocks.join(', ')+'</span></div>';
+  }
+  if (it.blockedBy && it.blockedBy.length){
+   depHTML += '<div class="dep"><span>&larr;</span><span>Blocked by: '+it.blockedBy.join(', ')+'</span></div>';
+  }
+
+  var moneyHTML = '';
+  if (it.money && it.money.label){
+   var cls = it.money.type === 'cost' ? 'cost' : 'rev';
+   moneyHTML = '<div class="fin-line aaron-only"><span class="money '+cls+'">'+escapeHTML(it.money.label)+'</span>' +
+    (it.money.customer ? '<span>'+escapeHTML(it.money.customer)+'</span>' : '') + '</div>';
+  }
+
+  var html = '<div class="item s-'+status+'" data-id="'+escapeAttr(it.id)+'" tabindex="0">' +
+   '<div class="row1">' +
+    '<h4>'+escapeHTML(it.title || it.id)+'</h4>' +
+    '<div class="badges">'+badges+'</div>' +
+   '</div>' +
+   (it.category ? '<div class="cat">'+escapeHTML(it.category)+(it.owner ? ' · Owner: '+escapeHTML(it.owner) : '')+'</div>' : '') +
+   (it.note ? '<div class="note">'+escapeHTML(it.note)+'</div>' : '') +
+   depHTML +
+   moneyHTML +
+   '</div>';
+  return html;
+ }
+
+ /* ── SPRINT BOARD ────────────────────────────────── */
+ function renderSprints(){
+  var d = STATE.data; if (!d) return;
+  var root = $('#view-sprints'); if (!root) return;
+  var sprints = d.sprints || [];
+  var items = d.items || [];
+  var html = '';
+  sprints.forEach(function(sp){
+   var bucket = items.filter(function(i){ return i.sprint === sp.id; });
+   bucket.sort(function(a,b){ return sortKey(a) - sortKey(b); });
+   html += '<section class="section-block">' +
+    '<h2><span class="blue">'+escapeHTML(sp.label.split(' ')[0])+'</span> <span class="dark">'+escapeHTML(sp.label.slice(sp.label.indexOf(' ')+1))+'</span></h2>' +
+    '<div class="desc">'+bucket.length+' item'+(bucket.length===1?'':'s')+'</div>' +
+    '<div class="items">' +
+     (bucket.length ? bucket.map(itemCardHTML).join('') : '<div class="empty">No items in this sprint.</div>') +
+    '</div>' +
+   '</section>';
+  });
+  // Orphans (no sprint)
+  var orphans = items.filter(function(i){ return !i.sprint; });
+  if (orphans.length){
+   html += '<section class="section-block">' +
+    '<h2><span class="blue">Unscheduled</span></h2>' +
+    '<div class="desc">'+orphans.length+' item(s) without a sprint assignment</div>' +
+    '<div class="items">'+orphans.map(itemCardHTML).join('')+'</div></section>';
+  }
+  root.innerHTML = html;
+ }
+
+ function sortKey(it){
+  // URGENT first, then BLOCKED, ACTIVE, NOT_STARTED (ready first), DONE last
+  var base = { URGENT:0, BLOCKED:1, ACTIVE:2, NOT_STARTED:3, DO_NOT:4, DONE:5 }[it.status || 'NOT_STARTED'];
+  if (it.status === 'NOT_STARTED' && it.ready) base -= 0.5;
+  var pri = { P0:0, P1:1, P2:2 }[it.priority || 'P2'];
+  return base * 10 + pri;
+ }
+
+ /* ── ALL ITEMS ───────────────────────────────────── */
+ function renderAll(){
+  var d = STATE.data; if (!d) return;
+  var wrap = $('#allItemsWrap'); if (!wrap) return;
+  var filtered = (d.items || []).filter(matchesFilters);
+  filtered.sort(function(a,b){ return sortKey(a) - sortKey(b); });
+  wrap.innerHTML = filtered.length
+   ? filtered.map(itemCardHTML).join('')
+   : '<div class="empty">No items match current filters.</div>';
+ }
+
+ /* ── TIMELINE ────────────────────────────────────── */
+ function renderTimeline(){
+  var d = STATE.data; if (!d) return;
+  var wrap = $('#timelineWrap'); if (!wrap) return;
+  var items = (d.items || []).slice().sort(function(a,b){
+   return (b.updated || '').localeCompare(a.updated || '');
+  });
+  wrap.innerHTML = items.map(function(it){
+   var date = it.completed || it.updated || it.created || '—';
+   var status = it.status || 'NOT_STARTED';
+   var label = status === 'DONE' ? 'Completed' : (status === 'ACTIVE' ? 'Active since' : 'Updated');
+   return '<div class="tl-item s-'+status+'" data-id="'+escapeAttr(it.id)+'" tabindex="0">' +
+    '<div class="date">'+label+' · '+escapeHTML(date)+' · '+escapeHTML(it.section || '')+'</div>' +
+    '<h5>'+escapeHTML(it.title || it.id)+'</h5>' +
+    (it.note ? '<div class="tl-note">'+escapeHTML(truncate(it.note, 180))+'</div>' : '') +
+    '</div>';
+  }).join('');
+ }
+
+ /* ── DEPENDENCY CHAINS SVG ──────────────────────────── */
+ var chainsRendered = false;
+ function renderChains(){
+  if (chainsRendered) { retriggerAnimations(); return; }
+  var d = STATE.data; if (!d) return;
+  var wrap = $('#chainsWrap'); if (!wrap) return;
+  var chains = d.chains || [];
+  var byId = {};
+  (d.items || []).forEach(function(it){ byId[it.id] = it; });
+
+  var html = '';
+  chains.forEach(function(ch, idx){
+   var nodes = ch.items.map(function(id){ return byId[id]; }).filter(Boolean);
+   if (!nodes.length) return;
+
+   var nodeW = 220, nodeH = 76, gapY = 30, padX = 20, padY = 16;
+   var svgW = nodeW + padX * 2;
+   var svgH = nodes.length * nodeH + (nodes.length - 1) * gapY + padY * 2;
+
+   var svg = '<svg class="chain-svg" viewBox="0 0 '+svgW+' '+svgH+'" xmlns="http://www.w3.org/2000/svg">' +
+    '<defs><marker id="arrow-'+idx+'" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">' +
+     '<path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path></marker></defs>';
+
+   nodes.forEach(function(n, i){
+    var y = padY + i * (nodeH + gapY);
+    var status = n.status || 'NOT_STARTED';
+    svg += '<g class="chain-node s-'+status+'" data-id="'+escapeAttr(n.id)+'" style="cursor:pointer">' +
+     '<rect x="'+padX+'" y="'+y+'" width="'+nodeW+'" height="'+nodeH+'" rx="8"></rect>' +
+     '<text x="'+(padX+12)+'" y="'+(y+24)+'" font-size="12" font-weight="900">'+escapeHTML(n.id + ' · ' + (n.priority||''))+'</text>' +
+     '<text x="'+(padX+12)+'" y="'+(y+44)+'" font-size="13">'+escapeHTML(truncate(n.title || '', 32))+'</text>' +
+     '<text x="'+(padX+12)+'" y="'+(y+62)+'" font-size="10" fill="currentColor" opacity="0.65">'+escapeHTML(status)+(n.ready?' · READY':'')+'</text>' +
+    '</g>';
+    if (i < nodes.length - 1){
+     var x1 = padX + nodeW/2, y1 = y + nodeH;
+     var x2 = padX + nodeW/2, y2 = y + nodeH + gapY - 4;
+     svg += '<path class="chain-line" style="animation-delay:'+(0.15 * (i+1))+'s;marker-end:url(#arrow-'+idx+')" d="M '+x1+' '+y1+' L '+x2+' '+y2+'"></path>';
+    }
+   });
+   svg += '</svg>';
+
+   html += '<div class="chain-card">' +
+    '<h3>'+escapeHTML(ch.label)+'</h3>' +
+    '<div class="chain-meta">'+nodes.length+' item'+(nodes.length===1?'':'s')+' · '+escapeHTML(ch.id)+'</div>' +
+    svg +
+   '</div>';
+  });
+
+  wrap.innerHTML = html || '<div class="empty">No dependency chains defined.</div>';
+  chainsRendered = true;
+ }
+
+ function retriggerAnimations(){
+  $$('.chain-line').forEach(function(p){
+   p.style.animation = 'none';
+   p.offsetHeight; /* reflow */
+   p.style.animation = '';
+  });
+ }
+
+ /* ── DRAWER (per-item detail + git history link) ────── */
+ var drawer = $('#drawer');
+ var backdrop = $('#drawerBackdrop');
+ var drawerTitle = $('#drawerTitle');
+ var drawerBody = $('#drawerBody');
+
+ function openDrawer(itemId){
+  var d = STATE.data; if (!d) return;
+  var it = (d.items || []).find(function(i){ return i.id === itemId; });
+  if (!it) return;
+  drawerTitle.textContent = it.id + ' · ' + (it.title || '');
+  var ghRepo = 'https://github.com/acnorris17/norris-ops';
+  var commits = ghRepo + '/commits/main?path=data/roadmap.json';
+  var search = ghRepo + '/search?q=' + encodeURIComponent(it.id) + '&type=commits';
+
+  var body =
+   '<dl>' +
+    row('ID', it.id) +
+    row('Status', (it.status || '') + (it.ready ? ' · READY' : '')) +
+    row('Priority', it.priority || '—') +
+    row('Section', it.section || '—') +
+    row('Sprint', it.sprint || '—') +
+    row('Owner', it.owner || '—') +
+    row('Category', it.category || '—') +
+    row('Created', it.created || '—') +
+    row('Updated', it.updated || '—') +
+    (it.completed ? row('Completed', it.completed) : '') +
+    (it.blockedBy && it.blockedBy.length ? row('Blocked by', it.blockedBy.join(', ')) : '') +
+    (it.blocks && it.blocks.length ? row('Blocks', it.blocks.join(', ')) : '') +
+    (it.money && it.money.label ? row('$', it.money.label) : '') +
+   '</dl>' +
+   (it.note ? '<div class="drawer-note">'+escapeHTML(it.note)+'</div>' : '') +
+   '<div class="drawer-actions">' +
+    '<a href="'+search+'" target="_blank" rel="noopener">Git log: '+escapeHTML(it.id)+'</a>' +
+    '<a href="'+commits+'" target="_blank" rel="noopener">roadmap.json history</a>' +
+   '</div>' +
+   '<pre>' + escapeHTML(JSON.stringify(it, null, 2)) + '</pre>';
+  drawerBody.innerHTML = body;
+  drawer.classList.add('open');
+  backdrop.classList.add('open');
+  drawer.setAttribute('aria-hidden','false');
+ }
+
+ function closeDrawer(){
+  drawer.classList.remove('open');
+  backdrop.classList.remove('open');
+  drawer.setAttribute('aria-hidden','true');
+ }
+ backdrop.addEventListener('click', closeDrawer);
+ $('#drawerClose').addEventListener('click', closeDrawer);
+ document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeDrawer(); });
+
+ function row(k,v){ return '<dt>'+escapeHTML(k)+'</dt><dd>'+escapeHTML(String(v))+'</dd>'; }
+
+ // delegate click on items and chain nodes
+ document.addEventListener('click', function(e){
+  var item = e.target.closest('.item[data-id]') || e.target.closest('.tl-item[data-id]') || e.target.closest('.chain-node[data-id]');
+  if (item){
+   openDrawer(item.dataset.id);
+  }
+ });
+ document.addEventListener('keydown', function(e){
+  if (e.key !== 'Enter') return;
+  var f = document.activeElement;
+  if (!f) return;
+  if (f.classList.contains('item') || f.classList.contains('tl-item')){
+   openDrawer(f.dataset.id);
+  }
+ });
+
+ /* ── CELEBRATION TRIGGER ON DONE ───────────────────── */
+ // If update_roadmap.py just marked an item DONE, set localStorage key
+ // nu_celebrate=<id> elsewhere, or we detect on load if any item.completed is today.
+ (function maybeCelebrate(){
+  var today = new Date().toISOString().slice(0,10);
+  fetchJSON('/data/roadmap.json').then(function(d){
+   var last = localStorage.getItem('nu_last_roadmap_celebrate') || '';
+   var done = (d.items || []).filter(function(i){ return i.completed === today && i.id > last; });
+   if (!done.length) return;
+   var latest = done.sort(function(a,b){ return a.id.localeCompare(b.id); }).pop();
+   localStorage.setItem('nu_last_roadmap_celebrate', latest.id);
+   if (typeof window.celebrate === 'function'){
+    setTimeout(function(){ try{ window.celebrate(); }catch(e){} }, 600);
+   } else {
+    inlinePhoenixRise();
+   }
+  }).catch(function(){});
+ })();
+
+ function inlinePhoenixRise(){
+  var el = document.createElement('div');
+  el.setAttribute('style','position:fixed;inset:0;pointer-events:none;z-index:200;display:flex;align-items:center;justify-content:center;font-size:84px;animation:phoenix-rise 1.6s ease-out forwards');
+  el.textContent = '🔥';
+  var style = document.createElement('style');
+  style.textContent = '@keyframes phoenix-rise{0%{opacity:0;transform:translateY(80px) scale(.3)}30%{opacity:1}100%{opacity:0;transform:translateY(-60vh) scale(1.8)}}';
+  document.head.appendChild(style);
+  document.body.appendChild(el);
+  setTimeout(function(){ el.remove(); }, 1700);
+ }
+
+ /* ── UTIL ────────────────────────────────────────── */
+ function escapeHTML(s){ return (s==null?'':String(s)).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+ function escapeAttr(s){ return escapeHTML(s); }
+ function truncate(s,n){ s = String(s||''); return s.length > n ? s.slice(0,n-1) + '…' : s; }
+
 })();
 </script>
-
-
- <!-- ═══ NEW SECTION: ACTIVE BUILDS ═══ -->
- <div class="section">
-  <h2><span class="blue">Active</span> <span class="dark">Builds &amp; Reconciliation</span></h2>
-  <div class="desc">In-progress work and recently completed items requiring follow-through.</div>
-  <div class="items">
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>Chain Electric / AJ Morris Reconciliation</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-done">Done</span></div>
-    </div>
-    <div class="cat">A/R &middot; Done April 18</div>
-    <div class="note">Hattiesburg MS + Searcy AR ship-tos. NU-BC-2834-F substituted for NU-BC-2834 (stock-out), logged with substitution reason. Invoice $8,930.48 incl. 4% CC fee, -$700 Valued-Partner courtesy adjustment. QB draft + apology email produced. Boss Products resend request sent to Thayne Grove + Troy Gongwer for invoices 6775/6776/6777.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Pending: Boss invoices 6775/6776/6777 resend &middot; QB invoice entry by CB</span></div>
-    <div class="fin-line aaron-only"><span class="money rev">$8,930.48</span><span>Invoice sent to ajmorris@bchain.com April 18</span></div>
-   </div>
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>Notes Intelligence Agent (reMarkable Recovery)</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-blocked">Not Started</span></div>
-    </div>
-    <div class="cat">Revenue &middot; Next priority after V5</div>
-    <div class="note">37 items stuck since April 3 crash. Must surface uninvoiced items including 1.5-Man install Louisiana customer and others. Critical for invoicing pipeline.</div>
-    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocks: surfacing stuck revenue items</span></div>
-   </div>
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>Session Summary Protocol + Living Memory Auto-Update</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-progress">Deployed</span></div>
-    </div>
-    <div class="cat">Infrastructure &middot; Memory pipeline</div>
-    <div class="note">Gmail [LIVING_MEMORY_UPDATE] draft pipeline + bridge LaunchAgent 15-min cycle deployed April 18. Auto-sync reliability ~50%. Target: 90%+ cross-channel sync across 8 locations.</div>
-   </div>
-
-  
-   <div class="item infra-crit">
-    <div class="row1">
-     <h3>Cloudflare Zero Trust &mdash; norrisops.com</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-done">Done</span></div>
-    </div>
-    <div class="cat">Infrastructure &middot; Done April 20, 2026</div>
-    <div class="note">Identity-based auth live on norrisops.com. 2 Access apps (Shared + Aaron Only), 30-day rolling session. Mirror via ~/norris-agent/scripts/sync_norrisops_pages.sh post-commit hook. Commit 75b90a058144, wrangler 67fa74ae. Replaces JS password gate. ops.norrisutilities.com held 2-4 weeks parallel fallback.</div>
-    <div class="dep"><span class="arr">&rarr;</span><span>Next: build sync_norrisops_pages.sh post-commit hook (referenced but not yet built)</span></div>
-   </div>
-
-</div>
- </div>
-
- <!-- ═══ NEW SECTION: INVOICING BACKLOG ═══ -->
- <div class="section">
-  <h2><span class="blue">Invoicing</span> <span class="dark">Backlog Detail</span></h2>
-  <div class="desc">Individual orders requiring QB invoices. ~$16,180 total blitz ready this week.</div>
-  <div class="items">
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>Thornhill / LineTec &mdash; 1&times; NU-BC-2851 Mar 20</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Revenue &middot; Invoice now</div>
-    <div class="note">PO DEPT468R. 1&times; NU-BC-2851 @ $305. Ship date Mar 20. No SD on disk for this order — needs SD + QB invoice.</div>
-    <div class="fin-line aaron-only"><span class="money rev">$305</span></div>
-   </div>
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>Coy Crosby / Dominion &mdash; March 20 1.5-Man shipment</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Revenue &middot; Verify qty then invoice</div>
-    <div class="note">~5-6&times; NU-BC-2834. Qty disputed &mdash; verify at UPS Store before invoicing. 2 tracking numbers confirmed (1Z2W49000395006856 + 1Z2W49000328343091). No SD for this specific order.</div>
-    <div class="fin-line aaron-only"><span class="money rev">~$1,590</span></div>
-   </div>
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>Benz / SWEPCO &mdash; 1&times; NU-BC-2851 Mar 20</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Revenue &middot; Invoice now (CC customer — 4% fee)</div>
-    <div class="note">Truck #860377 on invoice. Mar 20 shipment. SD-2026-BENZ-SWEPCO-0420 built April 20 for repeat order. Mar 20 also needs separate QB invoice.</div>
-    <div class="fin-line aaron-only"><span class="money rev">$305 + 4% CC fee</span></div>
-   </div>
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>Pickle / Florence Electric &mdash; Mixed ARCH/BCB/1.5-Man</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Revenue &middot; SKU unconfirmed</div>
-    <div class="note">3&times; NU-BC-2834 (1.5-Man 28&rdquo;&times;34&rdquo;) @ $265 = $795 &middot; 1&times; NU-BC-2834-C (Combo) @ $305 &middot; 2&times; NU-BC-2834-F (ARCH) @ $305 = $610. P/Ns confirmed in master since April 7. Tracking: 1Z2W49000328351797, delivered Mar 23. Contact: Darrell Pickle &mdash; Dpickle@florenceal.org</div>
-    <div class="fin-line aaron-only"><span class="money rev">$1,765</span></div>
-   </div>
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>Myers / AEP Roanoke &mdash; ARCH + Combo</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Revenue &middot; SKU unconfirmed</div>
-    <div class="note">2&times; NU-BC-2834-F (ARCH) @ $305 = $610 &middot; 1&times; NU-BC-2834-C (Combo) @ $305. Ship to: 1800 Loch Haven Drive, Roanoke VA 24019. Tracking: 1Z2W49000395012652, delivered Mar 24. <strong>UPS label note:</strong> UPS log shows &ldquo;Chain Electric / Abshire&rdquo; for this tracking &mdash; clerical UPS Store alias. &ldquo;Abshire&rdquo; = Sammy Myers canonical alias. SA V5 must flag destination mismatches automatically.</div>
-    <div class="fin-line aaron-only"><span class="money rev">$915</span></div>
-   </div>
-
-   <div class="item rev">
-    <div class="row1">
-     <h3>Coy Crosby / Dominion &mdash; April 8 Fleet PO 42350802</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
-    </div>
-    <div class="cat">Revenue &middot; Invoice pending customer confirmation</div>
-    <div class="note">5&times; NU-BC-2851 @ $305 = $1,525. Quote sent April 8, no response 13+ days. SD-2026-DOMINION-4501057807-0413 on disk. Delivery by 04/23/2026.</div>
-    <div class="fin-line aaron-only"><span class="money rev">$1,525</span></div>
-   </div>
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>Wayne Abadie / Primoris &mdash; PO# 0407-BYB0001</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-blocked">Blocked</span></div>
-    </div>
-    <div class="cat">Revenue &middot; Confirm spec with Wayne</div>
-    <div class="note">1&times; 24x24 cover to Michael Flemming, 2015 Holly Rd, Gilmore TX 75644 via Aerial Hydraulics. Likely NU-BC-2828 @ $235 but must confirm 1-Man size with Wayne Abadie before shipping.</div>
-    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocked: confirm 1-Man spec with Wayne Abadie</span></div>
-    <div class="fin-line aaron-only"><span class="money rev">$235</span></div>
-   </div>
-
-  </div>
- </div>
-
- <!-- ═══ NEW ITEMS IN REVENUE / STRATEGIC ═══ -->
- <div class="section">
-  <h2><span class="blue">Strategic</span> <span class="dark">Priorities</span></h2>
-  <div class="desc">High-value relationships and infrastructure requiring immediate attention.</div>
-  <div class="items">
-
-   <div class="item crit">
-    <div class="row1">
-     <h3>Terex OEM Bucket Covers &mdash; Bill Kugler</h3>
-     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-progress">Active</span></div>
-    </div>
-    <div class="cat">Strategic &middot; HIGHEST PRIORITY relationship</div>
-    <div class="note">$500K+ potential OEM program. Family legacy connection through Wayne. Relationship touch needed &mdash; do not let go cold.</div>
-    <div class="fin-line aaron-only"><span class="money rev">$500K+</span><span>Highest strategic priority in company</span></div>
-   </div>
-
-   <div class="item infra">
-    <div class="row1">
-     <h3>BSS Expense Groups &mdash; Full Picture</h3>
-     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-progress">In Progress</span></div>
-    </div>
-    <div class="cat">A/P &middot; Reimbursement tracking</div>
-    <div class="note">Group 1: $1,807.26 (personal card 1057) &middot; Group 2: $68.29 (NU card 7745) &middot; Group 3: ~$3,134.46 (Apple Card, NU owes Aaron) &middot; DoubleTree charges: TBD (Aaron must verify). BSS Invoice 11 total: $8,039.27.</div>
-   </div>
-
-   <div class="item infra">
-    <div class="row1">
-     <h3>Personal Gmail (acnorris1@gmail.com) &rarr; Legacy</h3>
-     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-blocked">Not Started</span></div>
-    </div>
-    <div class="cat">Infrastructure &middot; Integration</div>
-    <div class="note">Business Gmail (acnorris@norrisutilities.com) connected and working. Personal Gmail pending connection to Legacy for receipt/expense scanning.</div>
-   </div>
-
-  </div>
- </div>
 
 </body>
 </html>

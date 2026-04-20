@@ -2,7 +2,7 @@
   "metadata": {
     "last_updated": "2026-04-20T16:51:15-0500",
     "version": "1.0.2",
-    "commit": "ec57c5565f354fe22cd98cfaffdfbadabb574882",
+    "commit": "c699b21a32f8882db9c90b741d4dc93e4ac00d38",
     "item_count": 36,
     "stats": {
       "done": 9,
@@ -122,8 +122,7 @@
         "type": "unlocks"
       },
       "created": "2026-03-16",
-      "updated": "2026-04-20",
-      "completed": "2026-04-20"
+      "updated": "2026-04-20"
     },
     {
       "id": "r-002",

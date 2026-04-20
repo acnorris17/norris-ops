@@ -420,6 +420,8 @@ Captured after Aaron confirmed NU has only Dealers. Retires the old "30% off dea
 
 # SECTION 6: SESSION LOG (NEWEST FIRST)
 
+**April 20, 2026 (PM)** — SA V5 Audit (Session 1 of 3). Read-only diagnostic of shipping_agent_v5.py, shipping_hunter.py, shipping_readiness_gate.py, lib/audit_log.py, scripts/order_monitor.py. 11-source Hunt Ladder mapped (docstring claims 11; LADDER has 9; 3 live gog-backed sources + 6 stubs). 5 process rules enforcement traced — Rules 2 & 5 have non-blocking warnings in sd_builder.py, Rules 1/3/4 have no enforcement, all 18 records missing the fields. 3 SDs traced end-to-end (LINETEC-0402, AJ-0331-ChainElectric, MYERS-AEP-0320). Pickle ship-to HUNTED AND FOUND: 611 East Reeder Street, Florence AL 35630, in customer_db.json — reveals biggest architectural gap: the Hunt Ladder does not query internal data sources. 18-record completeness table produced. UPS public tracking via curl confirmed infeasible (Akamai bot protection hangs TLS). Report at output/reports/SA_V5_AUDIT_2026-04-20.md + Telegram summary at SA_V5_AUDIT_2026-04-20_TELEGRAM.txt. No code or data changed. Session 2 scope ready for Aaron review.
+
 **April 17, 2026 (evening)** — SA V5 launched
 - 1,301-line autonomous build.
 - 18 locked rulings + Dealer Pricing Rule + Hunt Ladder (11 sources, retry protocol, learning system) + Boss 5-field cross-check + concurrent-run lock + invoice number uniqueness check + money verification in readiness gate.
@@ -1528,3 +1530,6 @@ Service Token rotated. Client ID + Secret installed in ~/norris-agent/.env.
 curl test against norrisops.com returned HTTP 200 with CF_Authorization cookie. Token is live.
 .env now has 11/11 Cloudflare keys. .env confirmed gitignored (~/norris-agent/.gitignore).
 Ready for Live Roadmap build.
+
+- **2026-04-20 16:51** · Roadmap: status r-001: ACTIVE → DONE (Shipping AI Agent (SA V5)) · `ec57c556`
+- **2026-04-20 16:51** · Roadmap: status r-001: DONE → ACTIVE (Shipping AI Agent (SA V5)) · `c699b21a`
