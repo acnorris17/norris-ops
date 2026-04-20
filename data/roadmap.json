@@ -1,0 +1,744 @@
+{
+  "metadata": {
+    "last_updated": "2026-04-20T16:50:59-0500",
+    "version": "1.0.1",
+    "commit": "",
+    "item_count": 36,
+    "stats": {
+      "done": 10,
+      "active": 6,
+      "blocked": 5,
+      "urgent": 2,
+      "not_started": 13,
+      "do_not": 0
+    }
+  },
+  "chains": [
+    {
+      "id": "chain-sa-v5",
+      "label": "SA V5 → Truth Sources → Legacy Rules → G Brain migration",
+      "items": [
+        "r-001",
+        "r-019",
+        "r-020",
+        "r-021"
+      ]
+    },
+    {
+      "id": "chain-al-license",
+      "label": "Alabama Dealer License → Skylift Sales",
+      "items": [
+        "r-002",
+        "r-016"
+      ]
+    },
+    {
+      "id": "chain-invoice-blitz",
+      "label": "Invoice Blitz (~$16,180 week)",
+      "items": [
+        "r-003",
+        "r-027",
+        "r-028",
+        "r-029",
+        "r-030",
+        "r-031",
+        "r-032",
+        "r-033"
+      ]
+    },
+    {
+      "id": "chain-disaster-recovery",
+      "label": "Disaster Recovery (no backup = no business)",
+      "items": [
+        "r-011"
+      ]
+    },
+    {
+      "id": "chain-memory-pipeline",
+      "label": "Memory / Notes Pipeline",
+      "items": [
+        "r-024",
+        "r-025",
+        "r-018"
+      ]
+    },
+    {
+      "id": "chain-portal-build",
+      "label": "Portal Build Sequence",
+      "items": [
+        "r-004",
+        "r-005",
+        "r-006",
+        "r-007",
+        "r-008"
+      ]
+    }
+  ],
+  "sprints": [
+    {
+      "id": "now",
+      "label": "Do Right Now"
+    },
+    {
+      "id": "sprint-1",
+      "label": "This Sprint — Portal + Shipping"
+    },
+    {
+      "id": "sprint-2",
+      "label": "Next Sprint — Portal Features"
+    },
+    {
+      "id": "sprint-3",
+      "label": "Sprint 3 — Advanced + Security"
+    }
+  ],
+  "sections": [
+    "REVENUE",
+    "OPS PORTAL",
+    "LEGACY",
+    "INFRA",
+    "COMPLIANCE",
+    "MARKETING",
+    "FINANCIAL"
+  ],
+  "items": [
+    {
+      "id": "r-001",
+      "title": "Shipping AI Agent (SA V5)",
+      "section": "LEGACY",
+      "priority": "P0",
+      "status": "DONE",
+      "sprint": "now",
+      "category": "Critical Path · Agent build",
+      "owner": "Legacy Agent (M1)",
+      "note": "V5 = 1,301 lines, 23 sections. Running on M1 PID 91997. Section U gate re-run pending. 5 locked process rules from Chain Electric: (1) multi-ship-to → child SDs under parent order ID, (2) tag fulfillment source, (3) SKU substitutions logged with reason, (4) courtesy_adjustment as separate invoice line, (5) cb_internal_note on every SD.",
+      "blocks": [
+        "r-019",
+        "r-020"
+      ],
+      "ready": false,
+      "money": {
+        "label": "Unlocks entire A/R cycle",
+        "type": "unlocks"
+      },
+      "created": "2026-03-16",
+      "updated": "2026-04-20",
+      "completed": "2026-04-20"
+    },
+    {
+      "id": "r-002",
+      "title": "Alabama Master Dealer License",
+      "section": "COMPLIANCE",
+      "priority": "P0",
+      "status": "URGENT",
+      "sprint": "sprint-1",
+      "category": "Critical Path · Legal / compliance",
+      "owner": "Aaron",
+      "note": "Not started. Required before any Skylift truck sells in Alabama. Surety bond via SuretyBondsDirect.com.",
+      "blocks": [
+        "r-016"
+      ],
+      "ready": false,
+      "money": {
+        "label": "Bond: ~$500–$1,500 · Unlocks: $1,091,402.50 truck PO",
+        "cost_usd": 500,
+        "unlocks_usd": 1091402.5,
+        "type": "cost+unlocks"
+      },
+      "created": "2026-03-16",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-003",
+      "title": "BSS Invoice 11",
+      "section": "FINANCIAL",
+      "priority": "P0",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Critical Path · A/R send",
+      "owner": "Aaron",
+      "note": "Unblocked now. Aaron sends today. Saved in Google Drive and iCloud.",
+      "blockedBy": [],
+      "ready": true,
+      "money": {
+        "label": "$8,039.27",
+        "amount_usd": 8039.27,
+        "type": "revenue",
+        "customer": "Bay Shore Systems"
+      },
+      "created": "2026-04-15",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-004",
+      "title": "project-roadmap.html",
+      "section": "OPS PORTAL",
+      "priority": "P2",
+      "status": "ACTIVE",
+      "sprint": "sprint-1",
+      "category": "Portal · This page",
+      "owner": "CC (M1)",
+      "note": "Live Roadmap System v1. Dynamic render from /data/roadmap.json. 4 views (Sprint Board, Dependency Chains, Timeline, All Items). 8 features: stat cards, filters, SVG deps, git log drawer, DONE celebrations, print CSS, mobile, dark mode.",
+      "ready": false,
+      "created": "2026-04-18",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-005",
+      "title": "change-log.html",
+      "section": "OPS PORTAL",
+      "priority": "P2",
+      "status": "DONE",
+      "sprint": "sprint-1",
+      "category": "Portal · History view",
+      "owner": "CC (M1)",
+      "note": "Last 50 git commits on ops repo as reviewable timeline. Linked from portal nav. Deployed April 19.",
+      "ready": false,
+      "completed": "2026-04-19",
+      "created": "2026-04-15",
+      "updated": "2026-04-19"
+    },
+    {
+      "id": "r-006",
+      "title": "Contact detail modal",
+      "section": "OPS PORTAL",
+      "priority": "P2",
+      "status": "DONE",
+      "sprint": "sprint-1",
+      "category": "Portal · CB's CRM request",
+      "owner": "CC (M1)",
+      "note": "Click a contact → see every invoice + interaction in one place. Deployed April 19.",
+      "ready": false,
+      "completed": "2026-04-19",
+      "created": "2026-04-10",
+      "updated": "2026-04-19"
+    },
+    {
+      "id": "r-007",
+      "title": "Fix pipeline_value stat",
+      "section": "OPS PORTAL",
+      "priority": "P2",
+      "status": "DONE",
+      "sprint": "sprint-1",
+      "category": "Portal · Data correction",
+      "owner": "CC (M1)",
+      "note": "Dashboard was showing $685K. Now showing $2.5M+. Fixed April 19.",
+      "ready": false,
+      "completed": "2026-04-19",
+      "created": "2026-04-15",
+      "updated": "2026-04-19"
+    },
+    {
+      "id": "r-008",
+      "title": "CB Telegram Bot",
+      "section": "OPS PORTAL",
+      "priority": "P2",
+      "status": "NOT_STARTED",
+      "sprint": "sprint-2",
+      "category": "Portal · Separate bot",
+      "owner": "CC (M1)",
+      "note": "Dedicated business-only bot for Caroline. Separate from Aaron's Legacy bot. Needs design session.",
+      "ready": true,
+      "created": "2026-04-16",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-009",
+      "title": "sd_builder.py telegram_msg_id fix",
+      "section": "INFRA",
+      "priority": "P2",
+      "status": "DONE",
+      "sprint": "sprint-1",
+      "category": "Infrastructure · Regression",
+      "owner": "CC (M1)",
+      "note": "telegram_msg_id regression in sd_builder.py. Fixed April 14.",
+      "ready": false,
+      "completed": "2026-04-14",
+      "created": "2026-04-13",
+      "updated": "2026-04-14"
+    },
+    {
+      "id": "r-010",
+      "title": "norris-agent remote GitHub repo",
+      "section": "INFRA",
+      "priority": "P2",
+      "status": "DONE",
+      "sprint": "sprint-1",
+      "category": "Infrastructure · Git remote",
+      "owner": "CC (M1)",
+      "note": "GitHub repo for ~/norris-agent. Live at github.com/acnorris17/norris-agent.",
+      "ready": false,
+      "completed": "2026-04-18",
+      "created": "2026-04-15",
+      "updated": "2026-04-18"
+    },
+    {
+      "id": "r-011",
+      "title": "Time Machine backup on M1",
+      "section": "INFRA",
+      "priority": "P0",
+      "status": "URGENT",
+      "sprint": "now",
+      "category": "Infrastructure · Disaster recovery",
+      "owner": "Aaron",
+      "note": "CRITICAL: no backup exists. Blocks on external drive or NAS. If the M1 dies today, everything is lost. This is the single biggest infrastructure risk.",
+      "ready": false,
+      "money": {
+        "label": "Cost: ~$150–$400 external drive",
+        "cost_usd": 150,
+        "cost_max_usd": 400,
+        "type": "cost"
+      },
+      "created": "2026-03-20",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-012",
+      "title": "reMarkable pipeline reconnect",
+      "section": "INFRA",
+      "priority": "P2",
+      "status": "DONE",
+      "sprint": "sprint-1",
+      "category": "Infrastructure · Agent input",
+      "owner": "CC (M1)",
+      "note": "Pipeline disconnected. Reconnected April 19, runs 3x/day.",
+      "ready": false,
+      "completed": "2026-04-19",
+      "created": "2026-04-03",
+      "updated": "2026-04-19"
+    },
+    {
+      "id": "r-013",
+      "title": "Rick Sutherland / EPB — revival email",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Revenue · Today",
+      "owner": "Aaron",
+      "note": "SkyTruck47 quoted December 4, 2025. Going cold. Send revival email today.",
+      "ready": true,
+      "money": {
+        "label": "Opportunity: $185,000",
+        "amount_usd": 185000,
+        "type": "opportunity",
+        "customer": "EPB Chattanooga"
+      },
+      "created": "2025-12-04",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-014",
+      "title": "Coy Crosby / Dominion — April 8 RFP follow-up",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Revenue · This week",
+      "owner": "Aaron",
+      "note": "Material 42350802: 5× NU-BC-2851 @ $305 quoted. No response 13+ days after March 25 touch.",
+      "ready": true,
+      "money": {
+        "label": "Quote: $1,525 + shipping",
+        "amount_usd": 1525,
+        "type": "quote",
+        "customer": "Dominion Energy"
+      },
+      "created": "2026-04-08",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-015",
+      "title": "Coy Crosby / Dominion — March 20 qty verify",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Revenue · This week",
+      "owner": "Aaron",
+      "note": "~5× NU-BC-2834 shipped March 20, not yet invoiced. Aaron says 5, records say 6. Verify quantity at UPS Store before invoicing.",
+      "ready": true,
+      "money": {
+        "label": "Est. $1,325 @ $265/unit",
+        "amount_usd": 1325,
+        "type": "revenue",
+        "customer": "Dominion Energy"
+      },
+      "created": "2026-03-20",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-016",
+      "title": "MK Skylift marketing materials",
+      "section": "MARKETING",
+      "priority": "P1",
+      "status": "ACTIVE",
+      "sprint": "sprint-1",
+      "category": "Revenue · Urgent",
+      "owner": "MK Smith",
+      "note": "MK Smith behind schedule. Materials needed BEFORE trucks arrive — must sell all six. Skylift April Open Order Report received April 7. 5× SBA40i-LW + 1× SBA47i-MH.",
+      "blockedBy": [
+        "r-002"
+      ],
+      "ready": false,
+      "money": {
+        "label": "Total PO: $1,091,402.50",
+        "amount_usd": 1091402.5,
+        "type": "revenue",
+        "customer": "Skylift (6 trucks)"
+      },
+      "created": "2026-04-07",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-017",
+      "title": "Telegram Notification Reorganization",
+      "section": "LEGACY",
+      "priority": "P0",
+      "status": "ACTIVE",
+      "sprint": "now",
+      "category": "Legacy Agent · Current sprint",
+      "owner": "CC (M1)",
+      "note": "4 dedicated Telegram topics: nu-legacy-main (Legacy + Aaron only), nu-shipping-agent (SA), nu-ops-notifications (morning brief, email, automation), nu-critical-alerts (blockers/outages only). Every script calling send_telegram routed by category.",
+      "blockedBy": [],
+      "ready": false,
+      "created": "2026-04-17",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-018",
+      "title": "Memory Systems Health Dashboard",
+      "section": "LEGACY",
+      "priority": "P0",
+      "status": "DONE",
+      "sprint": "sprint-1",
+      "category": "Memory · Current sprint",
+      "owner": "CC (M1)",
+      "note": "Live at ops.norrisutilities.com/internal/memory-health.html with real data from all 6 sources. Deployed April 19.",
+      "ready": false,
+      "completed": "2026-04-19",
+      "created": "2026-04-17",
+      "updated": "2026-04-19"
+    },
+    {
+      "id": "r-019",
+      "title": "Truth Sources Lockdown",
+      "section": "INFRA",
+      "priority": "P0",
+      "status": "BLOCKED",
+      "sprint": "sprint-2",
+      "category": "Infrastructure · After V5",
+      "owner": "CC (M1)",
+      "note": "Build ~/nu-brain/truth_sources.json manifest (mirrored to Drive). Migrate every hard-coded path in every script/agent/tool to reference truth_source_path(key) helper. Deploy daily audit verify_truth_sources.py. Add pre-commit hook blocking new hard-coded paths. M5-write / M1-read-only boundaries enforced in code.",
+      "blockedBy": [
+        "r-001"
+      ],
+      "ready": false,
+      "created": "2026-04-17",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-020",
+      "title": "Legacy Rules Lockdown Session",
+      "section": "LEGACY",
+      "priority": "P0",
+      "status": "BLOCKED",
+      "sprint": "sprint-2",
+      "category": "Legacy Agent · After V5",
+      "owner": "CC (M1)",
+      "note": "Audit every established rule from March 17–present. Encode into ~/.openclaw/config/legacy_rules.yaml AND LEGACY_MEMORY.md IMMUTABLE RULES section. Verify Legacy queries them before every response. Includes: investigation principle, M5-write/M1-read flow, truth source routing, all 18 V5 rulings, dealer formula, PO-never-halts-SD.",
+      "blockedBy": [
+        "r-001"
+      ],
+      "ready": false,
+      "created": "2026-04-17",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-021",
+      "title": "G Brain iCloud → Drive migration",
+      "section": "INFRA",
+      "priority": "P2",
+      "status": "BLOCKED",
+      "sprint": "sprint-3",
+      "category": "Memory · After Truth Sources",
+      "owner": "CC (M1)",
+      "note": "Move G Brain storage from iCloud to Google Drive. Consistent with truth-source principle (M5 = source, M1 = read).",
+      "blockedBy": [
+        "r-019"
+      ],
+      "ready": false,
+      "created": "2026-04-17",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-022",
+      "title": "Customer Payment Terms Audit",
+      "section": "FINANCIAL",
+      "priority": "P2",
+      "status": "BLOCKED",
+      "sprint": "sprint-3",
+      "category": "SA · Future",
+      "owner": "Aaron/CB + CC (M1)",
+      "note": "Aaron or CB exports QB customer payment terms. SA ingests, flags discrepancies vs default \"Due on Receipt\". CB updates QB where Aaron approves Net-30/Net-60. Deferred from V5.",
+      "ready": false,
+      "created": "2026-04-17",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-023",
+      "title": "Chain Electric / AJ Morris Reconciliation",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "DONE",
+      "sprint": "sprint-1",
+      "category": "A/R · Done April 18",
+      "owner": "CC (M1) + Aaron",
+      "note": "Hattiesburg MS + Searcy AR ship-tos. NU-BC-2834-F substituted for NU-BC-2834 (stock-out), logged with substitution reason. Invoice $8,930.48 incl. 4% CC fee, -$700 Valued-Partner courtesy adjustment. QB draft + apology email produced. Boss Products resend request sent to Thayne Grove + Troy Gongwer for invoices 6775/6776/6777.",
+      "ready": false,
+      "completed": "2026-04-18",
+      "money": {
+        "label": "$8,930.48",
+        "amount_usd": 8930.48,
+        "type": "revenue",
+        "customer": "Chain Electric / AJ Morris"
+      },
+      "created": "2026-04-15",
+      "updated": "2026-04-18"
+    },
+    {
+      "id": "r-024",
+      "title": "Notes Intelligence Agent (reMarkable Recovery)",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "sprint-1",
+      "category": "Revenue · Next priority after V5",
+      "owner": "CC (M1)",
+      "note": "37 items stuck since April 3 crash. Must surface uninvoiced items including 1.5-Man install Louisiana customer and others. Critical for invoicing pipeline.",
+      "blockedBy": [
+        "r-001"
+      ],
+      "ready": false,
+      "created": "2026-04-03",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-025",
+      "title": "Session Summary Protocol + Living Memory Auto-Update",
+      "section": "INFRA",
+      "priority": "P2",
+      "status": "ACTIVE",
+      "sprint": "sprint-1",
+      "category": "Infrastructure · Memory pipeline",
+      "owner": "CC (M1)",
+      "note": "Gmail [LIVING_MEMORY_UPDATE] draft pipeline + bridge LaunchAgent 15-min cycle deployed April 18. Auto-sync reliability ~50%. Target: 90%+ cross-channel sync across 8 locations.",
+      "ready": false,
+      "created": "2026-04-18",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-026",
+      "title": "Cloudflare Zero Trust — norrisops.com",
+      "section": "INFRA",
+      "priority": "P2",
+      "status": "DONE",
+      "sprint": "sprint-1",
+      "category": "Infrastructure · Done April 20",
+      "owner": "CC (M1)",
+      "note": "Identity-based auth live on norrisops.com. 2 Access apps (Shared + Aaron Only), 30-day rolling session. Mirror via ~/norris-agent/scripts/sync_norrisops_pages.sh post-commit hook. Commit 75b90a058144, wrangler 67fa74ae. Replaces JS password gate. ops.norrisutilities.com held 2-4 weeks parallel fallback.",
+      "ready": false,
+      "completed": "2026-04-20",
+      "created": "2026-04-18",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-027",
+      "title": "Thornhill / LineTec — 1× NU-BC-2851 Mar 20",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Revenue · Invoice now",
+      "owner": "CB (QB entry)",
+      "note": "PO DEPT468R. 1× NU-BC-2851 @ $305. Ship date Mar 20. No SD on disk for this order — needs SD + QB invoice.",
+      "ready": true,
+      "money": {
+        "label": "$305",
+        "amount_usd": 305,
+        "type": "revenue",
+        "customer": "Thornhill / LineTec"
+      },
+      "created": "2026-03-20",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-028",
+      "title": "Coy Crosby / Dominion — March 20 1.5-Man shipment",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Revenue · Verify qty then invoice",
+      "owner": "Aaron (verify) + CB (QB)",
+      "note": "~5-6× NU-BC-2834. Qty disputed — verify at UPS Store before invoicing. 2 tracking numbers confirmed (1Z2W49000395006856 + 1Z2W49000328343091). No SD for this specific order.",
+      "ready": true,
+      "money": {
+        "label": "~$1,590",
+        "amount_usd": 1590,
+        "type": "revenue",
+        "customer": "Dominion Energy"
+      },
+      "created": "2026-03-20",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-029",
+      "title": "Benz / SWEPCO — 1× NU-BC-2851 Mar 20",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Revenue · Invoice now (CC customer — 4% fee)",
+      "owner": "CB (QB entry)",
+      "note": "Truck #860377 on invoice. Mar 20 shipment. SD-2026-BENZ-SWEPCO-0420 built April 20 for repeat order. Mar 20 also needs separate QB invoice.",
+      "ready": true,
+      "money": {
+        "label": "$305 + 4% CC fee",
+        "amount_usd": 305,
+        "type": "revenue",
+        "customer": "Benz / SWEPCO"
+      },
+      "created": "2026-03-20",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-030",
+      "title": "Pickle / Florence Electric — Mixed ARCH/BCB/1.5-Man",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Revenue · SKU unconfirmed",
+      "owner": "CB (QB entry)",
+      "note": "3× NU-BC-2834 (1.5-Man 28\"×34\") @ $265 = $795 · 1× NU-BC-2834-C (Combo) @ $305 · 2× NU-BC-2834-F (ARCH) @ $305 = $610. P/Ns confirmed in master since April 7. Tracking: 1Z2W49000328351797, delivered Mar 23. Contact: Darrell Pickle — Dpickle@florenceal.org",
+      "ready": true,
+      "money": {
+        "label": "$1,765",
+        "amount_usd": 1765,
+        "type": "revenue",
+        "customer": "Florence Electric"
+      },
+      "created": "2026-03-23",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-031",
+      "title": "Myers / AEP Roanoke — ARCH + Combo",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Revenue · SKU unconfirmed",
+      "owner": "CB (QB entry)",
+      "note": "2× NU-BC-2834-F (ARCH) @ $305 = $610 · 1× NU-BC-2834-C (Combo) @ $305. Ship to: 1800 Loch Haven Drive, Roanoke VA 24019. Tracking: 1Z2W49000395012652, delivered Mar 24. UPS log shows \"Chain Electric / Abshire\" for this tracking — clerical UPS Store alias. \"Abshire\" = Sammy Myers canonical alias. SA V5 must flag destination mismatches automatically.",
+      "ready": true,
+      "money": {
+        "label": "$915",
+        "amount_usd": 915,
+        "type": "revenue",
+        "customer": "AEP Roanoke / Myers"
+      },
+      "created": "2026-03-24",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-032",
+      "title": "Coy Crosby / Dominion — April 8 Fleet PO 42350802",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "NOT_STARTED",
+      "sprint": "now",
+      "category": "Revenue · Invoice pending customer confirmation",
+      "owner": "Aaron (confirm) + CB (QB)",
+      "note": "5× NU-BC-2851 @ $305 = $1,525. Quote sent April 8, no response 13+ days. SD-2026-DOMINION-4501057807-0413 on disk. Delivery by 04/23/2026.",
+      "ready": true,
+      "money": {
+        "label": "$1,525",
+        "amount_usd": 1525,
+        "type": "revenue",
+        "customer": "Dominion Energy"
+      },
+      "created": "2026-04-08",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-033",
+      "title": "Wayne Abadie / Primoris — PO# 0407-BYB0001",
+      "section": "REVENUE",
+      "priority": "P1",
+      "status": "BLOCKED",
+      "sprint": "sprint-1",
+      "category": "Revenue · Confirm spec with Wayne",
+      "owner": "Aaron",
+      "note": "1× 24x24 cover to Michael Flemming, 2015 Holly Rd, Gilmore TX 75644 via Aerial Hydraulics. Likely NU-BC-2828 @ $235 but must confirm 1-Man size with Wayne Abadie before shipping.",
+      "ready": false,
+      "money": {
+        "label": "$235",
+        "amount_usd": 235,
+        "type": "revenue",
+        "customer": "Primoris / Aerial Hydraulics"
+      },
+      "created": "2026-04-07",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-034",
+      "title": "Terex OEM Bucket Covers — Bill Kugler",
+      "section": "REVENUE",
+      "priority": "P0",
+      "status": "ACTIVE",
+      "sprint": "now",
+      "category": "Strategic · HIGHEST PRIORITY relationship",
+      "owner": "Aaron",
+      "note": "$500K+ potential OEM program. Family legacy connection through Wayne. Relationship touch needed — do not let go cold.",
+      "ready": false,
+      "money": {
+        "label": "$500K+",
+        "amount_usd": 500000,
+        "type": "opportunity",
+        "customer": "Terex OEM"
+      },
+      "created": "2026-03-20",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-035",
+      "title": "BSS Expense Groups — Full Picture",
+      "section": "FINANCIAL",
+      "priority": "P1",
+      "status": "ACTIVE",
+      "sprint": "now",
+      "category": "A/P · Reimbursement tracking",
+      "owner": "Aaron + CB",
+      "note": "Group 1: $1,807.26 (personal card 1057) · Group 2: $68.29 (NU card 7745) · Group 3: ~$3,134.46 (Apple Card, NU owes Aaron) · DoubleTree charges: TBD (Aaron must verify). BSS Invoice 11 total: $8,039.27.",
+      "ready": false,
+      "created": "2026-04-15",
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "r-036",
+      "title": "Personal Gmail (acnorris1@gmail.com) → Legacy",
+      "section": "INFRA",
+      "priority": "P2",
+      "status": "NOT_STARTED",
+      "sprint": "sprint-2",
+      "category": "Infrastructure · Integration",
+      "owner": "CC (M1)",
+      "note": "Business Gmail (acnorris@norrisutilities.com) connected and working. Personal Gmail pending connection to Legacy for receipt/expense scanning.",
+      "ready": false,
+      "created": "2026-04-15",
+      "updated": "2026-04-20"
+    }
+  ]
+}
