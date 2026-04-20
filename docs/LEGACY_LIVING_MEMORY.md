@@ -508,6 +508,279 @@ Three-pass spec iteration (v1 Legacy → v2 Claude → v3 separation of concerns
 Converted claude_bridge.py to persistent LaunchAgent. Upgraded model strings to claude-opus-4-7 across config.json + agent_runner.py + bridge --model flag. Discovered bridge is a STUB (accepts tasks, writes placeholder outbox, never spawns claude -p — fix deferred). V5 Shipping Agent stopped at CONDITIONAL GO gate: 18 READY records, $11,015 total, 44.7% variance vs V4 is Dealer Pricing Rule working correctly (NOT a money discrepancy). Locked NEW STANDING RULE: Session Summary System — every Claude session produces dated 11-section summary before ending, ~/norris-agent/MEMORY_session_summary_rule.md.
 → ~/norris-agent/session_summaries/SESSION_2026-04-18_ClaudeAi_Bridge_V5_NewRule.md
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 Readiness Handoff — 2026-04-20
+[LIVING_MEMORY_UPDATE] Session: SA V5 Readiness Handoff — 2026-04-20
+
+Session dates: 2026-04-20, approximately 10:30 AM – 2:00 PM CT
+Machine: M5 MacBook Pro → Claude.ai (Legacy Bot project)
+Model: Claude Opus 4.7
+Outcome: Session ended for comprehensive handoff to fresh Claude session. No production writes this session; all cleanup/execution deferred to next session with full handoff in place.
+
+═══════════════════════════════════════════════════════════════════════════════
+1. ONE-LINE SUMMARY
+═══════════════════════════════════════════════════════════════════════════════
+
+SA V5 readiness session that recovered V5 report + qb_baseline from feature/shipping-agent-v5 branch, verified all 18 parsed records, identified UPS tracking auto-verification as THE load-bearing capability currently stubbed in V5 code, and built a comprehensive handoff document for a fresh Claude session rather than attempting execution under context pressure.
+
+═══════════════════════════════════════════════════════════════════════════════
+2. WHY THIS SESSION EXISTED
+═══════════════════════════════════════════════════════════════════════════════
+
+SA V5 build stuck at Section U readiness gate since April 17 (PID 91997 on M1). $17K+ uninvoiced backlog blocked by variance flags (44.7% off V4 baseline), 3 missing S-IDs (S008/S009/S010), junk SDs from rogue email classifier, and unclear Chain Electric reconciliation state. Saturday April 18 work had produced $8,930.48 locked Chain Electric invoice but hadn't been fully reconciled into V5. Aaron needed session to finalize and unblock V5 GO.
+
+═══════════════════════════════════════════════════════════════════════════════
+3. WHAT WAS ACCOMPLISHED
+═══════════════════════════════════════════════════════════════════════════════
+
+- Recovered V5 readiness report (4,459 bytes) + qb_baseline_v5.md (2,033 bytes) via git stash + checkout feature/shipping-agent-v5. Files had been hidden since Aaron checked out main Sunday evening.
+- Read full V5 dashboard: 18 SDs parsed, $11,015 total READY, 44.7% variance vs V4 baseline ($7,610), 8 S-IDs present (S001-S003, S005-S007, S011, S012), 3 missing (S008, S009, S010).
+- Cross-referenced against Legacy's April 7 UPS tracking verification (5 Mar 20 orders with tracking + addresses) AND Saturday April 18 Chain Electric reconciliation ($8,930.48 locked).
+- Legacy ran read-only VERIFY prompt (Parts A/B/C) — confirmed 4 junk SDs (CARLOS, EDEVANSEUFMCCOM, GHK, RICHARD-0413), identified email classifier gap at order_monitor.py line 72, verified 6 records across sources. NO WRITES were made by Legacy.
+- Aaron confirmed:
+  * Crosby-0325 (dated Mar 25) is the TOSSED order — Coy was OOO 13 days, never shipped, another similar order replaced it later (DELETE, not KEEP)
+  * P/N trumps description: NU-BC-2834-F correct; "NU-BC-2834-ARCH" was Aaron's verbal shorthand that got baked into import
+  * UPS tracking auto-verification is THE LARGEST need and reason for the entire SA build
+  * Chain Electric ground truth: AJ and Jeremy matching orders, Boss drop-shipped 2834s to BOTH, Aaron supplemented 2834-F (ARCH) to BOTH, 15 units per location, 30 total
+- Handoff document built at /mnt/user-data/outputs/SA_V5_HANDOFF_2026-04-20.md (39,684 bytes, 12 sections A through L).
+
+═══════════════════════════════════════════════════════════════════════════════
+4. WHAT FAILED / WENT WRONG
+═══════════════════════════════════════════════════════════════════════════════
+
+- V5 scripts temporarily invisible because Aaron had checked out main on April 19 evening (scripts only live on feature branch — never merged). Resolved via git branch switch.
+- UPS tracking stub in V5 code was not previously flagged as critical-path. Now properly identified.
+- Session approached context compaction limit before execution could begin. Right call was made to stop and build handoff rather than rushing execution.
+- Aaron was concerned sharing VERIFY prompt with Legacy might have "messed things up" — it did NOT. Legacy's VERIFY was strictly read-only. No reversal needed.
+- P/N notation in qb_baseline ("NU-BC-2834-ARCH") is wrong and was only caught this session by explicit Aaron correction. Cleanup needed in SD rendering pipeline.
+
+═══════════════════════════════════════════════════════════════════════════════
+5. CURRENT STATE
+═══════════════════════════════════════════════════════════════════════════════
+
+GIT:
+- On branch feature/shipping-agent-v5
+- Stash: pre-v5-recovery-stash-20260420-123616 (holds Aaron's main-branch work)
+- Last V5 commit: 9986cbd "V5/G-U: intake, SD builder, Boss crosscheck, hunt ladder, sheet sync, portal sync, audit log, readiness gate"
+- Branch has NEVER been merged to main
+
+CC SESSION:
+- PID 91997 still alive (as of last visibility check)
+- Not in cc-main tmux — separate Terminal window
+- At Section U gate waiting for GO / HOLD / ISSUE / RECONCILE
+- Visibility of the window on M1 screen: UNCONFIRMED (verify with Aaron)
+
+V5 PARSED RECORDS (18 SDs):
+- KEEP (real): ABADIE-0331, ABADIE-0407-BYB0001, AJ-0331-ChainElectric, AJ-0331-B-JeremyBrown, AJ-0401-ARCH, JeremyBrown-0401-ARCH, BEDWELL-0407, DOMINION-4501057807-0413, LINETEC-0402, LINETEC-0406, LINETEC-THORNHILL-0413, THORNHILL-DEPT732-0408
+- DELETE (junk): CARLOS-0416, EDEVANSEUFMCCOM-0416, GHK-0416, RICHARD-0413
+- DELETE (stale/tossed): CROSBY-0325 (Mar 25 tossed order)
+- ARCHIVE (superseded): JeremyBrown-0331
+- ARCHIVE (test): SD-TEST-DEMO (not in parse, present in output dir)
+
+MISSING SDs TO RENDER (verified data available):
+- Thornhill DEPT468R Mar 20 — 1× NU-BC-2851 — tracking 1Z2W49000395021357 — $305
+- Crosby/Dominion Mar 20 — 6× NU-BC-2834 — 2 tracking nums — paid via Dominion #2000007308 — $1,590
+- Pickle/Florence Mar 20 — 3× NU-BC-2834 + 1× NU-BC-2834-C + 2× NU-BC-2834-F — tracking 1Z2W49000328351797 — $1,710
+- Myers/AEP Roanoke Mar 20 — 2× NU-BC-2834-F + 1× NU-BC-2834-C — tracking 1Z2W49000395012652 (UPS clerical error shows "ABSHIRE/CHAIN ELECTRIC") — $915
+- Benz/SWEPCO Mar 20 — 1× NU-BC-2851 Truck #860377 — tracking 1Z2W49000393585850 — $305
+- AJ-BOSS-0401-Hattiesburg (JSON exists, HTML render missing) — 5× NU-BC-2834 vendor_dropship
+
+CRITICAL GAP:
+- UPS tracking auto-verification in V5 Hunt Ladder is STUBBED (returns None pending UPS API key). This is the load-bearing capability for solving the $17K+ backlog. Decision pending: Option A (build live before GO) vs Option B (ship with stub, add in V5.1).
+
+═══════════════════════════════════════════════════════════════════════════════
+6. OPEN DECISIONS (FOR AARON — NEW SESSION FIRST FOUR QUESTIONS)
+═══════════════════════════════════════════════════════════════════════════════
+
+D1. Option A (UPS tracking live before GO, 2-4 extra hours, V5 ships fully functional) vs Option B (ship with stub, V5.1 adds UPS this week, CB can't cleanly invoice for ~5 more days). Aaron's stated position favors A. Confirm.
+D2. Is SA V5 Terminal window PID 91997 still visibly open on M1?
+D3. Did Boss Products resend invoices 6775/6776/6777 (Thayne Grove request from April 18)? Needed for AJ-BOSS-0401-Hattiesburg vendor_invoice field.
+D4. Current time in Birmingham AL for time-stamped session operations.
+
+═══════════════════════════════════════════════════════════════════════════════
+7. TASKS FOR NEXT SESSION (PRIORITIZED)
+═══════════════════════════════════════════════════════════════════════════════
+
+T1. Read /mnt/user-data/outputs/SA_V5_HANDOFF_2026-04-20.md completely — every line, no skimming
+T2. Run 14 search queries from handoff Section H
+T3. Ask Aaron the 4 confirmation questions (Section I)
+T4. Wait for answers before producing execution prompts
+T5. Execute cleanup Parts 1-8 with Aaron review between:
+    Part 1 — DELETE 4 junk + 1 stale SD
+    Part 2 — ARCHIVE test + superseded SD
+    Part 3 — RENDER 6 missing HTMLs from verified data
+    Part 4 — shipments.json normalization + stale flag purge
+    Part 5 — SD auto-builder email filter patch (order_monitor.py line 72)
+    Part 6 — UPS tracking live (IF Aaron picks Option A)
+    Part 7 — Commit + re-run shipping_readiness_gate.py dry-run
+    Part 8 — Aaron types GO, Section V writes, merge to main, stash pop
+T6. Fire [LIVING_MEMORY_UPDATE] Gmail drafts at milestones
+T7. After V5 ships, update LEGACY_LIVING_MEMORY.md and ROADMAP_DEFERRED.md
+
+═══════════════════════════════════════════════════════════════════════════════
+8. FILES CREATED / MODIFIED THIS SESSION
+═══════════════════════════════════════════════════════════════════════════════
+
+Claude environment:
+- /mnt/user-data/outputs/SA_V5_HANDOFF_2026-04-20.md (39,684 bytes)
+- /home/claude/SA_V5_HANDOFF_2026-04-20.md (working copy)
+
+Aaron's M1:
+- ~/Desktop/v5_readiness_2026-04-20_dryrun.txt (earlier dry-run capture)
+- ~/Desktop/v5_readiness_2026-04-20_freshrun.txt (later dry-run capture)
+- Git state: switched from main to feature/shipping-agent-v5; stash created
+
+NO writes to production canonical data this session:
+- shipments.json: UNTOUCHED
+- SD HTML files: UNTOUCHED
+- sa_learnings.json: UNTOUCHED
+- classifier_negative_examples.json: UNTOUCHED
+
+═══════════════════════════════════════════════════════════════════════════════
+9. KEY QUOTE / LESSON
+═══════════════════════════════════════════════════════════════════════════════
+
+Aaron, 2026-04-20:
+"I WILL NOT SACRIFICE ANYTHING for speed! (I hope AND I pray, I literally HAVE BEEN that we are truly SO close to having it complete BUT I WILL NOT SACRIFICE ANYTHING for speed!)"
+
+Lesson: The Option A vs Option B decision on UPS tracking isn't a velocity tradeoff — it's a quality-bar decision. UPS tracking auto-verification IS the reason V5 exists. Shipping V5 without it means CB still can't cleanly invoice, which is Aaron's primary pain point. The build doesn't ship meaningfully without this capability live.
+
+═══════════════════════════════════════════════════════════════════════════════
+10. CONTEXT THAT MUST PERSIST
+═══════════════════════════════════════════════════════════════════════════════
+
+- UPS tracking auto-verification is THE load-bearing capability (Aaron: "THE LARGEST need and reason for this entire SA BUILD")
+- Use case: post-ship, cross-reference tracking # against iShip/UPS emails OR UPS website to fill missing invoice data. NOT pre-ship address verification.
+- Constraint: minimal API spend, only trigger on real reasons (mismatch, missing data, NEEDS_REVIEW flag)
+- P/N trumps description always — NU-BC-2834-F, never NU-BC-2834-ARCH
+- Chain Electric structure: AJ + Jeremy matching orders, Boss drop 2834s BOTH locations, Aaron ARCH supplement BOTH locations, 30 units total, $8,930.48 locked invoice
+- Legacy's April 20 VERIFY prompt was READ-ONLY — no reversal needed
+- Crosby-0325 is the Mar 25 TOSSED order (DELETE, not KEEP)
+- Email classifier gap at order_monitor.py line 72 produced CARLOS/EDEVANSEUFMCCOM/GHK junk SDs
+- New session must read handoff file COMPLETELY before acting
+- Aaron is exhausted (hasn't ridden in weeks, back/eyes hurt, 5+ hours Saturday on cleanup); will not sacrifice quality for speed
+- Wayne standard applies; must be genuinely earned
+
+═══════════════════════════════════════════════════════════════════════════════
+11. NEW SESSION KICKOFF PROCEDURE
+═══════════════════════════════════════════════════════════════════════════════
+
+Aaron starts new Claude.ai session in the Legacy Bot project and attaches /mnt/user-data/outputs/SA_V5_HANDOFF_2026-04-20.md as the first message (or uploads and pastes opening line). New Claude:
+1. Reads handoff line by line (39,684 bytes, 12 sections)
+2. Runs Section H searches (14 queries)
+3. Asks 4 confirmation questions before acting
+4. Executes cleanup with Aaron review between each Part
+5. Fires [LIVING_MEMORY_UPDATE] drafts at milestones
+
+Authoritative handoff document: /mnt/user-data/outputs/SA_V5_HANDOFF_2026-04-20.md
+
+END OF MEMORY UPDATE.
+
+
+### [LIVING_MEMORY_UPDATE] Session: Roadmap Expansion + Memory Reconciliation + Service Token Rotation Prep — 2026-04-20
+═══════════════════════════════════════════════════════════════════
+SESSION SUMMARY — 2026-04-20
+═══════════════════════════════════════════════════════════════════
+
+1. HEADER
+- Session ID: 2026-04-20-roadmap-reconciliation
+- Date: Monday, April 20, 2026
+- Time: ~11:30 AM → ~2:30 PM CT
+- Claude: Opus 4.7 (claude-opus-4-7), Claude.ai web (M5)
+- Tool: Claude.ai project "Legacy" (Aaron pasted prompts to Legacy via Telegram and to CC on M1 via Universal Control)
+- Project: Norris Utilities / Legacy
+- Conversation title: Session following Cloudflare Zero Trust + JS Gate Replacement
+
+2. ONE-LINE SUMMARY
+Expanded project-roadmap.html, reconciled Legacy memory gaps surfaced during expansion, flagged service token .env gap, prepared new-session handoff for continuation.
+
+3. WHY THIS SESSION EXISTED
+Prior session (April 20 AM) shipped Cloudflare Zero Trust (commit 75b90a058144, wrangler 67fa74ae) to norrisops.com with 30-day rolling Access session. This session opened to (a) verify memory integrity across NorrisPalace/Living Memory/.env/scripts, (b) update the live project-roadmap.html to reflect April 20 work, (c) scope the Live Roadmap System build that makes the roadmap a real-time data-driven portal module.
+
+4. WHAT WAS ACCOMPLISHED
+- Claude updated the standalone dependency-map HTML artifact in project knowledge. LATER REALIZED ORPHAN — not referenced by portal, not automation-linked. Zero live effect. Flagged this mistake to Aaron.
+- Legacy ran roadmap intel report. Confirmed: ~/norris-ops/internal/project-roadmap.html is live at ops.norrisutilities.com/internal/project-roadmap.html (and via norrisops.com through Cloudflare Access). Standalone dependency-map file is NOT in norris-ops and NOT referenced by any automation.
+- CC ran combined memory integrity + roadmap audit. Findings: NorrisPalace rules/cloudflare-zero-trust-norrisops MISSING; Living Memory April 20 entry PRESENT; .env Cloudflare keys 9/11 (two missing); sync_norrisops_pages.sh at ~/norris-ops/scripts/ MISSING; post-commit hook PRESENT and actually calls ~/norris-agent/scripts/sync_norrisops_pages.sh (path mismatch with Phase A4 audit); repo had dirty tree (docs/LEGACY_LIVING_MEMORY.md, .wrangler/).
+- CC stopped at Phase C because no Cloudflare card existed in project-roadmap.html to str_replace. Correct call. Waited for Aaron's say-so.
+- Legacy d746a19: expanded project-roadmap.html with 13 items added, 3 modified (Shipping Agent V5 spec + PID 91997, Alabama License URGENT, Time Machine URGENT). Did NOT add Cloudflare card (out of scope per Prompt 2). Google Sheet got 13 TIMELINE rows. Living Memory e8f35a6.
+- Aaron pushed back that Pickle and Myers were wrongly marked BLOCKED in d746a19. Claude re-searched conversation history and confirmed: Pickle + Myers P/Ns confirmed April 8 from FlexPro Armor pricing master, stored in NorrisPalace April 8, marked READY TO INVOICE in portal that day. Legacy's d746a19 was stale on that point.
+- Claude produced Prompt 3 v2 with real data (P/N totals, trackings, Abshire=Myers alias, BCB=Bag correction, P/N-never-SKU terminology, acnorris1@gmail.com CONFIRMED CONNECTED).
+- Legacy executed Prompt 3 v2:
+  * Commit 81ad992: Pickle → READY $1,710, Myers → READY $915 (with Abshire alias + SA V5 cross-check flag), Cloudflare Zero Trust card added to Infrastructure section
+  * Commit 07624b3: 10 NorrisPalace keys written (terminology-locked-apr19, customer-aliases-canonical, pricing-v5-locked, branding-v5-locked, sd-v5-locked, portal-v5-locked, cloudflare-zero-trust-norrisops, do-not-resurface, personal-gmail-connected, model-default-apr19); Living Memory April 20 entry; .wrangler/ gitignored
+  * Mirror: ops.norrisutilities.com HTTP 200, norrisops.com HTTP 302 (Access auth redirect, expected)
+- Identified two blockers before Live Roadmap System build can start:
+  (a) Service Token Client ID + Client Secret missing from .env (old secret never captured; Aaron must rotate in Cloudflare Zero Trust → Access controls → Service credentials → Legacy Automation Token → rotate → paste both strings back)
+  (b) sync_norrisops_pages.sh does not exist at ~/norris-agent/scripts/ — post-commit hook logs error on every push (manual wrangler deploys have been happening; "automation" isn't real yet). CC prompt ready to build it.
+- Drafted Live Roadmap System BUILD prompt (Prompt 5): JSON truth at ~/norris-ops/data/roadmap.json + rebuilt project-roadmap.html fetches JSON + update_roadmap.py write helper + all 8 connection points (G Brain, Living Memory, index stat card, session summary Gmail deltas, Google Sheet, Telegram, portal celebration, git log drawer). Full brand compliance, 8 feature set including SVG dependency lines, git log drawer, PDF export, phoenix rise on DONE. ON HOLD until prerequisites clear.
+
+5. WHAT FAILED / WENT WRONG (HONEST)
+- CLAUDE: Updated the orphan dependency-map HTML artifact without first verifying whether it was live in the portal. Should have used Legacy intel report or project knowledge search as step 1. Aaron had to push me to check.
+- CLAUDE: First Prompt 3 version marked Pickle + Myers BLOCKED instead of READY. Had the truth available in conversation history from April 8; didn't search hard enough the first pass. Aaron called this out — legitimate criticism.
+- CLAUDE: Used "SKU" terminology in early output. Aaron's locked rule since April 19 is P/N never SKU. Corrected.
+- CLAUDE: Used "Shield" for the BCB accessory in an earlier response. BCB = Bucket Cover Bag ($55 accessory). Never "Shield." Master may have "SL" suffix mislabel. Corrected.
+- CLAUDE: Proposed closing earlier Cloudflare CC windows before suggesting Aaron check them for unfinished state. Ordering wrong. Aaron closed them before I flagged the check. Aaron called this out — legitimate criticism.
+- PRIOR SESSION (documented): Service Token Client Secret was shown once at token creation on April 20 AM and never captured into .env. Only UUID (15b9bf39...) was stored. Remediation = rotation in Cloudflare dashboard.
+- PRIOR SESSION (documented): sync_norrisops_pages.sh was referenced by post-commit hook but never actually written. Every git push logs an error. Manual wrangler deploys covering the gap. Remediation = write the script from CC prompt, dry-run test.
+
+6. CURRENT STATE
+- project-roadmap.html: LIVE at ops.norrisutilities.com/internal/project-roadmap.html and norrisops.com/internal/project-roadmap.html. Current commits: d746a19 + 81ad992 + 07624b3 (all pushed, mirror verified). Static HTML, no JSON backing (that's the Live Roadmap System build).
+- NorrisPalace: 10 authoritative rule keys written under rules/*-v5-locked and facts/personal-gmail-connected. Older conflicting keys may exist but new keys are authoritative.
+- LEGACY_LIVING_MEMORY.md: April 20 entry present (07624b3).
+- .env: 9/11 Cloudflare keys present. Missing CF_SERVICE_TOKEN_CLIENT_ID + CF_SERVICE_TOKEN_CLIENT_SECRET. Rotation in progress.
+- Mirror automation: POST-COMMIT HOOK CALLS MISSING SCRIPT. Manual deploys work via CLOUDFLARE_API_TOKEN. Script build pending.
+- Pickle / Florence Electric + Myers / AEP Roanoke invoices: READY TO INVOICE per rules/customer-aliases-canonical (Abshire = Sammy Myers). CB unblocked to create these invoices in QB.
+- Myers UPS tracking label mismatch: SA V5 test case documented, not blocking invoice.
+
+7. OPEN DECISIONS (AARON)
+- Rotate Service Token in Cloudflare Zero Trust dashboard (Aaron on Service Credentials page, Legacy Automation Token visible, three-dots → Refresh). After rotation: paste Client ID and Client Secret for Legacy to add to .env.
+- After .env complete and sync script built: GO or edit on Live Roadmap System build (Prompt 5 ready). Aaron said "this is fine for a 1st run build" on the design spec. Feature checkboxes not individually answered; interpret as all 8 features included for v1.
+- Verify Aaron's question in next session: "did me sharing with Legacy and asking it to do and save everything mess things up?" — to answer with explicit evidence from memory systems (Legacy only mutates on explicit writes, sharing transcripts does not corrupt storage).
+- Decide whether to delete the orphan nu_project_roadmap_dependency_map.html artifact from Claude.ai project knowledge (redundant with live portal file).
+
+8. TASKS FOR NEXT SESSION (PRIORITIZED)
+1. URGENT: Answer "did sharing with Legacy mess things up" — verify from memory system audit, don't hand-wave.
+2. Collect Service Token Client ID + Client Secret from Aaron post-rotation. Paste-ready one-line Legacy prompt to append both to .env.
+3. Send CC the sync_norrisops_pages.sh build prompt (ready in prior turn). Wait for dry-run pass.
+4. Send Legacy Prompt 5 (Live Roadmap System build) with all 8 features.
+5. Verify build outcome: manual test update_roadmap.py --status → JSON updates → commit → mirror → Sheet row → Telegram → portal celebrates.
+6. Delete orphan nu_project_roadmap_dependency_map.html from project knowledge (or leave for reference, flagged).
+7. Update LIVING ROADMAP dependency map visualization to reflect Chain 5 Portal Security COMPLETE.
+8. Schedule CB walkthrough of norrisops.com via Google Calendar (not yet scheduled; email sent morning of April 20).
+9. Session summary Gmail draft at session end per protocol.
+
+9. FILES CREATED / MODIFIED THIS SESSION
+- ~/norris-ops/internal/project-roadmap.html (modified by Legacy, commits d746a19 + 81ad992)
+- ~/norris-ops/.gitignore (added .wrangler/)
+- docs/LEGACY_LIVING_MEMORY.md (April 20 entry added, commits 07624b3)
+- NorrisPalace: 10 keys written (listed in §6)
+- Google Sheet 1dZ7YIhdjX7XgtKUkbd-4LUErI1uu0EuR3omwyp3K0Zg: 13 TIMELINE rows + 9 additional rows for reconciliation items
+- Claude.ai project knowledge orphan: nu_project_roadmap_dependency_map.html (Chain 5 updated to DONE — orphan, no live effect)
+
+10. KEY QUOTE / LESSON
+Aaron: "I am not sending the Prompt to Legacy unless you tell me to and its still good or get me an updated, better, LIVING AND REAL DATA containing PROMPT!"
+Lesson: Never produce a Legacy prompt with placeholder "BLOCKED — unconfirmed" status when actual confirmed data exists in conversation history or project knowledge. Search first, compose second. Real data, not templates.
+Aaron: "its NEVER SKU!"
+Lesson: P/N, always. Retroactive cleanup in all outputs.
+Claude's own lesson: When updating any file claimed to be "live," step 1 is verify the file is actually referenced by the live system. The dependency-map orphan incident cost 45 minutes and Aaron's trust.
+
+11. CONTEXT THAT MUST PERSIST
+- FlexPro Armor: NO ® EVER. Bare name only. NEVER "FlexPro Armor Guard."
+- P/N (Part Number), NEVER SKU.
+- BCB = Bucket Cover Bag ($55). NEVER "Shield."
+- Aaron wife Caroline Norris ≠ admin CB Caroline Butler. CB = Butler always.
+- Dealer formula: ROUND(Direct × 0.80, nearest $5). 20% off. D-Shape excluded. Distributor tier does NOT exist in V5.
+- Shipping: Direct ×1.10, Dealer ×1.05 (Ben's Formula half-markup).
+- Customer aliases: Abshire = Sammy Myers. Wayne Crosby = Coy Crosby (Dominion PO system artifact). Aerial Hydraulics = Wayne Abadie. Florence Electric = Darrell Pickle.
+- CB celebrations IDENTICAL to Aaron. No downgrade EVER.
+- Default model Claude Opus 4.7. Budget cap $120/mo API.
+- Cloudflare Zero Trust live on norrisops.com with 30-day Access session.
+- ops.norrisutilities.com held 2-4 weeks as parallel fallback.
+- Post-commit hook path canonical: ~/norris-agent/scripts/sync_norrisops_pages.sh (file does NOT exist yet — build pending).
+- Service Token UUID (CF_LEGACY_TOKEN_UUID = 15b9bf39...) is identifier only; Client ID + Client Secret are separate strings, missing from .env, rotation in progress.
+- Investigation principle: exhaust evidence to 100% certainty before asking Aaron. Never guess. Log resolutions to sa_learnings.json.
+- Gridco/Cunningham DEAD. Terry Mayfield (BSS) deceased 2024. Wayne bench/Shoal Creek hold quietly. MSP Ordering Portal DO NOT LAUNCH.
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -1249,3 +1522,9 @@ These are the service token credentials. Aaron created them during setup. FLAG: 
 
 ### .gitignore
 .wrangler/ added to .gitignore (commit 5d1ebdb).
+
+## April 20, 2026 — Cloudflare Service Token Installed
+Service Token rotated. Client ID + Secret installed in ~/norris-agent/.env.
+curl test against norrisops.com returned HTTP 200 with CF_Authorization cookie. Token is live.
+.env now has 11/11 Cloudflare keys. .env confirmed gitignored (~/norris-agent/.gitignore).
+Ready for Live Roadmap build.
