@@ -137,14 +137,14 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
      <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-progress">In Progress</span></div>
     </div>
     <div class="cat">Critical Path &middot; Agent build</div>
-    <div class="note">Blocks ALL invoicing by CB. Must be 100% verified before CB creates a single QuickBooks invoice. Output must supply correct tracking number, recipient, products, and amounts.</div>
+    <div class="note">V5 = 1,301 lines, 23 sections. Running on M1 PID 91997. Section U gate re-run pending. 5 locked process rules from Chain Electric: (1) multi-ship-to → child SDs under parent order ID, (2) tag fulfillment source, (3) SKU substitutions logged with reason, (4) courtesy_adjustment as separate invoice line, (5) cb_internal_note on every SD.</div>
     <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocks: every invoice CB would create</span></div>
     <div class="fin-line aaron-only"><span class="money rev">Unlocks entire A/R cycle</span><span>Input to BSS / Dominion / LineTec invoices</span></div>
    </div>
 
    <div class="item infra-crit">
     <div class="row1">
-     <h3>2. Alabama Master Dealer License</h3>
+     <h3>2. Alabama Master Dealer License &#9888;&#65039; URGENT</h3>
      <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
     </div>
     <div class="cat">Critical Path &middot; Legal / compliance</div>
@@ -247,7 +247,7 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
 
    <div class="item infra-crit">
     <div class="row1">
-     <h3>11. Time Machine backup on M1</h3>
+     <h3>11. Time Machine backup on M1 &#9888;&#65039; URGENT RISK</h3>
      <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
     </div>
     <div class="cat">Infrastructure &middot; Disaster recovery</div>
@@ -403,6 +403,164 @@ body{font-family:'Lato',Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;line-h
   }
 })();
 </script>
+
+
+ <!-- ═══ NEW SECTION: ACTIVE BUILDS ═══ -->
+ <div class="section">
+  <h2><span class="blue">Active</span> <span class="dark">Builds &amp; Reconciliation</span></h2>
+  <div class="desc">In-progress work and recently completed items requiring follow-through.</div>
+  <div class="items">
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>Chain Electric / AJ Morris Reconciliation</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-done">Done</span></div>
+    </div>
+    <div class="cat">A/R &middot; Done April 18</div>
+    <div class="note">Hattiesburg MS + Searcy AR ship-tos. NU-BC-2834-F substituted for NU-BC-2834 (stock-out), logged with substitution reason. Invoice $8,930.48 incl. 4% CC fee, -$700 Valued-Partner courtesy adjustment. QB draft + apology email produced. Boss Products resend request sent to Thayne Grove + Troy Gongwer for invoices 6775/6776/6777.</div>
+    <div class="dep"><span class="arr">&rarr;</span><span>Pending: Boss invoices 6775/6776/6777 resend &middot; QB invoice entry by CB</span></div>
+    <div class="fin-line aaron-only"><span class="money rev">$8,930.48</span><span>Invoice sent to ajmorris@bchain.com April 18</span></div>
+   </div>
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>Notes Intelligence Agent (reMarkable Recovery)</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-blocked">Not Started</span></div>
+    </div>
+    <div class="cat">Revenue &middot; Next priority after V5</div>
+    <div class="note">37 items stuck since April 3 crash. Must surface uninvoiced items including 1.5-Man install Louisiana customer and others. Critical for invoicing pipeline.</div>
+    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocks: surfacing stuck revenue items</span></div>
+   </div>
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>Session Summary Protocol + Living Memory Auto-Update</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-progress">Deployed</span></div>
+    </div>
+    <div class="cat">Infrastructure &middot; Memory pipeline</div>
+    <div class="note">Gmail [LIVING_MEMORY_UPDATE] draft pipeline + bridge LaunchAgent 15-min cycle deployed April 18. Auto-sync reliability ~50%. Target: 90%+ cross-channel sync across 8 locations.</div>
+   </div>
+
+  </div>
+ </div>
+
+ <!-- ═══ NEW SECTION: INVOICING BACKLOG ═══ -->
+ <div class="section">
+  <h2><span class="blue">Invoicing</span> <span class="dark">Backlog Detail</span></h2>
+  <div class="desc">Individual orders requiring QB invoices. ~$16,180 total blitz ready this week.</div>
+  <div class="items">
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>Thornhill / LineTec &mdash; 1&times; NU-BC-2851 Mar 20</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Revenue &middot; Invoice now</div>
+    <div class="note">PO DEPT468R. 1&times; NU-BC-2851 @ $305. Ship date Mar 20. No SD on disk for this order — needs SD + QB invoice.</div>
+    <div class="fin-line aaron-only"><span class="money rev">$305</span></div>
+   </div>
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>Coy Crosby / Dominion &mdash; March 20 1.5-Man shipment</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Revenue &middot; Verify qty then invoice</div>
+    <div class="note">~5-6&times; NU-BC-2834. Qty disputed &mdash; verify at UPS Store before invoicing. 2 tracking numbers confirmed (1Z2W49000395006856 + 1Z2W49000328343091). No SD for this specific order.</div>
+    <div class="fin-line aaron-only"><span class="money rev">~$1,590</span></div>
+   </div>
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>Benz / SWEPCO &mdash; 1&times; NU-BC-2851 Mar 20</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Revenue &middot; Invoice now (CC customer — 4% fee)</div>
+    <div class="note">Truck #860377 on invoice. Mar 20 shipment. SD-2026-BENZ-SWEPCO-0420 built April 20 for repeat order. Mar 20 also needs separate QB invoice.</div>
+    <div class="fin-line aaron-only"><span class="money rev">$305 + 4% CC fee</span></div>
+   </div>
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>Pickle / Florence Electric &mdash; Mixed ARCH/BCB/1.5-Man</h3>
+     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
+    </div>
+    <div class="cat">Revenue &middot; SKU unconfirmed</div>
+    <div class="note">3&times; NU-BC-2834 + 1&times; NU-BC-2834-C + 2&times; NU-BC-2834-F + 1.5-Man BCB accessory. 1.5-Man BCB P/N unknown &mdash; pull from Boss Products paperwork. P/Ns confirmed in master since April 7 but BCB P/N missing.</div>
+    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocked: 1.5-Man BCB P/N (30-second lookup from Boss paperwork)</span></div>
+    <div class="fin-line aaron-only"><span class="money rev">$1,765</span></div>
+   </div>
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>Myers / AEP Roanoke &mdash; ARCH + Combo</h3>
+     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-blocked">Blocked</span></div>
+    </div>
+    <div class="cat">Revenue &middot; SKU unconfirmed</div>
+    <div class="note">2&times; NU-BC-2834-F + 1&times; NU-BC-2834-C. P/Ns in master since April 7 per reconciliation. G Brain shows $915 ready to invoice.</div>
+    <div class="fin-line aaron-only"><span class="money rev">$915</span></div>
+   </div>
+
+   <div class="item rev">
+    <div class="row1">
+     <h3>Coy Crosby / Dominion &mdash; April 8 Fleet PO 42350802</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-ready">Ready</span></div>
+    </div>
+    <div class="cat">Revenue &middot; Invoice pending customer confirmation</div>
+    <div class="note">5&times; NU-BC-2851 @ $305 = $1,525. Quote sent April 8, no response 13+ days. SD-2026-DOMINION-4501057807-0413 on disk. Delivery by 04/23/2026.</div>
+    <div class="fin-line aaron-only"><span class="money rev">$1,525</span></div>
+   </div>
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>Wayne Abadie / Primoris &mdash; PO# 0407-BYB0001</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-blocked">Blocked</span></div>
+    </div>
+    <div class="cat">Revenue &middot; Confirm spec with Wayne</div>
+    <div class="note">1&times; 24x24 cover to Michael Flemming, 2015 Holly Rd, Gilmore TX 75644 via Aerial Hydraulics. Likely NU-BC-2828 @ $235 but must confirm 1-Man size with Wayne Abadie before shipping.</div>
+    <div class="dep blocks"><span class="arr">&#9888;</span><span>Blocked: confirm 1-Man spec with Wayne Abadie</span></div>
+    <div class="fin-line aaron-only"><span class="money rev">$235</span></div>
+   </div>
+
+  </div>
+ </div>
+
+ <!-- ═══ NEW ITEMS IN REVENUE / STRATEGIC ═══ -->
+ <div class="section">
+  <h2><span class="blue">Strategic</span> <span class="dark">Priorities</span></h2>
+  <div class="desc">High-value relationships and infrastructure requiring immediate attention.</div>
+  <div class="items">
+
+   <div class="item crit">
+    <div class="row1">
+     <h3>Terex OEM Bucket Covers &mdash; Bill Kugler</h3>
+     <div class="badges"><span class="pill p-p0">P0</span><span class="pill s-progress">Active</span></div>
+    </div>
+    <div class="cat">Strategic &middot; HIGHEST PRIORITY relationship</div>
+    <div class="note">$500K+ potential OEM program. Family legacy connection through Wayne. Relationship touch needed &mdash; do not let go cold.</div>
+    <div class="fin-line aaron-only"><span class="money rev">$500K+</span><span>Highest strategic priority in company</span></div>
+   </div>
+
+   <div class="item infra">
+    <div class="row1">
+     <h3>BSS Expense Groups &mdash; Full Picture</h3>
+     <div class="badges"><span class="pill p-p1">P1</span><span class="pill s-progress">In Progress</span></div>
+    </div>
+    <div class="cat">A/P &middot; Reimbursement tracking</div>
+    <div class="note">Group 1: $1,807.26 (personal card 1057) &middot; Group 2: $68.29 (NU card 7745) &middot; Group 3: ~$3,134.46 (Apple Card, NU owes Aaron) &middot; DoubleTree charges: TBD (Aaron must verify). BSS Invoice 11 total: $8,039.27.</div>
+   </div>
+
+   <div class="item infra">
+    <div class="row1">
+     <h3>Personal Gmail (acnorris1@gmail.com) &rarr; Legacy</h3>
+     <div class="badges"><span class="pill p-p2">P2</span><span class="pill s-blocked">Not Started</span></div>
+    </div>
+    <div class="cat">Infrastructure &middot; Integration</div>
+    <div class="note">Business Gmail (acnorris@norrisutilities.com) connected and working. Personal Gmail pending connection to Legacy for receipt/expense scanning.</div>
+   </div>
+
+  </div>
+ </div>
 
 </body>
 </html>
