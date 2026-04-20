@@ -1,12 +1,12 @@
 {
   "metadata": {
-    "last_updated": "2026-04-20T16:51:15-0500",
-    "version": "1.0.2",
+    "last_updated": "2026-04-20T17:55:49-0500",
+    "version": "1.0.3",
     "commit": "c699b21a32f8882db9c90b741d4dc93e4ac00d38",
     "item_count": 36,
     "stats": {
-      "done": 9,
-      "active": 7,
+      "done": 10,
+      "active": 6,
       "blocked": 5,
       "urgent": 2,
       "not_started": 13,
@@ -107,7 +107,7 @@
       "title": "Shipping AI Agent (SA V5)",
       "section": "LEGACY",
       "priority": "P0",
-      "status": "ACTIVE",
+      "status": "DONE",
       "sprint": "now",
       "category": "Critical Path · Agent build",
       "owner": "Legacy Agent (M1)",
@@ -122,7 +122,8 @@
         "type": "unlocks"
       },
       "created": "2026-03-16",
-      "updated": "2026-04-20"
+      "updated": "2026-04-20",
+      "completed": "2026-04-20"
     },
     {
       "id": "r-002",
