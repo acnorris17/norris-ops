@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-18T12:51:58",
+  "last_updated": "2026-04-20T07:15:18",
   "documents": [
     {
       "id": "SD-2026-ABADIE-0331",
@@ -767,6 +767,45 @@
       "vendor_invoice_number": "6775/6776/6777 (resend requested)",
       "vendor_ship_date": "04/01/2026",
       "vendor_freight_cost": null
+    },
+    {
+      "id": "SD-2026-BENZ-SWEPCO-0420",
+      "filename": "SD-2026-BENZ-SWEPCO-0420.html",
+      "customer": "Jimmy Benz",
+      "company": "SWEPCO",
+      "date": "04/20/2026",
+      "file": "shipping-docs/SD-2026-BENZ-SWEPCO-0420.html",
+      "status": "pending",
+      "approved": false,
+      "invoiced": false,
+      "invoiceNumber": null,
+      "trackingNumber": null,
+      "po": "Truck #860377",
+      "products": [
+        {
+          "sku": "NU-BC-2851",
+          "name": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "shipTo": "101 W Township St, Fayetteville, AR 72703",
+      "notes": "REPEAT ORDER \u2014 second cover, tore up the March 20 one. Truck #860377 on invoice.",
+      "parent_order_id": null,
+      "fulfillment_source": "nu_stock",
+      "cb_internal_note": "Jimmy Benz SWEPCO. 1x NU-BC-2851 @ $305. Truck #860377 on invoice. SECOND order \u2014 first was March 20. Ship to 101 W Township St, Fayetteville AR 72703. March 20 order also needs QB invoice ($305 + shipping).",
+      "internal_pricing": {
+        "line_items": [
+          {
+            "sku": "NU-BC-2851",
+            "name": "FlexPro Armor 2-Man Bucket Cover",
+            "qty": 1,
+            "unit_price": 305
+          }
+        ],
+        "subtotal": 305,
+        "shipping": null,
+        "total": null
+      }
     }
   ]
 }
