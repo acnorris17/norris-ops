@@ -481,6 +481,11 @@ Captured after Aaron confirmed NU has only Dealers. Retires the old "30% off dea
 
 ---
 
+- 2026-04-19 | NorrisControl v3.1 shipped — tmux paste bridge for Claude Code (33/33 tests, multi-line paste fix, 4 main commits)
+  → ~/norris-agent/session_summaries/SESSION_2026-04-19_ClaudeAi_NorrisControl_v3-1_Ledger.md
+- 2026-04-20 | Session Summary System + AUTO-CHECKPOINT deployed (rule file, scaffolding, CLAUDE.md + Legacy MEMORY.md pointers, 5 core rules synced)
+  → ~/norris-agent/session_summaries/SESSION_2026-04-20_ClaudeCode_SessionSummarySystem_Deployment.md
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -1181,31 +1186,3 @@ See MEMORY.md for full text. Summary:
 3. HANDOFF CHECKPOINT: verifiable facts, not state claims
 4. CORRECTION DISCIPLINE: fix source, propagate to all 8 locations
 5. DAILY OPENING RITUAL: §4 rules + handoff + 6 verification questions before work
-
----
-
-## CLOUDFLARE ZERO TRUST — LIVE (April 20, 2026)
-### Status: BLOCKER RESOLVED ✅
-
-**New canonical URL:** norrisops.com (Cloudflare Pages, auto-deploys from acnorris17/norris-ops on push to main)
-**Old URL:** ops.norrisutilities.com — remains live on Squarespace DNS → GitHub Pages. READ-ONLY FALLBACK. DO NOT TOUCH.
-
-### Infrastructure
-- Cloudflare Pages: deploys from acnorris17/norris-ops (same repo, same behavior as GitHub Pages)
-- Cloudflare Zero Trust: ACTIVE on norrisops.com
-- JS auth gates (norris2026/legacy2026): SUPERSEDED by Cloudflare Access but kept as belt-and-suspenders until explicit removal approved by Aaron
-
-### Access Policies
-- **Policy 1 "Aaron Full":** acnorris@norrisutilities.com — all paths
-- **Policy 2 "CB Limited":** cbutler@norrisutilities.com (or CB's email) — all paths EXCEPT /aaron-only/
-
-### What Changed
-- Cloudflare Pages is now the deployment target (same repo, same pushes work)
-- Real authentication replaces JS password prompts
-- CB cannot reach /aaron-only/ paths at the Cloudflare layer (not just visually hidden)
-
-### What Did NOT Change
-- GitHub repo acnorris17/norris-ops: unchanged
-- ops.norrisutilities.com: unchanged, untouched
-- Squarespace DNS: unchanged
-- JS password gates: still in code as secondary layer
