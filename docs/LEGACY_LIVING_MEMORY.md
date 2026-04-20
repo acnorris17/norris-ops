@@ -420,6 +420,33 @@ Captured after Aaron confirmed NU has only Dealers. Retires the old "30% off dea
 
 # SECTION 6: SESSION LOG (NEWEST FIRST)
 
+**April 20, 2026** — Cloudflare Zero Trust — RESOLVED
+- New canonical URL: https://norrisops.com (domain registered in Cloudflare Registrar)
+- Pages project `norris-ops` deployed from ~/norris-ops/ (445 files, 24 sec upload)
+- Apex CNAME `norrisops.com → norris-ops.pages.dev` (proxied)
+- Two Access apps configured:
+  - **Shared** (norrisops.com) UUID `d6e5b7cf-b864-483f-820d-bc5034d794c5` — allows
+    Aaron (acnorris@norrisutilities.com), CB (cbutler@norrisutilities.com), and
+    the Legacy service token.
+  - **Aaron Only** (norrisops.com/aaron-only) UUID
+    `d2d78532-48b1-4a90-95f4-67e22291eccb` — allows Aaron + Legacy service token.
+    CB excluded by absence (default deny).
+- Three access paths:
+  1. Aaron — full access to all paths (both apps)
+  2. CB — access to all paths EXCEPT /aaron-only/* (Shared only)
+  3. Legacy — service token, full access (automation never blocked)
+- Service token `Legacy Automation Token` UUID `15b9bf39-9bc6-4532-8c58-4a707b4023f6`
+  stored in ~/norris-agent/.env as CF_ACCESS_CLIENT_ID / CF_ACCESS_CLIENT_SECRET.
+- Verification tests all passed:
+  - Anonymous → 302 to norrisops.cloudflareaccess.com (login gate working)
+  - Service token on root → 200 OK (automation path working)
+  - Service token on /aaron-only/* → 404 (Access let through; file-not-yet)
+- ops.norrisutilities.com remains live on Squarespace DNS → GitHub Pages as fallback.
+- JS auth gates (norris2026 / legacy2026) remain in place as defense-in-depth.
+- Credentials in ~/norris-agent/.env: CLOUDFLARE_API_TOKEN, CF_ACCOUNT_ID,
+  CF_ZONE_ID_NORRISOPS, CF_APP_SHARED_UUID, CF_APP_AARON_UUID,
+  CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET, CF_LEGACY_TOKEN_UUID.
+
 **April 17, 2026 (evening)** — SA V5 launched
 - 1,301-line autonomous build.
 - 18 locked rulings + Dealer Pricing Rule + Hunt Ladder (11 sources, retry protocol, learning system) + Boss 5-field cross-check + concurrent-run lock + invoice number uniqueness check + money verification in readiness gate.
@@ -502,11 +529,16 @@ Captured after Aaron confirmed NU has only Dealers. Retires the old "30% off dea
 - Owner: Aaron (confirm-write) + Claude Code (wiring)
 - Priority: #1 AFTER memory
 
-**🟡 BLOCKER: Cloudflare not configured**
-- Impact: Portal relies on JS password gate (weak). Blocks true auth and website rebuild.
-- Path: Dedicated session open. Nameserver swap from Squarespace.
-- Owner: Aaron (must do in Squarespace/Cloudflare dashboards)
-- Priority: TODAY
+**✅ RESOLVED (2026-04-20): Cloudflare Zero Trust configured**
+- Prior status: 🟡 BLOCKER — Portal relied on JS password gate (weak).
+- Resolution: New domain norrisops.com registered in Cloudflare Registrar, Pages
+  deployed from ~/norris-ops/, Zero Trust Access configured with two apps
+  (Shared + Aaron Only) and a Legacy service token for automation.
+- Canonical URL: https://norrisops.com
+- Fallback URL: ops.norrisutilities.com (Squarespace DNS → GitHub Pages, still live)
+- Credentials: ~/norris-agent/.env (CF_APP_SHARED_UUID, CF_APP_AARON_UUID,
+  CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET, CF_LEGACY_TOKEN_UUID)
+- See Section 6 session log entry dated 2026-04-20 for full details.
 
 **🟡 BLOCKER: reMarkable pipeline crashed**
 - Impact: 37 action items stuck. In-person delivery notes don't flow into system. Morning brief missing handwritten note items.
