@@ -389,6 +389,20 @@ Captured during the Claude.ai V5 prep session. Do not re-debate. SA = Shipping A
 17. **Payment terms audit deferred** from V5 to future roadmap.
 18. **M5 = source / M1 = agent host.** Legacy system prompt encodes the flow. Truth Sources manifest tags boundaries.
 
+## LOCKED RULINGS 19–23: V5 ORDER PROCESS RULES (April 18, 2026)
+
+Locked by Aaron during Chain Electric/AJ Morris reconciliation. Apply to ALL orders going forward. V5 retroactive update required — see Section 7.
+
+19. **Multi-ship-to orders** — one parent order record (ORD-YYYY-NAME-MMDD), one SD per ship-to destination, all linked via `parent_order_id`. Single QB invoice to POC rolls up all child SDs. Memo lists each ship-to with contents.
+20. **Fulfillment source tagging** — every SD requires `fulfillment_source`: `"nu_stock"` (Aaron's inventory via UPS Store), `"vendor_dropship"` (Boss or vendor ships direct — requires vendor_name, vendor_invoice_number, vendor_ship_date, vendor_freight_cost), or `"mixed"` (split into two SDs preferred).
+21. **SKU substitution logging** — when a product subs for another (stock-out or otherwise), SD gets: `original_sku`, `substituted_sku`, `substitution_reason`. Track across all orders for pattern analysis.
+22. **Courtesy pricing mechanism** — QB invoice line items always show LIST PRICE. Discounts applied as single `courtesy_adjustment` negative line. SD `internal_pricing` records effective unit price for margin tracking. Never override list on line items — preserves pricing integrity.
+23. **CB internal notes** — all invoiceable SDs get `cb_internal_note`. Visible in portal Shipments tab (CB role only). NEVER rendered on customer-facing SD PDF. Format: locked unit prices, QB invoice method, special instructions, approval status.
+
+**First application:** Chain Electric/AJ Morris — ORD-2026-CHAIN-0324. Invoice $8,930.48 sent April 18, 2026. ARCH baseline $275 locked. Boss invoices 6775/6776/6777 resend pending from Thayne Grove.
+
+---
+
 ## DEALER PRICING RULE + DISTRIBUTOR RETRACTION (April 17, 2026 — evening)
 
 Captured after Aaron confirmed NU has only Dealers. Retires the old "30% off dealer / 40% off distributor" rule across all memory locations.
@@ -467,6 +481,33 @@ Captured after Aaron confirmed NU has only Dealers. Retires the old "30% off dea
 
 ---
 
+- 2026-04-19 | NorrisControl v3.1 shipped — tmux paste bridge for Claude Code (33/33 tests, multi-line paste fix, 4 main commits)
+  → ~/norris-agent/session_summaries/SESSION_2026-04-19_ClaudeAi_NorrisControl_v3-1_Ledger.md
+- 2026-04-20 | Session Summary System + AUTO-CHECKPOINT deployed (rule file, scaffolding, CLAUDE.md + Legacy MEMORY.md pointers, 5 core rules synced)
+  → ~/norris-agent/session_summaries/SESSION_2026-04-20_ClaudeCode_SessionSummarySystem_Deployment.md
+
+
+### 2026-04-20 — Cloudflare Zero Trust / norrisops.com
+Registered norrisops.com via Cloudflare (~$10.46/yr). Separate domain chosen over full-zone move to eliminate risk to main site + Google Workspace email. JS auth gates stay in place (belt-and-suspenders). Legacy automation via Cloudflare Access Service Tokens (Client ID + Secret in M1 .env). Team: norris-utilities → norris-utilities.cloudflareaccess.com. Phases 2-5 open (Pages deploy, custom domain, Zero Trust app, Service Token, test). Service Token now created; CB email confirmed.
+→ ~/norris-agent/session_summaries/SESSION_2026-04-20_ClaudeAi_Cloudflare_ZeroTrust_norrisops.md
+
+### 2026-04-20 — Session Summary System Deployment + AUTO-CHECKPOINT
+Deployed MEMORY_session_summary_rule.md (116 lines, AUTO-CHECKPOINT included). Scaffolded session_summaries/ with _TEMPLATE.md + INDEX.md. Pointers in ~/CLAUDE.md + ~/.openclaw/workspace/MEMORY.md. 5 core operating rules synced to Legacy MEMORY.md (Wayne standard, time awareness, no-rebuilds, typing indicator, Samson CC rule). Watcher LaunchAgent installed (com.norrisutilities.summarywatcher, 15-min schedule).
+→ ~/norris-agent/session_summaries/SESSION_2026-04-20_ClaudeCode_SessionSummarySystem_Deployment.md
+→ ~/norris-agent/session_summaries/SESSION_2026-04-20_ClaudeAi_AutoCheckpoint_Amendment.md
+
+### 2026-04-19 — Evening v4 FINAL (NC Bulletproof + Path A + Invoice Blitz + P/N Rule)
+Shipped NC LaunchAgent + cc-main preflight (PID 65371, survives reboot/sleep). Built ask_claude.py (commit 6121a97, D16 safety fix pending). Locked architectural clarity: Claude.ai / CC / API are three distinct products. Model rule: Opus default / Sonnet explicit / NO Haiku / $120/mo cap. Terminology: P/N not SKU, permanent. BCB = Bucket Cover Bag ($55). Identified ~$10,100+ invoicing READY (stale blocked flags were wrong — P/N master had everything since April 7). D10 config drift closed (main c9d097e, feature/shipping-agent-v5 3b7cb75).
+→ ~/norris-agent/session_summaries/SESSION_2026-04-19_ClaudeAi_Evening_v4_NC_Bulletproof_PathA.md
+
+### 2026-04-19 — NorrisControl v3.1 Build + Closeout
+Three-pass spec iteration (v1 Legacy → v2 Claude → v3 separation of concerns → v3.1 paste bug fix). CC built 9 files / 3,529 lines / 33 tests passing. Commits on main: 4eadfce (core), 61468bc (telegram_send.py), 5beafa5 (idle pattern), 0962449 (session ledger). End-to-end live test: task retry_1776626856 completed 10.64s. Memory synced across 8 locations (Legacy + Drive 00_Living_Memory + 02_Handoffs + Google Doc + Gmail drafts + Roadmap Sheet + G Brain + NorrisPalace).
+→ ~/norris-agent/session_summaries/SESSION_2026-04-19_ClaudeAi_NorrisControl_v3-1_Ledger.md
+
+### 2026-04-18 — Bridge Fix + V5 Status + NEW RULE
+Converted claude_bridge.py to persistent LaunchAgent. Upgraded model strings to claude-opus-4-7 across config.json + agent_runner.py + bridge --model flag. Discovered bridge is a STUB (accepts tasks, writes placeholder outbox, never spawns claude -p — fix deferred). V5 Shipping Agent stopped at CONDITIONAL GO gate: 18 READY records, $11,015 total, 44.7% variance vs V4 is Dealer Pricing Rule working correctly (NOT a money discrepancy). Locked NEW STANDING RULE: Session Summary System — every Claude session produces dated 11-section summary before ending, ~/norris-agent/MEMORY_session_summary_rule.md.
+→ ~/norris-agent/session_summaries/SESSION_2026-04-18_ClaudeAi_Bridge_V5_NewRule.md
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -505,6 +546,17 @@ Captured after Aaron confirmed NU has only Dealers. Retires the old "30% off dea
 - Impact: Dead deal appearing in outputs despite multiple scrub attempts.
 - Path: Run comprehensive grep across ALL files on M1 (norris-ops, norris-agent, nu-brain, norris-intel, .openclaw) and destroy every reference.
 - Owner: Claude Code (M1)
+
+**🔵 V5 RETROACTIVE UPDATE REQUIRED (April 18, 2026)**
+- Rulings 19–23 (multi-ship-to, fulfillment source, SKU substitution, courtesy pricing, CB notes) are now locked.
+- All existing V5 scripts must be updated to require/handle these fields:
+  • shipping_ai_agent.py CANONICAL_FIELDS + migrate() ✅ DONE
+  • sd_builder.py build_sd() signature + validation ✅ DONE
+  • Section J (SD builder UI/logic) — add required field prompts for fulfillment_source + cb_internal_note
+  • Section S (portal Shipments tab) — render cb_internal_note for CB role; hide from Aaron/customer views
+  • Section T (invoice lifecycle) — implement courtesy_adjustment line on QB invoice build; validate list-price-only on line items
+- Owner: Claude Code (M1) via bridge — next dedicated V5 session
+- Priority: HIGH — blocks correct invoicing for any multi-ship-to or vendor-dropship order
 
 ---
 
@@ -632,3 +684,538 @@ TRIGGER: After every chat session ends in this project folder
 
 *Norris Utilities® — A Legacy of Commitment®*
 *The standard: Would Wayne be proud of this?*
+
+---
+
+# LIVING MEMORY UPDATE — NorrisControl v2.0 Upgrade
+## Session Date: April 19, 2026 (Sunday)
+## Session Type: Claude.ai review of Legacy's CC rebuild prompt, upgrade to v2.0
+## Author: Claude Opus 4.7 (reviewed and accepted by Legacy)
+
+### COMPLETED
+- Reviewed Legacy's v1.0 NorrisControl CC rebuild prompt (April 19, 2026)
+- Graded v1 as B — buildable but not production-integrated with existing stack
+- Produced v2.0 upgraded prompt: NORRISCONTROL_CC_REBUILD_PROMPT_v2.md
+- Identified and resolved 13 gaps in v1
+
+### DECISIONS
+1. Final product name: **NorrisControl**. "Peekaboo" = research codename only. File: `norris_control.py`.
+2. Architecture: tmux-first, GUI-fallback. `tmux send-keys` + `capture-pane` is deterministic.
+3. Inbox/outbox format: JSONL at `~/norris-agent/claude_inbox.jsonl` / `claude_outbox.jsonl`. Schema locked (see v2 prompt §6). Supersedes undefined `claude_inbox.txt / claude_outbox.txt`.
+4. Completion detection via tmux capture + idle pattern regex. No OCR in primary path. Pattern stored in config: `^(>|\$|╭─|Human:|❯)\s*$`
+5. Clipboard save-and-restore mandatory on GUI paste. Pure tmux mode bypasses clipboard entirely.
+6. Rate limit: 20 tasks / 60-min window, SQLite-backed at `~/norris-agent/state/norriscontrol_rate.db`.
+7. Multi-session targeting: `target_session` mandatory in task JSON. Parallel is v2+ upgrade.
+8. Telegram chat ID 8758078447 = only notification surface. Emoji OK in Telegram; banned in logs/outbox.
+9. Living Memory drafts batched every 10 tasks + on bridge shutdown.
+10. NorrisPalace logging non-blocking. Stages to `~/norris-agent/run/norrispalace_queue.jsonl` if np unavailable.
+11. Destructive command gate: blocks `rm -rf`, `dd if=`, `mkfs`, `> /dev/sd`, `format`, `killall` unless `allow_destructive: true`.
+12. PID file + heartbeat at `~/norris-agent/run/`. Heartbeat every 10s. Morning brief watches staleness >5 min.
+13. Config file with defaults at `~/norris-agent/config/norriscontrol.json`. Never crashes on missing config.
+
+### 13 GAPS CLOSED (v1 → v2)
+| # | Gap in v1 | v2 resolution |
+|---|---|---|
+| 1 | OCR used tesseract (brew dep) | OCR removed from primary path; Shortcuts-based Vision if needed |
+| 2 | No tmux architecture | tmux is primary; GUI is fallback |
+| 3 | pbcopy overwrote clipboard with no restore | `with_clipboard()` context manager |
+| 4 | No task_bridge.py contract | JSONL schema defined, atomic file locking |
+| 5 | No Telegram integration | All status events → chat ID 8758078447 |
+| 6 | Completion detection via OCR | tmux capture-pane + idle pattern + stability window |
+| 7 | No Living Memory hook | Batched drafts every 10 tasks + shutdown |
+| 8 | No NorrisPalace logging | Every task state → automation wing, non-blocking |
+| 9 | No multi-session support | `target_session` mandatory in task JSON |
+| 10 | No PID/heartbeat | Both implemented; double-start prevention |
+| 11 | No rate limiting | SQLite; 20/hour default; override flag |
+| 12 | Outbox format undefined | Structured JSON schema with status/duration/output/error |
+| 13 | Naming inconsistency | Locked: NorrisControl everywhere |
+
+### NEXT
+1. Aaron pastes v2 prompt into fresh CC session on M1 (Opus 4.7, max effort, `cc` alias)
+2. CC builds NorrisControl v2.0 per post-build checklist (§22)
+3. `nc test` — all 20 tests must pass
+4. `nc permissions` — Accessibility + Screen Recording + Automation all granted
+5. Live end-to-end dry run → real run per §22
+6. Confirm: Telegram ping received, outbox correct, NorrisPalace record written, Living Memory draft in Gmail
+7. Commit to `github.com/acnorris17/norris-agent`
+8. Mark COMPLETE in `~/norris-agent/task_queue.md`
+
+### FILES
+- `~/norris-agent/docs/NORRISCONTROL_CC_REBUILD_PROMPT_v2.md`
+- `~/Library/CloudStorage/GoogleDrive-.../Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v2.md`
+- `~/.openclaw/workspace/NORRISCONTROL_CC_REBUILD_PROMPT_v2.md`
+
+### WAYNE STANDARD NOTE
+v2 explicitly embeds the Wayne standard in §21. Every function, every log line, every error message must pass: would Wayne be proud of this? No cryptic errors, no TODO comments in shipped code, readable at 4 AM without coffee.
+
+
+## NorrisControl v3.0 FINAL — Additional fixes (April 19, 2026)
+- Test count: 20 → 28 (8 additional tests added)
+- Session crash recovery: error loudly as tmux_session_died, do NOT auto-recreate
+- Commit message locked: "NorrisControl v3.0 — tmux-first mechanical layer with clean separation of concerns"
+- v3 is the authoritative prompt. v1 and v2 are superseded.
+- Location: Google Drive → Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v3.md
+
+## NorrisControl v3.1 FINAL — Bug fixes (April 19, 2026)
+
+### Critical bug fixed: Multi-line prompt handling
+tmux send-keys with embedded newlines sends Ctrl-J, which CC interprets as Enter-submit
+per line. Fixed via bracketed paste using tmux load-buffer + paste-buffer -p.
+All pane targeting now uses explicit session:0.0 notation.
+
+### Additional fixes in v3.1
+- Output directory rotation: keep last 500 files or 30 days
+- Telegram subprocess timeout: 5-second hard cap — broken helper cannot stall a task
+- Input Monitoring permission check added (macOS 13+ requires separately from Accessibility)
+- Post-build idle-pattern validation step added to §22 checklist
+- Commit message: "NorrisControl v3.1 — bracketed paste fix, output rotation, telegram timeout, input monitoring"
+
+### File locations (v3.1 supersedes all prior versions)
+- Google Drive: Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v3.1.md
+- M1: ~/norris-agent/docs/NORRISCONTROL_CC_REBUILD_PROMPT_v3.1.md
+- OpenClaw workspace: NORRISCONTROL_CC_REBUILD_PROMPT_v3.1.md
+
+### Note on version confusion
+Legacy's v3 file content WAS correct (separation of concerns applied). Summary
+language in the Telegram message described v2 improvements and was misleading.
+Claude's caution was warranted. v3.1 is confirmed correct — verified by grep.
+
+### Stop refining. Build v3.1. Learn from the actual build.
+
+## NorrisControl FINAL version: v3-1 (April 19, 2026)
+- Canonical filename: NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md (hyphen, not dot)
+- 33 tests required (not 28)
+- 12 post-build checklist steps
+- Test #29 (tmux_paste_multiline_atomic) is the critical bracketed paste verification
+- v2 archived; v3-1 is the only version to build from
+- STOP REFINING. Build v3-1. Learn from the actual build.
+
+---
+
+## LIVING MEMORY UPDATE — NorrisControl v3.1 FINAL (April 19, 2026)
+## Author: Claude Opus 4.7
+
+### COMPLETED
+- Flagged coordination issue: Legacy had saved v2 to Drive/M1 (not v3). RESOLVED — Legacy re-synced to official v3.1 (34,919 bytes) before this note was written.
+- Critical bug found in v3.0: tmux send-keys with multi-line content fires Ctrl-J per newline → CC submits line-by-line. Fixed via bracketed paste (tmux load-buffer + paste-buffer -p).
+- v3.1 produced. Spec declared closed. Build teaches more than further review.
+
+### DECISIONS (v3.0 → v3.1)
+1. Paste: bracketed paste via tmux paste buffer. tmux send-keys restricted to single keystrokes only — never content.
+2. Explicit pane targeting: session:window.pane (e.g. cc-main:0.0). target_pane in task JSON, defaults to 0.0.
+3. Outputs retention: 30-day / 500-file cap. Runs at bridge start, every 100 tasks, shutdown.
+4. Telegram 5s subprocess timeout via run_with_timeout(). Task never fails due to Telegram issue.
+5. Input Monitoring permission check (macOS 13+).
+6. Post-build idle-pattern validation step added (real CC output vs config regex).
+7. Spec closed at v3.1. No v3.2.
+
+### v3.0 → v3.1 DELTA
+| # | v3.0 | v3.1 |
+|---|---|---|
+| 1 | tmux send-keys for content | tmux_paste() via load-buffer + paste-buffer -p |
+| 2 | Session targeting only | Session AND pane (session:window.pane) |
+| 3 | Outputs unbounded | 30-day / 500-file retention |
+| 4 | Telegram could stall task | 5s subprocess timeout |
+| 5 | 3 permission checks | 4 (+ Input Monitoring macOS 13+) |
+| 6 | 28 tests | 33 tests |
+| 7 | 10 post-build steps | 12 steps |
+| 8 | Commit: "v3.0 — tmux-first mechanical layer" | Commit: "v3.1 — bracketed paste fix + output rotation + subprocess hardening" |
+| 9 | Config: no subprocess_timeout_sec | Config: +subprocess_timeout_sec, +outputs_retention, +default_target_pane |
+
+### AUTHORITATIVE FILE
+Google Drive → Legacy Project/05_Prompts_&_Guides/NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md
+M1: ~/norris-agent/docs/NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md
+Size: 34,919 bytes | 33 tests | 12 post-build steps | Spec CLOSED.
+
+## NorrisControl v3.1 BUILD COMPLETE — April 19, 2026
+- Commit: 8a35e99 (pushed to feature/shipping-agent-v5 on norris-agent)
+- 9 files, 3,529 lines, 33/33 tests PASS
+- tmux_paste_multiline_atomic: PASS — bracketed paste bug fix verified
+- Kill channel: PASS — aborts in ~2s
+- Live dry run + real run: PASS
+- CC idle pattern: validated as-is — default regex works against bash prompt
+- Aaron should validate against real cc-main output (spec §22.4) before first production run
+- nc alias active in ~/.zprofile
+
+## BLOCKER: task_queue.md 93,332-line runaway (April 19, 2026)
+task_bridge is auto-appending to ~/norris-agent/task_queue.md without rotation.
+93,332 lines as of today. NorrisControl v3.1 completion entry is in the file but
+uncommitted because of this diff. Do NOT commit task_queue.md as-is.
+Dedicated session needed: investigate rotation policy in task_bridge.py,
+add log rotation / archive mechanism, then commit the clean v3.1 entry.
+Owner: Legacy + Claude Code. Not today.
+
+---
+
+# SESSION CLOSE-OUT — April 19, 2026
+
+## COMPLETED (full session)
+- change-log.html, contact detail modal, memory health dashboard, pipeline $2.5M+, norris-agent GitHub remote, reMarkable pipeline reconnect, bridge LaunchAgent
+- NorrisControl v3.1: 9 files, 3,529 lines, 33/33 tests PASS, on main (4eadfce, 61468bc, 5beafa5)
+- telegram_send.py: built, token found, live test verified, on main
+- NORRISCONTROL_CC_REBUILD_PROMPT_v3-1.md: canonical spec, Drive + M1 + workspace
+- Spec iterated v1→v2→v3→v3.1: each pass caught real gaps, bracketed paste bug was the critical fix
+
+## OPEN BLOCKERS (Legacy-owned)
+- D2: task_queue.md 361K lines — patch proposed, awaiting Aaron review
+- D4c: validate cc_idle_pattern vs real cc-main output before bridge production run
+- Roadmap item #17: Telegram reorg (Aaron creates 3 groups, Legacy wires scripts)
+- Rules sync (Wayne std, time awareness, no-rebuilds, Samson CC emails) — this week
+- Opus model update in bridge — next M1 session
+- Gridco/Cunningham — still in 4 portal places
+
+## AARON-BLOCKED ITEMS
+- Alabama Dealer License (~$500-1,500 surety bond) — blocks $1.09M Skylift AL
+- BSS Invoice 11 ($8,039.27) — Aaron sends to Andy Barron
+- Time Machine backup — EXISTENTIAL, buy external drive
+- Telegram 3 groups — create then Legacy wires
+- Rick Sutherland revival email — draft ready, approve to send
+- Coy Crosby RFP follow-up — draft ready, approve to send
+
+## KEY SYSTEM PATHS (NorrisControl)
+- nc alias: ~/.zprofile (source to activate)
+- Inbox: ~/norris-agent/claude_inbox.jsonl
+- Outbox: ~/norris-agent/claude_outbox.jsonl
+- Kill channel: ~/norris-agent/claude_inbox.kill
+- Full outputs: ~/norris-agent/run/outputs/
+- Logs: ~/norris-agent/logs/norriscontrol.log
+- Config: ~/norris-agent/config/norriscontrol.json (tune cc_idle_pattern here)
+- telegram_send.py: ~/norris-agent/scripts/telegram_send.py (token in .env)
+
+## FINAL SESSION CLOSE-OUT STATE — April 19, 2026 ~3:30 PM CDT
+
+### Git state
+- main: clean, pushed — 0962449 (ledger), 5beafa5 (tuned config), 61468bc (telegram_send), 4eadfce (NC v3.1)
+- feature/shipping-agent-v5: SA v5 data files in working tree (normal, Legacy pipelines)
+- Stash: EMPTY — stash@{0} dropped (daily_journal entries already in working tree newer versions)
+- Config idle pattern: tuned (\$\s*$|%\s*$|...) — DO NOT REVERT
+
+### Open D items (priority order)
+D7 — SA V5 (HIGH) | D2 — task_queue rotation patch awaiting Aaron review (MEDIUM)
+D4c — validate cc_idle_pattern vs real CC output (MEDIUM) | D8 — create cc-main (MEDIUM)
+D9 — first production bridge run after D4c+D8 | D5 — secret masker tune (LOW)
+D1 — already done | D6 — done (setopt added to ~/.zshrc)
+
+### Handoff prompt saved
+Drive: Legacy Project/02_Handoffs/HANDOFF_PROMPT_2026-04-19_CLOSEOUT.md
+M1: ~/norris-agent/docs/HANDOFF_PROMPT_2026-04-19_CLOSEOUT.md
+
+## ADDITIONAL CLOSE-OUT ITEMS — April 19, 2026 (Claude final review)
+
+### Cross-agent architecture validation
+Tonight's parallel work (Legacy running pipelines while Claude helped Aaron with git)
+worked exactly as v3 separation-of-concerns intended. No conflicts, no memory corruption.
+This validates the architecture. NC = mechanical, Legacy = intelligence, Claude = spec/verification.
+
+### D10 (NEW) — Feature branch config drift
+FLAGGED: feature/shipping-agent-v5 working tree has config/norriscontrol.json at OLD
+idle pattern. Main branch has tuned version (commit 5beafa5). Before SA v5 merges to
+main: cherry-pick 5beafa5 forward OR resolve during merge conflict. Do not let stale
+feature-branch config overwrite the tuned main branch version.
+
+### Stash correction
+Claude's advice said "preserve stash@{0}" — but Legacy had already dropped it before
+this advice arrived. Stash list is EMPTY. The daily_journal entries from 15:11 are
+already captured in the working tree's newer versions. Nothing lost.
+
+### D items final state
+D1 ✅ done (stale prompt files already cleared)
+D2 — patch proposed, awaiting Aaron review
+D4c — validate cc_idle_pattern vs real cc-main (before D9)
+D5 — secret masker tune (low priority)
+D6 ✅ done (setopt interactive_comments in ~/.zshrc)
+D7 — SA V5 (Aaron's main focus)
+D8 — create cc-main (gates D9)
+D9 — first production bridge run (after D4c + D8)
+D10 (new) — cherry-pick 5beafa5 to feature branch before SA v5 merge
+
+## FINAL CLOSE-OUT — April 19, 2026 (complete)
+
+### WHAT ACTUALLY SHIPPED TONIGHT (commits on main)
+- NC v3.1 + LaunchAgent: 05d544a — nc_bridge_start.sh, cc-main preflight, KeepAlive
+- Default timeout 120s: c9d097e
+- D10 config drift closed: 3b7cb75 (feature branch) + cherry-picked to main
+- Recovery cheat sheet v1: Desktop + Drive (recover_all.sh pending = D14 partial)
+- ask_claude.py: 6121a97 — BUILT BUT NOT SAFE TO USE (Opus default ~$95/mo)
+- LaunchAgent PID 65371 stable
+
+### ask_claude.py STATUS: DO NOT WIRE TO ANYTHING
+Not connected to any automation, cron, skill, or LaunchAgent (verified by grep).
+Must complete D16 (Haiku default + Norris system prompt) before any use.
+
+### NEW D ITEMS
+D16 (CRITICAL, TOMORROW FIRST): ask_claude.py Haiku 4.5 default + Norris system prompt
+D17 (after D16): ask_claude.py cost guardrails — Opus call cap, spend logging, budget alert
+D14 (partial): recover_all.sh still needs writing
+
+### TOMORROW PRIORITY ORDER
+1. D16 — fix ask_claude.py (blocks Path A)
+2. D17 — cost guardrails
+3. D12 — Legacy "route to CC" skill
+4. D13 — CC outbox → Telegram formatter
+5. D14 — recover_all.sh
+6. D15 — SA v5 Section V (the proof-of-concept run)
+
+## MODEL SELECTION RULE — PERMANENT (April 19, 2026)
+- Opus 4.7 = default for ALL builds, code, drafts, quotes, emails, analysis
+- Haiku 4.5 = explicit --model haiku flag only, for simple triage/lookups
+- ask_claude.py default = claude-opus-4-7 (NOT Haiku — reverses earlier cost recommendation)
+- Budget cap: $120/mo accepted (Wayne standard quality > API savings)
+- Norris system prompt required on ALL ask_claude.py calls
+
+D16 UPDATED: ask_claude.py default = claude-opus-4-7, --model haiku flag for simple tasks,
+Norris system prompt required, cost logging required, budget cap $120/mo.
+# 2026-04-19 EVENING FINAL — Complete Session Record
+
+## COMPLETED TONIGHT
+- NC v3.1 end-to-end verified (task ran 4s, 16:02:31→16:02:35)
+- D10 config drift closed: c9d097e main, 3b7cb75 feature
+- NC LaunchAgent installed + cc-main preflight wrapper: 05d544a
+- ask_claude.py shipped: 6121a97 (⚠️ not safe to use until D16 complete)
+- Recovery cheat sheet v1 (Desktop + Drive)
+- Model selection rule locked: Opus 4.7 default, Sonnet 4.6 --model sonnet, NO Haiku
+- SA v5 readiness report: Option C attempted via bridge — SESSION_CONTEXT_MISSING (expected). Option A (Aaron manual paste) = D15-PREFLIGHT tomorrow morning.
+- Living Memory committed: 4804b8d, 6a3a9cd, 6a3a9cd+corrections
+
+## DECISIONS LOCKED
+- Opus 4.7 (claude-opus-4-7) = default for ALL builds, drafts, customer work, analysis, quotes, emails
+- Sonnet 4.6 (claude-sonnet-4-6) = --model sonnet for searches/triage/summarizing
+- Haiku 4.5 removed from toolkit entirely
+- $120/mo API budget cap; daily Telegram alert if projecting >$100/mo
+- NC drives CC only, never Claude.ai browser
+- SA v5 CC window stays open overnight, untouched
+- D15-PRIORITY is absolute first action tomorrow
+
+## TOMORROW ORDER (locked)
+1. D15-PREFLIGHT: Aaron opens SA v5 CC window, copies readiness report, pastes to Legacy
+2. D15-PRIORITY: Aaron reviews report, decides GO/HOLD/ISSUE/RECONCILE
+3. SA v5 Section V production write
+4. D16: ask_claude.py Opus default + --model sonnet flag + Norris system prompt + cost logging
+5. D17: budget guardrails + daily cost Telegram alert
+6. D14 completion: recover_all.sh script
+7. D12: Legacy "route to CC via NC" skill
+8. D13: CC outbox → Telegram formatter
+
+## BLOCKERS / OPEN
+- D11: NC idle-detection false-negative (cosmetic, investigate next session)
+- CC auth may need refresh after reboot (manual step)
+- openclaw status sometimes flaky post-reboot (manual fallback: openclaw gateway install --force && openclaw gateway start)
+- Time Machine backup still not running (biggest data risk — buy external drive)
+
+## META-LESSONS LOCKED
+- Handoff v1 was stale before ink dried — Legacy built ask_claude.py after v1 written. v3 captures everything.
+- Legacy racing ahead is pattern: deterministic builds OK, builds requiring Aaron decisions must gate.
+- Model tier correction (Haiku→Sonnet) from Aaron: "all my work is heavy builds." Opus default correct.
+- Wayne standard > API savings. Accepted $80-120/mo cost envelope.
+- Three agents (Legacy, Claude, Aaron) staying in lanes = the thing that actually worked today.
+
+## ALL COMMITS TONIGHT (main branch)
+- 3b7cb75: D10 config drift closed (feature branch)
+- c9d097e: Default timeout 120s
+- 05d544a: NC LaunchAgent + nc_bridge_start.sh wrapper
+- 6121a97: ask_claude.py (NOT safe until D16)
+- 6a3a9cd: Model rule locked (with Sonnet correction)
+- 4804b8d: D14/D16/D17 new items
+
+## FINAL CORRECTIONS — April 19, 2026 (v3 close-out)
+
+### Model rule CORRECTED: Haiku → Sonnet, Haiku DROPPED
+- Tier 1 DEFAULT: Opus 4.7 (claude-opus-4-7) — all builds, drafts, analysis
+- Tier 2 LIGHTER (--model sonnet): Sonnet 4.6 (claude-sonnet-4-6) — medium tasks
+- Haiku 4.5 REMOVED from toolkit — too lightweight for NU quality standard
+- Cost estimate: ~$80/mo with Opus+Sonnet mix — under $120/mo cap
+
+### Priority order corrected (SA V5 is #1, D16 is #2)
+- FIRST: D15-PREFLIGHT → Aaron pastes SA v5 readiness report → D15-PRIORITY (SA ships)
+- THEN: D16 → D14 → D12 → D13
+
+### Handoff v3 saved
+- Desktop: HANDOFF_2026-04-19_EVENING_CLOSEOUT.md ✅
+- Drive: 02_Handoffs + 05_Prompts_&_Guides ✅
+- M1: ~/norris-agent/docs/ ✅
+
+### Terminal windows at close-out
+- KEEP OPEN: SA v5 CC window ("Build Shipping AI Agent V5 production system")
+- SAFE TO CLOSE: All others
+- cc-main: runs in background via LaunchAgent, invisible, survives all closures
+
+## AARON'S "DONE" BAR — THIS WEEK (locked April 19, 2026)
+Five completions = success this week, in order:
+1. SA v5 ships (production confirm-write)
+2. Invoicing caught up — all ready orders billed
+3. Ops portal COMPLETE — CB says "everything I need is here"
+4. reMarkable pipeline verified end-to-end
+5. SD process flawless — auto-linked to QuickBooks
+
+AFTER these five only → Samson Rope Ordering System.
+Infrastructure (D12/D13/D16/D14) builds ONLY when it accelerates the five.
+BLOCK any V6 suggestions before V5 is stable.
+Aaron's stated feeling: "always building, nothing gets done." Respect it. Push completion.
+
+## WEEK OBJECTIVE + OPEN INVOICES (April 20-26, 2026)
+Five completions in order (ONLY these matter this week):
+1. SA v5 ships | 2. Invoicing blitz | 3. Ops portal complete | 4. reMarkable e2e | 5. SD flawless
+
+OPEN INVOICES Monday AM:
+READY: Thornhill/LineTec ($275), Benz/SWEPCO ($275), Coy Crosby/Dominion ($1,525+)
+BLOCKED on Boss SKUs: Pickle/Florence Electric, Myers/AEP
+PENDING spec: Abadie/Primoris (NU-BC-2828 $235)
+DONE: AJ Morris/Chain Electric $8,930.48 sent April 18
+
+Monday first move: confirm ready list, push Boss Products on Pickle+Myers SKUs.
+
+## P/N RULE + BCB + INVOICE CORRECTIONS (April 19, 2026)
+
+### P/N TERMINOLOGY — PERMANENT
+Aaron uses P/N (Part Number) not SKU. Correction flag if any agent says SKU.
+Ops portal, pricing master, SD generator, all output: P/N not SKU.
+
+### BCB DEFINITION LOCKED
+BCB = Bucket Cover Bag ($55 storage accessory). NOT Shield, NOT Combo.
+Master has labeling inconsistency (NU-BCB-2851-SL called "Shield 2-Man" in memory).
+1.5-Man BCB P/N unknown — pull from Boss paperwork Monday (likely NU-BCB-2834-SL @ $55).
+
+### STALE FLAGS PURGED
+"Blocked pending Boss SKU" was STALE DATA from April 7 snapshots.
+P/Ns have been in master since April 7 per 2026 Price List (§5).
+Darrell Pickle and Sammy Myers are NOT blocked. Ready to invoice.
+
+### INVOICE BLITZ ~$10,100
+READY: Thornhill $305 | Benz $305 | Coy April 8 $1,525 | Myers $915 | Wayne W6237 $610
+PENDING MINOR: Pickle $1,765 (need 1.5-Man BCB P/N — 30 sec Monday)
+PENDING VERIFICATION: Coy March 20 ~$1,590 (qty) | Wayne BYB0001 $235 (1-Man size confirm) | Chain Electric $2,850 (confirm drop ship received)
+Chain Electric AJ Morris: $8,930.48 already invoiced April 18 ✅
+# 2026-04-19 EVENING FINAL v4 — Complete Session Record
+# Authoritative. Supersedes v1, v2, v3.
+
+## COMPLETED TONIGHT (VERIFIED)
+### NC v3.1 Infrastructure
+- End-to-end live test: 16:02:31 → CC executed 16:02:35 (4s)
+- Output confirmed: "NorrisControl live test — Legacy to CC bridge verified"
+- NC LaunchAgent: 05d544a on main, PID 65371 stable 60+ sec
+- nc_bridge_start.sh wrapper with cc-main preflight
+- Old nohup PID 63297 killed and replaced
+- Survives: reboot, sleep, Legacy restart
+
+### Commits on main:
+- 0962449 session ledger
+- c9d097e default idle timeout 30→120s
+- 05d544a NC LaunchAgent + wrapper
+- 6121a97 ask_claude.py (Path A, needs D16 fix)
+- 88fbda9, 4804b8d, 6a3a9cd, 728615e, abb4ad1, 41e705d, 33c7d35, f77428e Living Memory
+
+### Commit on feature/shipping-agent-v5:
+- 3b7cb75 idle pattern sync (D10 closed)
+
+## PERMANENT RULES LOCKED TONIGHT
+
+### 1. P/N (not SKU) — PERMANENT
+All code, files, invoices, SD, portal, UI, agent replies use P/N.
+Exception: external integrations (QB field names) only if can't rename.
+Stale "SKU" = correction flag. Fix immediately.
+
+### 2. Model selection — PERMANENT
+- DEFAULT: claude-opus-4-7 (all builds, drafts, customer work)
+- LIGHTER (explicit): claude-sonnet-4-6 via --model sonnet
+- REMOVED: Haiku 4.5
+- Budget cap: $120/mo. Daily Telegram alert if projecting >$100/mo.
+
+### 3. BCB = Bucket Cover Bag ($55 storage accessory)
+NOT Shield. NOT Combo.
+1.5-Man BCB P/N: pull from Boss paperwork Monday (likely NU-BCB-2834-SL @ $55)
+Existing master has mislabel on 2-Man BCB ("SL" suffix means Bag not Shield)
+
+### 4. NC drives CC ONLY — not Claude.ai
+
+### 5. Aaron's week objective (April 20-26)
+Five completions in order, THEN Samson:
+1. SA v5 ships | 2. Invoicing blitz ~$10,100 | 3. Ops portal COMPLETE
+4. reMarkable verified e2e | 5. SD process FLAWLESS
+
+### 6. Stale flag rule
+"Blocked pending X" must be cross-checked against current master.
+P/N master (2026 Price List) authoritative since April 7.
+"Blocked pending Boss SKU" in shipments.json = STALE — purge next session.
+
+## INVOICING READY THIS WEEK (~$10,100)
+- Thornhill/LineTec: $305 (PO DEPT468R) — READY
+- Benz/SWEPCO: $305 (Truck #860377) — READY
+- Coy Crosby/Dominion April 8: $1,525 (5× NU-BC-2851) — READY
+- Coy Crosby/Dominion March 20: ~$1,590 (verify qty at UPS Store)
+- Sammy Myers/AEP: $915 (2× ARCH + 1× Combo) — READY, NOT BLOCKED
+- Wayne Primoris W6237: $610 (2× 2-Man) — READY
+- Wayne Primoris BYB0001: $235 (confirm 1-Man size w/ Wayne)
+- Darrell Pickle/Florence: $1,765 (pending 1.5-Man BCB P/N lookup — 30 sec Monday)
+- Chain Electric/AJ Morris: ALREADY INVOICED $8,930.48 on April 18 ✅
+
+ZERO blocked on vendors. Darrell needs one P/N from Boss paperwork Monday.
+
+## OPEN ROADMAP
+🚨 PRIORITY #1: SA v5 GO/HOLD/ISSUE/RECONCILE → Section V ships
+🚨 PRIORITY #2: Invoicing blitz (~$10,100)
+🚨 PRIORITY #3: D16 ask_claude.py (Opus default + Norris prompt + cost logging)
+HIGH: D14 recover_all.sh | D12 route-to-CC | D13 outbox formatter | D17 budget guardrails
+MEDIUM: Stale flag purge in shipments.json | P/N cleanup in master | 1.5-Man BCB P/N addition
+LOW: D11 idle detection | D1 D2 D5 D6 carried
+PENDING: Rick+Coy drafts | BSS Invoice 11 | Alabama license | Time Machine | Telegram 3-group
+
+## WHAT FAILED / CLAUDE ERRORS
+1. Claimed Legacy auto-restarts on reboot without verifying
+2. Conflated claude_bridge.py (old) with nc_bridge.py (new)
+3. Contradicted Terminal close-out advice within 15 min
+4. Read stale "blocked" flags as current truth (Pickle, Myers)
+5. Said "SKU" after P/N rule was stated
+6. Recommended Haiku first, corrected to Sonnet after pushback
+Root cause: status flags read without cross-checking master data.
+
+## WHAT FAILED / LEGACY PATTERNS
+1. Racing ahead: ask_claude.py shipped Opus default, no system prompt
+2. gog CLI Gmail draft unavailable — Claude.ai drafts worked (2 fired)
+3. SA v5 readiness report Option C failed (bridge CC lacks SA v5 context)
+
+## CURRENT RUNNING STATE
+- openclaw gateway: ✅ running
+- com.norrisutilities.nc-bridge: ✅ PID 65371
+- com.norrisutilities.claudebridge: ✅ (old bridge still running)
+- cc-main tmux: ✅ alive, CC idle at ❯
+- SA v5 CC window: OPEN overnight, untouched, gated on Aaron GO
+- Stash: EMPTY
+- Gmail drafts: 5+ living memory drafts in DRAFTS folder
+- Claude.ai draft: r-5665872137675202246 (Claude.ai fired directly)
+
+## INVOICE CORRECTION (April 19, 2026 late evening)
+Chain Electric / AJ Morris: ALREADY INVOICED $8,930.48 on April 18 ✅
+REMOVE from Monday invoice blitz list.
+Adjusted blitz total: ~$7,250 (Thornhill + Benz + Coy + Myers + Pickle + Abadie)
+
+## THREE ZONES + ORDER STATES (locked April 19, 2026 — final rules)
+Zone 1 (Legacy acts): internal records, portal, task queue, saved drafts
+Zone 2 (Aaron approves): email/invoice/quote drafts before send
+Zone 3 (Aaron/CB only): customer-facing sends — NEVER Legacy
+
+"EXECUTE" ≠ send to customer. Only explicit "send to [name]" authorizes Zone 3.
+Invoices must carry QB PDF, not Legacy-built PDF.
+
+SHIPPED / INVOICED (QB+PDF delivered) / PAID — three distinct states, never conflate.
+
+Chain Electric AJ Morris: SHIPPED ✅ INVOICED ❌ — QB invoice needed Monday.
+Revised blitz: ~$16,180 (Chain Electric back in).
+
+## §4 SYNC PROTOCOL — ALL THREE AGENTS (locked April 19, 2026 — FINAL)
+See MEMORY.md for full text. Summary:
+1. READ FIRST: authoritative source before any status claim. Flags are historical.
+2. THREE ZONES: internal(Legacy)/drafts(approve)/sends(Aaron/CB)
+3. HANDOFF CHECKPOINT: verifiable facts, not state claims
+4. CORRECTION DISCIPLINE: fix source, propagate to all 8 locations
+5. DAILY OPENING RITUAL: §4 rules + handoff + 6 verification questions before work
+
+## April 20, 2026 — Roadmap Comprehensive Expansion
+Commit d746a19 — 13 items added, 3 modified.
+Chain Electric reconciliation reflected as DONE (April 18, $8,930.48).
+Invoicing backlog broken out (7 individual orders, ~$16,180 total blitz).
+V5 expanded with full spec + 5 locked process rules + PID 91997.
+Terex/Bill Kugler flagged as $500K+ highest strategic priority.
+BSS expense groups detailed (Groups 1/2/3 + DoubleTree TBD).
+Alabama Dealer License + Time Machine both marked URGENT.
+Notes Intelligence Agent + Session Summary Protocol + Personal Gmail added.
+13 TIMELINE rows logged to Google Sheet. CB Telegram Bot design-session requirement noted.
