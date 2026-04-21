@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estate Purchase Negotiation — 4505 Buttewoods — Norris Utilities®</title>
+  <title>4505 Buttewoods Estate — Acquisition Strategy — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -16,10 +16,11 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-alert-red: #C41E3A;
-      --nu-success-green: #1B6B3A;
+      --nu-success: #2D7A3E;
+      --nu-warning: #B8860B;
+      --nu-danger: #B22222;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-italic: 'Playfair Display', Georgia, serif;
+      --font-tagline: 'Playfair Display', Georgia, serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,22 +33,22 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ══ HEADER ══ */
+    /* HEADER */
     .nu-header {
       position: relative;
       background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
-      padding: 60px 40px 80px;
+      padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 260px;
+      min-height: 320px;
     }
     .nu-header::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 80px);
       z-index: 1;
       opacity: 0.7;
     }
@@ -61,45 +62,54 @@
     }
     .nu-header * { position: relative; z-index: 2; }
 
-    .nu-ghost-phoenix {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 65%; max-width: 500px;
-      opacity: 0.07;
-      z-index: 1;
-      pointer-events: none;
+    .nu-phoenix-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 14px;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
-
     .nu-logo-text {
       font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3rem;
       color: var(--nu-white);
-      letter-spacing: 0.35em;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       margin-bottom: 4px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
+      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 1.25rem;
       color: var(--nu-white);
-      letter-spacing: 0.75em;
+      letter-spacing: 0.7em;
       text-transform: uppercase;
-      margin-bottom: 22px;
-      padding-left: 0.75em;
+      margin-bottom: 18px;
     }
     .nu-tagline {
-      font-family: var(--font-italic);
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       color: rgba(255,255,255,0.95);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
+    }
+    .nu-doc-label {
+      margin-top: 22px;
+      display: inline-block;
+      padding: 8px 24px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: var(--nu-white);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border-radius: 2px;
     }
 
-    /* ══ CHEVRON TRANSITION ══ */
+    /* CHEVRON TRANSITION */
     .nu-chevron {
       position: relative;
       height: 50px;
@@ -108,368 +118,420 @@
     }
     .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
-    /* ══ CONTENT ══ */
+    /* CONTENT AREA */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
-      padding: 0;
+    }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 200px; left: 50%;
+      transform: translateX(-50%);
+      width: 65%; max-width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
     }
     .nu-container {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 50px 40px 80px;
+      padding: 60px 40px 80px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* ══ PAGE TITLE BLOCK ══ */
-    .page-title-block {
-      border-left: 6px solid var(--nu-blue);
-      padding: 8px 0 8px 24px;
-      margin-bottom: 14px;
+    /* DOC TITLE */
+    .doc-title-block {
+      text-align: center;
+      margin-bottom: 50px;
+      padding-bottom: 30px;
+      border-bottom: 3px solid var(--nu-blue);
     }
-    .page-eyebrow {
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--nu-blue);
-      margin-bottom: 6px;
-    }
-    .page-title {
+    .doc-title-block h1 {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       color: var(--nu-dark-text);
+      margin-bottom: 12px;
       line-height: 1.15;
     }
-    .page-title .accent { color: var(--nu-blue); }
-    .page-subtitle {
-      margin-top: 10px;
-      font-size: 1.05rem;
-      color: #555;
-      font-weight: 400;
+    .doc-title-block h1 .accent { color: var(--nu-blue); }
+    .doc-meta {
+      font-size: 0.95rem;
+      color: #666;
+      letter-spacing: 0.04em;
     }
+    .doc-meta strong { color: var(--nu-dark-text); }
 
-    /* ══ STATUS BAR ══ */
-    .status-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 28px 0 36px;
-      padding: 14px 18px;
-      background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
-      border: 1px solid #dbe1ff;
-      border-radius: 8px;
-    }
-    .status-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .status-chip.priority { background: var(--nu-alert-red); color: #fff; border-color: var(--nu-alert-red); }
-    .status-chip.source { background: var(--nu-navy); color: #fff; border-color: var(--nu-navy); }
-    .status-chip.date { background: var(--nu-cyan); color: var(--nu-navy); border-color: var(--nu-cyan); }
-    .status-chip .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: currentColor;
-    }
-
-    /* ══ SECTION ══ */
-    .section {
-      margin-bottom: 40px;
-    }
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--nu-medium-gray);
-    }
-    .section-number {
+    /* SECTION HEADERS */
+    .nu-section-title {
+      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 1.6rem;
-      color: var(--nu-cyan);
-      letter-spacing: 0.05em;
-    }
-    .section-title {
-      font-weight: 900;
-      font-size: 1.5rem;
       color: var(--nu-blue);
-    }
-    .section-title .rest {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-
-    /* ══ PROPERTY FACTS GRID ══ */
-    .facts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-bottom: 12px;
-    }
-    .fact-card {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-top: 3px solid var(--nu-blue);
-      border-radius: 6px;
-      padding: 18px 20px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .fact-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0,0,255,0.08);
-    }
-    .fact-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #777;
-      margin-bottom: 6px;
-    }
-    .fact-value {
-      font-size: 1.15rem;
-      font-weight: 900;
-      color: var(--nu-dark-text);
-      line-height: 1.25;
-    }
-    .fact-value .sub {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: #666;
-      margin-top: 3px;
-    }
-
-    /* ══ CALLOUT BOX ══ */
-    .callout {
-      background: linear-gradient(135deg, #fff8f2 0%, #ffefe0 100%);
-      border-left: 5px solid var(--nu-accent-gold);
-      padding: 20px 24px;
-      border-radius: 4px;
       margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--nu-medium-gray);
     }
-    .callout-title {
-      font-weight: 900;
+    .nu-section-title span {
       color: var(--nu-dark-text);
-      margin-bottom: 8px;
-      font-size: 1.05rem;
+      font-weight: 700;
     }
-    .callout p {
-      font-size: 0.95rem;
-      color: var(--nu-body-text);
-    }
+    .nu-section { margin-bottom: 50px; }
 
-    /* ══ NEGOTIATION TABLE ══ */
-    .nego-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 16px;
-      background: var(--nu-white);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-      border-radius: 6px;
+    /* PROPERTY SUMMARY CARD */
+    .property-summary {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: var(--nu-white);
+      border-radius: 10px;
+      padding: 36px 40px;
+      margin-bottom: 50px;
+      box-shadow: 0 8px 28px rgba(0,0,51,0.18);
+      position: relative;
       overflow: hidden;
     }
-    .nego-table th {
-      background: var(--nu-navy);
-      color: var(--nu-white);
-      text-align: left;
-      padding: 14px 18px;
-      font-size: 0.85rem;
+    .property-summary::after {
+      content: '';
+      position: absolute;
+      top: -30%; right: -10%;
+      width: 50%; height: 160%;
+      background: radial-gradient(ellipse, rgba(6,208,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .property-summary h2 {
       font-weight: 900;
-      letter-spacing: 0.06em;
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .property-summary .address {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+      position: relative;
+    }
+    .property-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      position: relative;
+    }
+    .stat {
+      border-left: 3px solid var(--nu-cyan);
+      padding-left: 14px;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--nu-white);
+    }
+
+    /* TWO-COLUMN GRID */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* CARDS */
+    .nu-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 26px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .nu-card h3 {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-blue);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+    .nu-card p { margin-bottom: 10px; font-size: 0.95rem; }
+    .nu-card ul { padding-left: 20px; }
+    .nu-card ul li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      list-style: none;
+      position: relative;
+      padding-left: 16px;
+    }
+    .nu-card ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--nu-blue);
+      font-weight: 900;
+    }
+
+    /* PRIORITY BADGE */
+    .priority-badge {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 12px 30px 12px 18px;
+      margin-bottom: 28px;
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .nego-table td {
-      padding: 14px 18px;
+    .priority-badge::before {
+      content: '';
+      width: 10px; height: 10px;
+      background: var(--nu-cyan);
+      border-radius: 50%;
+      margin-right: 12px;
+      box-shadow: 0 0 8px var(--nu-cyan);
+    }
+
+    /* OFFER SCENARIO TABLE */
+    .scenario-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--nu-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .scenario-table th {
+      background: var(--nu-navy);
+      color: var(--nu-white);
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .scenario-table td {
+      padding: 14px 16px;
       border-bottom: 1px solid var(--nu-medium-gray);
       font-size: 0.95rem;
       vertical-align: top;
     }
-    .nego-table tr:last-child td { border-bottom: none; }
-    .nego-table tr:nth-child(even) td { background: #fafbff; }
-    .nego-table .lever-name {
+    .scenario-table tr:last-child td { border-bottom: none; }
+    .scenario-table tr.recommended {
+      background: rgba(6,208,255,0.08);
+    }
+    .scenario-table tr.recommended td:first-child {
+      border-left: 4px solid var(--nu-blue);
+      font-weight: 900;
+    }
+    .tag-rec {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-size: 0.7rem;
       font-weight: 700;
-      color: var(--nu-blue);
-      min-width: 160px;
+      letter-spacing: 0.08em;
+      margin-left: 8px;
     }
 
-    /* ══ PLAYBOOK STEPS ══ */
-    .playbook {
-      counter-reset: step;
-    }
-    .play-step {
+    /* TIMELINE */
+    .timeline {
       position: relative;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 22px 24px 22px 76px;
-      margin-bottom: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      padding-left: 30px;
     }
-    .play-step::before {
-      counter-increment: step;
-      content: counter(step, decimal-leading-zero);
+    .timeline::before {
+      content: '';
       position: absolute;
-      left: 18px;
-      top: 20px;
-      width: 42px; height: 42px;
-      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
-      color: #fff;
+      left: 8px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 22px;
+      padding-left: 18px;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -28px; top: 6px;
+      width: 14px; height: 14px;
+      background: var(--nu-white);
+      border: 3px solid var(--nu-blue);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-      box-shadow: 0 4px 10px rgba(0,0,255,0.25);
     }
-    .play-step h4 {
-      font-size: 1.05rem;
+    .tl-day {
       font-weight: 900;
+      color: var(--nu-blue);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .tl-action {
+      font-weight: 700;
       color: var(--nu-dark-text);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
-    .play-step p {
-      font-size: 0.95rem;
+    .tl-detail {
+      font-size: 0.92rem;
       color: var(--nu-body-text);
-      margin-bottom: 6px;
-    }
-    .play-step .meta {
-      font-size: 0.82rem;
-      color: #777;
-      font-style: italic;
     }
 
-    /* ══ DUAL COLUMN (pros/cons, walk-away/proceed) ══ */
-    .dual-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-    .col-box {
-      padding: 22px;
-      border-radius: 8px;
-    }
-    .col-box.proceed {
-      background: linear-gradient(135deg, #f0fbf4 0%, #e2f5ea 100%);
-      border-left: 5px solid var(--nu-success-green);
-    }
-    .col-box.walkaway {
-      background: linear-gradient(135deg, #fdf1f3 0%, #fbe1e6 100%);
-      border-left: 5px solid var(--nu-alert-red);
-    }
-    .col-box h4 {
-      font-size: 1.05rem;
-      font-weight: 900;
-      margin-bottom: 12px;
-      color: var(--nu-dark-text);
-    }
-    .col-box ul {
+    /* CONTINGENCY LIST */
+    .contingency-list {
       list-style: none;
       padding: 0;
     }
-    .col-box li {
-      position: relative;
-      padding-left: 22px;
-      margin-bottom: 8px;
-      font-size: 0.92rem;
-      line-height: 1.5;
+    .contingency-list li {
+      background: var(--nu-light-gray);
+      border-left: 4px solid var(--nu-blue);
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      border-radius: 0 6px 6px 0;
     }
-    .col-box.proceed li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--nu-success-green);
-      font-weight: 900;
-    }
-    .col-box.walkaway li::before {
-      content: '✕';
-      position: absolute;
-      left: 0;
-      color: var(--nu-alert-red);
-      font-weight: 900;
-    }
-
-    /* ══ CHECKLIST ══ */
-    .checklist {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 24px 28px;
-    }
-    .checklist-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 12px 0;
-      border-bottom: 1px dashed var(--nu-medium-gray);
-    }
-    .checklist-item:last-child { border-bottom: none; }
-    .checkbox {
-      width: 22px; height: 22px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .checklist-text {
-      font-size: 0.95rem;
+    .contingency-list li strong {
       color: var(--nu-dark-text);
+      display: block;
+      margin-bottom: 4px;
     }
-    .checklist-text strong { color: var(--nu-blue); }
+    .contingency-list li span {
+      font-size: 0.93rem;
+      color: var(--nu-body-text);
+    }
 
-    /* ══ FOOTER ══ */
+    /* CALLOUT */
+    .callout {
+      background: linear-gradient(135deg, rgba(0,0,255,0.04) 0%, rgba(6,208,255,0.06) 100%);
+      border: 1px solid rgba(0,0,255,0.15);
+      border-left: 4px solid var(--nu-blue);
+      padding: 22px 26px;
+      border-radius: 0 8px 8px 0;
+      margin: 28px 0;
+    }
+    .callout-title {
+      font-weight: 900;
+      color: var(--nu-blue);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .callout p { font-size: 0.96rem; }
+
+    /* SCRIPT BOX */
+    .script-box {
+      background: #fafafc;
+      border: 1px dashed #aaa;
+      border-radius: 6px;
+      padding: 20px 24px;
+      font-style: italic;
+      color: var(--nu-dark-text);
+      margin-top: 14px;
+      line-height: 1.7;
+    }
+    .script-box::before {
+      content: 'PROPOSED LANGUAGE';
+      display: block;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      padding: 10px 0 10px 32px;
+      position: relative;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 0.95rem;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 12px;
+      width: 18px; height: 18px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 3px;
+    }
+
+    /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 42px 40px;
+      padding: 50px 40px;
       text-align: center;
     }
     .nu-footer-tagline {
-      font-family: var(--font-italic);
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: var(--nu-cyan);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
     .nu-footer-contact {
-      font-size: 0.95rem;
-      line-height: 1.8;
+      font-size: 1rem;
+      line-height: 1.9;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
     }
     .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--nu-cyan);
+      margin: 14px auto 18px;
+    }
 
-    /* ══ RESPONSIVE ══ */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
-      .nu-logo-text { font-size: 1.9rem; letter-spacing: 0.22em; }
-      .nu-logo-subtitle { font-size: 0.9rem; letter-spacing: 0.5em; }
-      .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 36px 22px 60px; }
-      .page-title { font-size: 1.55rem; }
-      .dual-col { grid-template-columns: 1fr; }
-      .facts-grid { grid-template-columns: 1fr 1fr; }
-      .nego-table th, .nego-table td { padding: 10px 12px; font-size: 0.85rem; }
-      .play-step { padding: 22px 18px 22px 66px; }
+      .nu-header { padding: 50px 20px 70px; min-height: 240px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1.1rem; }
+      .nu-container { padding: 40px 22px 60px; }
+      .doc-title-block h1 { font-size: 1.7rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .property-summary { padding: 26px 22px; }
+      .property-summary .address { font-size: 1.3rem; }
+      .scenario-table { font-size: 0.85rem; }
+      .scenario-table th, .scenario-table td { padding: 10px 8px; }
     }
 
     @media print {
-      body { background: #fff; }
+      body { background: white; }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .fact-card, .play-step, .checklist { box-shadow: none; }
+      .nu-card { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .nu-section { page-break-inside: avoid; }
     }
   </style>
 </head>
@@ -477,271 +539,296 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-ghost-phoenix" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M100 20 L110 55 L145 35 L125 70 L165 60 L135 95 L155 135 L115 115 L100 165 L85 115 L45 135 L65 95 L35 60 L75 70 L55 35 L90 55 Z" fill="#ffffff"/>
-    </svg>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+      </svg>
+    </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-doc-label">Acquisition Strategy Brief</div>
   </header>
 
   <!-- WHITE CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#ffffff"/>
+      <path d="M0,0 L548,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- CONTENT -->
+  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
     <div class="nu-container">
 
-      <!-- PAGE TITLE -->
-      <div class="page-title-block">
-        <div class="page-eyebrow">reMarkable Action Item · Personal Real Estate</div>
-        <h1 class="page-title">Negotiate Purchase — <span class="accent">4505 Buttewoods Estate</span></h1>
-        <div class="page-subtitle">7,098 sq ft estate — strategy, levers, and playbook for Aaron C. Norris</div>
+      <!-- DOC TITLE -->
+      <div class="doc-title-block">
+        <h1><span class="accent">Negotiation</span> Strategy — 4505 Buttewoods Estate</h1>
+        <div class="doc-meta">
+          <strong>Prepared for:</strong> Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp;
+          <strong>Date:</strong> April 21, 2026 &nbsp;|&nbsp;
+          <strong>Source:</strong> reMarkable Action Item
+        </div>
       </div>
 
-      <div class="status-bar">
-        <span class="status-chip priority"><span class="dot"></span>PRIORITY · ACTIVE NEGOTIATION</span>
-        <span class="status-chip source">SOURCE · reMarkable Notes</span>
-        <span class="status-chip date">LOGGED · 2026-04-17</span>
-        <span class="status-chip">OWNER · Aaron C. Norris</span>
-        <span class="status-chip">CATEGORY · Personal / Real Estate</span>
-      </div>
+      <!-- PRIORITY BADGE -->
+      <div class="priority-badge">High-Value Personal Acquisition</div>
 
-      <!-- SECTION 1: PROPERTY SNAPSHOT -->
-      <section class="section">
-        <div class="section-header">
-          <div class="section-number">01</div>
-          <div class="section-title">Property <span class="rest">Snapshot</span></div>
-        </div>
-
-        <div class="facts-grid">
-          <div class="fact-card">
-            <div class="fact-label">Address</div>
-            <div class="fact-value">4505 Buttewoods<span class="sub">Target property</span></div>
+      <!-- PROPERTY SUMMARY -->
+      <section class="property-summary">
+        <h2>Subject Property</h2>
+        <div class="address">4505 Buttewoods — 7,098 sq ft Estate</div>
+        <div class="property-stats">
+          <div class="stat">
+            <div class="stat-label">Total Sq Ft</div>
+            <div class="stat-value">7,098</div>
           </div>
-          <div class="fact-card">
-            <div class="fact-label">Heated Sq Ft</div>
-            <div class="fact-value">7,098<span class="sub">Large estate footprint</span></div>
+          <div class="stat">
+            <div class="stat-label">Property Type</div>
+            <div class="stat-value">Estate</div>
           </div>
-          <div class="fact-card">
-            <div class="fact-label">Property Type</div>
-            <div class="fact-value">Estate Home<span class="sub">Single-family residential</span></div>
+          <div class="stat">
+            <div class="stat-label">Status</div>
+            <div class="stat-value">Negotiation</div>
           </div>
-          <div class="fact-card">
-            <div class="fact-label">Negotiation Status</div>
-            <div class="fact-value">Open<span class="sub">Offer / counter phase</span></div>
+          <div class="stat">
+            <div class="stat-label">Buyer</div>
+            <div class="stat-value">A.C. Norris</div>
           </div>
-          <div class="fact-card">
-            <div class="fact-label">Decision Maker</div>
-            <div class="fact-value">Aaron C. Norris<span class="sub">Sole buyer-side principal</span></div>
-          </div>
-          <div class="fact-card">
-            <div class="fact-label">Target Timeline</div>
-            <div class="fact-value">30–45 Days<span class="sub">To contract or walk</span></div>
-          </div>
-        </div>
-
-        <div class="callout">
-          <div class="callout-title">Ground Rule</div>
-          <p>This is a personal transaction. Keep it separate from Norris Utilities® business operations. Any legal, inspection, or financing correspondence routes through Aaron's personal email and personal counsel — not company channels. Do not CC company staff on anything related to this estate.</p>
         </div>
       </section>
 
-      <!-- SECTION 2: NEGOTIATION LEVERS -->
-      <section class="section">
-        <div class="section-header">
-          <div class="section-number">02</div>
-          <div class="section-title">Negotiation <span class="rest">Levers</span></div>
+      <!-- OBJECTIVE -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span>1. Objective &amp;</span> Position</h2>
+        <div class="grid-2">
+          <div class="nu-card">
+            <h3>Primary Objective</h3>
+            <p>Acquire 4505 Buttewoods at a price and terms that protect Aaron's capital, preserve liquidity for Norris Utilities® operations, and resolve every open disclosure question in writing before closing.</p>
+            <p>The deal must close clean — no unresolved water, structural, or title items carried forward as post-close risk.</p>
+          </div>
+          <div class="nu-card">
+            <h3>Negotiating Position</h3>
+            <ul>
+              <li>Buyer is financially qualified and decisive — credible close.</li>
+              <li>Open disclosure items (water intrusion, rental-listing discrepancies) create legitimate downward pressure.</li>
+              <li>Walk-away authority preserved — no emotional attachment communicated to listing side.</li>
+              <li>All concessions traded for written confirmations, not verbal assurances.</li>
+            </ul>
+          </div>
         </div>
+      </section>
 
-        <table class="nego-table">
+      <!-- LEVERAGE POINTS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span>2. Verified</span> Leverage Points</h2>
+        <p style="margin-bottom: 22px;">These items, already documented in prior reMarkable action records, form the factual basis for any price reduction or contingency request. Each is to be presented as a fact-finding inquiry first, then converted to a written concession.</p>
+
+        <ul class="contingency-list">
+          <li>
+            <strong>Water Intrusion Disclosure Omission</strong>
+            <span>Identified in prior file review (Task 270, 04/17). Listing materials did not disclose water intrusion history. Establishes basis for written H2O Waterproofing scope, transferable warranty, and price credit.</span>
+          </li>
+          <li>
+            <strong>Rental Listing vs. For-Sale Listing Discrepancy</strong>
+            <span>Identified in prior file review (Task 272, 04/21). Property was previously offered as a rental with material details that differ from current sale listing. Requires seller-signed clarification or a credit at closing.</span>
+          </li>
+          <li>
+            <strong>Pre-Close Written Verification Requirement</strong>
+            <span>Identified in prior file review (Task 271, 04/17). Written confirmation from H2O Waterproofing required before closing — not after. Non-negotiable condition.</span>
+          </li>
+          <li>
+            <strong>Estate Carry Cost</strong>
+            <span>7,098 sq ft generates substantial monthly utility, insurance, and maintenance burden for the seller. Time-on-market pressure compounds in seller's favor of a clean cash-equivalent close.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- OFFER SCENARIOS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span>3. Offer</span> Scenarios</h2>
+        <p style="margin-bottom: 22px;">Three structured scenarios, ranked from opening bid to walk-away ceiling. The recommended track is Scenario B — anchors below ask, leaves room to concede upward in exchange for written cures, and preserves walk-away credibility.</p>
+
+        <table class="scenario-table">
           <thead>
             <tr>
-              <th>Lever</th>
-              <th>Use It When</th>
-              <th>Concession Value</th>
+              <th style="width: 22%;">Scenario</th>
+              <th>Price Position</th>
+              <th>Earnest Money</th>
+              <th>Key Terms</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="lever-name">Price Reduction</td>
-              <td>Comps, days-on-market, or appraisal gap support a lower number.</td>
-              <td>Primary lever. Every $10K reduces monthly P&amp;I materially.</td>
+              <td>A — Opening Probe</td>
+              <td>List minus 12% to 14%</td>
+              <td>1% — held in escrow</td>
+              <td>30-day inspection. Water + rental-listing disclosure cure required before EM goes hard. Cash-equivalent close.</td>
+            </tr>
+            <tr class="recommended">
+              <td>B — Anchored Move <span class="tag-rec">Recommended</span></td>
+              <td>List minus 7% to 9%</td>
+              <td>2% — split escrow</td>
+              <td>21-day inspection. Seller delivers H2O Waterproofing written scope + transferable warranty. Written reconciliation of rental-vs-sale listing variances. Title insurance at seller cost.</td>
             </tr>
             <tr>
-              <td class="lever-name">Seller Concessions</td>
-              <td>Seller is anchored on price but flexible on cash flow to closing.</td>
-              <td>Ask 2–3% toward closing costs / rate buydown.</td>
-            </tr>
-            <tr>
-              <td class="lever-name">Repair Credits</td>
-              <td>Inspection uncovers HVAC, roof, water, or structural items.</td>
-              <td>Credit at close beats retail repair cost every time.</td>
-            </tr>
-            <tr>
-              <td class="lever-name">Closing Date Control</td>
-              <td>Seller needs speed — or needs to delay into next tax year.</td>
-              <td>Trade timing flexibility for $$$ off price.</td>
-            </tr>
-            <tr>
-              <td class="lever-name">Inclusions / Exclusions</td>
-              <td>Appliances, fixtures, outdoor equipment, furnishings in play.</td>
-              <td>List items explicitly in contract. Do not assume.</td>
-            </tr>
-            <tr>
-              <td class="lever-name">Earnest Money Posture</td>
-              <td>Competing offers; show seriousness without over-exposure.</td>
-              <td>Higher earnest + tight contingencies signals strength.</td>
-            </tr>
-            <tr>
-              <td class="lever-name">Contingency Structure</td>
-              <td>Protect downside without killing the deal.</td>
-              <td>Keep inspection + financing; release appraisal only if you can cover gap.</td>
-            </tr>
-            <tr>
-              <td class="lever-name">Rent-Back / Possession</td>
-              <td>Seller has nowhere to go on day one.</td>
-              <td>Offer short post-closing occupancy in exchange for price.</td>
+              <td>C — Walk-Away Ceiling</td>
+              <td>List minus 4% to 5%</td>
+              <td>3% — partial hard at day 14</td>
+              <td>14-day inspection. Seller cures all written disclosures. Aaron retains right to walk if any post-inspection finding materially exceeds disclosed scope.</td>
             </tr>
           </tbody>
         </table>
 
         <div class="callout">
-          <div class="callout-title">Rule of Thumb</div>
-          <p>Never move two levers in the same round. Concede or request one at a time so every counter has a clear purpose and the other side can say yes without feeling squeezed.</p>
+          <div class="callout-title">Concession Strategy</div>
+          <p>Move from Scenario A to B only after the seller responds in writing. Move from B to C only if the seller delivers signed cures on water intrusion and listing reconciliation. Never concede price without receiving a documented cure in exchange.</p>
         </div>
       </section>
 
-      <!-- SECTION 3: PLAYBOOK -->
-      <section class="section">
-        <div class="section-header">
-          <div class="section-number">03</div>
-          <div class="section-title">Negotiation <span class="rest">Playbook</span></div>
-        </div>
-
-        <div class="playbook">
-          <div class="play-step">
-            <h4>Establish Fair Market Value</h4>
-            <p>Pull active, pending, and sold comps in the Buttewoods area for 5,000–8,000 sq ft homes over the last 12 months. Adjust for lot size, condition, upgrades, and days on market. Build a one-page valuation memo for your own file.</p>
-            <p class="meta">Outcome: a defensible walk-up price and a firm ceiling.</p>
+      <!-- TIMELINE -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span>4. Negotiation</span> Timeline</h2>
+        <div class="timeline">
+          <div class="tl-item">
+            <span class="tl-day">Day 0 — April 21</span>
+            <div class="tl-action">Internal Strategy Lock-In</div>
+            <div class="tl-detail">Confirm price ceiling, walk-away threshold, and required written cures with Aaron. Brief buyer's agent on Scenario B as opening posture.</div>
           </div>
-          <div class="play-step">
-            <h4>Understand Seller Motivation</h4>
-            <p>Ask the listing agent directly: Why are they selling? What's their timeline? Have they already purchased their next home? Is the price set by the seller or by the agent? Motivation dictates which levers work.</p>
-            <p class="meta">Outcome: know whether price, timing, or certainty is the real currency.</p>
+          <div class="tl-item">
+            <span class="tl-day">Day 1 to 2</span>
+            <div class="tl-action">Submit Scenario A (Opening Probe)</div>
+            <div class="tl-detail">Written offer delivered with disclosure inquiry letter attached. Calls out water intrusion and rental-listing items as standalone issues — not yet linked to price.</div>
           </div>
-          <div class="play-step">
-            <h4>Pre-Qualify Financing First</h4>
-            <p>Have proof-of-funds and a current pre-approval letter ready before the first offer. On a 7,098 sq ft estate, sellers will not take a vague offer seriously. Use Renasant (Patrick Lavette) for relationship lending if terms are competitive.</p>
-            <p class="meta">Outcome: instant credibility; faster response from the listing side.</p>
+          <div class="tl-item">
+            <span class="tl-day">Day 3 to 7</span>
+            <div class="tl-action">Receive Counter, Pivot to Scenario B</div>
+            <div class="tl-detail">Concede measured ground on price. Hold firm on written H2O Waterproofing scope and rental-vs-sale reconciliation as conditions of moving forward.</div>
           </div>
-          <div class="play-step">
-            <h4>Open with a Firm, Defensible Number</h4>
-            <p>Do not low-ball — that invites the agent to dismiss the offer. Open 4–8% under your strike price with a tight expiration (48–72 hours) and a clean contingency package. Attach the comp memo summary as support.</p>
-            <p class="meta">Outcome: serious buyer signal, room to move on the next round.</p>
+          <div class="tl-item">
+            <span class="tl-day">Day 8 to 14</span>
+            <div class="tl-action">Inspection Period &amp; Disclosure Cures</div>
+            <div class="tl-detail">Independent inspection ordered. H2O Waterproofing letter received in writing. Rental-listing variances reconciled in seller-signed addendum.</div>
           </div>
-          <div class="play-step">
-            <h4>Control the Inspection Phase</h4>
-            <p>Use a licensed inspector plus specialty eyes if needed (roof, HVAC, structural/foundation, sewer scope, pool if applicable). An estate of this size hides six-figure problems in plain sight. Convert findings into a repair-credit ask, not a renegotiation of price.</p>
-            <p class="meta">Outcome: protect yourself without re-opening the price fight.</p>
+          <div class="tl-item">
+            <span class="tl-day">Day 15 to 21</span>
+            <div class="tl-action">Final Terms or Walk</div>
+            <div class="tl-detail">If all cures delivered, finalize at Scenario B price. If material findings exceed disclosed scope, invoke Scenario C ceiling or exit cleanly with EM returned.</div>
           </div>
-          <div class="play-step">
-            <h4>Lock Contract Language Personally</h4>
-            <p>Read every line of the contract and addenda. Confirm: included fixtures, exact square footage basis, title company choice, closing date, possession, warranty coverage, HOA assignment, earnest money handling, and default remedies. Do not delegate this read.</p>
-            <p class="meta">Outcome: no post-closing surprises. You signed what you read.</p>
-          </div>
-          <div class="play-step">
-            <h4>Set Your Walk-Away Number — In Writing</h4>
-            <p>Before the first counter, write your ceiling on paper and put it in a drawer. If the deal crosses that line, walk. Do not renegotiate with yourself mid-cycle. Discipline here is worth more than any single lever above.</p>
-            <p class="meta">Outcome: you never overpay because of deal momentum.</p>
-          </div>
-          <div class="play-step">
-            <h4>Close Cleanly and Move On</h4>
-            <p>Once under contract, communicate through counsel and the title company only. Keep emotional conversation out of email. Confirm final walk-through 24–48 hours before close. Wire funds only after voice-verifying wiring instructions with the title company directly.</p>
-            <p class="meta">Outcome: clean close, clean paper trail, zero wire-fraud exposure.</p>
+          <div class="tl-item">
+            <span class="tl-day">Day 22 to 35</span>
+            <div class="tl-action">Close</div>
+            <div class="tl-detail">Title insurance verified. Transferable waterproofing warranty assigned at closing table. Funds wired only after all cures appear in the closing package.</div>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 4: PROCEED vs WALK -->
-      <section class="section">
-        <div class="section-header">
-          <div class="section-number">04</div>
-          <div class="section-title">Proceed <span class="rest">or Walk</span></div>
-        </div>
+      <!-- CONTINGENCIES -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span>5. Required</span> Contingencies</h2>
+        <p style="margin-bottom: 22px;">These contingencies must appear in the offer in writing. None are negotiable. Each was identified in a prior reMarkable action review and is now codified here as a closing condition.</p>
 
-        <div class="dual-col">
-          <div class="col-box proceed">
-            <h4>Signals to Proceed</h4>
-            <ul>
-              <li>Price lands at or below defensible comp range.</li>
-              <li>Inspection reveals no structural, water, or systems bombshells.</li>
-              <li>Financing terms protect monthly cash flow under stress scenarios.</li>
-              <li>Seller accepts standard contingency package without gutting it.</li>
-              <li>Title comes back clean; no easement or boundary surprises.</li>
-              <li>Insurance quote is reasonable for the size and location.</li>
-            </ul>
+        <ul class="contingency-list">
+          <li>
+            <strong>Water Intrusion Cure (Pre-Close, In Writing)</strong>
+            <span>H2O Waterproofing must provide written scope of work, completion confirmation, and transferable warranty. Delivered before closing — not after. Carries to buyer at closing.</span>
+          </li>
+          <li>
+            <strong>Disclosure Reconciliation Addendum</strong>
+            <span>Seller-signed addendum reconciling all material differences between the prior rental listing and the current for-sale listing. No verbal explanations accepted.</span>
+          </li>
+          <li>
+            <strong>Independent Inspection</strong>
+            <span>Buyer's choice of licensed inspector. Right to terminate with full EM return if findings materially exceed disclosed condition.</span>
+          </li>
+          <li>
+            <strong>Title &amp; Survey</strong>
+            <span>Owner's title policy at seller cost. Current survey delivered before closing. Any encroachments or easements cured or credited.</span>
+          </li>
+          <li>
+            <strong>Financing or Cash-Equivalent Close</strong>
+            <span>Aaron retains optionality between cash close and conventional financing. Closing date driven by buyer convenience, not seller pressure.</span>
+          </li>
+          <li>
+            <strong>Walk-Away Without Penalty</strong>
+            <span>If any contingency goes uncured, EM returns in full and buyer exits with no further obligation.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- LANGUAGE / SCRIPTS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span>6. Negotiation</span> Language</h2>
+        <div class="grid-2">
+          <div class="nu-card">
+            <h3>Opening Disclosure Inquiry</h3>
+            <div class="script-box">
+              We want to move on this property and are prepared to perform. Before we paper terms, we need written confirmation on two open items: the water intrusion history and the variances between the prior rental listing and the current for-sale listing. Please have the seller's side address both in writing within five business days.
+            </div>
           </div>
-          <div class="col-box walkaway">
-            <h4>Signals to Walk</h4>
-            <ul>
-              <li>Seller refuses to move off list price with zero justification.</li>
-              <li>Inspection surfaces undisclosed water, foundation, or roof issues.</li>
-              <li>Appraisal misses contract price and seller will not close the gap.</li>
-              <li>Title defects or unresolved liens on the property.</li>
-              <li>Seller demands waiver of inspection or financing contingencies.</li>
-              <li>Deal momentum pushes you past your pre-written ceiling number.</li>
-            </ul>
+          <div class="nu-card">
+            <h3>Counter Response (Move to Scenario B)</h3>
+            <div class="script-box">
+              We can come up on price in exchange for a written H2O Waterproofing scope of work, transferable warranty, and a seller-signed addendum reconciling the rental and sale listing details. Concession is contingent on receiving both cures in writing before earnest money goes hard.
+            </div>
+          </div>
+          <div class="nu-card">
+            <h3>If Disclosure Cures Are Refused</h3>
+            <div class="script-box">
+              Without written cures on the water intrusion item and listing reconciliation, we cannot proceed. We will release the property and our earnest money will return per the contract. We are still interested if the seller is willing to address these items in writing.
+            </div>
+          </div>
+          <div class="nu-card">
+            <h3>Closing Confirmation Language</h3>
+            <div class="script-box">
+              Funds will wire only after the closing package includes the H2O Waterproofing transferable warranty, the seller-signed disclosure reconciliation addendum, the owner's title policy at seller cost, and a current survey. No funding before package is complete.
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 5: NEXT ACTIONS -->
-      <section class="section">
-        <div class="section-header">
-          <div class="section-number">05</div>
-          <div class="section-title">Next <span class="rest">Actions</span></div>
+      <!-- DECISION CHECKLIST -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span>7. Aaron's</span> Pre-Offer Checklist</h2>
+        <div class="nu-card">
+          <ul class="checklist">
+            <li>Confirm walk-away price ceiling and write it down before any conversation with listing side.</li>
+            <li>Confirm cash position and financing optionality with Patrick Lavette at Renasant Bank.</li>
+            <li>Confirm acquisition does not constrain working capital required for Norris Utilities® operations (Skylift PO carry, FlexPro Armor inventory, Samson Rope orders).</li>
+            <li>Authorize buyer's agent to deliver Scenario A in writing with disclosure inquiry attached.</li>
+            <li>Pre-line up independent inspector — booked for Day 8 of the timeline.</li>
+            <li>Confirm H2O Waterproofing contact and required documentation format before requesting from seller.</li>
+            <li>Set internal review checkpoints at Day 7 and Day 14 to evaluate seller responsiveness.</li>
+            <li>Pre-draft walk-away letter so it is ready to send the moment a hard line is crossed.</li>
+          </ul>
         </div>
+      </section>
 
-        <div class="checklist">
-          <div class="checklist-item">
-            <div class="checkbox"></div>
-            <div class="checklist-text"><strong>Pull comps</strong> for 5,000–8,000 sq ft homes in Buttewoods — last 12 months, sold and pending.</div>
+      <!-- RISK FRAME -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span>8. Risk</span> Frame</h2>
+        <div class="grid-3">
+          <div class="nu-card">
+            <h3>Capital Risk</h3>
+            <p>Estate-level acquisition consumes liquidity that would otherwise back Norris Utilities® receivables float and FlexPro Armor inventory build. Mitigated by financing optionality and clear walk-away ceiling.</p>
           </div>
-          <div class="checklist-item">
-            <div class="checkbox"></div>
-            <div class="checklist-text"><strong>Confirm pre-approval</strong> with Patrick Lavette at Renasant Bank — get current rate sheet.</div>
+          <div class="nu-card">
+            <h3>Disclosure Risk</h3>
+            <p>Two known open disclosure items (water intrusion, rental-vs-sale variance) signal the seller's record-keeping is incomplete. Treated as a leading indicator — assume more will surface in inspection.</p>
           </div>
-          <div class="checklist-item">
-            <div class="checkbox"></div>
-            <div class="checklist-text"><strong>Call listing agent</strong> and ask the motivation questions directly — take notes immediately after.</div>
-          </div>
-          <div class="checklist-item">
-            <div class="checkbox"></div>
-            <div class="checklist-text"><strong>Retain real estate counsel</strong> for contract review (personal, not company counsel).</div>
-          </div>
-          <div class="checklist-item">
-            <div class="checkbox"></div>
-            <div class="checklist-text"><strong>Line up inspection team</strong> — general inspector, roof, HVAC, structural, and sewer scope.</div>
-          </div>
-          <div class="checklist-item">
-            <div class="checkbox"></div>
-            <div class="checklist-text"><strong>Write the walk-away number</strong> on paper. Date it. Seal it. Do not share it.</div>
-          </div>
-          <div class="checklist-item">
-            <div class="checkbox"></div>
-            <div class="checklist-text"><strong>Get preliminary insurance quote</strong> for a 7,098 sq ft estate — replacement cost basis.</div>
-          </div>
-          <div class="checklist-item">
-            <div class="checkbox"></div>
-            <div class="checklist-text"><strong>Draft opening offer</strong> with 48–72 hour expiration, standard contingencies, proof-of-funds attached.</div>
+          <div class="nu-card">
+            <h3>Execution Risk</h3>
+            <p>7,098 sq ft estates close slower than the buyer's preferred 30-day window. Build seller-pressure leverage by anchoring an early close date with cash-equivalent financing.</p>
           </div>
         </div>
       </section>
+
+      <!-- CALLOUT — FINAL POSTURE -->
+      <div class="callout">
+        <div class="callout-title">Final Posture</div>
+        <p>Open with disclosure inquiry — not price. Convert verified disclosure gaps into written cures. Trade price concessions only for documented seller actions. Hold walk-away credibility throughout. Close clean or do not close at all.</p>
+      </div>
 
     </div>
   </main>
@@ -749,10 +836,12 @@
   <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-divider"></div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> |
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <strong style="color: var(--nu-white);">Aaron C. Norris</strong> — Founder &amp; CEO<br>
+      Norris Utilities®, LLC &nbsp;|&nbsp; Birmingham, Alabama<br>
+      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a><br>
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>
