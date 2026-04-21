@@ -595,7 +595,8 @@
       "company": "&#9888;&#65039; VERIFY: Ship-to address needed",
       "date": "04/13/2026",
       "file": "shipping-docs/SD-2026-RICHARD-0413.html",
-      "status": "pending",
+      "status": "superseded",
+      "superseded_by": "SD-2026-LINETEC-THORNHILL-0413",
       "approved": false,
       "invoiced": false,
       "invoiceNumber": null,
@@ -609,7 +610,7 @@
         }
       ],
       "shipTo": "",
-      "notes": "",
+      "notes": "SA V5 D.10: duplicate stub of SD-2026-LINETEC-THORNHILL-0413. Marked superseded 2026-04-20. HTML preserved on disk.",
       "internal_pricing": {
         "line_items": [
           {
