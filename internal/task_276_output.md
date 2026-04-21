@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>H2O Waterproofing — Written Confirmation Call Plan — Norris Utilities®</title>
+  <title>H2O Waterproofing — Call Action Item — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -16,8 +16,8 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-alert-red: #C8102E;
-      --nu-success-green: #1B7A3E;
+      --nu-alert-red: #D32F2F;
+      --nu-success-green: #2E7D32;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -26,7 +26,7 @@
     body {
       font-family: var(--font-primary);
       color: var(--nu-body-text);
-      background: var(--nu-white);
+      background: var(--nu-light-gray);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -34,7 +34,7 @@
     /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
       padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
@@ -45,30 +45,29 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.6;
     }
     .nu-header::after {
       content: '';
       position: absolute;
       top: -50%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
       z-index: 1;
     }
     .nu-header * { position: relative; z-index: 2; }
 
     .nu-phoenix-icon {
-      width: 72px; height: 72px;
-      margin: 0 auto 14px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
-      opacity: 0.95;
     }
     .nu-logo-text {
       font-weight: 900;
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: var(--nu-white);
       letter-spacing: 0.35em;
       text-transform: uppercase;
@@ -77,384 +76,374 @@
     }
     .nu-logo-subtitle {
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: var(--nu-white);
       letter-spacing: 0.8em;
       text-transform: uppercase;
       margin-bottom: 20px;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-weight: 300;
-      font-size: 1.25rem;
-      color: rgba(255,255,255,0.92);
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.95);
       letter-spacing: 0.05em;
     }
-    .nu-doc-type {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 6px 18px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 3px;
-      color: var(--nu-white);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-    }
 
-    /* CHEVRON TRANSITION */
+    /* CHEVRON */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
 
     /* CONTENT */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
-      overflow: hidden;
+      min-height: 60vh;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
       top: 40%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 65%; max-width: 640px;
+      width: 65%;
+      max-width: 700px;
       aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(0,0,255,0.035) 0%, transparent 70%);
-      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
+      opacity: 0.07;
       z-index: 0;
       pointer-events: none;
     }
     .nu-content-area > * { position: relative; z-index: 1; }
 
-    .nu-inner {
+    .nu-container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 60px 40px;
     }
 
-    .nu-section-title {
-      font-weight: 900;
-      font-size: 1.55rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 18px;
-      letter-spacing: 0.01em;
-    }
-    .nu-section-title .accent {
-      color: #0033cc;
-    }
-    .nu-section + .nu-section { margin-top: 48px; }
-
-    /* BRIEF CARD */
-    .brief-card {
-      background: linear-gradient(135deg, #f7f9ff 0%, #eef3ff 100%);
-      border-left: 4px solid var(--nu-blue);
-      border-radius: 6px;
-      padding: 28px 32px;
+    /* PAGE TITLE */
+    .page-intro {
       margin-bottom: 40px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--nu-medium-gray);
     }
-    .brief-card h2 {
-      font-weight: 900;
-      font-size: 1.25rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 10px;
-    }
-    .brief-card p {
-      font-size: 1rem;
+    .breadcrumb {
+      font-size: 0.85rem;
       color: var(--nu-body-text);
-      margin-bottom: 8px;
-    }
-    .brief-card .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      margin-top: 14px;
-      font-size: 0.88rem;
-      color: #555;
-    }
-    .brief-card .meta-row strong {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-
-    /* CALL SCRIPT */
-    .script-block {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 26px 30px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    .script-label {
-      display: inline-block;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      padding: 4px 12px;
-      border-radius: 3px;
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.15em;
       text-transform: uppercase;
+      letter-spacing: 0.15em;
       margin-bottom: 12px;
     }
-    .script-block p {
-      font-size: 1.02rem;
-      color: var(--nu-dark-text);
-      line-height: 1.65;
-    }
-    .script-block p + p { margin-top: 10px; }
-    .script-block em {
-      color: #555;
-      font-style: italic;
-    }
+    .breadcrumb span { color: var(--nu-blue); font-weight: 700; }
 
-    /* CONFIRMATION CHECKLIST */
-    .checklist {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    }
-    .checklist-item {
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 18px;
-      padding: 20px 26px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      align-items: start;
-    }
-    .checklist-item:last-child { border-bottom: none; }
-    .checklist-num {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, var(--nu-blue), #0033cc);
-      color: var(--nu-white);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+    .page-title {
       font-weight: 900;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .checklist-content h4 {
-      font-weight: 900;
-      font-size: 1.02rem;
+      font-size: 2.4rem;
       color: var(--nu-dark-text);
-      margin-bottom: 6px;
+      margin-bottom: 12px;
+      line-height: 1.2;
     }
-    .checklist-content p {
-      font-size: 0.95rem;
+    .page-title span { color: var(--nu-blue); }
+
+    .page-subtitle {
+      font-size: 1.1rem;
       color: var(--nu-body-text);
-      line-height: 1.55;
-    }
-    .checklist-content .ask {
-      display: block;
-      margin-top: 8px;
-      padding: 10px 14px;
-      background: #f7f9ff;
-      border-left: 3px solid var(--nu-cyan);
-      border-radius: 3px;
-      font-size: 0.9rem;
-      color: var(--nu-dark-text);
-      font-style: italic;
+      max-width: 780px;
     }
 
-    /* EMAIL BLOCK */
-    .email-block {
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      padding: 28px 32px;
-      border: 1px solid var(--nu-medium-gray);
-      font-family: 'Lato', sans-serif;
+    /* PRIORITY STRIP */
+    .priority-strip {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: linear-gradient(135deg, var(--nu-alert-red) 0%, #B71C1C 100%);
+      color: var(--nu-white);
+      padding: 16px 24px;
+      border-radius: 6px;
+      margin-bottom: 40px;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(211,47,47,0.25);
     }
-    .email-headers {
-      font-size: 0.88rem;
-      color: #555;
-      padding-bottom: 14px;
-      margin-bottom: 18px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      line-height: 1.8;
+    .priority-strip .priority-label {
+      background: rgba(255,255,255,0.2);
+      padding: 4px 12px;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
-    .email-headers strong {
+
+    /* SECTION */
+    .nu-section {
+      margin-bottom: 40px;
+    }
+    .nu-section-title {
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--nu-cyan);
+      display: inline-block;
+    }
+    .nu-section-title span {
       color: var(--nu-dark-text);
       font-weight: 700;
-      display: inline-block;
-      width: 70px;
-    }
-    .email-body {
-      font-size: 0.98rem;
-      color: var(--nu-dark-text);
-      line-height: 1.75;
-    }
-    .email-body p {
-      margin-bottom: 14px;
-      padding-left: 20px;
-    }
-    .email-body p:first-child { padding-left: 0; }
-    .email-body ul {
-      padding-left: 40px;
-      margin-bottom: 14px;
-      list-style: none;
-    }
-    .email-body ul li {
-      padding: 3px 0;
-    }
-    .email-body ul li::before {
-      content: '•';
-      color: var(--nu-blue);
-      font-weight: 900;
-      margin-right: 10px;
-    }
-    .email-body .signature {
-      padding-left: 20px;
-      margin-top: 18px;
-      line-height: 1.45;
-      font-size: 0.92rem;
     }
 
-    /* CALL LOG */
-    .log-grid {
+    /* CONTACT CARD */
+    .contact-card {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      margin-top: 18px;
+      gap: 16px;
+      background: var(--nu-light-gray);
+      border-left: 5px solid var(--nu-blue);
+      padding: 24px;
+      border-radius: 6px;
+      margin-bottom: 32px;
     }
-    .log-field {
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .contact-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--nu-blue);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .contact-value {
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    /* CONFIRMATION ITEMS */
+    .confirm-list {
+      list-style: none;
+      counter-reset: confirm-counter;
+    }
+    .confirm-list li {
+      counter-increment: confirm-counter;
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
-      border-radius: 6px;
-      padding: 14px 16px;
-    }
-    .log-field label {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 900;
-      color: var(--nu-blue);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .log-field .line {
-      height: 22px;
-      border-bottom: 1px dashed #bbb;
-    }
-
-    /* RED FLAGS */
-    .red-flag-box {
-      background: #fff5f5;
-      border-left: 4px solid var(--nu-alert-red);
-      border-radius: 4px;
-      padding: 20px 24px;
+      border-left: 5px solid var(--nu-cyan);
+      padding: 22px 24px 22px 72px;
       margin-bottom: 14px;
+      border-radius: 6px;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .red-flag-box h4 {
+    .confirm-list li:hover {
+      transform: translateX(3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    .confirm-list li::before {
+      content: counter(confirm-counter);
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 100%);
+      color: var(--nu-white);
       font-weight: 900;
-      font-size: 1rem;
-      color: var(--nu-alert-red);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,255,0.25);
+    }
+    .confirm-list .item-title {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
       margin-bottom: 6px;
     }
-    .red-flag-box p {
-      font-size: 0.93rem;
-      color: var(--nu-dark-text);
-      line-height: 1.55;
+    .confirm-list .item-detail {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+      line-height: 1.5;
     }
 
-    /* CTA */
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 22px;
-    }
-    .nu-btn-primary, .nu-btn-secondary {
-      display: inline-block;
-      padding: 12px 26px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.92rem;
-      letter-spacing: 0.03em;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .nu-btn-primary {
-      background: var(--nu-blue);
+    /* SCRIPT / TALKING POINTS */
+    .script-block {
+      background: var(--nu-navy);
       color: var(--nu-white);
-      border: 2px solid var(--nu-blue);
-    }
-    .nu-btn-primary:hover {
-      background: #0000CC;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,255,0.3);
-    }
-    .nu-btn-secondary {
-      background: transparent;
-      color: var(--nu-blue);
-      border: 2px solid var(--nu-blue);
-    }
-    .nu-btn-secondary:hover {
-      background: var(--nu-blue);
-      color: var(--nu-white);
-    }
-
-    /* FOOTER */
-    .nu-footer {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: rgba(255,255,255,0.85);
-      padding: 44px 32px;
-      text-align: center;
+      padding: 28px;
+      border-radius: 8px;
+      margin-bottom: 24px;
       position: relative;
       overflow: hidden;
     }
-    .nu-footer::before {
+    .script-block::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan), var(--nu-blue));
+      top: 0; right: 0;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(6,208,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .script-block .script-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--nu-cyan);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .script-block .script-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.95);
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* FOLLOW-UP CHECKLIST */
+    .checklist {
+      list-style: none;
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .checklist li {
+      padding: 16px 20px 16px 54px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      position: relative;
+      font-size: 0.98rem;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      background: var(--nu-white);
+    }
+
+    /* INFO CALLOUT */
+    .callout {
+      background: linear-gradient(135deg, rgba(6,208,255,0.08) 0%, rgba(0,0,255,0.04) 100%);
+      border-left: 5px solid var(--nu-cyan);
+      padding: 20px 24px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+    }
+    .callout .callout-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--nu-blue);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .callout p {
+      color: var(--nu-dark-text);
+      font-size: 0.98rem;
+    }
+
+    /* STATUS ROW */
+    .status-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .status-tile {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 6px;
+      padding: 20px;
+      text-align: center;
+    }
+    .status-tile .status-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--nu-body-text);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .status-tile .status-value {
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: var(--nu-blue);
+    }
+    .status-tile.alert .status-value { color: var(--nu-alert-red); }
+
+    /* FOOTER */
+    .nu-footer {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 60%, #000099 100%);
+      color: rgba(255,255,255,0.85);
+      padding: 50px 40px;
+      text-align: center;
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', 'Lato', serif;
       font-style: italic;
       font-weight: 300;
-      font-size: 1.15rem;
+      font-size: 1.3rem;
       color: var(--nu-cyan);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
     .nu-footer-contact {
-      font-size: 0.92rem;
-      line-height: 1.8;
+      font-size: 0.95rem;
+      line-height: 1.9;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
+      transition: color 0.2s ease;
     }
-    .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-contact a:hover {
+      color: var(--nu-white);
+    }
+    .nu-footer-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--nu-cyan);
+      margin: 20px auto;
+      opacity: 0.5;
+    }
 
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 220px; }
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.45em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .nu-inner { padding: 40px 22px; }
-      .brief-card, .script-block, .email-block { padding: 20px; }
-      .checklist-item { grid-template-columns: 44px 1fr; gap: 12px; padding: 16px 18px; }
-      .checklist-num { width: 32px; height: 32px; font-size: 0.88rem; }
-      .email-body p, .email-body .signature { padding-left: 10px; }
+      .page-title { font-size: 1.75rem; }
+      .nu-container { padding: 40px 20px; }
+      .priority-strip { flex-direction: column; align-items: flex-start; text-align: left; }
     }
 
     @media print {
+      body { background: white; }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .script-block, .checklist, .email-block { box-shadow: none; break-inside: avoid; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-      .cta-row { display: none; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .confirm-list li:hover { transform: none; }
     }
   </style>
 </head>
@@ -462,246 +451,151 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
-      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
-    </svg>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
-    <div class="nu-doc-type">Vendor Call Plan &middot; Written Confirmation</div>
   </header>
 
-  <!-- CHEVRON -->
+  <!-- CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L548,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- CONTENT -->
+  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-inner">
+    <div class="nu-container">
 
-      <!-- BRIEF -->
+      <!-- INTRO -->
+      <div class="page-intro">
+        <div class="breadcrumb">Action Item &nbsp;›&nbsp; <span>Vendor Call</span></div>
+        <h1 class="page-title">Call <span>H2O Waterproofing</span> — Get Transfer Terms in Writing</h1>
+        <p class="page-subtitle">
+          Phone call to H2O Waterproofing. Objective: secure written confirmation of transfer process and fees before proceeding with any further orders or customer commitments.
+        </p>
+      </div>
+
+      <!-- PRIORITY STRIP -->
+      <div class="priority-strip">
+        <span class="priority-label">Priority</span>
+        <span>Action required — do not advance vendor relationship until written confirmation received.</span>
+      </div>
+
+      <!-- STATUS ROW -->
+      <div class="status-row">
+        <div class="status-tile">
+          <div class="status-label">Type</div>
+          <div class="status-value">Vendor Call</div>
+        </div>
+        <div class="status-tile">
+          <div class="status-label">Channel</div>
+          <div class="status-value">Phone → Email</div>
+        </div>
+        <div class="status-tile alert">
+          <div class="status-label">Deliverable</div>
+          <div class="status-value">Written Confirmation</div>
+        </div>
+        <div class="status-tile">
+          <div class="status-label">Owner</div>
+          <div class="status-value">Aaron C. Norris</div>
+        </div>
+      </div>
+
+      <!-- VENDOR CONTACT -->
       <section class="nu-section">
-        <div class="brief-card">
-          <h2>Call Objective</h2>
-          <p>Call H2O Waterproofing and obtain <strong>written confirmation</strong> of the items below. Nothing in this matter moves forward on verbal agreement alone. Every confirmed point leaves the call in an email reply, a PDF, or a signed document in hand.</p>
-          <p>Why: verbal commitments from a waterproofing vendor are not enforceable against a schedule, a warranty, or a delivered scope. Paper protects Norris Utilities® and the end customer equally.</p>
-          <div class="meta-row">
-            <div><strong>Vendor:</strong> H2O Waterproofing</div>
-            <div><strong>Owner of record:</strong> Aaron C. Norris</div>
-            <div><strong>Doc date:</strong> April 20, 2026</div>
-            <div><strong>Required outcome:</strong> Written confirmation on file before close of business</div>
+        <h2 class="nu-section-title">Vendor <span>Contact</span></h2>
+        <div class="contact-card">
+          <div class="contact-item">
+            <span class="contact-label">Company</span>
+            <span class="contact-value">H2O Waterproofing</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Aaron's Phone</span>
+            <span class="contact-value">205-500-1343</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Aaron's Email</span>
+            <span class="contact-value">acnorris@norrisutilities.com</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Company</span>
+            <span class="contact-value">Norris Utilities, LLC</span>
           </div>
         </div>
       </section>
 
-      <!-- CALL SCRIPT -->
+      <!-- ITEMS TO CONFIRM IN WRITING -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Opening</span> &mdash; Set the Frame in the First 30 Seconds</h2>
+        <h2 class="nu-section-title">Get In <span>Writing</span></h2>
+        <p style="margin-bottom: 20px; color: var(--nu-body-text);">
+          Every item below must be confirmed by H2O Waterproofing via email — not voice, not text. If it is not in writing, it is not confirmed.
+        </p>
+        <ol class="confirm-list">
+          <li>
+            <div class="item-title">Transfer Process — Step by Step</div>
+            <div class="item-detail">Request a written description of the full transfer process H2O Waterproofing uses: what forms are required, what authorizations, what documentation is exchanged, and who signs off at each step.</div>
+          </li>
+          <li>
+            <div class="item-title">Transfer Fees — All-In Cost</div>
+            <div class="item-detail">Request the complete fee schedule in writing. Base fees, handling fees, expedite fees, any pass-through costs. No verbal quotes. Total landed cost in dollars — not ranges.</div>
+          </li>
+          <li>
+            <div class="item-title">Turnaround Time — Business Days Committed</div>
+            <div class="item-detail">Written commitment: number of business days from initiation to completion. Include any conditions that could extend the timeline.</div>
+          </li>
+          <li>
+            <div class="item-title">Points of Contact — Names &amp; Direct Lines</div>
+            <div class="item-detail">The person at H2O responsible for managing the transfer, their direct phone and email, and the backup if they are unavailable.</div>
+          </li>
+          <li>
+            <div class="item-title">What Can Block the Transfer</div>
+            <div class="item-detail">Any conditions, missing documentation, or eligibility issues that could cause H2O to reject or delay a transfer. Get the exclusions in writing so there are no surprises.</div>
+          </li>
+        </ol>
+      </section>
 
+      <!-- PHONE SCRIPT -->
+      <section class="nu-section">
+        <h2 class="nu-section-title">Opening <span>Script</span></h2>
         <div class="script-block">
-          <span class="script-label">Greeting</span>
-          <p>"This is Aaron Norris with Norris Utilities in Birmingham. Do you have a couple of minutes? I need to walk through a short list of items and get each one confirmed in writing today &mdash; either an email reply or a signed page, whichever is easier on your side."</p>
-          <p><em>Stay calm, warm, and direct. The phrase "in writing" is said out loud, up front, so it is not a surprise at the end of the call.</em></p>
+          <div class="script-label">When they pick up — Aaron says:</div>
+          <div class="script-text">
+            "This is Aaron Norris with Norris Utilities. I need to understand your transfer process and fee structure before we move any further. Walk me through how a transfer works on your end, and then please send me the process and the fee schedule in an email so I have it in writing. I want to make sure everyone on my team is working from the same information."
+          </div>
         </div>
 
-        <div class="script-block">
-          <span class="script-label">Anchor the Ask</span>
-          <p>"I am going to read you the points one at a time. As we get through each one, I will ask you to confirm, and then I will recap it in an email to you this afternoon. If you can reply 'confirmed' to that email, we are done and we can move forward."</p>
-          <p><em>This removes ambiguity. The vendor now expects a follow-up email and has been told in advance that a one-word reply closes the loop.</em></p>
-        </div>
-      </section>
-
-      <!-- CONFIRMATION CHECKLIST -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Confirmation</span> Checklist &mdash; Every Item Must End in Writing</h2>
-
-        <div class="checklist">
-          <div class="checklist-item">
-            <div class="checklist-num">1</div>
-            <div class="checklist-content">
-              <h4>Confirmation of Scope</h4>
-              <p>Have H2O Waterproofing state, in their own words, exactly what work they are performing, where it is being performed, and what materials and products are being used. Get the square footage or linear footage if applicable.</p>
-              <span class="ask">Ask: "Can you send me in an email the exact scope of work, the address, the square footage covered, and the product or system being applied?"</span>
-            </div>
-          </div>
-
-          <div class="checklist-item">
-            <div class="checklist-num">2</div>
-            <div class="checklist-content">
-              <h4>Pricing &mdash; Lump Sum, Unit Price, or T&amp;M</h4>
-              <p>Lock the number. If it is a lump sum, confirm the total. If it is unit pricing, confirm the unit rate and any minimum. If it is time and materials, confirm the hourly rate, the markup on materials, and the cap, if any.</p>
-              <span class="ask">Ask: "What is the total dollar figure, and is that a firm price or subject to change? If it can change, what triggers the change?"</span>
-            </div>
-          </div>
-
-          <div class="checklist-item">
-            <div class="checklist-num">3</div>
-            <div class="checklist-content">
-              <h4>Start Date &mdash; Firm or Tentative</h4>
-              <p>Get a calendar date on paper. If they cannot commit to a firm start, get the window (for example, week of May 4), and get what would cause the window to slip.</p>
-              <span class="ask">Ask: "What is the start date you are committing to, and what would cause that to move?"</span>
-            </div>
-          </div>
-
-          <div class="checklist-item">
-            <div class="checklist-num">4</div>
-            <div class="checklist-content">
-              <h4>Completion Date &mdash; Duration on the Job</h4>
-              <p>Get a stated duration and a projected completion date. Tie it to the start date. A vendor that will not put a completion date in writing is a vendor whose schedule cannot be planned around.</p>
-              <span class="ask">Ask: "From the start date, how many working days until completion, and what is the completion date you are putting on paper?"</span>
-            </div>
-          </div>
-
-          <div class="checklist-item">
-            <div class="checklist-num">5</div>
-            <div class="checklist-content">
-              <h4>Warranty &mdash; Term, Coverage, and Exclusions</h4>
-              <p>The warranty must be stated by term (for example, 5 years, 10 years, or a manufacturer&rsquo;s pass-through), by coverage (labor, materials, or both), and by exclusions. Ask specifically what voids it.</p>
-              <span class="ask">Ask: "What is the warranty in years, does it cover labor and materials, and what voids it? Please include the warranty document as a PDF."</span>
-            </div>
-          </div>
-
-          <div class="checklist-item">
-            <div class="checklist-num">6</div>
-            <div class="checklist-content">
-              <h4>Insurance &mdash; COI with Norris Utilities as Certificate Holder</h4>
-              <p>Request a current Certificate of Insurance showing General Liability, Auto, and Workers&rsquo; Compensation coverage. Norris Utilities, LLC must be listed as the certificate holder, and ideally as an additional insured where applicable.</p>
-              <span class="ask">Ask: "Please have your agent email a current COI to acnorris@norrisutilities.com with Norris Utilities, LLC listed as the certificate holder."</span>
-            </div>
-          </div>
-
-          <div class="checklist-item">
-            <div class="checklist-num">7</div>
-            <div class="checklist-content">
-              <h4>Payment Terms &mdash; Schedule, Method, and Retention</h4>
-              <p>Confirm the deposit percentage, any progress billing milestones, and the final payment trigger. Confirm retention if any is being held. Confirm the acceptable payment methods and the billing entity name and address exactly as it will appear on the invoice.</p>
-              <span class="ask">Ask: "What is the payment schedule, how do you want to be paid, and what is the exact legal name and billing address that should appear on our check or ACH?"</span>
-            </div>
-          </div>
-
-          <div class="checklist-item">
-            <div class="checklist-num">8</div>
-            <div class="checklist-content">
-              <h4>Point of Contact &mdash; Who Runs the Job</h4>
-              <p>Get the name, cell, and email of the person who will be on site or running the job day to day. Office numbers are not sufficient when something needs to happen on a jobsite at 7:00 AM.</p>
-              <span class="ask">Ask: "Who is the on-site lead for this work, and what is the best cell number and email for that person?"</span>
-            </div>
-          </div>
-
-          <div class="checklist-item">
-            <div class="checklist-num">9</div>
-            <div class="checklist-content">
-              <h4>Change Order Process</h4>
-              <p>Confirm in writing that no change to scope, price, or schedule is valid unless issued as a written change order signed by Aaron C. Norris. This single item prevents the majority of downstream disputes.</p>
-              <span class="ask">Ask: "Please confirm in the email that any change to scope, price, or schedule requires a written change order signed by me before it is valid."</span>
-            </div>
-          </div>
-
-          <div class="checklist-item">
-            <div class="checklist-num">10</div>
-            <div class="checklist-content">
-              <h4>Lien Waivers &mdash; Partial and Final</h4>
-              <p>Confirm H2O Waterproofing will provide partial lien waivers with any progress draw and a final, unconditional lien waiver with final payment. This is non-negotiable on any job that touches a property Norris Utilities or a customer holds an interest in.</p>
-              <span class="ask">Ask: "Please confirm you will provide partial lien waivers with each progress draw and a final unconditional lien waiver with final payment."</span>
-            </div>
-          </div>
+        <div class="callout">
+          <div class="callout-label">Closing Line — Lock In the Email</div>
+          <p>"Before we hang up, confirm the email address where you'll send the written process and fees. I'll watch for it today — send to <strong>acnorris@norrisutilities.com</strong>. Appreciate it."</p>
         </div>
       </section>
 
-      <!-- FOLLOW-UP EMAIL -->
+      <!-- POST-CALL CHECKLIST -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Follow-up</span> Email &mdash; Send Within Two Hours of the Call</h2>
-
-        <div class="email-block">
-          <div class="email-headers">
-            <div><strong>To:</strong> H2O Waterproofing &mdash; [contact name on call]</div>
-            <div><strong>From:</strong> Aaron C. Norris &lt;acnorris@norrisutilities.com&gt;</div>
-            <div><strong>Subject:</strong> Recap of our call &mdash; please reply "confirmed" to each item</div>
-          </div>
-          <div class="email-body">
-            <p>[Name] &mdash;</p>
-            <p>Thank you for the time on the phone. As promised, here is the recap of what we covered. Please reply to this email with the word "confirmed" next to each point, or note any correction, so I have our agreement on file.</p>
-            <ul>
-              <li>Scope of work, address, and product or system being applied</li>
-              <li>Total price and whether it is firm or subject to change, with change triggers</li>
-              <li>Start date and what would cause it to move</li>
-              <li>Duration in working days and the completion date</li>
-              <li>Warranty term, coverage (labor and materials), and exclusions &mdash; PDF to follow</li>
-              <li>Current Certificate of Insurance &mdash; Norris Utilities, LLC listed as certificate holder</li>
-              <li>Payment schedule, accepted methods, and the exact legal name and billing address for the invoice</li>
-              <li>On-site point of contact &mdash; name, cell, email</li>
-              <li>Any change to scope, price, or schedule requires a written change order signed by Aaron C. Norris before it is valid</li>
-              <li>Partial lien waivers with each progress draw and a final unconditional lien waiver with final payment</li>
-            </ul>
-            <p>Once I have your reply and the COI on file, I am good to proceed on our end. If any item needs more time to answer, let me know which one and when you will have it back to me.</p>
-            <p>Sincerely,</p>
-            <div class="signature">
-              Aaron C. Norris<br>
-              Founder &amp; CEO<br>
-              Norris Utilities, LLC<br>
-              Cell: 205-500-1343<br>
-              acnorris@norrisutilities.com
-            </div>
-          </div>
-        </div>
+        <h2 class="nu-section-title">After The <span>Call</span></h2>
+        <ul class="checklist">
+          <li>Log call date, duration, and person spoken with in master tracker.</li>
+          <li>Watch inbox for written confirmation email from H2O Waterproofing.</li>
+          <li>If nothing received within 24 hours — follow up by phone and reference the call.</li>
+          <li>File the written confirmation under Vendors → H2O Waterproofing.</li>
+          <li>Share process summary with Caroline Butler so she can reference it when customers ask.</li>
+          <li>Update master tracker: status = "Transfer terms documented — ready to proceed."</li>
+        </ul>
       </section>
 
-      <!-- RED FLAGS -->
+      <!-- WHY THIS MATTERS -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Red Flags</span> &mdash; Stop and Reassess if You Hear Any of These</h2>
-
-        <div class="red-flag-box">
-          <h4>"We do not put that in writing."</h4>
-          <p>Any refusal to confirm scope, price, schedule, warranty, or insurance in writing is a stop-work signal. A reputable waterproofing vendor will put every material term on paper without resistance.</p>
-        </div>
-        <div class="red-flag-box">
-          <h4>"We'll handle it as we go."</h4>
-          <p>Open-ended change terms create open-ended invoices. Insist on a written change order requirement before any work begins.</p>
-        </div>
-        <div class="red-flag-box">
-          <h4>"Our insurance agent is hard to reach."</h4>
-          <p>Certificates of Insurance are issued in minutes by any active agent. A delayed COI often means coverage is lapsed or inadequate. Do not release a deposit until the COI is on file.</p>
-        </div>
-        <div class="red-flag-box">
-          <h4>"The warranty is verbal, we stand behind our work."</h4>
-          <p>Verbal warranties cannot be transferred, enforced, or assigned. Get the written warranty document &mdash; manufacturer pass-through, contractor-backed, or both &mdash; in a PDF.</p>
-        </div>
-        <div class="red-flag-box">
-          <h4>"We don&rsquo;t bother with lien waivers on small jobs."</h4>
-          <p>Lien waivers protect the property owner regardless of job size. No progress payment goes out without a partial waiver; no final payment goes out without a final unconditional waiver.</p>
-        </div>
-      </section>
-
-      <!-- CALL LOG -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Call Log</span> &mdash; Record Below for the File</h2>
-
-        <div class="log-grid">
-          <div class="log-field"><label>Date of Call</label><div class="line"></div></div>
-          <div class="log-field"><label>Time (Start &mdash; End)</label><div class="line"></div></div>
-          <div class="log-field"><label>H2O Contact Name</label><div class="line"></div></div>
-          <div class="log-field"><label>H2O Contact Title</label><div class="line"></div></div>
-          <div class="log-field"><label>Phone Number Used</label><div class="line"></div></div>
-          <div class="log-field"><label>Email for Recap</label><div class="line"></div></div>
-          <div class="log-field"><label>Scope Confirmed?</label><div class="line"></div></div>
-          <div class="log-field"><label>Price Confirmed ($)</label><div class="line"></div></div>
-          <div class="log-field"><label>Start Date</label><div class="line"></div></div>
-          <div class="log-field"><label>Completion Date</label><div class="line"></div></div>
-          <div class="log-field"><label>Warranty Term</label><div class="line"></div></div>
-          <div class="log-field"><label>COI Received (Y/N)</label><div class="line"></div></div>
-          <div class="log-field"><label>Change Order Clause OK?</label><div class="line"></div></div>
-          <div class="log-field"><label>Lien Waiver Clause OK?</label><div class="line"></div></div>
-          <div class="log-field"><label>Recap Email Sent At</label><div class="line"></div></div>
-          <div class="log-field"><label>Written Reply Received?</label><div class="line"></div></div>
-        </div>
-
-        <div class="cta-row">
-          <a class="nu-btn-primary" href="tel:2055001343">Call Aaron &mdash; 205-500-1343</a>
-          <a class="nu-btn-secondary" href="mailto:acnorris@norrisutilities.com?subject=H2O%20Waterproofing%20%E2%80%94%20Written%20Confirmation%20Recap">Email Recap to Aaron</a>
+        <h2 class="nu-section-title">Why <span>Written Matters</span></h2>
+        <div class="callout">
+          <div class="callout-label">Verbal Does Not Count</div>
+          <p>Norris Utilities® operates on documented commitments. Verbal fee quotes change, verbal timelines slip, and verbal process descriptions get misremembered. Written terms protect the customer, protect the relationship with H2O Waterproofing, and protect the business. Do not commit a customer to H2O until the written terms are on file.</p>
         </div>
       </section>
 
@@ -711,10 +605,11 @@
   <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+    <div class="nu-footer-divider"></div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO &middot; Norris Utilities, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &middot;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &middot;
+      <strong>Aaron C. Norris</strong>, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>
