@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "description": "Known false-positive senders / patterns for the SA V5 order classifier (order_monitor.py). Each entry captures a junk SD that was created by the classifier in error, with the sender signature and reason for rejection. order_monitor.py loads this file and uses sender_patterns as an exclusion list.",
+  "last_updated": "2026-04-20T22:00:00-05:00",
+  "source_incident": "SA V5 D.10 — three junk SDs created from April 16 emails (Carlos Zapata, edevans@eufmc.com, GHK Admin). Root cause: the line 72 Gmail query used overly broad from: filters, and the classifier's signal check allowed generic keywords (e.g. 'order') to pass without domain verification.",
+  "examples": [
+    {
+      "junk_sd_id": "SD-2026-CARLOS-0416",
+      "customer": "Carlos Zapata",
+      "date_detected": "2026-04-16",
+      "sender_patterns": ["zapata"],
+      "reason": "Classifier matched 'zapata' token in CUSTOMER_DOMAINS list but sender has no relationship to Norris Utilities — no order-signal keywords, no PO, no product references. Common first/last name caused false positive.",
+      "action": "exclude"
+    },
+    {
+      "junk_sd_id": "SD-2026-EDEVANSEUFMCCOM-0416",
+      "customer": "edevans@eufmc.com",
+      "date_detected": "2026-04-16",
+      "sender_patterns": ["eufmc.com", "edevans@"],
+      "reason": "EUFMC (Electric Utility Fleet Managers Conference) is an industry event; the sender is a conference/mailing-list address, not a customer. No order-signal keywords present.",
+      "action": "exclude"
+    },
+    {
+      "junk_sd_id": "SD-2026-GHK-0416",
+      "customer": "GHK Admin",
+      "date_detected": "2026-04-16",
+      "sender_patterns": ["ghk"],
+      "reason": "Unknown admin sender unrelated to Norris Utilities — no order-signal keywords, no PO, no product references. 'GHK' token matched nothing in the known-customer list, meaning the email passed via a signal-based query but never had strong signals.",
+      "action": "exclude"
+    }
+  ],
+  "strong_signal_keywords": [
+    "bucket cover",
+    "NU-BC",
+    "2-man",
+    "1.5-man",
+    "1-man",
+    "please ship",
+    "ship to",
+    "PO#",
+    "purchase order",
+    "DEPT"
+  ],
+  "min_confidence_policy": {
+    "rule": "If the sender is NOT in CUSTOMER_DOMAINS (unknown sender) AND the email's subject+snippet contains NO strong_signal_keyword, the classifier MUST NOT create an SD. Log and skip the thread.",
+    "backward_compatible": "Existing orders already in shipping_docs.json and pending_orders.json are NOT re-processed. This policy only affects new, unseen thread IDs.",
+    "escalation": "If a legitimate sender is rejected by this policy, Aaron/CB adds them to CUSTOMER_DOMAINS (order_monitor.py line 60-65) and the next scan picks them up."
+  },
+  "gmail_query_exclusions": {
+    "description": "NOT from: tokens to add to the known-customers-by-name query on order_monitor.py line 72, so junk addresses are filtered before classification.",
+    "tokens": ["NOT from:zapata", "NOT from:eufmc.com", "NOT from:ghk"]
+  }
+}

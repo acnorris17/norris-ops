@@ -889,6 +889,38 @@ FILES:
 - Pending on D.8 + 4-source persistence rule: 5 March 20 canonical records persisted to customer_db.json, sa_learnings.json, LEGACY_LIVING_MEMORY.md, output/internal/sds/
 
 
+### [LIVING_MEMORY_UPDATE] SA V5 S2 — D.10 complete — 2026-04-21T01:16Z
+[LIVING_MEMORY_UPDATE] SA V5 S2 — D.10 complete — 2026-04-21T01:16Z
+
+## COMPLETED
+- D.10 classifier hardening: scripts/order_monitor.py NEGATIVE_PATTERNS + MIN_CONFIDENCE=0.70 gate.
+- data/classifier_negative_examples.json seeded v5.1.0 with 3 patterns (EUFMC / GHK / Carlos-Globaltec-no-NU-context).
+- tests/test_order_monitor_classifier.py — 13 tests, all pass.
+- Combined test suite (D.7 sid + D.10 classifier): 30/30 green.
+- Quiet-hours guard refactored into __main__ so module is importable at any hour.
+
+## DECISIONS
+- Negative patterns use must_not_contain_any_of for context-aware filtering (e.g. "Carlos + FlexPro + NU-BC" should NOT be filtered even though it contains "Carlos").
+- Below-MIN_CONFIDENCE candidates go to data/classifier_deferred.jsonl for weekly review (never auto-SD).
+- Scoring: 0.50 known-customer + 0.30 subject signal + 0.20 snippet signal + 0.20 PO + 0.10 product mention, capped at 1.0.
+
+## CHANGED
+- scripts/order_monitor.py (+119 LOC)
+- data/classifier_negative_examples.json (v5.0.0 empty → v5.1.0 with 3 patterns)
+- tests/test_order_monitor_classifier.py (new, 200 LOC)
+
+## BLOCKED
+None.
+
+## NEXT
+D.9 (delete 4 junk SDs + archive 2 superseded), then D.2/D.3 Hunt Ladder rungs, D.4 rules validators, D.5 invoice_prep. Aaron authorized autonomous run through Gate 2.
+
+## FILES
+- Commit 7cf5392 on feature/shipping-agent-v5
+- Branch not pushed (Gate 5 merge deferred)
+- Session 2 prior commits: fbd4195 (Rule v1 migration), 5e09fa7 (proposal Applied), a6f8553 (stash restore), 291a61e (audit artifacts).
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
