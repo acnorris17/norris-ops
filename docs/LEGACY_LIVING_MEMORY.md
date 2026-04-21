@@ -1145,6 +1145,14 @@ Project: Norris Utilities — Legacy Bot
 Conversation title: Missing iShip Email Delivery — Diagnosis, Fix, Recovery
 
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S2 CC Build — 2026-04-21
+COMPLETED: V5 S2 pre-flight (PF.4 schema-corrected) and Gate 1.5 SID backfill. sid_issuance_log.jsonl now has 15 contiguous entries S-2026-001..015. 013/014/015 cite ops commit f867bf0 as source.
+CHANGED: data/sid_issuance_log.jsonl (+3 entries); norris-ops/docs/LEGACY_LIVING_MEMORY.md staged-uncommitted with new ## DATA SCHEMA CONTRACTS section (will commit during D.2 per Correction 1).
+NEXT: D.9 — introspect shipping_docs.json schema, delete junk SDs (CARLOS/EDEVANS/GHK/RICHARD-0413/CROSBY-0325), archive superseded Jeremy Brown, capture classifier negatives.
+COMMIT: 525a2d1 on feature/shipping-agent-v5 (norris-agent)
+STASHES: preflight-untracked-daemon-output-2026-04-21 (stash@{0}), preflight-daemon-noise-2026-04-21-masterbuild (stash@{1}). pre-v5-recovery-stash now at stash@{7} — DO NOT POP this session.
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -2013,3 +2021,73 @@ Aaron's explicit directions this session:
 3. Silence mirror success Telegram pings permanently.
 
 Commits: norris-ops/main: 7feae47, 713dd54, 25970ef | norris-agent/main: 3fbb600, 44d8593
+
+---
+
+## DATA SCHEMA CONTRACTS
+## Established: April 21, 2026 (V5 S2 master build, PF.4 correction)
+
+This section is the AUTHORITATIVE contract for how V5+ code reads canonical
+data files. When a schema changes, this section updates BEFORE the code
+changes, and every consumer must assert the expected version.
+
+### customer_db.json — v5.0.0 (wrapped schema)
+
+Top-level shape:
+
+```json
+{
+  "version": "5.0.0",
+  "customers": {
+    "<customer_id>": {
+      "customer_id": "...",
+      "canonical_name": "...",
+      "common_aliases": [...],
+      "billing_address": {"full": "..."},
+      "billing_route": "direct_check" | "corporate_ap" | ...,
+      "billing_tier": "direct" | "dealer",
+      "po_required": bool,
+      "is_cc_customer": bool,
+      "payment_terms": "...",
+      "ship_to_history": [{"address": {"full": "..."}, "first_used": "...", "last_used": "...", "frequency": int, "label": str|null}],
+      "primary_pocs": [{"name": "...", "email": "...", "phone": "..."}],
+      "notes": "...",
+      "source": "qb" | "aaron" | ...,
+      "source_priority": int,
+      "created_at": "ISO8601",
+      "updated_at": "ISO8601"
+    },
+    ...
+  },
+  "last_updated": "ISO8601"
+}
+```
+
+**Rules for every customer_db consumer:**
+
+1. Load via a helper that asserts version. Canonical helper:
+   ```python
+   def _load_customer_db():
+       d = json.load(open('data/customer_db.json'))
+       if d.get('version') != '5.0.0':
+           raise RuntimeError(f"customer_db schema mismatch: {d.get('version')}")
+       return d['customers']
+   ```
+2. Never index `d['<customer_id>']` — always `d['customers']['<customer_id>']`,
+   or iterate `_load_customer_db().values()`.
+3. Tests must include a `test_v5_schema_guard` that fails fast if the version
+   key changes — we want schema bumps to halt, not silently misbehave.
+4. `billing_address` is a dict with a `full` key (single-string address). No
+   split street/city/state/zip fields at this schema level.
+5. `primary_pocs` is a LIST of dicts — a customer may have 0, 1, or many POCs.
+   Code must handle each case. Never assume `primary_pocs[0]` exists.
+
+**Historic note (why this section exists):**
+
+The PF.4 canary in the V5 S2 master build asserted `d.get('Florence Electricity Department')`
+against a flat-schema assumption. Under v5.0.0 that returns None and the
+canary halted pre-flight even though Pickle/Florence was present. Aaron
+instructed the fix and established this schema contract to prevent repeat
+incidents. Every downstream customer_db reader in V5 must match the contract
+above. Future schema bumps will add a new subsection here before the code
+migration.
