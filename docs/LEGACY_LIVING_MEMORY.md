@@ -921,6 +921,61 @@ D.9 (delete 4 junk SDs + archive 2 superseded), then D.2/D.3 Hunt Ladder rungs, 
 - Session 2 prior commits: fbd4195 (Rule v1 migration), 5e09fa7 (proposal Applied), a6f8553 (stash restore), 291a61e (audit artifacts).
 
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S2 — Ground Truth Captured + Master CC Prompt Emitting — 2026-04-21
+Master CC Prompt being emitted now in the next turn. Aaron has explicitly stepped away and is relying on this prompt to run correctly without further Q&A from him.
+
+GROUND TRUTH FROM PASTE A-FIX (appended to session2_resume_diagnostic_2026-04-21.md):
+
+FEATURE BRANCH STATE — feature/shipping-agent-v5 at 7cf5392 "V5 S2 D.10: classifier NOT-filter + MIN_CONFIDENCE gate"
+
+PRESENT on feature:
+- lib/sid.py (6,382 bytes, API confirmed: issue_sid/list_active_sids/lookup_sid/migrate_old_id/tombstone_sid)
+- lib/truth_sources.py (4,639 bytes)
+- data/sid_crosswalk.json (1,779 bytes)
+- data/sid_issuance_log.jsonl (3,065 bytes, 12 entries S-2026-001 through S-2026-012, all retro_migration_2026-04-20)
+- data/shipping_docs.json (466,931 bytes — BUT loads as 0 orders; schema issue or pre-populated-pre-rule-v1 format)
+- data/customer_db.json (99,682 bytes — Pickle IS present at "Florence Electricity Department", confirmed billing_address 611 East Reeder Street Florence AL 35630 US)
+- data/name_aliases.json (1,432 bytes)
+- data/classifier_negative_examples.json (1,592 bytes)
+- data/product_catalog.json (12,524 bytes)
+- data/sa_learnings.json (79 bytes — essentially empty, needs seeding)
+- output/docs/SID_RULE_v1_2026-04-20.md (4,906 bytes)
+- output/docs/SID_CROSSWALK_v1_2026-04-20.md (7,848 bytes)
+- output/reports/SA_V5_AUDIT_2026-04-20.md (57,249 bytes)
+- output/reports/qb_baseline_v5.md (2,033 bytes)
+- output/reports/shipping_agent_readiness_v5_2026-04-17.md (4,459 bytes)
+- output/internal/SD_MASTER_TEMPLATE.html (6,979 bytes, 14 tokens verified)
+- scripts/shipping_agent_v5.py (123 lines — stub, run_pipeline exits "stages not yet wired")
+- scripts/shipping_hunter.py (9,429 bytes, 263 lines — 11-rung Hunt Ladder SCAFFOLDED; iship/ups_api/ups_playwright/remarkable/sheet_direct_read are STUBS; gmail_ups_receipt/gmail_ups_delivery/boss_vendor_email are LIVE)
+- scripts/shipping_readiness_gate.py (11,502 bytes)
+- scripts/order_monitor.py (30,817 bytes)
+- LEGACY_LIVING_MEMORY.md (116,936 bytes)
+
+MISSING on feature (MUST BUILD):
+- lib/process_rules.py (D.4 — 5 blocking validators)
+- lib/invoice_prep.py (D.5 — Chain Electric $8,930.48 regression target)
+- lib/living_memory.py (D.11 — Living Memory auto-update)
+- lib/ups_api.py (D.6 — UPS Developer API)
+- lib/ups_browser.py (D.6 — Playwright fallback)
+- data/hunt_attempts.jsonl (created on first Hunt Ladder run)
+- tests/test_sid.py, test_customer_db_lookup.py, test_name_aliases.py, test_process_rules.py, test_invoice_prep.py, test_ups_tracking.py
+
+PYTHON DEPS:
+- Present: requests, bs4, fcntl, pathlib
+- MISSING: playwright, selenium, undetected_chromedriver, pydantic, beautifulsoup4 (bs4 present without beautifulsoup4 is weird — beautifulsoup4 installs bs4, check imports), pydantic
+
+ENV VARS (names confirmed): ANTHROPIC_API_KEY, CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET, CF_ACCOUNT_ID, CF_APP_AARON_UUID, CF_APP_SHARED_UUID, CF_LEGACY_TOKEN_UUID, CF_SERVICE_TOKEN_CLIENT_ID, CF_SERVICE_TOKEN_CLIENT_SECRET, CF_TEAM_DOMAIN, CF_ZONE_ID_NORRISOPS, CLOUDFLARE_API_TOKEN, OPENAI_API_KEY, PAGES_PROJECT, PAGES_URL, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+
+NOT IN ENV (critical for D.6 UPS multi-method):
+- UPS_CLIENT_ID / UPS_CLIENT_SECRET (UPS Developer API still pending approval — error 182279)
+
+DISK SPACE: 926GB disk, 873GB used, 27GB free, 98% capacity. Tight. Playwright Chromium download is ~200MB. Will work but monitor.
+
+5 CC PROCESSES PRESERVED on M1 as breadcrumbs (do not kill).
+
+PASTE COUNT: this session fires one Master CC Prompt to a NEW 6th CC window. Aaron walks away. Build CC works autonomously through Gate 2 (UPS method select — first mandatory pause).
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
