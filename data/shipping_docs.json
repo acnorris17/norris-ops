@@ -89,12 +89,12 @@
       "products": [
         {
           "sku": "NU-BC-2851",
-          "name": "FlexPro Armor® 2-Man Bucket Cover",
+          "name": "FlexPro Armor\u00ae 2-Man Bucket Cover",
           "qty": 5
         },
         {
           "sku": "NU-BC-2834",
-          "name": "FlexPro Armor® 1.5-Man Bucket Cover",
+          "name": "FlexPro Armor\u00ae 1.5-Man Bucket Cover",
           "qty": 5
         }
       ],
@@ -104,13 +104,13 @@
         "line_items": [
           {
             "sku": "NU-BC-2851",
-            "name": "FlexPro Armor® 2-Man Bucket Cover",
+            "name": "FlexPro Armor\u00ae 2-Man Bucket Cover",
             "qty": 5,
             "unit_price": 305
           },
           {
             "sku": "NU-BC-2834",
-            "name": "FlexPro Armor® 1.5-Man Bucket Cover",
+            "name": "FlexPro Armor\u00ae 1.5-Man Bucket Cover",
             "qty": 5,
             "unit_price": 265
           }
@@ -285,7 +285,7 @@
         }
       ],
       "shipTo": "192 Old Wire Rd, MC M40, West Columbia, SC 29170",
-      "notes": "",
+      "notes": "PO MISMATCH: ops record shows 42350802, SD-2026-DOMINION-4501057807-0413 shows 4501057807. Row-note only \u2014 formal cb_internal_note pending D.4.",
       "internal_pricing": {
         "line_items": [
           {

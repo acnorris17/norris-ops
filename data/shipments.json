@@ -161,5 +161,67 @@
       "pending_reason": "Blocked on Boss SKU \u2014 SD render scheduled in D.8"
     }
   ],
-  "sid_rule_version": 1
+  "sid_rule_version": 1,
+  "shipments": [
+    {
+      "id": "S-2026-013",
+      "customer": "Jimmy Benz",
+      "company": "SWEPCO",
+      "email": "",
+      "phone": "",
+      "product": "1x FlexPro Armor 2-Man BC",
+      "sku": "NU-BC-2851",
+      "qty": 1,
+      "amount": 305,
+      "ship_date": "2026-03-20",
+      "po": "Truck #860377",
+      "status": "ready",
+      "cc_customer": true,
+      "tracking": "1Z2W49000393585850",
+      "sd_link": "",
+      "notes": "CC customer (4% fee). Mar 20 shipment. Truck #860377 on invoice.",
+      "created": "2026-04-20T20:17:36.260344",
+      "updated": "2026-04-20T20:17:36.260344"
+    },
+    {
+      "id": "S-2026-014",
+      "customer": "Darrell Pickle",
+      "company": "Florence Electric Utility Board",
+      "email": "Dpickle@florenceal.org",
+      "phone": "",
+      "product": "3x NU-BC-2834 + 1x NU-BC-2834-C + 2x NU-BC-2834-F",
+      "sku": "NU-BC-2834/C/F",
+      "qty": 6,
+      "amount": 1710,
+      "ship_date": "2026-03-20",
+      "po": "",
+      "status": "ready",
+      "cc_customer": false,
+      "tracking": "1Z2W49000328351797",
+      "sd_link": "",
+      "notes": "P/Ns confirmed Apr 8. Mixed ARCH/Combo/reg 1.5-Man. Delivered Mar 23.",
+      "created": "2026-04-20T20:17:36.260344",
+      "updated": "2026-04-20T20:17:36.260344"
+    },
+    {
+      "id": "S-2026-015",
+      "customer": "Sammy Myers",
+      "company": "AEP Roanoke",
+      "email": "",
+      "phone": "",
+      "product": "2x NU-BC-2834-F + 1x NU-BC-2834-C",
+      "sku": "NU-BC-2834-F/C",
+      "qty": 3,
+      "amount": 915,
+      "ship_date": "2026-03-20",
+      "po": "",
+      "status": "ready",
+      "cc_customer": false,
+      "tracking": "1Z2W49000395012652",
+      "sd_link": "",
+      "notes": "ARCH+Combo. UPS label shows 'Chain Electric / Abshire' \u2014 clerical alias, canonical=Sammy Myers. Delivered Mar 24.",
+      "created": "2026-04-20T20:17:36.260344",
+      "updated": "2026-04-20T20:17:36.260344"
+    }
+  ]
 }
