@@ -1734,3 +1734,26 @@ That number will **never** be reused.
   in `rec["internal_s_id"]` (new format flows through unchanged).
 - Any future code reading or writing S-IDs must go through `lib/sid.py`. No
   direct mutation of `internal_s_id` in `shipping_docs.json`.
+
+## April 20, 2026 — Evening session closeout (authoritative version)
+
+Session arc: Infrastructure closeout for Cloudflare ZT + autonomous portal work starting AM.
+
+Shipped:
+- sync_norrisops_pages.sh built live at canonical path (2703b executable). Smoke test commit 713dd54, mirror log silent-on-success policy locked.
+- Live Roadmap System v1 deployed via CC (commit 7feae47): roadmap.json seeded 36 items, dynamic HTML render, update_roadmap.py CLI, 4 tabbed views, 8 connection points. Smoke test 6/8 fired.
+- Bridge progress-ping spam silenced (commit 3fbb600). Log-only on success, TIER 1 only on failure.
+- update_roadmap.py cherry-picked to norris-agent main (commit 44d8593).
+
+Broken (pending fixes):
+- project-roadmap.html regressions: password prompt + brand system not applied. Legacy rebuild didn't inherit Zero Trust pattern.
+- update_roadmap.py v1.1 gaps: NorrisPalace write not wired, gbrain API mismatch, LM churn uncommitted, docstring drift.
+- CF Access service token rejected on norrisops.com — service_token_status:false. No rotation; investigate policy binding.
+- Legacy's filesystem checks have false-negative bug (v1.1 triage).
+
+Aaron's explicit directions this session:
+1. NO CREDENTIAL ROTATIONS despite transcript leak of 5 values.
+2. Always specify WHERE a command should be pasted.
+3. Silence mirror success Telegram pings permanently.
+
+Commits: norris-ops/main: 7feae47, 713dd54, 25970ef | norris-agent/main: 3fbb600, 44d8593
