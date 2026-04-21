@@ -1246,6 +1246,67 @@ CONTEXT THAT MUST PERSIST:
 - Next expected Tier 1 after FREE clears is GATE 2 — UPS method selection. That's the next real Aaron decision.
 
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S2 — Gate 2 REVISED: iShip LIVE + My Choice ACTIVE; D.6b Backprocess Inserted — 2026-04-21
+Parallel session this morning (iShip Recovery Audit Complete, 12:00 PM CT) materially changed the Gate 2 UPS method landscape. Re-verified from Gmail ground truth (not the session transcript — Gmail is authoritative):
+
+iSHIP RESTORATION CONFIRMED:
+- 4 live iShip emails from iShip_Services_201@iship.com landed between 12:57 PM and 2:07 PM CT today (Dominion, LineTec x2, AEP/SWEPCO)
+- Recovery audit identified $2,211 historical unbilled shipping in recovered iShip thread data
+- iShip was never actually dead — Gmail filter / UPS Store list caused silent drops since March 24. Fix landed ~11:30 AM CT 2026-04-21.
+
+MY CHOICE FOR BUSINESS ACTIVATED:
+- Welcome email from mcinfo@ups.com at 2026-04-20 19:58Z
+- Method 7 (UPS My Choice) promoted from DEFERRED to ACTIVE via email capture
+- No webhook receiver needed — emails come through Gmail, parsed same as iShip/Quantum View
+
+MATERIAL REVISION TO MASTER CC PROMPT:
+- Revised SELECT order: 1,5,6,4,7,8,2,3 (was 1,6,4,5,8,2,3,7)
+- iShip elevated from position 5 (DORMANT) to position 2 (LIVE, PRIMARY for UPS Store shipments)
+- My Choice elevated from position 8 (DEFERRED) to position 5 (ACTIVE email capture)
+- Aaron-assist demoted from position 5 to position 6 (true fallback only, target <20 interactions for full 40+ backlog)
+- Browser methods (2, 3) unchanged — still DISABLED due to Akamai TLS block from M1
+
+NEW TASK INSERTED — D.6b (between Gate 2 commit and D.8):
+- Email-based historical backprocess — iShip + Boss PDF + Quantum View + My Choice
+- DRY-RUN only; no writes to shipments.json
+- Output: output/reports/email_backprocess_dry_run_2026-04-21.md with per-method yields, matches, orphans
+- Expected yield per 12 PM audit: $2,211 iShip + estimated additional from Boss PDF + QV + MyChoice
+- Writes deferred to Gate 4 dry-run writeset review
+
+DECISIONS LOCKED:
+- Gate 2 SELECT includes full revised config + D.6b backprocess spec + updated disabled_reasons JSON
+- Master CC Prompt spine unchanged: D.8, D.1, D.11, P/N migration, Gates 3/4/5 proceed as originally specced
+- Only insert is D.6b between Gate 2 commit and D.8
+
+CHANGED in this turn (pending Aaron paste to CC):
+- data/ups_method_config.json — new schema with active/disabled/environment_notes_2026_04_21/backlog_first_pass_plan
+- output/reports/email_backprocess_dry_run_2026-04-21.md (to be generated in D.6b)
+
+BLOCKED: None.
+
+NEXT:
+1. Aaron pastes revised SELECT block into CC window
+2. CC commits Gate 2 config
+3. CC runs D.6b email backprocess dry-run → report
+4. CC Tier 2 with backprocess summary
+5. CC proceeds to D.8 (original plan)
+6. D.1 → D.11 → P/N migration → Gate 3 → Gate 4 (AARON APPROVAL) → Gate 5 (AARON APPROVAL)
+
+KEY QUOTE / LESSON:
+I could not read Aaron's shared Claude.ai session URL (no browsing). Instead I pulled iShip/MyChoice evidence directly from his Gmail — which is ground truth and more reliable than a session transcript anyway. The 4 live iShip emails from today + the mcinfo@ups.com welcome email told the complete story. Lesson: when a transcript is unreachable, go to the source data the transcript was about. Gmail/Drive/customer_db are always authoritative above any summary.
+
+The iShip restoration + My Choice activation together mean 5 of 8 UPS methods are Akamai-independent and 3 of them are LIVE TODAY (iShip, My Choice, Boss PDF). This is materially better than the 0/8 live probe made it look. The build is not compromised — the initial Akamai block was environmental AND the fix to iShip was separate AND My Choice just came online. All three facts compound into a much stronger Gate 2 production order than originally specced.
+
+CONTEXT THAT MUST PERSIST:
+- iShip feed LIVE from iShip_Services_201@iship.com as of 2026-04-21 ~11:30 AM CT
+- UPS My Choice for Business ACTIVE from mcinfo@ups.com as of 2026-04-20 19:58Z
+- UPS Developer API Ticket #182279 still pending — check Gmail every ~72 hrs for UPS response
+- $2,211 historical iShip backlog already identified; D.6b backprocess will confirm and expand
+- Aaron-assist should be last-resort, <20 interactions total for full 40+ invoice backlog
+- Browser methods (Playwright, Selenium) preserved-but-disabled; V5.1 re-enables behind proxy
+- Session parallel verification worked: M5 handled iShip diagnosis + fix in AM while this V5 build session ran; both sessions produced [LIVING_MEMORY_UPDATE] drafts; Living Memory bridge is the cross-session connective tissue
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
