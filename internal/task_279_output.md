@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Water Intrusion Remediation Action Plan — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Water Intrusion Remediation — Action Plan — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
     :root {
       --nu-blue: #0000FF;
@@ -16,9 +16,11 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-warning-red: #C8102E;
-      --nu-warning-amber: #F0A800;
+      --nu-alert-red: #C8102E;
+      --nu-warn-amber: #E8A90C;
+      --nu-success-green: #2D7A3E;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Playfair Display', Georgia, serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,7 +28,7 @@
     body {
       font-family: var(--font-primary);
       color: var(--nu-body-text);
-      background: var(--nu-white);
+      background: var(--nu-light-gray);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -34,24 +36,21 @@
     /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033CC 30%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
       padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 320px;
+      min-height: 300px;
     }
-
     .nu-header::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
         repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.7;
     }
-
     .nu-header::after {
       content: '';
       position: absolute;
@@ -60,541 +59,435 @@
       background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
-
-    .nu-header * { position: relative; z-index: 2; }
+    .nu-header > * { position: relative; z-index: 2; }
 
     .nu-phoenix-icon {
-      width: 78px;
-      height: 78px;
-      margin: 0 auto 18px;
-      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.35));
+      width: 72px; height: 72px;
+      margin: 0 auto 14px;
+      filter: drop-shadow(0 2px 14px rgba(0,0,0,0.35));
     }
-
     .nu-logo-text {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 3.2rem;
+      font-size: 3rem;
       color: var(--nu-white);
       letter-spacing: 0.35em;
       text-transform: uppercase;
       margin-bottom: 4px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
-
     .nu-logo-subtitle {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       color: var(--nu-white);
       letter-spacing: 0.8em;
       text-transform: uppercase;
-      margin-bottom: 22px;
-      padding-left: 0.8em;
+      margin-bottom: 18px;
     }
-
     .nu-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-display);
       font-style: italic;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 1.35rem;
       color: rgba(255,255,255,0.95);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
     }
 
     /* CHEVRON */
     .nu-chevron {
       position: relative;
-      height: 60px;
-      margin-top: -60px;
+      height: 50px;
+      margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg {
-      width: 100%;
-      height: 60px;
-      display: block;
-    }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
-    /* DOCUMENT META BAR */
-    .nu-doc-meta {
-      background: var(--nu-light-gray);
-      border-bottom: 3px solid var(--nu-blue);
-      padding: 18px 40px;
-    }
-    .nu-doc-meta-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 0.85rem;
-      color: var(--nu-dark-text);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .nu-doc-meta-inner span { display: inline-flex; align-items: center; gap: 8px; }
-    .nu-doc-meta-inner strong { color: var(--nu-blue); font-weight: 900; }
-    .nu-priority-badge {
-      background: var(--nu-warning-red);
-      color: var(--nu-white);
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-    }
-
-    /* CONTENT */
-    .nu-content-area {
-      position: relative;
+    /* DOC BAND */
+    .doc-band {
       background: var(--nu-white);
-      overflow: hidden;
-    }
-    .nu-content-area::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 65%; height: 65%;
-      max-width: 700px; max-height: 700px;
-      background: radial-gradient(circle, rgba(0,0,255,0.04) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
-    }
-    .nu-content-area > * { position: relative; z-index: 1; }
-
-    .nu-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 40px;
-    }
-
-    /* PAGE TITLE */
-    .nu-page-title-block {
-      text-align: center;
-      margin-bottom: 50px;
-      padding-bottom: 30px;
       border-bottom: 1px solid var(--nu-medium-gray);
+      padding: 28px 40px;
+      text-align: center;
     }
-    .nu-page-eyebrow {
+    .doc-eyebrow {
       display: inline-block;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      padding: 6px 16px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 900;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-    .nu-page-title {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 2.6rem;
-      line-height: 1.15;
-      color: var(--nu-dark-text);
-      margin-bottom: 14px;
-      letter-spacing: -0.01em;
-    }
-    .nu-page-title em {
       color: var(--nu-blue);
-      font-style: normal;
+      margin-bottom: 10px;
+      padding: 6px 14px;
+      background: rgba(0,0,255,0.06);
+      border-radius: 20px;
     }
-    .nu-page-subtitle {
-      font-size: 1.1rem;
+    .doc-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--nu-dark-text);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      line-height: 1.15;
+    }
+    .doc-title span { color: var(--nu-blue); }
+    .doc-sub {
+      font-size: 1rem;
       color: var(--nu-body-text);
       max-width: 780px;
       margin: 0 auto;
-      line-height: 1.55;
     }
-
-    /* SECTION HEADERS */
-    .nu-section {
-      margin-bottom: 56px;
-    }
-    .nu-section-title {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.5rem;
-      color: var(--nu-blue);
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--nu-medium-gray);
-      letter-spacing: 0.01em;
-    }
-    .nu-section-title span {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-
-    /* ALERT BANNER */
-    .nu-alert {
+    .doc-meta {
       display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
-      border-left: 5px solid var(--nu-warning-red);
-      padding: 22px 26px;
-      border-radius: 6px;
-      margin-bottom: 40px;
-      box-shadow: 0 2px 12px rgba(200, 16, 46, 0.08);
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 24px;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #666;
     }
-    .nu-alert-icon {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-      background: var(--nu-warning-red);
+    .doc-meta strong { color: var(--nu-dark-text); font-weight: 700; }
+
+    /* MAIN CONTENT */
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-light-gray);
+    }
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 50px 40px 60px;
+    }
+
+    /* PRIORITY STRIP */
+    .priority-strip {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 20px;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 22px 28px;
+      border-radius: 10px;
+      margin-bottom: 36px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      border-left: 6px solid var(--nu-cyan);
+    }
+    .priority-icon {
+      width: 52px; height: 52px;
+      background: var(--nu-cyan);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--nu-white);
-      font-weight: 900;
-      font-size: 1.4rem;
-      font-family: Georgia, serif;
+      flex-shrink: 0;
     }
-    .nu-alert-body h3 {
+    .priority-icon svg { width: 28px; height: 28px; fill: var(--nu-navy); }
+    .priority-body h2 {
       font-weight: 900;
-      color: var(--nu-warning-red);
-      font-size: 1.05rem;
-      margin-bottom: 6px;
+      font-size: 1.25rem;
+      margin-bottom: 4px;
       letter-spacing: 0.02em;
+    }
+    .priority-body p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+    }
+    .priority-tag {
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-    }
-    .nu-alert-body p {
-      color: var(--nu-dark-text);
-      font-size: 0.97rem;
-      line-height: 1.55;
-    }
-
-    /* CHEVRON BADGES */
-    .nu-badge {
-      display: inline-flex;
-      align-items: center;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      padding: 8px 14px;
+      background: var(--nu-alert-red);
       color: var(--nu-white);
-      padding: 12px 28px 12px 18px;
-      margin-bottom: 18px;
-      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 14px 50%);
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding-left: 28px;
+      border-radius: 4px;
+      white-space: nowrap;
     }
 
-    /* PHASE CARDS */
-    .nu-phases {
+    /* SECTION HEADERS */
+    .nu-section-title {
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      letter-spacing: -0.005em;
+    }
+    .nu-section-title span:first-child { color: var(--nu-blue); }
+    .nu-section-title span:last-child { color: var(--nu-dark-text); }
+    .section-rule {
+      height: 3px;
+      width: 60px;
+      background: var(--nu-cyan);
+      margin-bottom: 22px;
+    }
+    .section { margin-bottom: 44px; }
+
+    /* SUMMARY CARD */
+    .summary-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 28px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      border-left: 4px solid var(--nu-blue);
+    }
+    .summary-card p { margin-bottom: 12px; font-size: 1rem; }
+    .summary-card p:last-child { margin-bottom: 0; }
+    .summary-card strong { color: var(--nu-dark-text); font-weight: 700; }
+
+    /* PHASE GRID */
+    .phase-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 18px;
     }
-    .nu-phase-card {
+    .phase-card {
       background: var(--nu-white);
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
-      border-top: 4px solid var(--nu-blue);
-      border-radius: 8px;
-      padding: 26px 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .nu-phase-card:hover {
+    .phase-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 28px rgba(0,0,0,0.1);
     }
-    .nu-phase-num {
-      display: inline-block;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 40px;
-      font-weight: 900;
-      font-size: 1.1rem;
-      margin-bottom: 14px;
-    }
-    .nu-phase-card h4 {
-      font-weight: 900;
-      color: var(--nu-dark-text);
-      font-size: 1.15rem;
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .nu-phase-timing {
-      display: inline-block;
-      background: var(--nu-light-gray);
-      color: var(--nu-blue);
-      font-weight: 700;
-      font-size: 0.78rem;
-      padding: 4px 10px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .nu-phase-card ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 10px;
-    }
-    .nu-phase-card ul li {
-      position: relative;
-      padding-left: 18px;
-      margin-bottom: 8px;
-      font-size: 0.93rem;
-      line-height: 1.5;
-    }
-    .nu-phase-card ul li::before {
-      content: '•';
+    .phase-num {
       position: absolute;
-      left: 0;
-      color: var(--nu-cyan);
+      top: -14px; left: 22px;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
+      color: var(--nu-white);
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 900;
       font-size: 1.1rem;
-      line-height: 1;
+      box-shadow: 0 4px 12px rgba(0,0,255,0.3);
+    }
+    .phase-title {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin: 10px 0 6px;
+    }
+    .phase-window {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--nu-blue);
+      margin-bottom: 10px;
+    }
+    .phase-card p {
+      font-size: 0.92rem;
+      color: var(--nu-body-text);
     }
 
-    /* TABLE */
-    .nu-table-wrap {
-      overflow-x: auto;
-      border-radius: 8px;
+    /* BADGES */
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .nu-badge {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 12px 26px 12px 16px;
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+    }
+    .nu-badge-icon {
+      width: 22px; height: 22px;
+      margin-right: 10px;
+      fill: var(--nu-cyan);
+      flex-shrink: 0;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 10px 28px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
     }
-    .nu-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--nu-white);
-      font-size: 0.93rem;
-    }
-    .nu-table thead {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: var(--nu-white);
-    }
-    .nu-table th {
-      padding: 14px 16px;
-      text-align: left;
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-    }
-    .nu-table td {
-      padding: 14px 16px;
+    .check-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 0;
       border-bottom: 1px solid var(--nu-medium-gray);
-      vertical-align: top;
     }
-    .nu-table tbody tr:nth-child(even) {
-      background: var(--nu-light-gray);
-    }
-    .nu-table tbody tr:hover {
-      background: #eef4ff;
-    }
-    .nu-table .col-priority { font-weight: 700; }
-    .priority-high { color: var(--nu-warning-red); }
-    .priority-med { color: var(--nu-warning-amber); }
-    .priority-routine { color: var(--nu-blue); }
-
-    /* CHECKLIST */
-    .nu-checklist {
-      background: var(--nu-light-gray);
-      border-radius: 10px;
-      padding: 28px 30px;
-      border-left: 5px solid var(--nu-cyan);
-    }
-    .nu-checklist h4 {
-      font-weight: 900;
-      color: var(--nu-dark-text);
-      font-size: 1.1rem;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .nu-checklist ul {
-      list-style: none;
-      padding: 0;
-    }
-    .nu-checklist ul li {
-      padding: 10px 0 10px 36px;
-      border-bottom: 1px dashed rgba(0,0,0,0.08);
-      position: relative;
-      font-size: 0.97rem;
-      line-height: 1.5;
-    }
-    .nu-checklist ul li:last-child { border-bottom: none; }
-    .nu-checklist ul li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 13px;
-      width: 22px;
-      height: 22px;
+    .check-item:last-child { border-bottom: none; }
+    .check-box {
+      width: 24px; height: 24px;
       border: 2px solid var(--nu-blue);
       border-radius: 4px;
       background: var(--nu-white);
+      flex-shrink: 0;
+      margin-top: 2px;
     }
-
-    /* QUESTIONS BLOCK */
-    .nu-questions {
-      background: linear-gradient(135deg, #f0f6ff 0%, #ffffff 100%);
-      border: 1px solid #d6e4ff;
-      border-radius: 10px;
-      padding: 28px 30px;
-    }
-    .nu-questions ol {
-      padding-left: 22px;
-    }
-    .nu-questions ol li {
-      margin-bottom: 12px;
-      font-size: 0.97rem;
-      line-height: 1.5;
-      padding-left: 6px;
-    }
-    .nu-questions ol li::marker {
-      color: var(--nu-blue);
-      font-weight: 900;
-    }
-
-    /* CONTRACTOR BLOCK */
-    .nu-contractor-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-    }
-    .nu-contractor-card {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 22px 22px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .nu-contractor-card:hover {
-      border-color: var(--nu-blue);
-      box-shadow: 0 6px 20px rgba(0,0,255,0.08);
-    }
-    .nu-contractor-card h4 {
-      font-weight: 900;
-      color: var(--nu-blue);
-      font-size: 1.05rem;
-      margin-bottom: 8px;
-    }
-    .nu-contractor-card p {
-      font-size: 0.92rem;
-      color: var(--nu-body-text);
-      line-height: 1.5;
-    }
-    .nu-contractor-card .tag {
-      display: inline-block;
-      background: var(--nu-light-gray);
-      color: var(--nu-dark-text);
-      padding: 3px 10px;
-      font-size: 0.75rem;
+    .check-body h4 {
       font-weight: 700;
-      border-radius: 3px;
-      margin-bottom: 10px;
-      letter-spacing: 0.05em;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .check-body p {
+      font-size: 0.9rem;
+      color: var(--nu-body-text);
+    }
+    .check-tag {
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      align-self: center;
+    }
+    .tag-urgent { background: rgba(200,16,46,0.1); color: var(--nu-alert-red); }
+    .tag-soon { background: rgba(232,169,12,0.12); color: #9a6e00; }
+    .tag-then { background: rgba(0,0,255,0.08); color: var(--nu-blue); }
+
+    /* TWO-COL */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .info-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 24px 26px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .info-card h3 {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--nu-cyan);
+    }
+    .info-card ul { list-style: none; }
+    .info-card li {
+      padding: 8px 0;
+      padding-left: 22px;
+      position: relative;
+      font-size: 0.92rem;
+    }
+    .info-card li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 14px;
+      width: 8px; height: 8px;
+      background: var(--nu-blue);
+      transform: rotate(45deg);
     }
 
-    /* BUDGET TABLE */
-    .nu-budget {
+    /* VENDOR TABLE */
+    .vendor-table {
+      width: 100%;
       background: var(--nu-white);
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
+      border-collapse: separate;
+      border-spacing: 0;
     }
-    .nu-budget table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .nu-budget th, .nu-budget td {
-      padding: 14px 18px;
+    .vendor-table th {
+      background: var(--nu-navy);
+      color: var(--nu-white);
       text-align: left;
-      border-bottom: 1px solid var(--nu-medium-gray);
-    }
-    .nu-budget thead {
-      background: var(--nu-blue);
-      color: var(--nu-white);
-    }
-    .nu-budget thead th {
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-size: 0.82rem;
-    }
-    .nu-budget td.amount {
-      text-align: right;
+      padding: 14px 18px;
       font-weight: 700;
-      color: var(--nu-dark-text);
-      font-variant-numeric: tabular-nums;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
-    .nu-budget tfoot td {
-      background: var(--nu-light-gray);
-      font-weight: 900;
-      color: var(--nu-dark-text);
-      border-top: 2px solid var(--nu-blue);
-      font-size: 1.02rem;
+    .vendor-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 0.92rem;
+      vertical-align: top;
     }
+    .vendor-table tr:last-child td { border-bottom: none; }
+    .vendor-table tr:nth-child(even) td { background: var(--nu-light-gray); }
+    .vendor-table td strong { color: var(--nu-dark-text); }
 
-    /* ACTION CTA */
-    .nu-cta {
-      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 100%);
+    /* BUDGET BOX */
+    .budget-box {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: var(--nu-white);
-      padding: 36px 40px;
       border-radius: 10px;
-      text-align: center;
-      margin-top: 40px;
+      padding: 30px 34px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
     }
-    .nu-cta h3 {
+    .budget-box h3 {
       font-weight: 900;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      letter-spacing: 0.01em;
-    }
-    .nu-cta p {
-      font-size: 1.02rem;
-      margin-bottom: 22px;
-      opacity: 0.95;
-      max-width: 640px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .nu-cta-buttons {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .nu-btn-cta {
-      display: inline-block;
-      background: var(--nu-white);
-      color: var(--nu-blue);
-      padding: 12px 26px;
-      border-radius: 4px;
-      font-weight: 900;
-      text-decoration: none;
+      font-size: 1.15rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      font-size: 0.88rem;
-      transition: transform 0.2s, box-shadow 0.2s;
+      color: var(--nu-cyan);
+      margin-bottom: 8px;
     }
-    .nu-btn-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    .budget-box p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 640px;
     }
-    .nu-btn-cta.outline {
-      background: transparent;
+    .budget-range {
+      text-align: right;
+    }
+    .budget-range .amount {
+      font-size: 1.9rem;
+      font-weight: 900;
       color: var(--nu-white);
-      border: 2px solid var(--nu-white);
+      letter-spacing: -0.01em;
     }
-    .nu-btn-cta.outline:hover {
+    .budget-range .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+    }
+
+    /* SIGNALS */
+    .signals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .signal {
       background: var(--nu-white);
-      color: var(--nu-blue);
+      border-radius: 8px;
+      padding: 18px 20px;
+      border: 1px solid var(--nu-medium-gray);
+      border-top: 4px solid var(--nu-warn-amber);
     }
+    .signal strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .signal span { font-size: 0.85rem; color: var(--nu-body-text); }
 
     /* FOOTER */
     .nu-footer {
@@ -604,56 +497,41 @@
       text-align: center;
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-display);
       font-style: italic;
-      font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--nu-cyan);
       margin-bottom: 16px;
     }
-    .nu-footer-contact {
-      font-size: 0.95rem;
-      line-height: 1.85;
-    }
-    .nu-footer-contact a {
-      color: var(--nu-cyan);
-      text-decoration: none;
-    }
+    .nu-footer-contact { font-size: 0.9rem; line-height: 1.9; }
+    .nu-footer-contact a { color: var(--nu-cyan); text-decoration: none; }
     .nu-footer-contact a:hover { text-decoration: underline; }
-    .nu-footer-divider {
-      width: 80px;
-      height: 2px;
-      background: var(--nu-cyan);
-      margin: 16px auto;
-      opacity: 0.4;
-    }
-    .nu-footer-meta {
-      font-size: 0.78rem;
-      opacity: 0.6;
-      margin-top: 14px;
-      letter-spacing: 0.04em;
-    }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 50px 20px 70px; min-height: 240px; }
+      .nu-header { padding: 44px 20px 64px; min-height: 220px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; padding-left: 0.5em; }
-      .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 40px 22px; }
-      .nu-page-title { font-size: 1.85rem; }
-      .nu-page-subtitle { font-size: 0.98rem; }
-      .nu-doc-meta-inner { font-size: 0.75rem; }
-      .nu-cta { padding: 28px 22px; }
-      .nu-cta h3 { font-size: 1.25rem; }
-      .nu-badge { clip-path: none; border-radius: 6px; padding: 10px 16px; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1.05rem; }
+      .doc-title { font-size: 1.5rem; }
+      .wrap { padding: 32px 20px 40px; }
+      .priority-strip { grid-template-columns: 1fr; text-align: center; }
+      .priority-strip .priority-icon { margin: 0 auto; }
+      .two-col { grid-template-columns: 1fr; }
+      .budget-box { grid-template-columns: 1fr; text-align: left; }
+      .budget-range { text-align: left; }
+      .nu-badge { clip-path: none; border-radius: 8px; }
+      .check-item { grid-template-columns: auto 1fr; }
+      .check-tag { grid-column: 1 / -1; justify-self: start; }
+      .vendor-table { font-size: 0.85rem; }
+      .vendor-table th, .vendor-table td { padding: 10px 12px; }
     }
 
     @media print {
+      body { background: var(--nu-white); }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-cta, .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-phase-card, .nu-table-wrap { box-shadow: none; }
-      .nu-cta-buttons { display: none; }
+      .phase-card, .info-card, .summary-card, .checklist, .vendor-table { box-shadow: none; border: 1px solid #ccc; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
     }
   </style>
 </head>
@@ -664,7 +542,7 @@
     <div class="nu-phoenix-icon">
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
       </svg>
     </div>
     <div class="nu-logo-text">NORRIS</div>
@@ -674,353 +552,322 @@
 
   <!-- CHEVRON -->
   <div class="nu-chevron">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,60 L1440,0 L1440,60 L0,60 Z" fill="white"/>
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#F5F5F7"/>
     </svg>
   </div>
 
-  <!-- DOC META BAR -->
-  <div class="nu-doc-meta">
-    <div class="nu-doc-meta-inner">
-      <span>Document: <strong>Action Plan — Water Intrusion Remediation</strong></span>
-      <span>Prepared: <strong>April 21, 2026</strong></span>
-      <span>Owner: <strong>Aaron C. Norris</strong></span>
-      <span class="nu-priority-badge">Priority: High</span>
+  <!-- DOC BAND -->
+  <div class="doc-band">
+    <span class="doc-eyebrow">Action Item · Facility Integrity</span>
+    <h1 class="doc-title">Water Intrusion Remediation — <span>Professional Waterproofing Plan</span></h1>
+    <p class="doc-sub">Scoping, vendor selection, and execution plan to address active water intrusion requiring professional waterproofing. Protects inventory, office equipment, and the integrity of the structure.</p>
+    <div class="doc-meta">
+      <span><strong>Owner:</strong> Aaron C. Norris</span>
+      <span><strong>Opened:</strong> 2026-04-21</span>
+      <span><strong>Source:</strong> reMarkable Action Item</span>
+      <span><strong>Status:</strong> Open · Awaiting vendor walkthrough</span>
     </div>
   </div>
 
-  <!-- CONTENT -->
+  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-container">
+    <div class="wrap">
 
-      <!-- TITLE -->
-      <div class="nu-page-title-block">
-        <span class="nu-page-eyebrow">reMarkable Action Item — Property Maintenance</span>
-        <h1 class="nu-page-title">Address <em>Water Intrusion</em> Issue<br>Requiring Professional Waterproofing</h1>
-        <p class="nu-page-subtitle">Defined scope, contractor sourcing plan, decision checklist, and budget envelope to move from observation to a permanently dry building envelope without further damage to interior finishes, structure, or stored materials.</p>
+      <!-- PRIORITY STRIP -->
+      <div class="priority-strip">
+        <div class="priority-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C7 9 4 13 4 17a8 8 0 0 0 16 0c0-4-3-8-8-15z"/>
+          </svg>
+        </div>
+        <div class="priority-body">
+          <h2>Water Intrusion Confirmed — Professional Waterproofing Required</h2>
+          <p>Do-it-yourself patching is insufficient. A licensed waterproofing contractor must diagnose the source, seal the envelope, and warranty the fix before any finish repairs are started.</p>
+        </div>
+        <div class="priority-tag">Priority · Act This Week</div>
       </div>
 
-      <!-- ALERT -->
-      <div class="nu-alert">
-        <div class="nu-alert-icon">!</div>
-        <div class="nu-alert-body">
-          <h3>Why this can't wait</h3>
-          <p>Active or recurring water intrusion compounds quickly. Every additional rain cycle expands moisture migration into wall cavities, accelerates mold colonization (24–48 hours after sustained wetting), and weakens substrate adhesion for any future repair. Locking in professional waterproofing now is materially cheaper than redoing finishes later.</p>
-        </div>
-      </div>
-
-      <!-- SECTION 1: SCOPE -->
-      <section class="nu-section">
-        <div class="nu-badge">Step 01 — Define the Problem</div>
-        <h2 class="nu-section-title">Document the <span>Intrusion Before Calling Anyone</span></h2>
-        <p style="margin-bottom: 18px;">A waterproofer cannot scope a fix from a phone call. The first 30 minutes of work — done by Aaron or Caroline before any contractor visit — sets the entire job up for accurate quotes and apples-to-apples comparison.</p>
-
-        <div class="nu-checklist">
-          <h4>Pre-Inspection Checklist</h4>
-          <ul>
-            <li>Photograph every visible stain, efflorescence (white mineral deposit), peeling paint, or buckled trim — wide shot AND close-up of each location.</li>
-            <li>Note the date and weather of the most recent observed intrusion (heavy rain, prolonged drizzle, snow melt, irrigation overspray, etc.).</li>
-            <li>Identify the affected wall(s), floor(s), and ceiling(s). Mark approximate square footage for each.</li>
-            <li>Check exterior grading: is the soil sloping toward the foundation within 10 feet of the affected wall?</li>
-            <li>Inspect gutters and downspouts above the affected area. Confirm downspouts discharge at least 5 feet from the foundation.</li>
-            <li>Open the nearest crawlspace or basement access and photograph the wall side opposite the interior staining.</li>
-            <li>Use a moisture meter (Home Depot, ~$30) on suspect drywall — anything reading above 17% on wood-scale is actively wet.</li>
-          </ul>
+      <!-- SUMMARY -->
+      <section class="section">
+        <h2 class="nu-section-title"><span>Situation</span> <span>Summary</span></h2>
+        <div class="section-rule"></div>
+        <div class="summary-card">
+          <p>Active water intrusion has been observed and logged as a priority item on the reMarkable task list. Left unaddressed, water intrusion compounds quickly: drywall wicks moisture upward, mold establishes within 48–72 hours of sustained wetness, and electrical components in the affected zone become a safety exposure.</p>
+          <p><strong>The correct sequence is diagnose → stop the water → dry the cavity → verify → repair finishes.</strong> Skipping to finish repairs first is the most common expensive mistake and is the exact scenario this plan is designed to prevent.</p>
+          <p>This plan moves the issue from a handwritten note into a tracked scope with named vendors, phase gates, and a working budget range. It closes when a signed waterproofing warranty is on file and a 30-day dry check passes.</p>
         </div>
       </section>
 
-      <!-- SECTION 2: PHASES -->
-      <section class="nu-section">
-        <div class="nu-badge">Step 02 — Execution Plan</div>
-        <h2 class="nu-section-title">Five-Phase <span>Remediation Sequence</span></h2>
-        <p style="margin-bottom: 22px;">Phases must run in order. Skipping diagnosis to install waterproofing first is the most common — and most expensive — mistake. Verify the water source before sealing anything.</p>
+      <!-- PHASES -->
+      <section class="section">
+        <h2 class="nu-section-title"><span>Execution</span> <span>Phases</span></h2>
+        <div class="section-rule"></div>
+        <div class="phase-grid">
 
-        <div class="nu-phases">
+          <div class="phase-card">
+            <div class="phase-num">1</div>
+            <div class="phase-window">Today — Day 2</div>
+            <div class="phase-title">Contain &amp; Document</div>
+            <p>Move inventory and paper files 36" away from the affected wall. Photograph every stain, seam, and floor line. Place moisture meter readings on camera before any cleanup begins.</p>
+          </div>
 
-          <div class="nu-phase-card">
-            <div class="nu-phase-num">1</div>
-            <span class="nu-phase-timing">Days 1–3</span>
-            <h4>Source Diagnosis</h4>
+          <div class="phase-card">
+            <div class="phase-num">2</div>
+            <div class="phase-window">Day 1 — Day 3</div>
+            <div class="phase-title">Vendor Walkthroughs</div>
+            <p>Book three licensed waterproofing contractors for on-site inspections. Request written scopes with warranty length and exclusions clearly stated. No verbal quotes accepted.</p>
+          </div>
+
+          <div class="phase-card">
+            <div class="phase-num">3</div>
+            <div class="phase-window">Day 3 — Day 5</div>
+            <div class="phase-title">Select &amp; Schedule</div>
+            <p>Compare scopes on apples-to-apples basis. Select the contractor offering a written warranty of 5 years minimum and interior access for verification. Issue deposit, lock install date.</p>
+          </div>
+
+          <div class="phase-card">
+            <div class="phase-num">4</div>
+            <div class="phase-window">Week 2</div>
+            <div class="phase-title">Dry &amp; Seal</div>
+            <p>Commercial dehumidifier and air mover run until moisture meter reads &lt;16% in studs and &lt;12% in drywall. Contractor then executes exterior/interior seal work per scope.</p>
+          </div>
+
+          <div class="phase-card">
+            <div class="phase-num">5</div>
+            <div class="phase-window">Week 2 — Week 3</div>
+            <div class="phase-title">Verify Under Water</div>
+            <p>Controlled hose test for 30 minutes on the remediated wall. Interior inspection during and 24 hours after. No leak = proceed; any leak = back to contractor before payment.</p>
+          </div>
+
+          <div class="phase-card">
+            <div class="phase-num">6</div>
+            <div class="phase-window">Week 3 — Week 4</div>
+            <div class="phase-title">Finish Repair &amp; Close</div>
+            <p>Drywall patch, paint match, trim reinstallation. File warranty documents in the operations binder. Set 30-day and 90-day dry check reminders. Close the reMarkable item.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CHECKLIST -->
+      <section class="section">
+        <h2 class="nu-section-title"><span>Next</span> <span>Actions</span></h2>
+        <div class="section-rule"></div>
+
+        <div class="badge-row">
+          <div class="nu-badge">
+            <svg class="nu-badge-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 7L2 14l10 5 10-5-10-5z"/></svg>
+            CONTAIN FIRST
+          </div>
+          <div class="nu-badge">
+            <svg class="nu-badge-icon" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            WRITTEN SCOPES ONLY
+          </div>
+          <div class="nu-badge">
+            <svg class="nu-badge-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.41 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            WARRANTY REQUIRED
+          </div>
+        </div>
+
+        <div class="checklist">
+
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div class="check-body">
+              <h4>Move inventory and paperwork 36" clear of the wet wall</h4>
+              <p>FlexPro Armor stock, Samson Rope samples, and any file storage must be off the floor and away from the zone before vendors arrive.</p>
+            </div>
+            <div class="check-tag tag-urgent">Today</div>
+          </div>
+
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div class="check-body">
+              <h4>Photograph and label every visible water sign</h4>
+              <p>Interior stains, exterior grading, downspout outlets, window/door seams. Date-stamped photos protect the scope and become the baseline for warranty claims.</p>
+            </div>
+            <div class="check-tag tag-urgent">Today</div>
+          </div>
+
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div class="check-body">
+              <h4>Book 3 licensed waterproofing contractors for site walk</h4>
+              <p>Use the vendor candidates listed below. Ask each for license #, certificate of insurance, and two recent commercial references in Birmingham.</p>
+            </div>
+            <div class="check-tag tag-urgent">48 Hours</div>
+          </div>
+
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div class="check-body">
+              <h4>Run commercial dehumidifier until moisture readings pass</h4>
+              <p>Rent from Sunbelt if not available in-house. Target: &lt;16% in studs, &lt;12% in drywall. Log readings daily. Do NOT close up any cavity until readings hold.</p>
+            </div>
+            <div class="check-tag tag-soon">This Week</div>
+          </div>
+
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div class="check-body">
+              <h4>Compare scopes side by side — select by warranty, not price</h4>
+              <p>Lowest bid with no written warranty is the most expensive option. Require minimum 5-year transferable written warranty on waterproofing work.</p>
+            </div>
+            <div class="check-tag tag-soon">Day 5</div>
+          </div>
+
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div class="check-body">
+              <h4>Controlled hose test before final payment</h4>
+              <p>30-minute sustained water on the remediated exterior. Interior observation during and 24 hours after. Retain final 25% of payment until this test passes clean.</p>
+            </div>
+            <div class="check-tag tag-then">Week 2</div>
+          </div>
+
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div class="check-body">
+              <h4>File warranty + set 30/90-day dry checks</h4>
+              <p>Store signed warranty in operations binder and scan to the ops portal. Calendar a 30-day and 90-day visual dry check. Close the reMarkable task only after the 30-day passes.</p>
+            </div>
+            <div class="check-tag tag-then">Week 3</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- WARNING SIGNALS -->
+      <section class="section">
+        <h2 class="nu-section-title"><span>Red-Flag</span> <span>Signals</span></h2>
+        <div class="section-rule"></div>
+        <p style="margin-bottom: 18px; max-width: 780px;">If any of these appear during the work, stop, document, and escalate before paying a scheduled installment.</p>
+        <div class="signals-grid">
+          <div class="signal"><strong>No written warranty offered</strong><span>Walk away. A licensed waterproofer who will not warranty their work in writing is not the right vendor.</span></div>
+          <div class="signal"><strong>Insists on finish repair first</strong><span>Drywall and paint go last. Any vendor sequencing finish before seal is shortcutting the diagnosis.</span></div>
+          <div class="signal"><strong>Refuses hose test</strong><span>A real fix passes a controlled hose test. Refusal to test is a refusal to stand behind the work.</span></div>
+          <div class="signal"><strong>Musty smell returns</strong><span>A recurring musty smell after dry-out indicates trapped moisture or continued intrusion. Call the contractor back under warranty immediately.</span></div>
+          <div class="signal"><strong>Paint bubbling near baseboard</strong><span>Post-repair bubbling = active water still reaching drywall. Open a warranty ticket the same day it is observed.</span></div>
+          <div class="signal"><strong>Moisture readings rising again</strong><span>Log climbs above 16% after dry-out. This is a failed seal. Escalate before any cosmetic repair.</span></div>
+        </div>
+      </section>
+
+      <!-- VENDOR TABLE -->
+      <section class="section">
+        <h2 class="nu-section-title"><span>Vendor</span> <span>Candidates — Birmingham Metro</span></h2>
+        <div class="section-rule"></div>
+        <p style="margin-bottom: 18px; max-width: 820px;">Below are the categories of vendors to solicit. Aaron to confirm specific companies before outreach; Caroline Butler to manage scheduling once names are confirmed.</p>
+        <table class="vendor-table">
+          <thead>
+            <tr>
+              <th>Vendor Category</th>
+              <th>Scope They Own</th>
+              <th>What to Request</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Licensed Waterproofing Contractor</strong></td>
+              <td>Primary diagnosis, exterior seal, warrantied fix</td>
+              <td>Written scope, 5-year minimum warranty, COI, two commercial references</td>
+              <td>Tier 1 — must have 3 bids</td>
+            </tr>
+            <tr>
+              <td><strong>Licensed Roofer</strong></td>
+              <td>If intrusion traces to roofline, flashing, or gutters</td>
+              <td>Roof + flashing inspection report with photos; separate quote if in scope</td>
+              <td>Tier 1 — if roof suspected</td>
+            </tr>
+            <tr>
+              <td><strong>Foundation / Grading Contractor</strong></td>
+              <td>Exterior grading, downspout extensions, French drain if needed</td>
+              <td>Grading fall measurement, drainage recommendation, written scope</td>
+              <td>Tier 2 — if wall is below grade</td>
+            </tr>
+            <tr>
+              <td><strong>Mold Assessor (IICRC-certified)</strong></td>
+              <td>Air quality and surface testing behind the wall</td>
+              <td>Pre- and post-remediation clearance reports</td>
+              <td>Tier 2 — if wet &gt;72 hrs</td>
+            </tr>
+            <tr>
+              <td><strong>Equipment Rental (Sunbelt)</strong></td>
+              <td>Commercial dehumidifier, air movers, moisture meter</td>
+              <td>Daily rental rate, delivery window, propane vs electric model</td>
+              <td>Tier 1 — week 1 rental</td>
+            </tr>
+            <tr>
+              <td><strong>Drywall &amp; Paint Finisher</strong></td>
+              <td>Patch, texture match, paint match after seal verified</td>
+              <td>Fixed-price quote keyed to square footage after cavity is signed off dry</td>
+              <td>Tier 3 — last step only</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- TWO-COL: SCOPE + CRITERIA -->
+      <section class="section">
+        <h2 class="nu-section-title"><span>Scope</span> <span>Boundaries &amp; Selection Criteria</span></h2>
+        <div class="section-rule"></div>
+        <div class="two-col">
+
+          <div class="info-card">
+            <h3>In-Scope for This Project</h3>
             <ul>
-              <li>Schedule licensed waterproofing contractor for on-site inspection.</li>
-              <li>Request written diagnosis identifying entry point: above-grade (roof, flashing, window) or below-grade (foundation, footing drain).</li>
-              <li>Get diagnosis in writing before authorizing any repair work.</li>
+              <li>Locate source of water intrusion</li>
+              <li>Exterior and interior seal of the failure point</li>
+              <li>Dry-out of the affected wall cavity</li>
+              <li>Moisture verification with documented readings</li>
+              <li>Controlled hose test after seal is installed</li>
+              <li>Drywall patch, texture, and paint match</li>
+              <li>Signed warranty, stored in operations binder</li>
             </ul>
           </div>
 
-          <div class="nu-phase-card">
-            <div class="nu-phase-num">2</div>
-            <span class="nu-phase-timing">Days 4–10</span>
-            <h4>Quotes &amp; Selection</h4>
+          <div class="info-card">
+            <h3>Vendor Selection Criteria</h3>
             <ul>
-              <li>Collect a minimum of three written quotes from licensed, insured contractors.</li>
-              <li>Verify each contractor carries general liability and workers' comp.</li>
-              <li>Confirm warranty length — 10-year transferable is the industry benchmark for interior basement systems.</li>
-            </ul>
-          </div>
-
-          <div class="nu-phase-card">
-            <div class="nu-phase-num">3</div>
-            <span class="nu-phase-timing">Days 11–14</span>
-            <h4>Drying &amp; Mold Check</h4>
-            <ul>
-              <li>If wetted area is greater than 10 sq ft or has been wet for more than 48 hours, bring in a certified mold inspector before repair.</li>
-              <li>Run dehumidifiers continuously until moisture meter reads under 15% on framing.</li>
-              <li>Remove and bag any visibly compromised insulation or drywall.</li>
-            </ul>
-          </div>
-
-          <div class="nu-phase-card">
-            <div class="nu-phase-num">4</div>
-            <span class="nu-phase-timing">Days 15–25</span>
-            <h4>Waterproofing Install</h4>
-            <ul>
-              <li>Schedule installation. Expect 2–5 working days on site for a typical residential basement scope.</li>
-              <li>Be present (or send Caroline) for the first day's work to confirm scope matches the signed quote.</li>
-              <li>Photograph each stage of installation as documentation for the warranty file.</li>
-            </ul>
-          </div>
-
-          <div class="nu-phase-card">
-            <div class="nu-phase-num">5</div>
-            <span class="nu-phase-timing">Days 26–35</span>
-            <h4>Restoration &amp; Verify</h4>
-            <ul>
-              <li>Replace drywall, paint, trim, and any flooring impacted by the intrusion.</li>
-              <li>Test the system by triggering the largest reasonable water load — heavy hose at the foundation or after the next significant rain event.</li>
-              <li>File the contractor's written warranty in the property records folder.</li>
+              <li>Licensed and insured in Alabama</li>
+              <li>Written scope, no verbal quotes accepted</li>
+              <li>Minimum 5-year transferable warranty</li>
+              <li>Two recent commercial references (Birmingham metro)</li>
+              <li>Willingness to perform controlled hose test</li>
+              <li>Pay schedule: 25% deposit, 50% mid, 25% post-hose-test</li>
+              <li>No finish repairs paid until dry verification passes</li>
             </ul>
           </div>
 
         </div>
       </section>
 
-      <!-- SECTION 3: SOURCES -->
-      <section class="nu-section">
-        <div class="nu-badge">Step 03 — Likely Root Causes</div>
-        <h2 class="nu-section-title">Common <span>Water Intrusion Sources, Ranked</span></h2>
-        <p style="margin-bottom: 22px;">Use this matrix to triage where to look first. The most expensive thing to fix is rarely the most likely cause — most residential intrusions are exterior drainage issues, not foundation failures.</p>
-
-        <div class="nu-table-wrap">
-          <table class="nu-table">
-            <thead>
-              <tr>
-                <th style="width: 28%;">Source</th>
-                <th style="width: 14%;">Likelihood</th>
-                <th style="width: 18%;">Diagnostic Signal</th>
-                <th>First Fix to Try</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Gutter overflow / clogged downspout</strong></td>
-                <td class="col-priority priority-high">Very High</td>
-                <td>Vertical streaks on exterior wall; water at base of foundation during rain</td>
-                <td>Clean gutters, install downspout extensions to discharge 5+ ft away from foundation</td>
-              </tr>
-              <tr>
-                <td><strong>Negative grading toward foundation</strong></td>
-                <td class="col-priority priority-high">Very High</td>
-                <td>Standing water within 5 ft of the wall after rain</td>
-                <td>Re-grade soil to slope away at minimum 6 inches over first 10 feet</td>
-              </tr>
-              <tr>
-                <td><strong>Failed window or door flashing</strong></td>
-                <td class="col-priority priority-med">High</td>
-                <td>Stains on interior wall directly below a window or door head</td>
-                <td>Re-flash and re-caulk the opening; replace damaged trim</td>
-              </tr>
-              <tr>
-                <td><strong>Roof leak (flashing, valley, or penetration)</strong></td>
-                <td class="col-priority priority-med">Moderate</td>
-                <td>Ceiling stain, especially near chimneys, vents, or roof valleys</td>
-                <td>Roofer inspection — flashing repair or shingle replacement at the entry point</td>
-              </tr>
-              <tr>
-                <td><strong>Foundation crack (hairline or structural)</strong></td>
-                <td class="col-priority priority-routine">Moderate</td>
-                <td>Damp vertical line on basement wall; efflorescence trail</td>
-                <td>Polyurethane crack injection from interior — typical $400–$700 per crack</td>
-              </tr>
-              <tr>
-                <td><strong>Failed footing drain (French drain)</strong></td>
-                <td class="col-priority priority-routine">Lower</td>
-                <td>Water along the floor-wall joint after sustained rain</td>
-                <td>Interior perimeter drain + sump — full-system installation</td>
-              </tr>
-              <tr>
-                <td><strong>Plumbing leak (supply or waste line)</strong></td>
-                <td class="col-priority priority-routine">Lower</td>
-                <td>Wet area unrelated to weather; meter spins with no fixtures running</td>
-                <td>Plumber, not waterproofer — leak isolation and pipe repair</td>
-              </tr>
-              <tr>
-                <td><strong>Hydrostatic pressure (high water table)</strong></td>
-                <td class="col-priority priority-routine">Lower</td>
-                <td>Water seeping from floor center, not walls; worsens during wet season</td>
-                <td>Sump pump system; in severe cases, exterior excavation + membrane</td>
-              </tr>
-            </tbody>
-          </table>
+      <!-- BUDGET -->
+      <section class="section">
+        <h2 class="nu-section-title"><span>Working</span> <span>Budget Range</span></h2>
+        <div class="section-rule"></div>
+        <div class="budget-box">
+          <div>
+            <h3>Placeholder Until Bids Return</h3>
+            <p>The figure below is a planning range for professional exterior waterproofing on a small-to-medium commercial wall section in the Birmingham market, including cavity dry-out, controlled testing, and drywall finish work. Actual scope and price will be set by the three written bids.</p>
+          </div>
+          <div class="budget-range">
+            <div class="amount">$3,500 – $9,500</div>
+            <div class="label">Planning Range</div>
+          </div>
         </div>
       </section>
 
-      <!-- SECTION 4: CONTRACTOR SOURCING -->
-      <section class="nu-section">
-        <div class="nu-badge">Step 04 — Vendor Sourcing</div>
-        <h2 class="nu-section-title">Birmingham-Area <span>Contractor Categories to Call</span></h2>
-        <p style="margin-bottom: 22px;">Based on the diagnosis from Phase 1, contact contractors from the appropriate category. Always request three quotes minimum. Verify license, insurance, and BBB rating before scheduling any on-site visit.</p>
-
-        <div class="nu-contractor-grid">
-
-          <div class="nu-contractor-card">
-            <span class="tag">Category A</span>
-            <h4>Basement Waterproofing Specialists</h4>
-            <p>Below-grade water issues, foundation crack injection, interior perimeter drains, sump pump systems. Look for IICRC-certified firms with at least 10 years in business and a transferable warranty.</p>
-          </div>
-
-          <div class="nu-contractor-card">
-            <span class="tag">Category B</span>
-            <h4>Roofing &amp; Flashing Contractors</h4>
-            <p>For ceiling stains or upper-wall intrusion. Require GAF Master Elite or Owens Corning Platinum certification for warranty-grade workmanship. Confirm they will photograph attic side of the suspect area.</p>
-          </div>
-
-          <div class="nu-contractor-card">
-            <span class="tag">Category C</span>
-            <h4>Mold Remediation Firms</h4>
-            <p>Required if wet area exceeds 10 sq ft or wetting has continued more than 48 hours. Must hold IICRC AMRT certification. Get an independent post-remediation clearance test, not the contractor's own.</p>
-          </div>
-
-          <div class="nu-contractor-card">
-            <span class="tag">Category D</span>
-            <h4>Grading &amp; Drainage</h4>
-            <p>Landscape contractors with foundation drainage experience. Often the cheapest fix and the highest-value first move. Many waterproofing companies sub this work — getting it directly can cut the line item by 30–50%.</p>
-          </div>
-
-          <div class="nu-contractor-card">
-            <span class="tag">Category E</span>
-            <h4>Licensed Plumber</h4>
-            <p>For any leak unrelated to weather, or for sump pump and ejector pit installations. Verify Alabama state plumbing license and that the firm carries leak-detection equipment, not just basic repair tools.</p>
-          </div>
-
-          <div class="nu-contractor-card">
-            <span class="tag">Category F</span>
-            <h4>Structural Engineer (PE)</h4>
-            <p>Bring in only if a contractor identifies cracks wider than 1/4 inch, horizontal cracking, or wall bowing. A licensed PE letter is what insurance and any future buyer will require, not the contractor's own assessment.</p>
-          </div>
-
+      <!-- NOTES -->
+      <section class="section" style="margin-bottom:0;">
+        <h2 class="nu-section-title"><span>Closing</span> <span>Note</span></h2>
+        <div class="section-rule"></div>
+        <div class="summary-card">
+          <p>Water intrusion is the one building problem that gets exponentially more expensive every week it is ignored. The objective here is not the lowest bid — it is the last time we ever have to think about this wall.</p>
+          <p><strong>Definition of done:</strong> signed 5-year warranty on file, hose test passed, 30-day dry check clean, finish repairs complete, reMarkable item closed, ops portal updated.</p>
         </div>
       </section>
-
-      <!-- SECTION 5: BUDGET -->
-      <section class="nu-section">
-        <div class="nu-badge">Step 05 — Budget Envelope</div>
-        <h2 class="nu-section-title">Reasonable <span>Cost Ranges by Scope</span></h2>
-        <p style="margin-bottom: 22px;">Use these ranges as a sanity check on quotes received. Anything significantly below the low end of the range is a red flag — the contractor is either underscoping the work or planning to upsell mid-job. Anything well above the high end requires a detailed line-item explanation.</p>
-
-        <div class="nu-budget">
-          <table>
-            <thead>
-              <tr>
-                <th>Scope of Work</th>
-                <th style="text-align: right;">Low End</th>
-                <th style="text-align: right;">Typical</th>
-                <th style="text-align: right;">High End</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Gutter cleaning &amp; downspout extensions</td>
-                <td class="amount">$250</td>
-                <td class="amount">$450</td>
-                <td class="amount">$900</td>
-              </tr>
-              <tr>
-                <td>Re-grading &amp; surface drainage corrections</td>
-                <td class="amount">$800</td>
-                <td class="amount">$2,200</td>
-                <td class="amount">$5,500</td>
-              </tr>
-              <tr>
-                <td>Window or door flashing repair (per opening)</td>
-                <td class="amount">$400</td>
-                <td class="amount">$900</td>
-                <td class="amount">$1,800</td>
-              </tr>
-              <tr>
-                <td>Foundation crack injection (per crack)</td>
-                <td class="amount">$400</td>
-                <td class="amount">$650</td>
-                <td class="amount">$1,200</td>
-              </tr>
-              <tr>
-                <td>Roof flashing repair (limited area)</td>
-                <td class="amount">$500</td>
-                <td class="amount">$1,400</td>
-                <td class="amount">$3,500</td>
-              </tr>
-              <tr>
-                <td>Interior perimeter drain + sump (full basement)</td>
-                <td class="amount">$5,500</td>
-                <td class="amount">$9,500</td>
-                <td class="amount">$15,000</td>
-              </tr>
-              <tr>
-                <td>Mold remediation (greater than 10 sq ft area)</td>
-                <td class="amount">$1,500</td>
-                <td class="amount">$3,800</td>
-                <td class="amount">$7,500</td>
-              </tr>
-              <tr>
-                <td>Drywall, paint &amp; trim restoration</td>
-                <td class="amount">$1,200</td>
-                <td class="amount">$2,800</td>
-                <td class="amount">$6,000</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td>Reserve to authorize before contractor calls (typical mid-scope)</td>
-                <td class="amount">—</td>
-                <td class="amount">$8,000–$15,000</td>
-                <td class="amount">—</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </section>
-
-      <!-- SECTION 6: QUESTIONS TO ASK -->
-      <section class="nu-section">
-        <div class="nu-badge">Step 06 — Diligence Questions</div>
-        <h2 class="nu-section-title">Ten Questions <span>for Every Contractor Interview</span></h2>
-        <p style="margin-bottom: 22px;">Aaron should ask all ten of these before signing any contract. The way a contractor answers these questions tells you more than the price on the bid sheet.</p>
-
-        <div class="nu-questions">
-          <ol>
-            <li>What specifically do you believe is the source of this water intrusion, and what evidence led you to that conclusion?</li>
-            <li>What is the scope of work in writing — and what is explicitly excluded?</li>
-            <li>What warranty do you provide, in years, and is it transferable to a future owner of the property?</li>
-            <li>Will you pull permits, or is permitting my responsibility?</li>
-            <li>Are your installers W-2 employees of your company, or are they subcontractors? If subs, who carries the workers' comp?</li>
-            <li>Can I see proof of general liability insurance and workers' comp, current and naming me as additional insured during the job?</li>
-            <li>What is the payment schedule — and is there any deposit greater than 10% before work begins? (Anything over 30% upfront is a red flag.)</li>
-            <li>Who is the on-site foreman, and what is their direct cell phone number for the duration of the project?</li>
-            <li>If the issue recurs within the warranty period, what is the response time, and what is covered versus excluded?</li>
-            <li>Can you provide three references from completed jobs in the past 24 months that I can call directly?</li>
-          </ol>
-        </div>
-      </section>
-
-      <!-- CTA -->
-      <div class="nu-cta">
-        <h3>Next 48 Hours</h3>
-        <p>Complete the pre-inspection checklist (above) and request three on-site evaluations. Aaron's preferred contact path for vendors during business hours is direct cell. Caroline can manage scheduling intake and forward documents for review.</p>
-        <div class="nu-cta-buttons">
-          <a href="tel:2055001343" class="nu-btn-cta">Call Aaron — 205-500-1343</a>
-          <a href="mailto:acnorris@norrisutilities.com" class="nu-btn-cta outline">Email acnorris@norrisutilities.com</a>
-        </div>
-      </div>
 
     </div>
   </main>
@@ -1028,15 +875,11 @@
   <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
-    <div class="nu-footer-divider"></div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
-    </div>
-    <div class="nu-footer-meta">
-      130 Inverness Plaza #210, Birmingham, AL 35242 &nbsp;·&nbsp; Internal Action Plan &nbsp;·&nbsp; Prepared 2026-04-21
     </div>
   </footer>
 
