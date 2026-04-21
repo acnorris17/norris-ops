@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item — Inventory PO Follow-Up — Norris Utilities®</title>
+  <title>Inventory Order Follow-Up — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap');
-
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -17,9 +16,9 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-alert-red: #C73E1D;
-      --nu-alert-amber: #E8A723;
-      --nu-alert-green: #1F8A45;
+      --nu-alert-red: #C8102E;
+      --nu-alert-amber: #E89611;
+      --nu-success-green: #2E7D32;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -36,8 +35,8 @@
     /* ══ HEADER ══ */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
-      padding: 60px 40px 90px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
       min-height: 280px;
@@ -45,7 +44,7 @@
     .nu-header::before {
       content: '';
       position: absolute;
-      inset: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background:
         repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
         repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
@@ -60,21 +59,16 @@
       background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
       z-index: 1;
     }
-    .nu-header > * { position: relative; z-index: 2; }
+    .nu-header * { position: relative; z-index: 2; }
 
-    .nu-phoenix-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 65%;
-      max-width: 420px;
-      opacity: 0.07;
-      z-index: 1;
-      pointer-events: none;
+    .nu-phoenix-icon {
+      width: 72px; height: 72px;
+      margin: 0 auto 16px;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+      opacity: 0.95;
     }
-
     .nu-logo-text {
+      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3.2rem;
       color: var(--nu-white);
@@ -84,28 +78,30 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.35rem;
+      font-size: 1.2rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.75em;
       text-transform: uppercase;
       margin-bottom: 20px;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Lato', serif;
       font-style: italic;
-      font-weight: 400;
-      font-size: 1.3rem;
+      font-weight: 300;
+      font-size: 1.25rem;
       color: rgba(255,255,255,0.95);
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
 
-    /* ══ CHEVRON TRANSITION ══ */
+    /* ══ WHITE CHEVRON ══ */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
+      background: transparent;
     }
     .nu-chevron svg {
       width: 100%;
@@ -113,369 +109,380 @@
       display: block;
     }
 
-    /* ══ CONTENT ══ */
+    /* ══ CONTENT WRAPPER ══ */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
-      min-height: 60vh;
     }
-    .nu-container {
+    .nu-content-wrap {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 50px 40px 70px;
-      position: relative;
-      z-index: 1;
+      padding: 50px 40px 60px;
     }
 
-    /* ══ PAGE TITLE BLOCK ══ */
-    .nu-page-meta {
+    /* ══ STATUS BAR ══ */
+    .nu-status-bar {
+      background: linear-gradient(135deg, #fff8e1 0%, #fff3d6 100%);
+      border-left: 5px solid var(--nu-alert-amber);
+      border-radius: 6px;
+      padding: 18px 24px;
+      margin-bottom: 36px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 18px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid var(--nu-medium-gray);
     }
-    .nu-breadcrumb {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--nu-blue);
-      letter-spacing: 0.18em;
+    .nu-status-label {
+      font-weight: 900;
+      color: var(--nu-alert-amber);
       text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
     }
-    .nu-date-stamp {
+    .nu-status-text {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .nu-status-date {
+      margin-left: auto;
       font-size: 0.85rem;
       color: var(--nu-body-text);
       font-weight: 400;
     }
+
+    /* ══ PAGE TITLE ══ */
     .nu-page-title {
       font-weight: 900;
-      font-size: 2.1rem;
-      color: var(--nu-dark-text);
-      line-height: 1.2;
+      font-size: 2.4rem;
+      color: var(--nu-blue);
       margin-bottom: 8px;
+      line-height: 1.15;
     }
     .nu-page-title span {
-      color: var(--nu-blue);
+      color: var(--nu-dark-text);
+      font-weight: 700;
     }
     .nu-page-subtitle {
       font-size: 1.05rem;
       color: var(--nu-body-text);
+      margin-bottom: 40px;
       font-weight: 400;
-      margin-bottom: 32px;
+      max-width: 720px;
     }
 
-    /* ══ ALERT BANNER ══ */
-    .nu-alert-banner {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: linear-gradient(135deg, #fff4e6 0%, #ffe8cc 100%);
-      border-left: 6px solid var(--nu-alert-amber);
-      padding: 20px 24px;
-      border-radius: 6px;
-      margin-bottom: 32px;
-    }
-    .nu-alert-icon {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.8rem;
-      color: var(--nu-alert-amber);
-      background: var(--nu-white);
-      border: 2px solid var(--nu-alert-amber);
-      border-radius: 50%;
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .nu-alert-text {
-      flex: 1;
-    }
-    .nu-alert-title {
-      font-weight: 900;
-      font-size: 1.05rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .nu-alert-body {
-      font-size: 0.95rem;
-      color: var(--nu-body-text);
-    }
-
-    /* ══ SECTION HEADING ══ */
-    .nu-section {
-      margin-bottom: 36px;
-    }
+    /* ══ SECTION HEADERS ══ */
     .nu-section-title {
       font-weight: 900;
-      font-size: 1.5rem;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 3px solid var(--nu-cyan);
-    }
-    .nu-section-title .accent {
+      font-size: 1.45rem;
       color: var(--nu-blue);
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--nu-cyan);
+      display: inline-block;
+      letter-spacing: 0.01em;
     }
-    .nu-section-title .rest {
+    .nu-section-title span {
       color: var(--nu-dark-text);
       font-weight: 700;
     }
 
-    /* ══ ACTION CARD GRID ══ */
-    .nu-grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .nu-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
+    .nu-section {
+      margin-bottom: 44px;
     }
 
+    /* ══ CARDS ══ */
     .nu-card {
       background: var(--nu-white);
       border-radius: 8px;
-      padding: 22px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 24px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-bottom: 16px;
     }
-    .nu-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.09);
-    }
-    .nu-card-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--nu-blue);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .nu-card-value {
+    .nu-card-title {
       font-weight: 900;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 10px;
+    }
+    .nu-card-body {
+      font-size: 0.97rem;
+      color: var(--nu-body-text);
+    }
+    .nu-card-body p { margin-bottom: 10px; }
+    .nu-card-body strong { color: var(--nu-dark-text); }
+
+    /* ══ ACTION LIST ══ */
+    .nu-action-list {
+      list-style: none;
+      counter-reset: step;
+    }
+    .nu-action-list li {
+      counter-increment: step;
+      position: relative;
+      padding: 18px 20px 18px 72px;
+      margin-bottom: 14px;
+      background: var(--nu-white);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 6px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .nu-action-list li:hover {
+      transform: translateX(2px);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.09);
+    }
+    .nu-action-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
+      color: var(--nu-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+    }
+    .nu-action-title {
+      font-weight: 700;
       color: var(--nu-dark-text);
       margin-bottom: 4px;
+      font-size: 1rem;
     }
-    .nu-card-note {
-      font-size: 0.88rem;
+    .nu-action-detail {
+      font-size: 0.92rem;
       color: var(--nu-body-text);
     }
 
-    /* ══ STATUS PILLS ══ */
-    .nu-pill {
+    /* ══ EMAIL DRAFT BOX ══ */
+    .nu-email-draft {
+      background: #fafafb;
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 28px 32px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: var(--nu-dark-text);
+      position: relative;
+    }
+    .nu-email-draft::before {
+      content: 'DRAFT';
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-family: var(--font-primary);
+      font-size: 0.7rem;
+      font-weight: 900;
+      color: var(--nu-cyan);
+      letter-spacing: 0.18em;
+      background: var(--nu-navy);
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+    .nu-email-meta {
+      font-family: var(--font-primary);
+      font-size: 0.85rem;
+      color: var(--nu-body-text);
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .nu-email-meta strong {
+      color: var(--nu-dark-text);
       display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      width: 72px;
+    }
+    .nu-email-body p {
+      margin-bottom: 14px;
+      padding-left: 24px;
+    }
+    .nu-email-body .greeting {
+      padding-left: 0;
+      margin-bottom: 16px;
+    }
+    .nu-email-body .closing {
+      padding-left: 0;
+      margin-top: 20px;
+    }
+    .nu-email-body .signature {
+      padding-left: 24px;
+      margin-top: 4px;
+      color: var(--nu-body-text);
+      font-size: 0.92rem;
+    }
+    .nu-email-body ul {
+      padding-left: 48px;
+      margin-bottom: 14px;
+      list-style: none;
+    }
+    .nu-email-body ul li {
+      position: relative;
+      margin-bottom: 6px;
+    }
+    .nu-email-body ul li::before {
+      content: '•';
+      position: absolute;
+      left: -16px;
+      color: var(--nu-blue);
+      font-weight: 900;
+    }
+
+    /* ══ INFO GRID ══ */
+    .nu-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .nu-info-cell {
+      background: linear-gradient(135deg, #f8faff 0%, #eef3ff 100%);
+      border-radius: 6px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--nu-blue);
+    }
+    .nu-info-label {
+      font-size: 0.72rem;
+      font-weight: 900;
+      color: var(--nu-blue);
       text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
     }
-    .nu-pill-urgent {
-      background: #fde4e0;
-      color: var(--nu-alert-red);
+    .nu-info-value {
+      font-size: 0.98rem;
+      color: var(--nu-dark-text);
+      font-weight: 700;
     }
-    .nu-pill-active {
-      background: #fef3d7;
-      color: #9a6f0e;
-    }
-    .nu-pill-ok {
-      background: #def2e5;
-      color: var(--nu-alert-green);
+    .nu-info-value.empty {
+      color: #888;
+      font-weight: 400;
+      font-style: italic;
     }
 
     /* ══ CHECKLIST ══ */
     .nu-checklist {
       list-style: none;
-      padding: 0;
-      margin: 0;
     }
     .nu-checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 0;
+      padding: 10px 0 10px 32px;
+      position: relative;
       border-bottom: 1px solid var(--nu-medium-gray);
+      color: var(--nu-dark-text);
+      font-size: 0.96rem;
     }
-    .nu-checklist li:last-child {
-      border-bottom: none;
+    .nu-checklist li:last-child { border-bottom: none; }
+    .nu-checklist li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 3px;
+      background: var(--nu-white);
     }
-    .nu-checkbox {
-      width: 22px;
-      height: 22px;
+
+    /* ══ BUTTONS ══ */
+    .nu-btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .nu-btn-primary {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 13px 28px;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .nu-btn-primary:hover {
+      background: #0000CC;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,255,0.3);
+    }
+    .nu-btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--nu-blue);
+      padding: 11px 26px;
       border: 2px solid var(--nu-blue);
       border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 2px;
-      background: var(--nu-white);
-      position: relative;
-    }
-    .nu-check-content {
-      flex: 1;
-    }
-    .nu-check-title {
+      font-family: var(--font-primary);
       font-weight: 700;
-      color: var(--nu-dark-text);
-      font-size: 1rem;
-      margin-bottom: 3px;
-    }
-    .nu-check-sub {
-      font-size: 0.88rem;
-      color: var(--nu-body-text);
-    }
-    .nu-check-meta {
-      font-size: 0.78rem;
-      color: var(--nu-blue);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-
-    /* ══ EMAIL DRAFT BLOCK ══ */
-    .nu-draft-box {
-      background: var(--nu-light-gray);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 4px solid var(--nu-blue);
-      padding: 24px 28px;
-      border-radius: 6px;
-      margin-top: 12px;
-    }
-    .nu-draft-header {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--nu-blue);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .nu-draft-body {
       font-size: 0.95rem;
-      color: var(--nu-dark-text);
-      line-height: 1.7;
-      white-space: pre-wrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
     }
-
-    /* ══ VENDOR TABLE ══ */
-    .nu-table-wrap {
-      overflow-x: auto;
-      border-radius: 6px;
-      border: 1px solid var(--nu-medium-gray);
-    }
-    .nu-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--nu-white);
-    }
-    .nu-table th {
-      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 100%);
+    .nu-btn-secondary:hover {
+      background: var(--nu-blue);
       color: var(--nu-white);
-      padding: 12px 14px;
-      text-align: left;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .nu-table td {
-      padding: 13px 14px;
-      border-top: 1px solid var(--nu-medium-gray);
-      font-size: 0.93rem;
-      color: var(--nu-dark-text);
-    }
-    .nu-table tr:nth-child(even) td {
-      background: var(--nu-light-gray);
-    }
-
-    /* ══ CALLOUT BOX ══ */
-    .nu-callout {
-      background: linear-gradient(135deg, #eaf4ff 0%, #d9ebff 100%);
-      border-left: 5px solid var(--nu-blue);
-      padding: 22px 26px;
-      border-radius: 6px;
-      margin-bottom: 24px;
-    }
-    .nu-callout-title {
-      font-weight: 900;
-      font-size: 1rem;
-      color: var(--nu-blue);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .nu-callout-body {
-      font-size: 0.95rem;
-      color: var(--nu-dark-text);
-      line-height: 1.65;
     }
 
     /* ══ FOOTER ══ */
     .nu-footer {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 60%, #000099 100%);
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
       padding: 44px 40px;
       text-align: center;
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 400;
+      font-weight: 300;
       font-size: 1.2rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
+      letter-spacing: 0.02em;
     }
     .nu-footer-contact {
-      font-size: 0.92rem;
-      line-height: 1.85;
+      font-size: 0.95rem;
+      line-height: 1.9;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
     }
-    .nu-footer-contact a:hover {
-      text-decoration: underline;
-    }
-    .nu-footer-divider {
-      width: 60px;
-      height: 2px;
-      background: var(--nu-cyan);
-      margin: 16px auto;
-      opacity: 0.6;
-    }
-    .nu-footer-fineprint {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.06em;
-      margin-top: 10px;
-    }
+    .nu-footer-contact a:hover { text-decoration: underline; }
 
     /* ══ RESPONSIVE ══ */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 70px; min-height: 220px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.55em; }
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 0.9rem; letter-spacing: 0.4em; }
       .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 36px 20px 50px; }
-      .nu-page-title { font-size: 1.5rem; }
-      .nu-section-title { font-size: 1.2rem; }
-      .nu-alert-banner { flex-direction: column; text-align: center; }
+      .nu-content-wrap { padding: 30px 20px 40px; }
+      .nu-page-title { font-size: 1.75rem; }
+      .nu-email-draft { padding: 20px 20px; }
+      .nu-email-body p,
+      .nu-email-body .signature,
+      .nu-email-body ul { padding-left: 12px; }
+      .nu-status-date { margin-left: 0; width: 100%; }
     }
 
     @media print {
       body { background: var(--nu-white); }
-      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-card { box-shadow: none; border: 1px solid #ccc; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-action-list li { break-inside: avoid; }
+      .nu-email-draft { break-inside: avoid; }
     }
   </style>
 </head>
@@ -483,289 +490,169 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
-      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
-    </svg>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
+      </svg>
+    </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
-  <!-- CHEVRON TRANSITION -->
+  <!-- WHITE CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#FFFFFF"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#ffffff"/>
     </svg>
   </div>
 
   <!-- MAIN CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-container">
+    <div class="nu-content-wrap">
 
-      <div class="nu-page-meta">
-        <div class="nu-breadcrumb">Action Item &nbsp;·&nbsp; Inventory Operations</div>
-        <div class="nu-date-stamp">Logged: April 21, 2026</div>
+      <!-- STATUS BAR -->
+      <div class="nu-status-bar">
+        <span class="nu-status-label">● Action Required</span>
+        <span class="nu-status-text">Inventory follow-up overdue — anxiously awaiting supplier response</span>
+        <span class="nu-status-date">Logged: 2026-04-21</span>
       </div>
 
-      <h1 class="nu-page-title"><span>Follow Up</span> on Inventory Order from Last PO</h1>
-      <p class="nu-page-subtitle">Anxiously waiting — source captured from reMarkable. Awaiting vendor ship confirmation and ETA to close the loop with customers holding against this stock.</p>
+      <!-- TITLE -->
+      <h1 class="nu-page-title">Inventory Order <span>Follow-Up</span></h1>
+      <p class="nu-page-subtitle">
+        Open action item captured from reMarkable notes: follow up on inventory ordered against the last purchase order.
+        Aaron is anxiously awaiting confirmation of ship date and tracking. This page holds the action steps, draft
+        outreach, and a space to record the response once received.
+      </p>
 
-      <!-- STATUS BANNER -->
-      <div class="nu-alert-banner">
-        <div class="nu-alert-icon">!</div>
-        <div class="nu-alert-text">
-          <div class="nu-alert-title">Action Required — Vendor Follow-Up Owed</div>
-          <div class="nu-alert-body">This item originated from Aaron's reMarkable note. Until the last PO ships and an ETA is confirmed in writing, this stays on the open-items board and blocks downstream customer commitments.</div>
-        </div>
-      </div>
-
-      <!-- SNAPSHOT CARDS -->
+      <!-- SECTION: ORDER SNAPSHOT -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Current</span> <span class="rest">Status Snapshot</span></h2>
-        <div class="nu-grid-3">
-          <div class="nu-card">
-            <div class="nu-card-label">Priority</div>
-            <div class="nu-card-value"><span class="nu-pill nu-pill-urgent">Urgent</span></div>
-            <div class="nu-card-note">Anxiously waiting — flagged on reMarkable</div>
+        <h2 class="nu-section-title">Order <span>Snapshot</span></h2>
+        <div class="nu-info-grid">
+          <div class="nu-info-cell">
+            <div class="nu-info-label">PO Reference</div>
+            <div class="nu-info-value empty">Confirm PO # from records</div>
           </div>
-          <div class="nu-card">
-            <div class="nu-card-label">Stage</div>
-            <div class="nu-card-value"><span class="nu-pill nu-pill-active">Awaiting Vendor Reply</span></div>
-            <div class="nu-card-note">PO placed — ship date not confirmed</div>
+          <div class="nu-info-cell">
+            <div class="nu-info-label">Supplier</div>
+            <div class="nu-info-value empty">Confirm vendor on last PO</div>
           </div>
-          <div class="nu-card">
-            <div class="nu-card-label">Owner</div>
-            <div class="nu-card-value">Aaron C. Norris</div>
-            <div class="nu-card-note">CB supports once ETA is confirmed</div>
+          <div class="nu-info-cell">
+            <div class="nu-info-label">Order Status</div>
+            <div class="nu-info-value">Awaiting shipment confirmation</div>
           </div>
-          <div class="nu-card">
-            <div class="nu-card-label">Source</div>
-            <div class="nu-card-value">reMarkable Note</div>
-            <div class="nu-card-note">Captured April 21, 2026</div>
+          <div class="nu-info-cell">
+            <div class="nu-info-label">Priority</div>
+            <div class="nu-info-value">High — inventory hold</div>
           </div>
-          <div class="nu-card">
-            <div class="nu-card-label">Next Check</div>
-            <div class="nu-card-value">Within 24 Hours</div>
-            <div class="nu-card-note">If no reply, escalate to secondary contact</div>
+          <div class="nu-info-cell">
+            <div class="nu-info-label">Captured From</div>
+            <div class="nu-info-value">reMarkable notes</div>
           </div>
-          <div class="nu-card">
-            <div class="nu-card-label">Impact</div>
-            <div class="nu-card-value">Customer Commitments</div>
-            <div class="nu-card-note">Orders staged against this inventory</div>
+          <div class="nu-info-cell">
+            <div class="nu-info-label">Owner</div>
+            <div class="nu-info-value">Aaron C. Norris</div>
           </div>
         </div>
       </section>
 
-      <!-- WHAT TO DO -->
+      <!-- SECTION: ACTION PLAN -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Steps</span> <span class="rest">to Close This Item</span></h2>
+        <h2 class="nu-section-title">Action <span>Plan</span></h2>
+        <ol class="nu-action-list">
+          <li>
+            <div class="nu-action-title">Pull the last PO from QuickBooks</div>
+            <div class="nu-action-detail">Confirm PO number, line items, quantities, unit costs, and order date so the follow-up references exact numbers.</div>
+          </li>
+          <li>
+            <div class="nu-action-title">Check inbox for any prior supplier reply</div>
+            <div class="nu-action-detail">Search acnorris@norrisutilities.com and CB's folder for any ship-date confirmation or tracking already received but not filed.</div>
+          </li>
+          <li>
+            <div class="nu-action-title">Send follow-up email to the supplier</div>
+            <div class="nu-action-detail">Use the draft below. Keep tone direct and warm — ask for ship date, tracking, and any delays known.</div>
+          </li>
+          <li>
+            <div class="nu-action-title">Place a confirming phone call</div>
+            <div class="nu-action-detail">If no email reply within one business day, call the supplier rep directly. Leave voicemail with callback number 205-500-1343 if needed.</div>
+          </li>
+          <li>
+            <div class="nu-action-title">Update master_tracker with status</div>
+            <div class="nu-action-detail">Record reply (ship date, tracking, delay reason) so the open-item does not stay live in reMarkable.</div>
+          </li>
+          <li>
+            <div class="nu-action-title">Close the reMarkable action item</div>
+            <div class="nu-action-detail">Once confirmation is in hand and the tracker is updated, mark this item resolved in the reMarkable action log.</div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- SECTION: DRAFT EMAIL -->
+      <section class="nu-section">
+        <h2 class="nu-section-title">Supplier <span>Follow-Up Email</span></h2>
+        <div class="nu-email-draft">
+          <div class="nu-email-meta">
+            <div><strong>To:</strong> Supplier primary contact</div>
+            <div><strong>CC:</strong> Secondary contact (if two-contact account — see contact rules)</div>
+            <div><strong>Subject:</strong> Follow-Up — Last PO, Ship Date &amp; Tracking Request</div>
+          </div>
+          <div class="nu-email-body">
+            <p class="greeting">Name —</p>
+            <p>I wanted to follow up on the inventory order tied to our most recent PO with y'all.</p>
+            <p>We are anxiously waiting on this shipment so we can fulfill what is already committed on our side. I would appreciate confirmation on the following:</p>
+            <ul>
+              <li>Confirmed ship date out of your facility</li>
+              <li>Carrier and tracking number once generated</li>
+              <li>Any known delays, short-ships, or substitutions on the order</li>
+            </ul>
+            <p>If there is anything on our end holding this up — open balance, paperwork, or missing information — please let me know today and we will get it resolved immediately.</p>
+            <p>Appreciate your help getting this moving. Looking forward to earning more of this business going forward.</p>
+            <p class="closing">Sincerely,</p>
+            <p class="signature">
+              Aaron C. Norris<br>
+              Founder &amp; CEO<br>
+              Norris Utilities, LLC<br>
+              Cell: 205-500-1343<br>
+              acnorris@norrisutilities.com
+            </p>
+          </div>
+        </div>
+        <div class="nu-btn-row">
+          <a href="mailto:?subject=Follow-Up%20%E2%80%94%20Last%20PO%2C%20Ship%20Date%20%26%20Tracking%20Request" class="nu-btn-primary">Open in Email</a>
+          <a href="tel:2055001343" class="nu-btn-secondary">Call Supplier</a>
+        </div>
+      </section>
+
+      <!-- SECTION: RESPONSE LOG -->
+      <section class="nu-section">
+        <h2 class="nu-section-title">Response <span>Log</span></h2>
+        <div class="nu-card">
+          <div class="nu-card-title">Record supplier reply here</div>
+          <div class="nu-card-body">
+            <p><strong>Date contacted:</strong> ________________________</p>
+            <p><strong>Method:</strong> ☐ Email &nbsp; ☐ Phone &nbsp; ☐ Text</p>
+            <p><strong>Confirmed ship date:</strong> ________________________</p>
+            <p><strong>Carrier &amp; tracking:</strong> ________________________</p>
+            <p><strong>Notes / delays / partials:</strong> ________________________</p>
+            <p><strong>Next check-in:</strong> ________________________</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: CLOSE-OUT CHECKLIST -->
+      <section class="nu-section">
+        <h2 class="nu-section-title">Close-Out <span>Checklist</span></h2>
         <ul class="nu-checklist">
-          <li>
-            <div class="nu-checkbox"></div>
-            <div class="nu-check-content">
-              <div class="nu-check-title">Pull the last PO from QuickBooks and the vendor portal</div>
-              <div class="nu-check-sub">Confirm PO number, line items, quantities, unit cost, and the ship-to address on file. Cross-check against the Norris Utilities® master tracker so the numbers match before the outreach goes out.</div>
-              <div class="nu-check-meta">Prep · 10 minutes</div>
-            </div>
-          </li>
-          <li>
-            <div class="nu-checkbox"></div>
-            <div class="nu-check-content">
-              <div class="nu-check-title">Identify the correct vendor contact and CC policy</div>
-              <div class="nu-check-sub">BOSS Products → CC Troy Gongwer + Thayne Grove. Samson Rope → CC Donna Poll + Sarah Daniels. Skylift → Nick Gordon for pricing/specs, Andrew Jarmoszuk / Dale Williams / Nick Jarmoszuk Jr. for account matters. BSS → Andy Barron primary, Herb Minatre owner.</div>
-              <div class="nu-check-meta">Contacts · 5 minutes</div>
-            </div>
-          </li>
-          <li>
-            <div class="nu-checkbox"></div>
-            <div class="nu-check-content">
-              <div class="nu-check-title">Send the follow-up email (draft ready below)</div>
-              <div class="nu-check-sub">Lead with the ask — a firm ship date and tracking number for the PO. Keep it warm, direct, and short. Apply Aaron's voice: "Name —" greeting, no filler, no apologies, close "Sincerely,".</div>
-              <div class="nu-check-meta">Action · 5 minutes</div>
-            </div>
-          </li>
-          <li>
-            <div class="nu-checkbox"></div>
-            <div class="nu-check-content">
-              <div class="nu-check-title">Log the outreach on the master tracker</div>
-              <div class="nu-check-sub">Record date sent, vendor, PO referenced, contacts CC'd, and the promised reply-by date. This is what keeps the follow-up from slipping and gives CB the context she needs to take over.</div>
-              <div class="nu-check-meta">Tracker · 3 minutes</div>
-            </div>
-          </li>
-          <li>
-            <div class="nu-checkbox"></div>
-            <div class="nu-check-content">
-              <div class="nu-check-title">Escalate if no reply within 24 business hours</div>
-              <div class="nu-check-sub">Call the primary contact directly at 205-500-1343's standard morning window. If still no reply, route up one level (owner / GM) using the CC list above. Document the escalation on the tracker in the same row.</div>
-              <div class="nu-check-meta">Escalation · Conditional</div>
-            </div>
-          </li>
-          <li>
-            <div class="nu-checkbox"></div>
-            <div class="nu-check-content">
-              <div class="nu-check-title">Notify any customers staged against this inventory</div>
-              <div class="nu-check-sub">Once vendor ETA is confirmed, push the update to every customer holding against this PO. Use Aaron's voice; do not promise dates that aren't in writing from the vendor. CB handles the customer-facing send after Aaron reviews.</div>
-              <div class="nu-check-meta">Downstream · 15 minutes</div>
-            </div>
-          </li>
-          <li>
-            <div class="nu-checkbox"></div>
-            <div class="nu-check-content">
-              <div class="nu-check-title">Close the reMarkable item and archive the thread</div>
-              <div class="nu-check-sub">Mark the reMarkable note complete, move the vendor thread to the confirmed-shipped label in Gmail, and note the delivery window on the open-invoices page so invoicing does not slip once the stock lands.</div>
-              <div class="nu-check-meta">Closeout · 2 minutes</div>
-            </div>
-          </li>
+          <li>Last PO details pulled and confirmed</li>
+          <li>Follow-up email sent to supplier</li>
+          <li>Phone call placed if no reply within one business day</li>
+          <li>Ship date and tracking confirmed in writing</li>
+          <li>master_tracker updated with status and ship date</li>
+          <li>Customer(s) downstream notified of delivery window</li>
+          <li>reMarkable action item marked resolved</li>
         </ul>
-      </section>
-
-      <!-- DRAFT EMAIL -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Follow-Up</span> <span class="rest">Email Draft (Aaron's Voice)</span></h2>
-        <div class="nu-callout">
-          <div class="nu-callout-title">Before sending</div>
-          <div class="nu-callout-body">Swap in the vendor's name, the actual PO number, and the ship-to reference. Keep the em dash greeting, keep it short, and do not add apologies. CC the full contact pair per the vendor's CC policy.</div>
-        </div>
-        <div class="nu-draft-box">
-          <div class="nu-draft-header">Subject &nbsp;·&nbsp; Status Check — Last PO &nbsp;·&nbsp; Ship Date Request</div>
-          <div class="nu-draft-body">Name —
-
-    Checking in on the last PO we placed. We have customers staged against this stock and I'd like to give them a firm date.
-
-    Could you confirm:
-
-    • Ship date from your end
-    • Carrier and tracking number once released
-    • Any line items short-shipping or backordered
-
-    Appreciate a reply today if at all possible. If anything has shifted on availability, I'd rather know now so we can plan around it.
-
-    Sincerely,
-    Aaron C. Norris
-    Founder &amp; CEO — Norris Utilities®, LLC
-    Cell: 205-500-1343
-    acnorris@norrisutilities.com</div>
-        </div>
-      </section>
-
-      <!-- VENDOR ROUTING TABLE -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Vendor</span> <span class="rest">Routing &amp; CC Policy</span></h2>
-        <div class="nu-table-wrap">
-          <table class="nu-table">
-            <thead>
-              <tr>
-                <th>Vendor</th>
-                <th>Primary Contact</th>
-                <th>Must CC</th>
-                <th>Fallback</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>BOSS Products</td>
-                <td>Troy Gongwer</td>
-                <td>Thayne Grove (always)</td>
-                <td>Call line direct</td>
-              </tr>
-              <tr>
-                <td>Samson Rope</td>
-                <td>Donna Poll</td>
-                <td>Sarah Daniels (always)</td>
-                <td>Distributor desk</td>
-              </tr>
-              <tr>
-                <td>Skylift</td>
-                <td>Nick Gordon (pricing / specs)</td>
-                <td>Andrew Jarmoszuk, Dale Williams, Nick Jarmoszuk Jr.</td>
-                <td>Account lead on file</td>
-              </tr>
-              <tr>
-                <td>Bay Shore Systems</td>
-                <td>Andy Barron</td>
-                <td>Herb Minatre (owner, escalation only)</td>
-                <td>Andy mobile</td>
-              </tr>
-              <tr>
-                <td>Irby Construction</td>
-                <td>Jared Lemoine</td>
-                <td>Internal ops only</td>
-                <td>Email → phone after 24h</td>
-              </tr>
-              <tr>
-                <td>FlexPro Armor (in-house run)</td>
-                <td>Production lead</td>
-                <td>CB for customer-facing</td>
-                <td>Aaron direct</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- WHY IT MATTERS -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Why</span> <span class="rest">This Item Matters</span></h2>
-        <div class="nu-grid-2">
-          <div class="nu-card">
-            <div class="nu-card-label">Revenue Protection</div>
-            <div class="nu-card-value">Customer Commitments</div>
-            <div class="nu-card-note">Orders against this PO are revenue on the board. A silent vendor slip becomes a customer-facing slip within 48 hours if not caught now.</div>
-          </div>
-          <div class="nu-card">
-            <div class="nu-card-label">Trust &amp; Reputation</div>
-            <div class="nu-card-value">"Legacy of Commitment®"</div>
-            <div class="nu-card-note">Norris Utilities® wins on reliability. Proactive status updates — before the customer has to ask — are the standard on every deal.</div>
-          </div>
-          <div class="nu-card">
-            <div class="nu-card-label">Cash Flow</div>
-            <div class="nu-card-value">Invoicing Window</div>
-            <div class="nu-card-note">Stock landing = invoice sent same day per SOP. Every day the ship date slides is a day the receivable slides with it.</div>
-          </div>
-          <div class="nu-card">
-            <div class="nu-card-label">Operational Discipline</div>
-            <div class="nu-card-value">Open-Items Hygiene</div>
-            <div class="nu-card-note">This item stays on the open-items board until the vendor confirms. Closing loops — not collecting them — is the measure of a clean week.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FOLLOW-UP WINDOW -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Escalation</span> <span class="rest">Timeline</span></h2>
-        <div class="nu-grid-3">
-          <div class="nu-card">
-            <div class="nu-card-label">T + 0 Hours</div>
-            <div class="nu-card-value">Email Sent</div>
-            <div class="nu-card-note">Primary + full CC list per vendor policy. Logged on master tracker.</div>
-          </div>
-          <div class="nu-card">
-            <div class="nu-card-label">T + 24 Hours</div>
-            <div class="nu-card-value">Phone Follow-Up</div>
-            <div class="nu-card-note">Call the primary. Document the call note on the same tracker row.</div>
-          </div>
-          <div class="nu-card">
-            <div class="nu-card-label">T + 48 Hours</div>
-            <div class="nu-card-value">Escalate Upward</div>
-            <div class="nu-card-note">Loop in the owner / GM using the vendor's published escalation path.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- REPORT BACK -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="accent">Report</span> <span class="rest">Card — Close This Item</span></h2>
-        <div class="nu-callout">
-          <div class="nu-callout-title">Definition of Done</div>
-          <div class="nu-callout-body">
-            ✅ Vendor has confirmed a ship date in writing.<br>
-            ✅ Tracking number recorded on the master tracker and the open-invoices page.<br>
-            ✅ Every affected customer has received the updated ETA in Aaron's voice after his review.<br>
-            ✅ reMarkable source note marked complete and the Gmail thread labeled <em>confirmed-shipped</em>.<br>
-            ✅ This page is archived to <strong>/internal/archive/</strong> once all four lines above are green.
-          </div>
-        </div>
       </section>
 
     </div>
@@ -775,14 +662,11 @@
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
-    <div class="nu-footer-divider"></div>
-    <div class="nu-footer-fineprint">130 Inverness Plaza #210 &nbsp;·&nbsp; Birmingham, Alabama 35242 &nbsp;·&nbsp; Founded November 2021</div>
-    <div class="nu-footer-fineprint">Third-Generation Utility Equipment Dealer &amp; Distributor &nbsp;·&nbsp; Phoenix Icon®</div>
   </footer>
 
 </body>
