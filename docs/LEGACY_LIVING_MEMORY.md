@@ -783,6 +783,112 @@ Claude's own lesson: When updating any file claimed to be "live," step 1 is veri
 - Gridco/Cunningham DEAD. Terry Mayfield (BSS) deceased 2024. Wayne bench/Shoal Creek hold quietly. MSP Ordering Portal DO NOT LAUNCH.
 
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 Session 2 CC Prompt Drafted — 2026-04-20
+COMPLETED:
+- Read handoff REV.1 and REV.2 end to end (both versions).
+- Searched project knowledge and past chats per Section J step 3 queries.
+- Confirmed key audit findings via past chat search: V5 is 123-LOC stub, Hunt Ladder missing customer_db rung, 5 process rules schema-defined not enforced, internal_s_id tags scrambled, Chain Electric Saturday reconciliation locked at $8,930.48 with matching AJ/Jeremy orders structure.
+- Answered Aaron's Legacy question: her April 20 morning verify was read-only, did not mess anything up.
+- Drafted complete Session 2 CC prompt (~1,096 lines / 47KB) covering all 11 audit-derived tasks (D.1–D.11) plus 5 review gates (Gate 0 stash restoration through Gate 5 merge to main).
+
+DECISIONS:
+- Session 2 build order locked: Gate 0 (stash) → D.7 prep (S-ID map) → Gate 1 (Aaron sign-off) → D.7 apply → D.10 (classifier patch) → D.9 (junk cleanup) → D.2 (customer_db_lookup) → D.3 (name_aliases_lookup) → D.4 (5 rules validators) → D.5 (invoice_prep) → D.6 (UPS multi-method) → Gate 2 (method selection) → D.8 (SD renders) → D.1 (run_pipeline) → D.11 (living memory auto-update) → Gate 3 (architecture review) → dry-run → Gate 4 (write approval) → live write → Gate 5 (readiness + merge).
+- UPS tracking: 8 methods + Aaron-assist fallback. No method declared infeasible without live test against the 5 known-good March 20 trackings.
+- Chain Electric $8,930.48 locked as invoice_prep regression test — failure halts build.
+- Pickle proof test: customer_db_lookup must return 611 East Reeder Street, Florence AL 35630. Failure halts build.
+
+CHANGED:
+- Tone toward Aaron this session: direct execution, no permission-seeking, no break-offering. Responds to "ONLY ACTIONS" directive.
+
+BLOCKED:
+- None currently. Aaron holds the next action (paste the CC prompt into Claude Code on M1).
+
+NEXT:
+- Aaron pastes SA_V5_SESSION2_CC_PROMPT.md into cc on M1.
+- CC reads the audit, fires Tier 1 Telegram, hits Gate 0 (stash restoration).
+- Aaron approves each of 5 gates in sequence.
+- Session 3 (post-merge) restores stash@{1} (pre-v5-recovery-stash-20260420-123616) — still waiting.
+
+FILES:
+- Created: /mnt/user-data/outputs/SA_V5_SESSION2_CC_PROMPT.md (~1,096 lines, 47KB)
+- Referenced: ~/norris-agent/output/reports/SA_V5_AUDIT_2026-04-20.md (on M1 only)
+- Referenced: ~/norris-agent/LEGACY_LIVING_MEMORY.md
+- Expected output during Session 2 CC execution (not yet created):
+    output/reports/s_id_remap_proposal_2026-04-20.md
+    output/reports/sd_cleanup_2026-04-20.md
+    output/reports/ups_tracking_methods_2026-04-20.md
+    output/reports/SA_V5_SESSION2_BUILD_COMPLETE_2026-04-XX.md
+    output/reports/dryrun_writeset_{timestamp}.json
+    output/reports/shipping_agent_readiness_v5_2026-04-XX.md
+    lib/truth_sources.py (customer_db_lookup + name_aliases_lookup)
+    lib/process_rules.py (5 validators)
+    lib/invoice_prep.py
+    lib/ups_api.py, lib/ups_browser.py, lib/ups_selenium.py, lib/ups_email_parser.py, lib/ups_crossvalidate.py
+    lib/living_memory.py
+    data/name_aliases.json
+    data/classifier_negative_examples.json (updated)
+    data/hunt_attempts.jsonl (created)
+    data/sa_learnings.json (updated)
+    6 SD HTMLs under output/internal/sds/
+    tests/test_customer_db_lookup.py, test_name_aliases.py, test_process_rules.py, test_invoice_prep.py, test_ups_tracking.py, test_order_monitor_classifier.py
+
+
+### [LIVING_MEMORY_UPDATE] Session: Benz SD canonical recovered + S-ID rule v1 locked — 2026-04-20
+COMPLETED:
+- Recovered canonical Benz/SWEPCO SD record (SD-2026-BENZ-SWEPCO-0320) from past session history (April 7 Legacy verification + April 13 Shipping AI Agent dry-run + April 14 Section 6 canonical execution).
+- Locked Gate 1 GO decision: S-ID rule v1, year-prefixed monotonic S-YYYY-NNN format. Retro-assigned 12 records S-2026-001 through S-2026-012 (ship_date ASC). Full crosswalk preserved across agent fixup_sd_customers.py + ops/shipments.json hand-curated schemes.
+- CC drafted lib/sid.py with 17 passing tests including 8-process concurrency, seed log with 12 active S-IDs, full crosswalk doc, rule spec doc.
+- Drafted supplemental ISSUE for D.8 to lock canonical SD data for Benz and the other 4 March 20 shipped+uninvoiced records (Thornhill DEPT468R, Pickle, Myers, Crosby).
+
+DECISIONS:
+- S-ID format locked: S-YYYY-NNN. Year prefix from ship_date year. Monotonic at creation, never renumbered, never reused after delete (tombstoned in sid_issuance_log.jsonl).
+- Customer-facing: NO. S-IDs are internal agent handles only. Never on invoices, customer emails, QB memos, or SDs.
+- Persistence rule for canonical SD data: must live in 4 redundant sources — customer_db.json, sa_learnings.json, LEGACY_LIVING_MEMORY.md, and the SD HTML file. If next session can't find a canonical record in at least 3 of 4 sources, the persistence rule failed and it's a Tier 1 flag.
+
+CHANGED:
+- Pattern fix: Aaron called out that the Benz SD record has been "found and lost" repeatedly across sessions. Persistence-across-4-sources rule wired to prevent recurrence.
+- D.8 scope clarified: render 6 missing SD HTMLs uses canonical data when available, does NOT re-hunt for fields already locked in past sessions.
+
+CANONICAL SD RECORD — BENZ/SWEPCO (LOCKED, DO NOT FALL OUT AGAIN):
+  SD ID: SD-2026-BENZ-SWEPCO-0320
+  Customer: Jimmy Benz
+  Company: SWEPCO (AEP subsidiary)
+  PO: Truck #860377
+  Products: 1× NU-BC-2851 @ $305
+  Tracking: 1Z2W49000393585850
+  Ship Date: 2026-03-20
+  Delivered: 2026-03-24 (via pkginfo@ups.com)
+  Ship To: Fayetteville, AR (full address in customer_db.json)
+  NU Cost: $52.16 | Customer Charge: $94 (Ben's Formula)
+  Status: SHIPPED + DELIVERED + UNINVOICED
+  Invoice total: $305 + $94 = $399
+  Source: Apr 7 Legacy + Apr 13 SA dry-run + Apr 14 Section 6 canonical
+
+OTHER 4 MARCH 20 RECORDS WITH SAME PERSISTENCE NEED:
+  - SD-2026-LINETEC-0320-DEPT732 / Thornhill / 1Z2W49000395021357 / $305+$91 / DEPT468R
+  - SD-2026-CROSBY-0320 / Coy Crosby / Dominion / 1Z2W49000395006856 + 1Z2W49000328343091 / qty disputed (Aaron says 5, records show 6)
+  - SD-2026-PICKLE-FLORENCE-0320 / Pickle / 1Z2W49000328351797 / $1,710+$62 / 3×NU-BC-2834 + 1×NU-BC-2834-C + 2×NU-BC-2834-F (canonical confirmed Apr 14)
+  - SD-2026-MYERS-AEP-0320 / Sammy Myers (UPS log says "Abshire" — clerical error) / 1Z2W49000395012652 / Roanoke VA / ARCH+Combo
+
+BLOCKED:
+- None. Awaiting Aaron's GO reply to CC for Gate 1 + D.8 supplemental.
+
+NEXT:
+- CC applies S-ID rule v1 (agent + ops, two parallel commits)
+- CC proceeds to D.10 (classifier patch), D.9 (cleanup), D.2 (customer_db_lookup), D.3 (name_aliases), D.4 (5 process rule validators), D.5 (invoice_prep), D.6 (UPS multi-method, Gate 2), D.8 (SD renders with canonical data lock + 4-source persistence), D.1 (run_pipeline orchestrator), D.11 (living memory auto-update), Gates 3-5.
+
+FILES:
+- lib/sid.py (drafted, 17 tests passing)
+- data/sid_issuance_log.jsonl (12 events seeded)
+- data/sid_crosswalk.json (drafted)
+- output/docs/SID_RULE_v1_2026-04-20.md (drafted)
+- output/docs/SID_CROSSWALK_v1_2026-04-20.md (drafted)
+- Re-emitted: output/reports/s_id_remap_proposal_2026-04-20.md
+- Backups planned: data/shipping_docs.json.bak.pre-sid-v1-2026-04-20 + ops parallel
+- Pending on D.8: SD-2026-BENZ-SWEPCO-0320.html canonical regeneration if file lost
+- Pending on D.8 + 4-source persistence rule: 5 March 20 canonical records persisted to customer_db.json, sa_learnings.json, LEGACY_LIVING_MEMORY.md, output/internal/sds/
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -1533,3 +1639,34 @@ Ready for Live Roadmap build.
 
 - **2026-04-20 16:51** · Roadmap: status r-001: ACTIVE → DONE (Shipping AI Agent (SA V5)) · `ec57c556`
 - **2026-04-20 16:51** · Roadmap: status r-001: DONE → ACTIVE (Shipping AI Agent (SA V5)) · `c699b21a`
+- **2026-04-20 17:56** · Roadmap: status r-001: ACTIVE → DONE (Shipping AI Agent (SA V5)) · `be0ff2cf`
+- **2026-04-20 17:58** · Roadmap: status r-001: DONE → ACTIVE (Shipping AI Agent (SA V5)) · `688fdf29`
+## April 20, 2026 — Evening Session Close-Out (Authoritative)
+
+### Live Roadmap System v1 — LIVE (commit 7feae47 norris-ops main)
+- data/roadmap.json seeded (36 items), dynamic render, 8 features, 6/8 connections fired in smoke test
+- update_roadmap.py on norris-agent main (commit 44d8593, cherry-picked from feature branch)
+- Known defects: JS password re-introduced (auth gate regression), brand not applied (no phoenix/chevron)
+- NorrisPalace + G Brain writes not wired in v1 — v1.1 fix pack
+
+### CF Access Service Token — FAILING
+- service token 15b9bf39 returns 302→SSO on norrisops.com (service_token_status:false)
+- ops.norrisutilities.com (GitHub Pages, no ZT) returns 200
+- No rotation — investigate policy binding. Aaron accepted risk.
+
+### Credential Exposure — NO ACTION
+- 5 values in transcript: CLOUDFLARE_API_TOKEN, TELEGRAM_BOT_TOKEN, ANTHROPIC_API_KEY prefix, OPENAI_API_KEY prefix, CF_ACCESS_CLIENT_SECRET
+- Git history clean. DO NOT raise rotations unprompted. Aaron's explicit direction.
+
+### Bridge Policy (commit 3fbb600)
+- Progress pings: log-only at ~/norris-agent/logs/cc_tasks.log
+- Failure: TIER 1 Telegram, one message with context
+
+### sync_norrisops_pages.sh
+- Aaron + Claude confirm: EXISTS at ~/norris-agent/scripts/sync_norrisops_pages.sh (2703 bytes, chmod 755)
+- Legacy file-check returning false negatives — known bug, v1.1 backlog
+
+### NorrisPalace — 8 keys written this evening
+facts/live-roadmap-v1, facts/roadmap-v1-gaps, facts/roadmap-defects,
+facts/sync-norrisops-pages-live, facts/bridge-ping-policy,
+facts/update-roadmap-py-main, facts/cf-access-token-issue, rules/no-rotations-apr20
