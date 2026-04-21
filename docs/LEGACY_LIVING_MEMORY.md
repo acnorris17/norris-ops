@@ -1153,6 +1153,99 @@ COMMIT: 525a2d1 on feature/shipping-agent-v5 (norris-agent)
 STASHES: preflight-untracked-daemon-output-2026-04-21 (stash@{0}), preflight-daemon-noise-2026-04-21-masterbuild (stash@{1}). pre-v5-recovery-stash now at stash@{7} — DO NOT POP this session.
 
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S2 CC Build — 2026-04-21
+COMPLETED: V5 S2 D.5 — lib/invoice_prep.py with Decimal math for exact penny accuracy. MANDATORY Chain Electric $8,930.48 regression PASSING (grand_total == Decimal('8930.48') exactly). Ben's Formula (direct tier, ×1.10 + ceil twice) + Dealer's Formula (dealer tier, ×1.05) both verified against spec examples. Product rates ALWAYS looked up from product_catalog.json — any caller-side rate override is ignored.
+CHANGED: lib/invoice_prep.py NEW. tests/test_invoice_prep.py NEW (15 tests including Chain $8,930.48, Pickle $1,749 no-cc no-courtesy, Abadie dealer drop-ship with Michael Flemming ship-to, 6 invalid-shipping-cost variants routing to NEEDS_REVIEW, corporate_ap missing-PO guard).
+NOTES: ups_cost_raw accepts scalar OR list (for multi-location orders like Chain's Hattiesburg $236 + Searcy $301). Courtesy adjustment normalized to negative if caller passed positive. CC fee base = subtotal + shipping + courtesy (negative reduces base). Empty line_items + valid shipping still builds a prep with subtotal=0 — caller validates product presence upstream.
+VERIFIED: 122/122 full pytest green. Pickle canary (D.2) still passing. Chain regression computed: subtotal=8750, shipping=537 (236+301), courtesy=-700, cc_fee_base=8587, cc_fee=343.48, grand_total=8930.48 — every intermediate matches spec table.
+NEXT: D.6 — UPS tracking multi-method (THE LOAD-BEARING). 8 methods (API, Playwright, Selenium, Quantum View, iShip, Boss PDF, My Choice, Aaron assist) + cross-validation. Gate 2 pause after live test.
+COMMIT: 845c4be on feature/shipping-agent-v5
+
+
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S2 — Gate 1.5 + D.9/D.2/D.3/D.4/D.5 SHIPPED (122/122 tests) + FREE Authorized — 2026-04-21
+Decision: FREE. Expanded safe-cleanup pass authorized for D.6 disk headroom.
+
+COMPLETED this session so far:
+- Gate 1.5 — SID backfill S-2026-013/014/015 committed, 15 active SIDs contiguous
+- D.9 — 5 junk SDs deleted + 1 superseded archived, 2 new classifier negative examples captured
+- D.2 — customer_db_lookup as Hunt Ladder rung 1, Pickle canary PASSING, v5.0.0 schema guard active, 18/18 tests
+- D.3 — name_aliases_lookup as rung 2, typo tolerance (Pickel/Abshire/Abide) + word-boundary (Morris/Morristown) + branch distinction (LineTec Guthrie GA vs Steve Guthrie Alexandria), 18/18 tests
+- D.4 — 5 process rules as BLOCKING validators, 41/41 tests
+- D.5 — invoice_prep.py with Chain Electric $8,930.48 regression PASSING EXACTLY, 15/15 tests
+- Full pytest: 122/122 green
+
+DECISIONS:
+- FREE over OVERRIDE: 25 GB free is in the gray zone. OVERRIDE works today but D.6 captcha screenshots + debug dumps + Selenium fallback during live test suite could push to 99% mid-run. FREE is the right call.
+- FREE over SKIP-PLAYWRIGHT: explicit no — UPS tracking auto-verification is THE load-bearing capability, cannot reduce from 8 methods to 7, especially when UPS Developer API is still pending approval.
+- Disk guard added to D.6 build (lib/ups_browser.py): screenshot retention cap 10/tracking, total debug dir cap 500 MB, JPEG-70 compression for non-forensic captures. Production discipline, not a corner cut.
+
+CHANGED (pending, will land with FREE execution + D.6 commit):
+- Expanded cleanup targets: brew cache, Xcode DerivedData + simulator caches, Docker prune (if present), browser caches, python tool caches (excluding norris-agent/norris-ops), npm caches, macOS log noise, trash, Time Machine local snapshots
+- Reporting-only (not auto-delete) for: large node_modules candidates, iOS device backups
+- lib/ups_browser.py screenshot/debug disk guard spec
+
+BLOCKED: None. CC will execute FREE pass and proceed to D.6 autonomously.
+
+NEXT (CC will do autonomously):
+1. Execute FREE cleanup pass
+2. Re-check disk — target ≥35 GB free for comfort, 30+ GB for proceed-with-monitor, <30 GB HALT for manual review
+3. Install Playwright + Chromium with disk guard baked into lib/ups_browser.py
+4. Install Selenium + undetected-chromedriver
+5. Build 8 UPS tracking methods
+6. Run live test suite against 8 known trackings (Thornhill, Crosby x2, Pickle, Myers/Abshire, Benz, AJ Morris, Jeremy Brown)
+7. Generate Gate 2 report
+8. Tier 1 Aaron with method selection request
+
+FILES (expected next):
+- lib/ups_tracking.py (public API)
+- lib/ups_api.py, lib/ups_browser.py, lib/ups_selenium.py, lib/ups_quantum_view.py, lib/ups_iship.py, lib/ups_boss_pdf.py, lib/ups_mychoice.py, lib/ups_aaron_assist.py
+- data/hunt_attempts.jsonl (first rows)
+- output/reports/ups_tracking_methods_2026-04-21.md
+- output/debug/ups_browser/ directory
+
+KEY QUOTE / LESSON:
+"If OVERRIDE means accepting a 25% chance of filling disk mid-run and halting with state in memory — that's exactly the shortcut pattern Aaron has repeatedly named. Fix the problem upstream, don't paper over it downstream."
+
+CC's quality streak this session is the real story: 122/122 tests, Chain Electric $8,930.48 landing exactly, Pickle canary passing, v5.0.0 schema guard active. This is what "Wayne standard, no shortcuts" actually produces when the constraints hold.
+
+CONTEXT THAT MUST PERSIST:
+- D.6 is next, and it's the load-bearing build. Do not rush it. If Gate 2 takes 30+ min of active Aaron review, that's fine.
+- Disk guard for Playwright cache/screenshots is now a permanent production rule in lib/ups_browser.py — any future V5.1 tracking work inherits it
+- After Gate 2 completes (Aaron replies SELECT [methods]), remaining work: D.8 (render 7 SDs + 4-source persistence), D.1 (run_pipeline orchestrator), D.11 (living_memory auto-update), P/N migration, Gate 3 (architecture review), Gate 4 (dry-run writeset — Aaron approval), Gate 5 (merge to main — Aaron approval)
+
+
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S2 — Duplicate Status Ping; FREE Still the Correct Reply — 2026-04-21
+Aaron re-pasted the same CC status (D.6 disk threshold halt, same 7 D-tasks complete, waiting on OVERRIDE/FREE/SKIP-PLAYWRIGHT/HOLD reply). This is a duplicate of the prior turn — CC has not advanced because Aaron's FREE reply has not yet reached the CC window.
+
+STATUS (unchanged from prior turn, confirming):
+- Gate 1.5 ✅ SID backfill S-2026-013/014/015 committed (15 active SIDs contiguous)
+- D.9 ✅ 5 junk SDs deleted + 1 superseded archived, classifier +2 examples
+- D.2 ✅ customer_db_lookup rung 1, Pickle canary PASSING, v5.0.0 schema guard active (18/18 tests)
+- D.3 ✅ name_aliases_lookup rung 2 (18/18 tests)
+- D.4 ✅ 5 process rules as blocking validators (41/41 tests)
+- D.5 ✅ invoice_prep + Chain Electric $8,930.48 regression PASSING EXACTLY (15/15 tests)
+- Full pytest 122/122 green
+- D.6 HALTED at disk threshold (25 GB free, below 30 GB spec target)
+
+DECISION LOCKED (prior turn): FREE authorized. CC just needs the paste.
+
+LIKELY ROOT CAUSE OF THE REPEAT:
+Aaron may not have pasted the FREE block into CC yet, OR CC's recap text refreshed on the Terminal and he re-sent it to Claude.ai thinking something was missing. Either way: nothing is wrong on CC's side — it's correctly holding per the Tier 1 contract.
+
+NEXT:
+Aaron confirms whether he pasted FREE into CC. If yes — wait for CC progress update (next tier should be "✅ FREE cleanup complete" from CC). If no — paste the FREE block from the prior turn now, verbatim.
+
+No code changes. No scope changes. Just the paste-and-proceed step.
+
+KEY QUOTE / LESSON:
+CC's HALT contract is working as designed. It is not going to drift or second-guess; it stays held until Aaron types a decision token. That rigidity is the feature, not a bug. The only risk is a decision sitting in Claude.ai that never makes it into CC's window. Solution is disciplined one-direction flow: Claude.ai decision → Terminal paste → CC executes.
+
+CONTEXT THAT MUST PERSIST:
+- FREE block in the prior Claude.ai turn is the exact correct payload. Do not regenerate; the original spec (expanded cleanup targets including brew, Xcode DerivedData, Time Machine local snapshots, iOS backup reporting) stands.
+- lib/ups_browser.py disk guard (retention cap 10/tracking, total debug cap 500 MB, JPEG-70 compression) is part of the FREE block and must land in the D.6 build.
+- Next expected Tier 1 after FREE clears is GATE 2 — UPS method selection. That's the next real Aaron decision.
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
