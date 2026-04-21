@@ -3,6 +3,7 @@
 <head>
 <!-- nu-auth-gate-v2 -->
 <script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<!-- auth: Cloudflare Zero Trust only (JS password gate removed 2026-04-20 evening, post-7feae47) -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Project Roadmap — Norris Utilities® Portal</title>
@@ -13,9 +14,13 @@
    LIVE ROADMAP v1 — styles
    ═══════════════════════════════════════════════════════════════ */
 :root{
- --nu-blue:#0000FF; --nu-cyan:#06D0FF; --nu-navy:#0a0e5c;
- --nu-primary:#0033cc; --nu-mid:#0066ee; --nu-bright:#00aaff;
- --bg:#f5f6fa; --card:#fff; --text:#1a1a1a; --muted:#666; --border:#e8e8e8;
+ /* branding-v5-locked tokens */
+ --nu-navy-1:#0a0e5c; --nu-navy-2:#0033cc; --nu-blue-1:#0066ee;
+ --nu-blue-2:#00aaff; --nu-cyan:#06D0FF; --nu-ink:#1a1a1a;
+ /* legacy aliases preserved for existing selectors */
+ --nu-blue:#0000FF; --nu-navy:var(--nu-navy-1);
+ --nu-primary:var(--nu-navy-2); --nu-mid:var(--nu-blue-1); --nu-bright:var(--nu-blue-2);
+ --bg:#f5f6fa; --card:#fff; --text:var(--nu-ink); --muted:#666; --border:#e8e8e8;
  --shadow:0 2px 8px rgba(0,0,0,.06);
  --shadow-lg:0 8px 24px rgba(0,0,0,.12);
  --red:#dc3545; --green:#28a745; --amber:#e67e22; --violet:#6f42c1;
