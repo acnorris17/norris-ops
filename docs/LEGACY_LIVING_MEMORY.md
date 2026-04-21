@@ -1670,3 +1670,67 @@ Ready for Live Roadmap build.
 facts/live-roadmap-v1, facts/roadmap-v1-gaps, facts/roadmap-defects,
 facts/sync-norrisops-pages-live, facts/bridge-ping-policy,
 facts/update-roadmap-py-main, facts/cf-access-token-issue, rules/no-rotations-apr20
+
+---
+
+## CANONICAL SD RULE — S-ID Rule v1 (locked 2026-04-20)
+
+**Supersedes the "internal_s_id tags scrambled" state referenced in earlier
+entries of this file (including line 790).** Both agent and ops repos are now
+migrated to the `S-YYYY-NNN` format. All future S-IDs come from
+`lib/sid.py::issue_sid`. The scrambling described in the Session 1 audit is
+resolved.
+
+**Format:** `S-YYYY-NNN` (ship-year + zero-padded 3-digit sequence within year).
+First ever ID: `S-2026-001`.
+
+**Issuance:** monotonic at creation; tombstoned numbers never reused; no
+renumbering or gap-filling. Year rollover resets NNN to `001`.
+
+**Code source of truth:** `lib/sid.py` (5 functions: `issue_sid`,
+`tombstone_sid`, `lookup_sid`, `migrate_old_id`, `list_active_sids`). 17 unit
+tests in `tests/test_sid_issuance.py` including an 8-process concurrency test.
+
+**Storage:**
+- `data/sid_issuance_log.jsonl` — append-only event log, fcntl-locked writes
+- `data/sid_crosswalk.json` — full legacy-id → new-id map for both schemes
+- `output/docs/SID_RULE_v1_2026-04-20.md` — formal rule spec
+- `output/docs/SID_CROSSWALK_v1_2026-04-20.md` — human-readable crosswalk
+
+### Retro-assignment (the 12 KEEP records in `data/shipping_docs.json`)
+
+| New S-ID     | SD filename                          | Customer                        | Ship date   |
+|--------------|--------------------------------------|---------------------------------|-------------|
+| `S-2026-001` | SD-2026-ABADIE-0331                  | Aerial Hydraulics, Inc.         | 2026-03-31  |
+| `S-2026-002` | SD-2026-AJ-0331-B-JeremyBrown        | Chain Electric                  | 2026-03-31  |
+| `S-2026-003` | SD-2026-AJ-0331-ChainElectric        | Chain Electric                  | 2026-03-31  |
+| `S-2026-004` | SD-2026-AJ-0401-ARCH                 | Chain Electric                  | 2026-04-01  |
+| `S-2026-005` | SD-2026-JeremyBrown-0401-ARCH        | Chain Electric                  | 2026-04-01  |
+| `S-2026-006` | SD-2026-LINETEC-0402                 | LineTec Services, LLC           | 2026-04-02  |
+| `S-2026-007` | SD-2026-BEDWELL-0407                 | AEP/SWEPCO                      | 2026-04-07  |
+| `S-2026-008` | SD-2026-ABADIE-0407-BYB0001          | Aerial Hydraulics, Inc.         | 2026-04-07  |
+| `S-2026-009` | SD-2026-LINETEC-0406                 | LineTec Services, LLC           | 2026-04-07  |
+| `S-2026-010` | SD-2026-THORNHILL-DEPT732-0408       | LineTec - Thornhill Alexandria  | 2026-04-08  |
+| `S-2026-011` | SD-2026-DOMINION-4501057807-0413     | Dominion Energy - Coy Crosby    | 2026-04-13  |
+| `S-2026-012` | SD-2026-LINETEC-THORNHILL-0413       | LineTec - Thornhill Alexandria  | 2026-04-13  |
+
+Ops register `~/norris-ops/data/shipments.json`: 6 of 9 rows migrated to new
+S-IDs (matched to the KEEP set via customer + PO). Remaining 3 rows (Benz
+Truck#860377, Pickle, Myers) carry `id: "PENDING"` + `legacy_ops_id` until
+D.8 renders their SDs and `issue_sid` assigns their canonical IDs.
+
+### Tombstone
+
+`S007` in the agent scheme (`SD-2026-CROSBY-0325`) is tombstoned per D.9.
+That number will **never** be reused.
+
+### Rule going forward (IMMUTABLE)
+
+- `scripts/fixup_sd_customers.py` — `S_ID_RULES` table DELETED; file header
+  marks module SUPERSEDED for S-ID work.
+- `scripts/shipping_readiness_gate.py` — coverage check now calls
+  `lib.sid.list_active_sids(2026)` instead of a hardcoded list.
+- `scripts/shipping_portal_sync.py` — format-agnostic, renders whatever is
+  in `rec["internal_s_id"]` (new format flows through unchanged).
+- Any future code reading or writing S-IDs must go through `lib/sid.py`. No
+  direct mutation of `internal_s_id` in `shipping_docs.json`.

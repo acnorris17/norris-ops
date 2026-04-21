@@ -16,8 +16,7 @@
       "status": "ready",
       "cc_customer": false,
       "sd_link": "shipping-docs/SD-DEPT732.html",
-      "notes": "",
-      "legacy_ops_id": "S001"
+      "notes": ""
     },
     {
       "id": "S-2026-009",
@@ -34,8 +33,7 @@
       "status": "ready",
       "cc_customer": false,
       "sd_link": "",
-      "notes": "",
-      "legacy_ops_id": "S002"
+      "notes": ""
     },
     {
       "id": "S-2026-006",
@@ -52,8 +50,7 @@
       "status": "ready",
       "cc_customer": false,
       "sd_link": "",
-      "notes": "",
-      "legacy_ops_id": "S003"
+      "notes": ""
     },
     {
       "id": "S-2026-008",
@@ -70,8 +67,7 @@
       "status": "ready",
       "cc_customer": false,
       "sd_link": "",
-      "notes": "Ship to: Michael Flemming, 2015 Holly Rd, Gilmore TX 75644. Via Aerial Hydraulics: 5736 Jarvis St Harahan LA 70123, 504-734-8001",
-      "legacy_ops_id": "S004"
+      "notes": "Ship to: Michael Flemming, 2015 Holly Rd, Gilmore TX 75644. Via Aerial Hydraulics: 5736 Jarvis St Harahan LA 70123, 504-734-8001"
     },
     {
       "id": "S-2026-001",
@@ -88,8 +84,7 @@
       "status": "ready",
       "cc_customer": false,
       "sd_link": "",
-      "notes": "",
-      "legacy_ops_id": "S005"
+      "notes": ""
     },
     {
       "id": "S-2026-011",
@@ -106,8 +101,7 @@
       "status": "ready",
       "cc_customer": false,
       "sd_link": "",
-      "notes": "April 8 RFP = 5x confirmed. VERIFY March 20 shipment qty at UPS Store before invoicing that separate order. [sid-v1-2026-04-20: SD PO 4501057807 vs ops PO 42350802 \u2014 verify if same order or two]",
-      "legacy_ops_id": "S006"
+      "notes": "April 8 RFP = 5x confirmed. VERIFY March 20 shipment qty at UPS Store before invoicing that separate order. [sid-v1-2026-04-20: SD PO 4501057807 vs ops PO 42350802 \u2014 verify if same order or two]"
     },
     {
       "id": "PENDING",
@@ -125,7 +119,6 @@
       "cc_customer": false,
       "sd_link": "",
       "notes": "",
-      "legacy_ops_id": "S007",
       "pending_sid": true,
       "pending_reason": "Truck#860377 \u2014 SD render scheduled in D.8"
     },
@@ -145,7 +138,6 @@
       "cc_customer": false,
       "sd_link": "",
       "notes": "BLOCKED \u2014 ARCH/Combo SKU unconfirmed. CC both tgongwer@bossproductsinc.com AND tgrove@bossproductsinc.com on all Boss emails.",
-      "legacy_ops_id": "S008",
       "pending_sid": true,
       "pending_reason": "Blocked on ARCH/Combo Boss SKU \u2014 SD render scheduled in D.8"
     },
@@ -165,7 +157,6 @@
       "cc_customer": false,
       "sd_link": "",
       "notes": "BLOCKED \u2014 Same Boss Products ARCH/Combo SKU needed.",
-      "legacy_ops_id": "S009",
       "pending_sid": true,
       "pending_reason": "Blocked on Boss SKU \u2014 SD render scheduled in D.8"
     }
