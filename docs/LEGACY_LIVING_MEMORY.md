@@ -1398,6 +1398,86 @@ After Aaron replies with per-SD canonical: render remaining 5 + 4-source persist
 - Ops commit: 295bd97 (D.8 Benz — pushed)
 
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S3 — Loaded; D.6c→D.6b drift detected; standing by for git ground truth — 2026-04-21
+SESSION 3 (Claude.ai M5 Opus 4.7) loaded SA V5 S2 handoff packet at 19:46 CDT.
+
+## COMPLETED
+- Gmail bridge state pulled: 14 SA V5 S2 drafts read in full + 2 parallel iShip drafts (10 AM diagnostic + 12 PM recovery audit)
+- Handoff packet "SA V5 S2 — COMPLETE STATE SNAPSHOT for Session 3 Handoff" parsed
+- Cross-referenced against latest CC-fired draft (19db2a5d71b1f684 @ 00:45Z) showing D.6b completion
+
+## CRITICAL DRIFT DETECTED
+The Session 3 handoff prompt says to paste a "D.6c correction block" AFTER D.8 commits. That plan is OBSOLETE.
+- CC sequenced the work differently: D.6b (NOT D.6c) was inserted BEFORE D.8, not after
+- D.6b is already COMMITTED on feature/shipping-agent-v5 (per draft 19db2a5d71b1f684)
+- D.6b included: ups_method_config 9-method + tandem mode + 3-month silent-drop docs + email+sheet backprocess + 6 lib parsers + sheet reader + dry-run report
+- This is the SAME scope the handoff called "D.6c" — just sequenced before D.8 instead of after
+- NEXT real action per CC: D.8 (render 6 canonical SDs), not a paste
+
+## DECISIONS PENDING
+- Awaiting Aaron paste of `git log --oneline -10 && git branch --show-current && git status --short` to confirm exact commit hash for D.6b and Gate 2 config (de3d096), and verify CC has not started D.8 yet
+
+## D.6b FOLLOW-UPS SURFACED (NON-BLOCKING)
+1. Store Receipt parser dollars total = $0 — RegCost lives in PDF attachments, not body. Patch needed: download receipt PDFs and pdfplumber-extract.
+2. Boss PDF parser 0/92 tracking hits — gog attachment-download syntax needs verification against v0.12.0.
+3. 53 historical sheet rows have tracking but no QB Invoice # (larger than the "40+ invoice" estimate). Stage at Gate 4.
+4. Both unknown trackings investigated: 1Z2W49000329882999 RESOLVED (sheet+QV); 1Z2W49000395015551 partial (QV only).
+
+## NEXT
+1. Get git log ground truth from Aaron
+2. If CC committed D.6b and is in/before D.8 → wait for D.8 Tier 2, no paste needed
+3. If CC is mid-D.8 → wait for ping
+4. If CC has somehow advanced to D.1 without D.8 ping → investigate at that time
+5. After D.8 commits → proceed to D.1 (run_pipeline orchestrator)
+6. D.1 → D.11 → P/N migration → Gate 3 → Gate 4 (AARON GO) → Gate 5 (AARON MERGE)
+
+## ANSWER TO AARON'S PRE-LOADED QUESTION
+"Did sharing with Legacy mess things up?" — NO. Legacy caught the PF.4 schema bug this morning. Claude.ai caught the 8-method SELECT staleness this evening. The Living Memory bridge is the connective tissue. The fix for the SELECT race is Claude.ai-side discipline (ship preliminary first, revise additively), not less Legacy collaboration.
+
+## FILES
+- No V5 file mutations this session yet
+- This draft is the only artifact
+
+Wayne standard. Earn it.
+
+### [LIVING_MEMORY_UPDATE] SA V5 S3 — D.8 Tier 1 canonical data assembled; CC corrections + 2 genuine gaps remain — 2026-04-21
+## COMPLETED
+- Pulled canonical data from Gmail + project knowledge for 4 of 5 D.8 Tier 1 SDs
+- Confirmed Boss invoices 6775/6776/6777 PDFs sitting attached in Gmail thread 19da1b9c32c5cfdc (Thayne Grove → Aaron, 2026-04-21 14:38 UTC) — Boss PDF parser blocker is resolvable
+
+## CRITICAL DATA CORRECTIONS TO CC's TIER 1
+1. **SD-2026-CROSBY-DOMINION-0408**: CC's "PO 42350802, ship 2026-04-08" is wrong on both counts
+   - 42350802 = Dominion Material Number (RS BC 070420069 2 MAN BLACK 24"X48")
+   - Actual PO = **4501057807** (issued April 13 via Taulia portal, acknowledged via COY.CROSBY@dominionenergy.com same day)
+   - April 8 = RFP date, NOT ship date
+   - Ship-to: 192 Old Wire Rd, West Columbia, SC 29172 (per Taulia PO)
+   - No UPS delivery notification found post-April 13 → likely NOT YET SHIPPED, or shipped during silent-drop window with no surfaced confirmation
+
+2. **SD-2026-PICKLE-FLORENCE-0320**: CC's parse "1× BCB + 3× ARCH + 2× regular 1.5-Man" is the ORIGINAL SD before Aaron corrected it via voice text. Aaron's actual count (Mar 20 09:17 CT Telegram): "3 regular + 1 combo + 2 King/XL" — and the "King/XL 1.5-Man" SKU was never confirmed before the conversation moved on. Genuine Tier 1.
+
+## CONFIRMED FROM GMAIL
+- **Thornhill DEPT468R** (SD #1): Full resolution — Richard Thornhill order email March 17 19:50 UTC ("PO DEPT468R, 1 each 2 man Bucket cover, ship to 6411 Masonic Drive Alexandria LA 71301"). UPS delivery notification March 23 14:50 UTC (1Z2W49000395021357, signed LINETEC THE UPS STORE). 1× NU-BC-2851 @ $305.
+
+## CHANGED
+- None this turn (no commits yet)
+
+## BLOCKED
+- 5 of 5 D.8 SDs await canonical data block I am about to send Aaron
+- Boss PDF attachment download (gog v0.12.0 syntax) — alternative path = Aaron uses Mail.app or web Gmail to download the 3 PDFs from thread 19da1b9c32c5cfdc and saves to ~/norris-agent/data/boss_pdfs/
+
+## NEXT
+1. Aaron pastes per-SD canonical block into CC for SDs 1, 4 (with corrections), 5 (post-PDF-pull)
+2. Aaron answers genuine Tier 1: Pickle King/XL SKU + Myers ARCH/Combo confirm
+3. CC renders D.8 parts 2-6 → commits
+4. Proceed to D.1 → D.11 → P/N migration → Gates 3/4/5
+
+## FILES
+- No agent file mutations this turn
+- Canonical data block to be issued in next Aaron-facing message
+
+## KEY LESSON
+Gmail backprocess (D.6b) DID surface the Boss invoices being available — the parser just couldn't pull binary attachments. The data exists; the access path needs patching. Filed as Gate 4 follow-up per CC's commit message.
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -2364,3 +2444,50 @@ Persisted across 4 sources (customer_db.json, sa_learnings.json, this file, SD H
 - **Persisted:** 2026-04-22T00:48:30Z
 
 _Remaining Mar 20 batch (Thornhill DEPT468R, Pickle, Myers, Crosby-Mar-20) + AJ-BOSS-Hattiesburg + Crosby-Apr-8 pending Aaron confirmation of per-record canonical data before render — Tier 1 fired 2026-04-21._
+
+## SA V5 S2 SESSION SNAPSHOT — 2026-04-21 20:13 CDT
+
+### Commits on feature/shipping-agent-v5 this session
+525a2d1 Gate 1.5 SID backfill 013/014/015
+126e7c0 D.9 junk cleanup
+cf47a94 D.2 customer_db_lookup + v5 schema guard
+d8be0da D.3 name_aliases
+4e7c3f7 D.4 5 process rules
+845c4be D.5 invoice_prep + Chain $8,930.48 regression
+7e371dd D.6 UPS 8 methods + live probe
+Tests: 148/148 green at 7e371dd.
+
+### Gate 2 locked — 8-method order
+1 ups_api, 2 ups_boss_pdf, 3 ups_quantum_view, 4 ups_browser,
+5 ups_selenium, 6 ups_iship, 7 ups_mychoice, 8 ups_aaron_assist
+
+### Critical gaps to add as D.6c before D.1
+- Method 9: ups_store_receipt (from:store0255@theupsstore.com — RegCost for Ben's Formula)
+- Tandem mode with UPS Shipping Log V8 (Sheet ID 1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw, gid 943594533)
+- 3-month silent-drop window docs (2026-01-22 to 2026-04-21)
+- email_backprocess.py + 6 parser/reader modules
+
+### Environmental notes
+- iShip LIVE since 2026-04-21 ~11:30 AM CT (admin rule d8c0a at admin.google.com)
+- UPS My Choice for Business activated 2026-04-20 19:58Z
+- Akamai TLS rejects M1 for Playwright/Selenium — env not code
+- 3-month silent-drop window data GONE from Gmail (not recoverable)
+- UPS API ticket #182279 pending
+
+### Open items (Legacy tracks)
+- 2 unknown trackings: 1Z2W49000329882999, 1Z2W49000395015551
+- 40+ invoice backlog staged at Gate 4 for Aaron review
+- Scott's POS export: no longer waiting — SA independent per Aaron
+
+### Preservation rules — DO NOT VIOLATE
+- 5 concurrent CC sessions on M1 are deliberately preserved breadcrumbs. NEVER suggest killing them.
+- stash@{1} pre-v5-recovery-stash-20260420-123616 is Session 3 post-merge work. Do not pop.
+- feature/shipping-agent-v5 is the only write branch until Gate 5.
+
+### Multi-agent observability confirmed both directions
+- Legacy caught Claude.ai PF.4 schema bug (AM)
+- Claude.ai caught Legacy 8-method spec staleness (PM)
+- Mechanism: [LIVING_MEMORY_UPDATE] Gmail drafts + 15-min bridge
+
+### Gates remaining
+Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron GO) | Gate 5 (merge to main — Aaron MERGE)
