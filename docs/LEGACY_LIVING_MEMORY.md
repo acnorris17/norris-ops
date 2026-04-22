@@ -217,7 +217,7 @@ Order in → SD auto-prints → ship → Shipping Agent hunts ALL data from ALL 
 - ✅ S005 Abadie/Primoris W6237 — 2× NU-BC-2851 = $610 — READY
 - ⚠️ S007 Crosby/Dominion Mar 20 — ~5× NU-BC-2834 @ $265 — VERIFY QTY
 - ⚠️ S012 Abadie/Primoris BYB0001 — 1× NU-BC-2828 $235 — confirm received
-- ✅ S009 Pickle/Florence — 3× NU-BC-2834 + 1× NU-BC-2834-C + 2× NU-BC-2834-F = $1,710 — ARCH SKUs CONFIRMED (handled previously)
+- ✅ S009 Pickle/Florence — 3× NU-BC-2834 + 1× NU-BC-2834-C + 2× NU-BC-2834-F = $1,710 — ARCH P/Ns CONFIRMED (handled previously)
 - ✅ S010 Myers/AEP — 2× NU-BC-2834-F + 1× NU-BC-2834-C = $915 — CONFIRMED
 - ✅ S011 AJ Morris/Chain Electric — tracking + delivery confirmed
 
@@ -323,7 +323,7 @@ MCP server wired to OpenClaw. nu-handoff syncs M1 → iCloud → M5 every 30 min
 
 # SECTION 5: DATA & REFERENCES
 
-**KEY SKUs — FlexPro Armor (2026 Pricing):**
+**KEY P/Ns — FlexPro Armor (2026 Pricing):**
 - NU-BC-2828: 1-Man — $235
 - NU-BC-2834: 1.5-Man — $265
 - NU-BC-2851: 2-Man — $305
@@ -705,7 +705,7 @@ Prior session (April 20 AM) shipped Cloudflare Zero Trust (commit 75b90a058144, 
 - CC stopped at Phase C because no Cloudflare card existed in project-roadmap.html to str_replace. Correct call. Waited for Aaron's say-so.
 - Legacy d746a19: expanded project-roadmap.html with 13 items added, 3 modified (Shipping Agent V5 spec + PID 91997, Alabama License URGENT, Time Machine URGENT). Did NOT add Cloudflare card (out of scope per Prompt 2). Google Sheet got 13 TIMELINE rows. Living Memory e8f35a6.
 - Aaron pushed back that Pickle and Myers were wrongly marked BLOCKED in d746a19. Claude re-searched conversation history and confirmed: Pickle + Myers P/Ns confirmed April 8 from FlexPro Armor pricing master, stored in NorrisPalace April 8, marked READY TO INVOICE in portal that day. Legacy's d746a19 was stale on that point.
-- Claude produced Prompt 3 v2 with real data (P/N totals, trackings, Abshire=Myers alias, BCB=Bag correction, P/N-never-SKU terminology, acnorris1@gmail.com CONFIRMED CONNECTED).
+- Claude produced Prompt 3 v2 with real data (P/N totals, trackings, Abshire=Myers alias, BCB=Bag correction, P/N-never-P/N terminology, acnorris1@gmail.com CONFIRMED CONNECTED).
 - Legacy executed Prompt 3 v2:
   * Commit 81ad992: Pickle → READY $1,710, Myers → READY $915 (with Abshire alias + SA V5 cross-check flag), Cloudflare Zero Trust card added to Infrastructure section
   * Commit 07624b3: 10 NorrisPalace keys written (terminology-locked-apr19, customer-aliases-canonical, pricing-v5-locked, branding-v5-locked, sd-v5-locked, portal-v5-locked, cloudflare-zero-trust-norrisops, do-not-resurface, personal-gmail-connected, model-default-apr19); Living Memory April 20 entry; .wrangler/ gitignored
@@ -718,7 +718,7 @@ Prior session (April 20 AM) shipped Cloudflare Zero Trust (commit 75b90a058144, 
 5. WHAT FAILED / WENT WRONG (HONEST)
 - CLAUDE: Updated the orphan dependency-map HTML artifact without first verifying whether it was live in the portal. Should have used Legacy intel report or project knowledge search as step 1. Aaron had to push me to check.
 - CLAUDE: First Prompt 3 version marked Pickle + Myers BLOCKED instead of READY. Had the truth available in conversation history from April 8; didn't search hard enough the first pass. Aaron called this out — legitimate criticism.
-- CLAUDE: Used "SKU" terminology in early output. Aaron's locked rule since April 19 is P/N never SKU. Corrected.
+- CLAUDE: Used "P/N" terminology in early output. Aaron's locked rule since April 19 is P/N never P/N. Corrected.
 - CLAUDE: Used "Shield" for the BCB accessory in an earlier response. BCB = Bucket Cover Bag ($55 accessory). Never "Shield." Master may have "SL" suffix mislabel. Corrected.
 - CLAUDE: Proposed closing earlier Cloudflare CC windows before suggesting Aaron check them for unfinished state. Ordering wrong. Aaron closed them before I flagged the check. Aaron called this out — legitimate criticism.
 - PRIOR SESSION (documented): Service Token Client Secret was shown once at token creation on April 20 AM and never captured into .env. Only UUID (15b9bf39...) was stored. Remediation = rotation in Cloudflare dashboard.
@@ -1453,7 +1453,7 @@ Wayne standard. Earn it.
    - Ship-to: 192 Old Wire Rd, West Columbia, SC 29172 (per Taulia PO)
    - No UPS delivery notification found post-April 13 → likely NOT YET SHIPPED, or shipped during silent-drop window with no surfaced confirmation
 
-2. **SD-2026-PICKLE-FLORENCE-0320**: CC's parse "1× BCB + 3× ARCH + 2× regular 1.5-Man" is the ORIGINAL SD before Aaron corrected it via voice text. Aaron's actual count (Mar 20 09:17 CT Telegram): "3 regular + 1 combo + 2 King/XL" — and the "King/XL 1.5-Man" SKU was never confirmed before the conversation moved on. Genuine Tier 1.
+2. **SD-2026-PICKLE-FLORENCE-0320**: CC's parse "1× BCB + 3× ARCH + 2× regular 1.5-Man" is the ORIGINAL SD before Aaron corrected it via voice text. Aaron's actual count (Mar 20 09:17 CT Telegram): "3 regular + 1 combo + 2 King/XL" — and the "King/XL 1.5-Man" P/N was never confirmed before the conversation moved on. Genuine Tier 1.
 
 ## CONFIRMED FROM GMAIL
 - **Thornhill DEPT468R** (SD #1): Full resolution — Richard Thornhill order email March 17 19:50 UTC ("PO DEPT468R, 1 each 2 man Bucket cover, ship to 6411 Masonic Drive Alexandria LA 71301"). UPS delivery notification March 23 14:50 UTC (1Z2W49000395021357, signed LINETEC THE UPS STORE). 1× NU-BC-2851 @ $305.
@@ -1467,7 +1467,7 @@ Wayne standard. Earn it.
 
 ## NEXT
 1. Aaron pastes per-SD canonical block into CC for SDs 1, 4 (with corrections), 5 (post-PDF-pull)
-2. Aaron answers genuine Tier 1: Pickle King/XL SKU + Myers ARCH/Combo confirm
+2. Aaron answers genuine Tier 1: Pickle King/XL P/N + Myers ARCH/Combo confirm
 3. CC renders D.8 parts 2-6 → commits
 4. Proceed to D.1 → D.11 → P/N migration → Gates 3/4/5
 
@@ -2084,11 +2084,11 @@ Five completions in order (ONLY these matter this week):
 
 OPEN INVOICES Monday AM:
 READY: Thornhill/LineTec ($275), Benz/SWEPCO ($275), Coy Crosby/Dominion ($1,525+)
-BLOCKED on Boss SKUs: Pickle/Florence Electric, Myers/AEP
+BLOCKED on Boss P/Ns: Pickle/Florence Electric, Myers/AEP
 PENDING spec: Abadie/Primoris (NU-BC-2828 $235)
 DONE: AJ Morris/Chain Electric $8,930.48 sent April 18
 
-Monday first move: confirm ready list, push Boss Products on Pickle+Myers SKUs.
+Monday first move: confirm ready list, push Boss Products on Pickle+Myers P/Ns.
 
 ## P/N RULE + BCB + INVOICE CORRECTIONS (April 19, 2026)
 
@@ -2102,7 +2102,7 @@ Master has labeling inconsistency (NU-BCB-2851-SL called "Shield 2-Man" in memor
 1.5-Man BCB P/N unknown — pull from Boss paperwork Monday (likely NU-BCB-2834-SL @ $55).
 
 ### STALE FLAGS PURGED
-"Blocked pending Boss SKU" was STALE DATA from April 7 snapshots.
+"Blocked pending Boss P/N" was STALE DATA from April 7 snapshots.
 P/Ns have been in master since April 7 per 2026 Price List (§5).
 Darrell Pickle and Sammy Myers are NOT blocked. Ready to invoice.
 
@@ -2138,7 +2138,7 @@ Chain Electric AJ Morris: $8,930.48 already invoiced April 18 ✅
 ### 1. P/N (not SKU) — PERMANENT
 All code, files, invoices, SD, portal, UI, agent replies use P/N.
 Exception: external integrations (QB field names) only if can't rename.
-Stale "SKU" = correction flag. Fix immediately.
+Stale "P/N" = correction flag. Fix immediately.
 
 ### 2. Model selection — PERMANENT
 - DEFAULT: claude-opus-4-7 (all builds, drafts, customer work)
@@ -2161,7 +2161,7 @@ Five completions in order, THEN Samson:
 ### 6. Stale flag rule
 "Blocked pending X" must be cross-checked against current master.
 P/N master (2026 Price List) authoritative since April 7.
-"Blocked pending Boss SKU" in shipments.json = STALE — purge next session.
+"Blocked pending Boss P/N" in shipments.json = STALE — purge next session.
 
 ## INVOICING READY THIS WEEK (~$10,100)
 - Thornhill/LineTec: $305 (PO DEPT468R) — READY
@@ -2190,7 +2190,7 @@ PENDING: Rick+Coy drafts | BSS Invoice 11 | Alabama license | Time Machine | Tel
 2. Conflated claude_bridge.py (old) with nc_bridge.py (new)
 3. Contradicted Terminal close-out advice within 15 min
 4. Read stale "blocked" flags as current truth (Pickle, Myers)
-5. Said "SKU" after P/N rule was stated
+5. Said "P/N" after P/N rule was stated
 6. Recommended Haiku first, corrected to Sonnet after pushback
 Root cause: status flags read without cross-checking master data.
 
