@@ -2891,3 +2891,37 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - **reg_cost:** NEEDS_REVIEW
 - **cb_internal_note:** Line items CORRECTED per April 8 FlexPro Armor Pricing Master + NorrisPalace: 3x NU-BC-2834 + 1x NU-BC-2834-C + 2x NU-BC-2834-F, subtotal $1,710 (was previously rendered as $1,750 from earlier Telegram quantity-swap). BCB = Bucket Cover Bag (NU-BC-2834-C = BC + BCB, not 'Shield'). Skylift lead — Darrell separately ordered 6 bucket trucks crediting Aaron.
 - **Persisted:** 2026-04-22T14:16:22Z
+
+---
+## 2026-04-22 — SA V5 FIX 11 Session Close
+
+### TAG: sa_v5_fix11_resolution_2026-04-22
+
+**SA V5 FIX 11 fully resolved.** Aaron-assist hunt across Gmail (iShip, UPS Store receipts, order emails), QB invoice extract, Shipping Log V8 (live), and NorrisPalace.
+
+**T01–T08 FINAL STATUS:**
+- T01 (1Z2W49000389021252) — CLOSED on QB 1471 (TUF Solutions $1,845 paid). In Notes "Additional Tracking Number" field.
+- T02 (1Z2W49000323384092) — CLOSED on QB 1480 (AEP/SWEPCO Brian Riley Shreveport $7,237.74 paid). In Notes "Tracking (other #s)".
+- T03 (1Z2W49000390047857) — CLOSED on QB 1480 same field as T02.
+- T04 (1Z2W49000390462550) — CLOSED on QB 1480/1497 per Shipping Log V8 row note "should have added in w/ Rows 12, 13, & 14". Dual reference 1480/1497. QB 1497 = $245 02/18 AEP Shreveport supplemental shipping — Aaron to verify line items.
+- T05 (1Z2W49000325619996) — MINT S-2026-023. 1× NU-BC-2834 (1.5-Man; box 30×14×10 evidence; Aaron verbal said 1-Man — flagged). Lidia Turner / Henkels & McCoy / 604 Industrial Park Dr Pell City AL 35125. Verbal PO. Direct tier. $265 product, -$46 courtesy ship absorption.
+- T06 (1Z2W49000392272154) — MINT S-2026-024. DEALER tier. 2× NU-BC-2851. Bill-to Aerial Hydraulics (Wayne Abadie). Ship-to 3606 N. Frazier St Conroe TX 77303 Attn PSC Fleet/George Dufour. Verbal PO. Dealer shipping $72/pkg.
+- T07 (1Z2W49000326733593) — MINT S-2026-025. DEALER tier. 2× NU-BC-2851. PO 0223-PSC BKT0325. Same bill-to/ship-to as T06.
+- T08 (1Z2W49000326864095) — LINK QB 1501 (S-2026-026 audit SD only). 1× NU-BC-2851. PO DEPT409. Jeremy Nunez / 1965 River Rd Marksville LA 71351. LineTec A/P, no CC fee. $13.75 on 1501 = AL sales tax 5%. Add $66 shipping when CB pushes send.
+
+**PERMANENT PROTOCOL ADDITIONS:**
+1. QB Notes scraping: read "Additional Tracking Number" + "Tracking (other #s)" free-text alongside structured tracking_number column.
+2. Live Shipping Log V8 read > CSV snapshot. CSV may drop note columns or be stale.
+3. Box-size → P/N: 28×28=NU-BC-2828 (1-Man), 30×14×10=NU-BC-2834 (1.5-Man), 30×17×16=NU-BC-2851 (2-Man). ARCH/Combo need email confirmation.
+4. Source priority: Live QB export > QB snapshot > Drive cached. Live sheet > CSV. Box evidence > Aaron verbal recall for 2026 shipments without contemporaneous note.
+
+**OPEN ITEMS:**
+- 6 silent-draft invoices ($3,685.15): QB 1501/1503/1504/1505/1506/1507 — CB push, separate from SA V5
+- QB 1497 line item verification — Aaron task
+- Two cold-case 1/21 unknowns: 1Z2W49000390474154 + 1Z2W49000389496857
+
+**LESSON LEARNED (sa_learnings.json):**
+- preventable_escalation: notes_field_scraping_was_missing — T01/T02/T03 false-flagged uninvoiced; existed in QB Notes field
+- source_priority: live_sheet_over_csv_snapshot — T04 misclassified by M5 CSV read; Legacy live sheet read found definitive evidence
+
+**GIT STATE:** feature/shipping-agent-v5 at commit 5df0a60. Awaiting FIX 11 FINAL commit then Gate 5 merge → main, tag v5-session2-merged-2026-04-22.
