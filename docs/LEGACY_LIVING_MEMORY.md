@@ -2567,3 +2567,18 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - **reg_cost:** NEEDS_REVIEW
 - **cb_internal_note:** Darrell's Mar 20 09:17 CT Telegram correction superseded original SD parse. Definitive: 1 Combo + 3 ARCH + 2 Standard 1.5-Man = 6 units, subtotal $1,750. Note: Darrell separately ordered 6 Skylift bucket trucks crediting Aaron's input — see Skylift lead followup_queue.
 - **Persisted:** 2026-04-22T12:21:06Z
+
+### S-2026-015 — Sammy Myers / AEP / SWEPCO — 2026-03-20 (✅ SHIPPED)
+
+- **Filename:** SD-2026-MYERS-AEP-0320.html (locked)
+- **Customer:** Sammy Myers / AEP / SWEPCO
+- **PO:** N/A
+- **Ship To:** Sammy Myers, AEP/SWEPCO Roanoke, 1800 Loch Haven Dr, Roanoke, VA 24019
+- **Line items:** 2x NU-BC-2834-F, 1x NU-BC-2834-C — subtotal $915.00
+- **Ship Date:** 2026-03-20
+- **Tracking:** 1Z2W49000395012652
+- **Delivered:** 2026-03-23
+- **fulfillment_source:** nu_stock
+- **reg_cost:** NEEDS_REVIEW
+- **cb_internal_note:** Sammy Myers CC on file in Aaron's phone — apply 4% processing fee line item if charged to card. UPS receipt may show alias 'Abshire' for Sammy — alias entry needed in name_aliases.json.
+- **Persisted:** 2026-04-22T12:21:42Z
