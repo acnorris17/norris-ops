@@ -4,20 +4,18 @@
 <!-- CANONICAL_SD_RECORD v1 — DO NOT EDIT
   sd_id: SD-2026-BENZ-SWEPCO-0320
   internal_s_id: S-2026-013
-  customer: Jimmy Benz / SWEPCO
+  bill_to: AEP / SWEPCO
+  poc: Jimmy Benz
   po: Truck #860377
   ship_date: 2026-03-20
   delivered: 2026-03-24
   tracking: 1Z2W49000393585850
-  carrier: UPS Ground
   fulfillment_source: nu_stock
-  line_item: 1x NU-BC-2851 FlexPro Armor 2-Man Bucket Cover
-  nu_cost_paid: $52.16
-  customer_charge: $94.00
-  status: SHIPPED_DELIVERED_UNINVOICED
-  cb_internal_note: "Shipped Mar 20, delivered Mar 24. NOT YET INVOICED. QB invoice pending. Reference Truck #860377 in invoice memo."
-  source_confidence: HIGH
-  persisted: 2026-04-22T00:48:30Z
+  line_items: 1x NU-BC-2851
+  subtotal: $305.00
+  reg_cost: $52.16
+  cb_internal_note: "Shipped Mar 20, delivered Mar 24. NOT YET INVOICED. QB invoice pending. Reference Truck #860377 in invoice memo. Customer charge $94 (Ben's Formula historical override — default formula computes $59; historical record wins)."
+  persisted: 2026-04-22T12:27:05Z
 -->
 <head>
 <meta charset="UTF-8">
@@ -112,16 +110,16 @@ table.items tbody td.qty { text-align:center; font-weight:900; font-size:22px; v
     <div class="addr-head">Ship To</div>
     <div class="addr-body">
       <strong>Jimmy Benz</strong><br>
-      SWEPCO (AEP subsidiary)<br>
-      101 W Township Street<br>Fayetteville, AR 72703
+      SWEPCO<br>
+      Jimmy Benz<br>SWEPCO<br>101 W Township Street, Fayetteville, AR 72703
     </div>
   </div>
   <div class="addr-block">
     <div class="addr-head">Ordered By</div>
     <div class="addr-body">
       <strong>Jimmy Benz</strong><br>
-      SWEPCO (AEP subsidiary)<br>
-      JEBenz@aep.com
+      SWEPCO<br>
+      —
     </div>
   </div>
 </div>
@@ -135,7 +133,7 @@ table.items tbody td.qty { text-align:center; font-weight:900; font-size:22px; v
 <table class="items">
   <thead><tr><th style="width:130px;">P/N</th><th>Product</th><th class="qty">Qty</th></tr></thead>
   <tbody>
-    <tr><td><span class="sku">NU-BC-2851</span></td><td><div class="pname">FlexPro Armor 2-Man Bucket Cover</div><div class="pdesc">Collapsible 3 Panel Rigid Design. Size: 28" × 51". Hand Made in USA.</div></td><td class="qty">1</td></tr>
+    <tr><td><span class="sku">NU-BC-2851</span></td><td><div class="pname">FlexPro Armor 2-Man Bucket Cover</div><div class="pdesc">Collapsible 3 Panel Rigid Design. Size: 28" x 51". Hand Made in the USA.</div></td><td class="qty">1</td></tr>
   </tbody>
 </table>
 <div class="thankyou">
