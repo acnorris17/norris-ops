@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Action Plan: Remove Pricing from Boss Online Store — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
+    /* ══ ROOT VARIABLES ══ */
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -17,18 +17,19 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-success: #1B7F3A;
-      --nu-warning: #C9A84C;
-      --nu-alert: #C0392B;
+      --nu-warning: #D32F2F;
+      --nu-success: #2E7D32;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-tagline: 'Playfair Display', Georgia, serif;
     }
 
+    /* ══ BASE ══ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
       font-family: var(--font-primary);
       color: var(--nu-body-text);
-      background: var(--nu-light-gray);
+      background: var(--nu-white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -36,11 +37,11 @@
     /* ══ HEADER ══ */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, #06D0FF 100%);
-      padding: 60px 40px 90px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
+      padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 280px;
+      min-height: 320px;
     }
     .nu-header::before {
       content: '';
@@ -62,35 +63,36 @@
     }
     .nu-header > * { position: relative; z-index: 2; }
 
-    .nu-phoenix {
+    .nu-phoenix-icon {
       width: 70px;
       height: 70px;
       margin: 0 auto 14px;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.35));
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.35));
     }
     .nu-logo-text {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: var(--nu-white);
-      letter-spacing: 0.32em;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
       margin-bottom: 4px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: var(--nu-white);
       letter-spacing: 0.7em;
       text-transform: uppercase;
-      margin-bottom: 18px;
-      padding-left: 0.7em;
+      margin-bottom: 22px;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       color: rgba(255,255,255,0.95);
       letter-spacing: 0.04em;
     }
@@ -98,367 +100,452 @@
     /* ══ CHEVRON ══ */
     .nu-chevron {
       position: relative;
-      height: 60px;
-      margin-top: -60px;
+      height: 50px;
+      margin-top: -50px;
       z-index: 10;
-      line-height: 0;
     }
     .nu-chevron svg {
       width: 100%;
-      height: 60px;
+      height: 50px;
       display: block;
     }
 
-    /* ══ CONTENT WRAPPER ══ */
+    /* ══ CONTENT AREA ══ */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
+      overflow: hidden;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 200px; left: 50%;
-      transform: translateX(-50%);
-      width: 65%; height: 600px;
-      background: radial-gradient(circle, rgba(0, 51, 204, 0.04) 0%, transparent 60%);
-      pointer-events: none;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
+      border-radius: 50%;
       z-index: 0;
+      pointer-events: none;
     }
-    .nu-wrap {
-      position: relative;
+    .nu-container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 50px 40px 70px;
+      padding: 60px 40px;
+      position: relative;
       z-index: 1;
     }
 
-    /* ══ DOCUMENT META ══ */
-    .nu-doc-meta {
+    /* ══ DOCUMENT META BAR ══ */
+    .nu-meta-bar {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
-      padding: 14px 20px;
-      background: linear-gradient(90deg, var(--nu-light-gray) 0%, #fff 100%);
+      gap: 24px;
+      padding: 16px 24px;
+      background: var(--nu-light-gray);
       border-left: 4px solid var(--nu-blue);
-      margin-bottom: 30px;
-      font-size: 0.85rem;
+      border-radius: 4px;
+      margin-bottom: 40px;
+      font-size: 0.88rem;
+    }
+    .nu-meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .nu-meta-label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      font-size: 0.72rem;
+      color: var(--nu-blue);
+      margin-bottom: 2px;
+    }
+    .nu-meta-value {
+      font-weight: 400;
       color: var(--nu-dark-text);
     }
-    .nu-doc-meta strong { color: var(--nu-blue); font-weight: 900; }
-    .nu-doc-meta .pill {
-      display: inline-block;
-      background: var(--nu-alert);
-      color: #fff;
-      padding: 4px 12px;
-      border-radius: 12px;
+
+    /* ══ SECTION HEADERS ══ */
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .nu-section-title span {
+      color: var(--nu-dark-text);
       font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+    }
+    .nu-section-rule {
+      width: 60px;
+      height: 3px;
+      background: var(--nu-cyan);
+      margin-bottom: 24px;
+      border-radius: 2px;
+    }
+    .nu-section {
+      margin-bottom: 56px;
     }
 
-    /* ══ TITLE BLOCK ══ */
-    .nu-title-block {
-      margin-bottom: 36px;
-      padding-bottom: 22px;
-      border-bottom: 2px solid var(--nu-medium-gray);
+    /* ══ HERO TITLE ══ */
+    .nu-hero {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--nu-medium-gray);
     }
     .nu-eyebrow {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--nu-blue);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .nu-page-title {
-      font-weight: 900;
-      font-size: 2.4rem;
-      line-height: 1.15;
-      color: var(--nu-dark-text);
-      margin-bottom: 10px;
-    }
-    .nu-page-title .accent { color: var(--nu-blue); }
-    .nu-page-subtitle {
-      font-size: 1.1rem;
-      color: #555;
-      font-weight: 400;
-      max-width: 750px;
-    }
-
-    /* ══ SECTION ══ */
-    .nu-section { margin-bottom: 40px; }
-    .nu-section-title {
-      font-weight: 900;
-      font-size: 1.5rem;
-      margin-bottom: 16px;
-      letter-spacing: 0.01em;
-    }
-    .nu-section-title .first { color: var(--nu-blue); }
-    .nu-section-title .rest { color: var(--nu-dark-text); }
-
-    /* ══ ALERT BOX ══ */
-    .nu-alert-box {
-      background: linear-gradient(135deg, #fff8f6 0%, #fdecea 100%);
-      border-left: 5px solid var(--nu-alert);
-      border-radius: 4px;
-      padding: 20px 24px;
-      margin-bottom: 30px;
-    }
-    .nu-alert-title {
-      font-weight: 900;
-      font-size: 1rem;
-      color: var(--nu-alert);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .nu-alert-body {
-      font-size: 0.97rem;
-      color: var(--nu-dark-text);
-      line-height: 1.6;
-    }
-
-    /* ══ CONTEXT GRID ══ */
-    .nu-context-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-    .nu-context-card {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 6px;
-      padding: 18px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    }
-    .nu-context-label {
-      font-size: 0.72rem;
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 6px 14px;
+      border-radius: 3px;
+      font-size: 0.74rem;
       font-weight: 700;
       letter-spacing: 0.12em;
-      color: var(--nu-blue);
       text-transform: uppercase;
-      margin-bottom: 6px;
+      margin-bottom: 16px;
     }
-    .nu-context-value {
-      font-size: 1rem;
+    .nu-hero h1 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2.4rem;
       color: var(--nu-dark-text);
-      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
     }
-    .nu-context-value small {
-      display: block;
-      font-weight: 400;
-      color: #666;
-      font-size: 0.85rem;
-      margin-top: 3px;
+    .nu-hero h1 .accent {
+      color: var(--nu-blue);
+    }
+    .nu-hero-lead {
+      font-size: 1.1rem;
+      color: var(--nu-body-text);
+      max-width: 780px;
+      line-height: 1.65;
     }
 
-    /* ══ STEP CARDS ══ */
-    .nu-steps { display: flex; flex-direction: column; gap: 16px; }
-    .nu-step {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 5px solid var(--nu-blue);
+    /* ══ ALERT BANNER ══ */
+    .nu-alert {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+      border-left: 5px solid var(--nu-warning);
+      padding: 22px 26px;
       border-radius: 6px;
-      padding: 22px 24px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 18px;
-      align-items: start;
+      margin-bottom: 40px;
     }
-    .nu-step-num {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
-      color: #fff;
+    .nu-alert-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--nu-warning);
+      color: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1.3rem;
-      box-shadow: 0 2px 8px rgba(0,0,255,0.25);
+      font-size: 1.4rem;
     }
-    .nu-step-title {
+    .nu-alert-body h3 {
+      color: var(--nu-warning);
       font-weight: 900;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .nu-alert-body p {
+      color: var(--nu-dark-text);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    /* ══ REASONS GRID ══ */
+    .nu-reasons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .nu-reason-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-top: 4px solid var(--nu-blue);
+      padding: 24px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .nu-reason-num {
+      display: inline-block;
+      font-weight: 900;
+      font-size: 0.82rem;
+      color: var(--nu-cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    .nu-reason-card h4 {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .nu-reason-card p {
+      font-size: 0.92rem;
+      color: var(--nu-body-text);
+      line-height: 1.55;
+    }
+
+    /* ══ ACTION CHECKLIST ══ */
+    .nu-checklist {
+      list-style: none;
+      counter-reset: step;
+    }
+    .nu-checklist li {
+      counter-increment: step;
+      display: flex;
+      gap: 18px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .nu-checklist li:last-child { border-bottom: none; }
+    .nu-checklist li::before {
+      content: counter(step);
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
+      color: var(--nu-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+    }
+    .nu-checklist-body { flex: 1; }
+    .nu-checklist-body h4 {
+      font-weight: 900;
+      font-size: 1.05rem;
       color: var(--nu-dark-text);
       margin-bottom: 6px;
     }
-    .nu-step-desc {
-      font-size: 0.95rem;
+    .nu-checklist-body p {
+      font-size: 0.94rem;
       color: var(--nu-body-text);
-      margin-bottom: 10px;
+      line-height: 1.6;
     }
-    .nu-step-desc strong { color: var(--nu-dark-text); }
-    .nu-step-desc code {
-      background: var(--nu-light-gray);
-      padding: 2px 7px;
-      border-radius: 3px;
-      font-family: 'SF Mono', Menlo, monospace;
-      font-size: 0.85rem;
-      color: var(--nu-blue);
-    }
-    .nu-step ul {
-      margin: 8px 0 4px 18px;
-      font-size: 0.93rem;
-      color: var(--nu-body-text);
-    }
-    .nu-step ul li { margin-bottom: 4px; }
-    .nu-step-meta {
+    .nu-checklist-body .meta {
       display: inline-block;
       margin-top: 8px;
       font-size: 0.78rem;
       font-weight: 700;
       color: var(--nu-blue);
-      background: rgba(0,0,255,0.06);
-      padding: 4px 10px;
-      border-radius: 3px;
-      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    /* ══ EMAIL DRAFT ══ */
+    /* ══ EMAIL DRAFT BLOCK ══ */
     .nu-email {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 6px;
-      padding: 0;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    .nu-email-head {
       background: var(--nu-light-gray);
-      padding: 14px 22px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      font-size: 0.88rem;
+      border-radius: 8px;
+      padding: 32px;
+      border: 1px solid var(--nu-medium-gray);
     }
-    .nu-email-head div { margin-bottom: 4px; }
-    .nu-email-head strong {
-      display: inline-block;
-      width: 70px;
+    .nu-email-header {
+      border-bottom: 1px solid var(--nu-medium-gray);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      font-size: 0.92rem;
+    }
+    .nu-email-header div { margin-bottom: 4px; }
+    .nu-email-header strong {
       color: var(--nu-blue);
       font-weight: 700;
+      display: inline-block;
+      width: 70px;
     }
     .nu-email-body {
-      padding: 24px 26px;
       font-size: 0.96rem;
+      line-height: 1.75;
       color: var(--nu-dark-text);
-      line-height: 1.7;
     }
-    .nu-email-body p { margin-bottom: 14px; }
-    .nu-email-body p.indent { padding-left: 0; }
+    .nu-email-body p {
+      margin-bottom: 16px;
+      padding-left: 20px;
+    }
+    .nu-email-body .greeting,
+    .nu-email-body .closing,
     .nu-email-body .sig {
-      margin-top: 22px;
-      padding-top: 14px;
-      border-top: 1px solid var(--nu-medium-gray);
-      font-size: 0.92rem;
-      color: var(--nu-body-text);
+      padding-left: 0;
     }
-    .nu-email-body .sig strong { color: var(--nu-dark-text); }
+    .nu-email-body .sig {
+      padding-left: 20px;
+      margin-top: 4px;
+    }
+    .nu-email-body ul {
+      list-style: none;
+      padding-left: 40px;
+      margin-bottom: 16px;
+    }
+    .nu-email-body ul li {
+      position: relative;
+      margin-bottom: 6px;
+    }
+    .nu-email-body ul li::before {
+      content: '•';
+      color: var(--nu-blue);
+      position: absolute;
+      left: -16px;
+      font-weight: 700;
+    }
 
-    /* ══ TWO-COL ══ */
+    /* ══ TWO-COLUMN ══ */
     .nu-two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 24px;
     }
-    .nu-panel {
+    .nu-col-card {
       background: var(--nu-white);
-      border-radius: 6px;
-      padding: 22px 24px;
       border: 1px solid var(--nu-medium-gray);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      border-radius: 6px;
+      padding: 24px;
     }
-    .nu-panel.warn { border-top: 4px solid var(--nu-warning); }
-    .nu-panel.good { border-top: 4px solid var(--nu-success); }
-    .nu-panel-title {
+    .nu-col-card h4 {
       font-weight: 900;
       font-size: 1rem;
-      margin-bottom: 12px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .nu-panel.warn .nu-panel-title { color: var(--nu-warning); }
-    .nu-panel.good .nu-panel-title { color: var(--nu-success); }
-    .nu-panel ul {
-      margin-left: 18px;
-      font-size: 0.93rem;
-      color: var(--nu-body-text);
-    }
-    .nu-panel ul li { margin-bottom: 8px; }
-
-    /* ══ TIMELINE ══ */
-    .nu-timeline {
-      background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 6px;
-      padding: 24px 28px;
-    }
-    .nu-timeline-row {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 18px;
-      padding: 12px 0;
-      border-bottom: 1px dashed var(--nu-medium-gray);
-      font-size: 0.94rem;
-    }
-    .nu-timeline-row:last-child { border-bottom: none; }
-    .nu-timeline-when {
-      font-weight: 900;
       color: var(--nu-blue);
-      font-size: 0.9rem;
-      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
-    .nu-timeline-what { color: var(--nu-dark-text); }
-    .nu-timeline-what strong { color: var(--nu-dark-text); }
+    .nu-col-card.warning {
+      border-left: 4px solid var(--nu-warning);
+    }
+    .nu-col-card.success {
+      border-left: 4px solid var(--nu-success);
+    }
+    .nu-col-card.warning h4 { color: var(--nu-warning); }
+    .nu-col-card.success h4 { color: var(--nu-success); }
+    .nu-col-card ul {
+      list-style: none;
+    }
+    .nu-col-card ul li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 10px;
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+    .nu-col-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 8px; height: 8px;
+      background: var(--nu-cyan);
+      border-radius: 50%;
+    }
 
-    /* ══ CHECKLIST ══ */
-    .nu-checklist {
+    /* ══ CONTACTS CARD ══ */
+    .nu-contacts {
+      background: linear-gradient(135deg, #f8faff 0%, #eef4ff 100%);
+      border-radius: 8px;
+      padding: 28px;
+      border: 1px solid #d9e6ff;
+    }
+    .nu-contacts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .nu-contact {
+      background: var(--nu-white);
+      padding: 18px;
+      border-radius: 6px;
+      border-left: 3px solid var(--nu-blue);
+    }
+    .nu-contact .name {
+      font-weight: 900;
+      font-size: 1.02rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 2px;
+    }
+    .nu-contact .role {
+      font-size: 0.82rem;
+      color: var(--nu-blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .nu-contact .note {
+      font-size: 0.86rem;
+      color: var(--nu-body-text);
+      line-height: 1.5;
+    }
+    .nu-cc-rule {
+      margin-top: 18px;
+      padding: 12px 16px;
+      background: rgba(0,0,255,0.06);
+      border-radius: 4px;
+      font-size: 0.88rem;
+      color: var(--nu-dark-text);
+    }
+    .nu-cc-rule strong { color: var(--nu-blue); }
+
+    /* ══ SUCCESS METRICS ══ */
+    .nu-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .nu-metric {
+      text-align: center;
+      padding: 24px 16px;
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
       border-radius: 6px;
-      padding: 22px 26px;
     }
-    .nu-check-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--nu-light-gray);
-      font-size: 0.95rem;
-      color: var(--nu-dark-text);
+    .nu-metric-icon {
+      width: 36px;
+      height: 36px;
+      margin: 0 auto 10px;
+      color: var(--nu-blue);
     }
-    .nu-check-item:last-child { border-bottom: none; }
-    .nu-check-box {
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 3px;
-      flex-shrink: 0;
-      margin-top: 2px;
+    .nu-metric-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--nu-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .nu-metric-text {
+      font-size: 0.88rem;
+      color: var(--nu-body-text);
+      line-height: 1.45;
     }
 
     /* ══ FOOTER ══ */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 44px 40px;
+      padding: 50px 40px;
       text-align: center;
+      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
       font-size: 1.3rem;
       color: var(--nu-cyan);
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
     .nu-footer-contact {
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.9;
     }
     .nu-footer-contact a {
@@ -467,32 +554,40 @@
     }
     .nu-footer-contact a:hover { text-decoration: underline; }
     .nu-footer-divider {
-      width: 60px;
+      width: 80px;
       height: 2px;
       background: var(--nu-cyan);
-      margin: 14px auto;
-      opacity: 0.5;
+      margin: 0 auto 18px;
+      opacity: 0.6;
     }
 
     /* ══ RESPONSIVE ══ */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 70px; min-height: 220px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
+      .nu-header { padding: 50px 24px 70px; min-height: 240px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.45em; }
       .nu-tagline { font-size: 1.05rem; }
-      .nu-wrap { padding: 36px 22px 50px; }
-      .nu-page-title { font-size: 1.7rem; }
+      .nu-container { padding: 40px 22px; }
+      .nu-hero h1 { font-size: 1.7rem; }
       .nu-two-col { grid-template-columns: 1fr; }
-      .nu-step { grid-template-columns: 1fr; }
-      .nu-step-num { width: 42px; height: 42px; font-size: 1.1rem; }
-      .nu-timeline-row { grid-template-columns: 1fr; gap: 4px; }
+      .nu-meta-bar { gap: 14px; }
+      .nu-email { padding: 22px; }
+      .nu-email-body p, .nu-email-body .sig { padding-left: 0; }
+      .nu-email-body ul { padding-left: 18px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .nu-alert, .nu-reason-card, .nu-email, .nu-col-card { box-shadow: none; }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
       <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
     </svg>
@@ -501,280 +596,288 @@
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
+  <!-- CHEVRON TRANSITION -->
   <div class="nu-chevron">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,60 L1440,0 L1440,60 L0,60 Z" fill="white"/>
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L548,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
+  <!-- CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-wrap">
+    <div class="nu-container">
 
-      <div class="nu-doc-meta">
-        <span><strong>Action Item</strong> · reMarkable capture · Boss Online Store</span>
-        <span><span class="pill">Action Required</span> &nbsp; Owner: Aaron C. Norris &nbsp; · &nbsp; Date: 2026-04-21</span>
+      <!-- META BAR -->
+      <div class="nu-meta-bar">
+        <div class="nu-meta-item">
+          <div class="nu-meta-label">Action Item</div>
+          <div class="nu-meta-value">Boss Online Store — Pricing Removal</div>
+        </div>
+        <div class="nu-meta-item">
+          <div class="nu-meta-label">Date Issued</div>
+          <div class="nu-meta-value">April 21, 2026</div>
+        </div>
+        <div class="nu-meta-item">
+          <div class="nu-meta-label">Source</div>
+          <div class="nu-meta-value">reMarkable Action Item</div>
+        </div>
+        <div class="nu-meta-item">
+          <div class="nu-meta-label">Owner</div>
+          <div class="nu-meta-value">Aaron C. Norris</div>
+        </div>
+        <div class="nu-meta-item">
+          <div class="nu-meta-label">Priority</div>
+          <div class="nu-meta-value">High — Channel Integrity</div>
+        </div>
       </div>
 
-      <div class="nu-title-block">
-        <div class="nu-eyebrow">Channel Pricing · Action Plan</div>
-        <h1 class="nu-page-title">Remove Pricing from <span class="accent">Boss Online Store</span></h1>
-        <p class="nu-page-subtitle">Pull all customer-facing prices from the Boss Products online store listings under the Norris Utilities® reseller account, restore quote-on-request flow, and align the public storefront with the dealer/distributor channel pricing structure.</p>
+      <!-- HERO -->
+      <div class="nu-hero">
+        <div class="nu-eyebrow">Channel Strategy Action Plan</div>
+        <h1>Remove Pricing from the <span class="accent">Boss Online Store</span></h1>
+        <p class="nu-hero-lead">
+          Public pricing on the Boss Products online store undercuts the dealer/distributor channel that Norris Utilities® was appointed to protect.
+          This action plan removes published pricing, replaces it with a "Request a Quote" flow, and routes inquiries through the proper rep
+          structure. Coordinated with Troy Gongwer and Thayne Grove at Boss Products.
+        </p>
+      </div>
+
+      <!-- ALERT -->
+      <div class="nu-alert">
+        <div class="nu-alert-icon">!</div>
+        <div class="nu-alert-body">
+          <h3>Why this matters now</h3>
+          <p>
+            Customers searching for Boss products are landing on the public store, seeing list pricing, and bypassing the dealer relationship.
+            Dealers like Norris Utilities® cannot quote competitively when end-users already see retail numbers online. Every day pricing stays
+            visible costs the channel margin and weakens the rep relationship.
+          </p>
+        </div>
       </div>
 
       <!-- WHY -->
       <section class="nu-section">
-        <div class="nu-alert-box">
-          <div class="nu-alert-title">Why This Matters</div>
-          <div class="nu-alert-body">
-            Public pricing on the Boss online store undercuts the three-channel structure (Direct → Dealers 30% off → Distributors 40% off). Posted prices erode dealer margin, expose competitor visibility into landed cost, and short-circuit the relationship-driven sales process. Quotes must be issued direct from Norris Utilities® so the correct margin tier and Ben's shipping formula (ROUNDUP(ROUNDUP(RegCost, 0) × 1.10, 0)) are applied per customer.
+        <h2 class="nu-section-title">Why <span>Remove Pricing</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="nu-reasons">
+          <div class="nu-reason-card">
+            <div class="nu-reason-num">REASON 01</div>
+            <h4>Protects the Dealer Channel</h4>
+            <p>Public list pricing collapses dealer margin. Dealers can't negotiate when the customer already has the number on screen.</p>
+          </div>
+          <div class="nu-reason-card">
+            <div class="nu-reason-num">REASON 02</div>
+            <h4>Routes Leads to Reps</h4>
+            <p>A quote-request flow funnels every inquiry to the appointed rep for that territory — Norris Utilities® for our footprint.</p>
+          </div>
+          <div class="nu-reason-card">
+            <div class="nu-reason-num">REASON 03</div>
+            <h4>Industry Standard for Dealer-Sold Lines</h4>
+            <p>Skylift, Bay Shore Systems, Samson Rope, and FlexPro Armor all quote through reps. Boss's online pricing is the outlier.</p>
+          </div>
+          <div class="nu-reason-card">
+            <div class="nu-reason-num">REASON 04</div>
+            <h4>Captures Lead Data</h4>
+            <p>Quote requests yield contact info, application detail, and territory — far more valuable than an anonymous online checkout.</p>
           </div>
         </div>
       </section>
 
-      <!-- CONTEXT -->
+      <!-- ACTION STEPS -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Quick</span> <span class="rest">Context</span></h2>
-        <div class="nu-context-grid">
-          <div class="nu-context-card">
-            <div class="nu-context-label">Vendor</div>
-            <div class="nu-context-value">BOSS Products
-              <small>Authorized reseller channel</small>
+        <h2 class="nu-section-title">Action <span>Checklist</span></h2>
+        <div class="nu-section-rule"></div>
+        <ol class="nu-checklist">
+          <li>
+            <div class="nu-checklist-body">
+              <h4>Send formal request to Boss Products</h4>
+              <p>Email Troy Gongwer and Thayne Grove together with the request, the rationale, and the proposed replacement language. Use the email draft below verbatim.</p>
+              <span class="meta">Owner: Aaron · Target: This week</span>
             </div>
-          </div>
-          <div class="nu-context-card">
-            <div class="nu-context-label">Vendor Contacts</div>
-            <div class="nu-context-value">Troy Gongwer + Thayne Grove
-              <small>CC both on every email</small>
+          </li>
+          <li>
+            <div class="nu-checklist-body">
+              <h4>Confirm scope: SKUs and product families</h4>
+              <p>List which Boss SKUs and pages should have pricing removed. If the entire catalog, state that. If specific lines (covers, accessories, parts), name them.</p>
+              <span class="meta">Owner: Aaron + Boss</span>
             </div>
-          </div>
-          <div class="nu-context-card">
-            <div class="nu-context-label">Issue</div>
-            <div class="nu-context-value">Public prices visible
-              <small>Online store listings show MSRP</small>
+          </li>
+          <li>
+            <div class="nu-checklist-body">
+              <h4>Approve the replacement CTA copy</h4>
+              <p>"Request a Quote" button in place of the price. Form fields: Name, Company, Email, Phone, ZIP code, Application notes. ZIP routes to territory rep.</p>
+              <span class="meta">Owner: Boss web team</span>
             </div>
-          </div>
-          <div class="nu-context-card">
-            <div class="nu-context-label">Desired State</div>
-            <div class="nu-context-value">Quote on Request
-              <small>"Call for Pricing" replaces dollar amount</small>
+          </li>
+          <li>
+            <div class="nu-checklist-body">
+              <h4>Verify lead-routing logic</h4>
+              <p>Confirm that ZIPs in the Norris Utilities® territory route to acnorris@norrisutilities.com. Test with a dummy submission before launch.</p>
+              <span class="meta">Owner: Aaron to test</span>
             </div>
-          </div>
-        </div>
+          </li>
+          <li>
+            <div class="nu-checklist-body">
+              <h4>Audit live site after deployment</h4>
+              <p>Walk every public Boss product page. Confirm zero visible prices. Screenshot any pages still showing pricing and forward to Boss for fix.</p>
+              <span class="meta">Owner: Aaron · Within 24 hours of deploy</span>
+            </div>
+          </li>
+          <li>
+            <div class="nu-checklist-body">
+              <h4>Update internal Norris quoting workflow</h4>
+              <p>Note in the master tracker that Boss inbound leads will now route through the Norris quote desk. Caroline Butler to log inbound Boss inquiries on receipt.</p>
+              <span class="meta">Owner: Aaron + CB</span>
+            </div>
+          </li>
+          <li>
+            <div class="nu-checklist-body">
+              <h4>Notify the Norris dealer/distributor network</h4>
+              <p>Brief follow-up to dealers carrying Boss product confirming the change so they can quote without fear of being undercut online.</p>
+              <span class="meta">Owner: Aaron · After Boss confirms deploy</span>
+            </div>
+          </li>
+        </ol>
       </section>
 
-      <!-- STEPS -->
+      <!-- BEFORE / AFTER -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Action</span> <span class="rest">Steps</span></h2>
-        <div class="nu-steps">
-
-          <div class="nu-step">
-            <div class="nu-step-num">1</div>
-            <div>
-              <div class="nu-step-title">Inventory every priced listing</div>
-              <div class="nu-step-desc">Log into the Boss Products online store as Norris Utilities® and walk every active product page. Capture the SKU, title, posted price, and direct URL for each listing where a dollar amount is currently visible.</div>
-              <ul>
-                <li>Save list as <code>boss_priced_listings_2026-04-21.md</code></li>
-                <li>Flag any listing that also shows a "compare at" or strike-through price</li>
-                <li>Note which listings are tied to bundles vs. individual SKUs</li>
-              </ul>
-              <span class="nu-step-meta">Owner: Aaron · Time: 30 min</span>
-            </div>
+        <h2 class="nu-section-title">Before <span>and After</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="nu-two-col">
+          <div class="nu-col-card warning">
+            <h4>Before — Current State</h4>
+            <ul>
+              <li>List pricing publicly visible on every Boss product page</li>
+              <li>Customers shop the dealer instead of the rep</li>
+              <li>No lead capture — anonymous browsing</li>
+              <li>Dealer margin compressed before the conversation begins</li>
+              <li>Inconsistent with how every other dealer-sold line operates</li>
+            </ul>
           </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">2</div>
-            <div>
-              <div class="nu-step-title">Send removal request to Boss Products</div>
-              <div class="nu-step-desc">Email <strong>Troy Gongwer</strong> and <strong>Thayne Grove</strong> together (CC both — never one without the other) with the inventory list attached. Use the draft below. Request that all prices be hidden and replaced with a "Request a Quote" or "Call for Pricing" call-to-action.</div>
-              <ul>
-                <li>Subject: clear, specific, no jargon</li>
-                <li>Attach the SKU/URL inventory from Step 1</li>
-                <li>Specify the replacement CTA wording you want shown</li>
-              </ul>
-              <span class="nu-step-meta">Owner: Aaron · Time: 15 min</span>
-            </div>
+          <div class="nu-col-card success">
+            <h4>After — Target State</h4>
+            <ul>
+              <li>"Request a Quote" CTA in place of pricing</li>
+              <li>Inquiries routed by ZIP to the appointed territory rep</li>
+              <li>Full lead detail captured: contact, company, application</li>
+              <li>Dealer margin protected — quote starts the relationship</li>
+              <li>Aligned with Skylift, Bay Shore, Samson, FlexPro Armor practice</li>
+            </ul>
           </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">3</div>
-            <div>
-              <div class="nu-step-title">Confirm replacement CTA routing</div>
-              <div class="nu-step-desc">When the "Request a Quote" link is added, confirm the inquiry destination. Quote requests should route to <code>acnorris@norrisutilities.com</code> with Caroline Butler optionally CC'd, never to Boss directly. This protects channel ownership.</div>
-              <ul>
-                <li>Verify Boss is not capturing the lead</li>
-                <li>Verify the form passes SKU + customer info to Aaron</li>
-                <li>Test with a dummy submission once live</li>
-              </ul>
-              <span class="nu-step-meta">Owner: Aaron · Time: 20 min after vendor reply</span>
-            </div>
-          </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">4</div>
-            <div>
-              <div class="nu-step-title">Verify the change is live</div>
-              <div class="nu-step-desc">Re-walk every URL from the Step 1 inventory in an incognito window (logged out, no cookies). Every dollar amount must be gone and replaced with the agreed CTA. Document any listing still showing a price and re-ping the vendor same-day.</div>
-              <ul>
-                <li>Use Chrome incognito + Safari private as a cross-check</li>
-                <li>Screenshot each cleaned listing for the file</li>
-                <li>Test on mobile — Boss listings render differently on small screens</li>
-              </ul>
-              <span class="nu-step-meta">Owner: Aaron · Time: 25 min</span>
-            </div>
-          </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">5</div>
-            <div>
-              <div class="nu-step-title">Update internal pricing reference</div>
-              <div class="nu-step-desc">Note in the master tracker that Boss online listings are now quote-on-request. Add a one-line entry to the channel pricing reference so Caroline and any future team member quotes Boss product correctly: Direct → Dealers 30% off → Distributors 40% off, plus Ben's shipping formula on every line.</div>
-              <ul>
-                <li>Update <code>master_tracker</code></li>
-                <li>Update <code>pricing_quoting_reference</code></li>
-                <li>Note the date the change went live</li>
-              </ul>
-              <span class="nu-step-meta">Owner: Aaron + CB · Time: 10 min</span>
-            </div>
-          </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">6</div>
-            <div>
-              <div class="nu-step-title">Close the loop with Boss</div>
-              <div class="nu-step-desc">Once verified live, send a brief thank-you confirmation to Troy and Thayne. This keeps the relationship warm and creates a paper trail confirming the change was completed at our request and accepted by the vendor.</div>
-              <ul>
-                <li>One-paragraph email, no attachments</li>
-                <li>Reference the original request thread</li>
-                <li>Note the verification date</li>
-              </ul>
-              <span class="nu-step-meta">Owner: Aaron · Time: 5 min</span>
-            </div>
-          </div>
-
         </div>
       </section>
 
       <!-- EMAIL DRAFT -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Email</span> <span class="rest">Draft to Boss Products</span></h2>
+        <h2 class="nu-section-title">Email <span>Draft to Boss Products</span></h2>
+        <div class="nu-section-rule"></div>
         <div class="nu-email">
-          <div class="nu-email-head">
-            <div><strong>To:</strong> Troy Gongwer &lt;troy@bossproducts.com&gt;</div>
-            <div><strong>CC:</strong> Thayne Grove &lt;thayne@bossproducts.com&gt;</div>
+          <div class="nu-email-header">
+            <div><strong>To:</strong> Troy Gongwer</div>
+            <div><strong>CC:</strong> Thayne Grove</div>
             <div><strong>From:</strong> Aaron C. Norris &lt;acnorris@norrisutilities.com&gt;</div>
-            <div><strong>Subject:</strong> Norris Utilities® reseller listings — remove posted prices, switch to Request a Quote</div>
+            <div><strong>Subject:</strong> Request — Remove pricing from Boss Online Store</div>
           </div>
           <div class="nu-email-body">
-            <p>Troy and Thayne —</p>
-
-            <p class="indent">Quick request on the Boss online store listings under our Norris Utilities® reseller account. We need to pull the posted prices from every active SKU we resell and switch the listings over to a "Request a Quote" or "Call for Pricing" call-to-action.</p>
-
-            <p class="indent">The reason is simple — we sell through three channels (direct, dealer, distributor) and each tier carries its own pricing. Public dollar amounts on the storefront undercut our dealer partners and limit the conversation we need to have with each customer before quoting.</p>
-
-            <p class="indent">A few specifics so we keep this clean:</p>
-
-            <p class="indent">• Inventory list of every priced listing under our reseller account is attached.<br>
-            • Replace each posted price with the same CTA wording across the board — happy to defer to whatever your platform supports cleanest.<br>
-            • Quote inquiries should route to acnorris@norrisutilities.com so Norris Utilities® owns the channel response.<br>
-            • Once changes are live, I'll re-walk every listing in incognito and confirm.</p>
-
-            <p class="indent">When can your team have this turned around? If easier to handle on a quick call, my cell is below.</p>
-
-            <p class="indent">Appreciate y'all keeping the channel structure clean — it's been good for both of us.</p>
-
-            <p>Sincerely,</p>
-            <p style="padding-left:0;">&nbsp;&nbsp;&nbsp;&nbsp;Aaron C. Norris</p>
-
-            <div class="sig">
-              <strong>Aaron C. Norris</strong><br>
-              Founder &amp; CEO, Norris Utilities, LLC<br>
-              Cell: 205-500-1343 &nbsp;|&nbsp; acnorris@norrisutilities.com<br>
-              www.NorrisUtilities.com
+            <div class="greeting">Troy —</div>
+            <p>I want to bring up something that's been costing the dealer channel and ask for your help fixing it.</p>
+            <p>The Boss online store is currently publishing list pricing on the product pages. When customers in our territory shop online before calling, they show up to the conversation with the retail number already in hand. That collapses the room a dealer has to quote, and it routes the lead around the rep structure that you and Thayne built.</p>
+            <p>I'd like to request that the public store be updated as follows:</p>
+            <ul>
+              <li>Remove visible pricing from all Boss product pages</li>
+              <li>Replace the price field with a "Request a Quote" call to action</li>
+              <li>Capture name, company, email, phone, ZIP, and application notes</li>
+              <li>Route quote requests by ZIP to the appointed territory rep</li>
+            </ul>
+            <p>Every other dealer-sold line we represent — Skylift, Bay Shore Systems, Samson Rope, and FlexPro Armor — runs this way. It protects the channel, it captures real leads, and it keeps the rep relationship intact.</p>
+            <p>Happy to jump on a call with you and Thayne to walk through the proposed flow and confirm scope. If it's easier, I can put together a one-page mockup of the replacement CTA and send it over for the web team.</p>
+            <p>Thank y'all for considering this. I think it's the right move for the channel and I'd like to help get it across the finish line.</p>
+            <div class="closing">Sincerely,</div>
+            <div class="sig">Aaron C. Norris</div>
+            <div class="sig" style="font-size: 0.88rem; color: var(--nu-body-text); margin-top: 6px;">
+              Founder &amp; CEO<br>
+              Norris Utilities®, LLC<br>
+              Cell: 205-500-1343<br>
+              acnorris@norrisutilities.com
             </div>
           </div>
         </div>
       </section>
 
-      <!-- DO / DON'T -->
+      <!-- CONTACTS -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Guardrails</span> <span class="rest">— Do &amp; Don't</span></h2>
-        <div class="nu-two-col">
-          <div class="nu-panel good">
-            <div class="nu-panel-title">Do</div>
-            <ul>
-              <li>CC <strong>both</strong> Troy Gongwer and Thayne Grove on every Boss email — always.</li>
-              <li>Use a single, consistent CTA across all listings ("Request a Quote").</li>
-              <li>Route inquiries to acnorris@norrisutilities.com so Norris Utilities® owns the lead.</li>
-              <li>Verify in incognito on desktop <em>and</em> mobile — Boss mobile templates differ.</li>
-              <li>Document the live-date in the master tracker and pricing reference.</li>
-            </ul>
+        <h2 class="nu-section-title">Boss Products <span>Contacts</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="nu-contacts">
+          <div class="nu-contacts-grid">
+            <div class="nu-contact">
+              <div class="name">Troy Gongwer</div>
+              <div class="role">Boss Products — Primary</div>
+              <div class="note">Lead recipient on the request. First call for channel-strategy questions.</div>
+            </div>
+            <div class="nu-contact">
+              <div class="name">Thayne Grove</div>
+              <div class="role">Boss Products — Co-Lead</div>
+              <div class="note">CC on every Boss communication. Co-decision-maker on web and pricing.</div>
+            </div>
           </div>
-          <div class="nu-panel warn">
-            <div class="nu-panel-title">Don't</div>
-            <ul>
-              <li>Don't email Troy without copying Thayne (or vice versa).</li>
-              <li>Don't let Boss capture the quote inquiry — that bypasses our channel.</li>
-              <li>Don't ship a partial fix — every priced listing must change in one pass.</li>
-              <li>Don't assume the change is live based on the vendor's word — verify it.</li>
-              <li>Don't re-publish prices in any other public-facing channel (PDF line card, web).</li>
-            </ul>
+          <div class="nu-cc-rule">
+            <strong>Standing rule:</strong> All Boss Products correspondence CCs both Troy Gongwer and Thayne Grove. No exceptions.
           </div>
         </div>
       </section>
 
-      <!-- TIMELINE -->
+      <!-- SUCCESS METRICS -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Target</span> <span class="rest">Timeline</span></h2>
-        <div class="nu-timeline">
-          <div class="nu-timeline-row">
-            <div class="nu-timeline-when">2026-04-21</div>
-            <div class="nu-timeline-what"><strong>Day 0 —</strong> Inventory priced listings (Step 1) and send removal request to Boss (Step 2).</div>
+        <h2 class="nu-section-title">Success <span>Looks Like</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="nu-metrics">
+          <div class="nu-metric">
+            <div class="nu-metric-label">Pages Audited</div>
+            <div class="nu-metric-text">Zero public Boss pages display pricing</div>
           </div>
-          <div class="nu-timeline-row">
-            <div class="nu-timeline-when">2026-04-22 → 24</div>
-            <div class="nu-timeline-what"><strong>Days 1–3 —</strong> Boss confirms scope and replacement CTA routing (Step 3). Follow up daily if no reply by 4 PM CT.</div>
+          <div class="nu-metric">
+            <div class="nu-metric-label">Lead Routing</div>
+            <div class="nu-metric-text">Norris-territory ZIPs route to Aaron, verified by test submission</div>
           </div>
-          <div class="nu-timeline-row">
-            <div class="nu-timeline-when">2026-04-25 → 28</div>
-            <div class="nu-timeline-what"><strong>Days 4–7 —</strong> Boss implements changes. Aaron verifies live state in incognito + mobile (Step 4).</div>
+          <div class="nu-metric">
+            <div class="nu-metric-label">Dealer Confidence</div>
+            <div class="nu-metric-text">Dealer network notified and quoting without online undercut</div>
           </div>
-          <div class="nu-timeline-row">
-            <div class="nu-timeline-when">2026-04-29</div>
-            <div class="nu-timeline-what"><strong>Day 8 —</strong> Update internal master tracker and pricing reference (Step 5). Send vendor close-the-loop confirmation (Step 6).</div>
-          </div>
-          <div class="nu-timeline-row">
-            <div class="nu-timeline-when">2026-05-13</div>
-            <div class="nu-timeline-what"><strong>+2 weeks —</strong> Spot-check three random listings to confirm the change has stuck. Add note to follow-up rotation.</div>
+          <div class="nu-metric">
+            <div class="nu-metric-label">Inbound Leads</div>
+            <div class="nu-metric-text">Quote-request volume tracked monthly via the master tracker</div>
           </div>
         </div>
       </section>
 
-      <!-- VERIFICATION -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Verification</span> <span class="rest">Checklist</span></h2>
-        <div class="nu-checklist">
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Full inventory of priced listings captured with SKU + URL.</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Removal request emailed to Troy + Thayne (both CC'd).</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Boss reply received confirming scope and timeline.</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Replacement CTA wording agreed and consistent across listings.</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Quote inquiry routing tested with a dummy submission landing in Aaron's inbox.</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Every listing re-walked in incognito on desktop — no dollar amounts visible.</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Every listing re-walked in mobile private mode — no dollar amounts visible.</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Master tracker updated with live-date.</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Pricing reference updated noting Boss = quote-on-request.</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Close-the-loop confirmation sent to Troy + Thayne.</div></div>
-          <div class="nu-check-item"><div class="nu-check-box"></div><div>Two-week follow-up scheduled to spot-check that listings remain clean.</div></div>
+      <!-- NEXT TOUCH -->
+      <section class="nu-section" style="margin-bottom: 0;">
+        <h2 class="nu-section-title">Next <span>Touch Point</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="nu-col-card" style="border-left: 4px solid var(--nu-blue);">
+          <h4 style="color: var(--nu-blue);">Follow-Up Schedule</h4>
+          <ul>
+            <li>Day 0 (today): Send email to Troy and Thayne</li>
+            <li>Day 3: If no reply, follow up by phone — 205-500-1343 outbound</li>
+            <li>Day 7: Confirm scope and timeline in writing</li>
+            <li>Day 14: Test the live "Request a Quote" flow end-to-end</li>
+            <li>Day 21: Audit complete, dealer network notified, action item closed</li>
+          </ul>
         </div>
       </section>
 
     </div>
   </main>
 
+  <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-divider"></div>
     <div class="nu-footer-contact">
-      <strong>Aaron C. Norris</strong>, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities®, LLC<br>
+      <strong style="color: var(--nu-white);">Aaron C. Norris</strong> | Founder &amp; CEO<br>
+      Norris Utilities®, LLC | Birmingham, Alabama<br>
       <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a><br>
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
