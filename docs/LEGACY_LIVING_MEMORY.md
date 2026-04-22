@@ -1307,6 +1307,65 @@ CONTEXT THAT MUST PERSIST:
 - Session parallel verification worked: M5 handled iShip diagnosis + fix in AM while this V5 build session ran; both sessions produced [LIVING_MEMORY_UPDATE] drafts; Living Memory bridge is the cross-session connective tissue
 
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S2 — Legacy 8-Method SELECT Pasted; D.6c Correction Queued for After D.8 — 2026-04-21
+Aaron pasted Legacy's 8-method SELECT before my 9-method version landed. CC is now executing the 8-method ladder. Gate 2 locked without ups_store_receipt, without tandem mode, without 3-month silent-drop documentation, without the D.6b email backprocess spec.
+
+DAMAGE ASSESSMENT:
+- NOT critical — everything still on feature/shipping-agent-v5, no merge to main
+- Gate 4 (dry-run writeset, Aaron approval) is still ahead — real safety valve
+- Gate 5 (merge) is still ahead — explicit MERGE required
+- D.8 SD rendering does not depend on the 4 missing pieces
+- The 4 missing pieces can be added as an inserted task D.6c between D.8 and D.1
+
+RECOVERY PLAN:
+1. Let CC finish D.8 uninterrupted — canonical SD rendering is independent of the missing pieces
+2. When CC next pings (after D.8 commit, before D.1 start), paste the D.6c correction block
+3. D.6c adds:
+   - ups_store_receipt as Method 9 (inserted at priority 3 in active order)
+   - Tandem mode block in ups_method_config.json with Sheet ID + gid + resolution rules + new columns required
+   - Silent-drop window documentation in environment_notes_2026_04_21
+   - 6 new parser/reader modules: parse_iship, parse_store_receipt, parse_boss_pdf, parse_quantum_view, parse_mychoice, read_shipping_log_v8
+   - scripts/email_backprocess.py orchestrator
+   - output/reports/email_backprocess_dry_run_2026-04-21.md reconciliation output
+4. NO WRITES to shipping_docs.json during D.6c — reporting only
+5. Then proceed to D.1 as originally specified
+
+KEY QUOTE / LESSON:
+I over-engineered the timing pressure. Aaron was waiting for ~7 hours at Gate 2. Legacy's 8-method SELECT arrived, looked sensible, Aaron pasted it. My 9-method revision arrived seconds later. If I had led with "here's the SELECT block" in the first reply instead of re-revising three times, Aaron would have pasted mine first.
+
+Lesson: when there's a pending gate, the correct first response is ALWAYS the SELECT block (even if preliminary). Follow-up revisions become additive commits, not replacements. Never let perfect SELECT block be the enemy of shipped SELECT block.
+
+RECOVERY IS CLEAN because the branch architecture protects forward progress: everything is additive, nothing is irreversible until Gate 5 MERGE. D.6c restores the missing scope without requiring a Gate 2 rollback.
+
+DECISIONS LOCKED:
+- D.6c correction block given to Aaron for paste after CC's next D.8 ping
+- Do NOT interrupt CC mid-D.8
+- Do NOT paste the 9-method SELECT now — it conflicts with the 8-method config already locked
+- Additive commit via D.6c is the right path
+
+CHANGED: None (no code, no commits from my side)
+
+BLOCKED: None. CC executing D.8 on 8-method spec. D.6c paste queued for after D.8 commit.
+
+NEXT:
+1. CC completes D.8 (render 7 canonical SDs + 4-source persistence)
+2. CC commits D.8, Tier 2 pings
+3. Aaron pastes D.6c correction block BEFORE D.1
+4. CC extends config + builds parsers + runs backprocess + commits D.6c
+5. CC proceeds to D.1 per original plan
+6. D.11 → P/N migration → Gate 3 → Gate 4 (Aaron GO) → Gate 5 (Aaron MERGE)
+
+At Gate 4, the dry-run writeset will include D.6c findings — the 40+ invoice backlog staging happens there under Aaron's review.
+
+CONTEXT THAT MUST PERSIST:
+- 8-method config is locked at Gate 2 commit. D.6c adds Method 9 (ups_store_receipt) additively.
+- Legacy's SELECT beat my revised SELECT to Aaron's paste window due to my 3 revisions of the SELECT block. Future SELECTs: lead with the block, revise additively.
+- Gate 4 is the safety valve. Never skip it. No invoicing until Gate 4 GO.
+- Tandem mode with Apps Script must be explicit in config — Aaron's resilience directive.
+- 2 unknown trackings still need investigation in D.6c: 1Z2W49000329882999 and 1Z2W49000395015551.
+- 3-month silent-drop window (2026-01-22 to 2026-04-21) is permanent Gmail data loss. Shipping Log V8 sheet is the one Gmail-independent source that spans it.
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -2245,3 +2304,31 @@ instructed the fix and established this schema contract to prevent repeat
 incidents. Every downstream customer_db reader in V5 must match the contract
 above. Future schema bumps will add a new subsection here before the code
 migration.
+
+
+---
+
+## CANONICAL SD RECORDS — Mar 20 Batch (persisted 2026-04-21)
+
+Persisted across 4 sources (customer_db.json, sa_learnings.json, this file, SD HTML itself) so this data never falls out of agent memory. Investigation principle honored: every field here is HIGH-confidence, cross-verified. Future sessions MUST find this via at least 3 of 4 sources — if not, persistence rule failed.
+
+### S-2026-013 — Jimmy Benz / SWEPCO — 2026-03-20 ✅ SHIPPED_DELIVERED_UNINVOICED
+
+- **Filename:** SD-2026-BENZ-SWEPCO-0320.html (locked, do not rename)
+- **Customer:** Jimmy Benz
+- **Company:** SWEPCO (AEP subsidiary)
+- **PO:** Truck #860377
+- **Products:** 1× NU-BC-2851 (FlexPro Armor 2-Man Bucket Cover) @ $305
+- **Ship To:** 101 W Township Street, Fayetteville, AR 72703
+- **Tracking:** 1Z2W49000393585850
+- **Ship Date:** 2026-03-20
+- **Delivered:** 2026-03-24 (verified via pkginfo@ups.com history)
+- **Carrier:** UPS Ground
+- **NU Cost (paid):** $52.16 (UPS Store receipt)
+- **Customer Charge:** $94.00 (Ben's Formula historical override — default formula computes $59; historical record wins)
+- **fulfillment_source:** nu_stock
+- **cb_internal_note:** "Shipped Mar 20, delivered Mar 24. NOT YET INVOICED. QB invoice pending. Reference Truck #860377 in invoice memo."
+- **Source confidence:** HIGH (cross-verified Apr 7 Legacy + Apr 13 SA dry-run + Apr 14 Section 6 canonical + Aaron D.8 supplemental 2026-04-20)
+- **Persisted:** 2026-04-22T00:48:30Z
+
+_Remaining Mar 20 batch (Thornhill DEPT468R, Pickle, Myers, Crosby-Mar-20) + AJ-BOSS-Hattiesburg + Crosby-Apr-8 pending Aaron confirmation of per-record canonical data before render — Tier 1 fired 2026-04-21._
