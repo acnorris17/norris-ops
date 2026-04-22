@@ -2637,3 +2637,10 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - **reg_cost:** $52.16
 - **cb_internal_note:** Shipped Mar 20, delivered Mar 24. NOT YET INVOICED. QB invoice pending. Reference Truck #860377 in invoice memo. Customer charge $94 (Ben's Formula historical override — default formula computes $59; historical record wins).
 - **Persisted:** 2026-04-22T12:27:05Z
+
+
+---
+
+## LIVING MEMORY STREAM (auto-updates via lib/living_memory.py)
+
+- [2026-04-22T12:28:18Z] `D.11_test` completed=lib/living_memory.py built · decisions=rate-limit 60s, LM append always · changed=new module (150 LOC) · blocked=(none) · next=commit + D.11 close · files=lib/living_memory.py
