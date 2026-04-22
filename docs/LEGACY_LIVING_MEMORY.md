@@ -1478,6 +1478,44 @@ Wayne standard. Earn it.
 ## KEY LESSON
 Gmail backprocess (D.6b) DID surface the Boss invoices being available — the parser just couldn't pull binary attachments. The data exists; the access path needs patching. Filed as Gate 4 follow-up per CC's commit message.
 
+### [LIVING_MEMORY_UPDATE] SA V5 S3 — Thornhill S-ID misassignment corrected; canonical mapping restored — 2026-04-21
+## COMPLETED
+- Root-caused CC's A/B/C Tier 1: I mis-assigned S-2026-013 to Thornhill in prior paste block
+- Authoritative mapping from 2 Living Memory drafts + CC's own D.8 part 1 commit (8bc56aa renders Benz as S-2026-013):
+  - S-2026-013 = Benz SWEPCO 0320 (ALREADY RENDERED — part 1/6 complete)
+  - S-2026-014 = Pickle Florence 0320
+  - S-2026-015 = Myers AEP 0320
+  - S-2026-011 = Crosby Dominion (ops register, pre-existing)
+  - S-2026-012 = Thornhill 0413 (ops register, pre-existing — NOTE: this is for Apr 13, NOT the Mar 20 DEPT468R)
+- Thornhill DEPT468R (Mar 17 order, Mar 20 ship) was NEVER assigned a canonical S-ID. Must be fresh mint via lib.sid.issue_sid() → next available = S-2026-016
+- AJ-BOSS-Hattiesburg was planned as S-2026-016 in snapshot §5; with Thornhill claiming 016, AJ-BOSS becomes S-2026-017
+
+## CORRECTED S-ID ASSIGNMENTS (4 SDs remaining for D.8)
+- part 2/6: SD-2026-THORNHILL-DEPT468R-0320 → MINT via issue_sid() → expected S-2026-016
+- part 3/6: SD-2026-PICKLE-FLORENCE-0320 → S-2026-014 (backfilled, already in sid_issuance_log)
+- part 4/6: SD-2026-MYERS-AEP-0320 → S-2026-015 (backfilled, already in sid_issuance_log)
+- part 5/6: SD-2026-CROSBY-DOMINION-0421 → S-2026-011 (pre-existing ops register; UPDATE ship_date from pending to 2026-04-21 per today's iShip)
+- part 6/6: SD-2026-AJ-BOSS-0401-Hattiesburg → MINT via issue_sid() → expected S-2026-017
+
+## DECISIONS
+- CC mints new SIDs via lib.sid.issue_sid() for Thornhill + AJ-BOSS (NOT reused from ops register)
+- CC reuses existing SIDs for Pickle, Myers (S-2026-014/015 from Gate 1.5 backfill)
+- CC updates existing S-2026-011 Crosby record with April 21 ship date (not new SID)
+
+## CHANGED
+None this turn (no commits)
+
+## BLOCKED
+Clearing CC's A/B/C Tier 1 with corrected paste block now.
+
+## NEXT
+1. Aaron pastes corrected SID-assignment guidance to CC
+2. CC renders parts 2-6, 5 commits on feature branch + 5 ops pushes
+3. Proceed D.1 → D.11 → P/N migration → Gates 3/4/5
+
+## KEY LESSON
+My prior canonical block assumed Thornhill=S-2026-013 without verifying against the Gate 1.5 backfill mapping. Both [LIVING_MEMORY_UPDATE] drafts were unambiguous: S-2026-013/014/015 = Benz/Pickle/Myers (in that order). CC caught the contradiction because part 1/6 already used S-2026-013 for Benz. The A/B/C question was CC correctly halting on a data conflict, not asking a real question.
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -2491,3 +2529,18 @@ Tests: 148/148 green at 7e371dd.
 
 ### Gates remaining
 Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron GO) | Gate 5 (merge to main — Aaron MERGE)
+
+### S-2026-016 — Richard Thornhill / LineTec Services / LTS Power — 2026-03-20 (✅ SHIPPED)
+
+- **Filename:** SD-2026-THORNHILL-DEPT468R-0320.html (locked)
+- **Customer:** Richard Thornhill / LineTec Services / LTS Power
+- **PO:** DEPT468R
+- **Ship To:** Richard Thornhill, LineTec Services, 6411 Masonic Drive, Alexandria, LA 71301
+- **Line items:** 1x NU-BC-2851 — subtotal $305.00
+- **Ship Date:** 2026-03-20
+- **Tracking:** 1Z2W49000395021357
+- **Delivered:** 2026-03-23
+- **fulfillment_source:** nu_stock
+- **reg_cost:** NEEDS_REVIEW
+- **cb_internal_note:** March 20 batch shipment; PO DEPT468R received Mar 17. RegCost pending recovery from silent-drop window (UPS Store paper receipt or Aaron-assist). Apply Ben's Formula x 1.10 once captured.
+- **Persisted:** 2026-04-22T12:19:54Z
