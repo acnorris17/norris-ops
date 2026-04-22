@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- CANONICAL_SD_RECORD v1 — FIX 11 FINAL
+  sd_id: SD-2026-PRIMORIS-DEALER-0211
+  internal_s_id: S-2026-024
+  customer: Aerial Hydraulics, Inc.
+  billing_tier: dealer
+  po_number: Verbal (Wayne 2/6/2026 email)
+  tracking: 1Z2W49000392272154
+  grand_total: $542.00
+  cb_action: CREATE
+-->
+<head>
+<meta charset="UTF-8">
+<title>Norris Utilities — Shipping Document</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Lato',sans-serif; color:#1a1a2e; background:#fff; max-width:850px; margin:0 auto; padding:36px; }
+.header { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; padding-bottom:16px; margin-bottom:20px; border-bottom:1px solid #ccc; }
+.header-logo { flex:0 0 55%; }
+.header-logo img { width:100%; height:auto; display:block; }
+.header-info { flex:1; text-align:right; font-size:11px; color:#555; line-height:2; padding-bottom:2px; }
+.header-info strong { font-size:13px; font-weight:900; color:#1a1a2e; display:block; margin-bottom:4px; }
+.doc-title-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:20px; }
+.doc-title { font-size:20px; font-weight:900; letter-spacing:3px; text-transform:uppercase; }
+.doc-meta { text-align:right; font-size:11px; color:#555; line-height:2.1; }
+.address-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:14px; }
+.addr-block { border:1px solid #ccc; border-radius:4px; overflow:hidden; }
+.addr-head { background:#f2f2f2; border-bottom:1px solid #ccc; padding:6px 12px; font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
+.addr-body { padding:12px; font-size:12px; line-height:1.9; }
+.meta-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid #ccc; border-radius:4px; overflow:hidden; margin-bottom:14px; }
+.meta-cell { padding:9px 12px; border-right:1px solid #ccc; }
+.meta-cell:last-child { border-right:none; }
+.meta-label { font-size:8px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#888; margin-bottom:3px; }
+.meta-val { font-size:12px; font-weight:700; }
+table.items { width:100%; border-collapse:collapse; border:1px solid #ccc; border-radius:4px; overflow:hidden; margin-bottom:14px; font-size:12px; }
+table.items thead tr { background:#f2f2f2; }
+table.items thead th { padding:9px 12px; text-align:left; font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; border-bottom:1px solid #ccc; }
+table.items thead th.qty { text-align:center; width:70px; }
+table.items tbody td { padding:13px 12px; vertical-align:top; }
+table.items tbody td.qty { text-align:center; font-weight:900; font-size:22px; vertical-align:middle; }
+.sku { font-size:10px; font-weight:700; background:#eee; border-radius:3px; padding:2px 6px; display:inline-block; margin-bottom:4px; }
+.pname { font-weight:700; font-size:13px; margin-bottom:2px; }
+.pdesc { font-size:11px; color:#777; }
+.thankyou { text-align:center; padding:14px 0; font-size:12px; color:#555; font-style:italic; line-height:1.9; border-top:1px solid #eee; margin-bottom:18px; }
+.footer { display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid #ddd; }
+.footer img { height:34px; }
+.footer-tag { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:#aaa; }
+@media print {
+  @page { margin: 0.5in; size: letter; }
+  html, body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  header, footer { display: none !important; }
+  .nu-topnav { display: none !important; }
+  .print-tip { display: block !important; font-size: 9px; color: #999; text-align: center; margin-bottom: 4px; }
+}
+.print-tip { display: none; }
+</style>
+</head>
+<body>
+<style>
+.nu-topnav{background:#fff;border-bottom:2px solid #0000FF;padding:10px 20px;display:flex;align-items:center;gap:14px;font-family:'Lato',sans-serif;flex-wrap:wrap;position:sticky;top:0;z-index:9999;}
+.nu-topnav img{height:30px;}
+.nu-topnav-sep{width:1px;height:20px;background:#dde2ff;}
+.nu-topnav a{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0000FF;text-decoration:none;padding:5px 9px;border-radius:5px;transition:background .15s;white-space:nowrap;}
+.nu-topnav a:hover{background:#f0f2ff;}
+.nu-topnav-home{color:#1a1a2e!important;font-weight:900!important;}
+@media(max-width:600px){.nu-topnav{gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;}.nu-topnav a{font-size:10px;padding:4px 7px;}}
+@media print {.nu-topnav{display:none!important;}}
+</style>
+<div class="nu-topnav">
+  <a href="../index.html"><img src="../assets/norris-logo-horizontal.png" alt="Norris Utilities"></a>
+  <div class="nu-topnav-sep"></div>
+  <a href="../index.html" class="nu-topnav-home">&#8962; Portal</a>
+  <a href="../home-base.html">Home Base</a>
+  <a href="../mission-control.html">Mission Control</a>
+  <a href="../shipping-log.html">Shipping Log</a>
+  <a href="../po-tracker.html">PO Tracker</a>
+  <a href="../calendar.html">Calendar</a>
+  <a href="../../storefront/FlexPro-Armor-Store.html">FlexPro Armor</a>
+</div>
+
+<p class="print-tip">Tip: In Chrome Print settings, uncheck "Headers and footers" for clean output (one-time setting).</p>
+<div class="header">
+  <div class="header-logo"><img src="../assets/norris-logo-horizontal.png" alt="Norris Utilities"></div>
+  <div class="header-info">
+    <strong>Norris Utilities, LLC</strong>
+    130 Inverness Plaza, Suite 210<br>
+    Birmingham, AL 35242<br>
+    acnorris@norrisutilities.com<br>
+    www.norrisutilities.com
+  </div>
+</div>
+<div class="doc-title-row">
+  <div class="doc-title">Shipping Document</div>
+  <div class="doc-meta">SD-2026-PRIMORIS-DEALER-0211.html<br>February 11, 2026</div>
+</div>
+<div class="address-row">
+  <div class="addr-block">
+    <div class="addr-head">Ship To</div>
+    <div class="addr-body">
+      <strong>Wayne Abadie</strong><br>
+      Aerial Hydraulics, Inc.<br>
+      Attn: PSC Fleet / George Dufour<br>Primoris T&D<br>3606 N. Frazier St, Conroe TX 77303
+    </div>
+  </div>
+  <div class="addr-block">
+    <div class="addr-head">Ordered By</div>
+    <div class="addr-body">
+      <strong>Wayne Abadie</strong><br>
+      Aerial Hydraulics, Inc.<br>
+      aerione@aol.com | (504) 734-8001
+    </div>
+  </div>
+</div>
+<div class="meta-grid">
+  <div class="meta-cell"><div class="meta-label">Order Date</div><div class="meta-val">02/11/2026</div></div>
+  <div class="meta-cell"><div class="meta-label">Ship Date</div><div class="meta-val">TBD</div></div>
+  <div class="meta-cell"><div class="meta-label">Customer PO</div><div class="meta-val">Verbal (Wayne 2/6/2026 email)</div></div>
+  <div class="meta-cell"><div class="meta-label">Terms</div><div class="meta-val">Due on Receipt</div></div>
+</div>
+
+<table class="items">
+  <thead><tr><th style="width:130px;">P/N</th><th>Product</th><th class="qty">Qty</th></tr></thead>
+  <tbody>
+    <tr><td><span class="sku">NU-BC-2851</span></td><td><div class="pname">FlexPro Armor 2-Man Bucket Cover</div><div class="pdesc">Collapsible 3 Panel Rigid Design. Size: 28" × 51". Hand Made in USA.</div></td><td class="qty">2</td></tr>
+  </tbody>
+</table>
+<div class="thankyou">
+  Thank you, so very much, for the opportunity to work with you!<br>
+  We look forward to continuing to earn your business!
+</div>
+<div class="footer">
+  <img src="../assets/norris-logo-horizontal.png" alt="Norris Utilities">
+  <div class="footer-tag">Integrity above all else &nbsp;&middot;&nbsp; Business Partners, simplified.</div>
+</div>
+</body>
+</html>
