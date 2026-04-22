@@ -1534,6 +1534,29 @@ Commits: agent 6923662, ops 35aca84 (pushed).
 NEXT: Part 5/6 Crosby Dominion 0421 (rename + update S-2026-011).
 
 
+### [LIVING_MEMORY_UPDATE] Session: Legacy ACK + NorrisPalace locks persisted — awaiting Aaron GO — 2026-04-22
+COMPLETED:
+- Legacy ACK received. Observer-only discipline on V5 writes confirmed.
+- NorrisPalace data locks persisted (7 locks): Pickle $1,710 · Crosby Mar 20 6× NU-BC-2834 = $1,590 · R017=Myers/Abshire · BCB=Bucket Cover Bag · P/N never SKU · Chain Electric $8,930.48 IMMUTABLE · schema v5.1.0 additive.
+- Legacy committed to updating Living Memory Section 6 on Tier 2 fire (merge hash + tag v5-session2-merged-2026-04-22 + final test count).
+
+DECISIONS:
+- Multi-agent governance checkpoint clean: Legacy = observer, Claude.ai = coordinator, CC = sole V5 writer awaiting GO, Aaron = sole decision-maker at Gate 4→5 boundary.
+
+CHANGED:
+- NorrisPalace records +7 persistent locks (Aaron-side, not Claude-side).
+- No code changes.
+
+BLOCKED:
+- Aaron GO reply for Gate 5 merge. Paste block staged in session context per Section 9 A5.
+
+NEXT:
+- On GO: ship Gate 5 merge sequence to CC — pytest + grep + SID + Chain Electric regression + iShip re-run → git checkout main → ff-only merge feature/shipping-agent-v5 → tag v5-session2-merged-2026-04-22 → push origin main --tags → portal smoke test → DO NOT pop stash@{1} pre-v5-recovery → final Living Memory draft → Tier 2 Aaron.
+- On CC Tier 2 "V5 merged to main": fire final Living Memory draft, confirm to Legacy for Section 6 update, queue Section 10 Session 3 follow-ups.
+
+FILES:
+- No files created/modified this exchange. NorrisPalace locks are external to Claude write scope.
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
