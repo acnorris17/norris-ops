@@ -2607,3 +2607,18 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - **reg_cost:** PENDING
 - **cb_internal_note:** RFP April 8 → Taulia PO 4501057807 issued April 13 → shipped April 21 (4 business days production). Vendor # 300279384. Material Number 42350802 (Dominion internal material code). Ship-to is Dominion Fleet hub West Columbia SC. Coy's followup thank-you replied April 16. Tracking + RegCost pending parse from Gmail iShip thread 19db0f97c1ffdbe5 + ups_store_receipt same-day receipt.
 - **Persisted:** 2026-04-22T12:22:27Z
+
+### S-2026-017 — AJ Morris / Chain Electric — 2026-04-01 (PENDING)
+
+- **Filename:** SD-2026-AJ-BOSS-0401-Hattiesburg.html (locked)
+- **Customer:** AJ Morris / Chain Electric
+- **PO:** N/A
+- **Ship To:** Mr. AJ Morris, Chain Electric, 1308 W Pine Street, Hattiesburg, MS 39401
+- **Line items:** 5x NU-BC-2851, 5x NU-BC-2834 — subtotal $2850.00
+- **Ship Date:** 2026-04-01
+- **Tracking:** pending parse
+- **Delivered:** pending
+- **fulfillment_source:** vendor_dropship
+- **reg_cost:** PENDING
+- **cb_internal_note:** Boss drop-ship from March 24 verbal order (Aaron screenshot of AJ's text msg_id 362-364). Single ship-to Hattiesburg (Jeremy Brown / Searcy AR was separate stub, archived as superseded in D.9 commit 126e7c0; prior 'two ship-to' note is stale). Three Boss invoices 6775/6776/6777 cover this order (likely split for shipping/manufacturing), attached to Gmail thread 19da1b9c32c5cfdc message 19db07af02e86d75 from Thayne Grove 2026-04-21 14:38 UTC. RegCost + tracking pending Boss PDF extraction (Aaron downloads manually to ~/norris-agent/data/boss_pdfs/ if gog v0.12.0 attachment syntax blocks). Subtotal $2,850.
+- **Persisted:** 2026-04-22T12:23:39Z
