@@ -171,7 +171,7 @@
       "po": "Verbal",
       "products": [
         {
-          "sku": "NU-BC-2834-ARCH",
+          "sku": "NU-BC-2834-F",
           "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
           "qty": 5
         }
@@ -181,7 +181,7 @@
       "internal_pricing": {
         "line_items": [
           {
-            "sku": "NU-BC-2834-ARCH",
+            "sku": "NU-BC-2834-F",
             "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
             "qty": 5,
             "unit_price": 0
@@ -459,7 +459,7 @@
       "po": "Verbal",
       "products": [
         {
-          "sku": "NU-BC-2834-ARCH",
+          "sku": "NU-BC-2834-F",
           "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
           "qty": 5
         }
@@ -469,7 +469,7 @@
       "internal_pricing": {
         "line_items": [
           {
-            "sku": "NU-BC-2834-ARCH",
+            "sku": "NU-BC-2834-F",
             "name": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
             "qty": 5,
             "unit_price": 0
