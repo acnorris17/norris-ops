@@ -29,10 +29,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ══ HEADER ══ */
+    /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033CC 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
       padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
@@ -43,8 +43,8 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
       z-index: 1;
       opacity: 0.6;
     }
@@ -59,11 +59,14 @@
     .nu-header * { position: relative; z-index: 2; }
 
     .nu-phoenix-icon {
-      width: 72px; height: 72px;
-      margin: 0 auto 12px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+      opacity: 0.95;
     }
     .nu-logo-text {
+      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3.2rem;
       color: var(--nu-white);
@@ -73,339 +76,367 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: var(--nu-white);
       letter-spacing: 0.8em;
       text-transform: uppercase;
       margin-bottom: 20px;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-primary);
       font-style: italic;
       font-weight: 300;
       font-size: 1.3rem;
-      color: var(--nu-cyan);
+      color: rgba(255,255,255,0.9);
       letter-spacing: 0.05em;
     }
 
-    /* ══ CHEVRON ══ */
+    /* CHEVRON */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
 
-    /* ══ CONTENT ══ */
+    /* CONTENT */
     .nu-content-area {
       position: relative;
-      background: var(--nu-light-gray);
+      background: var(--nu-white);
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 20%; left: 50%;
-      transform: translate(-50%, 0);
-      width: 65%; height: 600px;
-      background: radial-gradient(circle, rgba(0,51,204,0.035) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%; padding-bottom: 65%;
+      background: radial-gradient(circle, rgba(0,0,255,0.04) 0%, transparent 70%);
       z-index: 0;
       pointer-events: none;
     }
     .nu-content-area > * { position: relative; z-index: 1; }
 
-    .nu-container {
+    .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 40px 80px;
+      padding: 60px 40px;
     }
 
-    .nu-page-header {
+    .page-intro {
       text-align: center;
       margin-bottom: 48px;
     }
-    .nu-eyebrow {
+    .page-label {
       display: inline-block;
+      background: var(--nu-navy);
+      color: var(--nu-cyan);
       font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
-      color: var(--nu-blue);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      background: rgba(6, 208, 255, 0.12);
-      padding: 8px 18px;
-      border-radius: 4px;
+      padding: 6px 18px;
+      border-radius: 2px;
       margin-bottom: 18px;
     }
-    .nu-page-title {
+    .page-title {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 2.4rem;
+      font-size: 2.6rem;
       color: var(--nu-dark-text);
-      margin-bottom: 12px;
-      line-height: 1.2;
+      line-height: 1.15;
+      margin-bottom: 14px;
     }
-    .nu-page-title .accent { color: var(--nu-blue); }
-    .nu-page-sub {
-      font-size: 1.05rem;
-      color: var(--nu-body-text);
+    .page-title span {
+      color: var(--nu-blue);
+    }
+    .page-subtitle {
+      font-size: 1.1rem;
+      color: #555;
       max-width: 720px;
       margin: 0 auto;
     }
 
-    /* ══ SECTION HEADERS ══ */
+    /* SECTION */
     .nu-section-title {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.5rem;
-      color: var(--nu-dark-text);
-      margin: 40px 0 20px;
+      font-size: 1.6rem;
+      margin-bottom: 18px;
       padding-bottom: 10px;
       border-bottom: 3px solid var(--nu-cyan);
     }
-    .nu-section-title span { color: var(--nu-blue); }
-
-    /* ══ TASK META BOX ══ */
-    .nu-meta {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      background: var(--nu-white);
-      border-radius: 8px;
-      padding: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 32px;
+    .nu-section-title .lead {
+      color: var(--nu-blue);
     }
-    .nu-meta-item {
-      border-left: 3px solid var(--nu-cyan);
-      padding-left: 14px;
-    }
-    .nu-meta-label {
-      font-size: 0.7rem;
+    .nu-section-title .rest {
+      color: var(--nu-dark-text);
       font-weight: 700;
-      letter-spacing: 0.12em;
+    }
+
+    /* STATUS STRIP */
+    .status-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .status-card {
+      background: var(--nu-white);
+      border-left: 4px solid var(--nu-blue);
+      padding: 18px 22px;
+      border-radius: 4px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .status-card .label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--nu-blue);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
-    .nu-meta-value {
-      font-size: 0.95rem;
+    .status-card .value {
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--nu-dark-text);
     }
+    .status-card .sub {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 4px;
+    }
 
-    /* ══ EMAIL CARD ══ */
-    .nu-email-card {
+    /* EMAIL BLOCK */
+    .email-block {
       background: var(--nu-white);
-      border-radius: 10px;
-      padding: 0;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
       border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 28px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 32px;
       overflow: hidden;
     }
-    .nu-email-header {
+    .email-header {
       background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
       color: var(--nu-white);
-      padding: 18px 24px;
+      padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
-    }
-    .nu-email-title-row {
-      display: flex;
-      align-items: center;
       gap: 12px;
     }
-    .nu-email-num {
+    .email-header .seq {
       background: var(--nu-cyan);
       color: var(--nu-navy);
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       font-weight: 900;
-      font-size: 0.95rem;
-      flex-shrink: 0;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 2px;
     }
-    .nu-email-title {
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: 0.02em;
+    .email-header .title {
+      font-weight: 900;
+      font-size: 1.1rem;
+      flex: 1;
+      min-width: 200px;
     }
-    .nu-email-tag {
-      font-size: 0.7rem;
+    .email-header .status-tag {
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      background: rgba(6, 208, 255, 0.2);
-      color: var(--nu-cyan);
       padding: 4px 10px;
-      border-radius: 3px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.1);
+      color: var(--nu-cyan);
+      border: 1px solid rgba(6,208,255,0.4);
     }
-    .nu-email-body {
+    .status-tag.priority {
+      background: var(--nu-cyan);
+      color: var(--nu-navy);
+      border-color: var(--nu-cyan);
+    }
+
+    .email-meta {
+      background: var(--nu-light-gray);
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px 24px;
+      font-size: 0.88rem;
+    }
+    .email-meta .meta-row {
+      display: flex;
+      gap: 8px;
+    }
+    .email-meta .meta-row strong {
+      color: var(--nu-blue);
+      font-weight: 700;
+      min-width: 64px;
+      display: inline-block;
+    }
+    .email-meta .meta-row span {
+      color: var(--nu-dark-text);
+    }
+
+    .email-body {
       padding: 24px 28px 28px;
     }
-    .nu-field-row {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 12px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--nu-light-gray);
-      font-size: 0.92rem;
-    }
-    .nu-field-row:last-of-type { border-bottom: none; }
-    .nu-field-label {
+    .email-subject {
+      font-size: 1.05rem;
       font-weight: 700;
-      color: var(--nu-blue);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      padding-top: 2px;
-    }
-    .nu-field-value { color: var(--nu-dark-text); }
-
-    .nu-email-preview {
-      background: var(--nu-light-gray);
-      border-left: 4px solid var(--nu-cyan);
-      padding: 20px 24px;
-      margin-top: 20px;
-      border-radius: 0 6px 6px 0;
-      font-size: 0.95rem;
-      line-height: 1.7;
       color: var(--nu-dark-text);
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed var(--nu-medium-gray);
     }
-    .nu-email-preview p { margin-bottom: 14px; text-indent: 24px; }
-    .nu-email-preview p:first-child { text-indent: 0; font-weight: 700; }
-    .nu-email-preview p:last-child { margin-bottom: 0; }
-    .nu-email-preview .sig {
-      text-indent: 0;
-      margin-top: 18px;
-      font-style: normal;
-    }
-    .nu-email-preview .sig-name {
-      font-weight: 700;
+    .email-subject::before {
+      content: 'Subject: ';
       color: var(--nu-blue);
+      font-weight: 900;
     }
-
-    /* ══ CHECKLIST ══ */
-    .nu-checklist {
-      background: var(--nu-white);
-      border-radius: 8px;
-      padding: 24px 28px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      border: 1px solid var(--nu-medium-gray);
+    .email-body p {
+      margin-left: 18px;
+      margin-bottom: 14px;
+      color: var(--nu-body-text);
+    }
+    .email-body p.no-indent {
+      margin-left: 0;
+    }
+    .email-body ul {
+      margin-left: 36px;
+      margin-bottom: 14px;
       list-style: none;
     }
-    .nu-checklist li {
+    .email-body ul li {
       position: relative;
-      padding: 12px 0 12px 36px;
-      border-bottom: 1px solid var(--nu-light-gray);
-      font-size: 0.95rem;
-      color: var(--nu-dark-text);
+      padding-left: 18px;
+      margin-bottom: 6px;
     }
-    .nu-checklist li:last-child { border-bottom: none; }
-    .nu-checklist li::before {
-      content: '';
+    .email-body ul li::before {
+      content: '•';
       position: absolute;
-      left: 0; top: 15px;
-      width: 20px; height: 20px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      background: var(--nu-white);
-    }
-    .nu-checklist li strong {
+      left: 0;
       color: var(--nu-blue);
-      margin-right: 6px;
+      font-weight: 900;
+    }
+    .email-signature {
+      margin-top: 20px;
+      margin-left: 0;
+      padding-top: 16px;
+      border-top: 1px solid var(--nu-medium-gray);
+      font-size: 0.92rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    .email-signature .name {
+      color: var(--nu-blue);
+      font-weight: 900;
+      font-size: 1rem;
+      margin-bottom: 2px;
     }
 
-    /* ══ CTA BAR ══ */
-    .nu-cta-bar {
-      background: linear-gradient(135deg, var(--nu-blue) 0%, #0066ee 60%, var(--nu-cyan) 100%);
-      color: var(--nu-white);
+    /* CHECKLIST */
+    .checklist {
+      background: var(--nu-light-gray);
+      border-radius: 8px;
       padding: 28px 32px;
-      border-radius: 10px;
-      margin-top: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
+      margin-bottom: 32px;
     }
-    .nu-cta-text {
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-    .nu-cta-sub {
-      font-weight: 400;
-      font-size: 0.9rem;
-      opacity: 0.9;
-      margin-top: 4px;
-    }
-    .nu-btn-primary {
-      display: inline-block;
-      background: var(--nu-white);
-      color: var(--nu-blue);
-      padding: 12px 26px;
-      border: none;
-      border-radius: 4px;
+    .checklist h3 {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      font-size: 1.2rem;
+      color: var(--nu-blue);
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
     }
-    .nu-btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    .checklist ol {
+      margin-left: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+    .checklist ol li {
+      counter-increment: step;
+      padding-left: 44px;
+      margin-bottom: 12px;
+      position: relative;
+      color: var(--nu-dark-text);
+    }
+    .checklist ol li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.85rem;
+    }
+    .checklist ol li strong {
+      color: var(--nu-blue);
     }
 
-    /* ══ FOOTER ══ */
+    /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 40px;
+      padding: 44px 40px;
       text-align: center;
+      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', var(--font-primary);
       font-style: italic;
       font-weight: 300;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
     .nu-footer-contact {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       line-height: 1.8;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
     }
-    .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-contact a:hover {
+      text-decoration: underline;
+    }
 
-    /* ══ RESPONSIVE ══ */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 220px; }
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 40px 20px 60px; }
-      .nu-page-title { font-size: 1.8rem; }
-      .nu-field-row { grid-template-columns: 1fr; gap: 2px; }
-      .nu-email-header { flex-direction: column; align-items: flex-start; }
+      .container { padding: 40px 20px; }
+      .page-title { font-size: 1.9rem; }
+      .email-body { padding: 20px; }
+      .email-body p, .email-body ul { margin-left: 0; }
+      .email-body ul { margin-left: 18px; }
+      .checklist { padding: 22px; }
     }
 
     @media print {
       body { background: var(--nu-white); }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-email-card, .nu-checklist, .nu-meta { box-shadow: none; break-inside: avoid; }
+      .email-block { box-shadow: none; page-break-inside: avoid; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
     }
   </style>
@@ -416,7 +447,7 @@
   <header class="nu-header">
     <div class="nu-phoenix-icon">
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
         <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
       </svg>
     </div>
@@ -428,150 +459,163 @@
   <!-- CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#F5F5F7"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
   <!-- MAIN CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-container">
+    <div class="container">
 
-      <div class="nu-page-header">
-        <span class="nu-eyebrow">Action Item · Marketing</span>
-        <h1 class="nu-page-title">MK <span class="accent">Catch-Up Emails</span> + Mel Introduction</h1>
-        <p class="nu-page-sub">Re-open the communication channel with MK Smith after the recent quiet stretch, and introduce Mel directly via email so MK and Mel can begin coordinating on open marketing items.</p>
+      <div class="page-intro">
+        <div class="page-label">Action Item · reMarkable</div>
+        <h1 class="page-title">MK <span>Catch-Up</span> Emails &amp; <span>Mel</span> Introduction</h1>
+        <p class="page-subtitle">
+          Re-engagement notes for MK Smith (marketing contractor) and a warm introduction
+          connecting MK with Mel — drafted in Aaron's voice and ready to send.
+        </p>
       </div>
 
-      <!-- TASK META -->
-      <div class="nu-meta">
-        <div class="nu-meta-item">
-          <div class="nu-meta-label">Action Source</div>
-          <div class="nu-meta-value">reMarkable Notebook</div>
+      <!-- STATUS STRIP -->
+      <div class="status-strip">
+        <div class="status-card">
+          <div class="label">Owner</div>
+          <div class="value">Aaron C. Norris</div>
+          <div class="sub">Founder &amp; CEO</div>
         </div>
-        <div class="nu-meta-item">
-          <div class="nu-meta-label">Captured</div>
-          <div class="nu-meta-value">2026-04-21</div>
+        <div class="status-card">
+          <div class="label">Date Captured</div>
+          <div class="value">April 22, 2026</div>
+          <div class="sub">reMarkable action item</div>
         </div>
-        <div class="nu-meta-item">
-          <div class="nu-meta-label">Owner</div>
-          <div class="nu-meta-value">Aaron C. Norris</div>
+        <div class="status-card">
+          <div class="label">Emails in Batch</div>
+          <div class="value">2 Drafts</div>
+          <div class="sub">MK catch-up + Mel intro</div>
         </div>
-        <div class="nu-meta-item">
-          <div class="nu-meta-label">Status</div>
-          <div class="nu-meta-value" style="color: var(--nu-blue);">Open — Send Today</div>
-        </div>
-      </div>
-
-      <!-- SECTION: EMAIL 1 -->
-      <h2 class="nu-section-title"><span>Email 1 —</span> MK Catch-Up</h2>
-
-      <div class="nu-email-card">
-        <div class="nu-email-header">
-          <div class="nu-email-title-row">
-            <span class="nu-email-num">1</span>
-            <span class="nu-email-title">Catch-Up with MK Smith</span>
-          </div>
-          <span class="nu-email-tag">Direct Send</span>
-        </div>
-        <div class="nu-email-body">
-          <div class="nu-field-row">
-            <div class="nu-field-label">To</div>
-            <div class="nu-field-value">MK Smith (Marketing Contractor)</div>
-          </div>
-          <div class="nu-field-row">
-            <div class="nu-field-label">From</div>
-            <div class="nu-field-value">acnorris@norrisutilities.com</div>
-          </div>
-          <div class="nu-field-row">
-            <div class="nu-field-label">Subject</div>
-            <div class="nu-field-value">Catching up — where we stand and what's next</div>
-          </div>
-          <div class="nu-field-row">
-            <div class="nu-field-label">Purpose</div>
-            <div class="nu-field-value">Reconnect, share recent wins, align on the next 30 days</div>
-          </div>
-
-          <div class="nu-email-preview">
-            <p>MK —</p>
-            <p>It's been a minute, and I wanted to loop you back in on where Norris Utilities® is at and where I need your help next.</p>
-            <p>Since we last connected, the Line Card has gone live, FlexPro Armor has moved through several reorders, and the Skylift PO from January is progressing. The ops portal at ops.norrisutilities.com is running daily and our inbound email volume has picked up meaningfully.</p>
-            <p>A few items I'd like your eyes on:</p>
-            <p>• Social content cadence — we have a real backlog of field photos now worth deploying<br>
-               • Website updates — the FlexPro Armor product pages need a refresh with the updated SKU matrix<br>
-               • A proper case study — Dominion Energy (Coy Crosby) is ready to be written up</p>
-            <p>I'd like to get on a 20-minute call this week to walk through priorities. I'm also going to introduce you to Mel in a separate email — Mel is going to be helping on the coordination side, and I want you two connected directly so nothing has to route through me.</p>
-            <p>Let me know what works on your end.</p>
-            <p class="sig">Sincerely,<br><span class="sig-name">Aaron C. Norris</span></p>
-          </div>
+        <div class="status-card">
+          <div class="label">Status</div>
+          <div class="value">Ready to Send</div>
+          <div class="sub">Awaiting Aaron review</div>
         </div>
       </div>
 
-      <!-- SECTION: EMAIL 2 -->
-      <h2 class="nu-section-title"><span>Email 2 —</span> Mel Introduction</h2>
-
-      <div class="nu-email-card">
-        <div class="nu-email-header">
-          <div class="nu-email-title-row">
-            <span class="nu-email-num">2</span>
-            <span class="nu-email-title">Introducing Mel to MK</span>
-          </div>
-          <span class="nu-email-tag">CC Both</span>
+      <!-- EMAIL 1 — MK CATCH-UP -->
+      <div class="email-block">
+        <div class="email-header">
+          <span class="seq">EMAIL 1 OF 2</span>
+          <span class="title">MK Smith — Catch-Up &amp; Reset</span>
+          <span class="status-tag">Draft</span>
         </div>
-        <div class="nu-email-body">
-          <div class="nu-field-row">
-            <div class="nu-field-label">To</div>
-            <div class="nu-field-value">MK Smith</div>
-          </div>
-          <div class="nu-field-row">
-            <div class="nu-field-label">CC</div>
-            <div class="nu-field-value">Mel</div>
-          </div>
-          <div class="nu-field-row">
-            <div class="nu-field-label">From</div>
-            <div class="nu-field-value">acnorris@norrisutilities.com</div>
-          </div>
-          <div class="nu-field-row">
-            <div class="nu-field-label">Subject</div>
-            <div class="nu-field-value">Intro — MK Smith ↔ Mel</div>
-          </div>
-          <div class="nu-field-row">
-            <div class="nu-field-label">Purpose</div>
-            <div class="nu-field-value">Direct introduction so MK and Mel can coordinate without routing through Aaron</div>
-          </div>
+        <div class="email-meta">
+          <div class="meta-row"><strong>To:</strong> <span>MK Smith (Marketing Contractor)</span></div>
+          <div class="meta-row"><strong>From:</strong> <span>Aaron C. Norris</span></div>
+          <div class="meta-row"><strong>CC:</strong> <span>—</span></div>
+          <div class="meta-row"><strong>Priority:</strong> <span>Normal</span></div>
+        </div>
+        <div class="email-body">
+          <div class="email-subject">Catching up — quick reset on marketing priorities</div>
 
-          <div class="nu-email-preview">
-            <p>MK, Mel —</p>
-            <p>Quick introduction so y'all can work together directly going forward.</p>
-            <p>MK Smith has been our marketing contractor and has handled brand work, the Line Card design language, and product page collateral for Norris Utilities®. MK knows the brand rules and the voice inside and out.</p>
-            <p>Mel is stepping in to help coordinate the moving pieces on our marketing and communications work — cadence, deadlines, and keeping initiatives from getting stuck on my desk.</p>
-            <p>The goal: y'all two connected directly so decisions on timing, deliverables, and priorities don't have to wait on me. I'll stay in the loop on the big calls, but I don't want to be the bottleneck for execution.</p>
-            <p>Mel — MK will share the current backlog and what's shipped. MK — Mel will reach out this week to lock in a recurring coordination slot.</p>
-            <p>Appreciate both of you. Looking forward to seeing this team earn the business.</p>
-            <p class="sig">Sincerely,<br><span class="sig-name">Aaron C. Norris</span></p>
+          <p class="no-indent">MK —</p>
+
+          <p>It has been longer than it should have been since we traded notes, and that is on me. Between the March shipments, the Skylift order, and the Samson Rope restock, the last few weeks have been heads-down. I wanted to get you caught up and re-aligned on what is next.</p>
+
+          <p>Here is where things stand on our side:</p>
+
+          <ul>
+            <li>FlexPro Armor volume is steady — NU-BC-2851 and NU-BC-2834 continue to be the two SKUs pulling the most demand.</li>
+            <li>Skylift partnership is active with a six-unit PO in motion.</li>
+            <li>Samson Rope distributor relationship is producing consistent repeat orders.</li>
+            <li>Bay Shore Systems territory work is warming up in the Southeast.</li>
+          </ul>
+
+          <p>What I need from you going forward:</p>
+
+          <ul>
+            <li>A refreshed content calendar through the end of Q2 — FlexPro Armor focused, Legacy of Commitment® brand voice.</li>
+            <li>Updated one-page product sheets reflecting current pricing and the four active SKUs.</li>
+            <li>LinkedIn presence cadence — two posts per week minimum, authored in my voice, sent to me for approval.</li>
+            <li>A short debrief on anything you tested in the last 60 days and what the numbers told us.</li>
+          </ul>
+
+          <p>I would like to get on a 30-minute call this week to walk through all of it and make sure we are pulling in the same direction. Send me two or three windows that work on your end and I will pick one.</p>
+
+          <p>Also — I am going to introduce you to Mel in a separate thread. Mel is someone I think you should know. More on that shortly.</p>
+
+          <p>Good to be back in touch. Looking forward to the reset.</p>
+
+          <p class="no-indent">Sincerely,</p>
+
+          <div class="email-signature">
+            <div class="name">Aaron C. Norris</div>
+            Founder &amp; CEO<br>
+            Norris Utilities, LLC<br>
+            Cell: 205-500-1343<br>
+            acnorris@norrisutilities.com
           </div>
         </div>
       </div>
 
-      <!-- EXECUTION CHECKLIST -->
-      <h2 class="nu-section-title"><span>Execution</span> Checklist</h2>
-      <ul class="nu-checklist">
-        <li><strong>1.</strong> Confirm MK Smith's current email address on file before sending.</li>
-        <li><strong>2.</strong> Confirm Mel's email address and preferred name/spelling for the intro line.</li>
-        <li><strong>3.</strong> Send Email 1 (MK catch-up) first, wait for read/reply, then send Email 2 (intro).</li>
-        <li><strong>4.</strong> Use Aaron's voice guide: em-dash greeting, indented paragraphs, bullets use •, close with "Sincerely," then "Aaron C. Norris".</li>
-        <li><strong>5.</strong> Log both sends in the master tracker under "Marketing — MK re-engagement".</li>
-        <li><strong>6.</strong> Set a 5-day follow-up reminder if MK has not replied to Email 1.</li>
-        <li><strong>7.</strong> Once Mel and MK confirm a recurring coordination slot, add it to the shared calendar.</li>
-      </ul>
-
-      <!-- CTA -->
-      <div class="nu-cta-bar">
-        <div>
-          <div class="nu-cta-text">Ready to send today.</div>
-          <div class="nu-cta-sub">Both drafts are prepared. Verify email addresses, then send in order.</div>
+      <!-- EMAIL 2 — MEL INTRODUCTION -->
+      <div class="email-block">
+        <div class="email-header">
+          <span class="seq">EMAIL 2 OF 2</span>
+          <span class="title">Intro — MK Smith &lt;&gt; Mel</span>
+          <span class="status-tag priority">Send Second</span>
         </div>
-        <a href="mailto:acnorris@norrisutilities.com?subject=MK%20%2B%20Mel%20emails%20sent" class="nu-btn-primary">Mark as Sent</a>
+        <div class="email-meta">
+          <div class="meta-row"><strong>To:</strong> <span>Mel</span></div>
+          <div class="meta-row"><strong>CC:</strong> <span>MK Smith</span></div>
+          <div class="meta-row"><strong>From:</strong> <span>Aaron C. Norris</span></div>
+          <div class="meta-row"><strong>Priority:</strong> <span>Normal</span></div>
+        </div>
+        <div class="email-body">
+          <div class="email-subject">Intro — MK Smith, our marketing lead at Norris Utilities®</div>
+
+          <p class="no-indent">Mel —</p>
+
+          <p>I want to put you in direct contact with MK Smith, who handles marketing for Norris Utilities®. I have been meaning to make this introduction for a while, and after catching back up with MK today, the timing is right.</p>
+
+          <p>A quick frame on each of you so the conversation starts from the same place:</p>
+
+          <ul>
+            <li><strong>MK Smith</strong> — Marketing contractor for Norris Utilities®. Runs our content, brand voice, product sheets, and LinkedIn presence. Knows the FlexPro Armor line, the Samson Rope side, and the Legacy of Commitment® positioning.</li>
+            <li><strong>Mel</strong> — Someone whose judgment I trust and whose perspective I think MK will benefit from. I will let you introduce yourself in your own words.</li>
+          </ul>
+
+          <p>Why I am connecting the two of you: I think there is natural overlap in how you both think about storytelling, brand, and getting a small company's voice heard in a noisy market. I am not asking for anything specific — just opening the line so you can trade notes if it is useful.</p>
+
+          <p>MK, Mel is copied here. Take it from there whenever works.</p>
+
+          <p>Good to have you both in the same thread.</p>
+
+          <p class="no-indent">Sincerely,</p>
+
+          <div class="email-signature">
+            <div class="name">Aaron C. Norris</div>
+            Founder &amp; CEO<br>
+            Norris Utilities, LLC<br>
+            Cell: 205-500-1343<br>
+            acnorris@norrisutilities.com
+          </div>
+        </div>
       </div>
+
+      <!-- SEND CHECKLIST -->
+      <div class="checklist">
+        <h3>Send Checklist — Before Hitting "Send"</h3>
+        <ol>
+          <li><strong>Confirm Mel's full name and email address</strong> before sending Email 2. Placeholder "Mel" must be replaced with the real address.</li>
+          <li><strong>Send Email 1 (MK catch-up) first.</strong> Let MK see the reset message before the third-party introduction arrives.</li>
+          <li><strong>Wait 10–15 minutes</strong>, then send Email 2 (MK &lt;&gt; Mel intro) so MK is not surprised by a CC.</li>
+          <li><strong>Calendar follow-up:</strong> if MK does not propose call windows within 48 hours, nudge once.</li>
+          <li><strong>Log both emails</strong> in the master tracker once sent — Sent date + subject line captured.</li>
+        </ol>
+      </div>
+
+      <h2 class="nu-section-title"><span class="lead">Action</span> <span class="rest">Summary</span></h2>
+      <p style="margin-left: 18px; margin-bottom: 12px;">Two emails drafted and ready for Aaron's review. Email 1 re-engages MK Smith on marketing priorities through end of Q2. Email 2 warmly introduces MK to Mel, with Mel as the primary recipient and MK on CC.</p>
+      <p style="margin-left: 18px;">Both drafts follow Aaron's voice guide — em-dash greeting, indented paragraphs, bullets with •, "Sincerely," close, full signature block. No filler language, no emojis, no apologies.</p>
 
     </div>
   </main>
