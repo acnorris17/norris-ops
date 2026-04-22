@@ -1634,6 +1634,139 @@ FILES:
 - output/cb_invoice_packets_2026-04-22.html (regenerated)
 - ops shipments.html (regenerated, pushed live)
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S3 master handoff written + 4th file confirmed — 2026-04-22
+COMPLETED:
+- Session 2 → Session 3 Master Handoff written. File at /mnt/user-data/outputs/SA_V5_SESSION3_MASTER_HANDOFF_2026-04-22.md.
+- Covers: identity, Gate 4 commit 878002f, FIX 9 4bc4f58, FIX 10 8050899, 8 FIX 11 targets T01-T08, Gate 5 merge spec, post-merge Q1-Q11 roadmap, all IMMUTABLE values, FlexPro P/N master, brand rules, vendor contacts, infrastructure, Living Memory protocol.
+- 4th file confirmed: qb_sent_invoices_2026-04-22.csv (Drive ID 1bK1jQpU8rtjOOmvuAaGhYpwObkWEUtL9, 42 rows Gmail quickbooks@notification.intuit.com sent notifications Jan 22 - Apr 7 2026) in Reports_2026-04-22 folder.
+
+DECISIONS:
+- Answer locked for Aaron's opening question in Session 3: Legacy's behavior on the 4th file task was correct. Did not mess anything up. Executed cleanly to Drive with correct naming.
+- Session 3 first-turn actions defined: (1) re-run correlation with 4 files, (2) check CC FIX 11 status, (3) create Living Memory draft, (4) report status concisely.
+- Zero "what first" questions permitted at session start.
+
+CHANGED:
+- Handoff certified YES-complete with 28-item checklist.
+- Added the 4th file into the correlation scope; Session 3 must use it.
+
+BLOCKED:
+- None. Waiting on CC FIX 11 result + Aaron's Session 3 start.
+
+NEXT:
+- Aaron starts new session, pastes master handoff.
+- Session 3 executes Action 1-4 without preamble.
+- If CC FIX 11 returns while Aaron away, Session 3 processes result on arrival.
+
+FILES:
+- /mnt/user-data/outputs/SA_V5_SESSION3_MASTER_HANDOFF_2026-04-22.md
+- Drive folder Reports_2026-04-22 now has 4 files (all IDs in handoff).
+
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S3 resumed — 4-file correlation — 2026-04-22
+COMPLETED:
+- SA V5 Session 3 opened on M5 Claude.ai with Master Handoff Prompt
+- Pulled all 4 correlation files from Drive folder 1PgfH9CjYtw0E5Icvoxh02-Q0qstepqfl:
+  • sd_enumeration_2026-04-22.csv (22 SDs) — ID 18c2ekXDiLxBOhtLNfPpK-UyZlxq3dVOg
+  • tracking_universe_2026-04-22.csv (314 rows) — ID 10hArPVF-Rz--MV-YGobi6chIngpUR5tF
+  • qb_invoice_extract_2026-04-22.csv (1,262 rows) — ID 1mAu8NKpit81AzxO1WfuXtrVJVxM9iCQo
+  • qb_sent_invoices_2026-04-22.csv (42 rows, 25 in 2026) — ID 1bK1jQpU8rtjOOmvuAaGhYpwObkWEUtL9 (Legacy's new contribution)
+- Re-ran the correlation across all 4 files with T01–T08 against both QB-creation (file 3) and QB-sent (file 4)
+- Identified one material finding that the 4th file surfaces
+
+DECISIONS:
+- Legacy's invoice-gathering task executed cleanly. Aaron's worry about Legacy "messing things up" is unfounded — Legacy produced the correct file, named correctly, in the correct Drive folder. Do not change how Aaron uses Legacy on this kind of fetch task.
+- The 4th file (qb_sent_invoices) is operationally valuable: it distinguishes QB-created invoices from QB-sent invoices. This catches the silent-draft failure mode (invoice exists in QB but never pushed to customer).
+
+CHANGED:
+- T08 (LineTec, 2/27/2026, tracking 1Z2W49000326864095, $59.58 reg → $66 Ben's) correlation status upgraded: QB contains invoice 1501 (02/27/2026 LineTec Services LLC, $275 product, NO tracking linked, NOT SENT per file 4). Date and customer match exactly. FIX 11 should LINK tracking + shipping + 4% CC fee to existing invoice 1501 rather than create a new SD + new invoice. Saves duplicate invoicing.
+- T05 (Henkels & McCoy, 2/11/2026) correlation status: QB has 3 Henkels invoices (1474, 1493, 1494) — NONE are SENT per file 4, NONE have matching tracking, shipping-line amounts don't match T05's $46. T05 remains truly uninvoiced. FIX 11 should build fresh SD.
+- T01/T02/T03/T04/T06/T07: no QB creation match, no sent-invoice match. All confirmed truly uninvoiced. FIX 11 builds fresh SDs per spec.
+
+BLOCKED:
+- Waiting on CC's FIX 11 completion report (last-known state: queued to CC at end of Session 2)
+- 1.5-Man BC stock-out since 2026-03-20 continues (Boss reorder email sent)
+
+NEXT:
+1. When Aaron pastes CC's FIX 11 output into this session: verify resolution table against correlation above, flag any deltas, produce Gate 5 merge paste-block if green
+2. Highlight the T08→invoice 1501 link to CC — FIX 11 Step 3 ("Cross-check existing SDs") must also cross-check existing QB invoices, not just existing SDs, to avoid duplicates. This is a new protocol item worth preserving.
+3. Update source priority hierarchy note: file 4 (qb_sent_invoices) belongs just below file 3 (qb_invoice_extract) in reconciliation checks — sent confirms the customer actually received the invoice; QB-only means silent draft that still needs action.
+
+FILES:
+- /home/claude/recon/qb_sent_invoices.csv (M5 working copy, 25 rows 2026)
+- /home/claude/recon/qb_raw_from_drive.txt (M5 raw QB extract scratch)
+- No M1 files written this turn (M5 coordinator session only)
+- No commits (feature/shipping-agent-v5 untouched; sole writer remains CC)
+- Drive folder 1PgfH9CjYtw0E5Icvoxh02-Q0qstepqfl unchanged (read-only consumption)
+
+KEY QUOTE / LESSON:
+Legacy's 4th file caught a silent-draft failure mode: QB invoice 1501 was created 2/27/2026 for the right customer but never linked to tracking and never sent. Without the qb_sent_invoices data, the original 3-file correlation would have either (a) missed the link entirely and created a duplicate SD/invoice or (b) treated 1501 as already-handled. The 4th file is the difference between "probably invoiced" and "definitely sent." Worth preserving as a future data-reconciliation discipline: whenever QB shows an invoice exists, confirm it also SENT before treating the tracking as handled.
+
+CONTEXT THAT MUST PERSIST:
+- Aaron's concern about sharing tasks with Legacy: the answer is NO, Legacy did not mess things up. Continue this pattern.
+- FIX 11 has one new edge to handle beyond spec: T08 should LINK to existing QB invoice 1501, not create a new invoice.
+- New protocol item: SA V5 Gate 5+ correlation flow should cross-check existing QB invoices (not just existing SDs) before minting new SDs for recovered trackings, to prevent duplicate invoicing.
+
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S3 — FIX 11 Step 2 patch committed — 2026-04-22
+COMPLETED:
+- FIX 11 Step 2 patch committed on feature/shipping-agent-v5, commit 5df0a60
+- QB invoice cross-check layer added per M5 correlation directives
+- Decision matrix finalized for all 8 targets:
+  T01 TUF 1/5        MINT NEW  S-2026-019
+  T02 AEP Riley 1/20 MINT NEW  S-2026-020
+  T03 AEP Riley 1/20 MINT NEW  S-2026-021
+  T04 AEP 1/21       MINT NEW  S-2026-022
+  T05 Henkels 2/11   MINT NEW  S-2026-023
+  T06 Primoris 2/11  MINT NEW  S-2026-024
+  T07 Primoris/Fox 2/24 MINT NEW  S-2026-025
+  T08 LineTec 2/27   LINK to QB 1501  S-2026-026 (internal audit only)
+- T08 delta flagged: $288.75 QB 1501 vs $275 expected, +$13.75 unexplained; cb_internal_note asks Aaron to verify 1501 line items before CB push
+- Superior Pipeline filtered out of match pool per Aaron's explicit directive
+- Tests: 162/162 green. Chain Electric $8,930.48 canary, Pickle canary, FIX 9/10 canaries all pass
+
+DECISIONS:
+- Live QB transaction export (2026-04-22 4:46 PM CT) adopted as authoritative source for QB cross-check, supersedes qb_invoice_extract file
+- New protocol rule added to FIX 11 Step 2 logic: cross-check EXISTING QB INVOICES (not just existing SDs) before minting new invoice, to prevent duplicates. This is now permanent SA V5 behavior.
+- T08 is a LINK operation (not MINT). New S-2026-026 SD is for internal audit + portal visibility only, not customer-facing invoice mint.
+
+CHANGED:
+- FIX 11 Step 2 logic now includes live-QB cross-reference layer before minting
+- Source priority hierarchy extended: live QB transaction export sits above previous extract files
+
+BLOCKED:
+- CC still blocked on Aaron's Telegram reply to @NorrisLegacyBot with per-tracking P/N + qty + PO/Truck#/DEPT# for T01-T08, plus ship-to clarification for Primoris T06/T07 and split-vs-joined clarification for T02/T03
+- Gate 5 merge blocked until FIX 11 returns ready
+
+SEPARATE DISCOVERY — CB SILENT-DRAFT BACKLOG:
+Live QB export revealed 6 overdue invoices that were never sent to customers:
+  1501 02/27 LineTec Services LLC    $288.75
+  1503 03/03 LineTec - Steve Guthrie  $550.00
+  1504 03/03 LineTec Services LLC    $288.75
+  1505 03/03 LineTec Services LLC    $299.75
+  1506 03/03 EPB Chattanooga       $1,500.00
+  1507 03/11 Sheffield Utilities     $757.90
+Total silent A/R: $3,685.15. CB task — push these invoices. Not SA-related. Not blocking SA V5.
+
+NEXT:
+1. Aaron replies in Telegram to @NorrisLegacyBot with P/N + qty + PO for 8 trackings
+2. CC parses reply into data/order_resolutions_2026.json
+3. CC mints S-2026-019..025 (T01-T07), builds LINK SD S-2026-026 for T08
+4. CC regenerates output/cb_invoice_packets_2026-04-22.html with new entries
+5. CC runs regression tests
+6. CC fires Tier 2 Gate 5 readiness ping
+7. M5 verifies, produces Gate 5 merge paste-block
+
+FILES:
+- Commit 5df0a60 on feature/shipping-agent-v5 (Step 2 patch)
+- data/qb_invoice_link_candidates_2026.json (new)
+- No M5 file writes this turn
+
+KEY QUOTE / LESSON:
+"Cross-check existing SDs" was insufficient — needed "cross-check existing QB invoices" too. The live QB export caught what the 3-file correlation would have missed and the 4-file correlation flagged but didn't fully structure. Permanent protocol addition.
+
+CONTEXT THAT MUST PERSIST:
+- T08 = LINK to invoice 1501, $13.75 amount discrepancy needs Aaron-verification of QB line items
+- 6 silent-draft invoices backlog ($3,685.15) is a CB task separate from SA V5
+- Sole remaining SA V5 blocker is Aaron's Telegram reply with per-tracking product data
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
