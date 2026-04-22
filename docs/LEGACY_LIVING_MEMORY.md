@@ -1516,6 +1516,14 @@ Clearing CC's A/B/C Tier 1 with corrected paste block now.
 ## KEY LESSON
 My prior canonical block assumed Thornhill=S-2026-013 without verifying against the Gate 1.5 backfill mapping. Both [LIVING_MEMORY_UPDATE] drafts were unambiguous: S-2026-013/014/015 = Benz/Pickle/Myers (in that order). CC caught the contradiction because part 1/6 already used S-2026-013 for Benz. The A/B/C question was CC correctly halting on a data conflict, not asking a real question.
 
+### [LIVING_MEMORY_UPDATE] SA V5 S2 — D.8 part 2/6 Thornhill DEPT468R — 2026-04-22T12:20Z
+[LIVING_MEMORY_UPDATE] SA V5 S2 — D.8 part 2/6 Thornhill DEPT468R — 2026-04-22T12:20Z
+
+S-2026-016 minted for SD-2026-THORNHILL-DEPT468R-0320. LineTec/Thornhill, PO DEPT468R, ship 2026-03-20, tracking 1Z2W49000395021357 delivered 2026-03-23. 1x NU-BC-2851 @ $305. reg_cost NEEDS_REVIEW (silent-drop). All 5 rules PASS. 4-source persisted. Commits: agent 364b573, ops 6240e90 (pushed live).
+
+NEXT: Part 3/6 Pickle Florence → reuse S-2026-014.
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -2544,3 +2552,18 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - **reg_cost:** NEEDS_REVIEW
 - **cb_internal_note:** March 20 batch shipment; PO DEPT468R received Mar 17. RegCost pending recovery from silent-drop window (UPS Store paper receipt or Aaron-assist). Apply Ben's Formula x 1.10 once captured.
 - **Persisted:** 2026-04-22T12:19:54Z
+
+### S-2026-014 — Darrell Pickle / Florence Electricity Department — 2026-03-20 (✅ SHIPPED)
+
+- **Filename:** SD-2026-PICKLE-FLORENCE-0320.html (locked)
+- **Customer:** Darrell Pickle / Florence Electricity Department
+- **PO:** STOCK
+- **Ship To:** Darrell Pickle, Florence Electricity Department, 611 East Reeder St, Florence, AL 35630
+- **Line items:** 1x NU-BC-2834-C, 3x NU-BC-2834-F, 2x NU-BC-2834 — subtotal $1750.00
+- **Ship Date:** 2026-03-20
+- **Tracking:** 1Z2W49000328351797
+- **Delivered:** 2026-03-23
+- **fulfillment_source:** nu_stock
+- **reg_cost:** NEEDS_REVIEW
+- **cb_internal_note:** Darrell's Mar 20 09:17 CT Telegram correction superseded original SD parse. Definitive: 1 Combo + 3 ARCH + 2 Standard 1.5-Man = 6 units, subtotal $1,750. Note: Darrell separately ordered 6 Skylift bucket trucks crediting Aaron's input — see Skylift lead followup_queue.
+- **Persisted:** 2026-04-22T12:21:06Z
