@@ -1366,6 +1366,38 @@ CONTEXT THAT MUST PERSIST:
 - 3-month silent-drop window (2026-01-22 to 2026-04-21) is permanent Gmail data loss. Shipping Log V8 sheet is the one Gmail-independent source that spans it.
 
 
+### [LIVING_MEMORY_UPDATE] SA V5 S2 — D.8 Benz (part 1/6) — 2026-04-22T00:50Z
+[LIVING_MEMORY_UPDATE] SA V5 S2 — D.8 part 1/6 Benz — 2026-04-22T00:50Z
+
+## COMPLETED
+- SD-2026-BENZ-SWEPCO-0320.html rendered at ~/norris-ops/shipping-docs/ from Aaron's D.8 supplemental canonical data.
+- 4-source persistence: customer_db.json (verified), data/sa_learnings.json (sd_canonical_records[] appended), docs/LEGACY_LIVING_MEMORY.md (CANONICAL SD RECORDS — Mar 20 Batch section added), SD HTML itself (canonical metadata comment embedded in <head>).
+- lib/sd_render.py (renderer with NO-PRICES guardrail).
+- Commits: agent 8bc56aa, ops 295bd97 (pushed + live at ops.norrisutilities.com).
+
+## DECISIONS
+- Benz uses ship-to from customer_db.json (101 W Township Street, Fayetteville AR 72703).
+- cb_internal_note = "Shipped Mar 20, delivered Mar 24. NOT YET INVOICED. QB invoice pending. Reference Truck #860377 in invoice memo." (per Aaron supplemental).
+- Customer charge $94 (historical override) vs. Ben's Formula computed $59 — historical wins per Aaron rule; flagged in canonical.
+- Other 5 SDs (Thornhill DEPT468R, Pickle, Myers, Crosby Apr 8, AJ-BOSS): TIER 1 fired for canonical data rather than rendering with placeholders (per 'NO PLACEHOLDERS' rule).
+
+## CHANGED
+- lib/sd_render.py (new, renderer)
+- data/sa_learnings.json (canonical record appended)
+- ~/norris-ops/shipping-docs/SD-2026-BENZ-SWEPCO-0320.html (new)
+- ~/norris-ops/docs/LEGACY_LIVING_MEMORY.md (appended)
+
+## BLOCKED
+5 of 6 D.8 SDs await Aaron canonical data confirmation.
+
+## NEXT
+After Aaron replies with per-SD canonical: render remaining 5 + 4-source persist each. Then D.1 (run_pipeline orchestrator), D.11 (living memory auto-wire), P/N migration, Gate 3.
+
+## FILES
+- Agent commits: fbd4195 (D.7 Rule v1), ..., de3d096 (Gate 2), 5bda047 (D.6b), 8bc56aa (D.8 Benz)
+- Ops commit: 295bd97 (D.8 Benz — pushed)
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
