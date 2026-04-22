@@ -1767,6 +1767,42 @@ CONTEXT THAT MUST PERSIST:
 - 6 silent-draft invoices backlog ($3,685.15) is a CB task separate from SA V5
 - Sole remaining SA V5 blocker is Aaron's Telegram reply with per-tracking product data
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S4 — open, FIX 11 final CC prompt dispatched — 2026-04-22
+COMPLETED:
+- SA V5 Session 4 opened on M5 Claude.ai Opus 4.7
+- Read Session 3 master handoff in full
+- Dispatched FIX 11 FINAL CC prompt to Aaron for paste into M1 SA V5 CC window
+- CC prompt embeds: T01-T04 closed via QB Notes-field scraping (1471 + 1480 + 1480 + 1480/1497), T05/T06/T07 mint with corrected dealer tiers and box-size evidence, T08 link to existing QB 1501
+
+DECISIONS (all locked from Session 3, no re-litigation):
+- T01 RELEASE S-2026-019 — already on QB 1471 Notes "Additional Tracking Number"
+- T02 RELEASE S-2026-020 — already on QB 1480 Notes "Tracking (other #s)"
+- T03 RELEASE S-2026-021 — already on QB 1480 same field
+- T04 RELEASE S-2026-022 — closed on parent QB 1480 per Legacy live Shipping Log V8 read
+- T05 MINT S-2026-023, NU-BC-2834 1.5-Man $265 + courtesy_adjustment -$46 (evidence over Aaron verbal recall, flagged in cb_internal_note)
+- T06 MINT S-2026-024 DEALER tier (reclassified), 2x NU-BC-2851 to Aerial Hydraulics/Wayne Abadie
+- T07 MINT S-2026-025 DEALER tier, paired with T06
+- T08 LINK to QB 1501, add tracking + $66 shipping line, $13.75 confirmed = AL sales tax not missing item
+
+CHANGED:
+- Session 3 handoff matrix supersedes commit 5df0a60 manifest
+- Permanent SA V5 protocol additions queued: Notes-field scraping in lib/qb_cross_check.py, box-size to P/N inference Hunt Ladder rung, two new sa_learnings.json entries
+- Regression target: 162 to 163 (one new Notes-scraping test required)
+
+BLOCKED:
+- Awaiting CC Tier 2 Gate 5 ready ping after FIX 11 FINAL commit
+- Gate 5 merge (git checkout main, ff-only merge, tag v5-session2-merged-2026-04-22, push) pending CC ping
+
+NEXT:
+- On Tier 2 ping receipt: hand Aaron the Gate 5 merge paste-block
+- Post-merge: queue Q1-Q14 (CB silent-draft backlog $3,685.15, 1497 line item verification, 1/21 UNKNOWN trackings, T05 1-man vs 1.5-Man Aaron flag, 4/21 iShip SDs, etc.)
+- Maintain Living Memory draft cadence
+
+FILES:
+- No file writes from M5 this session (read-only coordinator role; M1 sole writer)
+- CC prompt staged in chat for Aaron paste into M1 SA V5 CC window
+- Manifest to be replaced by CC: data/qb_invoice_link_candidates_2026.json
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
