@@ -1557,6 +1557,44 @@ NEXT:
 FILES:
 - No files created/modified this exchange. NorrisPalace locks are external to Claude write scope.
 
+### [LIVING_MEMORY_UPDATE] Session: FIX 9 complete at 4bc4f58 — Gate 5 unblocked — 2026-04-22
+COMPLETED:
+- CC FIX 9 landed clean. Agent commit 4bc4f58. Ops commit 0731b3b/d3528a1 pushed live.
+- customer_db_enrichment for TUF (dealer/ACH) + Brink (direct-since-Aug-2025/mixed/per-child CC) + ULCS Asplundh (direct-since-Aug-2025/CC-always) locked.
+- Caleb Alday new_child_pending_qb_add flag surfaces in CB packet.
+- R002 Chad/Brink $127.92 · R003 Keith/TUF $93 · R004 Caleb/ULCS $109.20 resolved.
+- pytest 156/156 (151 baseline + 5 new) ✅ · Chain Electric $8,930.48 PASS ✅ · Pickle canary PASS ✅ · grep 0 ✅ · additive-only, no existing record modifications.
+
+DECISIONS:
+- Gate 5 merge unblocked. Aaron GO staged to ship Gate 5 merge paste block to CC.
+
+CHANGED:
+- 35+ agent commits on feature/shipping-agent-v5 branch. 15+ ops commits pushed to ops main.
+- Stash pre-fix9-daemon-noise-2026-04-22 preserved (NOT pre-v5-recovery which stays untouched).
+
+BLOCKED:
+- Aaron GO for Gate 5 merge.
+- Network tool intermittent errors during deep research phase (6+ times). Cause: Claude.ai parallel tool calls with long-context project knowledge searches + iso-8859-1 encoded CSVs occasionally hitting submit timeouts. Not a data problem. Research output was successful in final pass.
+
+NEXT:
+- On Aaron GO → paste Gate 5 merge sequence to CC:
+    pytest + grep + SID + Chain Electric regression + iShip re-run
+    git checkout main
+    git merge --ff-only feature/shipping-agent-v5
+    git tag -a v5-session2-merged-2026-04-22 -m 'V5 S2 complete: 9 FIXes, 156 tests, Chain Electric immutable'
+    git push origin main --tags
+    Portal smoke test
+    DO NOT pop stash@{1} pre-v5-recovery
+    Final Living Memory draft
+    Tier 2 Aaron
+- On merge complete → queue Section 10 Session 3 follow-ups (iShip S-019/020/021, Boss PDF parser, UPS Store pdfplumber, Scott POS export, Notes Intelligence, CB Telegram Bot).
+
+FILES:
+- data/customer_db_enrichment_2026-04-22.json
+- lib/customer_db.py (additive merge logic)
+- tests/test_customer_db_enrichment.py (5 new tests)
+- output/cb_invoice_packets_2026-04-22.html (regenerated with enrichment)
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
