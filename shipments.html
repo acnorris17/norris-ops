@@ -28,7 +28,7 @@ section.packet p { margin: 6px 0; font-size: 12px; }
 code { background: #eee; padding: 2px 6px; border-radius: 3px; font-size: 11px; }
 </style></head>
 <body>
-<h1>CB Invoice-Ready Writeset — Norris Utilities — 2026-04-22 14:29 UTC</h1>
+<h1>CB Invoice-Ready Writeset — Norris Utilities — 2026-04-22 20:41 UTC</h1>
 
 <div class="intro">
 <h3>CB Action Sequence</h3>
@@ -86,8 +86,8 @@ Ben's Formula (direct): ROUNDUP(ROUNDUP(RegCost,0) × 1.10, 0). Dealer tier uses
 <h3>LINE ITEMS</h3>
 <table class="items">
 <thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
-<tr><td><code>NU-BC-2834</code></td><td>FlexPro Armor 1.5-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$265.00</td><td style="text-align:right">$1325.00</td></tr>
+<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor® 2-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
+<tr><td><code>NU-BC-2834</code></td><td>FlexPro Armor® 1.5-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$265.00</td><td style="text-align:right">$1325.00</td></tr>
 <tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$2850.00</td></tr></tbody>
 </table>
 <p><strong>SHIPPING:</strong> <span style="color:#c00">NEEDS_REVIEW — silent-drop window; paper UPS Store receipt or Aaron-assist recovery.</span></p>
@@ -110,7 +110,7 @@ Ben's Formula (direct): ROUNDUP(ROUNDUP(RegCost,0) × 1.10, 0). Dealer tier uses
 <h3>LINE ITEMS</h3>
 <table class="items">
 <thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
+<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor® 2-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
 <tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$1525.00</td></tr></tbody>
 </table>
 <p><strong>SHIPPING:</strong> <span style="color:#c00">NEEDS_REVIEW — silent-drop window; paper UPS Store receipt or Aaron-assist recovery.</span></p>
@@ -534,17 +534,17 @@ CB: enter this total on ONE Chain Electric invoice. Do NOT split.</p>
 </section>
 <section class="packet standalone">
 <h2>STANDALONE SHIPPING — R002 — Chad Christian / Brink Constructors — 01-28</h2>
-<p class="qb-action">QB ACTION: CREATE new QB customer (Brink Constructors) + new invoice. 9774 18th St W Princeton MN.</p>
+<p class="qb-action">QB ACTION: CREATE new invoice under 'Brink Constructors Inc.' → 'Brink - Chad Christian' child. CC fee APPLIES (FIX 9: Chad pays by credit_card per enrichment; $123 + 4% = $127.92). 9774 18th St W Princeton MN 55371.</p>
 <dl>
 <dt>Tracking:</dt><dd>1ZBRINK0128</dd>
 <dt>Ben's Shipping:</dt><dd>$123</dd>
 <dt>Ship date:</dt><dd>2026-01-28</dd>
 </dl>
-<p class="grand">SHIPPING TOTAL: $123</p>
+<p><strong>CC FEE (4%):</strong> $4.92 <span style="font-size:10px;color:#888">(FIX 9 enrichment: customer pays by credit card)</span></p><p class="grand">TOTAL WITH CC FEE: $127.92</p>
 </section>
 <section class="packet standalone">
 <h2>STANDALONE SHIPPING — R003 — Keith McIntosh / TUF Solutions — 01-28</h2>
-<p class="qb-action">QB ACTION: CREATE new QB customer (TUF Solutions — NOT TEREX). 122 Center Dr White House TN 37188.</p>
+<p class="qb-action">QB ACTION: CREATE new invoice under 'TUF Solutions' (QB) — NOT TEREX. NO CC fee (FIX 9: dealer tier, ACH/check per 28+ invoice history). 122 Center Dr White House TN 37188.</p>
 <dl>
 <dt>Tracking:</dt><dd>1ZTUF0128</dd>
 <dt>Ben's Shipping:</dt><dd>$93</dd>
@@ -554,13 +554,13 @@ CB: enter this total on ONE Chain Electric invoice. Do NOT split.</p>
 </section>
 <section class="packet standalone">
 <h2>STANDALONE SHIPPING — R004 — Caleb Alday / ULCS Birmingham — 02-02</h2>
-<p class="qb-action">QB ACTION: CREATE new QB customer (ULCS Birmingham — Asplundh subsidiary).</p>
+<p class="qb-action">QB ACTION: ADD 'Caleb Alday' as sub-account under 'ULCS - Birmingham' parent in QB FIRST (FIX 9 new_child_pending_qb_add), THEN invoice. CC fee APPLIES (FIX 9: $105 + 4% = $109.20; ULCS 100% CC history).</p>
 <dl>
 <dt>Tracking:</dt><dd>1ZULCS0202</dd>
 <dt>Ben's Shipping:</dt><dd>$105</dd>
 <dt>Ship date:</dt><dd>2026-02-02</dd>
 </dl>
-<p class="grand">SHIPPING TOTAL: $105</p>
+<p><strong>CC FEE (4%):</strong> $4.20 <span style="font-size:10px;color:#888">(FIX 9 enrichment: customer pays by credit card)</span></p><p class="grand">TOTAL WITH CC FEE: $109.20</p>
 </section>
 <section class="packet standalone">
 <h2>STANDALONE SHIPPING — R005 — LineTec — 02-02</h2>
@@ -687,6 +687,6 @@ CB: enter this total on ONE Chain Electric invoice. Do NOT split.</p>
 </div>
 
 <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 10px; color: #999; text-align: center;">
-Generated by scripts/build_cb_invoice_packets.py | 2026-04-22 14:29 UTC | Rule v1 S-IDs: S-2026-001..018 | FlexPro Armor | A Legacy of Commitment®
+Generated by scripts/build_cb_invoice_packets.py | 2026-04-22 20:41 UTC | Rule v1 S-IDs: S-2026-001..018 | FlexPro Armor | A Legacy of Commitment®
 </footer>
 </body></html>
