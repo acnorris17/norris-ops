@@ -2644,3 +2644,17 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 ## LIVING MEMORY STREAM (auto-updates via lib/living_memory.py)
 
 - [2026-04-22T12:28:18Z] `D.11_test` completed=lib/living_memory.py built · decisions=rate-limit 60s, LM append always · changed=new module (150 LOC) · blocked=(none) · next=commit + D.11 close · files=lib/living_memory.py
+### S-2026-014 — Darrell Pickle / Florence Electricity Department — 2026-03-20 (✅ SHIPPED)
+
+- **Filename:** SD-2026-PICKLE-FLORENCE-0320.html (locked)
+- **Customer:** Darrell Pickle / Florence Electricity Department
+- **PO:** STOCK
+- **Ship To:** Darrell Pickle, Florence Electricity Department, 611 East Reeder St, Florence, AL 35630
+- **Line items:** 3x NU-BC-2834, 1x NU-BC-2834-C, 2x NU-BC-2834-F — subtotal $1710.00
+- **Ship Date:** 2026-03-20
+- **Tracking:** 1Z2W49000328351797
+- **Delivered:** 2026-03-23
+- **fulfillment_source:** nu_stock
+- **reg_cost:** NEEDS_REVIEW
+- **cb_internal_note:** Line items CORRECTED per April 8 FlexPro Armor Pricing Master + NorrisPalace: 3x NU-BC-2834 + 1x NU-BC-2834-C + 2x NU-BC-2834-F, subtotal $1,710 (was previously rendered as $1,750 from earlier Telegram quantity-swap). BCB = Bucket Cover Bag (NU-BC-2834-C = BC + BCB, not 'Shield'). Skylift lead — Darrell separately ordered 6 bucket trucks crediting Aaron.
+- **Persisted:** 2026-04-22T14:16:22Z
