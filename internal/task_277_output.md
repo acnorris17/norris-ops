@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Plan — Micah Sign Online Trade — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+  <title>Action Plan — Micah / Sign Online Trading — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
       --nu-blue: #0000FF;
@@ -16,11 +16,9 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-green: #1B8F3A;
-      --nu-amber: #D98A00;
-      --nu-red: #C42424;
+      --nu-success: #0a7a3a;
+      --nu-warning: #b8860b;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-tagline: 'Playfair Display', Georgia, serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,10 +31,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HEADER */
+    /* ══ HEADER ══ */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033CC 35%, #0066EE 65%, #00AAFF 85%, var(--nu-cyan) 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
       padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
@@ -47,10 +45,10 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.6;
+      opacity: 0.7;
     }
     .nu-header::after {
       content: '';
@@ -60,20 +58,15 @@
       background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
-    .nu-header > * { position: relative; z-index: 2; }
+    .nu-header * { position: relative; z-index: 2; }
 
-    .nu-phoenix-watermark {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 65%;
-      opacity: 0.07;
-      z-index: 1;
-      pointer-events: none;
+    .nu-phoenix-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 14px;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
-
     .nu-logo-text {
-      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3.2rem;
       color: var(--nu-white);
@@ -84,401 +77,309 @@
     }
     .nu-logo-subtitle {
       font-weight: 900;
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.75em;
       text-transform: uppercase;
       margin-bottom: 20px;
+      padding-left: 0.75em;
     }
     .nu-tagline {
-      font-family: var(--font-tagline);
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
-      font-weight: 400;
-      font-size: 1.3rem;
-      color: rgba(255,255,255,0.95);
-      letter-spacing: 0.03em;
-    }
-    .nu-doc-type {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 6px 18px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 24px;
-      color: var(--nu-white);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      backdrop-filter: blur(4px);
+      font-weight: 300;
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.05em;
     }
 
-    /* CHEVRON */
+    /* ══ CHEVRON ══ */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
 
-    /* CONTENT */
+    /* ══ CONTENT ══ */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
+      padding-bottom: 40px;
     }
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+
     .nu-container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 50px 40px 80px;
+      padding: 60px 40px;
     }
 
-    /* TITLE BLOCK */
-    .page-title-block {
-      border-bottom: 3px solid var(--nu-medium-gray);
-      padding-bottom: 24px;
-      margin-bottom: 40px;
-    }
-    .page-kicker {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--nu-cyan);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .page-title {
-      font-size: 2.3rem;
+    /* ══ TITLE BLOCK ══ */
+    .nu-page-title {
       font-weight: 900;
+      font-size: 2.4rem;
       color: var(--nu-dark-text);
+      margin-bottom: 10px;
       line-height: 1.15;
-      margin-bottom: 12px;
     }
-    .page-title .accent { color: var(--nu-blue); }
-    .page-meta {
+    .nu-page-title span { color: var(--nu-blue); }
+    .nu-page-subtitle {
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .nu-meta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px 32px;
-      font-size: 0.9rem;
-      color: var(--nu-body-text);
+      gap: 20px;
       margin-top: 14px;
+      padding: 14px 18px;
+      background: var(--nu-light-gray);
+      border-left: 4px solid var(--nu-cyan);
+      border-radius: 4px;
+      font-size: 0.92rem;
     }
-    .page-meta strong {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-      display: block;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 2px;
-    }
+    .nu-meta-row strong { color: var(--nu-dark-text); }
 
-    /* SECTION HEADERS */
+    /* ══ SECTION HEADERS ══ */
+    .nu-section {
+      margin-top: 48px;
+    }
     .nu-section-title {
-      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 1.5rem;
       color: var(--nu-blue);
-      margin-bottom: 8px;
-      line-height: 1.2;
-    }
-    .nu-section-title .rest {
-      color: var(--nu-dark-text);
-      font-weight: 900;
-    }
-    .nu-section-sub {
-      font-size: 0.92rem;
-      color: var(--nu-body-text);
-      margin-bottom: 24px;
-      max-width: 760px;
-    }
-    .nu-section { margin-bottom: 50px; }
-
-    /* BADGE */
-    .nu-badge {
-      display: inline-flex;
-      align-items: center;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      padding: 10px 22px 10px 16px;
-      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%, 16px 50%);
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
       margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--nu-medium-gray);
     }
-
-    /* STATUS BAR */
-    .status-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-    .status-card {
-      background: var(--nu-white);
-      border-left: 4px solid var(--nu-blue);
-      padding: 18px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      border-radius: 4px;
-    }
-    .status-card.cyan { border-left-color: var(--nu-cyan); }
-    .status-card.gold { border-left-color: var(--nu-accent-gold); }
-    .status-card.green { border-left-color: var(--nu-green); }
-    .status-card .label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--nu-body-text);
-      margin-bottom: 4px;
-    }
-    .status-card .value {
-      font-size: 1.05rem;
-      font-weight: 900;
+    .nu-section-title span {
       color: var(--nu-dark-text);
-      line-height: 1.3;
+      font-weight: 700;
     }
 
-    /* STEP TIMELINE */
-    .steps-list {
-      position: relative;
-      padding-left: 0;
-      list-style: none;
+    /* ══ STEP CARDS ══ */
+    .nu-steps {
+      display: grid;
+      gap: 20px;
     }
-    .step {
-      position: relative;
+    .nu-step {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 20px;
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 24px 28px 24px 88px;
-      margin-bottom: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      border-radius: 10px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .step:hover {
+    .nu-step:hover {
+      transform: translateY(-2px);
       box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      transform: translateY(-1px);
     }
-    .step-num {
-      position: absolute;
-      left: 20px;
-      top: 22px;
-      width: 52px;
-      height: 52px;
-      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
-      color: var(--nu-white);
-      border-radius: 50%;
+    .nu-step-num {
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
+      color: var(--nu-white);
       font-weight: 900;
-      font-size: 1.3rem;
-      box-shadow: 0 3px 10px rgba(0,0,255,0.25);
+      font-size: 1.4rem;
+      box-shadow: 0 4px 10px rgba(0,0,255,0.25);
     }
-    .step-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 10px;
+    .nu-step-title {
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+    }
+    .nu-step-when {
+      display: inline-block;
+      background: var(--nu-navy);
+      color: var(--nu-cyan);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .nu-step p {
       margin-bottom: 8px;
     }
-    .step-title {
-      font-size: 1.15rem;
-      font-weight: 900;
-      color: var(--nu-dark-text);
-      line-height: 1.3;
+    .nu-step ul {
+      margin: 8px 0 4px 20px;
     }
-    .step-when {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--nu-blue);
-      background: rgba(0,0,255,0.06);
-      padding: 4px 12px;
-      border-radius: 12px;
-      white-space: nowrap;
+    .nu-step ul li {
+      margin-bottom: 4px;
     }
-    .step-body {
-      font-size: 0.95rem;
-      color: var(--nu-body-text);
-      line-height: 1.65;
-    }
-    .step-body p { margin-bottom: 10px; }
-    .step-body p:last-child { margin-bottom: 0; }
 
-    /* EMAIL DRAFT CARDS */
-    .email-card {
+    /* ══ EMAIL DRAFT BLOCK ══ */
+    .nu-email-card {
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       margin-bottom: 22px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     }
-    .email-header {
-      background: linear-gradient(135deg, var(--nu-light-gray), var(--nu-white));
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--nu-medium-gray);
+    .nu-email-header {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      color: var(--nu-white);
+      padding: 14px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
     }
-    .email-label {
+    .nu-email-label {
       font-weight: 900;
-      color: var(--nu-blue);
-      font-size: 0.95rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      color: var(--nu-cyan);
     }
-    .email-pill {
-      font-size: 0.72rem;
+    .nu-email-order {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 400;
+    }
+    .nu-email-fields {
+      padding: 16px 22px 8px;
+      border-bottom: 1px dashed var(--nu-medium-gray);
+      font-size: 0.92rem;
+    }
+    .nu-email-fields div {
+      margin-bottom: 4px;
+    }
+    .nu-email-fields strong {
+      display: inline-block;
+      width: 70px;
+      color: #666;
       font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
-    .email-pill.first { background: rgba(27,143,58,0.12); color: var(--nu-green); }
-    .email-pill.second { background: rgba(217,138,0,0.12); color: var(--nu-amber); }
-    .email-pill.meeting { background: rgba(0,0,255,0.1); color: var(--nu-blue); }
-    .email-meta {
-      padding: 14px 24px;
-      background: var(--nu-light-gray);
-      border-bottom: 1px solid var(--nu-medium-gray);
-      font-size: 0.88rem;
-    }
-    .email-meta-row {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 8px;
-      padding: 4px 0;
-    }
-    .email-meta-row .k {
-      font-weight: 700;
-      color: var(--nu-dark-text);
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      padding-top: 2px;
-    }
-    .email-body {
-      padding: 22px 28px;
-      font-size: 0.95rem;
-      color: var(--nu-body-text);
+    .nu-email-body {
+      padding: 20px 22px;
+      font-size: 0.97rem;
       line-height: 1.7;
-      white-space: pre-wrap;
-      font-family: 'Lato', Georgia, serif;
+      color: var(--nu-body-text);
+    }
+    .nu-email-body p {
+      margin-bottom: 12px;
+      padding-left: 18px;
+    }
+    .nu-email-body p:first-child {
+      padding-left: 0;
+    }
+    .nu-email-body .bullets {
+      padding-left: 36px;
+      margin-bottom: 12px;
+    }
+    .nu-email-body .bullets div {
+      margin-bottom: 4px;
+    }
+    .nu-email-body .signoff {
+      padding-left: 0;
+      margin-top: 18px;
+    }
+    .nu-email-body .signoff .name {
+      padding-left: 18px;
+      margin-top: 2px;
     }
 
-    /* CHECKLIST */
-    .checklist {
+    /* ══ CHECKLIST ══ */
+    .nu-checklist {
+      background: var(--nu-light-gray);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 6px;
+      padding: 20px 24px;
+    }
+    .nu-checklist li {
       list-style: none;
-      padding: 0;
-    }
-    .checklist li {
+      padding: 8px 0 8px 32px;
       position: relative;
-      padding: 10px 10px 10px 40px;
       border-bottom: 1px dashed var(--nu-medium-gray);
-      font-size: 0.95rem;
     }
-    .checklist li:last-child { border-bottom: none; }
-    .checklist li::before {
+    .nu-checklist li:last-child { border-bottom: none; }
+    .nu-checklist li::before {
       content: '';
       position: absolute;
-      left: 10px;
-      top: 13px;
-      width: 18px;
-      height: 18px;
+      left: 0; top: 12px;
+      width: 18px; height: 18px;
       border: 2px solid var(--nu-blue);
       border-radius: 4px;
       background: var(--nu-white);
     }
-    .checklist li strong {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
 
-    /* TALKING POINTS */
-    .talking-grid {
+    /* ══ MEETING CARD ══ */
+    .nu-meeting-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
     }
-    .talking-card {
-      background: linear-gradient(135deg, var(--nu-white), var(--nu-light-gray));
+    .nu-meeting-tile {
+      background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
-      border-top: 3px solid var(--nu-cyan);
-      border-radius: 6px;
-      padding: 20px 22px;
+      border-top: 4px solid var(--nu-cyan);
+      border-radius: 8px;
+      padding: 18px 20px;
     }
-    .talking-card h4 {
-      font-size: 1rem;
+    .nu-meeting-tile h4 {
       font-weight: 900;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--nu-blue);
       margin-bottom: 8px;
     }
-    .talking-card p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: var(--nu-body-text);
+    .nu-meeting-tile p {
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+    .nu-meeting-tile .sub {
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 4px;
     }
 
-    /* CALLOUT */
-    .callout {
-      background: linear-gradient(135deg, rgba(0,0,255,0.04), rgba(6,208,255,0.06));
-      border-left: 5px solid var(--nu-blue);
-      padding: 20px 26px;
-      border-radius: 0 6px 6px 0;
-      margin: 24px 0;
-    }
-    .callout-title {
-      font-weight: 900;
-      color: var(--nu-blue);
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 6px;
-    }
-    .callout p { font-size: 0.92rem; line-height: 1.65; }
-
-    /* MEETING AGENDA */
-    .agenda-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--nu-white);
+    /* ══ CALLOUT ══ */
+    .nu-callout {
+      background: linear-gradient(135deg, #fffbe6 0%, #fff5c4 100%);
+      border-left: 4px solid var(--nu-accent-gold);
+      padding: 16px 20px;
       border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      margin: 24px 0;
+      font-size: 0.95rem;
     }
-    .agenda-table th, .agenda-table td {
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      font-size: 0.9rem;
-      vertical-align: top;
-    }
-    .agenda-table th {
-      background: var(--nu-navy);
-      color: var(--nu-white);
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-    }
-    .agenda-table td:first-child {
-      font-weight: 700;
-      color: var(--nu-blue);
-      white-space: nowrap;
-      width: 90px;
-    }
-    .agenda-table tr:last-child td { border-bottom: none; }
-    .agenda-table tr:nth-child(even) td { background: var(--nu-light-gray); }
+    .nu-callout strong { color: #7a5a00; }
 
-    /* FOOTER */
+    /* ══ FOOTER ══ */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
@@ -486,15 +387,15 @@
       text-align: center;
     }
     .nu-footer-tagline {
-      font-family: var(--font-tagline);
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
     .nu-footer-contact {
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       line-height: 1.85;
     }
     .nu-footer-contact a {
@@ -502,31 +403,24 @@
       text-decoration: none;
     }
     .nu-footer-contact a:hover { text-decoration: underline; }
-    .nu-footer-meta {
-      margin-top: 16px;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 0.08em;
-    }
 
-    /* RESPONSIVE */
+    /* ══ RESPONSIVE ══ */
     @media (max-width: 768px) {
       .nu-header { padding: 40px 20px 60px; min-height: 200px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 36px 20px 60px; }
-      .page-title { font-size: 1.6rem; }
-      .step { padding: 80px 20px 20px 20px; }
-      .step-num { position: relative; left: auto; top: auto; margin-bottom: 12px; }
-      .email-body { padding: 18px 20px; font-size: 0.9rem; }
-      .email-meta-row { grid-template-columns: 70px 1fr; }
+      .nu-container { padding: 40px 20px; }
+      .nu-page-title { font-size: 1.7rem; }
+      .nu-step { grid-template-columns: 1fr; }
+      .nu-step-num { margin: 0 auto; }
+      .nu-email-fields strong { width: 60px; }
     }
 
     @media print {
-      body { background: white; }
+      body { background: var(--nu-white); }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .step, .email-card, .talking-card { box-shadow: none; break-inside: avoid; }
+      .nu-step, .nu-email-card { box-shadow: none; page-break-inside: avoid; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
     }
   </style>
@@ -535,19 +429,21 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix-watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path d="M100 10 L115 45 L150 25 L130 60 L170 55 L140 90 L165 130 L125 105 L100 150 L75 105 L35 130 L60 90 L30 55 L70 60 L50 25 L85 45 Z" fill="white"/>
-    </svg>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
-    <div class="nu-doc-type">Action Plan · Internal</div>
   </header>
 
-  <!-- WHITE CHEVRON TRANSITION -->
+  <!-- CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#ffffff"/>
     </svg>
   </div>
 
@@ -555,262 +451,198 @@
   <main class="nu-content-area">
     <div class="nu-container">
 
-      <!-- TITLE BLOCK -->
-      <div class="page-title-block">
-        <div class="page-kicker">reMarkable Action Item · Outreach Sequence</div>
-        <h1 class="page-title">Send Micah Emails, Then <span class="accent">Schedule the Meeting</span></h1>
-        <div style="color: var(--nu-body-text); font-size: 1rem; max-width: 780px;">
-          Sign Online Trade — structured two-touch outreach to Micah, ending with a confirmed 30-minute discovery call. Send Email #1 today, follow-up Email #2 within five business days if no reply, then lock the meeting on the calendar.
-        </div>
-        <div class="page-meta">
-          <div><strong>Owner</strong>Aaron C. Norris</div>
-          <div><strong>Source</strong>reMarkable Action Item</div>
-          <div><strong>Prepared</strong>2026-04-21</div>
-          <div><strong>Target Contact</strong>Micah — Sign Online Trade</div>
-          <div><strong>Channel</strong>Email → Calendar</div>
-        </div>
+      <h1 class="nu-page-title"><span>Action Plan</span> — Micah / Sign Online Trading</h1>
+      <p class="nu-page-subtitle">Send emails, then schedule the meeting.</p>
+
+      <div class="nu-meta-row">
+        <div><strong>Source:</strong> reMarkable action item</div>
+        <div><strong>Owner:</strong> Aaron C. Norris</div>
+        <div><strong>Date opened:</strong> 2026-04-22</div>
+        <div><strong>Priority:</strong> Active — sequence matters</div>
       </div>
 
-      <!-- STATUS BAR -->
-      <div class="status-bar">
-        <div class="status-card">
-          <div class="label">Step 1</div>
-          <div class="value">Email #1 — Intro</div>
-        </div>
-        <div class="status-card cyan">
-          <div class="label">Step 2</div>
-          <div class="value">Email #2 — Follow-Up</div>
-        </div>
-        <div class="status-card gold">
-          <div class="label">Step 3</div>
-          <div class="value">Meeting Scheduled</div>
-        </div>
-        <div class="status-card green">
-          <div class="label">Target Outcome</div>
-          <div class="value">Discovery Call Booked</div>
-        </div>
-      </div>
-
-      <!-- SEQUENCE OVERVIEW -->
+      <!-- SECTION: SEQUENCE -->
       <section class="nu-section">
-        <div class="nu-badge">Sequence Overview</div>
-        <h2 class="nu-section-title">Three <span class="rest">Touches to a Booked Meeting</span></h2>
-        <p class="nu-section-sub">Each step has a single job. Do not combine them. Send, wait, follow up, then schedule. If Micah replies at any point, skip directly to scheduling.</p>
+        <h2 class="nu-section-title"><span>The</span> Sequence</h2>
 
-        <ol class="steps-list">
-          <li class="step">
-            <div class="step-num">1</div>
-            <div class="step-header">
-              <div class="step-title">Send Email #1 — Introduction & Purpose</div>
-              <div class="step-when">Today · 2026-04-21</div>
-            </div>
-            <div class="step-body">
-              <p>Short, specific, and direct. Tell Micah who we are, why we're reaching out about Sign Online Trade, and propose a 30-minute call. No attachments. One clear ask.</p>
-              <p>Log the send in the master tracker with timestamp. If a bounce comes back, confirm Micah's current address before step 2.</p>
-            </div>
-          </li>
-          <li class="step">
-            <div class="step-num">2</div>
-            <div class="step-header">
-              <div class="step-title">Send Email #2 — Value-Add Follow-Up</div>
-              <div class="step-when">+5 Business Days If No Reply</div>
-            </div>
-            <div class="step-body">
-              <p>Only send if Micah has not responded. This is not a nudge — it adds one concrete piece of value (relevant capability, reference customer, or a specific question). Stays under 120 words.</p>
-              <p>If a reply comes in between sends, stop the sequence and move to Step 3 scheduling immediately.</p>
-            </div>
-          </li>
-          <li class="step">
-            <div class="step-num">3</div>
-            <div class="step-header">
-              <div class="step-title">Schedule the Meeting on Micah's Reply</div>
-              <div class="step-when">Within 24 Hours of Reply</div>
-            </div>
-            <div class="step-body">
-              <p>Offer two or three specific 30-minute windows in Central Time. Once Micah picks one, send a calendar invite with a clear subject line, agenda in the body, and a phone number or video link.</p>
-              <p>Add the meeting to the Google Calendar with a 15-minute prep reminder the morning of the call.</p>
-            </div>
-          </li>
-        </ol>
-      </section>
+        <div class="nu-steps">
 
-      <!-- EMAIL #1 -->
-      <section class="nu-section">
-        <div class="nu-badge">Email Draft #1</div>
-        <h2 class="nu-section-title">Introduction <span class="rest">— Keep it Tight</span></h2>
-        <p class="nu-section-sub">First email goes to Micah directly. Aaron's voice: em-dash greeting, indented paragraphs, direct ask up front, no filler. Review before send, then send from acnorris@norrisutilities.com.</p>
-
-        <div class="email-card">
-          <div class="email-header">
-            <div class="email-label">Email #1 · Initial Outreach</div>
-            <div class="email-pill first">Send First</div>
+          <div class="nu-step">
+            <div class="nu-step-num">1</div>
+            <div>
+              <div class="nu-step-when">Today</div>
+              <h3 class="nu-step-title">Send the context email to Micah</h3>
+              <p>Plain introduction and purpose. Gets Micah oriented before the scheduling ask. See draft below (Email #1).</p>
+              <ul>
+                <li>Confirm the account still needs what Micah and I last discussed</li>
+                <li>Confirm the decision-makers on his side</li>
+                <li>Set expectation that a short working meeting is the next step</li>
+              </ul>
+            </div>
           </div>
-          <div class="email-meta">
-            <div class="email-meta-row"><div class="k">To</div><div>Micah &lt;[confirm address before send]&gt;</div></div>
-            <div class="email-meta-row"><div class="k">From</div><div>Aaron C. Norris — acnorris@norrisutilities.com</div></div>
-            <div class="email-meta-row"><div class="k">Subject</div><div>Sign Online Trade — quick intro from Norris Utilities</div></div>
+
+          <div class="nu-step">
+            <div class="nu-step-num">2</div>
+            <div>
+              <div class="nu-step-when">Same day, 30 min later</div>
+              <h3 class="nu-step-title">Send the details email to Micah</h3>
+              <p>The specifics — what Norris Utilities® brings to the Sign Online Trading relationship, and what I need from him to move. See draft below (Email #2).</p>
+              <ul>
+                <li>Product scope and margin structure</li>
+                <li>Three channel tiers: Direct, Dealer, Distributor</li>
+                <li>Any open items carried from the last conversation</li>
+              </ul>
+            </div>
           </div>
-          <div class="email-body">Micah —
 
-    I'm Aaron Norris, Founder &amp; CEO of Norris Utilities. We're a third-generation utility equipment dealer and distributor based in Birmingham, Alabama, serving twenty-plus states across the Southeast.
+          <div class="nu-step">
+            <div class="nu-step-num">3</div>
+            <div>
+              <div class="nu-step-when">After he replies</div>
+              <h3 class="nu-step-title">Schedule the Sign Online Trading meeting</h3>
+              <p>Do not propose a calendar slot until he has responded to both emails. Then send the meeting invite with the three-option window below.</p>
+              <ul>
+                <li>Offer Zoom by default; in-person on request</li>
+                <li>Block 45 minutes — working meeting, not a demo</li>
+                <li>Cc Caroline Butler on the invite for logistics</li>
+              </ul>
+            </div>
+          </div>
 
-    I'm reaching out about Sign Online Trade. I'd like to walk through what you're working on, see where there's fit with our product lines, and explore whether a working relationship would be advantageous for both sides.
-
-    Could we put thirty minutes on the calendar next week? I have openings Tuesday and Thursday afternoons, Central Time. Happy to work around what's easiest for you.
-
-    Sincerely,
-
-    Aaron C. Norris
-    Founder &amp; CEO
-    Norris Utilities, LLC
-    Cell: 205-500-1343
-    acnorris@norrisutilities.com</div>
-        </div>
-
-        <div class="callout">
-          <div class="callout-title">Before You Send</div>
-          <p>Confirm Micah's correct email address and the full name of "Sign Online Trade" (the business entity). If either is uncertain, pause and verify — do not guess. Log the send with timestamp in the master tracker the moment it goes out.</p>
         </div>
       </section>
 
-      <!-- EMAIL #2 -->
+      <!-- SECTION: EMAIL DRAFTS -->
       <section class="nu-section">
-        <div class="nu-badge">Email Draft #2</div>
-        <h2 class="nu-section-title">Follow-Up <span class="rest">— Add Value, Don't Nudge</span></h2>
-        <p class="nu-section-sub">Only send if there's been no reply for five business days. This email does not say "just following up." It adds one concrete piece of value and asks a specific question that makes it easy to reply.</p>
+        <h2 class="nu-section-title"><span>Email</span> Drafts</h2>
 
-        <div class="email-card">
-          <div class="email-header">
-            <div class="email-label">Email #2 · Follow-Up (Conditional)</div>
-            <div class="email-pill second">Send Only If No Reply</div>
+        <!-- EMAIL 1 -->
+        <div class="nu-email-card">
+          <div class="nu-email-header">
+            <div class="nu-email-label">Email #1 — Context</div>
+            <div class="nu-email-order">Send first</div>
           </div>
-          <div class="email-meta">
-            <div class="email-meta-row"><div class="k">To</div><div>Micah &lt;same address as Email #1&gt;</div></div>
-            <div class="email-meta-row"><div class="k">From</div><div>Aaron C. Norris — acnorris@norrisutilities.com</div></div>
-            <div class="email-meta-row"><div class="k">Subject</div><div>Re: Sign Online Trade — quick intro from Norris Utilities</div></div>
+          <div class="nu-email-fields">
+            <div><strong>To:</strong> Micah</div>
+            <div><strong>From:</strong> acnorris@norrisutilities.com</div>
+            <div><strong>Subject:</strong> Sign Online Trading — picking up where we left off</div>
           </div>
-          <div class="email-body">Micah —
-
-    Following up on my note from last week. I know things move fast on your end, so I'll keep this short.
-
-    Since my first email, I wanted to flag one thing that may be relevant: we're an authorized Samson Rope distributor and the Southeast territory rep for Bay Shore Systems drill rigs, and we handle FlexPro Armor bucket covers direct from the factory. If any of those overlap with what Sign Online Trade is sourcing or specifying, there's a real conversation to be had.
-
-    Would a thirty-minute call next Wednesday or Friday work? I'll send an invite the moment you pick a time.
-
-    Sincerely,
-
-    Aaron C. Norris
-    Founder &amp; CEO
-    Norris Utilities, LLC
-    Cell: 205-500-1343
-    acnorris@norrisutilities.com</div>
+          <div class="nu-email-body">
+            <p>Micah —</p>
+            <p>Circling back on Sign Online Trading. Before I suggest a time to meet, I want to make sure we are working from the same picture.</p>
+            <p>A couple of things I would like to confirm on your end:</p>
+            <div class="bullets">
+              <div>• The scope we last discussed is still the right scope</div>
+              <div>• You are still the right point of contact, or whether I need to include anyone else</div>
+              <div>• Any timing pressure on your side I should know about</div>
+            </div>
+            <p>A follow-up email is coming right behind this one with the specifics. After you have both in hand, I will send over a couple of times that work on my end for a short working meeting.</p>
+            <div class="signoff">
+              <p>Sincerely,</p>
+              <p class="name">Aaron C. Norris</p>
+            </div>
+          </div>
         </div>
 
-        <div class="callout">
-          <div class="callout-title">If Still No Reply After Email #2</div>
-          <p>Do not send a third cold email. Mark the contact as dormant in the tracker and revisit in sixty days with a different angle — a trade-show mention, a mutual contact introduction, or a specific piece of news about Sign Online Trade. Quality over persistence.</p>
+        <!-- EMAIL 2 -->
+        <div class="nu-email-card">
+          <div class="nu-email-header">
+            <div class="nu-email-label">Email #2 — Details</div>
+            <div class="nu-email-order">Send second, same day</div>
+          </div>
+          <div class="nu-email-fields">
+            <div><strong>To:</strong> Micah</div>
+            <div><strong>From:</strong> acnorris@norrisutilities.com</div>
+            <div><strong>Subject:</strong> Sign Online Trading — what we bring and what I need</div>
+          </div>
+          <div class="nu-email-body">
+            <p>Micah —</p>
+            <p>As promised, here are the specifics so we can use the meeting time to decide rather than introduce.</p>
+            <p>What Norris Utilities® brings to Sign Online Trading:</p>
+            <div class="bullets">
+              <div>• FlexPro Armor bucket covers — handmade USA, our four core SKUs (NU-BC-2851, NU-BC-2834, NU-BC-2851-C, NU-BC-2834-C)</div>
+              <div>• Samson Rope — authorized distributor pricing</div>
+              <div>• Skylift bucket trucks and Bay Shore Systems drill rigs on the equipment side</div>
+              <div>• Three-channel structure: Direct, Dealer, Distributor</div>
+            </div>
+            <p>What I need from you to move this forward:</p>
+            <div class="bullets">
+              <div>• The channel tier that fits Sign Online Trading's model</div>
+              <div>• Volume expectation for the first quarter of the relationship</div>
+              <div>• Any account setup items on your end I should have in hand before we meet</div>
+            </div>
+            <p>Once you have had a chance to read both notes, I will send a meeting request with a couple of times. Forty-five minutes is all we need.</p>
+            <div class="signoff">
+              <p>Sincerely,</p>
+              <p class="name">Aaron C. Norris</p>
+            </div>
+          </div>
         </div>
+
       </section>
 
-      <!-- MEETING SCHEDULING -->
+      <!-- SECTION: MEETING -->
       <section class="nu-section">
-        <div class="nu-badge">Step 3 — Schedule</div>
-        <h2 class="nu-section-title">Book the <span class="rest">Meeting the Right Way</span></h2>
-        <p class="nu-section-sub">When Micah replies, move fast. Offer specific windows, not "let me know when works." Lock the invite within 24 hours of his reply.</p>
+        <h2 class="nu-section-title"><span>Meeting</span> — Sign Online Trading</h2>
 
-        <ul class="checklist">
-          <li><strong>Reply within 4 business hours</strong> with two or three concrete 30-minute windows in Central Time (example: Tue 2:00 PM, Wed 10:00 AM, Thu 3:30 PM).</li>
-          <li><strong>Ask for his preferred format:</strong> phone call or video (Google Meet default, Zoom if he requests it).</li>
-          <li><strong>Send the calendar invite</strong> within one hour of his selection. Include Micah's email as an attendee so he gets a confirmation.</li>
-          <li><strong>Invite subject line:</strong> "Norris Utilities × Sign Online Trade — Intro Call (Aaron Norris / Micah)".</li>
-          <li><strong>Invite body</strong> must include: dial-in or Meet link, 3-point agenda, Aaron's cell (205-500-1343), and a one-line sentence on what to expect.</li>
-          <li><strong>Set a 15-minute prep reminder</strong> the morning of the call on Aaron's calendar.</li>
-          <li><strong>Update the master tracker</strong>: status moves from "Emailed" → "Meeting Scheduled" with the date/time.</li>
-        </ul>
-      </section>
-
-      <!-- MEETING AGENDA -->
-      <section class="nu-section">
-        <div class="nu-badge">Meeting Agenda</div>
-        <h2 class="nu-section-title">30 <span class="rest">Minutes, Three Segments</span></h2>
-        <p class="nu-section-sub">Walking in with a structured agenda signals professionalism and respects Micah's time. Aaron leads discovery, then Aaron positions, then they align on the next concrete step.</p>
-
-        <table class="agenda-table">
-          <thead>
-            <tr><th>Time</th><th>Segment</th><th>Goal</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>0:00 — 0:05</td>
-              <td><strong>Opening &amp; Introductions</strong></td>
-              <td>Brief mutual intros. Aaron thanks Micah for the time and confirms the 30-minute window.</td>
-            </tr>
-            <tr>
-              <td>0:05 — 0:15</td>
-              <td><strong>Discovery — Sign Online Trade</strong></td>
-              <td>Aaron asks: what does Sign Online Trade do, who's the customer, what are they sourcing today, and where are the pain points?</td>
-            </tr>
-            <tr>
-              <td>0:15 — 0:22</td>
-              <td><strong>Norris Utilities Positioning</strong></td>
-              <td>Aaron walks through the relevant lines (FlexPro Armor, Samson Rope, Skylift, Bay Shore Systems) based on what Micah shared.</td>
-            </tr>
-            <tr>
-              <td>0:22 — 0:28</td>
-              <td><strong>Fit &amp; Next Steps</strong></td>
-              <td>Identify one or two concrete areas of overlap. Agree on the next deliverable — quote, sample, site visit, or introduction.</td>
-            </tr>
-            <tr>
-              <td>0:28 — 0:30</td>
-              <td><strong>Close &amp; Confirm</strong></td>
-              <td>Recap agreed next step, timeline, and who sends what. End on time — always.</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- TALKING POINTS -->
-      <section class="nu-section">
-        <div class="nu-badge">Aaron's Talking Points</div>
-        <h2 class="nu-section-title">What to <span class="rest">Lead With</span></h2>
-        <p class="nu-section-sub">Five anchor points that capture what makes Norris Utilities different. Use them as needed — do not recite them in order.</p>
-
-        <div class="talking-grid">
-          <div class="talking-card">
-            <h4>Third-Generation Legacy</h4>
-            <p>Norris Utilities is 3rd-generation in utility equipment. Founded November 2021 in Birmingham, we run on decades of industry relationships — not a startup learning the space.</p>
+        <div class="nu-meeting-grid">
+          <div class="nu-meeting-tile">
+            <h4>Format</h4>
+            <p>Zoom (default)</p>
+            <div class="sub">In-person available on request</div>
           </div>
-          <div class="talking-card">
-            <h4>Product Depth</h4>
-            <p>FlexPro Armor bucket covers (handmade USA), Samson Rope authorized distribution, Skylift bucket trucks, and Bay Shore Systems drill rigs across the Southeast territory.</p>
+          <div class="nu-meeting-tile">
+            <h4>Length</h4>
+            <p>45 minutes</p>
+            <div class="sub">Working meeting — not a demo</div>
           </div>
-          <div class="talking-card">
-            <h4>Direct CEO Access</h4>
-            <p>Aaron is the single point of contact — no sales layers, no handoffs. Decisions, pricing, and problem-solving happen in one conversation.</p>
+          <div class="nu-meeting-tile">
+            <h4>Attendees</h4>
+            <p>Aaron + Micah</p>
+            <div class="sub">CB cc'd on logistics</div>
           </div>
-          <div class="talking-card">
-            <h4>20+ State Footprint</h4>
-            <p>Active customer base across more than twenty states. Proven logistics, established freight lanes, and reliable delivery across the Southeast and beyond.</p>
+          <div class="nu-meeting-tile">
+            <h4>Purpose</h4>
+            <p>Decide channel tier &amp; first-quarter scope</p>
+            <div class="sub">Introductions already handled by email</div>
           </div>
-          <div class="talking-card">
-            <h4>Earn the Business</h4>
-            <p>We don't assume fit — we listen first. If there's overlap, we build. If there isn't, we refer and stay in touch. Long relationships over short wins.</p>
+        </div>
+
+        <div class="nu-callout">
+          <strong>Do not schedule before Micah replies.</strong> The two emails do the work up front. Sending a calendar invite before he has read them forces him to schedule blind — the meeting becomes an introduction instead of a decision.
+        </div>
+
+        <h3 class="nu-section-title" style="font-size:1.2rem; margin-top:28px;"><span>Proposed</span> Time Windows</h3>
+        <div class="nu-meeting-grid">
+          <div class="nu-meeting-tile">
+            <h4>Option A</h4>
+            <p>Tue, Apr 28 — 10:00 AM CT</p>
+            <div class="sub">45 minutes</div>
+          </div>
+          <div class="nu-meeting-tile">
+            <h4>Option B</h4>
+            <p>Wed, Apr 29 — 2:00 PM CT</p>
+            <div class="sub">45 minutes</div>
+          </div>
+          <div class="nu-meeting-tile">
+            <h4>Option C</h4>
+            <p>Thu, Apr 30 — 8:30 AM CT</p>
+            <div class="sub">45 minutes</div>
           </div>
         </div>
       </section>
 
-      <!-- POST-MEETING -->
+      <!-- SECTION: CHECKLIST -->
       <section class="nu-section">
-        <div class="nu-badge">Post-Meeting</div>
-        <h2 class="nu-section-title">Close the <span class="rest">Loop Same Day</span></h2>
-        <p class="nu-section-sub">The meeting is not done when the call ends. Within two hours, a recap email goes to Micah with the agreed next step and timeline. Caroline Butler (CB) drafts the recap; Aaron reviews before send.</p>
-
-        <ul class="checklist">
-          <li><strong>Send recap email</strong> within 2 hours of the call — summary of what was discussed, agreed next step, who owns it, and by when.</li>
-          <li><strong>Update master tracker</strong> with call date, outcome, next-step owner, and due date.</li>
-          <li><strong>Log relevant contacts</strong> — if Micah mentioned other people at Sign Online Trade, add them to the CRM.</li>
-          <li><strong>Calendar the follow-up</strong> — whatever timeline was agreed (one week, two weeks, month-end), put it on the calendar now.</li>
-          <li><strong>If a quote is owed</strong> — route to pricing with the Ben's Shipping Formula applied and margin lines set per product category.</li>
+        <h2 class="nu-section-title"><span>Action</span> Checklist</h2>
+        <ul class="nu-checklist">
+          <li>Email #1 (Context) sent to Micah</li>
+          <li>Email #2 (Details) sent to Micah — same day, ~30 min after Email #1</li>
+          <li>Both emails logged in the master tracker under Sign Online Trading</li>
+          <li>Micah's reply received and reviewed</li>
+          <li>Meeting invite sent with Option A / B / C — CB cc'd</li>
+          <li>Meeting held; outcome recorded (channel tier, Q1 volume, next steps)</li>
+          <li>Follow-up sent within 24 hours of the meeting with written summary</li>
         </ul>
       </section>
 
@@ -826,7 +658,6 @@
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
-    <div class="nu-footer-meta">Internal Action Plan · Prepared 2026-04-21 · Phoenix Icon®</div>
   </footer>
 
 </body>
