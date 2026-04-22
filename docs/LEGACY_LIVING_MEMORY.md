@@ -1595,6 +1595,45 @@ FILES:
 - tests/test_customer_db_enrichment.py (5 new tests)
 - output/cb_invoice_packets_2026-04-22.html (regenerated with enrichment)
 
+### [LIVING_MEMORY_UPDATE] Session: FIX 10 complete at 8050899 — Gate 5 fully unblocked — 2026-04-22
+COMPLETED:
+- CC FIX 10 landed clean. Agent commit 8050899. Ops commit cb91a5c/cd3d4e1 pushed live.
+- S-2026-016 Thornhill DEPT468R shipping: reg_cost $50.60 → Ben's Formula $56 customer shipping → grand_total $361 exact. Status promoted needs_review → ready.
+- New file data/shipping_ledger_2026.json created (tracking-indexed canonical ledger, first entry 1Z2W49000395021357). Foundation for future shipping recovery work.
+- 6 new tests at tests/test_s2026_016_shipping_recovery.py (all exact-value assertions pass).
+- pytest 162/162 · Chain Electric $8,930.48 IMMUTABLE PASS · Pickle $1,834 canary PASS · FIX 9 enrichment canary PASS · grep NEEDS_REVIEW packet 0 · grep SID outside whitelist 0.
+
+DECISIONS:
+- CB aggregate workload $14,489.48 final. Composition: Chain Electric 8930.48 + Pickle 1834 + Crosby Mar 20 1736 + Myers 988 + Benz 378 + Thornhill 361 (NEW FIX 10) + R026 Primoris 262. Reconciles to the penny.
+- Gate 5 merge fully unblocked. Zero deferred items. 3 stashes preserved (pre-fix9, pre-fix10, pre-v5-recovery).
+
+CHANGED:
+- 10 fixes complete on feature/shipping-agent-v5 (FIX 1-8 Gate 4 + FIX 9 customer_db_enrichment + FIX 10 S-2026-016 shipping).
+- Tests baseline grew 148 → 162 over Session 2.
+
+BLOCKED:
+- Aaron GO on Gate 5 merge paste block.
+
+NEXT:
+- On Aaron GO → ship Gate 5 merge sequence to CC:
+    1. Re-run pytest + grep + SID + Chain Electric regression + iShip re-run. All green.
+    2. git checkout main
+    3. git merge --ff-only feature/shipping-agent-v5
+    4. git tag -a v5-session2-merged-2026-04-22 -m 'V5 S2 complete: 10 FIXes, 162 tests, Chain Electric immutable, CB workload $14,489.48'
+    5. git push origin main --tags
+    6. Portal smoke test per Section H
+    7. DO NOT pop stash@{1} pre-v5-recovery (Session 3 work)
+    8. Final Living Memory draft
+    9. Tier 2 Aaron merge complete
+- Post-merge: Section 10 Session 3 follow-ups (iShip S-019/020/021 from 2026-04-21, Boss PDF parser gog v0.12.0 fix, UPS Store pdfplumber, Scott POS export reply, Notes Intelligence Agent, CB Telegram Bot, Skylift Darrell Pickle 6-truck warm follow-up).
+
+FILES:
+- data/shipping_ledger_2026.json (new — tracking-indexed)
+- lib/invoice_prep.py (S-2026-016 packet updated)
+- tests/test_s2026_016_shipping_recovery.py (new — 6 tests)
+- output/cb_invoice_packets_2026-04-22.html (regenerated)
+- ops shipments.html (regenerated, pushed live)
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
