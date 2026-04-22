@@ -1524,6 +1524,16 @@ S-2026-016 minted for SD-2026-THORNHILL-DEPT468R-0320. LineTec/Thornhill, PO DEP
 NEXT: Part 3/6 Pickle Florence → reuse S-2026-014.
 
 
+### [LIVING_MEMORY_UPDATE] SA V5 S2 — D.8 part 4/6 Myers — 2026-04-22T12:21Z
+[LIVING_MEMORY_UPDATE] SA V5 S2 — D.8 part 4/6 Myers AEP — 2026-04-22T12:21Z
+
+S-2026-015 reused for SD-2026-MYERS-AEP-0320. AEP/SWEPCO Roanoke / Sammy Myers at 1800 Loch Haven Dr Roanoke VA 24019. Ship 2026-03-20, delivered 2026-03-23, tracking 1Z2W49000395012652. 2x NU-BC-2834-F + 1x NU-BC-2834-C, subtotal $915. reg_cost NEEDS_REVIEW (silent-drop). cb_internal_note flags CC-on-file (4% fee if charged) + UPS Abshire/Myers clerical alias (name_aliases.json entry pending).
+
+Commits: agent 6923662, ops 35aca84 (pushed).
+
+NEXT: Part 5/6 Crosby Dominion 0421 (rename + update S-2026-011).
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -2582,3 +2592,18 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - **reg_cost:** NEEDS_REVIEW
 - **cb_internal_note:** Sammy Myers CC on file in Aaron's phone — apply 4% processing fee line item if charged to card. UPS receipt may show alias 'Abshire' for Sammy — alias entry needed in name_aliases.json.
 - **Persisted:** 2026-04-22T12:21:42Z
+
+### S-2026-011 — Coy Crosby / Dominion Energy — 2026-04-21 (PENDING)
+
+- **Filename:** SD-2026-CROSBY-DOMINION-0421.html (locked)
+- **Customer:** Coy Crosby / Dominion Energy
+- **PO:** 4501057807
+- **Ship To:** Dominion Energy Fleet, Dominion Energy, 192 Old Wire Rd, West Columbia, SC 29172
+- **Line items:** 5x NU-BC-2851 — subtotal $1525.00
+- **Ship Date:** 2026-04-21
+- **Tracking:** pending parse
+- **Delivered:** pending
+- **fulfillment_source:** nu_stock
+- **reg_cost:** PENDING
+- **cb_internal_note:** RFP April 8 → Taulia PO 4501057807 issued April 13 → shipped April 21 (4 business days production). Vendor # 300279384. Material Number 42350802 (Dominion internal material code). Ship-to is Dominion Fleet hub West Columbia SC. Coy's followup thank-you replied April 16. Tracking + RegCost pending parse from Gmail iShip thread 19db0f97c1ffdbe5 + ups_store_receipt same-day receipt.
+- **Persisted:** 2026-04-22T12:22:27Z
