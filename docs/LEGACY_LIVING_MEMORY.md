@@ -2622,3 +2622,18 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - **reg_cost:** PENDING
 - **cb_internal_note:** Boss drop-ship from March 24 verbal order (Aaron screenshot of AJ's text msg_id 362-364). Single ship-to Hattiesburg (Jeremy Brown / Searcy AR was separate stub, archived as superseded in D.9 commit 126e7c0; prior 'two ship-to' note is stale). Three Boss invoices 6775/6776/6777 cover this order (likely split for shipping/manufacturing), attached to Gmail thread 19da1b9c32c5cfdc message 19db07af02e86d75 from Thayne Grove 2026-04-21 14:38 UTC. RegCost + tracking pending Boss PDF extraction (Aaron downloads manually to ~/norris-agent/data/boss_pdfs/ if gog v0.12.0 attachment syntax blocks). Subtotal $2,850.
 - **Persisted:** 2026-04-22T12:23:39Z
+
+### S-2026-013 — Jimmy Benz / AEP / SWEPCO — 2026-03-20 (✅ SHIPPED)
+
+- **Filename:** SD-2026-BENZ-SWEPCO-0320.html (locked)
+- **Customer:** Jimmy Benz / AEP / SWEPCO
+- **PO:** Truck #860377
+- **Ship To:** Jimmy Benz, SWEPCO, 101 W Township Street, Fayetteville, AR 72703
+- **Line items:** 1x NU-BC-2851 — subtotal $305.00
+- **Ship Date:** 2026-03-20
+- **Tracking:** 1Z2W49000393585850
+- **Delivered:** 2026-03-24
+- **fulfillment_source:** nu_stock
+- **reg_cost:** $52.16
+- **cb_internal_note:** Shipped Mar 20, delivered Mar 24. NOT YET INVOICED. QB invoice pending. Reference Truck #860377 in invoice memo. Customer charge $94 (Ben's Formula historical override — default formula computes $59; historical record wins).
+- **Persisted:** 2026-04-22T12:27:05Z
