@@ -1,0 +1,224 @@
+/* ══════════════════════════════════════════════════════════════════
+   SHIPMENTS V1 — Phase A scope
+   Top-bar, blocked banner, Live Shipping Log iframe, footer, phoenix
+   Section 2 appends PULSE/chips/table/search styles.
+   ══════════════════════════════════════════════════════════════════ */
+
+@import url("/assets/css/NU_Brand_CSS_Framework.css");
+
+/* ── Page frame ── */
+body {
+  background: #fafafa;
+  min-height: 100vh;
+}
+
+/* ── 3-tier nav ── */
+.nu-topnav-row-1 {
+  background: #fff;
+  border-bottom: 1px solid #e1e5ee;
+  padding: 8px 24px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.nu-topnav-row-1 a {
+  color: #1a1a2e;
+  font-weight: 900;
+  text-decoration: none;
+}
+.nu-topnav-row-1 a:hover { color: var(--nu-blue-primary); }
+
+.nu-topnav-row-2 {
+  background: #fff;
+  border-bottom: 2px solid var(--nu-blue);
+  padding: 10px 24px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+.nu-topnav-row-2 a {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--nu-blue);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+}
+.nu-topnav-row-2 a:hover { background: #f0f2ff; }
+.nu-topnav-row-2 a.active {
+  background: var(--nu-blue-primary);
+  color: #fff;
+}
+
+.nu-topnav-row-3 {
+  background: #f8f9fb;
+  border-bottom: 1px solid #e1e5ee;
+  padding: 8px 24px;
+  display: flex;
+  gap: 4px;
+  font-size: 11px;
+}
+.nu-topnav-row-3 a {
+  color: #666;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.nu-topnav-row-3 a:hover { background: #eceff5; color: var(--nu-blue-primary); }
+.nu-topnav-row-3 a.active {
+  background: #fff;
+  color: var(--nu-blue-primary);
+  border: 1px solid #dde2ff;
+}
+
+/* ── Header hero overrides (tighter for working pages) ── */
+.nu-header {
+  padding: 40px 40px 60px;
+  min-height: 200px;
+}
+.nu-logo-img {
+  height: 70px;
+  margin-bottom: 12px;
+}
+.nu-logo-subtitle {
+  font-size: 1.2rem;
+  letter-spacing: 0.6em;
+  margin-bottom: 14px;
+}
+.nu-tagline { font-size: 1.05rem; }
+
+/* ── Blocked-orders banner ── */
+.blocked-banner {
+  background: #fff8e1;
+  border-left: 4px solid #ff9500;
+  padding: 14px 24px;
+  margin: 20px 32px 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  border-radius: 4px;
+}
+.blocked-banner strong { color: #c76d00; }
+
+/* ── Live Shipping Log section (iframe + button) ── */
+.live-sheet-section {
+  margin: 0 32px 20px;
+  background: #fff;
+  border: 1px solid #e1e5ee;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.live-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-bottom: 1px solid #e1e5ee;
+  background: #f8f9fb;
+}
+.live-sheet-title {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--nu-blue-primary);
+}
+.live-sheet-btn {
+  font-size: 12px;
+  padding: 8px 16px;
+  background: var(--nu-blue-primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.live-sheet-btn:hover { background: #002299; }
+.live-sheet-iframe {
+  width: 100%;
+  height: 420px;
+  border: 0;
+  display: block;
+  background: #fff;
+}
+
+/* ── Main content scaffold (Section 2 populates) ── */
+.nu-main {
+  margin: 0 32px 32px;
+  min-height: 120px;
+}
+
+/* ── Footer (compact single-line) ── */
+.nu-footer-compact {
+  background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+  color: rgba(255,255,255,0.85);
+  padding: 18px 32px;
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 12px;
+  border-top: 3px solid var(--nu-blue-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.nu-footer-compact .tagline {
+  font-family: var(--font-tagline);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--nu-cyan);
+  font-size: 13px;
+}
+.nu-footer-compact .sep { color: rgba(255,255,255,0.4); }
+
+/* ── Phoenix watermark (page-level, fixed) ── */
+.phoenix-watermark {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 150px;
+  height: 150px;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: -1;
+}
+.phoenix-watermark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── Scaffold placeholder text ── */
+.scaffold-note {
+  padding: 40px 24px;
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+  background: #fff;
+  border: 1px dashed #dde2ff;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .nu-topnav-row-2, .nu-topnav-row-3 {
+    padding: 8px 12px;
+    gap: 4px;
+  }
+  .blocked-banner, .live-sheet-section, .nu-main {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+  .live-sheet-iframe { height: 340px; }
+}

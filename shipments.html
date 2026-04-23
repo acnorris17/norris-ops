@@ -5,471 +5,85 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shipments &amp; Invoicing — Norris Utilities®</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/brand.css">
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Lato', Arial, sans-serif;
-  color: var(--nu-body, #1a1a1a);
-  background: #fafafa;
-  position: relative;
-  min-height: 100vh;
-}
-body::after {
-  content: ""; position: fixed; bottom: 20px; right: 20px;
-  width: 150px; height: 150px;
-  background: url("/assets/phoenix-watermark.png") no-repeat center/contain;
-  opacity: 0.07; pointer-events: none; z-index: -1;
-}
-.nu-topnav {
-  background: #fff; border-bottom: 2px solid #0000FF;
-  padding: 10px 20px; display: flex; align-items: center; gap: 14px;
-  position: sticky; top: 0; z-index: 9999;
-}
-.nu-topnav a {
-  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-  color: #0000FF; text-decoration: none; padding: 5px 9px; border-radius: 5px;
-}
-.nu-topnav a:hover { background: #f0f2ff; }
-.nu-topnav-home { color: #1a1a2e !important; font-weight: 900 !important; }
-.nu-topnav-sep { width: 1px; height: 20px; background: #dde2ff; }
-.brand-header {
-  background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, #06D0FF 100%);
-  padding: 28px 40px 36px; color: #fff;
-}
-.brand-header h1 {
-  font-size: 28px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase;
-}
-.brand-header .subtitle {
-  font-family: 'Playfair Display', Georgia, serif; font-style: italic;
-  color: #06D0FF; font-size: 16px; margin-top: 4px;
-}
-.chevron-transition {
-  height: 30px; background: #fff;
-  clip-path: polygon(0 100%, 38% 0, 100% 100%); margin-top: -1px;
-}
-.reminder-banner {
-  background: #fff8e1; border-left: 4px solid #ff9500;
-  padding: 14px 20px; margin: 20px 32px; font-size: 13px; line-height: 1.6;
-}
-.reminder-banner strong { color: #c76d00; }
-.stat-row {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
-  padding: 0 32px; margin-bottom: 16px;
-}
-.stat-tile {
-  background: #fff; border-radius: 8px; padding: 14px 18px;
-  border-left: 4px solid #0033cc; box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-.stat-tile.cc { border-left-color: #ff9500; }
-.stat-value { font-size: 28px; font-weight: 900; color: #0033cc; }
-.stat-tile.cc .stat-value { color: #ff9500; }
-.stat-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #888; margin-top: 4px; }
-.shipping-log-link {
-  display: inline-flex; align-items: center; gap: 8px;
-  margin: 0 32px 16px; padding: 8px 16px;
-  background: #f0f2ff; border: 1px solid #dde2ff; border-radius: 6px;
-  color: #0033cc; text-decoration: none; font-size: 13px; font-weight: 700;
-}
-.shipping-log-link:hover { background: #e6ebff; }
-.status-key {
-  margin: 0 32px 16px; padding: 14px 20px;
-  background: #f8f9fb; border: 1px solid #e1e5ee; border-radius: 8px;
-  display: flex; flex-wrap: wrap; gap: 12px; font-size: 11px;
-}
-.status-key strong { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #555; margin-right: 8px; }
-.status-pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
-.status-pill.shipped { background: #d1ecf1; color: #0c5460; }
-.status-pill.processing { background: #fff3cd; color: #856404; }
-.status-pill.pending { background: #e2e3e5; color: #383d41; }
-.status-pill.invoiced { background: #d4edda; color: #155724; }
-.status-pill.cc { background: #ffe5b4; color: #7a4f00; }
-.status-pill.blocked { background: #f8d7da; color: #721c24; }
-.status-pill.reconcile { background: #ffd9b3; color: #8a4d00; }
-.table-wrap { margin: 0 32px 24px; overflow-x: auto; background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
-table.shipments { width: 100%; border-collapse: collapse; font-size: 12px; }
-table.shipments thead { background: linear-gradient(135deg, #0a0e5c, #0033cc); color: #fff; }
-table.shipments th { padding: 10px 12px; text-align: left; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; white-space: nowrap; }
-table.shipments th.center { text-align: center; }
-table.shipments tbody tr { border-bottom: 1px solid #eee; transition: background 0.15s; cursor: pointer; }
-table.shipments tbody tr:hover { background: #f5f7fb; }
-table.shipments tbody tr.expanded { background: #eef3ff; }
-table.shipments td { padding: 10px 12px; vertical-align: top; }
-table.shipments td.center { text-align: center; }
-table.shipments td.icon-col { width: 36px; text-align: center; padding: 10px 4px; }
-table.shipments td .stacked { display: block; line-height: 1.5; }
-.tracking-pill { display: inline-block; padding: 1px 6px; background: #f0f2ff; border-radius: 3px; font-size: 11px; color: #0033cc; text-decoration: none; }
-.tracking-pill:hover { text-decoration: underline; }
-.qb-link { color: #0033cc; font-weight: 700; text-decoration: none; }
-.qb-link:hover { text-decoration: underline; }
-.dash { color: #ccc; }
-.copy-btn { background: #0033cc; color: #fff; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; }
-.copy-btn:hover { background: #002299; }
-.expand-btn { background: none; border: none; color: #0033cc; cursor: pointer; font-size: 14px; }
-.detail-panel {
-  background: #f8f9fb; border-top: 2px solid #0033cc; border-bottom: 2px solid #0033cc;
-  padding: 20px 32px; display: none;
-}
-.detail-panel.open { display: block; animation: slideDown 0.25s ease-out; }
-@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-.detail-panel h3 { font-size: 14px; font-weight: 900; color: #0033cc; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
-.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; font-size: 12px; }
-.detail-block { background: #fff; padding: 12px 16px; border-radius: 6px; border: 1px solid #e1e5ee; }
-.detail-block h4 { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #555; margin-bottom: 6px; }
-.detail-block .breakdown { font-family: 'Lato', monospace; font-size: 11px; color: #444; line-height: 1.7; }
-.cb-note { background: #fff9e6; border: 1px solid #ffe08a; padding: 10px 14px; border-radius: 6px; font-size: 12px; color: #5a4500; grid-column: span 2; }
-.reference-panel {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
-  margin: 24px 32px; padding: 20px; background: #fff;
-  border: 1px solid #e1e5ee; border-radius: 8px;
-}
-.reference-col h4 { font-size: 12px; font-weight: 900; color: #0033cc; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; border-bottom: 2px solid #0033cc; padding-bottom: 6px; }
-.reference-col ol, .reference-col ul { padding-left: 20px; font-size: 12px; line-height: 1.8; }
-.reference-col code { background: #f0f2ff; padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 11px; }
-.nu-footer-bar {
-  background: linear-gradient(135deg, #000033, #000066);
-  color: rgba(255,255,255,0.85);
-  padding: 24px 40px; text-align: center; margin-top: 30px;
-}
-.nu-footer-bar .tagline {
-  font-family: 'Playfair Display', Georgia, serif; font-style: italic;
-  color: #06D0FF; font-size: 14px; margin-bottom: 6px;
-}
-.nu-footer-bar .legal { font-size: 11px; }
-.toast {
-  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-  background: #155724; color: #fff; padding: 12px 22px; border-radius: 6px;
-  font-size: 13px; font-weight: 700; z-index: 99999;
-  opacity: 0; pointer-events: none; transition: opacity 0.3s;
-}
-.toast.show { opacity: 1; }
-@keyframes sparkle { 0%,100%{box-shadow:0 0 0 transparent;} 50%{box-shadow:0 0 12px 3px rgba(255,215,0,.6);} }
-@keyframes alert-pulse { 0%,100%{background:#fff;} 50%{background:#ffe5e5;} }
-.cel-sparkle { animation: sparkle 1.5s ease-in-out; }
-.cel-confetti { animation: sparkle 3s ease-in-out; box-shadow: 0 0 20px rgba(255,215,0,0.8); }
-.cel-phoenix { animation: sparkle 5s ease-in-out; box-shadow: 0 0 30px rgba(0, 51, 204, 0.7); }
-.cel-alert { animation: alert-pulse 1s ease-in-out 3; }
-</style>
+<link rel="stylesheet" href="/assets/css/shipments-v1.css">
 </head>
 <body>
-<nav class="nu-topnav">
-  <a href="index.html" class="nu-topnav-home">&#8962; Portal</a>
-  <div class="nu-topnav-sep"></div>
-  <a href="home-base.html">Home Base</a>
-  <a href="mission-control.html">Mission Control</a>
-  <a href="shipments.html">Shipments</a>
-  <a href="shipping-log.html">Shipping Log</a>
-  <a href="po-tracker.html">PO Tracker</a>
-  <a href="cb-dashboard.html">CB Dashboard</a>
-  <a href="cb-invoices.html">CB Invoices</a>
+
+<!-- ═══ 3-tier nav ═══ -->
+<nav class="nu-topnav-row-1" aria-label="Portal home">
+  <a href="/index.html">&#8962; Norris Portal</a>
+</nav>
+<nav class="nu-topnav-row-2" aria-label="Portal sections">
+  <a href="/home-base.html">Home Base</a>
+  <a href="/mission-control.html">Mission Control</a>
+  <a href="/shipments.html" class="active">Shipments</a>
+  <a href="/shipping-log.html">Shipping Log</a>
+  <a href="/po-tracker.html">PO Tracker</a>
+  <a href="/cb-dashboard.html">CB Dashboard</a>
+  <a href="/cb-invoices.html">CB Invoices</a>
+</nav>
+<nav class="nu-topnav-row-3" aria-label="Shipments sub-sections">
+  <a href="/shipments.html" class="active">Shipments &amp; Invoicing</a>
+  <a href="/shipments/archive.html">Archived Invoices</a>
+  <a href="/shipping-docs/index.html">Shipping Docs</a>
 </nav>
 
-<header class="brand-header">
-  <h1>Shipments &amp; Invoicing</h1>
-  <div class="subtitle">Norris Utilities® — Fulfillment Tracker</div>
+<!-- ═══ NORRIS hero ═══ -->
+<header class="nu-header">
+  <img src="/assets/images/Full_Logo_White.png" alt="Norris Utilities" class="nu-logo-img">
+  <div class="nu-logo-subtitle">Shipments &amp; Invoicing</div>
+  <div class="nu-tagline">A Legacy of Commitment&reg;</div>
 </header>
-<div class="chevron-transition"></div>
 
-<div class="reminder-banner">
-  <strong>⚠ Critical reminder:</strong> Nothing is invoiced in QuickBooks until BOTH tracking number AND shipping cost are captured. Confirm both before pushing send. CB internal notes are visible to CB only — never on customer-facing SDs or invoices.
+<!-- ═══ White asymmetric chevron transition ═══ -->
+<div class="nu-chevron" aria-hidden="true">
+  <svg viewBox="0 0 100 10" preserveAspectRatio="none">
+    <polygon points="0,10 38,0 100,10" fill="#fff"/>
+  </svg>
 </div>
 
-<div class="stat-row">
-  <div class="stat-tile"><div class="stat-value" id="stat-today">0</div><div class="stat-label">Today's Orders</div></div>
-  <div class="stat-tile"><div class="stat-value" id="stat-shipped">0</div><div class="stat-label">Shipped</div></div>
-  <div class="stat-tile"><div class="stat-value" id="stat-processing">0</div><div class="stat-label">Processing</div></div>
-  <div class="stat-tile"><div class="stat-value" id="stat-pending">0</div><div class="stat-label">Pending Pickup</div></div>
-  <div class="stat-tile cc"><div class="stat-value" id="stat-cc">0</div><div class="stat-label">CC + 4% Flag</div></div>
-</div>
-
-<a class="shipping-log-link" href="shipping-log.html" target="_blank">Shipping Log →</a>
-
-<div class="status-key">
-  <strong>Status Key:</strong>
-  <span class="status-pill shipped">● SHIPPED — tracking confirmed, in transit/delivered</span>
-  <span class="status-pill processing">● PROCESSING — order received, preparing</span>
-  <span class="status-pill pending">● PENDING — awaiting pickup or carrier</span>
-  <span class="status-pill invoiced">● INVOICED — QB invoice created</span>
-  <span class="status-pill cc">⚠ CC +4% — credit-card surcharge applied</span>
-  <span class="status-pill blocked">● BLOCKED — SKU unconfirmed or other</span>
-  <span class="status-pill reconcile">● RECONCILE — conflict, needs review</span>
-</div>
-
-<div class="table-wrap">
-<table class="shipments">
-<thead>
-<tr>
-  <th></th>
-  <th>Order Date</th>
-  <th>Customer</th>
-  <th>P/N</th>
-  <th>Description</th>
-  <th class="center">Qty</th>
-  <th>Ship To</th>
-  <th>POC</th>
-  <th>Tracking #</th>
-  <th class="center">Cust. Shipping</th>
-  <th class="center">Inv #</th>
-  <th class="center">Status</th>
-  <th class="center">Copy for QB</th>
-  <th class="center">Detail</th>
-</tr>
-</thead>
-<tbody id="ship-tbody">
-  <tr><td colspan="14" style="text-align:center; padding:30px; color:#999">Loading…</td></tr>
-</tbody>
-</table>
-</div>
-
-<div id="detail-panel" class="detail-panel"></div>
-
-<section class="reference-panel">
-  <div class="reference-col">
-    <h4>Order-to-Invoice Workflow</h4>
-    <ol>
-      <li>Order received (email / Telegram / verbal)</li>
-      <li>SD generated, customer confirms</li>
-      <li>Pick &amp; pack at NU stock OR Boss drop-ship</li>
-      <li>UPS pickup → tracking captured</li>
-      <li>Shipping cost computed (Ben's / Dealer's formula)</li>
-      <li>QB invoice created (CB pastes from Copy-for-QB)</li>
-      <li>Invoice sent to customer</li>
-      <li>Sheet writeback: qb_invoice + sent + verified flagged</li>
-    </ol>
-  </div>
-  <div class="reference-col">
-    <h4>Payment Method Rules</h4>
-    <ul>
-      <li><strong>Direct Net 30/Receipt</strong> — corporate A/P, no CC fee</li>
-      <li><strong>Direct CC</strong> — add 4% processing fee line</li>
-      <li><strong>Dealer ACH</strong> — Wayne Abadie, no CC fee</li>
-      <li><strong>Dealer CC</strong> — apply 4% if charged to card</li>
-      <li><strong>LineTec branches</strong> — Alexandria=A/P, Guthrie=CC</li>
-      <li><strong>Brink</strong> — Travis Fischer ACH parent; Chad Christian CC</li>
-      <li><strong>ULCS</strong> — always 4% CC</li>
-    </ul>
-  </div>
-  <div class="reference-col">
-    <h4>Shipping Cost Formula</h4>
-    <p style="font-size:12px; line-height:1.7">
-      <strong>Ben's (direct):</strong><br>
-      <code>ROUNDUP(ROUNDUP(RegCost,0) × 1.10, 0)</code><br><br>
-      <strong>Dealer's:</strong><br>
-      <code>ROUNDUP(ROUNDUP(RegCost,0) × 1.05, 0)</code><br><br>
-      <strong>Multi-tracking:</strong> apply per-package, then sum.
-      Never sum reg costs first.
-    </p>
-  </div>
+<!-- ═══ Blocked-orders banner ═══ -->
+<section class="blocked-banner" aria-label="Critical reminder">
+  <strong>&#9888; Critical reminder:</strong>
+  Nothing is invoiced in QuickBooks until BOTH tracking number AND shipping cost are captured.
+  Confirm both before pushing send.
+  CB internal notes are visible to CB only &mdash; never on customer-facing SDs or invoices.
 </section>
 
-<footer class="nu-footer-bar">
-  <div class="tagline">A Legacy of Commitment®</div>
-  <div class="legal">© 2026 Norris Utilities, LLC — Birmingham, Alabama — Internal Use Only</div>
+<!-- ═══ Live Shipping Log (Google Sheet iframe) ═══ -->
+<section class="live-sheet-section" aria-label="Live UPS Shipping Log">
+  <div class="live-sheet-header">
+    <span class="live-sheet-title">Live UPS Shipping Log</span>
+    <a class="live-sheet-btn"
+       href="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533"
+       target="_blank" rel="noopener">Open in new tab &rarr;</a>
+  </div>
+  <iframe class="live-sheet-iframe"
+          src="https://docs.google.com/spreadsheets/d/1A6Lh6YJGclrf_r_Sgw2_iWRMoOVeFcaU2t3O_owrGaw/edit?gid=943594533#gid=943594533&amp;rm=minimal"
+          title="Live UPS Shipping Log"
+          loading="lazy"></iframe>
+</section>
+
+<!-- ═══ Main content (Section 2 populates INVOICING PULSE + filters + table) ═══ -->
+<main id="shipments-main" class="nu-main">
+  <div class="scaffold-note">Shipments &amp; Invoicing table is loading…</div>
+</main>
+
+<!-- ═══ Footer ═══ -->
+<footer class="nu-footer-compact">
+  <span class="tagline">A Legacy of Commitment&reg;</span>
+  <span class="sep">|</span>
+  <span>&copy; 2026 Norris Utilities, LLC &mdash; Birmingham, Alabama</span>
+  <span class="sep">|</span>
+  <span>Internal Use Only</span>
 </footer>
 
-<div id="toast" class="toast">Copied for QB ✓</div>
+<!-- ═══ Phoenix watermark ═══ -->
+<div class="phoenix-watermark" aria-hidden="true">
+  <img src="/assets/images/Phoenix_Blue.png" alt="">
+</div>
 
-<script>
-const DATA_URL = 'data/shipments.json';
-let lastData = null;
-let lastStatuses = {};
-
-async function fetchAndRender() {
-  try {
-    const r = await fetch(DATA_URL + '?ts=' + Date.now());
-    const j = await r.json();
-    if (lastData) detectStatusChanges(j);
-    lastData = j;
-    render(j);
-  } catch (e) { console.error('fetch failed', e); }
-}
-
-function detectStatusChanges(j) {
-  for (const rec of (j.records || [])) {
-    const prev = lastStatuses[rec.sid];
-    if (prev && prev !== rec.status) celebrate(rec.sid, prev, rec.status);
-    lastStatuses[rec.sid] = rec.status;
-  }
-}
-
-function celebrate(sid, oldS, newS) {
-  const tr = document.querySelector(`tr[data-sid="${sid}"]`);
-  if (!tr) return;
-  if (oldS === 'PENDING' && newS === 'PROCESSING') tr.classList.add('cel-sparkle');
-  else if (oldS === 'PROCESSING' && newS === 'SHIPPED') tr.classList.add('cel-confetti');
-  else if (oldS === 'SHIPPED' && newS === 'INVOICED') tr.classList.add('cel-phoenix');
-  else if (newS === 'BLOCKED' || newS === 'RECONCILE') tr.classList.add('cel-alert');
-  setTimeout(() => tr.classList.remove('cel-sparkle','cel-confetti','cel-phoenix','cel-alert'), 5500);
-}
-
-function render(j) {
-  const recs = (j.records || []).slice().sort((a,b) =>
-    (b.order_date || '').localeCompare(a.order_date || '')
-  );
-  const today = new Date().toISOString().slice(0,10);
-  document.getElementById('stat-today').textContent = recs.filter(r => r.order_date === today).length;
-  document.getElementById('stat-shipped').textContent = recs.filter(r => r.status === 'SHIPPED').length;
-  document.getElementById('stat-processing').textContent = recs.filter(r => r.status === 'PROCESSING').length;
-  document.getElementById('stat-pending').textContent = recs.filter(r => r.status === 'PENDING').length;
-  document.getElementById('stat-cc').textContent = recs.filter(r => r.cc_surcharge_applies).length;
-
-  const tbody = document.getElementById('ship-tbody');
-  if (!recs.length) {
-    tbody.innerHTML = '<tr><td colspan="14" style="text-align:center; padding:30px; color:#999">No shipments yet.</td></tr>';
-    return;
-  }
-  tbody.innerHTML = recs.map(rowHtml).join('');
-  document.querySelectorAll('.copy-btn').forEach(b => b.addEventListener('click', e => {
-    e.stopPropagation();
-    copyForQB(b.getAttribute('data-sid'));
-  }));
-  document.querySelectorAll('.expand-btn').forEach(b => b.addEventListener('click', e => {
-    e.stopPropagation();
-    toggleDetail(b.getAttribute('data-sid'));
-  }));
-  document.querySelectorAll('tr[data-sid]').forEach(tr => tr.addEventListener('click', () => {
-    toggleDetail(tr.getAttribute('data-sid'));
-  }));
-}
-
-function fmtAddr(addr) {
-  if (!addr || addr === '—') return '—';
-  const parts = addr.split(' | ');
-  if (parts.length >= 2) {
-    return `${esc(parts[0])}<br><span style="color:#666; font-size:11px">${esc(parts.slice(1).join(', '))}</span>`;
-  }
-  return esc(addr);
-}
-
-function rowHtml(r) {
-  const items = r.line_items || [];
-  const stackedPN = items.map(i => `<span class="stacked">${esc(i.pn)}</span>`).join('');
-  const stackedDesc = items.map(i => `<span class="stacked">${esc(i.description_short || '')}</span>`).join('');
-  const stackedQty = items.map(i => `<span class="stacked">${i.qty}</span>`).join('');
-  const trackings = (r.tracking_numbers || []).map(t =>
-    `<a href="https://www.ups.com/track?tracknum=${encodeURIComponent(t)}" target="_blank" class="tracking-pill">${esc(t)}</a>`
-  ).join('<br>');
-  const ship = r.customer_shipping_cost != null ? `$${r.customer_shipping_cost}` : '<span class="dash">—</span>';
-  const inv = r.qb_invoice_number
-    ? `<a class="qb-link" href="https://app.qbo.intuit.com/app/invoice${r.qb_invoice_id ? '?txnId=' + r.qb_invoice_id : ''}" target="_blank">${esc(r.qb_invoice_number)}</a>`
-    : '<span class="dash">—</span>';
-  const statusClass = (r.status || '').toLowerCase();
-  const ccBadge = r.cc_surcharge_applies ? '<span class="status-pill cc">⚠ CC</span>' : '';
-  return `
-  <tr data-sid="${esc(r.sid)}">
-    <td class="icon-col"><a href="${esc(r.sd_path)}" target="_blank" title="Open SD" onclick="event.stopPropagation()">📦</a></td>
-    <td>${esc(r.order_date || '—')}</td>
-    <td><strong>${esc(r.customer)}</strong></td>
-    <td>${stackedPN}</td>
-    <td>${stackedDesc}</td>
-    <td class="center">${stackedQty}</td>
-    <td>${fmtAddr(r.ship_to_address)}</td>
-    <td>${esc(r.poc || '—')}</td>
-    <td>${trackings || '<span class="dash">—</span>'}</td>
-    <td class="center">${ship}</td>
-    <td class="center">${inv}</td>
-    <td class="center"><span class="status-pill ${statusClass}">${esc(r.status)}</span> ${ccBadge}</td>
-    <td class="center"><button class="copy-btn" data-sid="${esc(r.sid)}">📋 Copy</button></td>
-    <td class="center"><button class="expand-btn" data-sid="${esc(r.sid)}">▼</button></td>
-  </tr>`;
-}
-
-function toggleDetail(sid) {
-  const panel = document.getElementById('detail-panel');
-  if (panel.dataset.sid === sid) {
-    panel.classList.remove('open');
-    panel.dataset.sid = '';
-    document.querySelector(`tr[data-sid="${sid}"]`)?.classList.remove('expanded');
-    return;
-  }
-  document.querySelectorAll('tr.expanded').forEach(t => t.classList.remove('expanded'));
-  document.querySelector(`tr[data-sid="${sid}"]`)?.classList.add('expanded');
-  const r = (lastData?.records || []).find(x => x.sid === sid);
-  if (!r) return;
-  panel.dataset.sid = sid;
-  panel.innerHTML = renderDetail(r);
-  panel.querySelector('.copy-btn')?.addEventListener('click', () => copyForQB(sid));
-  panel.classList.add('open');
-}
-
-function renderDetail(r) {
-  const items = (r.line_items || []).map(i => `${i.qty}× <code>${i.pn}</code> — ${esc(i.description_full || i.description_short)}`).join('<br>');
-  const trackings = (r.tracking_numbers || []).map((t, i) => {
-    const cost = (r.tracking_per_package_costs || [])[i];
-    return `<div>• <a href="https://www.ups.com/track?tracknum=${encodeURIComponent(t)}" target="_blank">${esc(t)}</a>${cost ? ` (reg $${cost})` : ''}</div>`;
-  }).join('');
-  return `
-  <h3>Detail — ${esc(r.sid)} — ${esc(r.customer)}</h3>
-  <div class="detail-grid">
-    <div class="detail-block"><h4>Bill-To</h4>${esc(r.customer)}<br>tier: ${esc(r.billing_tier)}</div>
-    <div class="detail-block"><h4>Ship-To</h4>${fmtAddr(r.ship_to_address)}<br><span style="color:#666; font-size:11px">POC: ${esc(r.poc || '—')}</span></div>
-    <div class="detail-block" style="grid-column: span 2"><h4>Line Items</h4>${items || '—'}</div>
-    <div class="detail-block"><h4>Shipping Breakdown</h4><div class="breakdown">${trackings || '—'}<br><strong>Total: $${r.customer_shipping_cost ?? '—'}</strong></div></div>
-    <div class="detail-block"><h4>Invoice / Sheet / SD</h4>
-      Inv #: ${r.qb_invoice_number ? `<a class="qb-link" href="https://app.qbo.intuit.com/app/invoice${r.qb_invoice_id ? '?txnId=' + r.qb_invoice_id : ''}" target="_blank">${esc(r.qb_invoice_number)}</a>` : '—'}<br>
-      SD: <a href="${esc(r.sd_path)}" target="_blank">${esc(r.sd_filename)}</a><br>
-      PO: ${esc(r.po_number || '—')}<br>
-      CC fee: ${r.cc_surcharge_applies ? `$${r.cc_surcharge_amount}` : 'none'}
-    </div>
-    ${r.cb_internal_note ? `<div class="cb-note"><strong>CB internal note:</strong> ${esc(r.cb_internal_note)}</div>` : ''}
-  </div>
-  <p style="margin-top:14px"><button class="copy-btn" data-sid="${esc(r.sid)}">📋 Copy ALL for QB</button></p>`;
-}
-
-function copyForQB(sid) {
-  const r = (lastData?.records || []).find(x => x.sid === sid);
-  if (!r) return;
-  const lines = [];
-  lines.push(`CUSTOMER: ${r.customer}`);
-  lines.push('');
-  lines.push(`BILLING ADDRESS:`);
-  lines.push(r.ship_to_address.split(' | ').join(', '));
-  lines.push('');
-  lines.push(`SHIP TO ADDRESS:`);
-  lines.push(r.ship_to_address.split(' | ').join(', '));
-  if (r.poc) lines.push(`ATTN: ${r.poc}`);
-  lines.push('');
-  lines.push(`PO: ${r.po_number || 'Verbal'}`);
-  lines.push(`TERMS: Due on Receipt`);
-  lines.push(`INVOICE DATE: ${new Date().toISOString().slice(0,10)}`);
-  lines.push('');
-  lines.push(`LINE ITEMS:`);
-  for (const li of (r.line_items || [])) {
-    lines.push(`${li.qty}× ${li.pn} — ${li.description_full || li.description_short}`);
-  }
-  if (r.customer_shipping_cost != null) {
-    lines.push('');
-    lines.push(`SHIPPING (UPS Ground): $${r.customer_shipping_cost}`);
-  }
-  if (r.cc_surcharge_applies) {
-    lines.push(`CC PROCESSING FEE (4%): $${r.cc_surcharge_amount}`);
-  }
-  lines.push('');
-  lines.push('TRACKING:');
-  for (const t of (r.tracking_numbers || [])) lines.push(`  ${t}`);
-  lines.push('');
-  lines.push(`MEMO: ${r.po_number || 'Verbal'}`);
-  if (r.cb_internal_note) {
-    lines.push('');
-    lines.push(`NOTES (CB INTERNAL): ${r.cb_internal_note}`);
-  }
-  navigator.clipboard.writeText(lines.join('\n')).then(() => showToast('Copied for QB ✓'));
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
-}
-
-function esc(s) {
-  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-fetchAndRender();
-setInterval(fetchAndRender, 30000);
-</script>
 </body>
 </html>
