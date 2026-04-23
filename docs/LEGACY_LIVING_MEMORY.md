@@ -3629,3 +3629,47 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - Q13: Shipping Log V9 schema design
 - Q14: SA self-healing improvements
 - Q15: Apps Script tier-awareness upgrade
+
+---
+## 2026-04-23 — SA V5 V1 REWORK SESSION 5 CLOSE (PARTIAL — 7 of 22 facts received)
+
+### TAG: sa_v5_v1_rework_session5_2026-04-23
+
+**SA V5 PREVIEW FAIL — MERGE HALTED.**
+Aaron browser-tested feature/sa-v5-completion via http://192.168.1.184:8765.
+19 defects + Gate A revision required. Main untouched. Branch at 7ef798a until V1 rework complete.
+
+**GATE A REVISED (2026-04-23 CORRECT RULE):**
+WRONG reading: "table replaces packets/iframe entirely."
+CORRECT: KEEP current live Shipments & Invoicing top portion (NORRIS hero + 3-tier nav + Live Shipping Log iframe + blocked banner).
+REPLACE ONLY bottom half: packet cards + Shipping Document Archive + FlexPro Pricing Reference card + Action Items list → new 14-col polished table.
+
+**V1 SPEC LOCKED (pending Aaron A/B final sign-off):**
+- 14-col table, Status at position 2 (far-left per Aaron), PO# at position 5 (~80px narrow, visible on row)
+- Notes: wrap-text expandable cell
+- Invoice Sent checkbox: auto-archives row
+- CC Fee: auto-calc column = (subtotal + shipping) × 0.04
+- Payment badge pill: Net30 / CC / CC on file / ACH / OnReceipt
+- INVOICING PULSE strip: 6 live tiles above table
+- Filter chips row + search bar + sortable columns
+- Progressive disclosure: default/detailed toggle
+
+**VOCABULARY RULE LOCKED 2026-04-23:**
+Aaron NEVER uses "SKU". Always "P/N" or "part number". ZERO exceptions in ALL outputs — HTML, CC prompts, Gmail drafts, Telegram sends, memory updates, Legacy responses. Update all templates accordingly.
+
+**PROCESS RULE LOCKED 2026-04-23:**
+M5 Claude writes plain-English spec BEFORE any CC prompt.
+Aaron signs "SPEC LOCKED". THEN CC prompt written.
+Breaks the build loop where CC produced Sessions 3/4/5 work that failed Aaron's functional test.
+
+**VERIFICATION RULE LOCKED 2026-04-23:**
+CC grep + pytest verify file structure only.
+Aaron functional click-test in browser preview = canonical pre-merge gate.
+NO MERGE without Aaron's explicit PREVIEW PASS.
+
+**BRAND INHERITANCE RULE LOCKED 2026-04-23:**
+New HTML must EXTEND existing live page templates.
+NU_Brand_CSS_Framework.css MUST be inherited — no orphaned builds lacking Lato, brand gradient, or NORRIS logo.
+CC verifies visual match to reference page before declaring done.
+
+⚠️ INCOMPLETE — 15 additional facts (8–22) not yet received.
