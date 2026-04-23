@@ -4228,3 +4228,24 @@ Write broken. Address post-SA-V5-DONE per Aaron direction. Pages 187 → 211 thr
 
 **FACT 18 — AARON POSITION Phase A click-test:**
 Aaron gave detailed feedback to M5 Claude. PHASE A PASS status to CC unclear at Session 6 close. Session 7 will verify via Gmail drafts / Aaron continuation.
+
+---
+## 2026-04-23 — Session 6 Summary (Sections 1–4 partial; more pending)
+
+### Session ID: 2026-04-23-Session-6-Phase-A-Complete-Handoff
+
+**ONE-LINE:** Session 6 converted spec to phased CC prompt, CC executed Phase A clean (76/76 tests), Aaron click-tested with feedback, produced handoff for Session 7 Phase B.
+
+**WHY:** Session 5 ended mid-Q&A. Session 6 took A/B decisions + SPEC LOCKED, produced Cowork bootstrap prompt for registry, produced CC FIX prompt, got Phase A built and preview-ready. Pivoted mid-way when CC honestly surfaced 18-section one-shot was 20-40 hours with stale paths.
+
+**ACCOMPLISHED:**
+- Cowork bootstrap: 79 entries + 51 review rows. Saved to Drive.
+- 3 POC clarifications: Abide confirmed (QB auth), Brian Riley confirmed, Pike left as-is.
+- 3 hand-appends confirmed: LineTec-Thornhill-Alexandria, LineTec-LeCompte-Corporate, Irby-McCarty-None.
+- Canonical naming rule locked as project law.
+- Registry live: 82 entries, MD5 220dd369.
+- Lavette NOT added (banker). Lemoine NOT added (BSS/RCOO only).
+- 18-section one-shot CC prompt written → CC pushed back honestly on 9 stale state issues (HEAD drift 7ef798a→357b961, preview server down, paths stale, etc.). HONEST PIVOT.
+- Phase A (Sections 0/1/7-lite/2/4) executed clean. 76/76 tests. Phase B (3/5/6/7-full/8), C (9), D (10-14), E (15-18) deferred.
+
+⚠️ Summary sections 5–11 not yet received.
