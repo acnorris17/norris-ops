@@ -3673,3 +3673,108 @@ NU_Brand_CSS_Framework.css MUST be inherited — no orphaned builds lacking Lato
 CC verifies visual match to reference page before declaring done.
 
 ⚠️ INCOMPLETE — 15 additional facts (8–22) not yet received.
+
+---
+## 2026-04-23 Session 5 V1 Rework Spec Lock (Facts 8–22)
+
+**Facts 1–7 logged in previous entry above.**
+
+**FACT 8 — CUSTOMER REGISTRY ARCHITECTURE (locked 2026-04-23):**
+File: ~/norris-agent/data/customer_registry.json
+Schema per entry: id (Company-Person-Branch), canonical_name, company_root, branch, tier (direct|dealer), poc (name/email/phone/mobile), aliases[], payment {method, cc_on_file, cc_fee_applies, po_required}, drop_ship_endpoints[] (dealers only), internal_notes.
+Bootstrap examples:
+- LineTec-Thornhill-Alexandria: canonical "LineTec Services - Richard Thornhill", aliases [LTS Power, LineTec, LTS Alexandria], Net30 + po_required=true + cc_fee_applies=false
+- LineTec-Guthrie-GA: canonical "LineTec Services - Steve Guthrie", branch "Guthrie, GA", CC + cc_fee_applies=true
+- AerialHydraulics-Abadie-Dealer: tier=dealer, drop_ship_endpoints=[Primoris T&D Conroe TX PSC George Dufour, Primoris Gilmer TX Michael Flemming]
+Fuzzy-match: ≥95% auto-apply + silent log; 80-95% apply + flag morning brief; <80% → RECONCILE/REVIEW. Aaron confirms once → alias remembered forever.
+Bootstrap source: QB_Contact_List_with_Addresses__1_10_26.xlsx + historical shipments.json.
+
+**FACT 9 — QB INVOICE PDF AUTO-CAPTURE PIPELINE (locked 2026-04-23):**
+Step 1: Legacy Gmail watcher — sender quickbooks@notification.intuit.com, subject contains "Invoice" + customer, PDF attachment. Also watch Aaron's Sent folder.
+Step 2: Pull PDF. Step 3: Parse via pdfplumber (invoice #, customer, line items, total, date sent).
+Step 4: Match against shipments.json on customer + line items + ±7-day window.
+Step 5: Single match → populate INV #, tick Invoice Sent, archive row, save PDF to ~/norris-ops/invoices/YYYY-MM/Invoice_XXXX_[customer-slug].pdf. INV # becomes clickable link.
+Step 6: No match or multiple → RECONCILE/REVIEW, candidates in expanded panel.
+Redundancy: Legacy + SA both run independently.
+
+**FACT 10 — REDUNDANCY ARCHITECTURE (locked 2026-04-23):**
+Legacy = Watcher: Gmail every 3 min (4AM-10:30PM CT), QB webhook, UPS tracking.
+SA = Validator + Actor: reads event bus every 3 min (offset +90s from Legacy), independent scan, cross-references.
+dedup_key = sha256(customer + invoice# + event_type + ISO date to minute precision). First emitter commits; second verifies.
+Heartbeat: each writes ~/norris-agent/heartbeat/{legacy|sa}.ts every 60s. >5 min without heartbeat → other takes over solo + pages Aaron Tier 2.
+Morning brief: 4 AM agreement rate summary. Tradeoff accepted: ~2 days build for "NO GAPS. NO MISTAKES. NO ERRORS."
+
+**FACT 11 — AUTO-STATUS ENGINE V1:**
+QB invoice creation → status=invoiced + INV # populate.
+Sent email with invoice attachment → Invoice Sent tick + row archive.
+UPS delivery confirmation (V1 promotion) → notify Aaron Tier 2.
+Customer reply parsing V1/V2 pending Aaron B answer.
+
+**FACT 12 — ARCHIVED INVOICES PAGE:**
+URL: norrisops.com/shipments/archive. Grouped by month (default open), nested by year (collapsible). Sort = Invoice # descending trumps date. Searchable + filterable (year/status/date range/$). CSV export. Same brand framework. Never deleted.
+
+**FACT 13 — SD HTML NAVIGATION:**
+Every SD HTML page (existing + future) gets header bar: small NORRIS logo (top-left, links to /shipments), "← Back to Shipments & Invoicing", "← Back to Shipping Docs Index". Same Lato + brand colors. Body unchanged.
+
+**FACT 14 — SHIPPING DOCS INDEX V1:**
+Replace current SD#-only cards with richer cards: SD# + Customer canonical + Company + Ship Date (MM/DD/YY) + Items short summary + Status pill + Invoice # (if) + Tracking # preview (first + "+N more") + Notes preview (50 chars). Same brand. Search + sort + filter. Card click opens SD HTML in new tab.
+
+**FACT 15 — V2→V1 PROMOTIONS LOCKED:**
+Bulk select + bulk action, CSV export, full status audit log viewer modal, UPS delivery auto-status. Customer reply parsing V1 or V2 pending Aaron B answer.
+
+**FACT 16 — STATUS AUDIT TRAIL:**
+Every status change records: actor (CB/AC/Legacy/Auto/SA) + ISO 8601 UTC + timestamp_display (MM/DD/YY HH:MM:SS AM/PM CT) + from status + to status + source (free-text). Hover over status pill = last entry. "Audit Trail" link in expanded panel → full history modal (V1 promotion).
+
+**FACT 17 — COPY BUTTON ARCHITECTURE:**
+1 main "📋 Copy ALL for QB" per row: CUSTOMER / BILL-TO / SHIP-TO / PO# / PAYMENT TERMS / LINE ITEMS / SHIPPING / CC FEE / INVOICE MEMO / TOTAL.
+8 section-specific buttons in expanded panel: Bill-To / Ship-To / Tracking / Line Items / PO / Invoice Memo / Shipping+CC Fee / Customer Email.
+Every button click-tested before declared done. Every successful click fires ✅ toast.
+
+**FACT 18 — CC CUSTOMER HANDLING:**
+Payment badge pill: 🟢 Net 30 / 🔵 CC / 🟣 CC on file / 🟡 ACH / ⚪ On Receipt.
+CC Fee auto-calc column when cc_fee_applies=true. Formula = (subtotal + shipping) × 0.04. No tax (wholesale, varied state/local rates unknown).
+cc_on_file=true → Notes auto-populates "💳 CC on file — charge at invoice send" on first appearance.
+
+**FACT 19 — INVOICING PULSE (KPI strip above table):**
+6 live tiles with time-window toggle (Today / This Week / This Month / This Quarter / YTD):
+(1) Open SDs — count status ≠ invoiced
+(2) Ready to Invoice — tracking + shipping + not blocked + not REVIEW
+(3) Invoiced [period] — Invoice Sent ticks in window
+(4) NU Shipping Paid [period] — $ sum paid to UPS
+(5) Customer Shipping Billed [period] — $ sum customers paid us
+(6) Unbilled Revenue — $ open SDs × expected customer price
+Real-time, connected to visible rows. Collapsible to single icon row.
+
+**FACT 20 — RECONCILE/REVIEW STATUS — 5 EXPLICIT TRIGGERS:**
+(a) Qty mismatch: Aaron intake says 5, UPS receipt says 6
+(b) Orphan invoice: QB PDF arrives but no matching row in shipments.json
+(c) Box vs confirmation conflict: UPS dims imply one P/N, email implies another
+(d) Alias confidence 80-95%: fuzzy match not high enough for auto-apply
+(e) Legacy vs SA disagreement: one reports event, other finds no match
+Resolution: amber pulse on row, expanded panel shows both sources side-by-side, one-click resolve (Accept UPS / Accept Aaron / Merge / Reject / Promote new SD). sa_learnings.json records pattern + rule.
+
+**FACT 21 — PREVIEW SERVER STATUS:**
+RUNNING on M1 at http://192.168.1.184:8765. Worktree /tmp/sa-v5-preview, detached HEAD at 7ef798a. Command: python3 -m http.server 8765 --bind 0.0.0.0 (bg task). DO NOT TEAR DOWN until Aaron re-previews FIXED build.
+
+**FACT 22 — MERGE HALTED:**
+feature/sa-v5-completion stays on branch at 7ef798a. Main untouched (pre-SA-V5 CB Invoice Packets + stale CROSBY-0325 link). 9 commits ahead of main. MERGE ONLY AFTER: V1 rework fix + Aaron PREVIEW PASS + Aaron MERGE GO.
+
+---
+### SESSION 5 CONTEXT THAT MUST PERSIST (Section 11):
+
+11.1 M5 writes spec. Aaron signs SPEC LOCKED. THEN CC prompt. No exceptions.
+11.2 Aaron click-test = canonical pre-merge gate.
+11.3 NU_Brand_CSS_Framework.css mandatory. No orphaned builds.
+11.4 KEEP vs REPLACE must be explicit. Ambiguous language breaks build loop.
+11.5 "SKU" FORBIDDEN. Always "P/N" or "part number". Zero exceptions.
+11.6 Preview server on M1 = canonical test env for feature branch (CF deploys from main only).
+11.7 customer_registry.json = canonical for all customer naming.
+11.8 Legacy + SA redundancy with dedup_key is non-negotiable.
+11.9 RECONCILE/REVIEW = human-in-the-loop safety net. Without it FIX 11 would have duped invoices.
+11.10 Archived invoices never deleted. Invoice # trumps date for sort.
+11.11 INV # cells link to saved QB PDF in ~/norris-ops/invoices/.
+11.12 norrisops.com is canonical. ops.norrisutilities.com is retired.
+11.16 Dealer-only tier (no distributors). Distributor path raises NotImplementedError.
+11.17 Aerial Hydraulics / Wayne Abadie = NU's only current dealer; drop-ships to Primoris TX/LA.
+11.19 Superior Pipeline Services ALWAYS excluded from SA workflows.
+11.20 cron cannot access macOS login Keychain; LaunchAgents can. Always use LaunchAgents for authenticated background services.
