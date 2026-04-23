@@ -499,6 +499,67 @@ body {
   border-color: var(--nu-blue-primary);
 }
 
+/* ── Copy buttons (Section 4) ── */
+.copy-trigger.open {
+  background: var(--nu-blue-primary);
+  color: #fff;
+  border-radius: 4px;
+}
+.copy-panel-row td {
+  padding: 14px 20px;
+  background: #f8f9fb;
+  border-bottom: 2px solid var(--nu-blue-primary);
+}
+.copy-panel {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.copy-group {
+  background: #fff;
+  border: 1px solid #dde2ff;
+  border-radius: 6px;
+  padding: 10px 14px;
+  min-width: 260px;
+  flex: 1;
+}
+.copy-group-label {
+  font-size: 10px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: var(--nu-blue-primary);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.copy-group-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.copy-field-btn {
+  background: #fff;
+  border: 1px solid var(--nu-blue-primary);
+  color: var(--nu-blue-primary);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  white-space: nowrap;
+}
+.copy-field-btn:hover { background: var(--nu-blue-primary); color: #fff; }
+.copy-field-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background: #fff;
+  color: #999;
+  border-color: #ccc;
+}
+.copy-field-btn:disabled:hover { background: #fff; color: #999; }
+
 /* ── Toast (Section 4 copy buttons) ── */
 .nu-toast {
   position: fixed;
