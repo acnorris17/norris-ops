@@ -1913,6 +1913,48 @@ OPEN QUESTIONS for next session:
 3) Status badges (t12): wire on /shipments, separate from SA V5 agent?
 4) Premature a365228 tag push provenance — process failure to codify in SA V5 protocol
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S4 — Comprehensive Completion CC Prompt Dispatched — 2026-04-22
+COMPLETED:
+- Built comprehensive SA V5 Completion CC prompt (9 sections, ~600 lines)
+- Closes ALL FIX 11 audit gaps: BLOCKER (status badges + /shipping-docs/ index regen), HIGH (hyperlinks + sheet writeback + layout + T06/T07 reconciliation), LOW (adjacent pages widget + 4 missing pages conditional on Gate B)
+- Bakes in 5 process rules as validators with regression tests
+- Bakes in Apps Script reconciliation rule (V5 tier-aware ×1.05 wins over Sheet universal ×1.10)
+- Bakes in premature-tag-push prevention via lib.release.pre_tag_check()
+- Bakes in recon-before-writes protocol
+- Two Tier 1 gates inside prompt (no Aaron decisions skipped, no guessing): Gate A=shipments.html layout, Gate B=missing pages scope
+
+DECISIONS:
+- Apps Script vs V5 markup conflict: V5 wins, Sheet reconciles on writeback (logged as sa_learnings shipping_log_authoritative_source)
+- Sheet schema: stay on V8, V9 migration = roadmap
+- Apps Script tier-awareness upgrade = Q15 in next-session queue
+- /shipping-docs/index.html: auto-regen via build_sd_index.py + LaunchAgent every 30 min
+- Branch model: feature/sa-v5-completion → staging → --no-ff merge to main
+- Tag: sa-v5-completion-2026-04-22 (agent) + ops-sa-v5-completion-2026-04-22 (ops)
+
+CHANGED:
+- Prompt structure: 9 sections with Tier 2 pings between, Tier 1 only on real HALT
+- 12 canaries listed (Chain Electric, Pickle, Crosby, FIX 9/10/11, pytest 177, defensive greps, line count)
+- 11-source priority hierarchy locked
+- 12 abort conditions specified
+
+BLOCKED:
+- Awaiting Aaron paste of comprehensive prompt to M1 CC
+- CC will fire Section 1 RECON ping first, then HALT at Gate A, then Gate B, then proceed through Sections 3-8
+
+NEXT:
+- On CC ping receipt: relay Aaron's gate decisions back to CC
+- Post-merge: queue refresh (Q1-Q14 + new Q15 Apps Script tier-awareness)
+- Move to next ops build phase (CB Telegram bot, Notes Intelligence Agent, Samson portal, MSP portal, etc.)
+
+FILES:
+- Prompt staged in M5 Claude.ai chat for Aaron paste to M1 CC
+- Will produce: lib/sheet_writeback.py, lib/release.py, scripts/build_sd_index.py, scripts/backfill_sheet_writeback.py, scripts/reconcile_t06_t07_sheet.py, tests/test_5_process_rules.py, tests/test_apps_script_reconciliation.py, tests/test_sheet_writeback.py
+- Will modify: lib/qb_cross_check.py (verify FIX 11 protocols), lib/invoice_prep.py (5 process rule validators), data/sa_learnings.json (3 new lessons), data/shipments.json (status field on every record), ops portal HTML files per Gate A choice
+- Will install: ~/Library/LaunchAgents/com.norrisutilities.sd-index-rebuild.plist
+
+KEY LESSON:
+Aaron's request was "100% certainty YES." Honest answer required surfacing 2 decisions that genuinely need his input rather than guessing. Solution: encode them as Tier 1 gates INSIDE the prompt itself. Prompt remains complete because gates handle the unknowns. Aaron doesn't have to come back for more rounds — CC pauses at the right moment, asks once, then continues.
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
