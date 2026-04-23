@@ -2573,6 +2573,56 @@ Aaron asked a simple question: what backup drive to buy for the M1. Conversation
 - July (Prime Day): ~$620 (DS723+ + 2x 2TB SSDs)
 - **Total committed: ~$2,020**
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 V1 Phase B §H Recovery Complete + Spec Recovered + Trigger Pending — 2026-04-23
+RECOVERY COMPLETE — Phase B base prepared, awaiting spec verification + CC trigger.
+
+COMPLETED Session 9 so far:
+- §H CC recovery executed by Aaron, all 8 steps green per CC summary
+- agent-v4 LaunchAgent: RunAtLoad + StartInterval=1800 confirmed; bootout success; in-flight Task 239 killed mid-Claude-call at 17:03:35 CT
+- boot-recovery LaunchAgent: RunAtLoad + scripts/reconnect.sh --login confirmed as the re-loader (validates Session 8 hypothesis); bootout success
+- 120s verification window passed: launchctl empty, ps empty, agent_v4.log frozen at 17:03:35 (>60s stale)
+- norris-agent dirty tree stashed clean: stash@{0} agent_runner_work_pre_phase_b_2026-04-23 (11 mod + 20 untracked)
+- Single cc process verified: PID 60441 only (the Phase B build window)
+- Tier 1 RECOVERY COMPLETE Telegram sent successfully
+
+DECISIONS:
+- norris-ops HEAD drift from c1125aa to 23ec6f7 ACCEPTED as new Phase B base. Drift verified safe: agent-v4 auto-commits touched only internal/task_*.md + docs/pending_sessions/* — zero overlap with Phase B target paths (shipments.html, assets/js/*, assets/css/shipments-v1*, shipping-log.html, shipping-docs/index.html, shipments/archive.html, ~/norris-agent/lib/*, ~/norris-agent/tests/*). Spec §0.1 footnote covers this case explicitly.
+- Phase B master spec PHASE_B_CC_PROMPT_SESSION_7.md RECOVERED in original 2,584-line form (Aaron pasted as document attachment). No reconstruction needed. Byte-fidelity intact.
+- Per F.27, spec delivers via M1 file path (not clipboard). Target path: ~/norris-ops/docs/PHASE_B_CC_PROMPT_SESSION_7.md.
+- NorrisPalace ingest queued: tag sa_v5_phase_b_master_spec, --no-embed flag (G Brain still broken).
+
+CHANGED:
+- norris-ops branch feature/sa-v5-completion HEAD: c1125aa → 23ec6f7 (agent-v4 auto-commits, safe)
+- norris-agent dirty tree → clean via stash@{0}
+- LaunchAgent state: agent-v4 + boot-recovery now DEAD until manually re-loaded post-Phase B
+- 4 LaunchAgents verified KEEP RUNNING: claude-bridge, keepawake, nc-bridge, n8n, power-monitor, bridge
+
+BLOCKED:
+- Awaiting Aaron line-count confirmation (wc -l should return 2584) on saved spec file
+- Phase B build cannot start until spec is on disk at ~/norris-ops/docs/PHASE_B_CC_PROMPT_SESSION_7.md
+
+NEXT:
+- Aaron downloads spec from Claude.ai chat document attachment, saves to ~/norris-ops/docs/PHASE_B_CC_PROMPT_SESSION_7.md
+- Aaron runs wc -l + md5 + np ingest --no-embed
+- Aaron pastes single-line trigger to CC PID 60441: "Read ~/norris-ops/docs/PHASE_B_CC_PROMPT_SESSION_7.md and execute..."
+- CC fires PHASE B READY Tier 1 certification, runs §0 state verification (will note 23ec6f7 drift per footnote), then ~9 hour autonomous build
+- Tier 1 PHASE B DONE expected 2-10 AM CT next morning
+- Aaron click-tests at 4 AM CT per spec §10 exit protocol
+
+FILES:
+- /Users/acnorris1/norris-agent stash@{0}: agent_runner_work_pre_phase_b_2026-04-23 (POP after Phase B per §E decision 3)
+- ~/norris-ops/docs/PHASE_B_CC_PROMPT_SESSION_7.md (PENDING — Aaron writing now)
+- norris-ops HEAD 23ec6f7 (verified safe Phase B base)
+- norris-agent HEAD b241427 (clean)
+
+LaunchAgent reload checklist for post-Phase B (Session 9 → Aaron):
+- Re-load agent-v4 once Phase B PASS confirmed: launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.norrisutilities.agent-v4.plist
+- Re-load boot-recovery: launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.norrisutilities.boot-recovery.plist
+- Pop stash: cd ~/norris-agent && git stash pop stash@{0}
+- Verify agent-v4 picks up where it left off (Task 239 was killed mid-call — may need to re-queue)
+
+Session 9 instance: M5 Claude Opus 4.7 web. Bridge processes within 15 min.
+
 ## 7. OPEN DECISIONS (AARON)
 1. Confirm decision on M5 Pro (not base M5) when WWDC keynote drops June 8 — verify pricing/availability
 2. Confirm DS723+ still right call at Prime Day — if any new Synology model drops with 10GbE standard, reconsider
