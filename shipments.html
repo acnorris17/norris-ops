@@ -1,784 +1,475 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8">
-<title>CB Invoice Packets — 2026-04-22</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shipments &amp; Invoicing — Norris Utilities®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/brand.css">
 <style>
-body { font-family: 'Lato', Arial, sans-serif; max-width: 1000px; margin: 0 auto; padding: 30px; color: #1a1a2e; background: #fafafa; }
-h1 { font-size: 24px; letter-spacing: 2px; color: #0033cc; margin-bottom: 10px; }
-.intro { background: #fffbe6; border-left: 4px solid #ff9500; padding: 14px 18px; margin-bottom: 24px; font-size: 13px; }
-.intro h3 { margin-top: 0; color: #c76d00; }
-.packet { background: white; border: 1px solid #ccc; border-radius: 6px; padding: 20px; margin: 16px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-.packet h2 { font-size: 16px; margin-top: 0; color: #0033cc; letter-spacing: 1px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
-.packet h3 { font-size: 13px; letter-spacing: 1px; margin-top: 14px; color: #666; }
-.qb-action { background: #e6f0ff; border-left: 3px solid #0033cc; padding: 6px 12px; font-weight: 700; font-size: 12px; }
-.parent-ref { font-size: 11px; color: #888; font-style: italic; }
-.packet.parent { border-left: 4px solid #c00; background: #fff5f5; }
-.packet.parent .pf4 { background: #fff0f0; border: 1px solid #f5c0c0; padding: 12px; border-radius: 4px; margin: 10px 0; }
-.packet.parent .pf4 h3 { color: #c00; }
-.packet.standalone { border-left: 4px solid #999; }
-.packet.r026 { border-left: 4px solid #6a0; }
-dl { display: grid; grid-template-columns: 180px 1fr; gap: 4px 12px; margin: 10px 0; font-size: 12px; }
-dt { font-weight: 700; color: #555; }
-table.items { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px; }
-table.items th { background: #f2f2f2; padding: 6px 10px; text-align: left; font-size: 10px; letter-spacing: 1px; }
-table.items td { padding: 6px 10px; border-top: 1px solid #eee; }
-.memo { background: #f5f5f5; padding: 8px 12px; font-size: 11px; margin: 10px 0; }
-.note { background: #fff9e6; padding: 8px 12px; font-size: 11px; margin: 6px 0; font-style: italic; color: #777; }
-.grand { text-align: right; font-size: 16px; font-weight: 700; margin-top: 10px; color: #0033cc; }
-section.packet p { margin: 6px 0; font-size: 12px; }
-code { background: #eee; padding: 2px 6px; border-radius: 3px; font-size: 11px; }
-</style></head>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Lato', Arial, sans-serif;
+  color: var(--nu-body, #1a1a1a);
+  background: #fafafa;
+  position: relative;
+  min-height: 100vh;
+}
+body::after {
+  content: ""; position: fixed; bottom: 20px; right: 20px;
+  width: 150px; height: 150px;
+  background: url("/assets/phoenix-watermark.png") no-repeat center/contain;
+  opacity: 0.07; pointer-events: none; z-index: -1;
+}
+.nu-topnav {
+  background: #fff; border-bottom: 2px solid #0000FF;
+  padding: 10px 20px; display: flex; align-items: center; gap: 14px;
+  position: sticky; top: 0; z-index: 9999;
+}
+.nu-topnav a {
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: #0000FF; text-decoration: none; padding: 5px 9px; border-radius: 5px;
+}
+.nu-topnav a:hover { background: #f0f2ff; }
+.nu-topnav-home { color: #1a1a2e !important; font-weight: 900 !important; }
+.nu-topnav-sep { width: 1px; height: 20px; background: #dde2ff; }
+.brand-header {
+  background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, #06D0FF 100%);
+  padding: 28px 40px 36px; color: #fff;
+}
+.brand-header h1 {
+  font-size: 28px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase;
+}
+.brand-header .subtitle {
+  font-family: 'Playfair Display', Georgia, serif; font-style: italic;
+  color: #06D0FF; font-size: 16px; margin-top: 4px;
+}
+.chevron-transition {
+  height: 30px; background: #fff;
+  clip-path: polygon(0 100%, 38% 0, 100% 100%); margin-top: -1px;
+}
+.reminder-banner {
+  background: #fff8e1; border-left: 4px solid #ff9500;
+  padding: 14px 20px; margin: 20px 32px; font-size: 13px; line-height: 1.6;
+}
+.reminder-banner strong { color: #c76d00; }
+.stat-row {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
+  padding: 0 32px; margin-bottom: 16px;
+}
+.stat-tile {
+  background: #fff; border-radius: 8px; padding: 14px 18px;
+  border-left: 4px solid #0033cc; box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.stat-tile.cc { border-left-color: #ff9500; }
+.stat-value { font-size: 28px; font-weight: 900; color: #0033cc; }
+.stat-tile.cc .stat-value { color: #ff9500; }
+.stat-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #888; margin-top: 4px; }
+.shipping-log-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 0 32px 16px; padding: 8px 16px;
+  background: #f0f2ff; border: 1px solid #dde2ff; border-radius: 6px;
+  color: #0033cc; text-decoration: none; font-size: 13px; font-weight: 700;
+}
+.shipping-log-link:hover { background: #e6ebff; }
+.status-key {
+  margin: 0 32px 16px; padding: 14px 20px;
+  background: #f8f9fb; border: 1px solid #e1e5ee; border-radius: 8px;
+  display: flex; flex-wrap: wrap; gap: 12px; font-size: 11px;
+}
+.status-key strong { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #555; margin-right: 8px; }
+.status-pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+.status-pill.shipped { background: #d1ecf1; color: #0c5460; }
+.status-pill.processing { background: #fff3cd; color: #856404; }
+.status-pill.pending { background: #e2e3e5; color: #383d41; }
+.status-pill.invoiced { background: #d4edda; color: #155724; }
+.status-pill.cc { background: #ffe5b4; color: #7a4f00; }
+.status-pill.blocked { background: #f8d7da; color: #721c24; }
+.status-pill.reconcile { background: #ffd9b3; color: #8a4d00; }
+.table-wrap { margin: 0 32px 24px; overflow-x: auto; background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+table.shipments { width: 100%; border-collapse: collapse; font-size: 12px; }
+table.shipments thead { background: linear-gradient(135deg, #0a0e5c, #0033cc); color: #fff; }
+table.shipments th { padding: 10px 12px; text-align: left; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; white-space: nowrap; }
+table.shipments th.center { text-align: center; }
+table.shipments tbody tr { border-bottom: 1px solid #eee; transition: background 0.15s; cursor: pointer; }
+table.shipments tbody tr:hover { background: #f5f7fb; }
+table.shipments tbody tr.expanded { background: #eef3ff; }
+table.shipments td { padding: 10px 12px; vertical-align: top; }
+table.shipments td.center { text-align: center; }
+table.shipments td.icon-col { width: 36px; text-align: center; padding: 10px 4px; }
+table.shipments td .stacked { display: block; line-height: 1.5; }
+.tracking-pill { display: inline-block; padding: 1px 6px; background: #f0f2ff; border-radius: 3px; font-size: 11px; color: #0033cc; text-decoration: none; }
+.tracking-pill:hover { text-decoration: underline; }
+.qb-link { color: #0033cc; font-weight: 700; text-decoration: none; }
+.qb-link:hover { text-decoration: underline; }
+.dash { color: #ccc; }
+.copy-btn { background: #0033cc; color: #fff; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; }
+.copy-btn:hover { background: #002299; }
+.expand-btn { background: none; border: none; color: #0033cc; cursor: pointer; font-size: 14px; }
+.detail-panel {
+  background: #f8f9fb; border-top: 2px solid #0033cc; border-bottom: 2px solid #0033cc;
+  padding: 20px 32px; display: none;
+}
+.detail-panel.open { display: block; animation: slideDown 0.25s ease-out; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+.detail-panel h3 { font-size: 14px; font-weight: 900; color: #0033cc; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; font-size: 12px; }
+.detail-block { background: #fff; padding: 12px 16px; border-radius: 6px; border: 1px solid #e1e5ee; }
+.detail-block h4 { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #555; margin-bottom: 6px; }
+.detail-block .breakdown { font-family: 'Lato', monospace; font-size: 11px; color: #444; line-height: 1.7; }
+.cb-note { background: #fff9e6; border: 1px solid #ffe08a; padding: 10px 14px; border-radius: 6px; font-size: 12px; color: #5a4500; grid-column: span 2; }
+.reference-panel {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  margin: 24px 32px; padding: 20px; background: #fff;
+  border: 1px solid #e1e5ee; border-radius: 8px;
+}
+.reference-col h4 { font-size: 12px; font-weight: 900; color: #0033cc; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; border-bottom: 2px solid #0033cc; padding-bottom: 6px; }
+.reference-col ol, .reference-col ul { padding-left: 20px; font-size: 12px; line-height: 1.8; }
+.reference-col code { background: #f0f2ff; padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 11px; }
+.nu-footer-bar {
+  background: linear-gradient(135deg, #000033, #000066);
+  color: rgba(255,255,255,0.85);
+  padding: 24px 40px; text-align: center; margin-top: 30px;
+}
+.nu-footer-bar .tagline {
+  font-family: 'Playfair Display', Georgia, serif; font-style: italic;
+  color: #06D0FF; font-size: 14px; margin-bottom: 6px;
+}
+.nu-footer-bar .legal { font-size: 11px; }
+.toast {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background: #155724; color: #fff; padding: 12px 22px; border-radius: 6px;
+  font-size: 13px; font-weight: 700; z-index: 99999;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.toast.show { opacity: 1; }
+@keyframes sparkle { 0%,100%{box-shadow:0 0 0 transparent;} 50%{box-shadow:0 0 12px 3px rgba(255,215,0,.6);} }
+@keyframes alert-pulse { 0%,100%{background:#fff;} 50%{background:#ffe5e5;} }
+.cel-sparkle { animation: sparkle 1.5s ease-in-out; }
+.cel-confetti { animation: sparkle 3s ease-in-out; box-shadow: 0 0 20px rgba(255,215,0,0.8); }
+.cel-phoenix { animation: sparkle 5s ease-in-out; box-shadow: 0 0 30px rgba(0, 51, 204, 0.7); }
+.cel-alert { animation: alert-pulse 1s ease-in-out 3; }
+</style>
+</head>
 <body>
-<h1>CB Invoice-Ready Writeset — Norris Utilities — 2026-04-22 23:39 UTC</h1>
+<nav class="nu-topnav">
+  <a href="index.html" class="nu-topnav-home">&#8962; Portal</a>
+  <div class="nu-topnav-sep"></div>
+  <a href="home-base.html">Home Base</a>
+  <a href="mission-control.html">Mission Control</a>
+  <a href="shipments.html">Shipments</a>
+  <a href="shipping-log.html">Shipping Log</a>
+  <a href="po-tracker.html">PO Tracker</a>
+  <a href="cb-dashboard.html">CB Dashboard</a>
+  <a href="cb-invoices.html">CB Invoices</a>
+</nav>
 
-<div class="intro">
-<h3>CB Action Sequence</h3>
-<ol>
-<li>Open this page — read top to bottom.</li>
-<li>For each packet, create a QB invoice per the <strong>QB ACTION</strong> label.</li>
-<li>Paste exact line items, shipping, adjustments from the packet into QB.</li>
-<li>Set payment terms, memo, customer email per packet.</li>
-<li>Save + send invoice.</li>
-<li>Flag anything that doesn't match QB customer — Aaron reviews.</li>
-<li>Estimated time: 60-90 minutes at normal pace.</li>
-</ol>
-<p><strong>Notes:</strong> Do NOT paste "CB internal note" into QB (internal tracking only).
-PF4 lock: S-2026-017 Chain Electric $8,930.48 is IMMUTABLE — do not recompute.
-Ben's Formula (direct): ROUNDUP(ROUNDUP(RegCost,0) × 1.10, 0). Dealer tier uses ×1.05.</p>
+<header class="brand-header">
+  <h1>Shipments &amp; Invoicing</h1>
+  <div class="subtitle">Norris Utilities® — Fulfillment Tracker</div>
+</header>
+<div class="chevron-transition"></div>
+
+<div class="reminder-banner">
+  <strong>⚠ Critical reminder:</strong> Nothing is invoiced in QuickBooks until BOTH tracking number AND shipping cost are captured. Confirm both before pushing send. CB internal notes are visible to CB only — never on customer-facing SDs or invoices.
 </div>
 
-<h1 style="margin-top: 30px;">SECTION A — MAIN INVOICE PACKETS (22)</h1>
-
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-001 — Aerial Hydraulics, Inc.</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Aerial Hydraulics, Inc.</dd>
-<dt>Ship to:</dt><dd>Primoris T&D Services<br>Attn: PSC George Dufour<br>3606 N. Frazier St<br>Conroe, TX 77303</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>0330-PRIMORIS W6237</dd>
-<dt>Invoice date:</dt><dd>March 31, 2026</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">2</td><td style="text-align:right">$305.00</td><td style="text-align:right">$610.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$610.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO 0330-PRIMORIS W6237"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $610.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-002 — Chain Electric</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Chain Electric</dd>
-<dt>Ship to:</dt><dd>Jeremy Brown<br>2631 Ridgewood Rd<br>Searcy, AR 72143</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>Verbal</dd>
-<dt>Invoice date:</dt><dd>TBD</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
-<tr><td><code>NU-BC-2834</code></td><td>FlexPro Armor 1.5-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$265.00</td><td style="text-align:right">$1325.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$2850.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO Verbal"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $2850.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-003 — Chain Electric</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Chain Electric</dd>
-<dt>Ship to:</dt><dd>AJ Morris<br>Chain Electric Company<br>1308 W Pine St<br>Hattiesburg, MS 39401<br>(601) 549-5409 | ajmorris@bchain.com</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>Verbal</dd>
-<dt>Invoice date:</dt><dd>TBD</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$1525.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO Verbal"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $1525.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-004 — Chain Electric</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Chain Electric</dd>
-<dt>Ship to:</dt><dd>AJ Morris<br>Chain Electric Company<br>1308 W Pine St<br>Hattiesburg, MS 39401</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>Verbal</dd>
-<dt>Invoice date:</dt><dd>TBD</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2834-F</code></td><td>FlexPro Armor ARCH Bucket Cover for 1.5-Man</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$1525.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO Verbal"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $1525.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-005 — Chain Electric</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Chain Electric</dd>
-<dt>Ship to:</dt><dd>Jeremy Brown<br>2631 Ridgewood Rd<br>Searcy, AR 72143</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>Verbal</dd>
-<dt>Invoice date:</dt><dd>TBD</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2834-F</code></td><td>FlexPro Armor ARCH Bucket Cover for 1.5-Man</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$1525.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO Verbal"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $1525.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-006 — LineTec Services, LLC</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>LineTec Services, LLC</dd>
-<dt>Ship to:</dt><dd>Linetec Services<br>Attn: Richard Thornhill<br>6411 Masonic Drive<br>Alexandria, LA 71301</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>DEPT450</dd>
-<dt>Invoice date:</dt><dd>TBD</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$305.00</td><td style="text-align:right">$305.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$305.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO DEPT450"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $305.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-007 — AEP/SWEPCO</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>AEP/SWEPCO</dd>
-<dt>Ship to:</dt><dd>Dave Bedwell<br>AEP/SWEPCO<br>355 South 145th East Ave<br>Tulsa, OK 74108</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>Verbal</dd>
-<dt>Invoice date:</dt><dd>Today</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-DSHAPE</code></td><td>FlexPro Armor D-Shape Transmission Bucket Cover</td><td style="text-align:right">4</td><td style="text-align:right">$0.00</td><td style="text-align:right">$0.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$0.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO Verbal"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $0.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-008 — Aerial Hydraulics, Inc.</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Aerial Hydraulics, Inc.</dd>
-<dt>Ship to:</dt><dd>Michael Flemming<br>2015 Holly Rd<br>Gilmer, TX 75644</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>0407-BYB0001</dd>
-<dt>Invoice date:</dt><dd>April 7, 2026</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2828</code></td><td>FlexPro Armor 1-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$235.00</td><td style="text-align:right">$235.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$235.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO 0407-BYB0001"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $235.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-009 — LineTec Services, LLC</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>LineTec Services, LLC</dd>
-<dt>Ship to:</dt><dd>Linetec Services<br>Attn: Richard Thornhill<br>6411 Masonic Drive<br>Alexandria, LA 71301</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>DEPT889</dd>
-<dt>Invoice date:</dt><dd>April 7, 2026</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$305.00</td><td style="text-align:right">$305.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$305.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO DEPT889"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $305.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-010 — LineTec - Thornhill Alexandria</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>LineTec - Thornhill Alexandria</dd>
-<dt>Ship to:</dt><dd>Richard Thornhill<br>LineTec Services / LTS Power<br>6411 Masonic Drive<br>Alexandria LA 71301</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>DEPT732</dd>
-<dt>Invoice date:</dt><dd>TBD</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$305.00</td><td style="text-align:right">$305.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$305.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO DEPT732"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $305.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-011 — Dominion Energy</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Dominion Energy</dd>
-<dt>Ship to:</dt><dd>Dominion Energy Fleet<br>Dominion Energy<br>192 Old Wire Rd, West Columbia, SC 29172</dd>
-<dt>POC:</dt><dd>Coy Crosby</dd>
-<dt>PO:</dt><dd>4501057807</dd>
-<dt>Invoice date:</dt><dd>2026-04-21</dd>
-<dt>Payment terms:</dt><dd>Corporate A/P / Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$1525.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO 4501057807"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> RFP April 8 → Taulia PO 4501057807 issued April 13 → shipped April 21 (4 business days production). Vendor # 300279384. Material Number 42350802 (Dominion internal material code). Ship-to is Dominion Fleet hub West Columbia SC. Coy's followup thank-you replied April 16. Tracking + RegCost pending parse from Gmail iShip thread 19db0f97c1ffdbe5 + ups_store_receipt same-day receipt.</p>
-<p class="grand">GRAND TOTAL: $1525.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-012 — LineTec - Thornhill Alexandria</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>LineTec - Thornhill Alexandria</dd>
-<dt>Ship to:</dt><dd>Linetec Services<br>Attn: Jeremy Nunez<br>1966 River Road<br>Marksville, LA 71351</dd>
-<dt>POC:</dt><dd></dd>
-<dt>PO:</dt><dd>DEPT420</dd>
-<dt>Invoice date:</dt><dd>TBD</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$305.00</td><td style="text-align:right">$305.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$305.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "PO DEPT420"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> </p>
-<p class="grand">GRAND TOTAL: $305.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-013 — AEP / SWEPCO</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>AEP / SWEPCO</dd>
-<dt>Ship to:</dt><dd>Jimmy Benz<br>SWEPCO<br>101 W Township Street, Fayetteville, AR 72703</dd>
-<dt>POC:</dt><dd>Jimmy Benz</dd>
-<dt>PO:</dt><dd>Truck #860377</dd>
-<dt>Invoice date:</dt><dd>2026-03-20</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$305.00</td><td style="text-align:right">$305.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$305.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $59.00<br><span style="font-size:11px;color:#666">tracking captured from iShip/Store receipt</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000393585850 | PO Truck #860377"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> Shipped Mar 20, delivered Mar 24. NOT YET INVOICED. QB invoice pending. Reference Truck #860377 in invoice memo. Customer charge $94 (Ben's Formula historical override — default formula computes $59; historical record wins).</p>
-<p class="grand">GRAND TOTAL: $364.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-014 — Florence Electricity Department</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Florence Electricity Department</dd>
-<dt>Ship to:</dt><dd>Darrell Pickle<br>Florence Electricity Department<br>611 East Reeder St, Florence, AL 35630</dd>
-<dt>POC:</dt><dd>Darrell Pickle</dd>
-<dt>PO:</dt><dd>STOCK</dd>
-<dt>Invoice date:</dt><dd>2026-03-20</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2834</code></td><td>FlexPro Armor 1.5-Man Bucket Cover</td><td style="text-align:right">3</td><td style="text-align:right">$265.00</td><td style="text-align:right">$795.00</td></tr>
-<tr><td><code>NU-BC-2834-C</code></td><td>FlexPro Armor 1.5-Man Combo</td><td style="text-align:right">1</td><td style="text-align:right">$305.00</td><td style="text-align:right">$305.00</td></tr>
-<tr><td><code>NU-BC-2834-F</code></td><td>FlexPro Armor 1.5-Man ARCH Bucket Cover</td><td style="text-align:right">2</td><td style="text-align:right">$305.00</td><td style="text-align:right">$610.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$1710.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $124.00<br><span style="font-size:11px;color:#666">• 1Z2W49000328351797 (delivered 2026-03-23)<br>• 1Z2W49000395015551 (delivered 2026-03-23)</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000328351797, 1Z2W49000395015551 | PO STOCK"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> Quantities 3x NU-BC-2834 + 1x NU-BC-2834-C + 2x NU-BC-2834-F per April 8 FlexPro Armor Pricing Master + NorrisPalace. Subtotal $1,710. Shipping $124 (2 pkgs × $62). Invoice total $1,834. Corporate A/P (no CC fee). BCB = Bucket Cover Bag. Skylift lead: Darrell separately ordered 6 bucket trucks crediting Aaron.</p>
-<p class="grand">GRAND TOTAL: $1834.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-015 — AEP / SWEPCO</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>AEP / SWEPCO</dd>
-<dt>Ship to:</dt><dd>Sammy Myers<br>AEP/SWEPCO Roanoke<br>1800 Loch Haven Dr, Roanoke, VA 24019</dd>
-<dt>POC:</dt><dd>Sammy Myers</dd>
-<dt>PO:</dt><dd>—</dd>
-<dt>Invoice date:</dt><dd>2026-03-20</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2834-F</code></td><td>FlexPro Armor 1.5-Man ARCH Bucket Cover</td><td style="text-align:right">2</td><td style="text-align:right">$305.00</td><td style="text-align:right">$610.00</td></tr>
-<tr><td><code>NU-BC-2834-C</code></td><td>FlexPro Armor 1.5-Man Combo</td><td style="text-align:right">1</td><td style="text-align:right">$305.00</td><td style="text-align:right">$305.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$915.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING:</strong> <span style="color:#c00">pending parse (silent-drop window) — awaiting UPS Store paper receipt or Aaron-assist recovery.</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000395012652"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> Sammy Myers CC on file in Aaron's phone — apply 4% processing fee line item if charged to card. Abshire → Sammy Myers UPS clerical alias CONFIRMED in data/name_aliases.json (D.3 canonical) + test_abshire_is_myers covers it. R017 tracking 1Z2W49000395012652 = this record per FIX3 PF1.</p>
-<p class="grand">GRAND TOTAL: $915.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-016 — LineTec Services / LTS Power</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>LineTec Services / LTS Power</dd>
-<dt>Ship to:</dt><dd>Richard Thornhill<br>LineTec Services<br>6411 Masonic Drive, Alexandria, LA 71301</dd>
-<dt>POC:</dt><dd>Richard Thornhill</dd>
-<dt>PO:</dt><dd>DEPT468R</dd>
-<dt>Invoice date:</dt><dd>2026-03-20</dd>
-<dt>Payment terms:</dt><dd>Corporate A/P / Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$305.00</td><td style="text-align:right">$305.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$305.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $56.00<br><span style="font-size:11px;color:#666">• 1Z2W49000395021357 (delivered 2026-03-23)</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000395021357 | PO DEPT468R"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> FIX 10 (2026-04-22): UPS Store receipt recovered from Gmail March 20 thread msg 6/7 via Legacy observer. RegCost $50.60 → Ben's Formula $56 customer shipping. Grand total $361.00 (305 + 56, no CC fee — LineTec Alexandria corporate A/P). CREATE new QB invoice. Last external blocker closed; shipping now READY.</p>
-<p class="grand">GRAND TOTAL: $361.00</p>
-</section>
-<section class="packet parent">
-<h2>INVOICE PACKET — S-2026-017 — Chain Electric</h2>
-<p class="qb-action">QB ACTION: CREATE — Chain Electric invoice $8,930.48 (PF4 IMMUTABLE)</p>
-<dl>
-<dt>Customer:</dt><dd>Chain Electric</dd>
-<dt>POC:</dt><dd>AJ Morris (ajmorris@bchain.com, 601-549-5409)</dd>
-<dt>PO:</dt><dd>Verbal (Aaron screenshot of AJ text Mar 24)</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<div class="pf4">
-<h3>PF4 LOCK — DO NOT RECOMPUTE</h3>
-<p>Chain Electric $8,930.48 invoice is the IMMUTABLE April 18 reconciliation
-canonical. Components (reference only):</p>
-<ul>
-<li>Subtotal: $8,750 (10× NU-BC-2851 + 10× NU-BC-2834 + 10× NU-BC-2851)</li>
-<li>Shipping: $537 ($236 Hattiesburg + $301 Searcy, Ben's Formula applied)</li>
-<li>Courtesy adjustment: -$700 (Valued-Partner Courtesy)</li>
-<li>CC fee 4%: $343.48</li>
-<li><strong>Grand Total: $8,930.48</strong></li>
-</ul>
-<p>Children S-2026-017-A + -B are reference SDs showing Boss drop-ship splits.
-CB: enter this total on ONE Chain Electric invoice. Do NOT split.</p>
-</div>
-<p class="memo"><strong>QB memo:</strong> "AJ Morris drop-ship via Boss Products (invoices 6775/6776/6777); April 18 reconciliation canonical; multi-ship-to Hattiesburg + Searcy per SDs 017-A and 017-B"</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-018 — Dominion Energy</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Dominion Energy</dd>
-<dt>Ship to:</dt><dd>Coy Crosby<br>Dominion Energy<br>192 Old Wire Rd, West Columbia SC 29172</dd>
-<dt>POC:</dt><dd>Coy Crosby</dd>
-<dt>PO:</dt><dd>—</dd>
-<dt>Invoice date:</dt><dd>2026-03-20</dd>
-<dt>Payment terms:</dt><dd>Corporate A/P / Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2834</code></td><td>FlexPro Armor 1.5-Man Bucket Cover</td><td style="text-align:right">6</td><td style="text-align:right">$265.00</td><td style="text-align:right">$1590.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$1590.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $146.00<br><span style="font-size:11px;color:#666">• 1Z2W49000328343091 (delivered 2026-03-24)<br>• 1Z2W49000395006856 (delivered 2026-03-24)</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000328343091, 1Z2W49000395006856"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> Crosby Mar 20 historical shipment (PF3 canonical): 6× NU-BC-2834 @ $265 = $1,590 + $146 shipping (2 pkgs × $73 Ben's) = $1,736 invoice total. Corporate A/P (no CC fee). Memo: 'Dominion payment #2000007308 received March 24, 2026 — previously uninvoiced in QB'. Separate from April fleet S-2026-011 (PO 4501057807, 5× NU-BC-2851, ship 2026-04-21).</p>
-<p class="grand">GRAND TOTAL: $1736.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-023 — Henkels & McCoy</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Henkels & McCoy</dd>
-<dt>Ship to:</dt><dd>Lidia Turner<br>Henkels & McCoy<br>604 Industrial Park Dr, Pell City AL 35125</dd>
-<dt>POC:</dt><dd>Lidia Turner</dd>
-<dt>PO:</dt><dd>Verbal</dd>
-<dt>Invoice date:</dt><dd>2026-02-11</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2834</code></td><td>FlexPro Armor 1.5-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$265.00</td><td style="text-align:right">$265.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$265.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $46.00<br><span style="font-size:11px;color:#666">• 1Z2W49000325619996 (pending)</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000325619996 | PO Verbal"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> EVIDENCE CONFLICT: Aaron verbal recall said '1-man BC' but Legacy box-size evidence (30x14x10 UPS receipt) = 1.5-Man size. Going with evidence (NU-BC-2834 @ $265). Aaron please confirm post-mint; if 1-man was correct, change to NU-BC-2828 @ $235. Shipping waived as courtesy per Aaron — delay was on NU's end.</p>
-<p class="grand">GRAND TOTAL: $311.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-024 — Aerial Hydraulics, Inc.</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Aerial Hydraulics, Inc.</dd>
-<dt>Ship to:</dt><dd>Attn: PSC Fleet / George Dufour<br>Primoris T&D<br>3606 N. Frazier St, Conroe TX 77303</dd>
-<dt>POC:</dt><dd>Wayne Abadie</dd>
-<dt>PO:</dt><dd>Verbal (Wayne 2/6/2026 email)</dd>
-<dt>Invoice date:</dt><dd>2026-02-11</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">2</td><td style="text-align:right">$305.00</td><td style="text-align:right">$610.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$610.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $72.00<br><span style="font-size:11px;color:#666">• 1Z2W49000392272154 (pending)</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000392272154 | PO Verbal (Wayne 2/6/2026 email)"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> Drop-ship dealer order. Bill Wayne/Aerial Hydraulics, not Primoris direct.</p>
-<p class="grand">GRAND TOTAL: $682.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-025 — Aerial Hydraulics, Inc.</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>Aerial Hydraulics, Inc.</dd>
-<dt>Ship to:</dt><dd>Attn: George Dufour<br>Primoris T&D<br>3606 N. Frazier St, Conroe TX 77303</dd>
-<dt>POC:</dt><dd>Wayne Abadie (Fox referral)</dd>
-<dt>PO:</dt><dd>0223-PSC BKT0325</dd>
-<dt>Invoice date:</dt><dd>2026-02-24</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">2</td><td style="text-align:right">$305.00</td><td style="text-align:right">$610.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$610.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $72.00<br><span style="font-size:11px;color:#666">• 1Z2W49000326733593 (pending)</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000326733593 | PO 0223-PSC BKT0325"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> Drop-ship dealer order paired with T06 (S-2026-024). Bill Wayne/Aerial Hydraulics.</p>
-<p class="grand">GRAND TOTAL: $682.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-026 — LineTec Services, LLC</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-
-<dl>
-<dt>Customer (QB match):</dt><dd>LineTec Services, LLC</dd>
-<dt>Ship to:</dt><dd>Jeremy Nunez<br>LineTec Services<br>1965 River Road, Marksville LA 71351</dd>
-<dt>POC:</dt><dd>Jeremy Nunez</dd>
-<dt>PO:</dt><dd>DEPT409</dd>
-<dt>Invoice date:</dt><dd>2026-02-27</dd>
-<dt>Payment terms:</dt><dd>Corporate A/P / Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$305.00</td><td style="text-align:right">$305.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$305.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $66.00<br><span style="font-size:11px;color:#666">• 1Z2W49000326864095 (pending)</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000326864095 | PO DEPT409"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> Link to existing 1501 — do not mint new invoice. $13.75 already on 1501 = AL sales tax verified, NOT a missing line. Add tracking + $66 shipping then push send. Alexandria LA corporate A/P (no CC fee).</p>
-<p class="grand">GRAND TOTAL: $371.00</p>
-</section>
-
-<h1 style="margin-top: 30px;">SECTION B — CHILD REFERENCES (2)</h1>
-<div class="intro">Child packets are for CB reference only — they show the ship-to and tracking detail of drop-ship children under a parent invoice. The parent invoice above carries the billable total.</div>
-
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-017-A — Chain Electric</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-<p class="parent-ref">Parent: SD-2026-AJ-BOSS-0401-Hattiesburg (S-2026-017 child — for reference only; parent holds the invoiceable total)</p>
-<dl>
-<dt>Customer (QB match):</dt><dd>Chain Electric</dd>
-<dt>Ship to:</dt><dd>Mr. AJ Morris<br>Chain Electric<br>1308 W Pine Street, Hattiesburg, MS 39401</dd>
-<dt>POC:</dt><dd>AJ Morris</dd>
-<dt>PO:</dt><dd>—</dd>
-<dt>Invoice date:</dt><dd>2026-04-01</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2851</code></td><td>FlexPro Armor 2-Man Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$1525.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $320.00<br><span style="font-size:11px;color:#666">• 1Z2W49000329239194 (pending)<br>• 1Z2W49000395813055 (pending)<br>• 1Z2W49000395908757 (pending)</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000329239194, 1Z2W49000395813055, 1Z2W49000395908757"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> CHILD of S-2026-017. 5× NU-BC-2851 to AJ Morris Hattiesburg. Ship via Boss drop-ship; 3 packages total $320 shipping.</p>
-<p class="grand">GRAND TOTAL: $1845.00</p>
-</section>
-<section class="packet">
-<h2>INVOICE PACKET — S-2026-017-B — Chain Electric</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice</p>
-<p class="parent-ref">Parent: SD-2026-AJ-BOSS-0401-Hattiesburg (S-2026-017 child — for reference only; parent holds the invoiceable total)</p>
-<dl>
-<dt>Customer (QB match):</dt><dd>Chain Electric</dd>
-<dt>Ship to:</dt><dd>Jeremy Brown<br>2631 Ridgewood Rd, Searcy AR 72143</dd>
-<dt>POC:</dt><dd>AJ Morris</dd>
-<dt>PO:</dt><dd>—</dd>
-<dt>Invoice date:</dt><dd>2026-04-01</dd>
-<dt>Payment terms:</dt><dd>Due on Receipt</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2834-F</code></td><td>FlexPro Armor 1.5-Man ARCH Bucket Cover</td><td style="text-align:right">5</td><td style="text-align:right">$305.00</td><td style="text-align:right">$1525.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$1525.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula applied):</strong> $422.00<br><span style="font-size:11px;color:#666">• 1Z2W49000329247890 (pending)<br>• 1Z2W49000395911654 (pending)<br>• 1Z2W49000395917452 (pending)<br>• 1Z2W49000395926157 (pending)</span></p>
-<p class="memo"><strong>QB memo field:</strong> "Tracking: 1Z2W49000329247890, 1Z2W49000395911654, 1Z2W49000395917452, 1Z2W49000395926157 | P/N substitution: NU-BC-2834→NU-BC-2834-F (NU-BC-2834 stock-out triggered ARCH upgrade substitution)"</p>
-<p class="note"><strong>CB internal note (DO NOT paste into QB):</strong> CHILD of S-2026-017. 5× NU-BC-2834-F to Jeremy Brown Searcy AR. Original P/N NU-BC-2834 (Standard) — substituted to NU-BC-2834-F (ARCH) due to stock-out per Aaron directive. Ship via Boss drop-ship; 4 packages total $422 shipping.</p>
-<p class="grand">GRAND TOTAL: $1947.00</p>
-</section>
-
-<h1 style="margin-top: 30px;">SECTION C — STANDALONE SHIPPING INVOICES (13)</h1>
-<div class="intro">These are post-R017 shipping-only charges: either ADD as a shipping line to an open invoice for that customer, or CREATE a shipping-only invoice. Each packet shows the QB action decision.</div>
-
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R001 — Benz AEP/SWEPCO — 01-23</h2>
-<p class="qb-action">QB ACTION: ADD to AEP/SWEPCO Jan invoice if open; else CREATE standalone shipping-only.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZBENZ0123</dd>
-<dt>Ben's Shipping:</dt><dd>$73</dd>
-<dt>Ship date:</dt><dd>2026-01-23</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $73</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R002 — Chad Christian / Brink Constructors — 01-28</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice under 'Brink Constructors Inc.' → 'Brink - Chad Christian' child. CC fee APPLIES (FIX 9: Chad pays by credit_card per enrichment; $123 + 4% = $127.92). 9774 18th St W Princeton MN 55371.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZBRINK0128</dd>
-<dt>Ben's Shipping:</dt><dd>$123</dd>
-<dt>Ship date:</dt><dd>2026-01-28</dd>
-</dl>
-<p><strong>CC FEE (4%):</strong> $4.92 <span style="font-size:10px;color:#888">(FIX 9 enrichment: customer pays by credit card)</span></p><p class="grand">TOTAL WITH CC FEE: $127.92</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R003 — Keith McIntosh / TUF Solutions — 01-28</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice under 'TUF Solutions' (QB) — NOT TEREX. NO CC fee (FIX 9: dealer tier, ACH/check per 28+ invoice history). 122 Center Dr White House TN 37188.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZTUF0128</dd>
-<dt>Ben's Shipping:</dt><dd>$93</dd>
-<dt>Ship date:</dt><dd>2026-01-28</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $93</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R004 — Caleb Alday / ULCS Birmingham — 02-02</h2>
-<p class="qb-action">QB ACTION: ADD 'Caleb Alday' as sub-account under 'ULCS - Birmingham' parent in QB FIRST (FIX 9 new_child_pending_qb_add), THEN invoice. CC fee APPLIES (FIX 9: $105 + 4% = $109.20; ULCS 100% CC history).</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZULCS0202</dd>
-<dt>Ben's Shipping:</dt><dd>$105</dd>
-<dt>Ship date:</dt><dd>2026-02-02</dd>
-</dl>
-<p><strong>CC FEE (4%):</strong> $4.20 <span style="font-size:10px;color:#888">(FIX 9 enrichment: customer pays by credit card)</span></p><p class="grand">TOTAL WITH CC FEE: $109.20</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R005 — LineTec — 02-02</h2>
-<p class="qb-action">QB ACTION: ADD to existing LineTec invoice or combine with R010/R011. Branch determines CC fee.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZLTC0202</dd>
-<dt>Ben's Shipping:</dt><dd>$109</dd>
-<dt>Ship date:</dt><dd>2026-02-02</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $109</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R006 — Henkels & McCoy — 02-11</h2>
-<p class="qb-action">QB ACTION: ADD to Henkels open invoice, else CREATE.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZHENKEL0211</dd>
-<dt>Ben's Shipping:</dt><dd>$46</dd>
-<dt>Ship date:</dt><dd>2026-02-11</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $46</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R007 — Primoris Abadie — 02-11</h2>
-<p class="qb-action">QB ACTION: ADD to Primoris open invoice, else CREATE.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZPRIMOR0211</dd>
-<dt>Ben's Shipping:</dt><dd>$75</dd>
-<dt>Ship date:</dt><dd>2026-02-11</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $75</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R008 — EPB Sutherland — 02-11</h2>
-<p class="qb-action">QB ACTION: CREATE first EPB invoice.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZEPB0211</dd>
-<dt>Ben's Shipping:</dt><dd>$93</dd>
-<dt>Ship date:</dt><dd>2026-02-11</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $93</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R009 — Primoris Fox — 02-24</h2>
-<p class="qb-action">QB ACTION: CREATE (different POC than Abadie).</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZPRIMFOX0224</dd>
-<dt>Ben's Shipping:</dt><dd>$75</dd>
-<dt>Ship date:</dt><dd>2026-02-24</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $75</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R010 — LineTec — 02-24</h2>
-<p class="qb-action">QB ACTION: See R005.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZLTC0224</dd>
-<dt>Ben's Shipping:</dt><dd>$66</dd>
-<dt>Ship date:</dt><dd>2026-02-24</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $66</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R011 — LineTec — 02-27</h2>
-<p class="qb-action">QB ACTION: See R005.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZLTC0227</dd>
-<dt>Ben's Shipping:</dt><dd>$66</dd>
-<dt>Ship date:</dt><dd>2026-02-27</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $66</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R012 — Michael Waldrep / Sheffield Utilities — 03-14</h2>
-<p class="qb-action">QB ACTION: mwaldrep@sheffieldutilities.com. ADD or CREATE.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZSHEFF0314</dd>
-<dt>Ben's Shipping:</dt><dd>$79</dd>
-<dt>Ship date:</dt><dd>2026-03-14</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $79</p>
-</section>
-<section class="packet standalone">
-<h2>STANDALONE SHIPPING — R015 — AEP/SWEPCO Roberts (POC) — 03-20</h2>
-<p class="qb-action">QB ACTION: NEW POC alias Roberts → AEP/SWEPCO (FIX 7). ADD or CREATE per open invoice check.</p>
-<dl>
-<dt>Tracking:</dt><dd>1ZROBERTS0320</dd>
-<dt>Ben's Shipping:</dt><dd>$94</dd>
-<dt>Ship date:</dt><dd>2026-03-20</dd>
-</dl>
-<p class="grand">SHIPPING TOTAL: $94</p>
-</section>
-
-<h1 style="margin-top: 30px;">SECTION D — R026 PRIMORIS (INVOICE-READY)</h1>
-
-<section class="packet r026">
-<h2>INVOICE PACKET — R026 — Wayne Abadie / Primoris T&D — invoice-ready at $262</h2>
-<p class="qb-action">QB ACTION: CREATE new invoice — Primoris T&D (Wayne Abadie POC)</p>
-<dl>
-<dt>Ship to:</dt><dd>Michael Flemming, 2015 Holly Rd, Gilmer TX 75644</dd>
-<dt>Via:</dt><dd>Aerial Hydraulics, 5736 Jarvis St, Harahan LA 70123</dd>
-<dt>PO:</dt><dd>0407-BYB0001</dd>
-<dt>Delivered:</dt><dd>2026-04-10 16:49 (Left at drop box)</dd>
-</dl>
-<h3>LINE ITEMS</h3>
-<table class="items">
-<thead><tr><th>P/N</th><th>Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Total</th></tr></thead>
-<tbody><tr><td><code>NU-BC-2828</code></td><td>FlexPro Armor 1-Man Bucket Cover</td><td style="text-align:right">1</td><td style="text-align:right">$235.00</td><td style="text-align:right">$235.00</td></tr>
-<tr style="font-weight:700;background:#f5f5f5"><td colspan="4" style="text-align:right">Subtotal:</td><td style="text-align:right">$235.00</td></tr></tbody>
-</table>
-<p><strong>SHIPPING (Ben's Formula):</strong> $27</p>
-<p class="grand">GRAND TOTAL: $262.00</p>
-<p class="note">Gilmer TX (not Gilmore — corrected in FIX 7).</p>
-</section>
-
-<div class="intro" style="margin-top: 30px;">
-<h3>Post-merge follow-ups (queue — do NOT action at Gate 4)</h3>
-<ul>
-<li>3 new iShip SDs from 2026-04-22 (AEP/SWEPCO 1:07 PM, Thornhill DEPT450/732/889 × 2 at 12:19/12:41 PM) — render as S-2026-019/020/021 in next session.</li>
-<li>Skylift lead: Darrell Pickle ordered 6 bucket trucks crediting Aaron's input.</li>
-<li>Boss PDF attachment parser gog v0.12.0 syntax fix (for Boss invoices 6775/6776/6777 auto-extract).</li>
-<li>UPS Store receipt PDF pdfplumber extraction (silent-drop RegCost recovery).</li>
-<li>Scott @ UPS Store historical POS export awaiting reply (email sent 2026-04-21).</li>
-</ul>
+<div class="stat-row">
+  <div class="stat-tile"><div class="stat-value" id="stat-today">0</div><div class="stat-label">Today's Orders</div></div>
+  <div class="stat-tile"><div class="stat-value" id="stat-shipped">0</div><div class="stat-label">Shipped</div></div>
+  <div class="stat-tile"><div class="stat-value" id="stat-processing">0</div><div class="stat-label">Processing</div></div>
+  <div class="stat-tile"><div class="stat-value" id="stat-pending">0</div><div class="stat-label">Pending Pickup</div></div>
+  <div class="stat-tile cc"><div class="stat-value" id="stat-cc">0</div><div class="stat-label">CC + 4% Flag</div></div>
 </div>
 
-<footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 10px; color: #999; text-align: center;">
-Generated by scripts/build_cb_invoice_packets.py | 2026-04-22 23:39 UTC | Rule v1 S-IDs: S-2026-001..018 | FlexPro Armor | A Legacy of Commitment®
+<a class="shipping-log-link" href="shipping-log.html" target="_blank">Shipping Log →</a>
+
+<div class="status-key">
+  <strong>Status Key:</strong>
+  <span class="status-pill shipped">● SHIPPED — tracking confirmed, in transit/delivered</span>
+  <span class="status-pill processing">● PROCESSING — order received, preparing</span>
+  <span class="status-pill pending">● PENDING — awaiting pickup or carrier</span>
+  <span class="status-pill invoiced">● INVOICED — QB invoice created</span>
+  <span class="status-pill cc">⚠ CC +4% — credit-card surcharge applied</span>
+  <span class="status-pill blocked">● BLOCKED — SKU unconfirmed or other</span>
+  <span class="status-pill reconcile">● RECONCILE — conflict, needs review</span>
+</div>
+
+<div class="table-wrap">
+<table class="shipments">
+<thead>
+<tr>
+  <th></th>
+  <th>Order Date</th>
+  <th>Customer</th>
+  <th>P/N</th>
+  <th>Description</th>
+  <th class="center">Qty</th>
+  <th>Ship To</th>
+  <th>POC</th>
+  <th>Tracking #</th>
+  <th class="center">Cust. Shipping</th>
+  <th class="center">Inv #</th>
+  <th class="center">Status</th>
+  <th class="center">Copy for QB</th>
+  <th class="center">Detail</th>
+</tr>
+</thead>
+<tbody id="ship-tbody">
+  <tr><td colspan="14" style="text-align:center; padding:30px; color:#999">Loading…</td></tr>
+</tbody>
+</table>
+</div>
+
+<div id="detail-panel" class="detail-panel"></div>
+
+<section class="reference-panel">
+  <div class="reference-col">
+    <h4>Order-to-Invoice Workflow</h4>
+    <ol>
+      <li>Order received (email / Telegram / verbal)</li>
+      <li>SD generated, customer confirms</li>
+      <li>Pick &amp; pack at NU stock OR Boss drop-ship</li>
+      <li>UPS pickup → tracking captured</li>
+      <li>Shipping cost computed (Ben's / Dealer's formula)</li>
+      <li>QB invoice created (CB pastes from Copy-for-QB)</li>
+      <li>Invoice sent to customer</li>
+      <li>Sheet writeback: qb_invoice + sent + verified flagged</li>
+    </ol>
+  </div>
+  <div class="reference-col">
+    <h4>Payment Method Rules</h4>
+    <ul>
+      <li><strong>Direct Net 30/Receipt</strong> — corporate A/P, no CC fee</li>
+      <li><strong>Direct CC</strong> — add 4% processing fee line</li>
+      <li><strong>Dealer ACH</strong> — Wayne Abadie, no CC fee</li>
+      <li><strong>Dealer CC</strong> — apply 4% if charged to card</li>
+      <li><strong>LineTec branches</strong> — Alexandria=A/P, Guthrie=CC</li>
+      <li><strong>Brink</strong> — Travis Fischer ACH parent; Chad Christian CC</li>
+      <li><strong>ULCS</strong> — always 4% CC</li>
+    </ul>
+  </div>
+  <div class="reference-col">
+    <h4>Shipping Cost Formula</h4>
+    <p style="font-size:12px; line-height:1.7">
+      <strong>Ben's (direct):</strong><br>
+      <code>ROUNDUP(ROUNDUP(RegCost,0) × 1.10, 0)</code><br><br>
+      <strong>Dealer's:</strong><br>
+      <code>ROUNDUP(ROUNDUP(RegCost,0) × 1.05, 0)</code><br><br>
+      <strong>Multi-tracking:</strong> apply per-package, then sum.
+      Never sum reg costs first.
+    </p>
+  </div>
+</section>
+
+<footer class="nu-footer-bar">
+  <div class="tagline">A Legacy of Commitment®</div>
+  <div class="legal">© 2026 Norris Utilities, LLC — Birmingham, Alabama — Internal Use Only</div>
 </footer>
-</body></html>
+
+<div id="toast" class="toast">Copied for QB ✓</div>
+
+<script>
+const DATA_URL = 'data/shipments.json';
+let lastData = null;
+let lastStatuses = {};
+
+async function fetchAndRender() {
+  try {
+    const r = await fetch(DATA_URL + '?ts=' + Date.now());
+    const j = await r.json();
+    if (lastData) detectStatusChanges(j);
+    lastData = j;
+    render(j);
+  } catch (e) { console.error('fetch failed', e); }
+}
+
+function detectStatusChanges(j) {
+  for (const rec of (j.records || [])) {
+    const prev = lastStatuses[rec.sid];
+    if (prev && prev !== rec.status) celebrate(rec.sid, prev, rec.status);
+    lastStatuses[rec.sid] = rec.status;
+  }
+}
+
+function celebrate(sid, oldS, newS) {
+  const tr = document.querySelector(`tr[data-sid="${sid}"]`);
+  if (!tr) return;
+  if (oldS === 'PENDING' && newS === 'PROCESSING') tr.classList.add('cel-sparkle');
+  else if (oldS === 'PROCESSING' && newS === 'SHIPPED') tr.classList.add('cel-confetti');
+  else if (oldS === 'SHIPPED' && newS === 'INVOICED') tr.classList.add('cel-phoenix');
+  else if (newS === 'BLOCKED' || newS === 'RECONCILE') tr.classList.add('cel-alert');
+  setTimeout(() => tr.classList.remove('cel-sparkle','cel-confetti','cel-phoenix','cel-alert'), 5500);
+}
+
+function render(j) {
+  const recs = (j.records || []).slice().sort((a,b) =>
+    (b.order_date || '').localeCompare(a.order_date || '')
+  );
+  const today = new Date().toISOString().slice(0,10);
+  document.getElementById('stat-today').textContent = recs.filter(r => r.order_date === today).length;
+  document.getElementById('stat-shipped').textContent = recs.filter(r => r.status === 'SHIPPED').length;
+  document.getElementById('stat-processing').textContent = recs.filter(r => r.status === 'PROCESSING').length;
+  document.getElementById('stat-pending').textContent = recs.filter(r => r.status === 'PENDING').length;
+  document.getElementById('stat-cc').textContent = recs.filter(r => r.cc_surcharge_applies).length;
+
+  const tbody = document.getElementById('ship-tbody');
+  if (!recs.length) {
+    tbody.innerHTML = '<tr><td colspan="14" style="text-align:center; padding:30px; color:#999">No shipments yet.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = recs.map(rowHtml).join('');
+  document.querySelectorAll('.copy-btn').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    copyForQB(b.getAttribute('data-sid'));
+  }));
+  document.querySelectorAll('.expand-btn').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    toggleDetail(b.getAttribute('data-sid'));
+  }));
+  document.querySelectorAll('tr[data-sid]').forEach(tr => tr.addEventListener('click', () => {
+    toggleDetail(tr.getAttribute('data-sid'));
+  }));
+}
+
+function fmtAddr(addr) {
+  if (!addr || addr === '—') return '—';
+  const parts = addr.split(' | ');
+  if (parts.length >= 2) {
+    return `${esc(parts[0])}<br><span style="color:#666; font-size:11px">${esc(parts.slice(1).join(', '))}</span>`;
+  }
+  return esc(addr);
+}
+
+function rowHtml(r) {
+  const items = r.line_items || [];
+  const stackedPN = items.map(i => `<span class="stacked">${esc(i.pn)}</span>`).join('');
+  const stackedDesc = items.map(i => `<span class="stacked">${esc(i.description_short || '')}</span>`).join('');
+  const stackedQty = items.map(i => `<span class="stacked">${i.qty}</span>`).join('');
+  const trackings = (r.tracking_numbers || []).map(t =>
+    `<a href="https://www.ups.com/track?tracknum=${encodeURIComponent(t)}" target="_blank" class="tracking-pill">${esc(t)}</a>`
+  ).join('<br>');
+  const ship = r.customer_shipping_cost != null ? `$${r.customer_shipping_cost}` : '<span class="dash">—</span>';
+  const inv = r.qb_invoice_number
+    ? `<a class="qb-link" href="https://app.qbo.intuit.com/app/invoice${r.qb_invoice_id ? '?txnId=' + r.qb_invoice_id : ''}" target="_blank">${esc(r.qb_invoice_number)}</a>`
+    : '<span class="dash">—</span>';
+  const statusClass = (r.status || '').toLowerCase();
+  const ccBadge = r.cc_surcharge_applies ? '<span class="status-pill cc">⚠ CC</span>' : '';
+  return `
+  <tr data-sid="${esc(r.sid)}">
+    <td class="icon-col"><a href="${esc(r.sd_path)}" target="_blank" title="Open SD" onclick="event.stopPropagation()">📦</a></td>
+    <td>${esc(r.order_date || '—')}</td>
+    <td><strong>${esc(r.customer)}</strong></td>
+    <td>${stackedPN}</td>
+    <td>${stackedDesc}</td>
+    <td class="center">${stackedQty}</td>
+    <td>${fmtAddr(r.ship_to_address)}</td>
+    <td>${esc(r.poc || '—')}</td>
+    <td>${trackings || '<span class="dash">—</span>'}</td>
+    <td class="center">${ship}</td>
+    <td class="center">${inv}</td>
+    <td class="center"><span class="status-pill ${statusClass}">${esc(r.status)}</span> ${ccBadge}</td>
+    <td class="center"><button class="copy-btn" data-sid="${esc(r.sid)}">📋 Copy</button></td>
+    <td class="center"><button class="expand-btn" data-sid="${esc(r.sid)}">▼</button></td>
+  </tr>`;
+}
+
+function toggleDetail(sid) {
+  const panel = document.getElementById('detail-panel');
+  if (panel.dataset.sid === sid) {
+    panel.classList.remove('open');
+    panel.dataset.sid = '';
+    document.querySelector(`tr[data-sid="${sid}"]`)?.classList.remove('expanded');
+    return;
+  }
+  document.querySelectorAll('tr.expanded').forEach(t => t.classList.remove('expanded'));
+  document.querySelector(`tr[data-sid="${sid}"]`)?.classList.add('expanded');
+  const r = (lastData?.records || []).find(x => x.sid === sid);
+  if (!r) return;
+  panel.dataset.sid = sid;
+  panel.innerHTML = renderDetail(r);
+  panel.querySelector('.copy-btn')?.addEventListener('click', () => copyForQB(sid));
+  panel.classList.add('open');
+}
+
+function renderDetail(r) {
+  const items = (r.line_items || []).map(i => `${i.qty}× <code>${i.pn}</code> — ${esc(i.description_full || i.description_short)}`).join('<br>');
+  const trackings = (r.tracking_numbers || []).map((t, i) => {
+    const cost = (r.tracking_per_package_costs || [])[i];
+    return `<div>• <a href="https://www.ups.com/track?tracknum=${encodeURIComponent(t)}" target="_blank">${esc(t)}</a>${cost ? ` (reg $${cost})` : ''}</div>`;
+  }).join('');
+  return `
+  <h3>Detail — ${esc(r.sid)} — ${esc(r.customer)}</h3>
+  <div class="detail-grid">
+    <div class="detail-block"><h4>Bill-To</h4>${esc(r.customer)}<br>tier: ${esc(r.billing_tier)}</div>
+    <div class="detail-block"><h4>Ship-To</h4>${fmtAddr(r.ship_to_address)}<br><span style="color:#666; font-size:11px">POC: ${esc(r.poc || '—')}</span></div>
+    <div class="detail-block" style="grid-column: span 2"><h4>Line Items</h4>${items || '—'}</div>
+    <div class="detail-block"><h4>Shipping Breakdown</h4><div class="breakdown">${trackings || '—'}<br><strong>Total: $${r.customer_shipping_cost ?? '—'}</strong></div></div>
+    <div class="detail-block"><h4>Invoice / Sheet / SD</h4>
+      Inv #: ${r.qb_invoice_number ? `<a class="qb-link" href="https://app.qbo.intuit.com/app/invoice${r.qb_invoice_id ? '?txnId=' + r.qb_invoice_id : ''}" target="_blank">${esc(r.qb_invoice_number)}</a>` : '—'}<br>
+      SD: <a href="${esc(r.sd_path)}" target="_blank">${esc(r.sd_filename)}</a><br>
+      PO: ${esc(r.po_number || '—')}<br>
+      CC fee: ${r.cc_surcharge_applies ? `$${r.cc_surcharge_amount}` : 'none'}
+    </div>
+    ${r.cb_internal_note ? `<div class="cb-note"><strong>CB internal note:</strong> ${esc(r.cb_internal_note)}</div>` : ''}
+  </div>
+  <p style="margin-top:14px"><button class="copy-btn" data-sid="${esc(r.sid)}">📋 Copy ALL for QB</button></p>`;
+}
+
+function copyForQB(sid) {
+  const r = (lastData?.records || []).find(x => x.sid === sid);
+  if (!r) return;
+  const lines = [];
+  lines.push(`CUSTOMER: ${r.customer}`);
+  lines.push('');
+  lines.push(`BILLING ADDRESS:`);
+  lines.push(r.ship_to_address.split(' | ').join(', '));
+  lines.push('');
+  lines.push(`SHIP TO ADDRESS:`);
+  lines.push(r.ship_to_address.split(' | ').join(', '));
+  if (r.poc) lines.push(`ATTN: ${r.poc}`);
+  lines.push('');
+  lines.push(`PO: ${r.po_number || 'Verbal'}`);
+  lines.push(`TERMS: Due on Receipt`);
+  lines.push(`INVOICE DATE: ${new Date().toISOString().slice(0,10)}`);
+  lines.push('');
+  lines.push(`LINE ITEMS:`);
+  for (const li of (r.line_items || [])) {
+    lines.push(`${li.qty}× ${li.pn} — ${li.description_full || li.description_short}`);
+  }
+  if (r.customer_shipping_cost != null) {
+    lines.push('');
+    lines.push(`SHIPPING (UPS Ground): $${r.customer_shipping_cost}`);
+  }
+  if (r.cc_surcharge_applies) {
+    lines.push(`CC PROCESSING FEE (4%): $${r.cc_surcharge_amount}`);
+  }
+  lines.push('');
+  lines.push('TRACKING:');
+  for (const t of (r.tracking_numbers || [])) lines.push(`  ${t}`);
+  lines.push('');
+  lines.push(`MEMO: ${r.po_number || 'Verbal'}`);
+  if (r.cb_internal_note) {
+    lines.push('');
+    lines.push(`NOTES (CB INTERNAL): ${r.cb_internal_note}`);
+  }
+  navigator.clipboard.writeText(lines.join('\n')).then(() => showToast('Copied for QB ✓'));
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+fetchAndRender();
+setInterval(fetchAndRender, 30000);
+</script>
+</body>
+</html>
