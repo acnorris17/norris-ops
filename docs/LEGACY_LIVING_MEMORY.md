@@ -3113,3 +3113,59 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - source_priority: live_sheet_over_csv_snapshot — T04 misclassified by M5 CSV read; Legacy live sheet read found definitive evidence
 
 **GIT STATE:** feature/shipping-agent-v5 at commit 5df0a60. Awaiting FIX 11 FINAL commit then Gate 5 merge → main, tag v5-session2-merged-2026-04-22.
+
+---
+## 2026-04-22 — SA V5 FIX 11 FINAL (Session 4 Close)
+
+### TAG: sa_v5_fix11_final_2026-04-22
+
+**FIX 11 FINAL committed and pushed. 171/171 tests green.**
+- Agent commit: 576855a | Ops commit: a32ea04 | Both pushed live
+- 162 baseline + 9 Notes-scraping tests
+
+**SID RESOLUTION:**
+- T01-T04 → TOMBSTONED via QB Notes-field scraping. S-2026-019/020/021/022 never reusable.
+- T05 → MINTED S-2026-023 (Henkels/Lidia Turner, Pell City AL, 1× NU-BC-2834 1.5-Man $265, courtesy_adjustment -$46 shipping waive)
+- T06 → MINTED S-2026-024 (DEALER, Wayne Abadie/Aerial Hydraulics drop-ship to Primoris PSC Fleet Conroe TX, 2× NU-BC-2851 $235 dealer = $470 + $72 ship = $542)
+- T07 → MINTED S-2026-025 (DEALER, paired with T06 same bill/ship)
+- T08 → LINKED QB 1501 (LineTec Alexandria, add tracking + $66 ship line; $13.75 on 1501 = AL sales tax)
+
+**SID LEDGER 2026:** 22 active SIDs (001-018 + 023-026); 019-022 permanently tombstoned. lib.sid.list_active_sids(2026) is authoritative.
+
+**PRICING SOURCE PRIORITY — LOCKED (supersedes all prior):**
+- Master xlsx Dealer Price List sheet = authoritative for all listed P/Ns
+- ROUND(Direct × 0.80, nearest $5) = FALLBACK ONLY for unlisted P/Ns
+- Listed prices that override formula:
+  - NU-BC-2851: LISTED $235 (formula = $245, LISTED WINS)
+  - NU-BC-2834: LISTED $205 (formula = $210, LISTED WINS)
+  - NU-BC-2828: LISTED $195 (formula = $190, LISTED WINS)
+
+**APPS SCRIPT RECONCILIATION RULE:**
+- V5 tier-aware customer_cost (×1.05 dealer / ×1.10 direct) wins over Apps Script universal ×1.10
+- On disagreement: V5 calculation wins; Sheet writeback queues to overwrite Sheet value with V5's
+- Apps Script tier-awareness upgrade = roadmap Q15
+
+**PREMATURE TAG PUSH PROCESS FAILURE — DOCUMENTED:**
+- Tag v5-session2-merged-2026-04-22 pushed pointing at a365228 BEFORE Gate 5 merge executed (Session 2 failure)
+- Force-repointed Sessions 3/4
+- Process fix: tag pushes ONLY after merge confirmed via lib.release.pre_tag_check()
+
+**RECON-BEFORE-WRITES PROTOCOL — MANDATORY:**
+- All multi-file builds begin with read-only recon dumping path/sha256/linecount/excerpt of every target file BEFORE any write
+- Prevents silent overwrites (FIX 11 Step 2 commit 5df0a60 overwritten by FINAL because pre-build recon was incomplete)
+
+**LIVE SHEET READ PRECEDENCE — CONFIRMED:**
+- T04 evidence: M5 CSV (2026-04-08) = "UNKNOWN customer"; Legacy live sheet = explicit note "should have added in w/ Rows 12, 13, & 14" + dual QB Invoice ref "1480/1497"
+- Defer to Legacy live Sheet read over M5 CSV snapshot always
+
+**BOX-SIZE → P/N INFERENCE (Hunt Ladder — locked):**
+- 28×28 → NU-BC-2828 (1-Man, $235)
+- 30×14×10 → NU-BC-2834 (1.5-Man, $265)
+- 30×17×16 → NU-BC-2851 (2-Man, $305)
+- ARCH/Combo variants need email confirmation (box dims don't differ)
+- Physical UPS receipt evidence overrides Aaron verbal recall on 2026 shipments without contemporaneous note
+
+**QB NOTES-FIELD SCRAPING — lib/qb_cross_check.py:**
+- Reads invoice.notes free-text for: "Additional Tracking Number", "Tracking (other #s)", "Add'l Tracking", "Other Tracking"
+- Reads alongside structured tracking_number column
+- Without this: SA produces false-positive "uninvoiced" results → duplicate invoice risk

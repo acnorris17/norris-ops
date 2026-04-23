@@ -297,6 +297,18 @@
       background: #E0E7FF;
       color: #3730A3;
     }
+    .status-blocked {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+    .status-reconcile {
+      background: #FCE7F3;
+      color: #9D174D;
+    }
+    .status-cc {
+      background: #FFEDD5;
+      color: #9A3412;
+    }
     .status-dot {
       width: 7px;
       height: 7px;
@@ -307,6 +319,50 @@
     .status-pending .status-dot { background: #D97706; }
     .status-processing .status-dot { background: #2563EB; }
     .status-invoiced .status-dot { background: #4F46E5; }
+    .status-blocked .status-dot { background: #DC2626; }
+    .status-reconcile .status-dot { background: #DB2777; }
+    .status-cc .status-dot { background: #EA580C; }
+
+    /* ══ COPY BUTTON ══ */
+    .copy-qb-btn {
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
+      color: #fff;
+      border: 0;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-family: var(--font-primary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: background 0.15s ease;
+    }
+    .copy-qb-btn:hover { filter: brightness(1.15); }
+    .copy-qb-btn.copied { background: #059669; }
+
+    /* ══ CROSS-LINK ══ */
+    .nav-crosslink {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 50%, #00aaff 100%);
+      color: #fff;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 51, 204, 0.25);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .nav-crosslink:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 51, 204, 0.35);
+    }
 
     /* ══ CC FLAG ══ */
     .cc-flag {
@@ -496,8 +552,11 @@
       <!-- PAGE HEADER -->
       <div class="page-header">
         <h1><span class="icon">📊</span> <span>Shipping</span> Log</h1>
-        <div style="font-size: 0.85rem; color: #888; font-weight: 600;">
-          Norris Utilities® — Fulfillment Tracker
+        <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+          <a href="/shipments.html" class="nav-crosslink">→ Live Shipments &amp; Invoicing</a>
+          <div style="font-size: 0.85rem; color: #888; font-weight: 600;">
+            Norris Utilities® — Fulfillment Tracker
+          </div>
         </div>
       </div>
 
