@@ -1955,6 +1955,89 @@ FILES:
 KEY LESSON:
 Aaron's request was "100% certainty YES." Honest answer required surfacing 2 decisions that genuinely need his input rather than guessing. Solution: encode them as Tier 1 gates INSIDE the prompt itself. Prompt remains complete because gates handle the unknowns. Aaron doesn't have to come back for more rounds — CC pauses at the right moment, asks once, then continues.
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S5 — PREVIEW FAIL, 19 defects captured, spec lock-in process initiated — 2026-04-23
+PREVIEW FAIL — comprehensive defect list captured. SA V5 build does NOT match Aaron's actual spec.
+
+ROOT CAUSE OF LOOP:
+- Session 4 wrote 889-line CC prompt thorough on table structure but THIN on brand framework inheritance, button functional behavior, status workflow, notes column, SD back-nav, date format, P/N column width, bad record dedup, Shipping Log Google Sheet preservation
+- Things Aaron has stated repeatedly across prior sessions were treated as "already understood" rather than re-explicitly stated in CC prompt — CC built exactly what prompt said, prompt was incomplete
+- Session 5 trusted CC grep + pytest as verification. Grep tells what's NOT in file; tells nothing about whether buttons work, styling matches brand, data presentation is usable. Aaron clicking through actual rendered page caught everything automated checks missed.
+- Verification protocol failure: functional smoke test by Aaron must precede any merge
+
+DEFECTS IDENTIFIED (19 total, mapped to fixes):
+
+BRAND & VISUAL:
+1. No logo/graphics/brand inheritance — fix: wrap pages in .nu-header + .nu-chevron from NU_Brand_CSS_Framework.css, use Full_Logo_White.png, Lato + Playfair
+2. Pages don't match other Ops pages — fix: CC matches user-selected reference page exactly
+3. Rows hard to follow / too busy yet not enough — fix: zebra striping, row padding, dividers, brand cyan hover
+
+DATA:
+4. Chain Electric duplicate records — fix: dedup pass, canonical SD wins
+5. Order Dates missing on some — fix: pull from SD HTML, fallback to sheet first-tracking-date
+6. Date format inconsistent — fix: MM/DD/YY uniform across all date cells
+7. Top records data not hydrated into row — fix: enforce source priority hierarchy, "—" placeholder for empty
+
+FUNCTIONAL (currently broken):
+8. Copy-for-QB button does nothing — fix: wire clipboard API + toast confirmation + click-test before done
+9. Details ▼ arrow does nothing — fix: wire toggle + click-test before done
+10. Status pill not interactive — fix: clickable → 7-status dropdown → updates shipments.json + fires celebration
+11. Celebrations untestable — resolves with item 10
+
+LAYOUT:
+12. Status column position — fix: move to position 2 (right after 📦 SD icon)
+13. P/N column too narrow — fix: 130-140px min-width
+14. No Notes column — fix: editable text input, auto-save to shipments.json, visible on both Shipments & Invoicing + Shipping Log
+15. Detail panel disliked — fix: replace with 2-column layout (Bill/Ship-To left, Line Items right), drop generic reference cards
+
+SD NAVIGATION:
+16. No back/nav from SD — fix: add header bar with Norris logo + "← Back to Shipments & Invoicing" + "← Back to Shipping Docs Index"
+
+SHIPPING LOG PAGE:
+17. Appears unchanged — fix: apply same brand framework + defect fixes 1-16
+18. Google Sheet not visible — fix: "📊 Open Live Google Sheet Tracker" button (new tab, no embed)
+
+SHIPPING DOCS INDEX:
+19. Cards only show SD# — fix: each card shows SD#, Customer, Company, Ship Date, Items summary, Status pill
+
+DECISIONS:
+- HALT remains. NO MERGE.
+- Preview server kept up at http://192.168.1.184:8765 for Aaron re-test post-fix
+- Process change locked: M5 Claude does NOT write CC prompt until Aaron signs off on plain-English spec first
+- Process change locked: CC functional smoke test by Aaron is mandatory pre-merge gate (not just CC grep + pytest)
+
+3 OPEN QUESTIONS FOR AARON BEFORE FIX SPEC IS WRITTEN:
+Q-A: Pick 1 existing Ops page as brand reference (CB Dashboard / Home Base / Mission Control / etc.) so CC matches it exactly
+Q-B: Notes column field name — reuse cb_internal_note OR new aaron_to_cb_note field?
+Q-C: Status change permission — Aaron + CB both, or Aaron-only with CB read-only?
+
+CHANGED:
+- Memory edit #20 already corrected (norrisops.com canonical)
+- No file writes during preview verification
+
+BLOCKED:
+- S9 merge blocked indefinitely until corrected build re-verified by Aaron
+- Q1-Q15 post-completion queue blocked
+
+NEXT STEPS:
+1. Aaron answers Q-A, Q-B, Q-C
+2. M5 Claude writes plain-English FIX SPEC LIST
+3. Aaron reads spec, confirms or corrects
+4. Only after Aaron sign-off, M5 Claude writes CC fix prompt
+5. CC executes fix on feature branch
+6. Aaron re-previews via http://192.168.1.184:8765, click-tests every button
+7. Only after PREVIEW PASS → MERGE GO
+
+KEY LESSONS (record to sa_learnings.json):
+1. Category=spec_completeness: "Things stated in prior sessions are NOT carried automatically into new CC prompts. Every CC prompt must restate ALL functional + visual + data + behavioral requirements explicitly. Treat each prompt as if CC has zero prior context."
+2. Category=verification_protocol: "Grep + pytest verify file structure, NOT functional behavior or visual fidelity. Functional smoke test by Aaron clicking buttons in rendered browser preview is the canonical gate before merge. From now on: no merge without Aaron click-test PASS, regardless of how clean automated checks are."
+3. Category=brand_inheritance: "All new HTML builds in norris-ops MUST inherit from NU_Brand_CSS_Framework.css (logo, .nu-header, .nu-chevron, Lato, Playfair tagline, gradient). Verify brand inheritance via visual reference to existing Ops page, not just CSS class presence."
+4. Category=button_functionality: "Every interactive UI element (buttons, dropdowns, expandable panels) requires explicit click-test before declaring done. Static HTML structure passing grep != working interactive UI."
+
+FILES (no changes this turn):
+- /tmp/sa-v5-preview (CC's worktree, server still running on 8765)
+- feature/sa-v5-completion (9 commits ahead, NOT merging)
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
