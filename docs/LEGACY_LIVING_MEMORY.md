@@ -3169,3 +3169,50 @@ Gate 3 (architecture self-review, no pause) | Gate 4 (dry-run writeset — Aaron
 - Reads invoice.notes free-text for: "Additional Tracking Number", "Tracking (other #s)", "Add'l Tracking", "Other Tracking"
 - Reads alongside structured tracking_number column
 - Without this: SA produces false-positive "uninvoiced" results → duplicate invoice risk
+
+---
+## 2026-04-23 — SA V5 COMPLETION PROMPT + POST-COMPLETION QUEUE
+
+### TAG: sa_v5_completion_prompt_delivered_2026-04-23
+
+**SA V5 COMPLETION CC PROMPT delivered to Aaron, pending paste to M1 CC.**
+- File: /mnt/user-data/outputs/SA_V5_COMPLETION_CC_PROMPT_FINAL.md
+- Size: 889 lines, 10 sections, 15 abort conditions (A1-A15)
+- Status: Aaron has it; paste to M1 CC pending or in progress
+
+**LOCKED GATE DECISIONS:**
+- Gate A: Table view replaces packets/iframe design
+- Gate B: Scope limited to Shipping/SA/SD pages ONLY
+
+**TABLE VIEW SPEC (14 columns, locked):**
+- NO SD# column visible — SD access via 📦 icon hyperlink only
+- Multi-tracking: stacked vertically in cell
+- Description: short label only (e.g. "2-Man BC", "1.5-Man ARCH")
+- Customer Shipping Cost: final number only in row; breakdown in expanded panel
+- Copy-for-QB button: per row + per-section buttons in detail panel
+- Celebrations on status change (CB sees full show)
+- Brand inheritance: NU_Brand_CSS_Framework.css across all 3 pages
+
+**GOVERNANCE DURING SA V5 COMPLETION BUILD:**
+- feature/sa-v5-completion = SOLE WRITER: M1 CC
+- Legacy = OBSERVER ONLY (no SA V5 file writes, no feature branch)
+- Tier 2 ping cadence: after every Section
+- Tier 1 HALT only for: regression failure, abort conditions A1-A15
+- Living Memory Gmail draft: after every Section completion
+
+**POST-COMPLETION QUEUE Q1-Q15:**
+- Q1: CB silent-draft backlog $3,685.15 (QB 1501/1503/1504/1505/1506/1507)
+- Q2: Aaron QB 1497 line items verification (T04 supplemental shipping ref)
+- Q3: Two adjacent 1/21 UNKNOWN trackings (1Z2W49000390474154 + 1Z2W49000389496857) deep-cold-case
+- Q4: T05 Aaron 1-Man vs 1.5-Man flag review (box evidence = 1.5-Man; Aaron verbal = 1-Man)
+- Q5: 3 new iShip SDs from 4/21
+- Q6: Pickle 6-truck Skylift follow-up
+- Q7: Boss PDF parser fix
+- Q8: UPS Store receipt pdfplumber
+- Q9: CB Telegram Bot design
+- Q10: Notes Intelligence Agent (recover reMarkable pipeline + 37 stuck items)
+- Q11: Ops portal SD-tracking-invoice-receipt linkage view
+- Q12: MK Smith website work
+- Q13: Shipping Log V9 schema design
+- Q14: SA self-healing improvements
+- Q15: Apps Script tier-awareness upgrade

@@ -597,24 +597,32 @@
       <div class="legend">
         <div class="legend-title">Status Key</div>
         <div class="legend-item">
-          <span class="status status-shipped"><span class="status-dot"></span>Shipped</span>
-          Tracking confirmed, in transit or delivered
+          <span class="status status-pending"><span class="status-dot"></span>Pending</span>
+          Awaiting pickup or carrier confirmation
         </div>
         <div class="legend-item">
           <span class="status status-processing"><span class="status-dot"></span>Processing</span>
           Order received, preparing for shipment
         </div>
         <div class="legend-item">
-          <span class="status status-pending"><span class="status-dot"></span>Pending</span>
-          Awaiting pickup or carrier confirmation
+          <span class="status status-shipped"><span class="status-dot"></span>Shipped</span>
+          Tracking confirmed, in transit or delivered
         </div>
         <div class="legend-item">
           <span class="status status-invoiced"><span class="status-dot"></span>Invoiced</span>
           QB invoice created (tracking + cost confirmed)
         </div>
         <div class="legend-item">
-          <span class="cc-flag">CC +4%</span>
-          Credit card surcharge applied
+          <span class="status status-cc"><span class="status-dot"></span>CC</span>
+          Credit card — +4% surcharge itemized
+        </div>
+        <div class="legend-item">
+          <span class="status status-blocked"><span class="status-dot"></span>Blocked</span>
+          Missing freight/tracking/POC — cannot invoice
+        </div>
+        <div class="legend-item">
+          <span class="status status-reconcile"><span class="status-dot"></span>Reconcile</span>
+          V5 tier-aware calc differs from Apps Script (auto-overwrite)
         </div>
       </div>
 
@@ -624,7 +632,6 @@
           <thead>
             <tr>
               <th>Order Date</th>
-              <th>SD#</th>
               <th>Customer</th>
               <th>Product</th>
               <th>Qty</th>
@@ -636,29 +643,29 @@
               <th>Payment Method</th>
               <th>QB Invoice #</th>
               <th>Status</th>
+              <th>Copy for QB</th>
             </tr>
           </thead>
           <tbody>
             <!-- ORDER 1 — Shipped, Net 30 -->
-            <tr>
+            <tr data-customer="Sheffield Utilities" data-tracking="1Z999AA10123456784" data-shipcost="52" data-qbinv="INV-1247">
               <td class="mono">06/19/2025</td>
-              <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2025-0619A</td>
               <td style="font-weight:700;">Sheffield Utilities</td>
               <td>FlexPro Armor — NU-BC-2851 (2-Man, 28"×51")</td>
               <td class="center">2</td>
               <td>Sheffield, AL 35660</td>
-              <td class="mono">1Z999AA10123456784</td>
+              <td class="mono"><a href="https://www.ups.com/track?tracknum=1Z999AA10123456784" target="_blank" rel="noopener">1Z999AA10123456784</a></td>
               <td>UPS Ground</td>
               <td class="currency">$47.00</td>
               <td class="currency">$52.00</td>
               <td><span class="payment-net">Net 30</span></td>
               <td class="mono" style="font-weight:700; color:#059669;">INV-1247</td>
               <td><span class="status status-shipped"><span class="status-dot"></span>Shipped</span></td>
+              <td class="center"><button class="copy-qb-btn" onclick="copyForQB(this)">Copy</button></td>
             </tr>
             <!-- ORDER 2 — Processing, CC +4% -->
-            <tr>
+            <tr data-customer="EPB Chattanooga" data-tracking="" data-shipcost="" data-qbinv="">
               <td class="mono">06/19/2025</td>
-              <td class="mono" style="font-weight:700; color: var(--nu-blue);">SD-2025-0619B</td>
               <td style="font-weight:700;">EPB Chattanooga</td>
               <td>FlexPro Armor — NU-BC-2851-C (2-Man Combo)</td>
               <td class="center">4</td>
@@ -672,7 +679,8 @@
                 <span class="cc-flag">CC +4%</span>
               </td>
               <td style="color:#999; font-style:italic;">Blocked — no tracking</td>
-              <td><span class="status status-processing"><span class="status-dot"></span>Processing</span></td>
+              <td><span class="status status-blocked"><span class="status-dot"></span>Blocked</span></td>
+              <td class="center"><button class="copy-qb-btn" onclick="copyForQB(this)" disabled title="Tracking missing — cannot invoice yet">Copy</button></td>
             </tr>
           </tbody>
         </table>
@@ -706,11 +714,13 @@
         <div class="workflow-card">
           <h3>📦 Shipping Cost Formula</h3>
           <ul>
-            <li><strong>Customer Cost = ROUNDUP(ROUNDUP(RegCost, 0) × 1.10, 0)</strong></li>
-            <li>Round the carrier's regular cost up to the nearest dollar first</li>
-            <li>Multiply by 1.10 (10% handling markup)</li>
-            <li>Round result up to the nearest dollar</li>
-            <li>Example: Carrier charges $42.37 → $43 → $47.30 → <strong>$48.00 billed</strong></li>
+            <li><strong>Direct tier (Ben's Formula):</strong> ROUNDUP(ROUNDUP(RegCost,0) × 1.10, 0)</li>
+            <li><strong>Dealer tier (×1.05):</strong> ROUNDUP(ROUNDUP(RegCost,0) × 1.05, 0)</li>
+            <li>Round the carrier's regular cost up first, then apply tier markup, then round again</li>
+            <li>Multi-tracking: apply per-package THEN sum (never sum-then-format)</li>
+            <li>Example direct: $42.37 → $43 × 1.10 → $47.30 → <strong>$48 billed</strong></li>
+            <li>Example dealer: $45 × 1.05 → $47.25 → <strong>$48 billed</strong> (TUF, BSS-Dealer)</li>
+            <li>Source of truth: V5 tier-aware calc overwrites Apps Script ×1.10 universal on Sheet writeback</li>
           </ul>
         </div>
       </div>
@@ -734,6 +744,36 @@
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>
+
+  <script>
+    /* S6.3 — Copy-for-QB: builds the same clipboard payload that shipments.html uses
+       (customer, tracking, ship cost, QB invoice #) so CB can paste a QB line item without
+       retyping across Sheet → QB transitions. */
+    function copyForQB(btn) {
+      const row = btn.closest("tr");
+      const customer = row.dataset.customer || "";
+      const tracking = row.dataset.tracking || "";
+      const shipcost = row.dataset.shipcost || "";
+      const qbinv = row.dataset.qbinv || "";
+      const payload =
+        "Customer: " + customer + "\n" +
+        "Tracking: " + (tracking || "(pending)") + "\n" +
+        "Ship Cost: " + (shipcost ? "$" + shipcost : "(pending)") + "\n" +
+        "QB Invoice: " + (qbinv || "(not created)");
+      navigator.clipboard.writeText(payload).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = "Copied ✓";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.classList.remove("copied");
+        }, 1600);
+      }).catch(err => {
+        console.error("clipboard write failed", err);
+        btn.textContent = "Failed";
+      });
+    }
+  </script>
 
 </body>
 </html>
