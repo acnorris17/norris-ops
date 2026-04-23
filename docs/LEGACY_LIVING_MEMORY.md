@@ -2487,6 +2487,215 @@ Sincerely,
 Aaron C. Norris
 (drafted by Cowork on AC's behalf)
 
+### [LIVING_MEMORY_UPDATE] Session: Hardware Infrastructure Plan — M1 Relief, NAS, Mac Mini — 2026-04-23
+═══════════════════════════════════════════════════════════════════
+SESSION SUMMARY — HARDWARE INFRASTRUCTURE PLAN
+═══════════════════════════════════════════════════════════════════
+
+## 1. HEADER
+- Session ID: HW-INFRA-2026-04-23-S01
+- Date: 2026-04-23
+- Time: ~1:00 PM – 2:30 PM CT (approx)
+- Claude version: Opus 4.7 (claude.ai web)
+- Tool: Claude.ai web interface
+- Project: Norris Utilities — AI Infrastructure & Agent Platform
+- Conversation title: "Best backup drive / M1 upgrades / hardware infrastructure"
+- Subproject: Hardware Infrastructure Layer (backup, file storage, agent host)
+
+## 2. ONE-LINE SUMMARY
+Defined full hardware roadmap to relieve M1 RAM pressure (14.24/16GB used, 6.75GB swap), resolve 24-day Time Machine outage, and build proper 24/7 agent-hosting infrastructure: M5 Pro Mac mini + Synology DS723+ NAS + existing backup drive redeployed to M1.
+
+## 3. WHY THIS SESSION EXISTED
+Aaron asked a simple question: what backup drive to buy for the M1. Conversation progressively uncovered:
+- M1 has no backup at all (Time Machine alert: "No Backups for 24 Days")
+- M1 is running as 24/7 agent host (not a backup machine — production server for Legacy, bridges, Shipping Agent V5, NorrisPalace, Telegram bot)
+- M1 RAM at 89% used with 6.75GB swap — straining under load
+- Aaron wanted mobility (no cord from M1 to a local drive)
+- Aaron wanted speed, cooling, silence, expandability without overspend
+- Aaron wanted real 24/7 agent hosting infrastructure that scales with his roadmap
+
+## 4. WHAT WAS ACCOMPLISHED
+- **Killed the BeeStation path** (wireless appeal, but speed/features wrong for Aaron's actual use case — he's running real infrastructure, not home cloud)
+- **Evaluated & eliminated** DS224+ ($515 setup — RAM ceiling 6GB kills agent roadmap at 18mo), DS923+ ($1,200 setup — over-spec for 2-person company), DS725+ (2025 model — downgrade; lost 10GbE upgrade path)
+- **Locked NAS choice**: Synology DS723+ + 2x Samsung 870 EVO 2TB SATA SSDs
+  - Ryzen R1600 CPU, 2GB ECC RAM (upgradeable to 32GB)
+  - 2x NVMe cache slots (add later), 10GbE upgrade slot
+  - RAID 1 = 2TB usable, mirrored, silent, cool
+  - Wireless from M1's perspective (NAS → router via ethernet; M1 → WiFi)
+  - Competitive check: UGREEN DXP2800 rejected (UGOS too technical for "not an IT guy"); DS725+ rejected (removed 10GbE upgrade path); QNAP rejected (steeper learning curve)
+- **Locked Mac mini plan**: M5 Pro Mac mini 24GB / 512GB at WWDC 2026 (June 8-13)
+  - Reason for M5 over M4: M5 launches ~6-8 weeks from now, 14-22% faster CPU, 3.5x faster AI, same pricing
+  - Reason for Pro over regular: 273 GB/s memory bandwidth vs 120 GB/s (2.3x). Agent host bottleneck is bandwidth, not just capacity. Regular M5 at 24GB would hit same bandwidth ceiling M1 is hitting now. Pro gives real headroom for 20-30 agent future.
+  - TB5 vs TB4 matters when NAS connected
+- **Emergency backup fix (FREE)**: Move existing backup drive from M5 → M1 tonight. M5 has iCloud/Google Drive/Time Machine already. M1 is the at-risk production server. Don't buy $60 stopgap — use what's already owned.
+- **Price research verified** across Amazon, B&H, Newegg, Best Buy (doesn't stock), Walmart (pre-owned only)
+  - DS723+ currently $450 (historical low $360 Prime Day); Samsung 870 EVO 2TB ~$150 each
+  - B&H Payboo credit card DOES NOT WORK in Alabama (sales tax refund excluded) — so no tax advantage there
+  - Best cashback: Amazon Prime Visa 5% on ~$770 = $38.50
+  - Rakuten unreliable for large purchases (documented account-lock bait-and-switch issues) — SKIP
+- **Price monitoring setup** (external to Claude — Claude cannot monitor backgrounds):
+  - Camelcamelcamel alerts (Amazon price tracker): DS723+ target $370, Samsung 870 EVO 2TB target $140
+  - Slickdeals alerts for "Synology DS723" and "Samsung 870 EVO 2TB"
+  - Calendar events placed for WWDC (June 8) and Prime Day (July 8)
+- **Chrome Task Manager reviewed**: Aaron's Chrome NOT as bad as it looked. 40+ tabs, heaviest at 400MB. Quick win: close 15-20 old SD-2026-* tabs and file:///tmp/ tabs = ~500-800MB recovered.
+
+## 5. WHAT FAILED / WENT WRONG (HONEST — INCLUDING CLAUDE'S MISTAKES)
+- **Claude flip-flopped recommendation 4 times**: BeeStation → DS923+ → DS723+ → DS224+ → DS723+ locked. Each flip was driven by new info from Aaron (use case, budget, agent roadmap, mobility). Aaron called it out. Claude recalibrated but should have asked the right scoping questions upfront instead of assuming.
+- **Initial cord-free misconception**: Claude assumed Aaron understood network-attached storage is already wireless from M1's perspective; Aaron had to clarify what he meant. Fixed mid-session.
+- **Initial M1/M5 role confusion**: Claude kept framing M1 as "backup computer" — Aaron corrected: M1 is the 24/7 agent production server (M5 is workstation). This flipped the Mac mini framing from "offload M1" to "replace M1 as server, demote M1 to real backup."
+- **Claude proposed $60 WD Elements stopgap**: Aaron correctly pointed out he already has a backup drive on the M5 that isn't critical there — just move it. Saved $60 and the wait time.
+- **RAM "upgrade" question**: Aaron asked 3 times about adding RAM. Claude had to repeatedly clarify: Apple Silicon unified memory is SOLDERED to SoC. No upgrade possible on any M-series Mac, ever. Confirmed factually correct; no hedging.
+- **eGPU question**: Not supported on Apple Silicon. Confirmed factually.
+- **Claude cannot monitor prices in background**: Had to be honest that there's no trigger/alert Claude can set from within its own system. Pointed Aaron to real tools (camelcamelcamel, Slickdeals, calendar).
+
+## 6. CURRENT STATE
+**M1 MacBook Pro (Aaron's production agent server):**
+- 16GB RAM, ~14.24GB used, 6.75GB swap active, fan spinning regularly
+- Running: Legacy agent, bridge LaunchAgents, NorrisPalace, Shipping Agent V5 builds, Telegram bot, multiple Claude Code sessions
+- No Time Machine backup in 24 days (CRITICAL — alert showing)
+- Chrome: 40+ tabs, ~6-8GB memory footprint
+- Status: stable but at ceiling, not crashing
+
+**M5 MacBook Pro (Aaron's workstation):**
+- Where daily work happens (Claude.ai sessions, documents, strategy)
+- Has existing backup drive attached (available to migrate)
+- Has iCloud, Google Drive, Time Machine already configured
+- Status: healthy
+
+**Network / Infrastructure:**
+- Home network intact, router accessible for future NAS ethernet
+- Moving to new home in ~May 2026 (confirmed — Aaron's mention)
+
+**Budget runway committed:**
+- Tonight: $0
+- May (after move): ~$0 (depending on M4 vs M5 path — waiting)
+- June (WWDC): ~$1,399 (M5 Pro Mac mini 24GB/512GB)
+- July (Prime Day): ~$620 (DS723+ + 2x 2TB SSDs)
+- **Total committed: ~$2,020**
+
+## 7. OPEN DECISIONS (AARON)
+1. Confirm decision on M5 Pro (not base M5) when WWDC keynote drops June 8 — verify pricing/availability
+2. Confirm DS723+ still right call at Prime Day — if any new Synology model drops with 10GbE standard, reconsider
+3. Decide where Mac mini physically lives in new house (router closet vs. L-desk corner)
+4. Decide migration order for what moves off M1 onto Mac mini first (Legacy first? All at once?)
+5. Whether to add NVMe cache drives to NAS at purchase or defer ($120 saved now, 15-min upgrade later)
+
+## 8. TASKS FOR NEXT SESSION (PRIORITIZED)
+**IMMEDIATE (TONIGHT):**
+1. Move existing backup drive from M5 → M1
+2. Enable Time Machine on M1 → select moved drive → first backup runs overnight
+3. Close 15-20 old Chrome tabs (SD-2026-*, file:///tmp/*, duplicate tabs)
+
+**SHORT TERM (next 1-2 weeks):**
+4. Set camelcamelcamel alerts at links in this doc
+5. Set Slickdeals keyword alerts
+6. Monitor M1 memory — if swap exceeds 10GB consistently, restart M1 to release Python zombies
+
+**MAY (during/after move):**
+7. Settle into new house, map out network layout
+8. Identify physical spot for future Mac mini (near router)
+9. Identify physical spot for future NAS (near router or hidden)
+
+**JUNE 8-13 (WWDC):**
+10. Watch Apple keynote
+11. Confirm M5 Pro Mac mini specs and pricing match expectations
+12. Order M5 Pro Mac mini 24GB/512GB (target ~$1,399, look for B&H discount within 60 days)
+
+**JULY (Prime Day):**
+13. Check camelcamelcamel — if DS723+ hits ~$370 target, pull trigger
+14. Order: DS723+ diskless + 2x Samsung 870 EVO 2TB (budget ~$620 at sale prices)
+
+**AFTER HARDWARE ARRIVES:**
+15. Set up Mac mini headless (one-time monitor connection, then Screen Sharing/SSH forever)
+16. Migrate Legacy agent from M1 → Mac mini (test first, don't cut over until verified)
+17. Migrate bridge LaunchAgents, NorrisPalace queries, Shipping Agent V5, Telegram bot runner
+18. Set up NAS: RAID 1 on 2x 2TB SSDs
+19. Configure Time Machine on BOTH M1 and Mac mini → NAS target
+20. Configure SMB file share for Aaron/CB portal files
+
+## 9. FILES CREATED/MODIFIED
+**Calendar events created (Aaron's primary Google Calendar, acnorris@norrisutilities.com):**
+- June 8, 2026 8:00 AM CT — "WWDC 2026 — M5 Mac mini announcement check" (just created this session)
+- July 8, 2026 6:00 AM CT — "Buy NAS: DS723+ + 2x 2TB SSDs — Prime Day" (created earlier this session)
+- June 15, 2026 8:00 AM CT — "Check Prime Day announcement date — NAS purchase" (created earlier this session)
+
+**Files to create/update next session:**
+- ~/norris-ops/docs/LEGACY_LIVING_MEMORY.md → add Hardware Infrastructure Plan section
+- ~/norris-ops/docs/HARDWARE_INFRASTRUCTURE_ROADMAP.md (new file — see structure below)
+- NorrisPalace record: hardware_plan_2026
+- G Brain timeline entry: hw-infra-decision-2026-04-23
+
+## 10. KEY QUOTES / LESSONS
+- Aaron: "I'm not an IT guy and don't want to be one." → Ruled out UGREEN, QNAP. Locked Synology DSM ecosystem.
+- Aaron: "I need agents to run exceptionally well... build and leverage dozens of them daily around the clock." → Drove M4/M5 Pro decision over regular tier for memory bandwidth.
+- Aaron: "That is almost a new MacBook still..." → Forced rightsize from DS923+ down to DS723+, saved ~$490
+- Aaron: "I have a backup on my M5. Should I reconnect it back to my M1?" → Correct intuition. Killed the $60 stopgap buy. Use what you own.
+- Aaron's screenshot revealing 24-day no-backup emergency → Shifted "wait for Prime Day" to "fix backup TONIGHT with drive you own"
+- Claude's flip-flopping taught: ask scoping questions upfront (use case, mobility needs, existing infrastructure, 12-24 month roadmap) BEFORE recommending hardware.
+
+## 11. CONTEXT THAT MUST PERSIST
+
+### FINAL HARDWARE DECISIONS (LOCKED):
+- **NAS: Synology DS723+** diskless + **2x Samsung 870 EVO 2TB SATA SSDs** (RAID 1)
+- **Agent host: M5 Pro Mac mini 24GB/512GB** (wait for WWDC June 8-13)
+- **Backup: Existing M5 backup drive relocated to M1 TONIGHT** (Time Machine)
+- **Long-term structure:**
+  - M5 = primary workstation (unchanged)
+  - Mac mini M5 Pro = 24/7 agent host (new role — replaces M1)
+  - M1 = mobile/backup workstation (demoted from production — closed lid or travel)
+  - NAS = file storage + Time Machine target for both M1 and Mac mini + CB's portal files
+
+### WHY M5 PRO MAC MINI (not M4, not regular M5, not Mac Studio):
+- M5 launch 6-8 weeks out — M4 would be outdated the day it arrives
+- Pro tier delivers 273 GB/s memory bandwidth vs 120 GB/s on regular (2.3x) — bandwidth is Aaron's actual bottleneck for concurrent agents
+- Pro tier TB5 vs TB4 — 3x faster NAS connection when that comes online
+- Mac Studio is overkill ($2,000+) for 2-person company
+
+### WHY DS723+ (not DS224+, not DS923+, not DS725+, not UGREEN):
+- DS224+ ceiling at 6GB RAM kills agent scaling within 18 months
+- DS923+ 4-bay wastes $490 on unused capacity
+- DS725+ removed 10GbE upgrade path (downgrade from DS723+)
+- UGREEN DXP2800 cheaper but UGOS too technical for "not an IT guy"
+- DS723+ sweet spot: 32GB RAM ceiling + NVMe cache slots + 10GbE upgrade path + DSM ecosystem
+
+### PRICE TARGETS:
+- DS723+ target: $370 (currently $450; historical low $360)
+- Samsung 870 EVO 2TB target: $140 (currently $150-160; historical low $159.99)
+- M5 Pro Mac mini 24GB/512GB target: $1,399 new; $1,199 with B&H discount within 60 days of launch
+
+### ALABAMA SALES TAX REALITY:
+- B&H Payboo card DOES NOT WORK in Alabama (sales tax refund excluded)
+- Best savings path: Amazon + Prime Visa (5% back) = $38.50 on ~$770
+- Rakuten unreliable — SKIP for large purchases
+- Newegg has occasional $25 promo gift card on $250+ spend
+
+### M1 CURRENT STATE FOR MIGRATION PLANNING:
+- Runs: Legacy, bridge LaunchAgents, NorrisPalace, Shipping Agent V5, Telegram bot, multiple Claude Code sessions simultaneously
+- Memory: 14.24/16 GB used + 6.75 GB swap = significant pressure
+- Fan running regularly due to swap disk writes
+- NO Time Machine backup (as of 2026-04-23 — 24 days stale)
+- Chrome with 40+ tabs contributing ~6-8 GB to memory
+
+### WHAT CANNOT BE DONE (STOP ASKING):
+- Cannot add RAM to any Apple Silicon Mac — soldered to SoC
+- Cannot add eGPU to any Apple Silicon Mac — unsupported
+- External SSD swap files: technically possible, not recommended, marginal benefit
+- Claude cannot monitor prices in background — external tools only
+
+### CALENDAR EVENT IDs (for reference):
+- WWDC 2026 check: hc8c2dmfbdp0ss19r85qf74a0s (June 8, 8 AM CT)
+- Prime Day NAS purchase: DE9E0EF8-2CA1-4B83-AD8D-9D56CA7749D2:2D262A32-7078-45A6-8519-337117AF96EC (July 8, 6 AM CT)
+- Prime Day announcement check: DE9E0EF8-2CA1-4B83-AD8D-9D56CA7749D2:696E2763-D295-47F0-AA36-E47B790DF8E8 (June 15, 8 AM CT)
+
+### PARKED ITEMS (Aaron was typing responses when context ran out):
+- Aaron had more questions about the M4/M5 Pro decision he was typing
+- Aaron will paste those questions into the new session AFTER pasting this handoff prompt
+- New session MUST read this whole handoff before responding to any follow-ups
+
+═══════════════════════════════════════════════════════════════════
+END OF SESSION SUMMARY
+═══════════════════════════════════════════════════════════════════
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -3944,3 +4153,54 @@ Multi-POC companies get separate registry entries per ordering person.
 - Irby-McCarty-None: William McCarty, Net30, po_required. McCarty is ONLY Irby orderer for FlexPro. Lemoine does NOT order FlexPro (BSS/RCOO only).
 
 DO NOT ADD: Patrick Lavette (banker), Jared Lemoine (BSS contact only, not FlexPro customer).
+
+---
+## 2026-04-23 — Session 6 Close (Facts 1–13 of 18; 14–18 pending)
+
+### TAG: sa_v5_phase_a_live_2026-04-23
+
+**FACT 1 — PHASE A LIVE:**
+CC executed Session 6 phased prompt autonomously. Sections 0, 1, 7-lite, 2, 4 committed clean on feature/sa-v5-completion. 76/76 tests passing in 77s. Preview live at http://192.168.1.184:8765. norris-ops HEAD: 1d86e5a.
+
+**FACT 2 — PHASE A SHIPPED:**
+NU brand inherited (NU_Brand_CSS_Framework.css + 7 logo PNGs). Gate A respected (top portion preserved). 4-tile PULSE (Open 23 / Ready 8 / Blocked 0 / Unbilled $21,173). 11 filter chips + live search + view toggle + column sort. 14-col table via 82-entry registry. 13 QB-field-matched copy buttons.
+
+**FACT 3 — PHASE A DEFERRED to Phase B:**
+Status pill interactivity, Notes edit, Invoice Sent archive, ▼ expand panel, Payment badge, CC Fee calc, fuzzy match, ⚠ tooltips.
+
+**FACT 4 — PHASE B SCOPE:**
+Section 1.5 visual polish + Section 3 status+audit+celebrations + Section 5 detail panel + Section 6 notes+invoice archive + Section 7-full fuzzy match + canonical naming enforcement + ⚠ tooltips + Section 8 payment badge + CC Fee column + Section 7-recon data truth-up pass.
+
+**FACT 5 — AARON PHASE B DIRECTIVE (verbatim):**
+"Make it look fantastic, REALLY pop/stand out. Animations, graphics, celebrations, FUN, and funny all built in. Super awesome rare mega-celebrations for milestone events." Wayne-respectful tone.
+
+**FACT 6 — CUSTOMER NAMING RULE (iron-clad 2026-04-23):**
+Every rendered customer cell MUST be "Company - Person Who Ordered". No bare company names, no slash variants (LineTec/LTS Power alone, AEP/SWEPCO alone, Dominion Energy alone, Brink alone). If SD lacks orderer name, SA investigates; if ambiguous, REVIEW status.
+
+**FACT 7 — BRINK:**
+New customer not in current 82-entry registry. Aaron mentioned off the top of his head. Flag for investigation: which Brink company? Who orders? Phase B Section 7-full adds.
+
+**FACT 8 — ⚠ INDICATOR RULE:**
+Hover tooltip REQUIRED on any customer cell showing ⚠. Must show: closest registry match + confidence % + "Below auto-apply threshold, Phase B will resolve". Phase B Section 7-full adds.
+
+**FACT 9 — DATA TRUTH-UP (Phase B Section 7-recon):**
+Cross-reference sources:
+- Detailed_Sales_Report__Product_and_Services_ALL_4726.csv
+- QB_Contact_List_with_Addresses (newest version)
+- ~/norris-ops/data/shipments.json
+- ~/norris-ops/shipping-docs/*.html
+Report "expected vs actual" open-SD count to Aaron. Current count = 23, Aaron suspects more.
+
+**FACT 10 — REGISTRY STATUS:**
+82 entries, MD5: 220dd369f730d616a1949d58c0d832ae. 51 flagged in customer_registry_review.csv for later review. 3 hand-appended confirmed: LineTec-Thornhill-Alexandria, LineTec-LeCompte-Corporate, Irby-McCarty-None.
+
+**FACT 11 — CANONICAL RULE ENFORCEMENT Phase B:**
+registry_loader add_alias() write-back function. Learning: 95%+ auto, 80-95% morning brief flag, <80% REVIEW. ⚠ hover shows candidates.
+
+**FACT 12 — A/B LOCKED Session 6:**
+A = REVIEW (not RECONCILE). B = V2 (customer reply parsing deferred). All status labels say REVIEW.
+
+**FACT 13 — SOURCE PRIORITY H REVISED:**
+UPS tracking = supporting evidence ONLY. Cannot contradict SD or Aaron statement. SD is authoritative on ordered AND shipped. UPS never documents what is actually sent.
+
+⚠ INCOMPLETE — Facts 14–18 not yet received.
