@@ -371,10 +371,7 @@
         const key = th.dataset.sort;
         if (!key || !(key in SORTABLE_COLUMNS)) return;
         if (state.sort.key === key) {
-          state.sort.dir = state.sort.dir === "asc" ? "desc" : state.sort.dir === "desc" ? "none" : "asc";
-          if (state.sort.dir === "none") {
-            state.sort = { key: "order-date", dir: "desc" };
-          }
+          state.sort = { key, dir: state.sort.dir === "asc" ? "desc" : "asc" };
         } else {
           state.sort = { key, dir: "asc" };
         }
