@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lifetime Warranty Clarification — FlexPro Armor — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <title>Lifetime Warranty Clarification — Norris Utilities®</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400;1,700&display=swap');
+
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -16,9 +17,11 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-warn: #C9582C;
-      --nu-success: #1F7A3A;
+      --nu-red: #C53030;
+      --nu-green: #2F855A;
+      --nu-amber: #D69E2E;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-italic: 'Playfair Display', Georgia, serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,70 +37,83 @@
     /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
-      padding: 70px 40px 90px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      padding: 60px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 320px;
+      min-height: 300px;
     }
+
     .nu-header::before {
       content: '';
       position: absolute;
-      inset: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.7;
+      opacity: 0.6;
     }
+
     .nu-header::after {
       content: '';
       position: absolute;
-      top: -40%; right: -15%;
-      width: 75%; height: 180%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6,208,255,0.18) 0%, transparent 70%);
       z-index: 1;
     }
-    .nu-header-inner { position: relative; z-index: 2; }
+
+    .nu-header > * { position: relative; z-index: 2; }
 
     .nu-phoenix-icon {
       width: 72px;
       height: 72px;
       margin: 0 auto 14px;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.35));
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
+
     .nu-logo-text {
+      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3rem;
       color: var(--nu-white);
       letter-spacing: 0.32em;
       text-transform: uppercase;
+      margin-bottom: 4px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--nu-white);
-      letter-spacing: 0.7em;
+      letter-spacing: 0.75em;
       text-transform: uppercase;
-      margin-bottom: 18px;
-      padding-left: 0.7em;
+      margin-bottom: 20px;
+      padding-left: 0.75em;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-italic);
       font-style: italic;
       font-weight: 400;
       font-size: 1.25rem;
       color: rgba(255,255,255,0.95);
       letter-spacing: 0.04em;
     }
-    .nu-doc-title {
-      margin-top: 24px;
+
+    .nu-doc-badge {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 6px 18px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--nu-white);
+      font-size: 0.8rem;
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.35em;
-      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      border-radius: 2px;
     }
 
     /* CHEVRON */
@@ -107,346 +123,445 @@
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
 
     /* CONTENT */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
+      overflow: hidden;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 8%; left: 50%;
+      top: 200px; left: 50%;
       transform: translateX(-50%);
-      width: 65vw; max-width: 800px; aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(0,51,204,0.045) 0%, transparent 65%);
-      border-radius: 50%;
+      width: 65%;
+      max-width: 700px;
+      aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(0,0,255,0.035) 0%, transparent 70%);
       z-index: 0;
-      pointer-events: none;
     }
-    .nu-wrap {
+    .nu-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
       position: relative;
       z-index: 1;
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 56px 32px 72px;
     }
 
-    /* DOCUMENT META */
+    /* DOCUMENT TITLE */
+    .doc-title-block {
+      text-align: center;
+      margin-bottom: 50px;
+      padding-bottom: 30px;
+      border-bottom: 3px solid var(--nu-blue);
+    }
+    .doc-title-eyebrow {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--nu-blue);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .doc-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2.4rem;
+      line-height: 1.15;
+      color: var(--nu-dark-text);
+      margin-bottom: 14px;
+    }
+    .doc-title .highlight {
+      color: var(--nu-blue);
+    }
+    .doc-subtitle {
+      font-size: 1.1rem;
+      color: var(--nu-body-text);
+      font-weight: 400;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* META ROW */
     .doc-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 28px;
-      padding: 16px 22px;
-      background: var(--nu-light-gray);
-      border-left: 4px solid var(--nu-blue);
-      border-radius: 4px;
-      margin-bottom: 36px;
-      font-size: 0.9rem;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 24px;
+      font-size: 0.85rem;
+      color: var(--nu-body-text);
     }
-    .doc-meta strong { color: var(--nu-blue); font-weight: 700; }
-    .doc-meta span { color: var(--nu-dark-text); }
-
-    /* SECTION HEADERS */
-    .nu-section-title {
-      font-weight: 900;
-      font-size: 1.55rem;
-      margin: 40px 0 14px;
-      color: var(--nu-dark-text);
-      line-height: 1.25;
+    .doc-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .nu-section-title .accent { color: var(--nu-blue); }
-    .nu-section-sub {
+    .doc-meta-label {
       font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--nu-dark-text);
-      margin: 26px 0 10px;
+      color: var(--nu-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.75rem;
     }
 
-    p { margin-bottom: 14px; color: var(--nu-body-text); }
-    p.lead {
-      font-size: 1.08rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 22px;
-    }
-
-    /* CALLOUT — THE QUESTION */
-    .question-box {
-      background: linear-gradient(135deg, #FFF8E6 0%, #FFEFCC 100%);
-      border-left: 5px solid var(--nu-accent-gold);
-      padding: 22px 26px;
-      border-radius: 4px;
-      margin: 28px 0 36px;
-    }
-    .question-box .label {
+    /* SECTION HEADER */
+    .nu-section-title {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 0.78rem;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--nu-dark-text);
+    }
+    .nu-section-title .first-word {
+      color: var(--nu-blue);
+    }
+    .nu-section-lead {
+      color: var(--nu-body-text);
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+
+    section.block {
+      margin-bottom: 48px;
+    }
+
+    /* QUESTION CALLOUT */
+    .question-callout {
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
+      color: var(--nu-white);
+      padding: 32px 36px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(0,0,51,0.18);
+    }
+    .question-callout::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -10%;
+      width: 50%; height: 180%;
+      background: radial-gradient(ellipse, rgba(6,208,255,0.25) 0%, transparent 70%);
+    }
+    .question-callout > * { position: relative; }
+    .question-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      margin-bottom: 10px;
+    }
+    .question-text {
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--nu-white);
+    }
+    .question-subtext {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+    }
+
+    /* TWO COLUMN OPTIONS */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+    .option-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 28px;
+      border: 2px solid var(--nu-medium-gray);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .option-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    }
+    .option-card.option-a {
+      border-top: 6px solid var(--nu-blue);
+    }
+    .option-card.option-b {
+      border-top: 6px solid var(--nu-cyan);
+    }
+    .option-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 900;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #8a6a1a;
-      margin-bottom: 8px;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 12px;
     }
-    .question-box .text {
-      font-size: 1.1rem;
+    .option-a .option-label {
+      background: var(--nu-blue);
+      color: var(--nu-white);
+    }
+    .option-b .option-label {
+      background: var(--nu-cyan);
+      color: var(--nu-navy);
+    }
+    .option-heading {
+      font-size: 1.25rem;
+      font-weight: 900;
       color: var(--nu-dark-text);
+      margin-bottom: 6px;
+    }
+    .option-tag {
+      font-size: 0.9rem;
+      color: var(--nu-blue);
       font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .option-desc {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+      margin-bottom: 16px;
+    }
+    .option-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .option-list li {
+      position: relative;
+      padding: 6px 0 6px 22px;
+      font-size: 0.92rem;
+      color: var(--nu-body-text);
+      border-bottom: 1px solid var(--nu-light-gray);
+    }
+    .option-list li:last-child { border-bottom: none; }
+    .option-list li::before {
+      content: '•';
+      position: absolute;
+      left: 4px;
+      color: var(--nu-blue);
+      font-weight: 900;
+      font-size: 1.1rem;
       line-height: 1.4;
     }
 
-    /* COMPARISON TABLE */
-    .compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin: 24px 0 32px;
-    }
-    .compare .opt {
+    /* IMPLICATIONS TABLE */
+    .implications-table {
+      width: 100%;
+      border-collapse: collapse;
       background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
       border-radius: 8px;
-      padding: 22px 22px 24px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
     }
-    .compare .opt h3 {
-      font-weight: 900;
-      font-size: 1.05rem;
-      color: var(--nu-blue);
-      margin-bottom: 6px;
-      letter-spacing: 0.02em;
+    .implications-table thead {
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
+      color: var(--nu-white);
     }
-    .compare .opt .sub {
+    .implications-table th {
+      padding: 14px 18px;
+      text-align: left;
       font-weight: 700;
-      font-size: 0.78rem;
-      letter-spacing: 0.14em;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
+    }
+    .implications-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 0.93rem;
+      vertical-align: top;
+    }
+    .implications-table tr:last-child td { border-bottom: none; }
+    .implications-table tr:nth-child(even) td { background: var(--nu-light-gray); }
+    .implications-table td:first-child {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      width: 26%;
+    }
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .pill-structure {
+      background: rgba(0,0,255,0.1);
+      color: var(--nu-blue);
+    }
+    .pill-owner {
+      background: rgba(6,208,255,0.18);
+      color: #0077A8;
+    }
+
+    /* RECOMMENDATION */
+    .recommendation-box {
+      background: var(--nu-white);
+      border-left: 6px solid var(--nu-blue);
+      padding: 28px 32px;
+      border-radius: 4px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .recommendation-label {
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .recommendation-heading {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--nu-dark-text);
+      margin-bottom: 12px;
+    }
+    .recommendation-text {
+      font-size: 1rem;
       color: var(--nu-body-text);
       margin-bottom: 14px;
     }
-    .compare .opt p { font-size: 0.93rem; margin-bottom: 10px; }
-    .compare .opt ul { padding-left: 18px; margin: 8px 0 4px; }
-    .compare .opt li { font-size: 0.92rem; margin-bottom: 6px; }
-    .compare .opt .stamp {
-      position: absolute;
-      top: -10px; right: 14px;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      font-size: 0.7rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      padding: 4px 10px;
-      border-radius: 3px;
-      text-transform: uppercase;
-    }
-    .compare .opt.recommended { border-color: var(--nu-blue); border-width: 2px; }
-    .compare .opt.recommended .stamp { background: var(--nu-blue); }
-
-    /* DEFINITIONS TABLE */
-    table.def {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0 28px;
-      font-size: 0.93rem;
-      background: var(--nu-white);
-      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-    }
-    table.def th, table.def td {
-      padding: 12px 14px;
-      text-align: left;
-      vertical-align: top;
-      border-bottom: 1px solid var(--nu-medium-gray);
-    }
-    table.def th {
-      background: var(--nu-dark-text);
-      color: var(--nu-white);
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    table.def tr:last-child td { border-bottom: none; }
-    table.def tr:nth-child(even) td { background: var(--nu-light-gray); }
-    table.def td.term { font-weight: 700; color: var(--nu-blue); white-space: nowrap; }
-
-    /* RECOMMENDATION BLOCK */
-    .recommend {
-      background: linear-gradient(135deg, #E8F4FF 0%, #D4ECFF 100%);
-      border: 2px solid var(--nu-blue);
-      border-radius: 8px;
-      padding: 24px 28px 26px;
-      margin: 30px 0 36px;
-    }
-    .recommend .label {
-      font-weight: 900;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+    .recommendation-text:last-child { margin-bottom: 0; }
+    .recommendation-text strong {
       color: var(--nu-blue);
-      margin-bottom: 10px;
-    }
-    .recommend h3 {
       font-weight: 900;
-      font-size: 1.3rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 12px;
-    }
-    .recommend p { margin-bottom: 10px; font-size: 0.97rem; }
-    .recommend .why {
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px dashed rgba(0,51,204,0.35);
-    }
-    .recommend .why strong { color: var(--nu-blue); font-weight: 700; }
-
-    /* DRAFT LANGUAGE BLOCK */
-    .draft {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 4px solid var(--nu-cyan);
-      border-radius: 6px;
-      padding: 22px 26px;
-      margin: 18px 0 28px;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 0.97rem;
-      color: var(--nu-dark-text);
-      line-height: 1.7;
-    }
-    .draft p { margin-bottom: 12px; color: var(--nu-dark-text); }
-    .draft .head {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--nu-blue);
-      margin-bottom: 12px;
-    }
-
-    /* OPEN QUESTIONS */
-    ol.questions {
-      counter-reset: q;
-      list-style: none;
-      padding: 0;
-      margin: 16px 0 28px;
-    }
-    ol.questions li {
-      counter-increment: q;
-      position: relative;
-      padding: 14px 18px 14px 56px;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 6px;
-      margin-bottom: 10px;
-      font-size: 0.95rem;
-    }
-    ol.questions li::before {
-      content: counter(q);
-      position: absolute;
-      left: 14px; top: 50%;
-      transform: translateY(-50%);
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      font-weight: 900;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    ol.questions li strong { color: var(--nu-dark-text); }
-
-    /* DECISION ROW */
-    .decision-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin: 18px 0 8px;
-    }
-    .decision-row .box {
-      border: 2px dashed var(--nu-medium-gray);
-      border-radius: 6px;
-      padding: 18px;
-      text-align: center;
-    }
-    .decision-row .box .lbl {
-      font-weight: 900;
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--nu-body-text);
-      margin-bottom: 8px;
-    }
-    .decision-row .box .checkline {
-      margin-top: 14px;
-      border-bottom: 1px solid var(--nu-dark-text);
-      height: 24px;
     }
 
     /* NEXT STEPS */
-    ul.steps {
-      list-style: none;
-      padding: 0;
-      margin: 14px 0 8px;
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
-    ul.steps li {
-      padding: 10px 14px 10px 38px;
+    .step-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 22px;
+      text-align: left;
       position: relative;
-      border-bottom: 1px solid var(--nu-medium-gray);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .step-num {
+      position: absolute;
+      top: -14px;
+      left: 22px;
+      width: 32px;
+      height: 32px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .step-heading {
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+      margin-top: 6px;
+    }
+    .step-text {
+      font-size: 0.88rem;
+      color: var(--nu-body-text);
+    }
+
+    /* CONTEXT NOTE */
+    .context-note {
+      background: #FFF8E1;
+      border-left: 4px solid var(--nu-accent-gold);
+      padding: 18px 22px;
+      border-radius: 4px;
+      margin-bottom: 32px;
+    }
+    .context-note-heading {
+      font-weight: 900;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
       font-size: 0.95rem;
     }
-    ul.steps li:last-child { border-bottom: none; }
-    ul.steps li::before {
-      content: '▸';
-      position: absolute;
-      left: 14px; top: 10px;
-      color: var(--nu-cyan);
-      font-weight: 900;
+    .context-note-text {
+      font-size: 0.9rem;
+      color: var(--nu-body-text);
     }
 
     /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 44px 32px;
+      padding: 44px 40px;
       text-align: center;
+      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-italic);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
+      letter-spacing: 0.02em;
     }
-    .nu-footer-contact { font-size: 0.92rem; line-height: 1.85; }
-    .nu-footer-contact a { color: var(--nu-cyan); text-decoration: none; }
+    .nu-footer-contact {
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
     .nu-footer-contact a:hover { text-decoration: underline; }
-    .nu-footer-meta {
-      margin-top: 14px;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.04em;
+    .nu-footer-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--nu-cyan);
+      margin: 0 auto 16px;
+      opacity: 0.6;
     }
 
     /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .nu-header { padding: 50px 22px 70px; min-height: 250px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
-      .nu-tagline { font-size: 1.05rem; }
-      .nu-wrap { padding: 40px 20px 56px; }
-      .compare { grid-template-columns: 1fr; }
-      .decision-row { grid-template-columns: 1fr; }
-      .nu-section-title { font-size: 1.3rem; }
+    @media (max-width: 860px) {
+      .options-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .doc-title { font-size: 1.8rem; }
+    }
+    @media (max-width: 640px) {
+      .nu-header { padding: 44px 20px 70px; min-height: 240px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; padding-left: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .nu-inner { padding: 40px 20px 60px; }
+      .doc-title { font-size: 1.55rem; }
+      .doc-meta { gap: 18px; flex-direction: column; align-items: center; }
+      .question-callout { padding: 22px 22px; }
+      .question-text { font-size: 1.1rem; }
+      .option-card { padding: 22px; }
+      .implications-table th, .implications-table td { padding: 10px 12px; font-size: 0.85rem; }
+      .implications-table td:first-child { width: 38%; }
     }
 
     @media print {
       body { background: var(--nu-white); }
-      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-      .recommend, .question-box, .draft { box-shadow: none; }
+      .nu-header, .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .option-card, .recommendation-box, .step-card { box-shadow: none; border: 1px solid #ccc; }
     }
   </style>
 </head>
@@ -454,182 +569,219 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <div class="nu-header-inner">
-      <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
       </svg>
-      <div class="nu-logo-text">NORRIS</div>
-      <div class="nu-logo-subtitle">UTILITIES</div>
-      <div class="nu-tagline">A Legacy of Commitment®</div>
-      <div class="nu-doc-title">Internal Action Memo · Warranty Language</div>
     </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-doc-badge">Internal Policy Decision</div>
   </header>
 
-  <!-- WHITE CHEVRON -->
+  <!-- CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L548,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- CONTENT -->
+  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-wrap">
+    <div class="nu-inner">
 
-      <div class="doc-meta">
-        <span><strong>Source:</strong> reMarkable action item, captured 2026-04-22</span>
-        <span><strong>Owner:</strong> Aaron C. Norris</span>
-        <span><strong>Product:</strong> FlexPro Armor Bucket Covers</span>
-        <span><strong>Status:</strong> Decision required</span>
-      </div>
-
-      <h1 class="nu-section-title"><span class="accent">Clarify</span> What "Lifetime" Means</h1>
-      <p class="lead">FlexPro Armor bucket covers are marketed with a "lifetime" warranty. The word is doing a lot of work and it is not specific enough to defend in a claim or against a competitor's fine print. This memo lays out the question, the realistic options, the recommended definition, and the language to put on quotes, invoices, and the website.</p>
-
-      <div class="question-box">
-        <div class="label">The question on the page</div>
-        <div class="text">When we say "lifetime" warranty on FlexPro Armor — do we mean the life of the structure (the bucket truck / aerial device the cover is mounted on), or the life of the original purchaser / owner?</div>
-      </div>
-
-      <h2 class="nu-section-title"><span class="accent">Why</span> This Matters Now</h2>
-      <p>Three forces are pushing this from "later" to "this week":</p>
-      <ul style="padding-left: 22px; margin-bottom: 22px;">
-        <li style="margin-bottom: 6px;">Customers (Dominion, AEP Roanoke, Chain Electric) are signing POs with the word "lifetime" on the quote — we need to know what we're promising before they file a claim.</li>
-        <li style="margin-bottom: 6px;">Caroline (CB) is preparing invoice-ready writesets and needs the warranty line item locked.</li>
-        <li style="margin-bottom: 6px;">The line card and product page at NorrisUtilities.com both reference "lifetime" without defining it.</li>
-      </ul>
-
-      <h2 class="nu-section-title"><span class="accent">Two</span> Interpretations on the Table</h2>
-      <div class="compare">
-        <div class="opt">
-          <span class="stamp">Option A</span>
-          <h3>Life of the Structure</h3>
-          <div class="sub">Tied to the asset</div>
-          <p>The warranty runs as long as the bucket truck or aerial device the cover was originally fitted to remains in service.</p>
-          <ul>
-            <li>Transfers with the truck if it's sold.</li>
-            <li>Ends when the truck is retired, totaled, or scrapped.</li>
-            <li>Common in heavy-equipment OEM language.</li>
-            <li>Easier to defend — physical asset is verifiable.</li>
-          </ul>
-        </div>
-        <div class="opt recommended">
-          <span class="stamp">Option B · Recommended</span>
-          <h3>Life of the Original Owner</h3>
-          <div class="sub">Tied to the buyer</div>
-          <p>The warranty runs as long as the original purchasing entity (the utility, contractor, or fleet owner that bought the cover) continues to own and operate the cover.</p>
-          <ul>
-            <li>Non-transferable — does not pass to a new buyer.</li>
-            <li>Ends if the cover is sold, gifted, or transferred to a third party.</li>
-            <li>Standard for premium consumer/commercial soft goods.</li>
-            <li>Protects us from secondhand-market claims we can't verify.</li>
-          </ul>
+      <!-- DOCUMENT TITLE -->
+      <div class="doc-title-block">
+        <div class="doc-title-eyebrow">reMarkable Action Item · Policy Clarification</div>
+        <h1 class="doc-title">Clarify What <span class="highlight">"Lifetime"</span> Means</h1>
+        <p class="doc-subtitle">Life of the structure, or life of the original owner? This decision defines our warranty scope, transferability, and long-term obligation on FlexPro Armor bucket covers.</p>
+        <div class="doc-meta">
+          <div class="doc-meta-item">
+            <span class="doc-meta-label">Owner:</span>
+            <span>Aaron C. Norris</span>
+          </div>
+          <div class="doc-meta-item">
+            <span class="doc-meta-label">Captured:</span>
+            <span>reMarkable — 2026-04-23</span>
+          </div>
+          <div class="doc-meta-item">
+            <span class="doc-meta-label">Status:</span>
+            <span>Open — Decision Required</span>
+          </div>
+          <div class="doc-meta-item">
+            <span class="doc-meta-label">Affects:</span>
+            <span>FlexPro Armor warranty language</span>
+          </div>
         </div>
       </div>
 
-      <h2 class="nu-section-title"><span class="accent">Definitions</span> We Need on Paper</h2>
-      <p>Whichever option Aaron chooses, these terms must be defined the same way everywhere — quote, invoice, website, line card, claim form.</p>
-      <table class="def">
-        <thead>
-          <tr>
-            <th style="width: 28%;">Term</th>
-            <th>Working Definition</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="term">Lifetime</td>
-            <td>The duration the original purchaser of record continues to own and operate the FlexPro Armor cover for its intended commercial use.</td>
-          </tr>
-          <tr>
-            <td class="term">Original Purchaser</td>
-            <td>The legal entity named on the Norris Utilities® invoice at time of sale. Not transferable to subsequent owners or to assets resold on the secondary market.</td>
-          </tr>
-          <tr>
-            <td class="term">Intended Use</td>
-            <td>Daily field service on a utility bucket truck, aerial lift, or comparable insulated boom platform. Excludes recreational, demolition, or off-label use.</td>
-          </tr>
-          <tr>
-            <td class="term">Covered Defects</td>
-            <td>Failure of seams, stitching, snaps, grommets, mounting hardware, and core fabric integrity under normal field conditions.</td>
-          </tr>
-          <tr>
-            <td class="term">Excluded</td>
-            <td>Cosmetic fading, abrasion from contact with energized lines, fire/chemical damage, modifications by third parties, and damage from improper installation.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2 class="nu-section-title"><span class="accent">Recommendation</span></h2>
-      <div class="recommend">
-        <div class="label">Aaron's call to make — drafted position</div>
-        <h3>Define "lifetime" as the life of the original purchaser of record — non-transferable.</h3>
-        <p>This matches how Samson Rope, premium tool brands, and most commercial soft-goods manufacturers handle the same word. It protects Norris Utilities® from claims on covers that have changed hands without our knowledge, and it keeps the language defensible.</p>
-        <div class="why">
-          <p><strong>Why not "life of the structure":</strong> bucket trucks routinely get resold between contractors, refurbished, or transferred between fleet yards. We would have no record of who currently owns the asset, what use it has been put to, or whether the cover was ever reinstalled correctly after a refurb. That is an open-ended liability.</p>
-          <p><strong>Why not silent:</strong> leaving "lifetime" undefined invites the customer's interpretation to govern at claim time. That is the worst position — the broadest possible promise with no documentation to push back.</p>
-        </div>
+      <!-- CONTEXT NOTE -->
+      <div class="context-note">
+        <div class="context-note-heading">Why this matters right now</div>
+        <div class="context-note-text">"Lifetime" currently appears in FlexPro Armor marketing and quote language without a defined meaning. Until we lock a definition, every quote, spec sheet, and distributor conversation carries ambiguous risk — and a future claim could be decided against whichever interpretation is less favorable to Norris Utilities®.</div>
       </div>
 
-      <h2 class="nu-section-title"><span class="accent">Draft</span> Language for Quotes &amp; Invoices</h2>
-      <p>Once Aaron approves Option A or B, this paragraph drops onto every FlexPro Armor quote, invoice, and the product page. Drafted here against the recommended Option B.</p>
-
-      <div class="draft">
-        <div class="head">FlexPro Armor — Lifetime Warranty (Original Purchaser)</div>
-        <p>Norris Utilities® warrants each FlexPro Armor bucket cover against defects in materials and workmanship for the lifetime of the original purchaser of record, as identified on the Norris Utilities® invoice at the time of sale.</p>
-        <p>This warranty covers seams, stitching, snaps, grommets, mounting hardware, and core fabric integrity under normal commercial field use on a utility bucket truck, aerial lift, or comparable insulated boom platform. It is non-transferable and ends if the cover is sold, gifted, or otherwise transferred to a party other than the original purchaser.</p>
-        <p>Excluded: cosmetic fading or abrasion from normal use, damage from contact with energized conductors, fire or chemical exposure, third-party modifications, and damage caused by improper installation. To file a claim, contact Norris Utilities® at 205-500-1343 or acnorris@norrisutilities.com with the original invoice number and photographs of the defect.</p>
+      <!-- THE QUESTION -->
+      <div class="question-callout">
+        <div class="question-label">The Question to Decide</div>
+        <div class="question-text">When we say FlexPro Armor is backed by a "lifetime" guarantee — are we talking about the lifetime of the <u>structure</u> (the bucket cover product itself), or the lifetime of the <u>original owner</u> who purchased it?</div>
+        <div class="question-subtext">The two definitions are not interchangeable. Each creates a different promise, a different legal obligation, and a different cost model.</div>
       </div>
 
-      <h2 class="nu-section-title"><span class="accent">Open</span> Questions for Aaron</h2>
-      <ol class="questions">
-        <li><strong>Option A or B?</strong> Confirm definition before any further FlexPro Armor quote goes out.</li>
-        <li><strong>Pro-rated or full replacement?</strong> If a cover fails in year 8, is it a free replacement, or a pro-rated credit toward a new one?</li>
-        <li><strong>Repair vs. replace?</strong> For seam failures specifically, do we offer a free re-stitch (cheaper for us, faster for the customer) before going to full replacement?</li>
-        <li><strong>Claim window?</strong> How many days does the customer have to report a defect after discovery — 30, 60, 90?</li>
-        <li><strong>Who pays return shipping on a warranty claim?</strong> Default is Norris pays inbound for verified defects, customer pays inbound if no defect found.</li>
-        <li><strong>Existing customers</strong> — Dominion, AEP Roanoke, Chain Electric, Pickle, AJ-BOSS, Crosby. Do we re-issue invoices with the new warranty paragraph, or grandfather them under "lifetime" as written?</li>
-      </ol>
+      <!-- TWO OPTIONS -->
+      <section class="block">
+        <h2 class="nu-section-title"><span class="first-word">Two</span> interpretations on the table</h2>
+        <p class="nu-section-lead">Both are defensible. Both are used in industry. They are not the same promise.</p>
 
-      <h2 class="nu-section-title"><span class="accent">Decision</span> &amp; Sign-Off</h2>
-      <div class="decision-row">
-        <div class="box">
-          <div class="lbl">Definition Selected</div>
-          <div class="checkline"></div>
-          <div style="font-size: 0.78rem; margin-top: 6px; color: var(--nu-body-text);">A · Life of structure &nbsp;|&nbsp; B · Life of original purchaser</div>
-        </div>
-        <div class="box">
-          <div class="lbl">Aaron's Approval &amp; Date</div>
-          <div class="checkline"></div>
-          <div style="font-size: 0.78rem; margin-top: 6px; color: var(--nu-body-text);">Initial &amp; date to lock</div>
-        </div>
-      </div>
+        <div class="options-grid">
 
-      <h2 class="nu-section-title"><span class="accent">Next</span> Steps Once Aaron Decides</h2>
-      <ul class="steps">
-        <li>Update FlexPro Armor product page on NorrisUtilities.com with the approved warranty paragraph.</li>
-        <li>Update the printed and PDF Line Card — warranty footer line.</li>
-        <li>CB adds the warranty paragraph to the standard quote template and invoice footer.</li>
-        <li>CB drafts a one-page "FlexPro Armor Warranty" PDF for customers who request it.</li>
-        <li>Aaron signs off on whether the language is retroactive or grandfathered for current open invoices.</li>
-        <li>File the signed memo to ~/norris-ops/internal/ and link it from the master tracker under FlexPro Armor.</li>
-      </ul>
+          <div class="option-card option-a">
+            <span class="option-label">Option A</span>
+            <div class="option-heading">Life of the Structure</div>
+            <div class="option-tag">Product-based · Transferable</div>
+            <div class="option-desc">The warranty runs as long as the FlexPro Armor cover itself remains in service. If the cover is sold with the truck, the coverage travels with it.</div>
+            <ul class="option-list">
+              <li>Coverage tied to the serial number on the cover</li>
+              <li>Transfers to subsequent owners automatically</li>
+              <li>Ends when the cover is retired, destroyed, or modified</li>
+              <li>Stronger marketing angle — "built to last as long as the product does"</li>
+              <li>Higher long-tail exposure on claims</li>
+            </ul>
+          </div>
+
+          <div class="option-card option-b">
+            <span class="option-label">Option B</span>
+            <div class="option-heading">Life of the Original Owner</div>
+            <div class="option-tag">Buyer-based · Non-transferable</div>
+            <div class="option-desc">The warranty belongs to the person or company that bought the cover new from Norris Utilities®. When that owner sells the truck or the cover, the warranty ends.</div>
+            <ul class="option-list">
+              <li>Coverage tied to the original invoice and buyer of record</li>
+              <li>Does not transfer on resale of truck or equipment</li>
+              <li>Ends on sale, fleet disposal, or business dissolution</li>
+              <li>Tighter risk window — matches most industry "lifetime" warranties</li>
+              <li>Simpler to administer and audit</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- IMPLICATIONS -->
+      <section class="block">
+        <h2 class="nu-section-title"><span class="first-word">What</span> each choice changes</h2>
+        <p class="nu-section-lead">Side-by-side impact on pricing, support, marketing, and legal exposure.</p>
+
+        <table class="implications-table">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Life of Structure</th>
+              <th>Life of Original Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Who is covered?</td>
+              <td><span class="pill pill-structure">Structure</span> Any current holder of the cover</td>
+              <td><span class="pill pill-owner">Owner</span> Only the buyer on the original invoice</td>
+            </tr>
+            <tr>
+              <td>Transferable on resale?</td>
+              <td>Yes — travels with the product</td>
+              <td>No — warranty ends at resale</td>
+            </tr>
+            <tr>
+              <td>Claim duration</td>
+              <td>Open-ended until the cover is retired</td>
+              <td>Capped by owner's active use period</td>
+            </tr>
+            <tr>
+              <td>Proof required</td>
+              <td>Serial number on the cover</td>
+              <td>Original invoice + buyer identity</td>
+            </tr>
+            <tr>
+              <td>Support load</td>
+              <td>Higher — any downstream owner can call</td>
+              <td>Lower — known customer list only</td>
+            </tr>
+            <tr>
+              <td>Pricing implication</td>
+              <td>Premium position — justifies 50% margin</td>
+              <td>Still premium — aligns with industry norm</td>
+            </tr>
+            <tr>
+              <td>Resale value to customer</td>
+              <td>Higher — warranty adds to used-truck value</td>
+              <td>Neutral — warranty does not transfer</td>
+            </tr>
+            <tr>
+              <td>Legal exposure</td>
+              <td>Broader — more potential claimants</td>
+              <td>Narrower — defined claimant pool</td>
+            </tr>
+            <tr>
+              <td>Administrative burden</td>
+              <td>Requires serial tracking and transfer logs</td>
+              <td>Requires invoice-matched claim check only</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- RECOMMENDATION / PATH FORWARD -->
+      <section class="block">
+        <h2 class="nu-section-title"><span class="first-word">Path</span> to a locked-in definition</h2>
+        <p class="nu-section-lead">Aaron makes the call. Once set, the definition flows into every quote, spec sheet, and marketing asset.</p>
+
+        <div class="recommendation-box">
+          <div class="recommendation-label">Recommendation</div>
+          <div class="recommendation-heading">Define "lifetime" in writing before the next FlexPro Armor quote goes out.</div>
+          <p class="recommendation-text">Whichever direction Aaron chooses, the priority is <strong>clarity on paper</strong>. An undefined "lifetime" promise is the single biggest warranty-language risk on FlexPro Armor today. A one-sentence definition — added to the spec sheet footer, the quote terms, and the website product page — closes the ambiguity for every downstream conversation.</p>
+          <p class="recommendation-text">Industry precedent leans toward <strong>life of the original owner</strong>: it is what most premium equipment manufacturers mean when they say "lifetime," it keeps the claimant pool defined, and it matches the 50% margin structure without creating unbounded tail risk. That said, <strong>life of the structure</strong> is a stronger marketing story if Aaron wants to differentiate aggressively against the 24×48 and 24×34 competitors.</p>
+          <p class="recommendation-text">Either choice is fine. No choice is not.</p>
+        </div>
+      </section>
+
+      <!-- NEXT STEPS -->
+      <section class="block">
+        <h2 class="nu-section-title"><span class="first-word">Next</span> three concrete steps</h2>
+        <p class="nu-section-lead">Move from ambiguity to a documented, defensible policy.</p>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-heading">Pick the definition</div>
+            <div class="step-text">Aaron decides: structure-based or owner-based. Record the decision in open-items and the master tracker with today's date.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-heading">Write the clause</div>
+            <div class="step-text">One sentence, plain English. Example: "FlexPro Armor carries a lifetime warranty against manufacturing defects for the original purchaser, non-transferable."</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-heading">Propagate everywhere</div>
+            <div class="step-text">Update the spec sheet footer, quote terms template, website product page, and dealer/distributor sell sheets. Archive old versions.</div>
+          </div>
+        </div>
+      </section>
 
     </div>
   </main>
 
   <!-- FOOTER -->
   <footer class="nu-footer">
+    <div class="nu-footer-divider"></div>
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
-      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a><br>
-      130 Inverness Plaza #210, Birmingham, AL 35242
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
-    <div class="nu-footer-meta">Internal Action Memo · FlexPro Armor Lifetime Warranty Clarification · Generated 2026-04-22</div>
   </footer>
 
 </body>
