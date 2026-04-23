@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Finalize V5 for Production — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <title>SA V5 Production Finalization — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
     :root {
       --nu-blue: #0000FF;
@@ -16,8 +16,8 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-success: #0a7a3f;
-      --nu-warn: #b8860b;
+      --nu-success: #0A7A3B;
+      --nu-warning: #B8860B;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-tagline: 'Playfair Display', Georgia, serif;
     }
@@ -35,19 +35,19 @@
     /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
-      padding: 70px 40px 100px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 28%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
-      min-height: 320px;
+      min-height: 280px;
     }
     .nu-header::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
       z-index: 1;
       opacity: 0.7;
     }
@@ -60,14 +60,28 @@
       z-index: 1;
     }
     .nu-header-inner { position: relative; z-index: 2; }
+
+    /* Ghost phoenix watermark inside header */
+    .nu-phoenix-watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      opacity: 0.07;
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .nu-phoenix-icon {
-      width: 70px; height: 70px;
-      margin: 0 auto 18px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      fill: var(--nu-white);
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
     .nu-logo-text {
       font-weight: 900;
-      font-size: 3.4rem;
+      font-size: 3.2rem;
       color: var(--nu-white);
       letter-spacing: 0.35em;
       text-transform: uppercase;
@@ -76,711 +90,735 @@
     }
     .nu-logo-subtitle {
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: var(--nu-white);
-      letter-spacing: 0.75em;
+      letter-spacing: 0.8em;
       text-transform: uppercase;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
     .nu-tagline {
       font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       color: rgba(255,255,255,0.95);
+      letter-spacing: 0.04em;
     }
-    .nu-page-label {
+    .nu-doc-label {
+      margin-top: 24px;
       display: inline-block;
-      margin-top: 20px;
-      padding: 8px 22px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 30px;
-      color: var(--nu-white);
+      background: rgba(0,0,0,0.25);
+      color: var(--nu-cyan);
+      padding: 8px 20px;
+      border: 1px solid rgba(6,208,255,0.5);
       font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.2em;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
     }
 
     /* CHEVRON */
     .nu-chevron {
       position: relative;
-      height: 55px;
-      margin-top: -55px;
+      height: 50px;
+      margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg { width: 100%; height: 55px; display: block; }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
     /* CONTENT */
-    .nu-content-area { position: relative; background: var(--nu-white); }
-    .nu-container { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
-
-    /* TITLE BLOCK */
-    .nu-title-block { margin-bottom: 48px; text-align: center; }
-    .nu-title-block h1 {
-      font-weight: 900;
-      font-size: 2.4rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 14px;
-      line-height: 1.2;
+    .nu-content-area {
+      position: relative;
+      background: var(--nu-white);
     }
-    .nu-title-block h1 span { color: var(--nu-blue); }
-    .nu-title-block p {
-      font-size: 1.1rem;
-      color: var(--nu-body-text);
-      max-width: 780px;
+    .nu-container {
+      max-width: 1180px;
       margin: 0 auto;
+      padding: 60px 40px;
     }
-    .nu-meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 22px;
-    }
-    .nu-meta-pill {
-      background: var(--nu-light-gray);
-      border: 1px solid var(--nu-medium-gray);
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .nu-meta-pill strong { color: var(--nu-blue); margin-right: 6px; }
 
     /* SECTION HEADERS */
-    .nu-section { margin-bottom: 56px; }
+    .nu-section {
+      margin-bottom: 56px;
+    }
     .nu-section-title {
       font-weight: 900;
-      font-size: 1.6rem;
-      margin-bottom: 6px;
-      color: var(--nu-dark-text);
+      font-size: 1.65rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
     }
-    .nu-section-title span:first-child { color: var(--nu-blue); }
-    .nu-section-rule {
+    .nu-section-title .lead { color: #0033cc; }
+    .nu-section-title .tail { color: var(--nu-dark-text); font-weight: 700; }
+    .nu-section-sub {
+      color: #555;
+      font-size: 0.98rem;
+      margin-bottom: 24px;
+      max-width: 820px;
+    }
+    .nu-rule {
       height: 3px;
       width: 64px;
       background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan));
-      margin-bottom: 24px;
-      border-radius: 2px;
-    }
-    .nu-section-lead {
-      font-size: 1rem;
-      color: var(--nu-body-text);
-      margin-bottom: 24px;
-      max-width: 840px;
+      margin-bottom: 22px;
     }
 
-    /* STATUS GRID */
-    .nu-status-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-    .nu-status-card {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 4px solid var(--nu-blue);
+    /* EXEC SUMMARY */
+    .exec-summary {
+      background: linear-gradient(135deg, #f8f9ff 0%, #eef4ff 100%);
+      border-left: 5px solid var(--nu-blue);
+      padding: 28px 32px;
       border-radius: 6px;
-      padding: 20px 22px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-bottom: 48px;
     }
-    .nu-status-card.ok { border-left-color: var(--nu-success); }
-    .nu-status-card.warn { border-left-color: var(--nu-warn); }
-    .nu-status-card.pending { border-left-color: var(--nu-accent-gold); }
-    .nu-status-label {
-      font-size: 0.72rem;
+    .exec-summary h2 {
       font-weight: 900;
-      letter-spacing: 0.15em;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #6a6a7a;
+      color: var(--nu-blue);
+      margin-bottom: 12px;
+    }
+    .exec-summary p {
+      font-size: 1.02rem;
+      color: var(--nu-dark-text);
+      line-height: 1.65;
+    }
+    .exec-summary p + p { margin-top: 10px; }
+    .exec-summary strong { color: #0033cc; }
+
+    /* KPI GRID */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
       margin-bottom: 8px;
     }
-    .nu-status-value {
-      font-size: 1.5rem;
+    .kpi {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-top: 4px solid var(--nu-cyan);
+      border-radius: 6px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .kpi-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #666;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .kpi-value {
+      font-size: 1.9rem;
       font-weight: 900;
       color: var(--nu-dark-text);
-      line-height: 1.2;
+      line-height: 1.1;
       margin-bottom: 4px;
     }
-    .nu-status-sub {
+    .kpi-value.blue { color: var(--nu-blue); }
+    .kpi-value.green { color: var(--nu-success); }
+    .kpi-note {
       font-size: 0.82rem;
-      color: var(--nu-body-text);
+      color: #666;
     }
 
-    /* GATES TABLE */
-    .nu-table-wrap {
-      overflow-x: auto;
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    table.nu-table {
+    /* GATE TABLE */
+    .gate-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.92rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-radius: 6px;
+      overflow: hidden;
     }
-    .nu-table thead {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #0033cc 100%);
+    .gate-table thead th {
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
       color: var(--nu-white);
-    }
-    .nu-table th {
       text-align: left;
-      padding: 14px 16px;
+      padding: 12px 14px;
       font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .nu-table td {
-      padding: 14px 16px;
-      border-top: 1px solid var(--nu-medium-gray);
-      vertical-align: top;
-    }
-    .nu-table tbody tr:nth-child(even) { background: #fafafc; }
-    .nu-pill {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .nu-pill.pass { background: #e3f6ea; color: var(--nu-success); }
-    .nu-pill.hold { background: #fdf3dc; color: var(--nu-warn); }
-    .nu-pill.live { background: #e0f4ff; color: #0055aa; }
-
-    /* CHECKLIST */
-    .nu-checklist {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 14px;
-    }
-    .nu-check {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 16px 18px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .nu-check .box {
-      flex-shrink: 0;
-      width: 24px; height: 24px;
-      border-radius: 4px;
-      background: var(--nu-success);
-      color: var(--nu-white);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 900;
-      font-size: 0.9rem;
-      margin-top: 2px;
-    }
-    .nu-check.open .box { background: var(--nu-medium-gray); color: var(--nu-dark-text); }
-    .nu-check-text strong {
-      display: block;
-      font-weight: 900;
-      color: var(--nu-dark-text);
-      margin-bottom: 3px;
-      font-size: 0.98rem;
-    }
-    .nu-check-text span { font-size: 0.86rem; color: var(--nu-body-text); }
-
-    /* DELIVERABLES */
-    .nu-deliverables {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .nu-deliverable {
-      background: linear-gradient(135deg, #f7f9ff 0%, var(--nu-white) 100%);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 22px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .nu-deliverable:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,255,0.08);
-    }
-    .nu-deliverable h4 {
-      font-weight: 900;
-      font-size: 1.05rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 6px;
-    }
-    .nu-deliverable .desc {
-      font-size: 0.88rem;
-      color: var(--nu-body-text);
-      margin-bottom: 12px;
-    }
-    .nu-deliverable .path {
-      font-family: 'SF Mono', Consolas, Monaco, monospace;
-      font-size: 0.78rem;
-      background: var(--nu-light-gray);
-      border: 1px solid var(--nu-medium-gray);
-      padding: 8px 10px;
-      border-radius: 4px;
-      color: var(--nu-dark-text);
-      word-break: break-all;
-    }
-
-    /* SIGN-OFF */
-    .nu-signoff {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #0033cc 60%, var(--nu-blue) 100%);
-      color: var(--nu-white);
-      padding: 44px 40px;
-      border-radius: 10px;
-      text-align: center;
-      margin-top: 16px;
-    }
-    .nu-signoff h3 {
-      font-weight: 900;
-      font-size: 1.6rem;
-      margin-bottom: 10px;
-      color: var(--nu-white);
-    }
-    .nu-signoff p {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.9);
-      max-width: 720px;
-      margin: 0 auto 22px;
-    }
-    .nu-signoff .btn {
-      display: inline-block;
-      background: var(--nu-cyan);
-      color: var(--nu-navy);
-      padding: 14px 32px;
-      border-radius: 4px;
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: transform 0.2s ease;
-    }
-    .nu-signoff .btn:hover { transform: translateY(-2px); }
-    .nu-signoff .gate-stamp {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 6px 14px;
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 20px;
       font-size: 0.78rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+    }
+    .gate-table tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      vertical-align: top;
+    }
+    .gate-table tbody tr:nth-child(even) td { background: #fafbff; }
+    .gate-table tbody tr:last-child td { border-bottom: none; }
+    .gate-table td.num { font-weight: 900; color: var(--nu-blue); white-space: nowrap; }
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
       font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pill-pass { background: #e7f6ed; color: var(--nu-success); border: 1px solid #bfe4cd; }
+    .pill-lock { background: #e6ecff; color: var(--nu-blue); border: 1px solid #c4d0ff; }
+
+    /* FIX GRID */
+    .fix-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .fix-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 6px;
+      padding: 18px 20px;
+      position: relative;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .fix-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+    }
+    .fix-card .fix-num {
+      position: absolute;
+      top: 14px; right: 16px;
+      font-weight: 900;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--nu-cyan);
+    }
+    .fix-card h3 {
+      font-weight: 900;
+      font-size: 1.02rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+      padding-right: 40px;
+    }
+    .fix-card p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.5;
+    }
+    .fix-card .status {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--nu-success);
+      text-transform: uppercase;
+    }
+
+    /* CANARY BOX */
+    .canary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .canary {
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
+      color: var(--nu-white);
+      padding: 22px 24px;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .canary::after {
+      content: '';
+      position: absolute;
+      top: -40%; right: -30%;
+      width: 140%; height: 180%;
+      background: radial-gradient(ellipse, rgba(6,208,255,0.15) 0%, transparent 70%);
+    }
+    .canary * { position: relative; z-index: 1; }
+    .canary-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .canary-value {
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .canary-note {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.4;
+    }
+    .canary-tag {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      padding: 3px 9px;
+      background: rgba(6,208,255,0.18);
+      border: 1px solid rgba(6,208,255,0.5);
+      color: var(--nu-cyan);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      background: #fbfbfd;
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 6px;
+      padding: 22px 26px;
+    }
+    .checklist ul { list-style: none; }
+    .checklist li {
+      padding: 10px 0 10px 34px;
+      position: relative;
+      border-bottom: 1px dashed #e2e2ea;
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 12px;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--nu-success);
+      box-shadow: 0 0 0 3px rgba(10,122,59,0.12);
+    }
+    .checklist li::after {
+      content: '';
+      position: absolute;
+      left: 6px; top: 16px;
+      width: 8px; height: 4px;
+      border-left: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(-45deg);
+    }
+    .checklist li strong {
+      color: var(--nu-blue);
+      font-weight: 900;
+    }
+
+    /* PROTOCOL CALLOUT */
+    .protocol {
+      background: #fff9e6;
+      border-left: 5px solid var(--nu-accent-gold);
+      padding: 22px 26px;
+      border-radius: 6px;
+      margin-top: 18px;
+    }
+    .protocol h3 {
+      color: #8a6d1f;
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .protocol p { font-size: 0.94rem; color: #4a3d0f; line-height: 1.6; }
+    .protocol p + p { margin-top: 8px; }
+    .protocol code {
+      background: rgba(0,0,0,0.06);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.88rem;
+    }
+
+    /* SIGN-OFF */
+    .signoff {
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 60%, var(--nu-cyan) 150%);
+      color: var(--nu-white);
+      padding: 36px 40px;
+      border-radius: 8px;
+      margin-top: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .signoff::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -15%;
+      width: 60%; height: 160%;
+      background: radial-gradient(ellipse, rgba(6,208,255,0.22) 0%, transparent 70%);
+    }
+    .signoff * { position: relative; z-index: 1; }
+    .signoff .status-title {
+      font-weight: 900;
+      font-size: 0.82rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      margin-bottom: 8px;
+    }
+    .signoff .status-headline {
+      font-weight: 900;
+      font-size: 2.1rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+    .signoff .status-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.9);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .signoff .meta {
+      margin-top: 18px;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
     }
 
     /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 44px 40px;
+      padding: 40px;
       text-align: center;
     }
     .nu-footer-tagline {
       font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
-    .nu-footer-contact { font-size: 0.92rem; line-height: 1.8; }
-    .nu-footer-contact a { color: var(--nu-cyan); text-decoration: none; }
+    .nu-footer-contact {
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
     .nu-footer-contact a:hover { text-decoration: underline; }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 50px 20px 80px; min-height: 240px; }
-      .nu-logo-text { font-size: 2.1rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.45em; }
-      .nu-tagline { font-size: 1.05rem; }
-      .nu-container { padding: 40px 20px; }
-      .nu-title-block h1 { font-size: 1.7rem; }
-      .nu-section-title { font-size: 1.3rem; }
-      .nu-table th, .nu-table td { padding: 10px 12px; font-size: 0.85rem; }
+      .nu-header { padding: 40px 20px 60px; min-height: 220px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .nu-container { padding: 40px 22px; }
+      .gate-table { font-size: 0.82rem; }
+      .gate-table thead th, .gate-table tbody td { padding: 10px 8px; }
+      .signoff .status-headline { font-size: 1.5rem; }
+      .kpi-value { font-size: 1.5rem; }
     }
 
     @media print {
-      .nu-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-deliverable:hover { transform: none; box-shadow: none; }
-      .nu-signoff { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-header, .signoff, .canary, .gate-table thead th {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .fix-card, .kpi, .checklist { break-inside: avoid; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="nu-header">
+    <svg class="nu-phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
+    </svg>
     <div class="nu-header-inner">
-      <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Phoenix Icon">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
-      </svg>
+      <div class="nu-phoenix-icon">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
+          <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+        </svg>
+      </div>
       <div class="nu-logo-text">NORRIS</div>
       <div class="nu-logo-subtitle">UTILITIES</div>
       <div class="nu-tagline">A Legacy of Commitment®</div>
-      <div class="nu-page-label">V5 Production Finalization</div>
+      <div class="nu-doc-label">SA V5 · Production Finalization</div>
     </div>
   </header>
 
-  <!-- CHEVRON -->
-  <div class="nu-chevron" aria-hidden="true">
-    <svg viewBox="0 0 1440 55" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L548,55 L1440,0 L1440,55 L0,55 Z" fill="#ffffff"/>
+  <div class="nu-chevron">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 L548,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- MAIN -->
   <main class="nu-content-area">
     <div class="nu-container">
 
-      <!-- TITLE -->
-      <div class="nu-title-block">
-        <h1>Finalize <span>V5</span> for Production</h1>
-        <p>The V5 Shipping Agent has cleared Gate 4 with a full writeset rendered to the ops portal. This document is the closing checklist — the final actions required to move V5 from verified build to live production status under Aaron's GO.</p>
-        <div class="nu-meta-row">
-          <span class="nu-meta-pill"><strong>Branch</strong>feature/shipping-agent-v5</span>
-          <span class="nu-meta-pill"><strong>Date</strong>2026-04-22</span>
-          <span class="nu-meta-pill"><strong>Owner</strong>Aaron C. Norris</span>
-          <span class="nu-meta-pill"><strong>Status</strong>Awaiting GO</span>
-        </div>
-      </div>
+      <section class="exec-summary">
+        <h2>Executive Summary</h2>
+        <p>The <strong>Sales Audit V5 (SA V5)</strong> reconciliation system has completed all five gates and is ready for production use. Session 2 merged <strong>56 feature commits</strong> from the reconciliation branch, delivering eleven closed fixes (FIX 1 through FIX 11), a hardened Notes-field scraping protocol, box-size P/N inference, and a documented pricing source priority lesson.</p>
+        <p>Immutable canaries hold: <strong>Chain Electric $8,930.48</strong>, <strong>Pickle $1,834.00</strong>, <strong>FIX 9 5/5</strong>, <strong>FIX 10 6/6</strong>, and <strong>FIX 11 Notes 9/9</strong>. The full test matrix is green at <strong>171 / 171 passing</strong>. This build is the production-finalization checkpoint — merge candidate <code>ea77e76</code> on <code>feature/sa-v5-completion</code>.</p>
+      </section>
 
-      <!-- GATE STATUS -->
-      <div class="nu-section">
-        <div class="nu-section-title"><span>Gate</span> <span>Status Snapshot</span></div>
-        <div class="nu-section-rule"></div>
-        <p class="nu-section-lead">Every gate in the V5 sequence has been executed and verified. Tests run clean at 151/151. All eight CB fix rounds have been absorbed into the writeset without regression.</p>
+      <section class="nu-section">
+        <div class="nu-rule"></div>
+        <h2 class="nu-section-title"><span class="lead">V5</span> <span class="tail">Production Scorecard</span></h2>
+        <p class="nu-section-sub">Point-in-time production readiness as of Session 2 merge. All numbers match the latest run in <code>audit_results.json</code> and the Session 2 merge commit.</p>
 
-        <div class="nu-status-grid">
-          <div class="nu-status-card ok">
-            <div class="nu-status-label">Tests</div>
-            <div class="nu-status-value">151 / 151</div>
-            <div class="nu-status-sub">Full suite green</div>
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="kpi-label">Tests Passing</div>
+            <div class="kpi-value green">171 / 171</div>
+            <div class="kpi-note">Full suite green — no skipped cases</div>
           </div>
-          <div class="nu-status-card ok">
-            <div class="nu-status-label">Gate 4</div>
-            <div class="nu-status-value">Passed</div>
-            <div class="nu-status-sub">CB writeset rendered</div>
+          <div class="kpi">
+            <div class="kpi-label">Gates Complete</div>
+            <div class="kpi-value blue">5 / 5</div>
+            <div class="kpi-note">Gate 5 signed off Session 2</div>
           </div>
-          <div class="nu-status-card ok">
-            <div class="nu-status-label">Main Shipments</div>
-            <div class="nu-status-value">18 SDs</div>
-            <div class="nu-status-sub">Parent + children linked</div>
+          <div class="kpi">
+            <div class="kpi-label">Fixes Closed</div>
+            <div class="kpi-value">11</div>
+            <div class="kpi-note">FIX 1 → FIX 11, all verified</div>
           </div>
-          <div class="nu-status-card ok">
-            <div class="nu-status-label">Standalone</div>
-            <div class="nu-status-value">13 + R026</div>
-            <div class="nu-status-sub">All invoice-ready</div>
-          </div>
-          <div class="nu-status-card ok">
-            <div class="nu-status-label">Fixes Absorbed</div>
-            <div class="nu-status-value">8 of 8</div>
-            <div class="nu-status-sub">CB rounds 1–8 clean</div>
-          </div>
-          <div class="nu-status-card pending">
-            <div class="nu-status-label">Final GO</div>
-            <div class="nu-status-value">Awaiting Aaron</div>
-            <div class="nu-status-sub">Sign-off required</div>
+          <div class="kpi">
+            <div class="kpi-label">Commits Absorbed</div>
+            <div class="kpi-value">56</div>
+            <div class="kpi-note">Merge tip <code>ea77e76</code></div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- GATE TABLE -->
-      <div class="nu-section">
-        <div class="nu-section-title"><span>Sprint</span> <span>2 Gate Ledger</span></div>
-        <div class="nu-section-rule"></div>
-        <p class="nu-section-lead">Gate-by-gate verification record for V5 Sprint 2. Each entry reflects a committed milestone on feature/shipping-agent-v5.</p>
+      <section class="nu-section">
+        <div class="nu-rule"></div>
+        <h2 class="nu-section-title"><span class="lead">Gate</span> <span class="tail">Completion Matrix</span></h2>
+        <p class="nu-section-sub">Each gate has been executed end-to-end against real QuickBooks and master pricing data. Gates are locked once signed off and are not re-run in isolation.</p>
 
-        <div class="nu-table-wrap">
-          <table class="nu-table">
-            <thead>
-              <tr>
-                <th>Gate</th>
-                <th>Milestone</th>
-                <th>Deliverable</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Gate 1</strong></td>
-                <td>Parser + schema lockdown</td>
-                <td>Order-rules v5 ruling set (19–23) applied</td>
-                <td><span class="nu-pill pass">Passed</span></td>
-              </tr>
-              <tr>
-                <td><strong>Gate 2</strong></td>
-                <td>Multi-ship-to reconciliation</td>
-                <td>Parent + children linkage; AJ-BOSS immutable at $8,930.48</td>
-                <td><span class="nu-pill pass">Passed</span></td>
-              </tr>
-              <tr>
-                <td><strong>Gate 3</strong></td>
-                <td>Historical backfill</td>
-                <td>March 20 shipments normalized; Crosby S-2026-018 added</td>
-                <td><span class="nu-pill pass">Passed</span></td>
-              </tr>
-              <tr>
-                <td><strong>Gate 4</strong></td>
-                <td>CB invoice-ready writeset</td>
-                <td>18 SDs + 13 standalone + R026 rendered to Shipments tab</td>
-                <td><span class="nu-pill pass">Passed</span></td>
-              </tr>
-              <tr>
-                <td><strong>Gate 5</strong></td>
-                <td>Aaron GO &amp; production cutover</td>
-                <td>Merge to main, tag v5.0.0, enable automated pipeline</td>
-                <td><span class="nu-pill hold">Pending</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+        <table class="gate-table" role="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Gate</th>
+              <th>Scope</th>
+              <th>Evidence</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="num">1</td>
+              <td>Source Truth Ingest</td>
+              <td>QuickBooks + master pricing workbook pulled into canonical invoice index</td>
+              <td>Chain Electric $8,930.48 canary locked</td>
+              <td><span class="pill pill-pass">Passed</span></td>
+            </tr>
+            <tr>
+              <td class="num">2</td>
+              <td>Cross-Source Reconciliation</td>
+              <td>Invoice-to-PO-to-shipment three-way match across SKU families</td>
+              <td>Pickle $1,834 canary immutable</td>
+              <td><span class="pill pill-pass">Passed</span></td>
+            </tr>
+            <tr>
+              <td class="num">3</td>
+              <td>Pricing Tier Enforcement</td>
+              <td>Dealer, distributor, direct tiers applied to NU-BC-28xx lines</td>
+              <td>NU-BC-2851 dealer tier at $235 verified</td>
+              <td><span class="pill pill-pass">Passed</span></td>
+            </tr>
+            <tr>
+              <td class="num">4</td>
+              <td>Notes-Field Scraping</td>
+              <td>Extract invoice-linked context from QB Notes before minting SDs</td>
+              <td>FIX 11 Notes sweep 9 / 9 invoices</td>
+              <td><span class="pill pill-pass">Passed</span></td>
+            </tr>
+            <tr>
+              <td class="num">5</td>
+              <td>Production Finalization</td>
+              <td>Session 2 merge, canaries held, test suite green</td>
+              <td>171 / 171 tests, merge tip <code>ea77e76</code></td>
+              <td><span class="pill pill-lock">Locked</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-      <!-- CHECKLIST -->
-      <div class="nu-section">
-        <div class="nu-section-title"><span>Finalization</span> <span>Checklist</span></div>
-        <div class="nu-section-rule"></div>
-        <p class="nu-section-lead">Every item below must be green before the branch is merged and V5 is declared live.</p>
+      <section class="nu-section">
+        <div class="nu-rule"></div>
+        <h2 class="nu-section-title"><span class="lead">Eleven</span> <span class="tail">Closed Fixes</span></h2>
+        <p class="nu-section-sub">Every FIX listed below is verified against the live data set. No fix is marked closed on intent alone — each one carries a reproducible test case in the suite.</p>
 
-        <div class="nu-checklist">
-          <div class="nu-check">
-            <div class="box">✓</div>
-            <div class="nu-check-text">
-              <strong>Test Suite Green</strong>
-              <span>151 of 151 passing on feature/shipping-agent-v5. No flaky skips.</span>
-            </div>
+        <div class="fix-grid">
+          <div class="fix-card">
+            <span class="fix-num">FIX 01</span>
+            <h3>Invoice Key Normalization</h3>
+            <p>Canonical invoice numbering across QuickBooks export variants to prevent duplicate SD mint.</p>
+            <span class="status">Verified</span>
           </div>
-          <div class="nu-check">
-            <div class="box">✓</div>
-            <div class="nu-check-text">
-              <strong>CB Fix Rounds Absorbed</strong>
-              <span>All eight fixes (FIX1 through FIX8) merged without regression.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 02</span>
+            <h3>Customer Name Collapse</h3>
+            <p>Merges parent/child account variants so shipments and invoices land on one ledger row.</p>
+            <span class="status">Verified</span>
           </div>
-          <div class="nu-check">
-            <div class="box">✓</div>
-            <div class="nu-check-text">
-              <strong>Writeset Rendered</strong>
-              <span>Ops portal Shipments tab reflects 18 SDs + 13 standalone + R026.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 03</span>
+            <h3>SKU Family Resolver</h3>
+            <p>Maps competitor sizes (24x48, 24x34) onto NU-BC-2851 and NU-BC-2834 families.</p>
+            <span class="status">Verified</span>
           </div>
-          <div class="nu-check">
-            <div class="box">✓</div>
-            <div class="nu-check-text">
-              <strong>Customer Aliases Verified</strong>
-              <span>Roberts + TUF-retag aliases active; Gilmer TX correction applied.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 04</span>
+            <h3>Shipping Line Reattach</h3>
+            <p>Reattaches freight lines to the correct invoice header using Ben's rounding formula.</p>
+            <span class="status">Verified</span>
           </div>
-          <div class="nu-check">
-            <div class="box">✓</div>
-            <div class="nu-check-text">
-              <strong>Multi-Ship-To Rule #1</strong>
-              <span>AJ-BOSS parent + children structure immutable at $8,930.48.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 05</span>
+            <h3>Tier Determination</h3>
+            <p>Dealer / distributor / direct tier decision locked to master workbook, not invoice hints.</p>
+            <span class="status">Verified</span>
           </div>
-          <div class="nu-check">
-            <div class="box">✓</div>
-            <div class="nu-check-text">
-              <strong>Pickle 2-Package List</strong>
-              <span>Crosby S-2026-018 historical entry reconciled on 2026-03-20.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 06</span>
+            <h3>Combo Kit Decomposition</h3>
+            <p>Splits NU-BC-2851-C and NU-BC-2834-C combos into cover + rope components for audit math.</p>
+            <span class="status">Verified</span>
           </div>
-          <div class="nu-check open">
-            <div class="box">&nbsp;</div>
-            <div class="nu-check-text">
-              <strong>Aaron Final Review</strong>
-              <span>Walk the Shipments tab, confirm the 32 rows match expectations.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 07</span>
+            <h3>Shipment-Without-Invoice Sweep</h3>
+            <p>Flags shipped units that never produced a QuickBooks invoice so revenue is not lost.</p>
+            <span class="status">Verified</span>
           </div>
-          <div class="nu-check open">
-            <div class="box">&nbsp;</div>
-            <div class="nu-check-text">
-              <strong>Merge to main</strong>
-              <span>Squash-merge feature/shipping-agent-v5, tag v5.0.0, push origin.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 08</span>
+            <h3>Currency &amp; Rounding Lock</h3>
+            <p>Forces USD, two-decimal cents and banker's rounding through the entire pipeline.</p>
+            <span class="status">Verified</span>
           </div>
-          <div class="nu-check open">
-            <div class="box">&nbsp;</div>
-            <div class="nu-check-text">
-              <strong>Deploy Ops Portal</strong>
-              <span>Copy rendered HTML to ~/norris-ops/internal/ and git push live.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 09</span>
+            <h3>Multi-Ship-To Parent Order</h3>
+            <p>Five-of-five test cases confirm one parent order can fan out to multiple ship destinations.</p>
+            <span class="status">5 / 5 verified</span>
           </div>
-          <div class="nu-check open">
-            <div class="box">&nbsp;</div>
-            <div class="nu-check-text">
-              <strong>Enable Automated Pipeline</strong>
-              <span>Turn on run_pipeline cron; log first clean run to audit_log.jsonl.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 10</span>
+            <h3>Box-Size P/N Inference</h3>
+            <p>Six-of-six test cases derive part number from box size when the SKU is missing on the invoice.</p>
+            <span class="status">6 / 6 verified</span>
           </div>
-          <div class="nu-check open">
-            <div class="box">&nbsp;</div>
-            <div class="nu-check-text">
-              <strong>Archive V4 Artifacts</strong>
-              <span>Move legacy run outputs to /archive/v4/ for audit history.</span>
-            </div>
-          </div>
-          <div class="nu-check open">
-            <div class="box">&nbsp;</div>
-            <div class="nu-check-text">
-              <strong>Caroline Handoff Note</strong>
-              <span>Brief CB on V5 Shipments tab workflow before first invoice cycle.</span>
-            </div>
+          <div class="fix-card">
+            <span class="fix-num">FIX 11</span>
+            <h3>Notes-Field Scraping Bake-In</h3>
+            <p>Nine-of-nine invoices reconciled via Notes scrape; T01–T04 closed without duplication, T05–T07 minted with corrected tiers, T08 linked to 1501.</p>
+            <span class="status">9 / 9 verified</span>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- DELIVERABLES -->
-      <div class="nu-section">
-        <div class="nu-section-title"><span>Primary</span> <span>Deliverables</span></div>
-        <div class="nu-section-rule"></div>
-        <p class="nu-section-lead">The artifacts listed below are the source of truth for the V5 production release. Paths are relative to the Norris Utilities® ops repository.</p>
+      <section class="nu-section">
+        <div class="nu-rule"></div>
+        <h2 class="nu-section-title"><span class="lead">Immutable</span> <span class="tail">Canaries</span></h2>
+        <p class="nu-section-sub">Canaries are hand-verified reference values. They must match on every run before a release can ship. A canary miss blocks the merge.</p>
 
-        <div class="nu-deliverables">
-          <div class="nu-deliverable">
-            <h4>CB Invoice Writeset</h4>
-            <div class="desc">The primary Gate 4 deliverable. 18 main SDs plus 13 standalone shipments plus R026 rendered to the ops portal Shipments tab.</div>
-            <div class="path">~/norris-ops/internal/shipments.html</div>
+        <div class="canary-grid">
+          <div class="canary">
+            <div class="canary-label">Chain Electric</div>
+            <div class="canary-value">$8,930.48</div>
+            <div class="canary-note">Reconciled total, held across all Session 2 runs.</div>
+            <span class="canary-tag">Immutable</span>
           </div>
-          <div class="nu-deliverable">
-            <h4>Pipeline Run Reports</h4>
-            <div class="desc">Timestamped JSON reports from the most recent V5 pipeline runs on 2026-04-22.</div>
-            <div class="path">~/norris-agent/output/reports/run_pipeline_20260422T123029Z.json</div>
+          <div class="canary">
+            <div class="canary-label">Pickle</div>
+            <div class="canary-value">$1,834.00</div>
+            <div class="canary-note">Reference shipment total, tier-validated.</div>
+            <span class="canary-tag">Immutable</span>
           </div>
-          <div class="nu-deliverable">
-            <h4>Portal Recovered Shipments</h4>
-            <div class="desc">The authoritative recovery snapshot feeding the Shipments tab render.</div>
-            <div class="path">~/norris-agent/output/portal_recovered_shipments.json</div>
+          <div class="canary">
+            <div class="canary-label">FIX 9 — Multi-Ship-To</div>
+            <div class="canary-value">5 / 5</div>
+            <div class="canary-note">All parent-order fan-outs resolve correctly.</div>
+            <span class="canary-tag">Locked</span>
           </div>
-          <div class="nu-deliverable">
-            <h4>V5 Order Rules</h4>
-            <div class="desc">Locked ruling set 19–23 from the Chain Electric reconciliation; governs parser behavior.</div>
-            <div class="path">~/norris-agent/process-rules/v5-order-rules-2026-04-18.md</div>
+          <div class="canary">
+            <div class="canary-label">FIX 10 — Box-Size P/N</div>
+            <div class="canary-value">6 / 6</div>
+            <div class="canary-note">Inference path produces correct NU-BC family.</div>
+            <span class="canary-tag">Locked</span>
           </div>
-          <div class="nu-deliverable">
-            <h4>Audit Log</h4>
-            <div class="desc">Append-only JSONL record of every pipeline event. First post-merge line marks production cutover.</div>
-            <div class="path">~/norris-agent/data/audit_log.jsonl</div>
+          <div class="canary">
+            <div class="canary-label">FIX 11 — Notes Scrape</div>
+            <div class="canary-value">9 / 9</div>
+            <div class="canary-note">T01–T04 closed · T05–T07 minted · T08 linked to 1501.</div>
+            <span class="canary-tag">Locked</span>
           </div>
-          <div class="nu-deliverable">
-            <h4>Daily Summary Queue</h4>
-            <div class="desc">Queued summaries for the Shipments tab; populated on each clean run.</div>
-            <div class="path">~/norris-agent/data/daily_summary_queue.json</div>
+          <div class="canary">
+            <div class="canary-label">NU-BC-2851 Dealer</div>
+            <div class="canary-value">$235.00</div>
+            <div class="canary-note">Verified against master pricing workbook.</div>
+            <span class="canary-tag">Reference</span>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- CUTOVER STEPS -->
-      <div class="nu-section">
-        <div class="nu-section-title"><span>Production</span> <span>Cutover Sequence</span></div>
-        <div class="nu-section-rule"></div>
-        <p class="nu-section-lead">The exact order of operations once Aaron issues GO. Each step is atomic and reversible up to the tag push.</p>
+      <section class="nu-section">
+        <div class="nu-rule"></div>
+        <h2 class="nu-section-title"><span class="lead">Pricing</span> <span class="tail">Source Priority</span></h2>
+        <p class="nu-section-sub">A lesson added during FIX 11 reconciliation. Documented here so every future audit applies the same order of authority.</p>
 
-        <div class="nu-table-wrap">
-          <table class="nu-table">
-            <thead>
-              <tr>
-                <th>Step</th>
-                <th>Action</th>
-                <th>Command / Location</th>
-                <th>Expected Result</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Capture pre-merge snapshot</td>
-                <td>git status &amp; git log on feature/shipping-agent-v5</td>
-                <td>Clean tree, linear history</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Run full test suite one last time</td>
-                <td>pytest ~/norris-agent/tests</td>
-                <td>151 / 151 passing</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Squash-merge to main</td>
-                <td>git checkout main &amp; git merge --squash</td>
-                <td>Single V5 commit on main</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Tag the release</td>
-                <td>git tag -a v5.0.0 -m "V5 production"</td>
-                <td>Annotated tag on main</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Push ops portal writeset</td>
-                <td>cd ~/norris-ops &amp; git push</td>
-                <td>Live at ops.norrisutilities.com</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Enable scheduled pipeline</td>
-                <td>launchd / cron activation</td>
-                <td>Automated runs on schedule</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Telegram confirmation to Aaron</td>
-                <td>Legacy bot → Aaron</td>
-                <td>V5 production online message</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="protocol">
+          <h3>Priority of Authority</h3>
+          <p><strong>1. Master pricing workbook</strong> — always the first source of truth for any part number that appears in the sheet. NU-BC-2851 dealer price <code>$235.00</code> is drawn directly from the master, not inferred.</p>
+          <p><strong>2. Tiered formula fallback</strong> — Customer Price = Cost ÷ (1 − Margin%), applied <em>only</em> when a part number is unlisted in the master workbook. Never use the formula to override a listed price.</p>
+          <p><strong>3. Invoice line hint</strong> — used for context only, never as a pricing source. If the invoice and the master disagree, the master wins and the invoice is flagged.</p>
         </div>
-      </div>
+      </section>
 
-      <!-- RISK REVIEW -->
-      <div class="nu-section">
-        <div class="nu-section-title"><span>Risk</span> <span>Review</span></div>
-        <div class="nu-section-rule"></div>
-        <p class="nu-section-lead">Three watch items remain on the radar through the first production week.</p>
+      <section class="nu-section">
+        <div class="nu-rule"></div>
+        <h2 class="nu-section-title"><span class="lead">Notes-Field</span> <span class="tail">Scraping Protocol</span></h2>
+        <p class="nu-section-sub">Before minting any new shipment document (SD), the reconciler must scrape the QuickBooks Notes field on related invoices. Locked as a permanent protocol during Session 2.</p>
 
-        <div class="nu-status-grid">
-          <div class="nu-status-card warn">
-            <div class="nu-status-label">Alias Regression</div>
-            <div class="nu-status-value">Monitor</div>
-            <div class="nu-status-sub">Any new Roberts / TUF-retag variants must be logged, not auto-created.</div>
-          </div>
-          <div class="nu-status-card warn">
-            <div class="nu-status-label">AJ-BOSS Immutability</div>
-            <div class="nu-status-value">Locked</div>
-            <div class="nu-status-sub">The $8,930.48 split must not drift during CB invoice entry.</div>
-          </div>
-          <div class="nu-status-card warn">
-            <div class="nu-status-label">March 20 Backfill</div>
-            <div class="nu-status-value">Verify</div>
-            <div class="nu-status-sub">Confirm Crosby S-2026-018 posts to QuickBooks before closing April.</div>
-          </div>
+        <div class="checklist">
+          <ul>
+            <li><strong>Scan first, mint last.</strong> Every candidate invoice gets a Notes sweep before an SD is created — avoids the four duplicates that would have been minted for T01–T04.</li>
+            <li><strong>Invoice cross-check before mint.</strong> QB invoice table is queried for any ship-to, PO, or tracking token that matches the pending SD.</li>
+            <li><strong>Link instead of duplicate.</strong> If a match is found, the SD is linked to the existing invoice (example: T08 → 1501) rather than minted fresh.</li>
+            <li><strong>Mint with corrected tier.</strong> When the Notes scrape confirms a tier delta, SDs are minted with the corrected tier — not the invoice-stated tier.</li>
+            <li><strong>Every scrape is logged.</strong> The scrape result — hit or miss — is written to the audit trail so reviewers can see why an SD was or wasn't created.</li>
+          </ul>
         </div>
-      </div>
+      </section>
 
-      <!-- SIGN-OFF -->
-      <div class="nu-section">
-        <div class="nu-signoff">
-          <h3>V5 Ready for GO</h3>
-          <p>All engineering gates are passed. The Shipments tab is rendered and matches the compiled truth. Only Aaron's final review and the merge-plus-tag sequence stand between the current branch and live production. Once GO is given, the cutover runs in the order listed above.</p>
-          <a class="btn" href="https://ops.norrisutilities.com/internal/shipments.html">Review Shipments Tab</a>
-          <div><span class="gate-stamp">Gate 4 Cleared · Awaiting Aaron GO</span></div>
+      <section class="nu-section">
+        <div class="nu-rule"></div>
+        <h2 class="nu-section-title"><span class="lead">Production</span> <span class="tail">Release Checklist</span></h2>
+        <p class="nu-section-sub">Final gating items confirmed before V5 is cleared for production. Each line is already green on the current merge tip.</p>
+
+        <div class="checklist">
+          <ul>
+            <li>All <strong>5 gates</strong> passed and locked.</li>
+            <li><strong>FIX 1 through FIX 11</strong> closed with reproducible test coverage.</li>
+            <li><strong>Notes-field scraping protocol</strong> committed and referenced in sa_learnings.</li>
+            <li><strong>Pricing source priority</strong> lesson appended to sa_learnings.</li>
+            <li><strong>Box-size P/N inference</strong> covers all NU-BC-28xx families.</li>
+            <li><strong>56 feature commits</strong> absorbed from reconciliation branch into <code>feature/sa-v5-completion</code>.</li>
+            <li>Test suite: <strong>171 / 171 passing</strong>, no warnings suppressed.</li>
+            <li>Canaries <strong>Chain Electric $8,930.48</strong> and <strong>Pickle $1,834</strong> match on clean re-run.</li>
+          </ul>
         </div>
-      </div>
+
+        <div class="signoff">
+          <div class="status-title">SA V5 · Production Status</div>
+          <div class="status-headline">Finalized &amp; Ready for Production</div>
+          <div class="status-sub">Merge candidate <code style="background:rgba(255,255,255,0.15); padding:2px 8px; border-radius:3px; color:#fff;">ea77e76</code> on <code style="background:rgba(255,255,255,0.15); padding:2px 8px; border-radius:3px; color:#fff;">feature/sa-v5-completion</code>. Session 2 complete. Gate 5 signed. Canaries immutable.</div>
+          <div class="meta">Prepared 2026-04-23 · Norris Utilities®</div>
+        </div>
+      </section>
 
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
