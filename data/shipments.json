@@ -1,6 +1,837 @@
 {
-  "last_updated": "2026-04-20",
-  "orders": [
+  "schema_version": "5.1.0_completion",
+  "generated_at": "2026-04-23T10:23:59.547481+00:00",
+  "source": "agent/data/shipping_docs.json (authoritative)",
+  "record_count": 24,
+  "records": [
+    {
+      "sid": "S-2026-001",
+      "order_date": "March 31, 2026",
+      "customer": "Aerial Hydraulics, Inc.",
+      "customer_id": "Aerial Hydraulics, Inc.",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 2
+        }
+      ],
+      "ship_to_address": "Primoris T&D Services | Attn: PSC George Dufour | 3606 N. Frazier St | Conroe, TX 77303",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "dealer",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-ABADIE-0331.html",
+      "sd_path": "shipping-docs/SD-2026-ABADIE-0331.html",
+      "cb_internal_note": "",
+      "po_number": "0330-PRIMORIS W6237",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.535360+00:00"
+    },
+    {
+      "sid": "S-2026-008",
+      "order_date": "April 7, 2026",
+      "customer": "Aerial Hydraulics, Inc.",
+      "customer_id": "Aerial Hydraulics, Inc.",
+      "line_items": [
+        {
+          "pn": "NU-BC-2828",
+          "description_short": "1-Man BC",
+          "description_full": "FlexPro Armor 1-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Michael Flemming | 2015 Holly Rd | Gilmer, TX 75644",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "dealer",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-ABADIE-0407-BYB0001.html",
+      "sd_path": "shipping-docs/SD-2026-ABADIE-0407-BYB0001.html",
+      "cb_internal_note": "",
+      "po_number": "0407-BYB0001",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.535872+00:00"
+    },
+    {
+      "sid": "S-2026-002",
+      "order_date": "TBD",
+      "customer": "Chain Electric",
+      "customer_id": "Chain Electric",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor\u00ae 2-Man Bucket Cover",
+          "qty": 5
+        },
+        {
+          "pn": "NU-BC-2834",
+          "description_short": "1.5-Man BC",
+          "description_full": "FlexPro Armor\u00ae 1.5-Man Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "ship_to_address": "Jeremy Brown | 2631 Ridgewood Rd | Searcy, AR 72143",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-AJ-0331-B-JeremyBrown.html",
+      "sd_path": "shipping-docs/SD-2026-AJ-0331-B-JeremyBrown.html",
+      "cb_internal_note": "",
+      "po_number": "Verbal",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.536340+00:00"
+    },
+    {
+      "sid": "S-2026-003",
+      "order_date": "TBD",
+      "customer": "Chain Electric",
+      "customer_id": "Chain Electric",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor\u00ae 2-Man Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "ship_to_address": "AJ Morris | Chain Electric Company | 1308 W Pine St | Hattiesburg, MS 39401 | (601) 549-5409 | ajmorris@bchain.com",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-AJ-0331-ChainElectric.html",
+      "sd_path": "shipping-docs/SD-2026-AJ-0331-ChainElectric.html",
+      "cb_internal_note": "",
+      "po_number": "Verbal",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.536812+00:00"
+    },
+    {
+      "sid": "S-2026-004",
+      "order_date": "TBD",
+      "customer": "Chain Electric",
+      "customer_id": "Chain Electric",
+      "line_items": [
+        {
+          "pn": "NU-BC-2834-F",
+          "description_short": "1.5-Man ARCH",
+          "description_full": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
+          "qty": 5
+        }
+      ],
+      "ship_to_address": "AJ Morris | Chain Electric Company | 1308 W Pine St | Hattiesburg, MS 39401",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-AJ-0401-ARCH.html",
+      "sd_path": "shipping-docs/SD-2026-AJ-0401-ARCH.html",
+      "cb_internal_note": "",
+      "po_number": "Verbal",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.537295+00:00"
+    },
+    {
+      "sid": "S-2026-007",
+      "order_date": "Today",
+      "customer": "AEP/SWEPCO",
+      "customer_id": "AEP/SWEPCO",
+      "line_items": [
+        {
+          "pn": "NU-BC-DSHAPE",
+          "description_short": "D-Shape",
+          "description_full": "FlexPro Armor D-Shape Transmission Bucket Cover",
+          "qty": 4
+        }
+      ],
+      "ship_to_address": "Dave Bedwell | AEP/SWEPCO | 355 South 145th East Ave | Tulsa, OK 74108",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-BEDWELL-0407.html",
+      "sd_path": "shipping-docs/SD-2026-BEDWELL-0407.html",
+      "cb_internal_note": "",
+      "po_number": "Verbal",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.537914+00:00"
+    },
+    {
+      "sid": "S-2026-005",
+      "order_date": "TBD",
+      "customer": "Chain Electric",
+      "customer_id": "Chain Electric",
+      "line_items": [
+        {
+          "pn": "NU-BC-2834-F",
+          "description_short": "1.5-Man ARCH",
+          "description_full": "FlexPro Armor ARCH Bucket Cover for 1.5-Man",
+          "qty": 5
+        }
+      ],
+      "ship_to_address": "Jeremy Brown | 2631 Ridgewood Rd | Searcy, AR 72143",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-JeremyBrown-0401-ARCH.html",
+      "sd_path": "shipping-docs/SD-2026-JeremyBrown-0401-ARCH.html",
+      "cb_internal_note": "",
+      "po_number": "Verbal",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.538380+00:00"
+    },
+    {
+      "sid": "S-2026-006",
+      "order_date": "TBD",
+      "customer": "LineTec Services, LLC",
+      "customer_id": "LineTec Services, LLC",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Linetec Services | Attn: Richard Thornhill | 6411 Masonic Drive | Alexandria, LA 71301",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-LINETEC-0402.html",
+      "sd_path": "shipping-docs/SD-2026-LINETEC-0402.html",
+      "cb_internal_note": "",
+      "po_number": "DEPT450",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.538846+00:00"
+    },
+    {
+      "sid": "S-2026-009",
+      "order_date": "April 7, 2026",
+      "customer": "LineTec Services, LLC",
+      "customer_id": "LineTec Services, LLC",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Linetec Services | Attn: Richard Thornhill | 6411 Masonic Drive | Alexandria, LA 71301",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-LINETEC-0406.html",
+      "sd_path": "shipping-docs/SD-2026-LINETEC-0406.html",
+      "cb_internal_note": "",
+      "po_number": "DEPT889",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.539296+00:00"
+    },
+    {
+      "sid": "S-2026-012",
+      "order_date": "TBD",
+      "customer": "LineTec - Thornhill Alexandria",
+      "customer_id": "LineTec - Thornhill Alexandria",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Linetec Services | Attn: Jeremy Nunez | 1966 River Road | Marksville, LA 71351",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-LINETEC-THORNHILL-0413.html",
+      "sd_path": "shipping-docs/SD-2026-LINETEC-THORNHILL-0413.html",
+      "cb_internal_note": "",
+      "po_number": "DEPT420",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.539743+00:00"
+    },
+    {
+      "sid": "S-2026-010",
+      "order_date": "TBD",
+      "customer": "LineTec - Thornhill Alexandria",
+      "customer_id": "LineTec - Thornhill Alexandria",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Richard Thornhill | LineTec Services / LTS Power | 6411 Masonic Drive | Alexandria LA 71301",
+      "poc": "",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-THORNHILL-DEPT732-0408.html",
+      "sd_path": "shipping-docs/SD-2026-THORNHILL-DEPT732-0408.html",
+      "cb_internal_note": "",
+      "po_number": "DEPT732",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.540192+00:00"
+    },
+    {
+      "sid": "S-2026-016",
+      "order_date": "2026-03-20",
+      "customer": "LineTec Services / LTS Power",
+      "customer_id": "LineTec Services / LTS Power",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Richard Thornhill | LineTec Services | 6411 Masonic Drive, Alexandria, LA 71301",
+      "poc": "Richard Thornhill",
+      "tracking_numbers": [
+        "1Z2W49000395021357"
+      ],
+      "tracking_per_package_costs": [
+        50.6
+      ],
+      "customer_shipping_cost": 56.0,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "SHIPPED",
+      "sd_filename": "SD-2026-THORNHILL-DEPT468R-0320.html",
+      "sd_path": "shipping-docs/SD-2026-THORNHILL-DEPT468R-0320.html",
+      "cb_internal_note": "FIX 10 (2026-04-22): UPS Store receipt recovered from Gmail March 20 thread msg 6/7 via Legacy observer. RegCost $50.60 \u2192 Ben's Formula $56 customer shipping. Grand total $361.00 (305 + 56, no CC fee \u2014 LineTec Alexandria corporate A/P). CREATE new QB invoice. Last external blocker closed; shipping now READY.",
+      "po_number": "DEPT468R",
+      "po_required": true,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.541010+00:00"
+    },
+    {
+      "sid": "S-2026-014",
+      "order_date": "2026-03-20",
+      "customer": "Florence Electricity Department",
+      "customer_id": "Florence Electricity Department",
+      "line_items": [
+        {
+          "pn": "NU-BC-2834",
+          "description_short": "1.5-Man BC",
+          "description_full": "FlexPro Armor 1.5-Man Bucket Cover",
+          "qty": 3
+        },
+        {
+          "pn": "NU-BC-2834-C",
+          "description_short": "1.5-Man Combo",
+          "description_full": "FlexPro Armor 1.5-Man Combo",
+          "qty": 1
+        },
+        {
+          "pn": "NU-BC-2834-F",
+          "description_short": "1.5-Man ARCH",
+          "description_full": "FlexPro Armor 1.5-Man ARCH Bucket Cover",
+          "qty": 2
+        }
+      ],
+      "ship_to_address": "Darrell Pickle | Florence Electricity Department | 611 East Reeder St, Florence, AL 35630",
+      "poc": "Darrell Pickle",
+      "tracking_numbers": [
+        "1Z2W49000328351797",
+        "1Z2W49000395015551"
+      ],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": 124,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "SHIPPED",
+      "sd_filename": "SD-2026-PICKLE-FLORENCE-0320.html",
+      "sd_path": "shipping-docs/SD-2026-PICKLE-FLORENCE-0320.html",
+      "cb_internal_note": "Quantities 3x NU-BC-2834 + 1x NU-BC-2834-C + 2x NU-BC-2834-F per April 8 FlexPro Armor Pricing Master + NorrisPalace. Subtotal $1,710. Shipping $124 (2 pkgs \u00d7 $62). Invoice total $1,834. Corporate A/P (no CC fee). BCB = Bucket Cover Bag. Skylift lead: Darrell separately ordered 6 bucket trucks crediting Aaron.",
+      "po_number": "STOCK",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.541471+00:00"
+    },
+    {
+      "sid": "S-2026-015",
+      "order_date": "2026-03-20",
+      "customer": "AEP / SWEPCO",
+      "customer_id": "AEP / SWEPCO",
+      "line_items": [
+        {
+          "pn": "NU-BC-2834-F",
+          "description_short": "1.5-Man ARCH",
+          "description_full": "FlexPro Armor 1.5-Man ARCH Bucket Cover",
+          "qty": 2
+        },
+        {
+          "pn": "NU-BC-2834-C",
+          "description_short": "1.5-Man Combo",
+          "description_full": "FlexPro Armor 1.5-Man Combo",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Sammy Myers | AEP/SWEPCO Roanoke | 1800 Loch Haven Dr, Roanoke, VA 24019",
+      "poc": "Sammy Myers",
+      "tracking_numbers": [
+        "1Z2W49000395012652"
+      ],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "SHIPPED",
+      "sd_filename": "SD-2026-MYERS-AEP-0320.html",
+      "sd_path": "shipping-docs/SD-2026-MYERS-AEP-0320.html",
+      "cb_internal_note": "Sammy Myers CC on file in Aaron's phone \u2014 apply 4% processing fee line item if charged to card. Abshire \u2192 Sammy Myers UPS clerical alias CONFIRMED in data/name_aliases.json (D.3 canonical) + test_abshire_is_myers covers it. R017 tracking 1Z2W49000395012652 = this record per FIX3 PF1.",
+      "po_number": "",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.542260+00:00"
+    },
+    {
+      "sid": "S-2026-011",
+      "order_date": "2026-04-21",
+      "customer": "Dominion Energy",
+      "customer_id": "Dominion Energy",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "ship_to_address": "Dominion Energy Fleet | Dominion Energy | 192 Old Wire Rd, West Columbia, SC 29172",
+      "poc": "Coy Crosby",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-CROSBY-DOMINION-0421.html",
+      "sd_path": "shipping-docs/SD-2026-CROSBY-DOMINION-0421.html",
+      "cb_internal_note": "RFP April 8 \u2192 Taulia PO 4501057807 issued April 13 \u2192 shipped April 21 (4 business days production). Vendor # 300279384. Material Number 42350802 (Dominion internal material code). Ship-to is Dominion Fleet hub West Columbia SC. Coy's followup thank-you replied April 16. Tracking + RegCost pending parse from Gmail iShip thread 19db0f97c1ffdbe5 + ups_store_receipt same-day receipt.",
+      "po_number": "4501057807",
+      "po_required": true,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.542856+00:00"
+    },
+    {
+      "sid": "S-2026-017",
+      "order_date": "2026-04-01",
+      "customer": "Chain Electric",
+      "customer_id": "Chain Electric",
+      "line_items": [],
+      "ship_to_address": "MULTI-SHIP-TO \u2014 see children: | S-2026-017-A: AJ Morris, 1308 W Pine St, Hattiesburg MS 39401 | S-2026-017-B: Jeremy Brown, 2631 Ridgewood Rd, Searcy AR 72143",
+      "poc": "AJ Morris",
+      "tracking_numbers": [],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PENDING",
+      "sd_filename": "SD-2026-AJ-BOSS-0401-Hattiesburg.html",
+      "sd_path": "shipping-docs/SD-2026-AJ-BOSS-0401-Hattiesburg.html",
+      "cb_internal_note": "PARENT SD for Chain Electric AJ-BOSS drop-ship. Children A Hattiesburg + B Searcy. PF4 LOCK: Chain Electric $8,930.48 invoice total IMMUTABLE \u2014 do NOT recompute from children. Parent is bill-level; children carry shipping+line detail for Gate 4 writeset clarity. Fulfillment via Boss Products drop-ship; invoices 6775/6776/6777 in Gmail thread 19da1b9c32c5cfdc.",
+      "po_number": "",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.543317+00:00"
+    },
+    {
+      "sid": "S-2026-013",
+      "order_date": "2026-03-20",
+      "customer": "AEP / SWEPCO",
+      "customer_id": "AEP / SWEPCO",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Jimmy Benz | SWEPCO | 101 W Township Street, Fayetteville, AR 72703",
+      "poc": "Jimmy Benz",
+      "tracking_numbers": [
+        "1Z2W49000393585850"
+      ],
+      "tracking_per_package_costs": [
+        52.16
+      ],
+      "customer_shipping_cost": null,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "SHIPPED",
+      "sd_filename": "SD-2026-BENZ-SWEPCO-0320.html",
+      "sd_path": "shipping-docs/SD-2026-BENZ-SWEPCO-0320.html",
+      "cb_internal_note": "Shipped Mar 20, delivered Mar 24. NOT YET INVOICED. QB invoice pending. Reference Truck #860377 in invoice memo. Customer charge $94 (Ben's Formula historical override \u2014 default formula computes $59; historical record wins).",
+      "po_number": "Truck #860377",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.544112+00:00"
+    },
+    {
+      "sid": "S-2026-017-A",
+      "order_date": "2026-04-01",
+      "customer": "Chain Electric",
+      "customer_id": "Chain Electric",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "ship_to_address": "Mr. AJ Morris | Chain Electric | 1308 W Pine Street, Hattiesburg, MS 39401",
+      "poc": "AJ Morris",
+      "tracking_numbers": [
+        "1Z2W49000329239194",
+        "1Z2W49000395813055",
+        "1Z2W49000395908757"
+      ],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": 320,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PROCESSING",
+      "sd_filename": "SD-2026-AJ-BOSS-0401-Hattiesburg-A.html",
+      "sd_path": "shipping-docs/SD-2026-AJ-BOSS-0401-Hattiesburg-A.html",
+      "cb_internal_note": "CHILD of S-2026-017. 5\u00d7 NU-BC-2851 to AJ Morris Hattiesburg. Ship via Boss drop-ship; 3 packages total $320 shipping.",
+      "po_number": "",
+      "po_required": false,
+      "parent_sd_id": "SD-2026-AJ-BOSS-0401-Hattiesburg",
+      "last_updated": "2026-04-23T10:23:59.544576+00:00"
+    },
+    {
+      "sid": "S-2026-017-B",
+      "order_date": "2026-04-01",
+      "customer": "Chain Electric",
+      "customer_id": "Chain Electric",
+      "line_items": [
+        {
+          "pn": "NU-BC-2834-F",
+          "description_short": "1.5-Man ARCH",
+          "description_full": "FlexPro Armor 1.5-Man ARCH Bucket Cover",
+          "qty": 5
+        }
+      ],
+      "ship_to_address": "Jeremy Brown | 2631 Ridgewood Rd, Searcy AR 72143",
+      "poc": "AJ Morris",
+      "tracking_numbers": [
+        "1Z2W49000329247890",
+        "1Z2W49000395911654",
+        "1Z2W49000395917452",
+        "1Z2W49000395926157"
+      ],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": 422,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PROCESSING",
+      "sd_filename": "SD-2026-AJ-BOSS-0401-Hattiesburg-B.html",
+      "sd_path": "shipping-docs/SD-2026-AJ-BOSS-0401-Hattiesburg-B.html",
+      "cb_internal_note": "CHILD of S-2026-017. 5\u00d7 NU-BC-2834-F to Jeremy Brown Searcy AR. Original P/N NU-BC-2834 (Standard) \u2014 substituted to NU-BC-2834-F (ARCH) due to stock-out per Aaron directive. Ship via Boss drop-ship; 4 packages total $422 shipping.",
+      "po_number": "",
+      "po_required": false,
+      "parent_sd_id": "SD-2026-AJ-BOSS-0401-Hattiesburg",
+      "last_updated": "2026-04-23T10:23:59.545037+00:00"
+    },
+    {
+      "sid": "S-2026-018",
+      "order_date": "2026-03-20",
+      "customer": "Dominion Energy",
+      "customer_id": "Dominion Energy",
+      "line_items": [
+        {
+          "pn": "NU-BC-2834",
+          "description_short": "1.5-Man BC",
+          "description_full": "FlexPro Armor 1.5-Man Bucket Cover",
+          "qty": 6
+        }
+      ],
+      "ship_to_address": "Coy Crosby | Dominion Energy | 192 Old Wire Rd, West Columbia SC 29172",
+      "poc": "Coy Crosby",
+      "tracking_numbers": [
+        "1Z2W49000328343091",
+        "1Z2W49000395006856"
+      ],
+      "tracking_per_package_costs": [],
+      "customer_shipping_cost": 146,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "SHIPPED",
+      "sd_filename": "SD-2026-CROSBY-DOMINION-0320.html",
+      "sd_path": "shipping-docs/SD-2026-CROSBY-DOMINION-0320.html",
+      "cb_internal_note": "Crosby Mar 20 historical shipment (PF3 canonical): 6\u00d7 NU-BC-2834 @ $265 = $1,590 + $146 shipping (2 pkgs \u00d7 $73 Ben's) = $1,736 invoice total. Corporate A/P (no CC fee). Memo: 'Dominion payment #2000007308 received March 24, 2026 \u2014 previously uninvoiced in QB'. Separate from April fleet S-2026-011 (PO 4501057807, 5\u00d7 NU-BC-2851, ship 2026-04-21).",
+      "po_number": "",
+      "po_required": true,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.545582+00:00"
+    },
+    {
+      "sid": "S-2026-023",
+      "order_date": "2026-02-11",
+      "customer": "Henkels & McCoy",
+      "customer_id": "Henkels & McCoy",
+      "line_items": [
+        {
+          "pn": "NU-BC-2834",
+          "description_short": "1.5-Man BC",
+          "description_full": "FlexPro Armor 1.5-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Lidia Turner | Henkels & McCoy | 604 Industrial Park Dr, Pell City AL 35125",
+      "poc": "Lidia Turner",
+      "tracking_numbers": [
+        "1Z2W49000325619996"
+      ],
+      "tracking_per_package_costs": [
+        40.35
+      ],
+      "customer_shipping_cost": 46,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PROCESSING",
+      "sd_filename": "SD-2026-HENKELS-0211.html",
+      "sd_path": "shipping-docs/SD-2026-HENKELS-0211.html",
+      "cb_internal_note": "EVIDENCE CONFLICT: Aaron verbal recall said '1-man BC' but Legacy box-size evidence (30x14x10 UPS receipt) = 1.5-Man size. Going with evidence (NU-BC-2834 @ $265). Aaron please confirm post-mint; if 1-man was correct, change to NU-BC-2828 @ $235. Shipping waived as courtesy per Aaron \u2014 delay was on NU's end.",
+      "po_number": "Verbal",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.546046+00:00"
+    },
+    {
+      "sid": "S-2026-024",
+      "order_date": "2026-02-11",
+      "customer": "Aerial Hydraulics, Inc.",
+      "customer_id": "Aerial Hydraulics, Inc.",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 2
+        }
+      ],
+      "ship_to_address": "Attn: PSC Fleet / George Dufour | Primoris T&D | 3606 N. Frazier St, Conroe TX 77303",
+      "poc": "Wayne Abadie",
+      "tracking_numbers": [
+        "1Z2W49000392272154"
+      ],
+      "tracking_per_package_costs": [
+        67.74
+      ],
+      "customer_shipping_cost": 72,
+      "billing_tier": "dealer",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PROCESSING",
+      "sd_filename": "SD-2026-PRIMORIS-DEALER-0211.html",
+      "sd_path": "shipping-docs/SD-2026-PRIMORIS-DEALER-0211.html",
+      "cb_internal_note": "Drop-ship dealer order. Bill Wayne/Aerial Hydraulics, not Primoris direct.",
+      "po_number": "Verbal (Wayne 2/6/2026 email)",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.546514+00:00"
+    },
+    {
+      "sid": "S-2026-025",
+      "order_date": "2026-02-24",
+      "customer": "Aerial Hydraulics, Inc.",
+      "customer_id": "Aerial Hydraulics, Inc.",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 2
+        }
+      ],
+      "ship_to_address": "Attn: George Dufour | Primoris T&D | 3606 N. Frazier St, Conroe TX 77303",
+      "poc": "Wayne Abadie (Fox referral)",
+      "tracking_numbers": [
+        "1Z2W49000326733593"
+      ],
+      "tracking_per_package_costs": [
+        67.74
+      ],
+      "customer_shipping_cost": 72,
+      "billing_tier": "dealer",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": null,
+      "qb_invoice_id": null,
+      "status": "PROCESSING",
+      "sd_filename": "SD-2026-PRIMORIS-DEALER-FOX-0224.html",
+      "sd_path": "shipping-docs/SD-2026-PRIMORIS-DEALER-FOX-0224.html",
+      "cb_internal_note": "Drop-ship dealer order paired with T06 (S-2026-024). Bill Wayne/Aerial Hydraulics.",
+      "po_number": "0223-PSC BKT0325",
+      "po_required": false,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.547001+00:00"
+    },
+    {
+      "sid": "S-2026-026",
+      "order_date": "2026-02-27",
+      "customer": "LineTec Services, LLC",
+      "customer_id": "LineTec Services, LLC",
+      "line_items": [
+        {
+          "pn": "NU-BC-2851",
+          "description_short": "2-Man BC",
+          "description_full": "FlexPro Armor 2-Man Bucket Cover",
+          "qty": 1
+        }
+      ],
+      "ship_to_address": "Jeremy Nunez | LineTec Services | 1965 River Road, Marksville LA 71351",
+      "poc": "Jeremy Nunez",
+      "tracking_numbers": [
+        "1Z2W49000326864095"
+      ],
+      "tracking_per_package_costs": [
+        59.58
+      ],
+      "customer_shipping_cost": 66,
+      "billing_tier": "direct",
+      "cc_surcharge_applies": false,
+      "cc_surcharge_amount": 0,
+      "qb_invoice_number": "1501",
+      "qb_invoice_id": null,
+      "status": "PROCESSING",
+      "sd_filename": "SD-2026-LINETEC-DEPT409-0227.html",
+      "sd_path": "shipping-docs/SD-2026-LINETEC-DEPT409-0227.html",
+      "cb_internal_note": "Link to existing 1501 \u2014 do not mint new invoice. $13.75 already on 1501 = AL sales tax verified, NOT a missing line. Add tracking + $66 shipping then push send. Alexandria LA corporate A/P (no CC fee).",
+      "po_number": "DEPT409",
+      "po_required": true,
+      "parent_sd_id": null,
+      "last_updated": "2026-04-23T10:23:59.547477+00:00"
+    }
+  ],
+  "legacy_orders": [
     {
       "id": "S-2026-010",
       "customer": "Richard Thornhill",
@@ -161,8 +992,7 @@
       "pending_reason": "Blocked on Boss SKU \u2014 SD render scheduled in D.8"
     }
   ],
-  "sid_rule_version": 1,
-  "shipments": [
+  "legacy_shipments": [
     {
       "id": "S-2026-013",
       "customer": "Jimmy Benz",
