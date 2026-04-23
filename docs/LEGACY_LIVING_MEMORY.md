@@ -2038,6 +2038,75 @@ FILES (no changes this turn):
 - feature/sa-v5-completion (9 commits ahead, NOT merging)
 
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S5 — V1 spec drafted, Gate A revised, awaiting Aaron sign-off — 2026-04-23
+Aaron answered all 3 questions + added significant new direction. V1 SPEC drafted, awaiting Aaron sign-off before CC fix prompt is written.
+
+GATE A REVISION (locked):
+- Original Gate A "table replaces packets/iframe entirely" was WRONG
+- Aaron wants the iframe (Live Google Sheet embed) KEPT — provides visibility/access to existing tracking
+- KEEP top portion of current live shipments.html: NORRIS hero + 3-tier nav + "Open UPS Shipping Log" button + iframe + blocked banner
+- REPLACE only the bottom portion (packet cards + archive table + pricing card + action items list) with the new polished table
+
+NEW REQUIREMENTS LOCKED (added to spec):
+1. Sort + filter on table (column headers + filter chips + search bar)
+2. Comprehensive database — main page shows ONLY non-invoiced SDs; archived ones move to "Archived Invoices" page (linked, never deleted)
+3. Status pill = clickable AND auto-updated by Legacy from email/QB events
+4. Invoice Sent checkbox per row → triggers auto-archive when ticked
+5. Notes column field name = "Notes" — wrap-text, expandable, editable, auto-save
+6. Status change permission = ANYONE (CB / AC / Legacy / Auto/SA) WITH audit trail recording actor + timestamp + from/to
+7. Shipping Docs Index = richer cards (SD# + Customer + Company + Ship Date + Items short + Status + Inv # + Tracking + Notes preview) + search + sort + filter
+
+NEVER USE "SKU" — Aaron explicitly forbade. Always P/N or part number. (Need to encode in memory.)
+
+SD V1 SCOPE INCLUDES:
+- Today's Pulse widget (X ready to invoice / Y blocked / Z awaiting tracking / $TOTAL)
+- Quick filter chips (Ready to Invoice / Blocked / Today / This Week + status chips)
+- Search bar (Customer / P/N / Tracking / Ship-To / Notes)
+- Sortable column headers
+- Auto-status engine V1: QB invoice creation → status=invoiced + INV # populate; Sent email with invoice attachment → tick Invoice Sent + archive
+- Status audit trail per row (hover for last actor)
+- Brand inheritance from NU_Brand_CSS_Framework.css enforced
+- Zebra striping + comfortable row padding + cyan hover
+- SD HTML pages get back-nav header bar
+- 14-column table with Status at position 2 (right after 📦 SD icon)
+
+V2 EXPLICITLY DEFERRED:
+- Bulk select / bulk action
+- Export to CSV
+- Full status audit visualization (V1 = hover only)
+- Auto-status from UPS delivery
+- Customer reply parsing
+- AP Dashboard, CB Tasks, Follow-Ups (prior deferrals)
+
+DECISIONS:
+- HALT remains on merge until V1 spec signed off + CC build + Aaron preview pass
+- Process locked: spec sign-off in plain English BEFORE CC prompt written (breaks the loop)
+- Process locked: Aaron functional click-test BEFORE merge (no more grep-only verification)
+
+CHANGED:
+- Gate A revised: keep iframe, keep brand top, replace only bottom
+- "SKU" forbidden going forward
+
+NEXT:
+- Aaron replies SPEC LOCKED or SPEC EDITS
+- If LOCKED: M5 Claude writes comprehensive CC FIX prompt covering all 19 defects + new requirements
+- CC executes fix on feature/sa-v5-completion branch
+- Aaron previews via http://192.168.1.184:8765
+- Click-tests every interactive element
+- PREVIEW PASS → MERGE GO
+- Cloudflare deploys → live verify
+
+KEY LESSONS (record to sa_learnings.json):
+1. spec_evolution: "Aaron's vision evolves through the build process. Mid-build user testing is a feature, not a bug. Plan for at least one preview-fail-iterate cycle before final merge."
+2. brand_inheritance_enforcement: "Build new HTML by extending existing live page templates, not by creating fresh shells. New work should ADD to existing brand-inherited structure, not REPLACE the whole page."
+3. vocabulary_lock: "Aaron uses 'P/N' or 'part number' — NEVER 'SKU'. Encode in memory. Do not use SKU in any output, prompts, or internal communication going forward."
+
+FILES (no changes this turn):
+- /tmp/sa-v5-preview (CC's worktree, server still running on 8765)
+- feature/sa-v5-completion (9 commits ahead, NOT merging)
+- V1 spec drafted in chat, awaiting Aaron sign-off
+
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
