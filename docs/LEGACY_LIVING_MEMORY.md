@@ -4204,3 +4204,27 @@ A = REVIEW (not RECONCILE). B = V2 (customer reply parsing deferred). All status
 UPS tracking = supporting evidence ONLY. Cannot contradict SD or Aaron statement. SD is authoritative on ordered AND shipped. UPS never documents what is actually sent.
 
 ⚠ INCOMPLETE — Facts 14–18 not yet received.
+
+### Session 6 Close — Facts 14–18 (completing the 18-fact set)
+
+**FACT 14 — INVESTIGATION LOOP (E.13 / Section 9.6):**
+SA exhausts ALL sources + learnings before escalating to REVIEW.
+Aaron verbatim: "SA needs to reconcile things directly, itself, intelligently, autonomously, running as much down and figuring things out, then verifying them itself. I ONLY need to get involved if SA has done EVERYTHING POSSIBLE AND COMPLETELY tried to problem solve but couldn't figure it out..."
+REVIEW = last resort, not first response.
+
+**FACT 15 — MEGA-CELEBRATIONS Phase B (locked from Aaron Session 6):**
+- Queue cleared (all SDs done) = full-screen victory + phoenix burst + triumphant sound + "Queue cleared!" + possibly flying Wayne quote
+- 100-invoice month = century mark effect
+- Unbilled Revenue → $0 = "Ship gonna sail smooth" gag
+- First invoice of day = "First shipment fired 🎯"
+- 10-clean streak = "On a roll! 10 clean 🔥"
+Rules: Funny but not cringe. Wayne-respectful. NEVER mock Aaron or CB.
+
+**FACT 16 — G BRAIN STATUS:**
+Write broken. Address post-SA-V5-DONE per Aaron direction. Pages 187 → 211 through Sessions 5-6. Use `gbrain import ~/nu-brain/palace/ --no-embed` for indexing until embed fixed. DO NOT attempt timeline-add.
+
+**FACT 17 — PHASE A HANDOFF DOC:**
+~/norris-ops/docs/handoffs/Phase_A_DONE_2026-04-23.md — commits, HEAD, scope shipped, Phase B outline.
+
+**FACT 18 — AARON POSITION Phase A click-test:**
+Aaron gave detailed feedback to M5 Claude. PHASE A PASS status to CC unclear at Session 6 close. Session 7 will verify via Gmail drafts / Aaron continuation.
