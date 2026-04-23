@@ -4360,3 +4360,88 @@ ADDITIONAL: Re-verify filesystem + HEAD + preview BEFORE writing CC prompt. Temp
 - NAS → shared storage backbone, Time Machine for all Macs.
 
 **MORNING BRIEF FLAG:** Time Machine setup on M1 tonight — verify backup ran successfully by AM.
+
+---
+## 2026-04-23 Session 7 — Phase B Prompt Delivered (Facts 1–4 of 24; more pending)
+
+**FACT 1 — PHASE A STATUS:** LIVE. norris-ops HEAD 1d86e5a. norris-agent HEAD b241427. Preview 192.168.1.184:8765 running. Registry 82 entries MD5 220dd369f730d616a1949d58c0d832ae. 76/76 pytest in 77s. feature/sa-v5-completion NOT merged. Main untouched.
+
+**FACT 2 — PHASE B CC PROMPT DELIVERED:** File: /mnt/user-data/outputs/PHASE_B_CC_PROMPT_SESSION_7.md. Size: 123 KB, 2,584 lines, 18 sections. Drafted by M5 Claude Opus 4.7 Session 7. Status: awaiting Aaron to paste to fresh CC session on M1.
+
+**FACT 3 — PHASE B SCOPE LOCKED (7 build sections):**
+§1.5 visual polish | §3 interactive status pill + audit + celebrations | §5 expanded 2-col detail panel | §6 notes editable + Invoice Sent archive | §7-full registry fuzzy match + canonical enforcement + ⚠ tooltip | §7-recon data truth-up | §8 payment badge + CC Fee auto-calc. No scope additions without Aaron spec sign-off.
+
+**FACT 4 — PHASE B VISUAL POLISH §1.5 SPEC:**
+Logo: 80→120px desktop + drop-shadow cyan glow. Hero: "Shipments & Invoicing" Lato 900 4.2rem gradient text fill. Tagline: Playfair Display italic 1.4rem #06D0FF. Chevron: 48px depth (was ~24px). Phoenix watermark: 7→10% opacity + 8s pulse animation. Page-load entrance cascade: hero fade 400ms → tiles 100ms stagger → chips 500ms delay → rows 30ms stagger. Respects prefers-reduced-motion.
+
+⚠️ INCOMPLETE — Facts 5–24 pending.
+
+### Session 7 — Facts 5–14
+
+**FACT 5 — MEGA-CELEBRATIONS SPEC LOCKED (5 triggers, priority order):**
+M1 QUEUE CLEARED = full-screen phoenix burst + confetti + "Queue cleared!" + Wayne quote sub-banner (8-10s). M2 CENTURY MARK = 100th invoice/month + gold confetti + 💯 (5s). M3 SHIP GONNA SAIL SMOOTH = unbilled $0 + boat 🚢 floats + "All billed." (4s). M4 FIRST SHIPMENT OF DAY = first status→shipped after 4AM CT + 🎯 zoom (2s). M5 TEN CLEAN STREAK = 10 consecutive invoiced without REVIEW + 🔥 burst (3s). Rate limits: same mega won't fire twice/session; never on blocked/REVIEW; never on reverse events.
+
+**FACT 6 — STATUS PILL SPEC:**
+7 statuses: pending #6B7280, processing #F59E0B, shipped #0066EE, invoiced #10B981, cc #06D0FF, blocked #DC2626, REVIEW orange pulse #FB923C 2s. Click/keyboard → dropdown → select fires 3 actions: update shipments.json via sa_v1_writer, append audit + ledger, fire celebration. Hover = last audit entry + "View Full History" link.
+
+**FACT 7 — AUDIT LOG SCHEMA:**
+~/norris-agent/data/audit_log.jsonl. Fields: id (audit_<uuid4>), shipment_id, actor (aaron/cb/sa_auto/legacy_auto), iso_ts, display_ts, event, from, to, source. Per-shipment in-row audit_trail[] capped at last 20. Full history in separate file.
+
+**FACT 8 — SHIPMENTS LEDGER:**
+~/norris-agent/data/shipments_ledger.jsonl. APPEND-ONLY, never pruned. Fields: ledger_id, ts, shipment_id, event_type, actor, data, dedup_key (sha256 customer+invoice#+event_type+date-to-minute). Enables Phase D+ KPI dashboards.
+
+**FACT 9 — SA V1 WRITER ENDPOINT:**
+Port 8766. LaunchAgent: com.norrisutilities.sa-v1-writer. Plist: ~/Library/LaunchAgents/com.norrisutilities.sa-v1-writer.plist. RunAtLoad=true, KeepAlive=true. Atomic tempfile+rename with FileLock. /health endpoint. All frontend→data mutations route through :8766.
+
+**FACT 10 — DETAIL PANEL SPEC §5:**
+Trigger: ▼ or row click (not action cells). Animation: max-height 0→600px 300ms ease-out. 2-col ≥768px / 1-col <768px. LEFT: Bill-To + Ship-To + Order Context (date, PO#, terms, payment badge, registry notes). RIGHT: Line Items + Shipping (Ben's Formula) + CC Fee + QB Invoice Memo + Recent Activity (last 3 audit) + "View Full History" modal + 13 mirrored copy buttons.
+
+**FACT 11 — NOTES EDIT §6:**
+Click notes cell → textarea maxlength 2000 + char counter + Save/Cancel bar. Save: blur / Cmd+Enter / 3s auto-save debounce. Esc cancels. Audit event "notes_edit" + ledger append on every change.
+
+**FACT 12 — INVOICE SENT ARCHIVE §6:**
+Checkbox tick → optimistic UI → POST /api/shipments/{id}/invoice-sent → sa_v1_writer sets invoice_sent=true + status=invoiced + audit + ledger → confetti + toast + 500ms row slide-out → DOM remove. Un-tick = confirm dialog, reverts to previous status. Fires M1/M2/M3 if thresholds met.
+
+**FACT 13 — REGISTRY FUZZY MATCH §7-FULL:**
+rapidfuzz Levenshtein + company_root scoring. Bonuses: alias +20, POC +30, branch +10. Tiers: ≥95% auto-apply; 80-95% apply+flag; <80% REVIEW. add_alias() atomic with FileLock + ledger event "alias_added".
+
+**FACT 14 — CANONICAL NAMING ENFORCEMENT IRON-CLAD:**
+Regex: ^[A-Za-z0-9&\-\.\s]+ - [A-Za-z\s\.]+$ = "Company - Person Who Ordered". Every cell matches OR carries .review-needed class (⚠). Valid: "LineTec Services - Richard Thornhill", "Aerial Hydraulics - Wayne Abide". Invalid: "LineTec Services" (missing person), "LineTec/LTS Power" (slash). Abort A21 if violated post-build.
+
+⚠️ INCOMPLETE — Facts 15–24 pending.
+
+### Session 7 — Facts 15–24 (completing the 24-fact set)
+
+**FACT 15 — ⚠ HOVER TOOLTIP SPEC §7-full:**
+500ms hover delay, 150ms fade-in. Shows: raw input, top 3 candidates + confidence %, "Below auto-apply threshold (95%)" message, "Status resolves when alias added or marked REVIEW" footer. Click ⚠ offers "Mark as REVIEW" or "Copy raw text". Full one-click resolve deferred to Phase D. Abort A22 if missing.
+
+**FACT 16 — BRINK CONSTRUCTORS INVESTIGATION:**
+4 known candidates from QB Contact List: Travis Fischer (Corporate A/P, Rapid City SD parent, Net 30, ACH, PO req), Chad Christian (Princeton MN child, CC 4% fee), Lance Brogan (Leesburg FL child, Net 30), Josh Greanhaus (Burlington NC child, Net 30). CC Section 7-full verifies via QB + SD search. Aaron picks final entries from customer_registry_review.csv.
+
+**FACT 17 — DATA TRUTH-UP §7-RECON:**
+Cross-references: Detailed Sales Report CSV + QB Contact List xlsx + shipments.json + SD HTML files on disk. Produces: docs/truth-up/truth_up_2026-04-23.md with Expected vs Actual: shipments.json active count, SDs on disk count, overlap (ground truth), missing_from_json orphans, missing_from_disk, stale_active (json active but QB shows invoiced), qb_orphans_6mo. HALT if discrepancy >50%.
+
+**FACT 18 — PAYMENT BADGE §8:**
+6 pill types: Net 30 (gray), Net 60 (dark gray), CC (orange, 4% fee), CC on file (bright orange, auto-charge), ACH (green), On Receipt (cyan). Source: registry payment field. Hover = full terms. Missing = "—" gray + "No payment preference" tooltip.
+
+**FACT 19 — CC FEE COLUMN §8:**
+Column 11. Visible only when cc_fee_applies=true (else "—"). Formula: round((subtotal + customer_shipping) × 0.04, 2). Tooltip: Subtotal + Shipping + Total × 4.0% = fee.
+
+**FACT 20 — LINETEC BILLING-SPLIT VALIDATION §8:**
+LineTec-Thornhill-Alexandria = Net 30, PO req, NO CC fee. LineTec-LeCompte-Corporate = Net 30, PO req, NO CC fee. LineTec-Guthrie-GA = CC, 4% fee, no PO req. payment_rules.py.validate_linetec() raises on mismatch at build time.
+
+**FACT 21 — CC-ON-FILE NOTES AUTO-POPULATE:**
+Idempotent. Shipments where registry payment="CC on file" get "💳 CC on file — charge at invoice send" appended to notes on first render. Never added twice. Audit event "cc_on_file_note_auto" per addition. Runs once at Phase B deploy via bin/run_notes_auto.py.
+
+**FACT 22 — PHASE B EXIT PROTOCOL §10 ADDITION:**
+After git push + Tier 1 Telegram ping, CC runs `np ingest --type session_close --tag sa_v5_phase_b --tag complete --content ...` and separate `np ingest --type build_summary` with full handoff doc. No --embed flag (G Brain write broken, local NP only).
+
+**FACT 23 — PROJECT RULE LOCKED SESSION 7 (ALL FUTURE SESSIONS):**
+Claude instances MUST NEVER ask "what would you like to do first?" on session open. Every session starts by scanning memory (Gmail drafts, NorrisPalace, LLM, conversation_search, userMemories) and PROPOSING next action based on evidence. Asking = handoff failure. Applies to all future Claude.ai + CC sessions in this project.
+
+**FACT 24 — SESSION 7 DELIVERABLES SHIPPED:**
+(a) Phase B CC prompt: /mnt/user-data/outputs/PHASE_B_CC_PROMPT_SESSION_7.md
+(b) Gmail draft [LIVING_MEMORY_UPDATE] Session 7 close (11 sections)
+(c) Legacy memory update (this file — all 24 facts)
+(d) Session 8 Master Handoff: /mnt/user-data/outputs/MASTER_HANDOFF_Session7_to_Session8_2026-04-23.md
+(e) userMemories #29 replaced with Session 7 close (supersedes FIX 11 entry; Abide typo fixed as side-effect since #26 already holds correct spelling)
