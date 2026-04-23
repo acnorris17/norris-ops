@@ -4306,3 +4306,34 @@ Aaron gave detailed feedback to M5 Claude. PHASE A PASS status to CC unclear at 
 - /mnt/user-data/outputs/SA_V5_V1_MASTER_HANDOFF_SESSION_7.md
 - /mnt/user-data/outputs/LEGACY_MEMORY_UPDATE_Session6_close_2026-04-23.md
 - /mnt/user-data/outputs/SESSION_SUMMARY_Session6_2026-04-23.md
+
+### Session 6 Summary — Sections 9 (files), 10 (lesson), 11 (persist context)
+
+**SECTION 9 — FILES MODIFIED on M1 (via CC):**
+norris-ops: shipments.html, shipping-log.html, shipping-docs/index.html, shipments/archive.html, assets/css/{NU_Brand_CSS_Framework.css, shipments-v1.css}, assets/images/{Full_Logo_White/Blue/Black/BlueBlack.png, Phoenix_White/Blue/Black.png}, assets/js/{shipments-v1.js, copy-buttons.js, registry-client.js}, docs/handoffs/Phase_A_DONE_2026-04-23.md
+norris-agent: lib/registry_loader.py, tests/{test_shipments_brand.py, test_shipments_table_structure.py, test_registry_loader_phase_a.py, test_copy_buttons.py}, data/customer_registry.json, data/customer_registry_review.csv
+Memory: LEGACY_LIVING_MEMORY.md, nu-brain/palace/*.md
+UNCHANGED: main branch (no merge), production norrisops.com (still pre-SA-V5)
+
+**SECTION 10 — KEY QUOTE + LESSONS:**
+Aaron (Phase B directive): "Go ahead and account and start Phase B. Make it look fantastic, REALLY pop/stand out. Animations, graphics, celebrations, FUN, and funny all built in."
+CC (honesty rule): "Even a skilled engineer would spend 20-40 focused hours on this. I can't credibly execute it autonomously through Section 16 in one session."
+LESSON F.23 LOCKED: Phased build is right shape. One-shot multi-section prompts are a process failure. Phase A-E scoped, click-test gate each phase.
+ADDITIONAL: Re-verify filesystem + HEAD + preview BEFORE writing CC prompt. Template every prompt with state-confirm step.
+
+**SECTION 11 — CONTEXT THAT MUST PERSIST (Session 7+):**
+11.1 Phase A LIVE. HEAD 1d86e5a. Preview 192.168.1.184:8765. No merge without Aaron PASS.
+11.2 Registry 82 entries MD5 220dd369. Read-only until Phase B add_alias() ships.
+11.3 Canonical "Company - Person Who Ordered" is IRON-CLAD. Enforce in Phase B via registry_loader.
+11.4 UPS = supporting evidence only. SD trumps UPS.
+11.5 A=REVIEW. B=V2. Locked.
+11.6 Investigation loop BEFORE REVIEW escalation.
+11.7 Mega-celebrations spec locked for Phase B. Fun + funny + Wayne-respectful.
+11.8 "SKU" forbidden everywhere.
+11.9 Bridge active. Gmail [LIVING_MEMORY_UPDATE] drafts → Google Doc within 15 min.
+11.10 G Brain write broken. --no-embed import only. Fix post-V1.
+11.11 CC Tier 1 on phase exits/aborts only. Tier 2 per section.
+11.12 Phased build F.23 is project law.
+11.13 Visual polish is legitimate Phase B priority.
+11.14 Data truth-up Phase B Section 7-recon locked (QB + SDs + shipments.json cross-ref).
+11.15 Preview server stays up through Phase E merge + Aaron LIVE CONFIRMED. Do not tear down.
