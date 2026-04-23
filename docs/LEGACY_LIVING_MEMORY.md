@@ -2368,6 +2368,125 @@ SECTION 11 — CONTEXT THAT MUST PERSIST
 - cron cannot access Keychain; always LaunchAgents for authenticated background services.
 
 
+### [LIVING_MEMORY_UPDATE] Session: Customer Registry Bootstrap (SA V5) — 2026-04-23
+AC,
+
+Session summary for the SA V5 customer_registry.json bootstrap.
+
+NOTE: Your user preference references the 11-section template at ~/norris-agent/MEMORY_session_summary_rule.md. I don't have access to that file from this Cowork session, so I've used an 11-section structure I inferred from your preferences + prior session summary conventions. If the real template differs, overwrite what's below before sending.
+
+===============================================
+1. SESSION TITLE & DATE
+===============================================
+Session: Customer Registry Bootstrap (SA V5 V1)
+Date: 2026-04-23
+Session #: 6 (per the Cowork prompt block header)
+
+===============================================
+2. OBJECTIVE
+===============================================
+One-shot build of customer_registry.json from the QB Contact List (plus Sales Detail for activity flagging + alias discovery), delivered to the Cowork outputs folder for manual transfer to M1 at ~/norris-agent/data/customer_registry.json.
+
+===============================================
+3. INPUTS PROVIDED
+===============================================
+- Norris Utilities, LLC_Customer Contact List, 4-23-26 (xlsx + csv) — authoritative
+- Norris Utilities, LLC_Sales by Customer Detail 4-23-26 (xlsx + csv) — activity + aliases
+
+Deviation from original prompt: the prompt named the 1-10-26 contact list and 4-7-26 sales report. The files uploaded were the 4-23-26 versions of both — newer/more current, so no re-run required.
+
+===============================================
+4. DELIVERABLES (files)
+===============================================
+- customer_registry.json — 79 entries, schema-compliant, saved to Cowork outputs
+- registry_review.csv — 51 flagged entries (confidence < HIGH) for AC review
+- Location in Cowork: /mnt/outputs/ (equivalent of Desktop in this environment)
+- Next step: transfer customer_registry.json to M1 at ~/norris-agent/data/ via Universal Control drag-drop, OR paste contents to @NorrisLegacyBot with hash-confirm request
+
+===============================================
+5. COUNTS
+===============================================
+- Total entries: 79
+- By tier: 78 direct / 1 dealer (Aerial Hydraulics)
+- By confidence: HIGH=31 / MEDIUM=45 / LOW=3
+- Review CSV entries: 51
+
+===============================================
+6. HIGH-PRIORITY CUSTOMER STATUS (12 expected)
+===============================================
+PRESENT (9):
+- LineTec-Guthrie-GA (Steve Guthrie)
+- AerialHydraulics-Abide-Dealer (Wayne Abide — spelling flag, see §8)
+- Dominion-Crosby-None (Coy Crosby)
+- AEP-Myers-Roanoke (Sammy Myers)
+- AEP-Riley-SWEPCO (Brian Riley — name derived from email, flagged MEDIUM)
+- EPB-Sutherland-None (Rick Sutherland)
+- Sheffield-Waldrep-None (Michael Waldrep)
+- Henkels-Turner-None (Lidia Turner)
+- ChainElectric-Morris-Hattiesburg (AJ Morris)
+
+MISSING from QB Contact List (3) — flagged LOW in review CSV:
+- LineTec-Thornhill-Alexandria — Richard Thornhill not in QB. Bridget Vanderhoeven is present as A/P contact (LineTec-Vanderhoeven-Alexandria). Add Richard to QB.
+- Renasant-Lavette-None — Patrick Lavette not in QB. Add to QB.
+- Irby-Lemoine-None — Jared Lemoine not in QB. Angela Burke is A/P contact (Irby-Burke-None). Add Jared to QB.
+
+===============================================
+7. EXCLUSIONS APPLIED (per prompt rule 5)
+===============================================
+Verified zero hits for all seven:
+- Gridco / Shon Cunningham (DEAD deal)
+- Superior Pipeline Services
+- Bay Shore Systems (vendor)
+- Skylift - Matt LaVelle (vendor)
+- Mrs. Caroline Butler (internal)
+- Norris Utilities - MK Smith (internal)
+- Shopify dummy customer record
+
+===============================================
+8. KEY FLAGS FOR AC REVIEW
+===============================================
+1. Aerial Hydraulics POC spelling: QB says "Wayne Abide"; SA V5 prompt says "Wayne Abadie". Which is the real spelling? Whichever is wrong, fix at the source (QB or prompt).
+2. AEP/SWEPCO Shreveport (Brian Riley): QB "Full name" field was blank. Derived "Brian Riley" from email bjriley@aep.com. Please confirm.
+3. Pike Electric POC: QB "Full name" blank. Registry shows "Bryant (first name unconfirmed)" derived from email ShBryant@pike.com. Please confirm first name.
+4. Three QB "master" records with no POC populated (Alabama Power, Georgia Power, Mississippi Power): flagged LOW — these function as company-level buckets with no named contact. Use the branch-level records for actual orders.
+5. Terex (3 entries) and Versalift (2 entries): these are also manufacturers you buy from. QB has sales transactions on them, so I included as customers with MEDIUM confidence. Please confirm customer vs. vendor status.
+6. Power Design & Consulting had two QB records for Travis Hazelton with different emails (bill@ and thazelton@). Merged into one entry (PowerDesign-Hazelton-Alexandria) with both emails noted.
+7. Payment methods: when QB "Payment method" field was blank, entries default to "OnReceipt" per prompt rule — 32 entries fall in this bucket, each flagged MEDIUM in review CSV. Worth a batch review in QB.
+
+===============================================
+9. KEY DECISIONS
+===============================================
+1. Used the 4-23-26 files instead of the 1-10-26/4-7-26 files named in the original prompt (more current data, same schema).
+2. Applied prompt's specified IDs for the 9 must-haves present; derived IDs for the remaining 70 using <CompanyRoot>-<LastName>-<City/Branch>.
+3. Seeded payment defaults per prompt's known mappings; extended "Net30 + po_required=true" to ALL AEP corporate records (Lee, Myers, Riley, Bruns, Benz, Rice, Bedwell) since every AEP A/P entity requires a PO.
+4. Sorted registry by last_activity DESC so most-active customers surface first.
+5. Aliases: kept empty unless explicitly injected — 8 entries carry curated aliases (e.g., "LTS Power", "Linetec" for LineTec-Vanderhoeven; "AEP Shreveport" and "SWEPCO Shreveport" for AEP-Riley). Honest empties for the rest.
+6. Aerial Hydraulics: 2 drop-ship endpoints hard-coded per prompt (Primoris T&D Conroe + Gilmer); the Michael Flemming QB row folded in as an alias rather than a separate customer, since Wayne Abide is always the invoicee.
+
+===============================================
+10. OPEN LOOPS / NEXT STEPS
+===============================================
+1. AC: open registry_review.csv (51 rows). Work through them top-down; LOW first (6), then MEDIUM (45).
+2. AC: add the 3 missing must-have POCs in QB (Thornhill, Lavette, Lemoine) and re-run this bootstrap, OR edit customer_registry.json directly.
+3. AC: confirm Wayne Abide / Abadie spelling.
+4. AC: transfer customer_registry.json → M1 at ~/norris-agent/data/ via Universal Control drag, OR paste to @NorrisLegacyBot for md5-confirmed write.
+5. SA: once live on M1, start learning aliases from conversation and update the registry over time.
+
+===============================================
+11. MEMORY / RULES HIT DURING SESSION
+===============================================
+- Quality-standards skill applied: no placeholders in registry, no "approximately" / "various", every flagged issue noted in review CSV with suggested_fix.
+- Founder-profile not explicitly read this session (not needed for a pure data-shaping task); quality standards covered the voice requirements.
+- No BSS touchpoint this session.
+- No revenue-generating action this session — this is infrastructure work that unlocks follow-up automation.
+
+—
+End of summary. Review, edit if wrong, then send to yourself for Living Memory ingestion.
+
+Sincerely,
+Aaron C. Norris
+(drafted by Cowork on AC's behalf)
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
@@ -3778,3 +3897,27 @@ feature/sa-v5-completion stays on branch at 7ef798a. Main untouched (pre-SA-V5 C
 11.17 Aerial Hydraulics / Wayne Abadie = NU's only current dealer; drop-ships to Primoris TX/LA.
 11.19 Superior Pipeline Services ALWAYS excluded from SA workflows.
 11.20 cron cannot access macOS login Keychain; LaunchAgents can. Always use LaunchAgents for authenticated background services.
+
+---
+## 2026-04-23 — Customer Registry V1 Bootstrap
+
+**Event:** Customer registry V1 bootstrapped from QB Contact List 4-23-26 via Cowork.
+**79 entries (78 direct, 1 dealer). Confidence: MEDIUM=45, LOW=6 (in review CSV). HIGH entries confirmed in JSON (no confidence field in JSON itself — confidence tracked in review CSV).**
+**3 POC clarifications pending Aaron. 3 must-haves missing from QB.**
+
+Files written:
+- ~/norris-agent/data/customer_registry.json — md5: 85839206615b6b616fb630aa41c5f13c
+- ~/norris-agent/data/customer_registry_review.csv — md5: 9eff59be2fefd3a712e124084e4c0150
+
+Verified: 79 entries | 78 direct / 1 dealer | All required fields present | Aerial Hydraulics drop_ship_endpoints populated (2 endpoints) | 0 exclusion hits across both files.
+
+POC clarifications pending:
+1. AerialHydraulics: QB="Wayne Abide" vs SA V5="Wayne Abadie" — Aaron to confirm spelling
+2. AEP-Riley-SWEPCO: poc confirmed bjriley@aep.com, canonical "Brian Riley" — confirm full name
+3. Pike-Bryant-MountAiry: poc ShBryant@pike.com, first name unknown — pending Aaron
+
+Missing from QB (LOW confidence, must-adds):
+1. LineTec-Thornhill-Alexandria — Richard Thornhill, corporate A/P, Net30, PO required, no CC fee (QB has BVanderhoeven as LineTec Alexandria contact instead)
+2. Renasant-Lavette-None — Patrick Lavette, Renasant Bank
+3. Irby-Lemoine-None — Jared Lemoine, Irby Construction
+Aaron decision: add to QB and re-bootstrap, or hand-append via Legacy instruction.
