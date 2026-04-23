@@ -1836,6 +1836,83 @@ FILES:
 KEY LESSON:
 M5 added noise by quoting formula result with confidence ("per master") when the master itself listed the explicit dealer rate. Verification gate caught it before merge. Listed prices override derived/formula prices, always.
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S4 — FF aborted as expected, PATH A dispatched with diagnostic gate — 2026-04-22
+COMPLETED:
+- Gate 5 FF merge attempted, ABORTED — histories genuinely diverged (feature has 56 commits not on main, main has 17 commits not on feature)
+- Pricing lesson commit landed cleanly on feature: ea77e76 (sa_learnings pricing_source_priority entry appended)
+- Daemon noise stashed: pre-gate5-merge-v2-daemon-noise-2026-04-22
+- M5 recommended PATH A (--no-ff merge) over PATH B (reconcile-on-feature)
+- Updated CC paste-block dispatched with diagnostic STEP 1 (identify the 17 main-only commits) before merge execution
+
+DECISIONS:
+- PATH A locked: --no-ff merge into main. Merge commit lives on main where it semantically belongs.
+- Rationale: standard trunk practice, easy single-unit revert, doesn't muddy feature branch history if Session 3+ needs to revisit feature/shipping-agent-v5
+- Tag v5-session2-merged-2026-04-22 will be force-repointed via --force-with-lease (currently stale at a365228)
+- Self-documenting merge message embedded with FIX 1-11 summary, canary list, test count
+
+CHANGED:
+- Tag a365228 was prematurely pushed at some prior point (Session 2 process failure — not Session 4 or Session 3)
+- 56-commit feature branch + 17-commit main divergence absorbed in one merge commit
+
+BLOCKED:
+- Awaiting CC STEP 1 diagnostic output (3 git log commands) before executing STEP 2 merge
+- If STEP 1 reveals unexpected hotfixes in the 17 main-only commits, escalate Tier 2 before merge
+
+NEXT:
+- On STEP 1 clean: STEP 2 merge + STEP 3 verification + STEP 4 stash retention
+- Post-merge ping → present Q1-Q14 priority menu to Aaron
+- Two open questions for next session: (1) provenance of premature a365228 tag push, (2) inventory of the 17 main-only commits
+
+FILES:
+- data/sa_learnings.json — pricing_source_priority entry now in feature tip ea77e76
+- Stashes preserved: pre-gate5-merge-v2-daemon-noise-2026-04-22, pre-fix11-final-2026-04-22, stash@{1} pre-v5-recovery
+- /home/claude/FlexPro_Armor_Complete_Pricing_Master.xlsx (M5 verification copy, read-only)
+
+KEY LESSON:
+Premature tag push happened in Session 2 — created stale tag pointing at a365228 before Gate 5 merge was confirmed. Process fix: tag pushes belong AFTER successful merge + verification, never before. Will codify in SA V5 protocol.
+
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S4 — Gate 5 MERGED 9a572c0, ops portal linkage audit dispatched — 2026-04-22
+COMPLETED:
+- Gate 5 PATH A merge SUCCESS — main now at 9a572c0 (merge commit), tag v5-session2-merged-2026-04-22 force-pushed to origin
+- Conflict resolutions all took feature side: ask_claude.py, nc_bridge.py, nc_bridge_start.sh, order_monitor.py
+- pytest 171/171 green on main HEAD
+- 17 stashes preserved across session, no drops
+- Aaron raised critical follow-on question: did writeset actually land VISIBLE on /shipments and is it cross-linked to the broader ops portal pages?
+- M5 read LIVING_ROADMAP.html context: t11 (end-to-end pipeline) active "all pieces exist but not connected end-to-end", t12 (status badges) waiting, t13 (Sheet write-back) waiting "GAP 2 in shipping_processor.py", t7 (SD auto-print) waiting
+- M5 dispatched comprehensive read-only audit prompt to CC covering 5 audit tasks: /shipments rendering, /shipping-log Sheet status, /shipping-docs/ data-source diagnosis, cross-linkage clickability, adjacent pages scan
+
+DECISIONS:
+- Tonight's floor: T05-T08 visible & correct on /shipments (Aaron's stated minimum)
+- Stretch: map the linkage gap, return prioritized fix queue
+- AUDIT IS READ-ONLY — no writes, no rebuilds, no scope creep
+- Triage gates after audit: BLOCKER fixes tonight, HIGH queued by priority, LOW deferred to t11/t12/t13 session
+
+CHANGED:
+- main tip: 9a572c0 (was f10f183)
+- tag v5-session2-merged-2026-04-22: now points at 9a572c0 (was stale a365228)
+- Premature tag push (a365228) corrected via single-tag --force after --force-with-lease rejected for bulk push
+
+BLOCKED:
+- Awaiting CC Tier 2 audit ping (Sections A-F deliverable)
+- Cannot recommend gap fixes until audit evidence lands
+
+NEXT:
+- On audit return: triage BLOCKER/HIGH/LOW with Aaron
+- Likely pre-existing gaps: Sheet write-back unbuilt (t13 GAP 2), /shipping-docs/ uses different naming scheme than SA V5, status badges not wired (t12), no cross-page hyperlinks
+- Q1-Q14 priority menu still pending after linkage gaps triaged
+
+FILES:
+- /home/claude/FlexPro_Armor_Complete_Pricing_Master.xlsx (verification copy, read-only)
+- M5 read /mnt/project/LIVING_ROADMAP.html for scope context (no writes)
+- main HEAD 9a572c0 contains: 55 feature commits + sa_learnings pricing lesson + Notes-scraping protocol + box-size P/N inference + CB writeset 50.2KB at /shipments
+- Stashes preserved: 17 total spanning pre-fix1 through pre-gate5-merge-v3-daemon-noise
+
+OPEN QUESTIONS for next session:
+1) /shipping-docs/ bridge: should SA V5 dual-write into the SD-{customer}-{date} naming format, or should /shipping-docs/ migrate to S-2026-### namespace?
+2) Sheet write-back (t13): is this a Session 5 SA V5 build, or a separate ops portal build?
+3) Status badges (t12): wire on /shipments, separate from SA V5 agent?
+4) Premature a365228 tag push provenance — process failure to codify in SA V5 protocol
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
