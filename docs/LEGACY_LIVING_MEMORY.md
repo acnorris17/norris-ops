@@ -1803,6 +1803,39 @@ FILES:
 - CC prompt staged in chat for Aaron paste into M1 SA V5 CC window
 - Manifest to be replaced by CC: data/qb_invoice_link_candidates_2026.json
 
+### [LIVING_MEMORY_UPDATE] Session: SA V5 S4 — pricing source verified, NU-BC-2851 dealer = $235, merge GO — 2026-04-22
+COMPLETED:
+- Pre-merge verification surfaced dealer rate discrepancy (CC $235 vs M5 quoted $245 per master formula)
+- M5 opened FlexPro_Armor_Complete_Pricing_Master.xlsx directly to verify
+- Confirmed: NU-BC-2851 dealer = $235 in BOTH Dealer Price List sheet and Internal Master sheet (Cost $112, Direct $305, Dealer $235)
+- M5 was wrong; product_catalog.json v5.0.0 ($235) is authoritative
+- Resolution: option B dispatched to CC (merge as-is, T06/T07 stay at $542 each)
+
+DECISIONS:
+- NU-BC-2851 dealer rate locked at $235 (master verified, not $245)
+- Formula ROUND(Direct × 0.80, nearest $5) applies ONLY to UNLISTED P/Ns. Listed P/Ns override formula.
+- T06/T07 grand totals: $235 × 2 + $72 ship = $542 each (correct)
+
+CHANGED:
+- New sa_learnings.json entry queued before merge: {"date": "2026-04-22", "category": "pricing_source_priority", "lesson": "formula_fallback_only_for_unlisted_pns", "evidence": "M5 quoted NU-BC-2851 dealer $245 via formula (305x0.80 nearest $5); master xlsx has explicit $235 listing. Formula applies ONLY when P/N absent from Dealer Price List sheet."}
+- Several other P/Ns also don't follow the formula (e.g., NU-BC-2834 listed $205 vs formula $210) — listing always wins
+
+BLOCKED:
+- Awaiting CC final commit with new sa_learnings entry + Gate 5 merge execution
+- CC Tier 2 ping post-merge
+
+NEXT:
+- On merge confirm: hand Aaron Q1-Q14 priority menu
+- Update userMemories: clarify "Dealer pricing: master xlsx Dealer Price List is authoritative for all listed P/Ns. Formula ROUND(Direct x 0.80, nearest $5) is fallback ONLY for unlisted P/Ns. Several listed items don't follow the formula."
+
+FILES:
+- /home/claude/FlexPro_Armor_Complete_Pricing_Master.xlsx (M5 working copy, read-only verification)
+- data/sa_learnings.json (1 new entry queued via CC reply)
+- All 4 SD line item structures verified clean (tracking in structured field, PO in structured field, no line-item data in memo, cb_internal_note internal-only)
+
+KEY LESSON:
+M5 added noise by quoting formula result with confidence ("per master") when the master itself listed the explicit dealer rate. Verification gate caught it before merge. Listed prices override derived/formula prices, always.
+
 # SECTION 7: CURRENT BLOCKERS
 
 **🔴 BLOCKER: Memory systems not auto-updating across all channels**
