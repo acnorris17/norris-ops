@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Disclosure Discrepancy Review — Rental vs For-Sale Listings — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <title>Disclosure Discrepancy Review — Rental vs. For-Sale Listing — Norris Utilities®</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400;1,700&display=swap');
 
     :root {
       --nu-blue: #0000FF;
@@ -18,13 +17,11 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-warning: #D9534F;
-      --nu-warning-bg: #FBE9E7;
-      --nu-caution: #E89B2A;
-      --nu-caution-bg: #FFF5E6;
-      --nu-success: #2E7D32;
-      --nu-success-bg: #E8F5E9;
+      --nu-alert-red: #C41E3A;
+      --nu-warn-amber: #D97706;
+      --nu-ok-green: #047857;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-tagline: 'Playfair Display', Georgia, serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,50 +29,46 @@
     body {
       font-family: var(--font-primary);
       color: var(--nu-body-text);
-      background: var(--nu-light-gray);
+      background: var(--nu-white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HEADER */
+    /* ══ HEADER ══ */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
-      padding: 60px 40px 80px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      padding: 64px 40px 80px;
       text-align: center;
       overflow: hidden;
       min-height: 280px;
     }
     .nu-header::before {
       content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      position: absolute; inset: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.7;
     }
     .nu-header::after {
       content: '';
       position: absolute;
-      top: -40%; right: -15%;
-      width: 70%; height: 180%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
+      top: -40%; right: -20%;
+      width: 80%; height: 180%;
+      background: radial-gradient(ellipse, rgba(6,208,255,0.20) 0%, transparent 70%);
       z-index: 1;
     }
-    .nu-header * { position: relative; z-index: 2; }
+    .nu-header > * { position: relative; z-index: 2; }
 
     .nu-phoenix-icon {
-      width: 70px;
-      height: 70px;
+      width: 72px; height: 72px;
       margin: 0 auto 14px;
-      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.35));
     }
     .nu-logo-text {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: var(--nu-white);
       letter-spacing: 0.35em;
       text-transform: uppercase;
@@ -83,37 +76,46 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: var(--nu-white);
-      letter-spacing: 0.7em;
+      letter-spacing: 0.8em;
       text-transform: uppercase;
       margin-bottom: 18px;
+      padding-left: 0.8em;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.25rem;
-      color: rgba(255,255,255,0.95);
-      letter-spacing: 0.04em;
+      font-size: 1.3rem;
+      color: var(--nu-cyan);
+      letter-spacing: 0.03em;
+    }
+    .nu-doc-label {
+      margin-top: 22px;
+      display: inline-block;
+      padding: 6px 18px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 2px;
+      color: var(--nu-white);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
     }
 
-    /* CHEVRON */
+    /* ══ CHEVRON ══ */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg {
-      width: 100%;
-      height: 50px;
-      display: block;
-    }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
-    /* CONTENT */
+    /* ══ CONTENT ══ */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
@@ -121,390 +123,366 @@
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 12%; left: 50%;
-      transform: translate(-50%, 0);
-      width: 65%; max-width: 700px;
+      top: 200px; left: 50%;
+      transform: translateX(-50%);
+      width: 65%;
       aspect-ratio: 1;
+      max-width: 700px;
       background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 65%);
       border-radius: 50%;
       z-index: 0;
       pointer-events: none;
     }
-    .nu-content-area > * { position: relative; z-index: 1; }
-
     .nu-container {
+      position: relative;
+      z-index: 1;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 40px 40px;
+      padding: 56px 40px 72px;
     }
 
-    /* DOCUMENT META */
-    .nu-doc-meta {
+    /* ══ DOC HEADER ══ */
+    .doc-title {
+      font-weight: 900;
+      font-size: 2.15rem;
+      color: var(--nu-dark-text);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .doc-title .nu-accent { color: var(--nu-blue); }
+    .doc-subtitle {
+      font-size: 1.05rem;
+      color: #555;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .doc-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 22px;
+      gap: 12px 28px;
+      padding: 14px 20px;
       background: var(--nu-light-gray);
       border-left: 4px solid var(--nu-blue);
-      border-radius: 6px;
-      margin-bottom: 36px;
-      font-size: 0.88rem;
-      color: var(--nu-dark-text);
+      border-radius: 2px;
+      margin-bottom: 40px;
+      font-size: 0.9rem;
     }
-    .nu-doc-meta strong { color: var(--nu-blue); font-weight: 700; }
+    .doc-meta span strong { color: var(--nu-navy); font-weight: 700; margin-right: 4px; }
 
-    /* PAGE TITLE */
-    .nu-page-title {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 2.4rem;
-      line-height: 1.15;
-      color: var(--nu-dark-text);
-      margin-bottom: 12px;
-    }
-    .nu-page-title span.accent {
-      color: var(--nu-blue);
-      font-weight: 900;
-    }
-    .nu-page-subtitle {
-      font-family: var(--font-primary);
-      font-weight: 400;
-      font-size: 1.1rem;
-      color: var(--nu-body-text);
-      margin-bottom: 36px;
-      max-width: 800px;
-      line-height: 1.55;
-    }
-
-    /* PRIORITY BANNER */
-    .nu-priority-banner {
+    /* ══ STATUS BANNER ══ */
+    .status-banner {
       display: flex;
       align-items: flex-start;
       gap: 16px;
-      padding: 22px 26px;
-      background: var(--nu-caution-bg);
-      border-left: 5px solid var(--nu-caution);
-      border-radius: 6px;
-      margin-bottom: 40px;
+      padding: 20px 24px;
+      background: linear-gradient(90deg, rgba(217,119,6,0.08) 0%, rgba(217,119,6,0.02) 100%);
+      border: 1px solid rgba(217,119,6,0.3);
+      border-left: 5px solid var(--nu-warn-amber);
+      border-radius: 4px;
+      margin-bottom: 44px;
     }
-    .nu-priority-icon {
+    .status-banner .icon {
       flex-shrink: 0;
-      width: 40px;
-      height: 40px;
+      width: 42px; height: 42px;
+      background: var(--nu-warn-amber);
+      color: white;
       border-radius: 50%;
-      background: var(--nu-caution);
-      color: var(--nu-white);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
       font-size: 1.4rem;
-      font-family: serif;
     }
-    .nu-priority-banner-content h3 {
+    .status-banner h3 {
       font-weight: 900;
       font-size: 1.05rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 6px;
-      letter-spacing: 0.02em;
+      color: var(--nu-warn-amber);
+      margin-bottom: 4px;
       text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    .nu-priority-banner-content p {
-      font-size: 0.95rem;
-      color: var(--nu-dark-text);
-      line-height: 1.55;
-    }
+    .status-banner p { color: var(--nu-dark-text); font-size: 0.95rem; }
 
-    /* SECTION HEADERS */
+    /* ══ SECTION HEADERS ══ */
     .nu-section {
       margin-bottom: 44px;
     }
-    .nu-section-header {
-      font-family: var(--font-primary);
+    .nu-section-title {
       font-weight: 900;
       font-size: 1.5rem;
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--nu-medium-gray);
+      color: var(--nu-blue);
+      margin-bottom: 6px;
       letter-spacing: 0.01em;
     }
-    .nu-section-header .first {
-      color: var(--nu-blue);
-    }
-    .nu-section-header .rest {
+    .nu-section-title span {
       color: var(--nu-dark-text);
       font-weight: 700;
     }
-
-    /* COMPARISON TABLE */
-    .nu-compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    .nu-section-rule {
+      height: 3px;
+      width: 60px;
+      background: var(--nu-cyan);
+      margin-bottom: 22px;
+      border-radius: 2px;
     }
-    .nu-compare-col {
-      padding: 0;
-      background: var(--nu-white);
-    }
-    .nu-compare-col:first-child {
-      border-right: 1px solid var(--nu-medium-gray);
-    }
-    .nu-compare-head {
-      padding: 16px 22px;
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.05rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--nu-white);
-    }
-    .nu-compare-head.rental {
-      background: linear-gradient(135deg, #0033cc 0%, #0066ee 100%);
-    }
-    .nu-compare-head.sale {
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-    }
-    .nu-compare-row {
-      display: flex;
-      padding: 14px 22px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      font-size: 0.93rem;
-      line-height: 1.5;
-    }
-    .nu-compare-row:last-child { border-bottom: none; }
-    .nu-compare-row .label {
-      flex: 0 0 38%;
-      font-weight: 700;
-      color: var(--nu-blue);
-    }
-    .nu-compare-row .value {
-      flex: 1;
+    .nu-section > p {
+      margin-bottom: 14px;
       color: var(--nu-body-text);
     }
-    .nu-compare-row.mismatch .value {
-      color: var(--nu-warning);
-      font-weight: 700;
-    }
-    .nu-compare-row.match .value {
-      color: var(--nu-success);
-      font-weight: 600;
-    }
 
-    /* DISCREPANCY CARDS */
-    .nu-discrepancy {
-      background: var(--nu-warning-bg);
-      border-left: 5px solid var(--nu-warning);
-      border-radius: 6px;
-      padding: 20px 24px;
-      margin-bottom: 16px;
-    }
-    .nu-discrepancy-title {
-      font-weight: 900;
-      font-size: 1.05rem;
-      color: var(--nu-warning);
-      margin-bottom: 8px;
-      letter-spacing: 0.01em;
-    }
-    .nu-discrepancy-body {
-      font-size: 0.94rem;
-      color: var(--nu-dark-text);
-      line-height: 1.55;
-    }
-    .nu-discrepancy-body strong {
-      color: var(--nu-warning);
-      font-weight: 700;
-    }
-
-    /* CHECKLIST */
-    .nu-checklist {
-      list-style: none;
-      padding: 0;
-    }
-    .nu-checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px dashed var(--nu-medium-gray);
-      font-size: 0.95rem;
-      color: var(--nu-dark-text);
-      line-height: 1.55;
-    }
-    .nu-checklist li:last-child { border-bottom: none; }
-    .nu-checklist .num {
-      flex-shrink: 0;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 0.85rem;
-    }
-    .nu-checklist .text strong {
-      display: block;
-      font-weight: 700;
-      color: var(--nu-blue);
-      margin-bottom: 2px;
-    }
-
-    /* RISK GRID */
-    .nu-risk-grid {
+    /* ══ COMPARISON TABLE ══ */
+    .compare-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
     }
-    .nu-risk-card {
-      padding: 20px;
+    .compare-col {
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--nu-medium-gray);
+      background: var(--nu-white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .compare-col-header {
+      padding: 14px 20px;
+      color: var(--nu-white);
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .compare-col-header.rental { background: linear-gradient(135deg, #0a0e5c 0%, var(--nu-blue) 100%); }
+    .compare-col-header.forsale { background: linear-gradient(135deg, #064663 0%, var(--nu-cyan) 100%); color: var(--nu-navy); }
+    .compare-col-header .sub {
+      display: block;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      opacity: 0.85;
+      margin-top: 2px;
+      text-transform: none;
+    }
+    .compare-col-body { padding: 6px 0; }
+    .compare-col-body dl {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      font-size: 0.9rem;
+    }
+    .compare-col-body dt {
+      padding: 10px 16px;
+      font-weight: 700;
+      color: #5a5a70;
+      border-top: 1px solid var(--nu-medium-gray);
+      background: var(--nu-light-gray);
+    }
+    .compare-col-body dd {
+      padding: 10px 16px;
+      color: var(--nu-dark-text);
+      border-top: 1px solid var(--nu-medium-gray);
+    }
+    .compare-col-body dt:first-of-type,
+    .compare-col-body dd:first-of-type { border-top: none; }
+    .cell-flag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .flag-diff { background: rgba(196,30,58,0.12); color: var(--nu-alert-red); }
+    .flag-match { background: rgba(4,120,87,0.12); color: var(--nu-ok-green); }
+
+    /* ══ DISCREPANCY TABLE ══ */
+    .discrepancy-table {
+      width: 100%;
+      border-collapse: collapse;
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      border-top: 4px solid var(--nu-blue);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      font-size: 0.9rem;
     }
-    .nu-risk-card.high { border-top-color: var(--nu-warning); }
-    .nu-risk-card.med { border-top-color: var(--nu-caution); }
-    .nu-risk-card.low { border-top-color: var(--nu-success); }
-    .nu-risk-level {
+    .discrepancy-table thead th {
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .discrepancy-table tbody td {
+      padding: 14px;
+      border-top: 1px solid var(--nu-medium-gray);
+      vertical-align: top;
+    }
+    .discrepancy-table tbody tr:nth-child(even) { background: var(--nu-light-gray); }
+    .discrepancy-table tbody td strong { color: var(--nu-navy); }
+    .sev-pill {
       display: inline-block;
       padding: 3px 10px;
       border-radius: 12px;
       font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin-bottom: 10px;
     }
-    .nu-risk-level.high { background: var(--nu-warning-bg); color: var(--nu-warning); }
-    .nu-risk-level.med { background: var(--nu-caution-bg); color: var(--nu-caution); }
-    .nu-risk-level.low { background: var(--nu-success-bg); color: var(--nu-success); }
-    .nu-risk-card h4 {
+    .sev-high { background: rgba(196,30,58,0.12); color: var(--nu-alert-red); }
+    .sev-med { background: rgba(217,119,6,0.12); color: var(--nu-warn-amber); }
+    .sev-low { background: rgba(4,120,87,0.12); color: var(--nu-ok-green); }
+
+    /* ══ RISK CARDS ══ */
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .risk-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 6px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      border-top: 4px solid var(--nu-blue);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .risk-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    .risk-card.high { border-top-color: var(--nu-alert-red); }
+    .risk-card.med { border-top-color: var(--nu-warn-amber); }
+    .risk-card.low { border-top-color: var(--nu-ok-green); }
+    .risk-card h4 {
       font-weight: 900;
       font-size: 1rem;
       color: var(--nu-dark-text);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
-    .nu-risk-card p {
-      font-size: 0.88rem;
-      color: var(--nu-body-text);
-      line-height: 1.5;
+    .risk-card p { font-size: 0.9rem; color: var(--nu-body-text); }
+
+    /* ══ ACTION CHEVRONS ══ */
+    .action-list { list-style: none; margin-bottom: 8px; }
+    .action-list li {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 14px 28px 14px 18px;
+      margin-bottom: 10px;
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 18px 50%);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.01em;
+    }
+    .action-list li .num {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      background: var(--nu-cyan);
+      color: var(--nu-navy);
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 0.85rem;
+      margin-right: 14px;
+    }
+    .action-list li span.owner {
+      margin-left: auto;
+      padding-left: 14px;
+      font-weight: 400;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      white-space: nowrap;
     }
 
-    /* DECISION BOX */
-    .nu-decision-box {
-      background: linear-gradient(135deg, #f6f8ff 0%, #eef2ff 100%);
-      border: 2px solid var(--nu-blue);
-      border-radius: 10px;
-      padding: 28px 30px;
-      margin-top: 30px;
-    }
-    .nu-decision-box h3 {
-      font-weight: 900;
-      font-size: 1.3rem;
-      color: var(--nu-blue);
-      margin-bottom: 14px;
-    }
-    .nu-decision-box .options {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 16px;
-    }
-    .nu-option {
-      background: var(--nu-white);
-      padding: 16px 18px;
+    /* ══ DOCS CHECKLIST ══ */
+    .docs-checklist {
+      background: var(--nu-light-gray);
       border-radius: 6px;
+      padding: 22px 26px;
       border: 1px solid var(--nu-medium-gray);
     }
-    .nu-option strong {
-      display: block;
-      color: var(--nu-blue);
-      font-weight: 900;
-      margin-bottom: 6px;
-      font-size: 0.95rem;
+    .docs-checklist ul { list-style: none; }
+    .docs-checklist li {
+      padding: 10px 0;
+      border-bottom: 1px dashed #d4d4db;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.93rem;
     }
-    .nu-option p {
-      font-size: 0.88rem;
-      line-height: 1.5;
-      color: var(--nu-body-text);
-    }
-
-    /* SIGNOFF */
-    .nu-signoff {
-      margin-top: 36px;
-      padding: 22px 26px;
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      border-left: 4px solid var(--nu-cyan);
-    }
-    .nu-signoff p {
-      font-size: 0.92rem;
-      color: var(--nu-body-text);
-      line-height: 1.6;
-    }
-    .nu-signoff .reviewer {
-      margin-top: 14px;
-      font-weight: 700;
-      color: var(--nu-dark-text);
+    .docs-checklist li:last-child { border-bottom: none; }
+    .docs-checklist li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 3px;
+      margin-top: 2px;
     }
 
-    /* FOOTER */
+    /* ══ FOOTER ══ */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
       padding: 44px 40px;
       text-align: center;
-      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
     .nu-footer-contact {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       line-height: 1.85;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
     }
-    .nu-footer-contact a:hover {
-      text-decoration: underline;
+    .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-meta {
+      margin-top: 16px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.45em; }
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 820px) {
+      .compare-grid { grid-template-columns: 1fr; }
+      .nu-header { padding: 44px 20px 64px; min-height: 220px; }
+      .nu-logo-text { font-size: 2.1rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.55em; }
       .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 40px 20px; }
-      .nu-page-title { font-size: 1.7rem; }
-      .nu-compare { grid-template-columns: 1fr; }
-      .nu-compare-col:first-child { border-right: none; border-bottom: 1px solid var(--nu-medium-gray); }
-      .nu-compare-row { flex-direction: column; gap: 4px; }
-      .nu-compare-row .label { flex: none; }
-      .nu-doc-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .doc-title { font-size: 1.6rem; }
+      .nu-container { padding: 40px 20px 56px; }
+      .discrepancy-table { font-size: 0.82rem; }
+      .discrepancy-table thead th, .discrepancy-table tbody td { padding: 10px; }
+      .action-list li { clip-path: none; border-radius: 6px; padding: 14px 18px; }
+      .compare-col-body dl { grid-template-columns: 110px 1fr; font-size: 0.85rem; }
     }
 
     @media print {
-      body { background: var(--nu-white); }
-      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-      .nu-priority-banner, .nu-discrepancy, .nu-decision-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .risk-card, .compare-col, .discrepancy-table { box-shadow: none; }
+      .action-list li { clip-path: none; border-radius: 4px; }
+      .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
@@ -512,15 +490,14 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <div class="nu-phoenix-icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
-      </svg>
-    </div>
+    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+    </svg>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-doc-label">Internal Review Memo</div>
   </header>
 
   <!-- CHEVRON -->
@@ -530,306 +507,279 @@
     </svg>
   </div>
 
-  <!-- CONTENT -->
+  <!-- MAIN -->
   <main class="nu-content-area">
     <div class="nu-container">
 
-      <!-- DOC META -->
-      <div class="nu-doc-meta">
-        <div><strong>Source:</strong> reMarkable Action Item</div>
-        <div><strong>Owner:</strong> Aaron C. Norris</div>
-        <div><strong>Date Logged:</strong> April 21, 2026</div>
-        <div><strong>Status:</strong> Open — Review Required</div>
+      <h1 class="doc-title">Disclosure Discrepancy Review — <span class="nu-accent">Rental vs. For-Sale Listing</span></h1>
+      <p class="doc-subtitle">Side-by-side audit of disclosed property facts, material conditions, and representation language across both listings — with action items before we commit to purchase or negotiation posture.</p>
+
+      <div class="doc-meta">
+        <span><strong>Document:</strong> Disclosure-Review-001</span>
+        <span><strong>Prepared:</strong> 2026-04-23</span>
+        <span><strong>Owner:</strong> Aaron C. Norris</span>
+        <span><strong>Classification:</strong> Internal / Pre-Decision</span>
+        <span><strong>Status:</strong> Open — Action Required</span>
       </div>
 
-      <!-- PAGE TITLE -->
-      <h1 class="nu-page-title">
-        Disclosure <span class="accent">Discrepancy Review</span><br>
-        Rental vs For-Sale Listings
-      </h1>
-      <p class="nu-page-subtitle">
-        Side-by-side review of property disclosures appearing in the rental listing versus the for-sale listing. Mismatches flagged here must be reconciled before any offer is presented or contract is signed. Inconsistent disclosures across listing channels create material legal and financial exposure.
-      </p>
-
-      <!-- PRIORITY BANNER -->
-      <div class="nu-priority-banner">
-        <div class="nu-priority-icon">!</div>
-        <div class="nu-priority-banner-content">
-          <h3>Why This Matters</h3>
-          <p>Public listings (MLS, rental portals, brokerage sites) are durable evidence. When the same property is described two different ways across rental and sale channels, the seller has effectively made conflicting representations. The buyer-side review must catalog every difference, identify which version is correct, and obtain a written reconciliation in the seller's disclosure package before closing.</p>
+      <!-- STATUS BANNER -->
+      <div class="status-banner">
+        <div class="icon">!</div>
+        <div>
+          <h3>Action Required Before Moving Forward</h3>
+          <p>Representations made to rental tenants do not fully match the disclosures now being made to prospective buyers on the for-sale listing. Do not submit, respond to, or counter on any offer until each line item below is reconciled, documented, and confirmed in writing by the listing party.</p>
         </div>
       </div>
 
-      <!-- COMPARISON SECTION -->
+      <!-- SECTION 1 — OVERVIEW -->
       <section class="nu-section">
-        <h2 class="nu-section-header">
-          <span class="first">Side-by-Side</span> <span class="rest">Listing Comparison</span>
-        </h2>
-
-        <div class="nu-compare">
-          <div class="nu-compare-col">
-            <div class="nu-compare-head rental">Rental Listing</div>
-            <div class="nu-compare-row">
-              <div class="label">Bedrooms</div>
-              <div class="value">As represented in rental ad</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Bathrooms</div>
-              <div class="value">As represented in rental ad</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Square Footage</div>
-              <div class="value">Verify against rental copy</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Year Built</div>
-              <div class="value">Verify against rental copy</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Lot Size</div>
-              <div class="value">Verify against rental copy</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Heating / Cooling</div>
-              <div class="value">Verify against rental copy</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Appliances Included</div>
-              <div class="value">Verify against rental copy</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">HOA / Fees</div>
-              <div class="value">Verify against rental copy</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Parking / Garage</div>
-              <div class="value">Verify against rental copy</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Recent Renovations</div>
-              <div class="value">Verify against rental copy</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Known Defects Disclosed</div>
-              <div class="value">Verify against rental copy</div>
-            </div>
-          </div>
-          <div class="nu-compare-col">
-            <div class="nu-compare-head sale">For-Sale Listing</div>
-            <div class="nu-compare-row">
-              <div class="label">Bedrooms</div>
-              <div class="value">As represented in MLS / for-sale ad</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Bathrooms</div>
-              <div class="value">As represented in MLS / for-sale ad</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Square Footage</div>
-              <div class="value">Verify against MLS sheet</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Year Built</div>
-              <div class="value">Verify against MLS sheet</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Lot Size</div>
-              <div class="value">Verify against MLS sheet</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Heating / Cooling</div>
-              <div class="value">Verify against MLS sheet</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Appliances Included</div>
-              <div class="value">Verify against MLS sheet</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">HOA / Fees</div>
-              <div class="value">Verify against MLS sheet</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Parking / Garage</div>
-              <div class="value">Verify against MLS sheet</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Recent Renovations</div>
-              <div class="value">Verify against MLS sheet</div>
-            </div>
-            <div class="nu-compare-row">
-              <div class="label">Known Defects Disclosed</div>
-              <div class="value">Verify against MLS sheet</div>
-            </div>
-          </div>
-        </div>
-        <p style="margin-top: 14px; font-size: 0.85rem; color: var(--nu-body-text); font-style: italic;">
-          Populate each row with the exact wording from each listing. Highlight any row where the two columns disagree — those rows become the discrepancies tracked in the next section.
-        </p>
+        <h2 class="nu-section-title">Purpose <span>of this Review</span></h2>
+        <div class="nu-section-rule"></div>
+        <p>This memo captures the specific points where the property's rental-era marketing and landlord disclosures diverge from the current for-sale MLS listing, seller property disclosure, and associated marketing materials. The goal is not to assign fault — it is to make sure we walk into the transaction with a complete, consistent, and defensible factual record before price, terms, or concessions are negotiated.</p>
+        <p>Discrepancies in listed square footage, year of improvements, included fixtures, and known condition items can directly affect valuation, insurability, appraisal risk, and post-closing exposure. Every item flagged below should resolve into one of three outcomes: <strong>(a)</strong> corrected disclosure in writing, <strong>(b)</strong> price or credit adjustment, or <strong>(c)</strong> walk.</p>
       </section>
 
-      <!-- DISCREPANCY TYPES -->
+      <!-- SECTION 2 — SIDE BY SIDE -->
       <section class="nu-section">
-        <h2 class="nu-section-header">
-          <span class="first">Common</span> <span class="rest">Discrepancies to Flag</span>
-        </h2>
+        <h2 class="nu-section-title">Side-by-Side <span>Representations</span></h2>
+        <div class="nu-section-rule"></div>
+        <p>The following comparison reflects representations as they currently appear in the rental listing archive and in the active for-sale listing package. Cells flagged <em>DIFF</em> need a written reconciliation from the listing party.</p>
 
-        <div class="nu-discrepancy">
-          <div class="nu-discrepancy-title">1. Square Footage Mismatch</div>
-          <div class="nu-discrepancy-body">
-            Rental listings often round up; for-sale listings should match the appraisal or tax record. <strong>If they differ by more than 5%, request the source document for each figure.</strong>
-          </div>
-        </div>
+        <div class="compare-grid">
 
-        <div class="nu-discrepancy">
-          <div class="nu-discrepancy-title">2. Bedroom / Bathroom Count</div>
-          <div class="nu-discrepancy-body">
-            A "den" counted as a bedroom in one listing but not the other is a red flag. <strong>Confirm whether each room meets the legal definition of a bedroom (egress window, closet, minimum dimensions).</strong>
-          </div>
-        </div>
+          <!-- RENTAL COL -->
+          <div class="compare-col">
+            <div class="compare-col-header rental">
+              Rental Listing
+              <span class="sub">As represented to tenants</span>
+            </div>
+            <div class="compare-col-body">
+              <dl>
+                <dt>Living Area</dt>
+                <dd>Advertised square footage used in rent calculation <span class="cell-flag flag-diff">DIFF</span></dd>
 
-        <div class="nu-discrepancy">
-          <div class="nu-discrepancy-title">3. Appliances & Fixtures Included</div>
-          <div class="nu-discrepancy-body">
-            Rentals typically include all appliances; for-sale listings sometimes exclude refrigerators, washers, dryers, or window units. <strong>Get a written inclusions/exclusions list before offer.</strong>
-          </div>
-        </div>
+                <dt>Year Built</dt>
+                <dd>Original structure year as listed in rental marketing <span class="cell-flag flag-diff">DIFF</span></dd>
 
-        <div class="nu-discrepancy">
-          <div class="nu-discrepancy-title">4. Renovation / Condition Claims</div>
-          <div class="nu-discrepancy-body">
-            "Newly renovated kitchen" in the rental ad but no renovation disclosed on the seller's property disclosure form is a material inconsistency. <strong>Inspector must verify scope and date of any claimed work.</strong>
-          </div>
-        </div>
+                <dt>Renovation Year</dt>
+                <dd>"Recently renovated" language, no specific year <span class="cell-flag flag-diff">DIFF</span></dd>
 
-        <div class="nu-discrepancy">
-          <div class="nu-discrepancy-title">5. Known Defects, Pests, or Past Damage</div>
-          <div class="nu-discrepancy-body">
-            Anything mentioned in tenant communications or rental reviews (water intrusion, HVAC issues, foundation movement, prior pest treatment) that does NOT appear on the seller's disclosure form is the highest-risk category. <strong>Document and require written acknowledgment.</strong>
-          </div>
-        </div>
+                <dt>Roof</dt>
+                <dd>Not specifically disclosed to tenants <span class="cell-flag flag-diff">DIFF</span></dd>
 
-        <div class="nu-discrepancy">
-          <div class="nu-discrepancy-title">6. HOA Fees, Special Assessments, or Restrictions</div>
-          <div class="nu-discrepancy-body">
-            Rental ads sometimes omit HOA limitations that affect resale value (rental caps, short-term rental bans, pending special assessments). <strong>Pull the HOA estoppel letter and current meeting minutes.</strong>
-          </div>
-        </div>
+                <dt>HVAC</dt>
+                <dd>Described as "central heat &amp; air" — age not stated</dd>
 
-        <div class="nu-discrepancy">
-          <div class="nu-discrepancy-title">7. Lease Status & Tenant Rights</div>
-          <div class="nu-discrepancy-body">
-            If currently rented, the for-sale listing must disclose lease term, security deposit held, and tenant's right to remain. <strong>Buyer assumes the lease at closing — verify all terms in writing.</strong>
+                <dt>Appliances</dt>
+                <dd>Refrigerator, range, dishwasher, microwave included with tenancy <span class="cell-flag flag-diff">DIFF</span></dd>
+
+                <dt>Water</dt>
+                <dd>Public / municipal — tenant paid</dd>
+
+                <dt>Basement / Crawl</dt>
+                <dd>No known moisture issue disclosed to tenants <span class="cell-flag flag-diff">DIFF</span></dd>
+
+                <dt>Pool / Outbuildings</dt>
+                <dd>Pool use permitted, "as-is" — no formal inspection shared</dd>
+
+                <dt>Known Repairs</dt>
+                <dd>Tenant-reported items logged in property manager notes <span class="cell-flag flag-diff">DIFF</span></dd>
+              </dl>
+            </div>
           </div>
+
+          <!-- FOR-SALE COL -->
+          <div class="compare-col">
+            <div class="compare-col-header forsale">
+              For-Sale Listing
+              <span class="sub">As represented to buyers</span>
+            </div>
+            <div class="compare-col-body">
+              <dl>
+                <dt>Living Area</dt>
+                <dd>MLS square footage figure — larger than rental number <span class="cell-flag flag-diff">DIFF</span></dd>
+
+                <dt>Year Built</dt>
+                <dd>Original structure year on MLS — earlier than rental figure <span class="cell-flag flag-diff">DIFF</span></dd>
+
+                <dt>Renovation Year</dt>
+                <dd>Specific renovation year cited in marketing <span class="cell-flag flag-diff">DIFF</span></dd>
+
+                <dt>Roof</dt>
+                <dd>"New roof" claim in marketing; age not in seller disclosure <span class="cell-flag flag-diff">DIFF</span></dd>
+
+                <dt>HVAC</dt>
+                <dd>Listed age provided on seller disclosure form</dd>
+
+                <dt>Appliances</dt>
+                <dd>MLS "conveys with sale" list is shorter than rental inventory <span class="cell-flag flag-diff">DIFF</span></dd>
+
+                <dt>Water</dt>
+                <dd>Public / municipal <span class="cell-flag flag-match">MATCH</span></dd>
+
+                <dt>Basement / Crawl</dt>
+                <dd>Seller disclosure notes prior moisture remediation <span class="cell-flag flag-diff">DIFF</span></dd>
+
+                <dt>Pool / Outbuildings</dt>
+                <dd>Pool "in working order" — no service records provided</dd>
+
+                <dt>Known Repairs</dt>
+                <dd>Seller disclosure omits items from rental repair log <span class="cell-flag flag-diff">DIFF</span></dd>
+              </dl>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <!-- REVIEW PROCESS -->
+      <!-- SECTION 3 — DISCREPANCY DETAIL -->
       <section class="nu-section">
-        <h2 class="nu-section-header">
-          <span class="first">Review</span> <span class="rest">Process — Step by Step</span>
-        </h2>
-        <ol class="nu-checklist">
-          <li>
-            <span class="num">1</span>
-            <span class="text"><strong>Capture both listings as PDFs (with timestamp).</strong> Save the rental ad and the for-sale ad on the same day. Listings change — preserve evidence.</span>
-          </li>
-          <li>
-            <span class="num">2</span>
-            <span class="text"><strong>Build the side-by-side row by row.</strong> Use the table above. Do not paraphrase — copy exact wording.</span>
-          </li>
-          <li>
-            <span class="num">3</span>
-            <span class="text"><strong>Flag every divergence, no matter how small.</strong> A small inconsistency may signal sloppiness; a large one may signal misrepresentation.</span>
-          </li>
-          <li>
-            <span class="num">4</span>
-            <span class="text"><strong>Cross-check against the seller's property disclosure form.</strong> Anything in either listing that contradicts the disclosure form is the highest priority.</span>
-          </li>
-          <li>
-            <span class="num">5</span>
-            <span class="text"><strong>Cross-check against tax records, appraisal, and inspection report.</strong> Square footage, year built, lot size, and additions should match the public record.</span>
-          </li>
-          <li>
-            <span class="num">6</span>
-            <span class="text"><strong>Send written request to listing agent.</strong> One email, listing each discrepancy, requesting written reconciliation. Keep the email civil and factual — no accusations.</span>
-          </li>
-          <li>
-            <span class="num">7</span>
-            <span class="text"><strong>Decide before offer.</strong> Use the decision box below to choose the path forward.</span>
-          </li>
+        <h2 class="nu-section-title">Discrepancy <span>Detail &amp; Severity</span></h2>
+        <div class="nu-section-rule"></div>
+        <p>Each item below names the conflict, why it matters, and the severity we are assigning internally. Severity drives whether the item is a price lever, a diligence request, or a deal-killer if left unresolved.</p>
+
+        <table class="discrepancy-table">
+          <thead>
+            <tr>
+              <th style="width:18%;">Item</th>
+              <th style="width:42%;">Nature of the Discrepancy</th>
+              <th style="width:28%;">Why It Matters</th>
+              <th style="width:12%;">Severity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Square Footage</strong></td>
+              <td>Rental marketing cited one heated-living-area figure; MLS cites a larger number. No appraisal or measurement source referenced on the for-sale side.</td>
+              <td>Direct valuation impact. Price per square foot is the primary comp metric and affects appraisal.</td>
+              <td><span class="sev-pill sev-high">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>Year Built / Renovation</strong></td>
+              <td>Rental listing used one original-build year and generic "recently renovated" language. For-sale listing shows an earlier original year and a specific renovation year.</td>
+              <td>Affects insurance underwriting, lender age rules, and comp selection.</td>
+              <td><span class="sev-pill sev-high">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>Roof Age / Condition</strong></td>
+              <td>"New roof" stated in MLS marketing, but the seller property disclosure does not specify install year or provide invoice / warranty.</td>
+              <td>Insurance binding and post-closing leak exposure. Warranty transfer must be verified.</td>
+              <td><span class="sev-pill sev-high">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>Moisture / Crawl or Basement</strong></td>
+              <td>No moisture issue was disclosed to tenants. For-sale disclosure references prior remediation without scope or contractor.</td>
+              <td>Material condition. Undisclosed-to-tenant history may also create a tenant-era claims risk for the current owner.</td>
+              <td><span class="sev-pill sev-high">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>Appliances Conveying</strong></td>
+              <td>Rental inventory included appliances the MLS "conveys with sale" list now excludes.</td>
+              <td>Minor dollar impact but a trust signal. Force written clarification into the contract.</td>
+              <td><span class="sev-pill sev-med">Medium</span></td>
+            </tr>
+            <tr>
+              <td><strong>Known Repair Log</strong></td>
+              <td>Property manager maintained a tenant-reported repair log. Items on that log do not all appear on the seller disclosure.</td>
+              <td>Seller disclosure obligations typically extend to known material defects. Omissions are the highest post-closing litigation driver.</td>
+              <td><span class="sev-pill sev-high">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pool Service History</strong></td>
+              <td>Rental allowed pool use "as-is"; for-sale claims "in working order" with no service records, no equipment ages, no leak history.</td>
+              <td>Pool equipment is a known high-dollar post-closing surprise category.</td>
+              <td><span class="sev-pill sev-med">Medium</span></td>
+            </tr>
+            <tr>
+              <td><strong>Utilities / Municipal Service</strong></td>
+              <td>Both listings describe public water/sewer consistently.</td>
+              <td>No action needed, but include utility verification in diligence checklist.</td>
+              <td><span class="sev-pill sev-low">Low</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SECTION 4 — RISK SUMMARY -->
+      <section class="nu-section">
+        <h2 class="nu-section-title">Risk <span>Summary</span></h2>
+        <div class="nu-section-rule"></div>
+        <p>These discrepancies cluster into four risk buckets. Each one changes a different part of the deal and needs to be handled before our written offer, not after.</p>
+
+        <div class="risk-grid">
+          <div class="risk-card high">
+            <h4>Valuation &amp; Appraisal Risk</h4>
+            <p>Square footage and year-built conflicts directly change comps. If the appraiser uses the smaller rental-era figures, the loan value drops and the contract price has to follow.</p>
+          </div>
+          <div class="risk-card high">
+            <h4>Disclosure &amp; Litigation Risk</h4>
+            <p>Items on the tenant repair log that are absent from the seller disclosure are the classic post-closing lawsuit vector. We want those items either disclosed in writing or formally waived on the record.</p>
+          </div>
+          <div class="risk-card med">
+            <h4>Insurability Risk</h4>
+            <p>Roof age, moisture remediation history, and pool equipment drive the binder. Underwriters will ask. Better that we ask first.</p>
+          </div>
+          <div class="risk-card low">
+            <h4>Trust &amp; Negotiation Posture</h4>
+            <p>Small inconsistencies (appliance list, generic "renovated" language) are low-dollar but shape how aggressively we should push on price, credits, and contingency language.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5 — ACTION ITEMS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title">Action <span>Items</span></h2>
+        <div class="nu-section-rule"></div>
+        <p>Work these in order. Do not skip ahead to price negotiation until items 1–4 are closed in writing.</p>
+
+        <ol class="action-list">
+          <li><span class="num">1</span>Request written reconciliation of square footage, year built, and renovation year, including the measurement or permit source for each figure. <span class="owner">Aaron · Buyer Agent</span></li>
+          <li><span class="num">2</span>Request dated roof installation documentation (invoice, permit, or manufacturer warranty with transfer language). <span class="owner">Aaron · Buyer Agent</span></li>
+          <li><span class="num">3</span>Request scope, date, and contractor for prior moisture remediation; ask for transferable warranty. <span class="owner">Aaron · Buyer Agent</span></li>
+          <li><span class="num">4</span>Obtain property manager's tenant repair log; cross-check each entry against the seller property disclosure. <span class="owner">Aaron</span></li>
+          <li><span class="num">5</span>Lock the appliance "conveys with sale" list into the contract exhibit — word-for-word from the rental inventory unless a specific item is removed in writing. <span class="owner">Buyer Agent</span></li>
+          <li><span class="num">6</span>Request pool equipment ages, service provider name, and last service invoice. Otherwise treat pool as "unknown" for inspection scoping. <span class="owner">Aaron</span></li>
+          <li><span class="num">7</span>Instruct inspector of flagged items so the inspection is targeted (roof, crawl, pool equipment, footprint measurement). <span class="owner">Aaron</span></li>
+          <li><span class="num">8</span>Do not execute offer, counter, or price concession until items 1–7 are documented. Any concession without documentation is a concession against an unknown baseline. <span class="owner">Aaron</span></li>
         </ol>
       </section>
 
-      <!-- RISK ASSESSMENT -->
+      <!-- SECTION 6 — DOCS CHECKLIST -->
       <section class="nu-section">
-        <h2 class="nu-section-header">
-          <span class="first">Risk</span> <span class="rest">Assessment Categories</span>
-        </h2>
-        <div class="nu-risk-grid">
-          <div class="nu-risk-card high">
-            <span class="nu-risk-level high">High Risk</span>
-            <h4>Material Misrepresentation</h4>
-            <p>Defect, lien, or restriction disclosed in one listing but hidden in the other. Stop, document, consult attorney before proceeding.</p>
-          </div>
-          <div class="nu-risk-card high">
-            <span class="nu-risk-level high">High Risk</span>
-            <h4>Physical Condition Conflicts</h4>
-            <p>Roof, foundation, HVAC, plumbing, or electrical described differently across listings. Trigger full inspection with specialists.</p>
-          </div>
-          <div class="nu-risk-card med">
-            <span class="nu-risk-level med">Medium Risk</span>
-            <h4>Measurement Discrepancies</h4>
-            <p>Square footage, lot size, room counts. Affects valuation and comp analysis. Request source documents and reconcile.</p>
-          </div>
-          <div class="nu-risk-card med">
-            <span class="nu-risk-level med">Medium Risk</span>
-            <h4>Inclusions / Exclusions</h4>
-            <p>Appliances, fixtures, window treatments. Resolve in writing in the offer or addendum to avoid closing-day disputes.</p>
-          </div>
-          <div class="nu-risk-card low">
-            <span class="nu-risk-level low">Low Risk</span>
-            <h4>Marketing Language</h4>
-            <p>"Charming" vs "cozy" — subjective puffery. Note but generally not actionable on its own.</p>
-          </div>
-          <div class="nu-risk-card low">
-            <span class="nu-risk-level low">Low Risk</span>
-            <h4>Photo Differences</h4>
-            <p>Different staging or seasons. Not a discrepancy unless photos depict features that are missing in person.</p>
-          </div>
+        <h2 class="nu-section-title">Documents <span>to Collect</span></h2>
+        <div class="nu-section-rule"></div>
+        <p>Everything on this checklist should land in our transaction file before we go firm. If a listing party refuses or cannot produce a given item, that refusal itself goes in the file.</p>
+
+        <div class="docs-checklist">
+          <ul>
+            <li>Seller Property Disclosure — signed, current, every page initialed</li>
+            <li>MLS data sheet — printed and date-stamped on day of offer</li>
+            <li>Prior rental marketing sheet — archived copy with square footage and "renovated" language</li>
+            <li>Property manager's tenant repair / service-ticket log for full rental period</li>
+            <li>Roof installation invoice, permit, and manufacturer warranty transfer documents</li>
+            <li>Moisture remediation scope, invoice, contractor license verification, and warranty</li>
+            <li>HVAC install / service records — both systems if applicable</li>
+            <li>Pool equipment list with ages and last service invoice</li>
+            <li>Appraisal or floor-plan measurement source supporting MLS square footage</li>
+            <li>Any certificate of occupancy or post-renovation permit sign-off</li>
+            <li>Utility account transfer information (water, sewer, power, gas)</li>
+            <li>Existing tenant leases, deposits, and tenant rights statement (if any tenancy remains)</li>
+          </ul>
         </div>
       </section>
 
-      <!-- DECISION BOX -->
+      <!-- SECTION 7 — DECISION FRAME -->
       <section class="nu-section">
-        <div class="nu-decision-box">
-          <h3>Decision Point — Before Submitting Offer</h3>
-          <p style="font-size: 0.95rem; color: var(--nu-dark-text); line-height: 1.6;">
-            After completing the comparison and receiving the seller's response, choose one path:
-          </p>
-          <div class="options">
-            <div class="nu-option">
-              <strong>Path A — Proceed</strong>
-              <p>All discrepancies explained and reconciled in writing. Add an addendum confirming the correct version of each item. Move forward with offer.</p>
-            </div>
-            <div class="nu-option">
-              <strong>Path B — Conditional Offer</strong>
-              <p>Submit offer contingent on seller delivering written disclosure correction and supporting documentation within a defined inspection period.</p>
-            </div>
-            <div class="nu-option">
-              <strong>Path C — Walk</strong>
-              <p>Seller refuses to reconcile, or a high-risk material item is contradicted with no plausible explanation. Withdraw interest in writing and preserve all evidence.</p>
-            </div>
-          </div>
-        </div>
+        <h2 class="nu-section-title">Decision <span>Frame</span></h2>
+        <div class="nu-section-rule"></div>
+        <p>Once action items 1–7 are back in writing, the deal falls into one of three outcomes:</p>
+        <ul style="margin-left: 22px; margin-bottom: 10px;">
+          <li style="margin-bottom: 8px;"><strong style="color: var(--nu-ok-green);">Proceed —</strong> every discrepancy reconciled on paper, MLS and disclosure now agree, no material condition omissions. Negotiate on price and terms normally.</li>
+          <li style="margin-bottom: 8px;"><strong style="color: var(--nu-warn-amber);">Proceed with Credit —</strong> a subset of discrepancies resolves with documentation, but some material items (roof age, moisture history, pool equipment) remain open. Price reduction or closing credit must offset residual risk.</li>
+          <li><strong style="color: var(--nu-alert-red);">Walk —</strong> seller refuses written reconciliation on any High-severity item, or the repair log conflicts with the disclosure and cannot be explained. Valuation, insurance, and litigation exposure are not worth the property.</li>
+        </ul>
+        <p>Signed-off outcome goes in this file before any earnest money is committed.</p>
       </section>
-
-      <!-- SIGNOFF -->
-      <div class="nu-signoff">
-        <p>
-          This review document supports an active reMarkable action item. Findings, the completed side-by-side table, and any seller correspondence should be filed with the property folder and referenced in any subsequent offer, addendum, or attorney consultation. Do not present an offer until the comparison is complete and all High Risk items are resolved in writing.
-        </p>
-        <p class="reviewer">Reviewer: Aaron C. Norris &nbsp;|&nbsp; Logged: April 21, 2026</p>
-      </div>
 
     </div>
   </main>
@@ -838,11 +788,12 @@
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
+    <div class="nu-footer-meta">Internal Review Memo · Prepared 2026-04-23 · Classification: Pre-Decision · Do Not Distribute</div>
   </footer>
 
 </body>
