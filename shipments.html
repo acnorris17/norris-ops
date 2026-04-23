@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/shipments-v1.css">
 <script src="/assets/js/registry-client.js" defer></script>
+<script src="/assets/js/shipments-v1.js" defer></script>
 </head>
 <body>
 
@@ -67,10 +68,13 @@
           loading="lazy"></iframe>
 </section>
 
-<!-- ═══ Main content (Section 2 populates INVOICING PULSE + filters + table) ═══ -->
-<main id="shipments-main" class="nu-main">
-  <div class="scaffold-note">Shipments &amp; Invoicing table is loading…</div>
+<!-- ═══ Main content — shipments-v1.js mounts PULSE + filters + table here ═══ -->
+<main id="shipments-main" class="nu-main" aria-live="polite">
+  <div class="scaffold-note">Loading shipments…</div>
 </main>
+
+<!-- Copy-button toast target (Section 4 wires) -->
+<div id="nu-toast" class="nu-toast" role="status" aria-live="polite"></div>
 
 <!-- ═══ Footer ═══ -->
 <footer class="nu-footer-compact">
