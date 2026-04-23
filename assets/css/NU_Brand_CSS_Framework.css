@@ -1,0 +1,316 @@
+/* ══════════════════════════════════════════════════════════════════
+   NORRIS UTILITIES® — COMPLETE BRAND CSS FRAMEWORK
+   Line Card Design Language — Production Ready
+   Built by Legacy + Claude | March 31, 2026
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ══ CSS CUSTOM PROPERTIES ══ */
+:root {
+  --nu-blue: #0000FF;
+  --nu-blue-dark: #0a0e5c;
+  --nu-blue-primary: #0033cc;
+  --nu-blue-mid: #0066ee;
+  --nu-blue-light: #00aaff;
+  --nu-cyan: #06D0FF;
+  --nu-navy: #000033;
+  --nu-white: #FFFFFF;
+  --nu-body-text: #1a1a1a;
+  --nu-dark-text: #1a1a1a;
+  --nu-medium-gray: #e0e0e0;
+  --nu-light-gray: #f5f5f5;
+  --nu-badge-gray: #a8a8ac;
+  --font-primary: 'Lato', Arial, sans-serif;
+  --font-tagline: 'Playfair Display', 'Georgia', serif;
+}
+
+/* ══ BASE ══ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-primary);
+  color: var(--nu-body-text);
+  background: var(--nu-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══ HEADER — Power Tower Infrastructure Overlay ══ */
+.nu-header {
+  position: relative;
+  background: 
+    radial-gradient(ellipse at 65% 35%, rgba(0, 180, 255, 0.45) 0%, transparent 60%),
+    linear-gradient(135deg, var(--nu-blue-dark) 0%, #0033CC 30%, #0066ee 55%, var(--nu-blue-light) 80%, var(--nu-cyan) 100%);
+  padding: 60px 40px 80px;
+  text-align: center;
+  overflow: hidden;
+  min-height: 280px;
+}
+
+/* Infrastructure overlay — simulates power tower photograph */
+.nu-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+  background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 60px 60px, 80px 80px;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* Light leak / lens flare effect */
+.nu-header::after {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 80%; height: 200%;
+  background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+  z-index: 1;
+}
+
+.nu-header * { position: relative; z-index: 2; }
+
+/* ══ LOGO AREA ══ */
+.nu-logo-img {
+  height: 90px;
+  width: auto;
+  margin: 0 auto 16px;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+.nu-logo-text {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 3.2rem;
+  color: var(--nu-white);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.nu-logo-subtitle {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--nu-white);
+  letter-spacing: 0.8em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.nu-tagline {
+  font-family: var(--font-tagline);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.3rem;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.05em;
+}
+
+/* ══ WHITE CHEVRON TRANSITION ══ */
+.nu-chevron {
+  position: relative;
+  height: 50px;
+  margin-top: -50px;
+  z-index: 10;
+}
+.nu-chevron svg {
+  width: 100%;
+  height: 50px;
+  display: block;
+}
+
+/* ══ GHOST PHOENIX WATERMARK ══ */
+.nu-content-area {
+  position: relative;
+  background: var(--nu-white);
+}
+.nu-content-area::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  height: 70%;
+  background: url('assets/phoenix-white.png') center / contain no-repeat;
+  opacity: 0.07;
+  z-index: 0;
+  pointer-events: none;
+}
+.nu-content-area > * { position: relative; z-index: 1; }
+
+/* ══ SECTION HEADERS — Blue first word, black rest ══ */
+.nu-section-title {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--nu-blue-primary);
+  margin-bottom: 8px;
+  margin-top: 28px;
+}
+.nu-section-title .normal,
+.nu-section-title span {
+  color: var(--nu-dark-text);
+  font-weight: 700;
+}
+
+/* ══ CHEVRON BADGES — Right side value statements ══ */
+.nu-badge {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, #b8b8bc 0%, #a0a0a4 100%);
+  color: var(--nu-dark-text);
+  padding: 12px 20px 12px 16px;
+  margin-bottom: 14px;
+  clip-path: polygon(24px 50%, 0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+}
+.nu-badge-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--nu-blue-dark) 0%, var(--nu-blue-primary) 50%, var(--nu-blue-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 14px;
+}
+.nu-badge-icon img, .nu-badge-icon svg {
+  width: 22px; height: 22px;
+  filter: brightness(0) invert(1);
+}
+
+/* ══ DIAMOND GRID — Product layout ══ */
+.nu-diamond-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2px;
+  background: var(--nu-medium-gray);
+}
+.nu-diamond-cell {
+  background: var(--nu-white);
+  padding: 28px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.nu-diamond-cell:hover { background: #f0f4ff; }
+
+/* ══ CARDS ══ */
+.nu-card {
+  background: var(--nu-white);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1px solid var(--nu-medium-gray);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nu-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+/* ══ BUTTONS ══ */
+.nu-btn-primary {
+  display: inline-block;
+  background: var(--nu-blue);
+  color: var(--nu-white);
+  padding: 12px 28px;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.nu-btn-primary:hover {
+  background: #0000CC;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,255,0.3);
+}
+.nu-btn-secondary {
+  display: inline-block;
+  background: transparent;
+  color: var(--nu-blue);
+  padding: 12px 28px;
+  border: 2px solid var(--nu-blue);
+  border-radius: 4px;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.nu-btn-secondary:hover { background: var(--nu-blue); color: var(--nu-white); }
+
+/* ══ TABLES ══ */
+.nu-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.nu-table thead tr { background: var(--nu-blue-primary); color: white; }
+.nu-table thead th { padding: 10px 14px; text-align: left; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.3px; }
+.nu-table tbody tr:nth-child(even) { background: var(--nu-light-gray); }
+.nu-table tbody tr:nth-child(odd) { background: var(--nu-white); }
+.nu-table tbody td { padding: 9px 14px; border-bottom: 1px solid var(--nu-medium-gray); }
+.nu-table tfoot tr { background: var(--nu-blue-primary); color: white; }
+.nu-table tfoot td { padding: 9px 14px; font-weight: 900; }
+
+/* ══ STATUS BADGES ══ */
+.nu-status { display: inline-block; font-size: 8.5pt; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
+.nu-status-overdue { background: #f8d7da; color: #721c24; }
+.nu-status-due { background: #fff3cd; color: #856404; }
+.nu-status-paid { background: #d4edda; color: #155724; }
+.nu-status-pending { background: #cce5ff; color: #004085; }
+
+/* ══ FOOTER ══ */
+.nu-footer {
+  background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+  color: rgba(255,255,255,0.85);
+  padding: 40px;
+  text-align: center;
+  font-family: var(--font-primary);
+  border-top: 3px solid var(--nu-blue-primary);
+}
+.nu-footer-tagline {
+  font-family: var(--font-tagline);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--nu-cyan);
+  margin-bottom: 12px;
+}
+.nu-footer-contact { font-size: 0.9rem; line-height: 1.8; }
+.nu-footer-contact a { color: var(--nu-cyan); text-decoration: none; }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 768px) {
+  .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+  .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
+  .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+  .nu-tagline { font-size: 1rem; }
+  .nu-badge { clip-path: none; border-radius: 8px; }
+}
+
+/* ══ PRINT ══ */
+@media print {
+  .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .nu-card { box-shadow: none; border: 1px solid #ccc; }
+  .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { display: none; }
+}
