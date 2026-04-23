@@ -772,7 +772,7 @@ Claude's own lesson: When updating any file claimed to be "live," step 1 is veri
 - Aaron wife Caroline Norris ≠ admin CB Caroline Butler. CB = Butler always.
 - Dealer formula: ROUND(Direct × 0.80, nearest $5). 20% off. D-Shape excluded. Distributor tier does NOT exist in V5.
 - Shipping: Direct ×1.10, Dealer ×1.05 (Ben's Formula half-markup).
-- Customer aliases: Abshire = Sammy Myers. Wayne Crosby = Coy Crosby (Dominion PO system artifact). Aerial Hydraulics = Wayne Abadie. Florence Electric = Darrell Pickle.
+- Customer aliases: Abshire = Sammy Myers. Wayne Crosby = Coy Crosby (Dominion PO system artifact). Aerial Hydraulics = Wayne Abide. Florence Electric = Darrell Pickle.
 - CB celebrations IDENTICAL to Aaron. No downgrade EVER.
 - Default model Claude Opus 4.7. Budget cap $120/mo API.
 - Cloudflare Zero Trust live on norrisops.com with 30-day Access session.
@@ -3804,7 +3804,7 @@ Schema per entry: id (Company-Person-Branch), canonical_name, company_root, bran
 Bootstrap examples:
 - LineTec-Thornhill-Alexandria: canonical "LineTec Services - Richard Thornhill", aliases [LTS Power, LineTec, LTS Alexandria], Net30 + po_required=true + cc_fee_applies=false
 - LineTec-Guthrie-GA: canonical "LineTec Services - Steve Guthrie", branch "Guthrie, GA", CC + cc_fee_applies=true
-- AerialHydraulics-Abadie-Dealer: tier=dealer, drop_ship_endpoints=[Primoris T&D Conroe TX PSC George Dufour, Primoris Gilmer TX Michael Flemming]
+- AerialHydraulics-Abide-Dealer: tier=dealer, drop_ship_endpoints=[Primoris T&D Conroe TX PSC George Dufour, Primoris Gilmer TX Michael Flemming]
 Fuzzy-match: ≥95% auto-apply + silent log; 80-95% apply + flag morning brief; <80% → RECONCILE/REVIEW. Aaron confirms once → alias remembered forever.
 Bootstrap source: QB_Contact_List_with_Addresses__1_10_26.xlsx + historical shipments.json.
 
@@ -3894,7 +3894,7 @@ feature/sa-v5-completion stays on branch at 7ef798a. Main untouched (pre-SA-V5 C
 11.11 INV # cells link to saved QB PDF in ~/norris-ops/invoices/.
 11.12 norrisops.com is canonical. ops.norrisutilities.com is retired.
 11.16 Dealer-only tier (no distributors). Distributor path raises NotImplementedError.
-11.17 Aerial Hydraulics / Wayne Abadie = NU's only current dealer; drop-ships to Primoris TX/LA.
+11.17 Aerial Hydraulics / Wayne Abide = NU's only current dealer; drop-ships to Primoris TX/LA.
 11.19 Superior Pipeline Services ALWAYS excluded from SA workflows.
 11.20 cron cannot access macOS login Keychain; LaunchAgents can. Always use LaunchAgents for authenticated background services.
 
@@ -3912,7 +3912,7 @@ Files written:
 Verified: 79 entries | 78 direct / 1 dealer | All required fields present | Aerial Hydraulics drop_ship_endpoints populated (2 endpoints) | 0 exclusion hits across both files.
 
 POC clarifications pending:
-1. AerialHydraulics: QB="Wayne Abide" vs SA V5="Wayne Abadie" — Aaron to confirm spelling
+1. AerialHydraulics: RESOLVED — correct spelling is "Wayne Abide" (QB authoritative). Registry updated.
 2. AEP-Riley-SWEPCO: poc confirmed bjriley@aep.com, canonical "Brian Riley" — confirm full name
 3. Pike-Bryant-MountAiry: poc ShBryant@pike.com, first name unknown — pending Aaron
 
@@ -3921,3 +3921,26 @@ Missing from QB (LOW confidence, must-adds):
 2. Renasant-Lavette-None — Patrick Lavette, Renasant Bank
 3. Irby-Lemoine-None — Jared Lemoine, Irby Construction
 Aaron decision: add to QB and re-bootstrap, or hand-append via Legacy instruction.
+
+---
+## 2026-04-23 — Registry Corrections + Hand-Appends
+
+**CORRECTION 1 — SPELLING LOCKED (2026-04-23): "Wayne Abide" is correct. NOT "Abadie". QB is authoritative. Historical session entries using "Abadie" are timestamped records and left as-is, but ALL forward usage must be "Abide".**
+
+**CORRECTION 2 — AEP/SWEPCO Shreveport: Brian Riley confirmed. Default for all Shreveport orders.**
+
+**CORRECTION 3 — Pike Electric: entry as Cowork produced is fine. No changes.**
+
+**CORRECTION 4 — Patrick Lavette = Aaron's banker (Renasant Bank). NOT a customer. NOT in registry.**
+
+**CANONICAL NAMING RULE LOCKED (2026-04-23):**
+canonical_name = "Company - Person Who Ordered"
+The person who orders issues the PO ~97% of the time. Bill-to goes to corporate A/P. Ship-to is per-order from SD, NEVER stored in registry.
+Multi-POC companies get separate registry entries per ordering person.
+
+**HAND-APPENDED 3 ENTRIES to customer_registry.json:**
+- LineTec-Thornhill-Alexandria: Richard Thornhill, rthornhill@ltspower.com, Net30, po_required, DEFAULT for LineTec Alexandria orders
+- LineTec-LeCompte-Corporate: Tommy LeCompte, Net30, po_required, occasional orderer
+- Irby-McCarty-None: William McCarty, Net30, po_required. McCarty is ONLY Irby orderer for FlexPro. Lemoine does NOT order FlexPro (BSS/RCOO only).
+
+DO NOT ADD: Patrick Lavette (banker), Jared Lemoine (BSS contact only, not FlexPro customer).
