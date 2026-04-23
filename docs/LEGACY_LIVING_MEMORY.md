@@ -4337,3 +4337,26 @@ ADDITIONAL: Re-verify filesystem + HEAD + preview BEFORE writing CC prompt. Temp
 11.13 Visual polish is legitimate Phase B priority.
 11.14 Data truth-up Phase B Section 7-recon locked (QB + SDs + shipments.json cross-ref).
 11.15 Preview server stays up through Phase E merge + Aaron LIVE CONFIRMED. Do not tear down.
+
+---
+## Hardware Infrastructure Plan (April 23, 2026)
+
+**LOCKED DECISIONS:**
+
+**TONIGHT:** Move existing M5 backup drive to M1. Set up Time Machine on M1. Verify backup ran successfully by morning.
+
+**WWDC (June 8–13, 2026):** Purchase M5 Pro Mac mini 24GB / 512GB.
+- Role: New primary development machine. Replaces M5 MacBook Pro for stationary work.
+- Rationale: M1 is always-on server (Legacy + automations). M5 MBP is Aaron's mobile/travel machine. Mac mini handles heavy CC builds without tying up either.
+
+**PRIME DAY (July 2026):** Purchase Synology DS723+ NAS + 2× Samsung 870 EVO 2TB SSDs.
+- Role: Local network storage, Time Machine target for both Macs, norris-agent data + norris-ops repo backup, future brain/media offload.
+- Rationale: iCloud is not a backup strategy. Local redundancy + offsite (Time Machine) before the move.
+
+**ROLE TRANSITIONS (post-Mac mini arrival):**
+- M1 Mac mini → stays as always-on Legacy server (LaunchAgents, bridge, automations). NOT demoted — primary server role locked.
+- M5 MacBook Pro → travel + mobile only. Not primary dev.
+- Mac mini M5 Pro → primary dev/CC build machine.
+- NAS → shared storage backbone, Time Machine for all Macs.
+
+**MORNING BRIEF FLAG:** Time Machine setup on M1 tonight — verify backup ran successfully by AM.
