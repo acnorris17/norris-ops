@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rental Listing Disclosure Discrepancy — Action Plan — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Action Item — Disclosure Discrepancy: Rental Listing Advertisement — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
     :root {
       --nu-blue: #0000FF;
@@ -16,9 +16,9 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-alert-red: #C8102E;
-      --nu-warning-amber: #F59E0B;
-      --nu-success-green: #0F8A3F;
+      --nu-warning: #B8860B;
+      --nu-alert: #C0392B;
+      --nu-success: #1E7A3C;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -32,10 +32,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HEADER */
+    /* ══ HEADER ══ */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
       padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
@@ -44,12 +44,12 @@
     .nu-header::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background:
         repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
         repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.7;
+      opacity: 0.6;
     }
     .nu-header::after {
       content: '';
@@ -59,22 +59,17 @@
       background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
-    .nu-header > * { position: relative; z-index: 2; }
+    .nu-header * { position: relative; z-index: 2; }
 
-    .nu-phoenix-watermark {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 65%;
-      opacity: 0.07;
-      z-index: 1;
-      pointer-events: none;
+    .nu-phoenix-icon {
+      width: 72px; height: 72px;
+      margin: 0 auto 14px;
+      opacity: 0.95;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
-
     .nu-logo-text {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 3.2rem;
+      font-size: 3rem;
       color: var(--nu-white);
       letter-spacing: 0.35em;
       text-transform: uppercase;
@@ -82,438 +77,388 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.72em;
       text-transform: uppercase;
-      margin-bottom: 22px;
-      padding-left: 0.8em;
+      margin-bottom: 18px;
+      padding-left: 0.72em;
     }
     .nu-tagline {
-      font-family: 'Lato', serif;
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 1.25rem;
       color: rgba(255,255,255,0.95);
       letter-spacing: 0.05em;
     }
-    .nu-doc-badge {
+    .nu-eyebrow {
       display: inline-block;
-      margin-top: 22px;
-      padding: 8px 22px;
-      background: rgba(255,255,255,0.14);
+      margin-top: 20px;
+      padding: 6px 18px;
+      background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 40px;
+      border-radius: 20px;
       color: var(--nu-white);
+      font-size: 0.78rem;
       font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
     }
 
-    /* CHEVRON */
+    /* ══ CHEVRON ══ */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg {
-      width: 100%;
-      height: 50px;
-      display: block;
-    }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
-    /* CONTENT */
+    /* ══ CONTENT ══ */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
+      overflow: hidden;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 260px; left: 50%;
-      transform: translateX(-50%);
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%; height: 600px;
+      background: radial-gradient(circle, rgba(0,0,255,0.035) 0%, transparent 70%);
       border-radius: 50%;
       z-index: 0;
+      pointer-events: none;
     }
-    .nu-container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 60px 40px 80px;
+    .nu-inner {
       position: relative;
       z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
     }
 
-    /* TITLE BAR */
-    .nu-title-bar {
-      margin-bottom: 36px;
-      padding-bottom: 24px;
-      border-bottom: 3px solid var(--nu-blue);
-    }
-    .nu-doc-type {
-      display: inline-block;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      padding: 5px 14px;
-      font-size: 0.72rem;
+    /* ══ TITLE BLOCK ══ */
+    .action-title {
       font-weight: 900;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    h1.nu-page-title {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       color: var(--nu-dark-text);
-      line-height: 1.15;
+      line-height: 1.2;
       margin-bottom: 10px;
-      letter-spacing: -0.01em;
     }
-    h1.nu-page-title .highlight { color: var(--nu-blue); }
-    .nu-page-subtitle {
-      font-size: 1.08rem;
-      color: #555;
-      font-weight: 400;
-      max-width: 860px;
+    .action-title .lead {
+      color: var(--nu-blue);
     }
-    .nu-meta-row {
+    .action-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 22px;
-      margin-top: 18px;
-      font-size: 0.85rem;
-      color: #6a6a78;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--nu-medium-gray);
     }
-    .nu-meta-row span strong {
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .meta-chip.priority { background: #FDECEA; color: var(--nu-alert); border: 1px solid #F5C2C0; }
+    .meta-chip.source { background: #EEF1FF; color: var(--nu-blue); border: 1px solid #CBD4FF; }
+    .meta-chip.status { background: #FFF4DC; color: var(--nu-warning); border: 1px solid #F2DB9A; }
+    .meta-chip.owner { background: var(--nu-medium-gray); color: var(--nu-dark-text); }
+
+    /* ══ SECTIONS ══ */
+    .nu-section-title {
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--nu-blue);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .nu-section-title span {
       color: var(--nu-dark-text);
       font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      margin-right: 6px;
     }
+    .section { margin-bottom: 40px; }
 
-    /* ALERT BANNER */
-    .nu-alert {
-      background: linear-gradient(135deg, #fff6f7 0%, #ffeaee 100%);
-      border-left: 6px solid var(--nu-alert-red);
+    /* ══ ALERT BANNER ══ */
+    .alert-banner {
+      background: linear-gradient(135deg, #FFF8E7 0%, #FDF2D4 100%);
+      border-left: 5px solid var(--nu-warning);
       padding: 22px 26px;
       border-radius: 6px;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       display: flex;
       gap: 18px;
       align-items: flex-start;
     }
-    .nu-alert-icon {
-      width: 38px; height: 38px;
+    .alert-banner .icon {
+      font-weight: 900;
+      color: var(--nu-warning);
+      font-size: 1.6rem;
+      line-height: 1;
       flex-shrink: 0;
-      background: var(--nu-alert-red);
-      color: white;
+      width: 34px; height: 34px;
       border-radius: 50%;
-      display: flex;
+      background: var(--nu-white);
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 900;
-      font-size: 1.3rem;
+      border: 2px solid var(--nu-warning);
     }
-    .nu-alert-title {
+    .alert-banner h3 {
       font-weight: 900;
-      color: var(--nu-alert-red);
       font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 6px;
-    }
-    .nu-alert-body {
       color: var(--nu-dark-text);
-      font-size: 0.98rem;
-      line-height: 1.55;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .alert-banner p {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
     }
 
-    /* SECTIONS */
-    .nu-section { margin-bottom: 52px; }
-    .nu-section-title {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.5rem;
-      margin-bottom: 18px;
-      letter-spacing: -0.005em;
-    }
-    .nu-section-title .first { color: var(--nu-blue); }
-    .nu-section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
-    .nu-section-lede {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 24px;
-      max-width: 860px;
-    }
-
-    /* COMPARISON TABLE */
-    .nu-compare {
+    /* ══ DISCREPANCY COMPARE ══ */
+    .compare-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
-      margin-bottom: 10px;
     }
-    .nu-compare-card {
+    .compare-col {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
       border-radius: 8px;
       padding: 24px;
-      border: 1px solid var(--nu-medium-gray);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .compare-col.listed { border-top: 4px solid var(--nu-blue); }
+    .compare-col.disclosed { border-top: 4px solid var(--nu-alert); }
+    .compare-col h4 {
+      font-weight: 900;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      color: var(--nu-dark-text);
+    }
+    .compare-col.listed h4::before { content: '◆ '; color: var(--nu-blue); }
+    .compare-col.disclosed h4::before { content: '◆ '; color: var(--nu-alert); }
+    .compare-col dl {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 8px 14px;
+      font-size: 0.92rem;
+    }
+    .compare-col dt {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+    }
+    .compare-col dd {
+      color: var(--nu-body-text);
+    }
+    .compare-col dd.flag {
+      color: var(--nu-alert);
+      font-weight: 700;
+    }
+
+    /* ══ ACTION STEPS ══ */
+    .steps-list {
+      list-style: none;
+      counter-reset: step;
+    }
+    .steps-list li {
+      counter-increment: step;
+      position: relative;
+      padding: 18px 18px 18px 68px;
       background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 6px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .steps-list li:hover {
+      transform: translateX(3px);
+      box-shadow: 0 4px 14px rgba(0,0,255,0.08);
+    }
+    .steps-list li::before {
+      content: counter(step, decimal-leading-zero);
+      position: absolute;
+      left: 18px; top: 18px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033cc 100%);
+      color: var(--nu-white);
+      font-weight: 900;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.02em;
+    }
+    .steps-list .step-title {
+      font-weight: 900;
+      color: var(--nu-dark-text);
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .steps-list .step-detail {
+      font-size: 0.92rem;
+      color: var(--nu-body-text);
+    }
+    .steps-list .step-meta {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 10px;
+      background: var(--nu-light-gray);
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--nu-dark-text);
+    }
+
+    /* ══ BADGES (chevron) ══ */
+    .nu-badge {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 12px 28px 12px 18px;
+      margin: 0 8px 10px 0;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%, 14px 50%);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+    .nu-badge.blue { background: linear-gradient(135deg, var(--nu-blue) 0%, #0033cc 100%); }
+    .nu-badge.cyan { background: linear-gradient(135deg, #0066ee 0%, var(--nu-cyan) 100%); }
+
+    /* ══ RISK TABLE ══ */
+    .risk-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      background: var(--nu-white);
+      border-radius: 6px;
+      overflow: hidden;
       box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     }
-    .nu-compare-card.listed {
-      border-top: 5px solid var(--nu-warning-amber);
-    }
-    .nu-compare-card.actual {
-      border-top: 5px solid var(--nu-blue);
-    }
-    .nu-compare-label {
-      font-size: 0.72rem;
+    .risk-table th {
+      background: var(--nu-dark-text);
+      color: var(--nu-white);
+      text-align: left;
+      padding: 12px 16px;
       font-weight: 900;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .nu-compare-card.listed .nu-compare-label { color: var(--nu-warning-amber); }
-    .nu-compare-card.actual .nu-compare-label { color: var(--nu-blue); }
-    .nu-compare-heading {
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 14px;
-    }
-    .nu-compare-list {
-      list-style: none;
-      padding: 0;
-    }
-    .nu-compare-list li {
-      padding: 10px 0;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      font-size: 0.95rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .nu-compare-list li:last-child { border-bottom: none; }
-    .nu-compare-list .k {
-      color: #7a7a88;
-      font-weight: 700;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      flex-shrink: 0;
-    }
-    .nu-compare-list .v {
-      color: var(--nu-dark-text);
-      text-align: right;
-      font-weight: 400;
-    }
-
-    /* STEPS */
-    .nu-steps {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .nu-step {
-      display: grid;
-      grid-template-columns: 70px 1fr auto;
-      gap: 22px;
-      padding: 22px 26px;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 5px solid var(--nu-blue);
-      border-radius: 6px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
-      align-items: flex-start;
-    }
-    .nu-step-num {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 2.4rem;
-      color: var(--nu-blue);
-      line-height: 1;
-      letter-spacing: -0.02em;
-    }
-    .nu-step-body h3 {
-      font-weight: 900;
-      font-size: 1.08rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
-    }
-    .nu-step-body p {
-      color: #555;
-      font-size: 0.95rem;
-      margin-bottom: 8px;
-    }
-    .nu-step-body .why {
-      font-size: 0.85rem;
-      color: #7a7a88;
-      font-style: italic;
-      border-top: 1px dashed var(--nu-medium-gray);
-      padding-top: 8px;
-      margin-top: 8px;
-    }
-    .nu-step-tag {
-      align-self: center;
-      background: var(--nu-navy);
-      color: var(--nu-cyan);
-      font-weight: 700;
-      font-size: 0.72rem;
-      padding: 6px 12px;
-      border-radius: 20px;
+      font-size: 0.78rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      white-space: nowrap;
     }
-    .nu-step-tag.priority { background: var(--nu-alert-red); color: white; }
-    .nu-step-tag.followup { background: var(--nu-warning-amber); color: var(--nu-dark-text); }
-
-    /* CALL SCRIPT */
-    .nu-script {
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      padding: 28px 32px;
-      border-left: 5px solid var(--nu-cyan);
-    }
-    .nu-script-header {
-      font-weight: 900;
-      color: var(--nu-blue);
-      text-transform: uppercase;
-      font-size: 0.82rem;
-      letter-spacing: 0.15em;
-      margin-bottom: 14px;
-    }
-    .nu-script-body {
-      font-size: 1rem;
-      color: var(--nu-dark-text);
-      line-height: 1.7;
-    }
-    .nu-script-body p {
-      margin-bottom: 14px;
-    }
-    .nu-script-body p:last-child { margin-bottom: 0; }
-    .nu-script-body em {
-      color: var(--nu-blue);
-      font-style: italic;
-      font-weight: 400;
-    }
-
-    /* EVIDENCE CHECKLIST */
-    .nu-checklist {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 8px 0;
-    }
-    .nu-check-item {
-      display: flex;
-      gap: 14px;
-      padding: 14px 24px;
-      align-items: flex-start;
+    .risk-table td {
+      padding: 14px 16px;
       border-bottom: 1px solid var(--nu-medium-gray);
+      vertical-align: top;
     }
-    .nu-check-item:last-child { border-bottom: none; }
-    .nu-check-box {
-      width: 20px; height: 20px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 3px;
-    }
-    .nu-check-body { flex: 1; }
-    .nu-check-body strong {
-      display: block;
-      color: var(--nu-dark-text);
-      font-weight: 700;
-      margin-bottom: 3px;
-      font-size: 0.98rem;
-    }
-    .nu-check-body span {
-      color: #666;
-      font-size: 0.88rem;
-    }
-
-    /* OUTCOMES GRID */
-    .nu-outcomes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-    }
-    .nu-outcome {
-      padding: 22px;
-      border-radius: 8px;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-    }
-    .nu-outcome-badge {
+    .risk-table tr:last-child td { border-bottom: none; }
+    .risk-table .sev {
       display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 900;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 3px 10px;
       border-radius: 3px;
-      margin-bottom: 10px;
-    }
-    .nu-outcome.best .nu-outcome-badge { background: #d9f0e0; color: var(--nu-success-green); }
-    .nu-outcome.fair .nu-outcome-badge { background: #fef3d5; color: #a16207; }
-    .nu-outcome.walk .nu-outcome-badge { background: #ffe0e0; color: var(--nu-alert-red); }
-    .nu-outcome h4 {
-      font-weight: 900;
-      font-size: 1.02rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
-    }
-    .nu-outcome p {
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    /* LEGAL NOTE */
-    .nu-legal {
-      margin-top: 40px;
-      background: var(--nu-navy);
-      color: rgba(255,255,255,0.88);
-      padding: 26px 30px;
-      border-radius: 8px;
-      font-size: 0.92rem;
-      line-height: 1.65;
-    }
-    .nu-legal h4 {
-      color: var(--nu-cyan);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 0.85rem;
-      margin-bottom: 10px;
+    }
+    .sev.high { background: #FDECEA; color: var(--nu-alert); }
+    .sev.med  { background: #FFF4DC; color: var(--nu-warning); }
+    .sev.low  { background: #E6F4EA; color: var(--nu-success); }
+
+    /* ══ CTA ══ */
+    .cta-block {
+      margin-top: 44px;
+      padding: 32px;
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      border-radius: 10px;
+      color: var(--nu-white);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .cta-block h3 {
       font-weight: 900;
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+    }
+    .cta-block p {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+    }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .nu-btn-primary {
+      display: inline-block;
+      background: var(--nu-cyan);
+      color: var(--nu-navy);
+      padding: 13px 26px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 900;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .nu-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(6,208,255,0.35);
+    }
+    .nu-btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--nu-white);
+      padding: 13px 26px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .nu-btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--nu-white);
     }
 
-    /* FOOTER */
+    /* ══ FOOTER ══ */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: rgba(255,255,255,0.82);
-      padding: 44px 40px;
+      color: rgba(255,255,255,0.85);
+      padding: 44px 30px;
       text-align: center;
     }
     .nu-footer-tagline {
-      font-family: 'Lato', serif;
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.15rem;
+      font-weight: 400;
+      font-size: 1.25rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
     .nu-footer-contact {
       font-size: 0.92rem;
-      line-height: 1.85;
+      line-height: 1.9;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
@@ -521,27 +466,25 @@
     }
     .nu-footer-contact a:hover { text-decoration: underline; }
 
-    /* RESPONSIVE */
+    /* ══ RESPONSIVE ══ */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 220px; }
+      .nu-header { padding: 44px 20px 68px; min-height: 220px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
-      .nu-logo-subtitle { font-size: 0.85rem; letter-spacing: 0.5em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.45em; padding-left: 0.45em; }
       .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 40px 22px 60px; }
-      h1.nu-page-title { font-size: 1.7rem; }
-      .nu-compare { grid-template-columns: 1fr; }
-      .nu-step { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
-      .nu-step-num { font-size: 1.8rem; }
-      .nu-step-tag { justify-self: start; }
-      .nu-compare-list li { flex-direction: column; gap: 2px; }
-      .nu-compare-list .v { text-align: left; }
+      .nu-inner { padding: 40px 22px 60px; }
+      .action-title { font-size: 1.55rem; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .nu-badge { clip-path: none; border-radius: 4px; padding: 10px 16px; }
+      .cta-block { flex-direction: column; align-items: flex-start; }
+      .risk-table { font-size: 0.85rem; }
+      .risk-table th, .risk-table td { padding: 10px; }
     }
-
     @media print {
-      body { background: white; }
-      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-      .nu-step, .nu-compare-card, .nu-outcome { box-shadow: none; page-break-inside: avoid; }
+      body { background: var(--nu-white); }
+      .nu-header, .cta-block, .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .steps-list li { break-inside: avoid; }
+      .cta-block { display: none; }
     }
   </style>
 </head>
@@ -549,297 +492,232 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
-      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
+    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
     </svg>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
-    <div class="nu-doc-badge">Action Plan · Rental Disclosure</div>
+    <div class="nu-eyebrow">Action Item Briefing</div>
   </header>
 
   <!-- CHEVRON -->
-  <div class="nu-chevron">
+  <div class="nu-chevron" aria-hidden="true">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#FFFFFF"/>
     </svg>
   </div>
 
   <!-- CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-container">
+    <div class="nu-inner">
 
-      <!-- TITLE -->
-      <div class="nu-title-bar">
-        <div class="nu-doc-type">reMarkable Action Item · Priority</div>
-        <h1 class="nu-page-title">
-          Address the <span class="highlight">Disclosure Discrepancy</span> Between the Rental Listing Advertisement and Actual Conditions
-        </h1>
-        <p class="nu-page-subtitle">
-          A written and verbal plan to reconcile what was advertised in the rental listing with what was delivered on arrival — protect the tenancy, preserve the record, and drive to a clean resolution (corrected listing, concession, or release) without escalation.
-        </p>
-        <div class="nu-meta-row">
-          <span><strong>Owner</strong> Aaron C. Norris</span>
-          <span><strong>Prepared</strong> 2026-04-22</span>
-          <span><strong>Source</strong> reMarkable Tablet</span>
-          <span><strong>Status</strong> Open — 48 hr window</span>
-        </div>
+      <!-- TITLE + META -->
+      <h1 class="action-title">
+        <span class="lead">Address</span> Disclosure Discrepancy — <br>
+        Rental Listing Advertisement vs. Seller Disclosure
+      </h1>
+      <div class="action-meta">
+        <span class="meta-chip priority">● Priority: High</span>
+        <span class="meta-chip source">Source: reMarkable Action Item</span>
+        <span class="meta-chip status">Status: Open — Requires Response</span>
+        <span class="meta-chip owner">Owner: Aaron C. Norris</span>
+        <span class="meta-chip owner">Logged: 2026-04-22</span>
       </div>
 
-      <!-- ALERT -->
-      <div class="nu-alert">
-        <div class="nu-alert-icon">!</div>
+      <!-- ALERT BANNER -->
+      <div class="alert-banner">
+        <span class="icon">!</span>
         <div>
-          <div class="nu-alert-title">Act within 48 hours of move-in</div>
-          <div class="nu-alert-body">
-            Most states (including Alabama) treat the first 24–72 hours post-occupancy as the window to document move-in conditions and register written objections to material discrepancies. After that window, silence can be read as acceptance. Get the paper trail started today — phone calls alone are not enough.
-          </div>
+          <h3>Why this matters</h3>
+          <p>
+            A property's public rental listing advertises features, conditions, or disclosures that do not
+            match the formal Seller's Disclosure Statement provided under the purchase agreement. This kind
+            of gap creates material misrepresentation risk and must be resolved — in writing — before
+            closing. Do not proceed to underwriting sign-off until the record is reconciled.
+          </p>
         </div>
       </div>
 
-      <!-- SECTION 1: COMPARISON -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Document</span> <span class="rest">— Listing vs. Reality</span></h2>
-        <p class="nu-section-lede">
-          Build a side-by-side record before you call the landlord or agent. Fill in each row from the advertisement (MLS, Zillow, Apartments.com, agent email, or flyer) and from what you observed on arrival. Be specific. "Dishwasher listed — dishwasher missing" beats "kitchen not as described."
+      <!-- CONTEXT -->
+      <section class="section">
+        <h2 class="nu-section-title">Context <span>— What was flagged</span></h2>
+        <p style="margin-bottom: 14px;">
+          During pre-closing review the rental listing advertisement for the property was compared against
+          the Seller's Disclosure Statement on file. Material items appear in one document but are either
+          omitted, contradicted, or softened in the other. Under Alabama real estate practice, the buyer is
+          entitled to rely on the Seller's Disclosure Statement — but any published advertisement that
+          asserts the opposite is a parallel representation that cannot be ignored. This is the same family
+          of issue that triggered the H2O Waterproofing disclosure follow-up on the 4505 Butterworth file.
         </p>
-        <div class="nu-compare">
-          <div class="nu-compare-card listed">
-            <div class="nu-compare-label">As Advertised</div>
-            <div class="nu-compare-heading">Listing Advertisement</div>
-            <ul class="nu-compare-list">
-              <li><span class="k">Source</span><span class="v">Listing URL / screenshot</span></li>
-              <li><span class="k">Listed Date</span><span class="v">Date of ad</span></li>
-              <li><span class="k">Rent</span><span class="v">Advertised $/mo</span></li>
-              <li><span class="k">Sq Ft</span><span class="v">Advertised square footage</span></li>
-              <li><span class="k">Bed / Bath</span><span class="v">Advertised count</span></li>
-              <li><span class="k">Included</span><span class="v">Appliances / utilities / parking stated</span></li>
-              <li><span class="k">Condition</span><span class="v">"Move-in ready," "renovated," "like new"</span></li>
-              <li><span class="k">Photos</span><span class="v">What the photos showed</span></li>
-            </ul>
-          </div>
-          <div class="nu-compare-card actual">
-            <div class="nu-compare-label">As Delivered</div>
-            <div class="nu-compare-heading">Actual Condition on Arrival</div>
-            <ul class="nu-compare-list">
-              <li><span class="k">Source</span><span class="v">Your move-in photos / video (2026-04-22)</span></li>
-              <li><span class="k">Inspected</span><span class="v">Date / time walkthrough completed</span></li>
-              <li><span class="k">Rent Billed</span><span class="v">Actual $/mo on lease</span></li>
-              <li><span class="k">Measured Sq Ft</span><span class="v">If measurable — note tape-measured result</span></li>
-              <li><span class="k">Bed / Bath Found</span><span class="v">Actual count — note converted/den rooms</span></li>
-              <li><span class="k">Included on Arrival</span><span class="v">What was actually present / working</span></li>
-              <li><span class="k">Actual Condition</span><span class="v">Notes: damage, missing items, cleanliness</span></li>
-              <li><span class="k">Photos Match?</span><span class="v">Point-by-point note on any staged/deceptive photos</span></li>
-            </ul>
-          </div>
+        <div>
+          <span class="nu-badge blue">MATERIAL REPRESENTATION</span>
+          <span class="nu-badge">PRE-CLOSING</span>
+          <span class="nu-badge cyan">WRITTEN RECORD REQUIRED</span>
         </div>
       </section>
 
-      <!-- SECTION 2: STEPS -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Action</span> <span class="rest">Plan — Ordered Steps</span></h2>
-        <p class="nu-section-lede">
-          Work top to bottom. Do not skip the written notice step — a phone call alone doesn't protect you if this goes sideways.
-        </p>
-        <div class="nu-steps">
-
-          <div class="nu-step">
-            <div class="nu-step-num">01</div>
-            <div class="nu-step-body">
-              <h3>Preserve the Original Listing</h3>
-              <p>Screenshot the ad exactly as published — URL, date, photos, description text, bed/bath count, amenities list, included items, and rent. Save the PDF to your file. If the listing has since been edited or pulled, pull the Google cache or the Wayback Machine copy (web.archive.org).</p>
-              <p class="why">Why: advertisements are evidence. If the listing disappears, your claim becomes "he said / she said." A captured copy anchors the truth.</p>
-            </div>
-            <div class="nu-step-tag priority">Do First</div>
+      <!-- COMPARE -->
+      <section class="section">
+        <h2 class="nu-section-title">Side-by-Side <span>— Items to reconcile</span></h2>
+        <div class="compare-grid">
+          <div class="compare-col listed">
+            <h4>Rental Listing Advertisement</h4>
+            <dl>
+              <dt>Square footage claimed</dt><dd>Stated in ad</dd>
+              <dt>Year built / renovated</dt><dd>As advertised</dd>
+              <dt>Systems / appliances</dt><dd>Described as included &amp; operational</dd>
+              <dt>Water &amp; moisture</dt><dd>Not mentioned or described as "dry"</dd>
+              <dt>Roof / exterior</dt><dd>Described as recently serviced</dd>
+              <dt>HOA / use restrictions</dt><dd>Rental use shown as permitted</dd>
+            </dl>
           </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">02</div>
-            <div class="nu-step-body">
-              <h3>Photograph & Timestamp Actual Conditions</h3>
-              <p>Walk every room with your phone camera. Record a continuous video plus individual stills. Confirm timestamps are turned on. Capture missing appliances, cosmetic damage, broken fixtures, and any safety issues (smoke detector, water leaks, HVAC). Photograph the thermostat, breaker panel, and water heater too.</p>
-              <p class="why">Why: the move-in checklist is your baseline. Without it, the landlord can later claim pre-existing issues are your damage.</p>
-            </div>
-            <div class="nu-step-tag priority">Do First</div>
-          </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">03</div>
-            <div class="nu-step-body">
-              <h3>Complete the Move-In Inspection Checklist</h3>
-              <p>If the lease or property manager provided an inspection form, fill it out today. If not, create one: room by room, condition rating, and a "matches listing: yes/no" column. Sign, date, and scan. Email a PDF copy to the landlord and cc yourself.</p>
-              <p class="why">Why: a signed, dated, emailed checklist makes the record hard to dispute later and establishes the discrepancy formally.</p>
-            </div>
-            <div class="nu-step-tag">Same Day</div>
-          </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">04</div>
-            <div class="nu-step-body">
-              <h3>Send a Written Notice of Discrepancy</h3>
-              <p>Email (and text as backup) the landlord or leasing agent. Subject line: "Move-In Discrepancy — [Property Address] — Written Notice." State the date of occupancy, list the specific discrepancies, attach the listing screenshots and your move-in photos, and request a written response within 5 business days. Keep tone professional, not adversarial.</p>
-              <p class="why">Why: a written notice starts the clock on the landlord's duty to cure. Verbal complaints don't.</p>
-            </div>
-            <div class="nu-step-tag priority">Within 48 hrs</div>
-          </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">05</div>
-            <div class="nu-step-body">
-              <h3>Phone Call — Same Day as the Email</h3>
-              <p>Call the landlord or agent right after sending the email so it's not a surprise. Keep it brief and civil. Use the call script on this page. End by confirming you've sent the written notice and asking what day you can expect a written response.</p>
-              <p class="why">Why: a calm phone call preserves the relationship and often resolves things faster than email alone.</p>
-            </div>
-            <div class="nu-step-tag">Same Day</div>
-          </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">06</div>
-            <div class="nu-step-body">
-              <h3>Review the Lease Language</h3>
-              <p>Pull up the signed lease. Check: (a) does it incorporate the listing by reference, (b) does it contain an "as-is" or "entire agreement" clause that purports to override the ad, (c) what are the notice, repair, and termination provisions, and (d) is there a mandatory arbitration or small-claims clause? Flag anything unusual.</p>
-              <p class="why">Why: many leases have clauses that try to disclaim the advertisement. Alabama courts have held that material misrepresentation in advertising can still be actionable despite an as-is clause, but the lease terms frame the remedy.</p>
-            </div>
-            <div class="nu-step-tag">Within 48 hrs</div>
-          </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">07</div>
-            <div class="nu-step-body">
-              <h3>Determine the Remedy You'll Accept</h3>
-              <p>Before the landlord responds, decide what "fixed" looks like to you. Options range from (a) cure the defect — install the missing appliance, complete the repair, by a specific date; (b) rent concession — reduce monthly rent for the delta in value; (c) release from lease without penalty plus return of deposit and first/last. Pick a first ask and a walk-away number.</p>
-              <p class="why">Why: negotiations go faster when you've defined success before the other side replies.</p>
-            </div>
-            <div class="nu-step-tag">Before Reply</div>
-          </div>
-
-          <div class="nu-step">
-            <div class="nu-step-num">08</div>
-            <div class="nu-step-body">
-              <h3>Follow Up & Escalation Path</h3>
-              <p>If there's no written response in 5 business days, send a second written notice referencing the first. If the listing was on MLS, file a report with the listing brokerage's managing broker (Alabama Real Estate Commission complaint is a last resort). For apartment listing sites, report the misleading ad. Preserve certified-mail receipts.</p>
-              <p class="why">Why: a documented escalation path turns a landlord dispute into a provable claim if you ever need to go to small claims court or withhold rent under a repair-and-deduct theory.</p>
-            </div>
-            <div class="nu-step-tag followup">Day 6+</div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- CALL SCRIPT -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Call</span> <span class="rest">Script — Step 5</span></h2>
-        <p class="nu-section-lede">
-          Direct, warm, not apologetic. Lead with the ask. Keep it under three minutes.
-        </p>
-        <div class="nu-script">
-          <div class="nu-script-header">Phone Script — Landlord / Agent</div>
-          <div class="nu-script-body">
-            <p>"[Name] — Aaron Norris. I'm calling about the [property address] rental."</p>
-            <p>"I moved in yesterday, and there are a few items that don't line up with what was in the listing. I wanted to call before I followed up so you hear it from me directly. I also just emailed you a written summary with the listing screenshots and my move-in photos."</p>
-            <p>"The main items are <em>[list your top 2-3 discrepancies — be specific]</em>. I'm not looking to make this harder than it needs to be. I'd like to find a fair resolution — either getting those items corrected by a set date, or a rent adjustment that reflects the actual condition."</p>
-            <p>"Can you take a look at the email today and get me a written response by [date 5 business days out]? I'd rather handle this between us than escalate it."</p>
-            <p>"Sincerely — 205-500-1343 if anything comes up before then."</p>
+          <div class="compare-col disclosed">
+            <h4>Seller's Disclosure Statement</h4>
+            <dl>
+              <dt>Square footage claimed</dt><dd class="flag">Different figure on record</dd>
+              <dt>Year built / renovated</dt><dd class="flag">Conflict — confirm source</dd>
+              <dt>Systems / appliances</dt><dd class="flag">One or more marked "unknown"</dd>
+              <dt>Water &amp; moisture</dt><dd class="flag">Prior intrusion noted</dd>
+              <dt>Roof / exterior</dt><dd class="flag">Age unspecified / no receipt</dd>
+              <dt>HOA / use restrictions</dt><dd class="flag">Short-term rental may be restricted</dd>
+            </dl>
           </div>
         </div>
-      </section>
-
-      <!-- EVIDENCE -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Evidence</span> <span class="rest">Checklist — Save to File</span></h2>
-        <p class="nu-section-lede">
-          Keep all of the following in one folder (cloud + local backup). If this ends up in mediation or small claims court, this folder is your case.
+        <p style="margin-top: 16px; font-size: 0.9rem; color: var(--nu-body-text); font-style: italic;">
+          Fill the exact listed vs. disclosed values into this grid when the documents are pulled side by
+          side. Every "flag" must be closed before closing — either with an updated disclosure, a written
+          concession, or a price/repair credit.
         </p>
-        <div class="nu-checklist">
-          <div class="nu-check-item">
-            <div class="nu-check-box"></div>
-            <div class="nu-check-body">
-              <strong>Listing advertisement — full capture</strong>
-              <span>Screenshots of every page, photos, descriptions. Save URL and date accessed. If pulled, grab web.archive.org version.</span>
-            </div>
-          </div>
-          <div class="nu-check-item">
-            <div class="nu-check-box"></div>
-            <div class="nu-check-body">
-              <strong>Signed lease & all addenda</strong>
-              <span>Every page, initialed where required. Note any inconsistencies with the listing inside the lease itself.</span>
-            </div>
-          </div>
-          <div class="nu-check-item">
-            <div class="nu-check-box"></div>
-            <div class="nu-check-body">
-              <strong>Move-in photos & walkthrough video</strong>
-              <span>Timestamped, every room, every reported issue. Back up to cloud storage the same day.</span>
-            </div>
-          </div>
-          <div class="nu-check-item">
-            <div class="nu-check-box"></div>
-            <div class="nu-check-body">
-              <strong>Completed inspection checklist</strong>
-              <span>Signed, dated, scanned. Email-delivered copy to landlord with a read receipt if possible.</span>
-            </div>
-          </div>
-          <div class="nu-check-item">
-            <div class="nu-check-box"></div>
-            <div class="nu-check-body">
-              <strong>Written notice of discrepancy</strong>
-              <span>Email + text. Save the sent copy with timestamp. Note the phone call date and time beside it.</span>
-            </div>
-          </div>
-          <div class="nu-check-item">
-            <div class="nu-check-box"></div>
-            <div class="nu-check-body">
-              <strong>Payment records</strong>
-              <span>Security deposit, first/last, any application fees. Receipts or bank statements showing the transfers.</span>
-            </div>
-          </div>
-          <div class="nu-check-item">
-            <div class="nu-check-box"></div>
-            <div class="nu-check-body">
-              <strong>Correspondence log</strong>
-              <span>Running log of every email, text, call, and voicemail — date, time, duration, summary. One line per contact.</span>
-            </div>
-          </div>
-          <div class="nu-check-item">
-            <div class="nu-check-box"></div>
-            <div class="nu-check-body">
-              <strong>Comparable-rent research</strong>
-              <span>Three nearby comparable listings at actual delivered condition. Supports a rent-concession ask.</span>
-            </div>
-          </div>
-        </div>
       </section>
 
-      <!-- OUTCOMES -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Target</span> <span class="rest">Outcomes — Pick Your Ask</span></h2>
-        <p class="nu-section-lede">
-          Decide in advance which outcome you'll accept so negotiation stays clean. Don't telegraph the walk-away until you have to.
+      <!-- STEPS -->
+      <section class="section">
+        <h2 class="nu-section-title">Action Steps <span>— Run in order</span></h2>
+        <ol class="steps-list">
+          <li>
+            <div class="step-title">Pull both documents and timestamp them</div>
+            <div class="step-detail">
+              Download the current rental listing advertisement (screenshot the live page plus a saved PDF
+              of the listing) and the most recent Seller's Disclosure Statement. Save both to the deal
+              folder with today's date, 2026-04-22.
+            </div>
+            <span class="step-meta">Owner: Aaron</span>
+          </li>
+          <li>
+            <div class="step-title">Build the discrepancy log</div>
+            <div class="step-detail">
+              For every claim in the ad, note the matching line in the disclosure. Flag every conflict,
+              omission, or softened statement. Do not accept verbal "it's the same thing" answers — every
+              delta goes into the log in writing.
+            </div>
+            <span class="step-meta">Tool: side-by-side grid above</span>
+          </li>
+          <li>
+            <div class="step-title">Send the written request to the listing agent / seller</div>
+            <div class="step-detail">
+              Email (not text, not phone) identifying each discrepancy and asking for one of three
+              resolutions per item: updated disclosure, written correction of the advertisement, or a
+              credit/price adjustment. Request written response within 48 hours.
+            </div>
+            <span class="step-meta">CC: buyer's agent + closing attorney</span>
+          </li>
+          <li>
+            <div class="step-title">Loop in the closing attorney</div>
+            <div class="step-detail">
+              Share the discrepancy log and the email trail. Ask attorney whether any item rises to
+              material misrepresentation under Alabama real estate law and whether the purchase agreement
+              should be amended or the closing held.
+            </div>
+            <span class="step-meta">Deadline: before underwriting sign-off</span>
+          </li>
+          <li>
+            <div class="step-title">Decide: amend, credit, or walk</div>
+            <div class="step-detail">
+              Based on the seller's response, pick one: (a) accept an amended disclosure and proceed,
+              (b) accept a documented credit/repair at closing, or (c) exercise the inspection/disclosure
+              contingency and withdraw. Do not proceed on a "handshake" fix.
+            </div>
+            <span class="step-meta">No closing until resolved</span>
+          </li>
+          <li>
+            <div class="step-title">File the paper trail</div>
+            <div class="step-detail">
+              Every email, response, and amendment gets saved to the deal folder. Even if the deal closes
+              cleanly, the record has to exist — this is the same discipline applied on the Butterworth
+              closing and the reason it stayed out of trouble.
+            </div>
+            <span class="step-meta">Retention: life of ownership</span>
+          </li>
+        </ol>
+      </section>
+
+      <!-- RISK -->
+      <section class="section">
+        <h2 class="nu-section-title">Risk Register <span>— If we do nothing</span></h2>
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th style="width: 26%;">Risk</th>
+              <th style="width: 14%;">Severity</th>
+              <th>Exposure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Material misrepresentation claim post-closing</td>
+              <td><span class="sev high">High</span></td>
+              <td>Buyer sues for rescission or damages; repairs, diminution-in-value, and legal fees become our cost.</td>
+            </tr>
+            <tr>
+              <td>Rental income underperforms advertised figure</td>
+              <td><span class="sev high">High</span></td>
+              <td>If the ad claimed features or use that the disclosure or HOA restricts, actual rent / occupancy falls short of pro forma.</td>
+            </tr>
+            <tr>
+              <td>Insurance or lender clawback</td>
+              <td><span class="sev med">Medium</span></td>
+              <td>Lender relied on disclosure; advertised condition conflicts may trigger re-underwrite or rate change.</td>
+            </tr>
+            <tr>
+              <td>HOA / short-term rental violation fine</td>
+              <td><span class="sev med">Medium</span></td>
+              <td>If ad implies short-term rental use the HOA has restricted, fines and cease-and-desist notices follow occupancy.</td>
+            </tr>
+            <tr>
+              <td>Clean record closes — no issue</td>
+              <td><span class="sev low">Low</span></td>
+              <td>If discrepancy turns out to be cosmetic (wording only), resolution is a single amended line item and closing proceeds.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- DECISION CRITERIA -->
+      <section class="section">
+        <h2 class="nu-section-title">Decision Criteria <span>— When to stop the closing</span></h2>
+        <p>
+          Stop the closing if any one of the following is true after the discrepancy log is built:
         </p>
-        <div class="nu-outcomes">
-          <div class="nu-outcome best">
-            <div class="nu-outcome-badge">Best Case</div>
-            <h4>Cure the Discrepancy</h4>
-            <p>Landlord fixes, installs, or provides the missing/misrepresented item within a stated deadline (typically 14–30 days). Written amendment to the lease memorializing the fix.</p>
-          </div>
-          <div class="nu-outcome fair">
-            <div class="nu-outcome-badge">Fair Case</div>
-            <h4>Rent Concession</h4>
-            <p>Landlord can't or won't cure — accept a monthly rent reduction proportional to the lost value (often 5–15% depending on severity), documented as a signed lease addendum.</p>
-          </div>
-          <div class="nu-outcome walk">
-            <div class="nu-outcome-badge">Walk-Away</div>
-            <h4>Release Without Penalty</h4>
-            <p>Misrepresentation is material and uncurable — lease void or terminated, full return of deposit and pre-paid rent, no early-termination fee. Get it in writing before you move out.</p>
-          </div>
-        </div>
+        <ul style="margin: 14px 0 0 22px;">
+          <li style="margin-bottom: 8px;">Any water-intrusion, roof, or foundation item is claimed as "sound" in the ad but marked "known issue" or "unknown" on the disclosure.</li>
+          <li style="margin-bottom: 8px;">Advertised use (e.g., short-term rental) is not permitted under the HOA, deed restriction, or local ordinance.</li>
+          <li style="margin-bottom: 8px;">Seller refuses to respond in writing within the 48-hour window.</li>
+          <li style="margin-bottom: 8px;">Attorney flags any single item as material misrepresentation under Alabama law.</li>
+        </ul>
       </section>
 
-      <!-- LEGAL NOTE -->
-      <div class="nu-legal">
-        <h4>Important Note</h4>
-        This page is an operational action plan — not legal advice. If the discrepancy is material (habitability, safety, significant value impact) or if the landlord refuses to respond in writing, consult an Alabama landlord-tenant attorney before withholding rent, breaking the lease, or filing any complaint. Alabama Legal Aid (866-456-4995) offers free consultation if cost is a barrier. Keep every document in this plan; your case is only as strong as your file.
+      <!-- CTA -->
+      <div class="cta-block">
+        <div>
+          <h3>Ready to send the written request?</h3>
+          <p>Pull the two documents into the deal folder, then fire the discrepancy email today.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="mailto:acnorris@norrisutilities.com?subject=Disclosure%20Discrepancy%20—%20Rental%20Listing%20vs.%20Seller%20Disclosure" class="nu-btn-primary">Draft the Email</a>
+          <a href="tel:2055001343" class="nu-btn-secondary">Call the Attorney</a>
+        </div>
       </div>
 
     </div>
