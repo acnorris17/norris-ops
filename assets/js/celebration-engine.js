@@ -61,6 +61,17 @@
     if (typeof window.celebrate === "function") {
       window.celebrate();
     }
+    // §M.7 sound wiring — silent no-op if SoundEngine isn't loaded
+    // or if the user hasn't interacted with the page yet.
+    if (window.SoundEngine && typeof window.SoundEngine.play === "function") {
+      var sound = (
+        id === "phoenix-rise"    ? "chime"         : // shipped → invoiced
+        id === "ka-ching"        ? "cha-ching"     : // invoiced → cc
+        id === "confetti-burst"  ? "mark-shipped"  : // processing → shipped
+        id === "sparkle"         ? "mark-shipped"  :
+        null);
+      if (sound) window.SoundEngine.play(sound);
+    }
   }
 
   function fireForTransition(from, to, anchorEl) {

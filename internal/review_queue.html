@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review Queue — Norris Utilities®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+:root { --nu-blue:#0033cc; --nu-cyan:#06D0FF; --nu-ink:#1a1a1a; --nu-gray:#f5f5f7; }
+body { font-family:'Lato',-apple-system,BlinkMacSystemFont,sans-serif; margin:0; background:var(--nu-gray); color:var(--nu-ink); }
+.hdr { background: linear-gradient(135deg,#0a0e5c,#0033cc,#0066ee,#00aaff,#06D0FF); color:#fff; padding:18px 22px; }
+.hdr h1 { margin:0; font-weight:900; letter-spacing:.5px; font-size:24px; }
+.hdr p  { margin:4px 0 0; font-size:13px; opacity:.9; }
+.bar { background:#fff; padding:10px 22px; display:flex; gap:14px; border-bottom:1px solid #e5e5ea; }
+.bar .count { font-size:13px; color:#555; }
+.bar .count strong { color:var(--nu-blue); font-weight:900; }
+.wrap { padding:22px; max-width:1200px; margin:0 auto; }
+section.cat { background:#fff; border-radius:8px; margin-bottom:18px; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+section.cat h2 { margin:0; padding:14px 18px; border-bottom:1px solid #eee; font-weight:900; font-size:18px; }
+section.cat h2 .first { color:var(--nu-blue); }
+section.cat ul { list-style:none; padding:0; margin:0; }
+section.cat li { padding:12px 18px; border-bottom:1px solid #f1f1f3; font-size:14px; display:grid; grid-template-columns: 100px 1fr auto; gap:10px; align-items:start; }
+section.cat li:last-child { border-bottom:none; }
+section.cat li .cat-tag { font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; background:#f1f1f3; color:#555; height:20px; line-height:16px; display:inline-block; }
+section.cat.empty h2 { color:#aaa; }
+section.cat.empty p { padding:14px 18px; color:#999; font-size:13px; }
+.actions button { font-family:inherit; font-size:12px; padding:4px 10px; border-radius:4px; border:1px solid var(--nu-blue); background:#fff; color:var(--nu-blue); cursor:pointer; margin-left:6px; }
+.actions button.primary { background:var(--nu-blue); color:#fff; }
+.actions button.force { background:#cc6600; color:#fff; border-color:#cc6600; }
+.meta { color:#777; font-size:12px; margin-top:4px; }
+.ts { font-family: monospace; font-size:11px; color:#999; }
+.footer { padding:24px 22px; text-align:center; color:#777; font-size:12px; }
+.footer .legacy { font-family:'Playfair Display',serif; font-style:italic; color:var(--nu-blue); font-size:14px; }
+#auth-gate { display:none; position:fixed; inset:0; background:rgba(10,14,92,.95); color:#fff; z-index:9999; align-items:center; justify-content:center; }
+#auth-gate.show { display:flex; }
+#auth-gate form { background:#fff; color:#000; padding:22px; border-radius:8px; width:320px; }
+#auth-gate h3 { margin:0 0 10px; }
+#auth-gate input { width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; margin:6px 0; box-sizing:border-box; font:inherit; }
+#auth-gate .err { color:#c00; font-size:12px; display:none; margin:6px 0 0; }
+#auth-gate .err.show { display:block; }
+</style>
+</head>
+<body>
+<div id="auth-gate">
+  <form id="auth-form" onsubmit="return doAuth(event)">
+    <h3>Norris Utilities Portal</h3>
+    <p style="margin:0 0 8px; font-size:13px; color:#555;">Enter password to view the review queue.</p>
+    <input type="password" id="auth-pw" placeholder="password" autocomplete="off" autofocus>
+    <div id="auth-err" class="err">Incorrect password.</div>
+    <button type="submit" style="background:#0033cc; color:#fff; border:none; padding:8px 14px; border-radius:4px; cursor:pointer; width:100%;">Unlock</button>
+  </form>
+</div>
+
+<header class="hdr">
+  <h1>Review Queue</h1>
+  <p>Invoices and shipments needing human attention — <span id="updated">loading…</span></p>
+</header>
+<nav class="bar" id="summary"></nav>
+
+<main class="wrap" id="queue">
+  <p style="color:#777;">Loading…</p>
+</main>
+
+<footer class="footer">
+  <p>Norris Utilities<sup>®</sup> · <span class="legacy">A Legacy of Commitment<sup>®</sup></span></p>
+</footer>
+
+<script src="/auth.js"></script>
+<script>
+(function() {
+  // Simple auth gate — same as other internal pages
+  var AUTH_KEY = 'nu_auth';
+  var ROLE_KEY = 'nu_role';
+  var PASSWORDS = { legacy2026: 'cb', norris2026: 'aaron' };
+
+  function isAuthed() {
+    var ts = parseInt(sessionStorage.getItem(AUTH_KEY) || '0', 10);
+    return ts > 0 && (Date.now() - ts) < 28800000;
+  }
+
+  if (!isAuthed()) {
+    document.getElementById('auth-gate').classList.add('show');
+  }
+
+  window.doAuth = function(ev) {
+    ev.preventDefault();
+    var pw = document.getElementById('auth-pw').value;
+    var role = PASSWORDS[pw];
+    if (!role) {
+      document.getElementById('auth-err').classList.add('show');
+      return false;
+    }
+    sessionStorage.setItem(AUTH_KEY, Date.now().toString());
+    sessionStorage.setItem(ROLE_KEY, role);
+    document.getElementById('auth-gate').classList.remove('show');
+    load();
+    return false;
+  };
+
+  var CATEGORIES = [
+    {key:'REJECTED_FILTER',       label:'Rejected by filter', hint:'§M.5 said this is not FlexPro — Aaron can Force Ingest.'},
+    {key:'NO_SD_MATCH',           label:'No SD match',        hint:'Invoice ingested but no matching shipment.'},
+    {key:'HIGH_VARIANCE',         label:'High variance',      hint:'Rate or total variance > 5% vs. SD.'},
+    {key:'MISSING_CUSTOMER_TYPE', label:'Missing customer type', hint:'V2.2 migration left Customer Type ambiguous.'},
+    {key:'PARSE_FAIL',            label:'Parse failure',      hint:'PDF could not be parsed; manual entry needed.'},
+    {key:'CUSTOMER_REPLY',        label:'Customer reply',     hint:'Customer replied on a QB invoice thread.'},
+  ];
+
+  function h(tag, attrs, children) {
+    var n = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(k => {
+      if (k === 'class') n.className = attrs[k];
+      else if (k === 'html') n.innerHTML = attrs[k];
+      else n.setAttribute(k, attrs[k]);
+    });
+    (children||[]).forEach(c => {
+      if (typeof c === 'string') n.appendChild(document.createTextNode(c));
+      else if (c) n.appendChild(c);
+    });
+    return n;
+  }
+
+  function renderCategory(cat, items) {
+    var sec = h('section', {class: 'cat' + (items.length ? '' : ' empty')});
+    var words = cat.label.split(' ');
+    var first = words.shift();
+    var rest  = words.join(' ');
+    var title = h('h2', null, [
+      h('span', {class:'first'}, [first + (rest ? ' ' : '')]),
+      rest ? h('span', null, [rest]) : null,
+      h('span', {style:'float:right; color:#888; font-weight:normal; font-size:13px;'},
+        ['(' + items.length + ')'])
+    ]);
+    sec.appendChild(title);
+    if (!items.length) {
+      sec.appendChild(h('p', null, ['No items — ' + cat.hint]));
+      return sec;
+    }
+    var ul = h('ul');
+    items.forEach(function(it) {
+      var summary = it.invoice_number
+          ? 'Invoice ' + it.invoice_number
+          : (it.subject || it.thread_id || '(unknown)');
+      var li = h('li', null, [
+        h('span', {class:'cat-tag'}, [cat.key]),
+        h('div', null, [
+          h('strong', null, [summary]),
+          h('div', {class:'meta'}, [
+            (it.customer_hint || it.subject || '') + (it.filter_reason ? ' · ' + it.filter_reason : ''),
+            h('br'),
+            h('span', {class:'ts'}, [(it.ts || '').replace('T',' ').slice(0,19)])
+          ])
+        ]),
+        h('div', {class:'actions'}, [
+          h('button', null, ['Skip']),
+          cat.key === 'REJECTED_FILTER'
+            ? h('button', {class:'force', title:'Bypass §M.5 filter and ingest'}, ['Force Ingest'])
+            : h('button', {class:'primary'}, ['Approve']),
+          h('button', null, ['Reject']),
+        ])
+      ]);
+      ul.appendChild(li);
+    });
+    sec.appendChild(ul);
+    return sec;
+  }
+
+  function load() {
+    fetch('/data/review_queue.json?_=' + Date.now())
+      .then(r => r.json())
+      .then(function(snap) {
+        document.getElementById('updated').textContent =
+          'snapshot: ' + (snap.generated_at || '').replace('T',' ').slice(0,19) + ' UTC';
+        var root = document.getElementById('queue');
+        root.innerHTML = '';
+        var bar = document.getElementById('summary');
+        bar.innerHTML = '';
+        var total = snap.total || 0;
+        bar.appendChild(h('div', {class:'count'}, [
+          'Total items: ', h('strong', null, [String(total)])
+        ]));
+        CATEGORIES.forEach(function(cat) {
+          var items = (snap.items || {})[cat.key] || [];
+          bar.appendChild(h('div', {class:'count'}, [
+            cat.label + ': ', h('strong', null, [String(items.length)])
+          ]));
+          root.appendChild(renderCategory(cat, items));
+        });
+      })
+      .catch(function(err) {
+        document.getElementById('queue').innerHTML =
+          '<p style="color:#c00;">Failed to load queue snapshot: ' + err + '</p>';
+      });
+  }
+
+  if (isAuthed()) load();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-04-24T16:56:00.878479+00:00",
+  "total": 3,
+  "categories": {
+    "REJECTED_FILTER": 3,
+    "NO_SD_MATCH": 0,
+    "HIGH_VARIANCE": 0,
+    "MISSING_CUSTOMER_TYPE": 0,
+    "PARSE_FAIL": 0,
+    "CUSTOMER_REPLY": 0
+  },
+  "items": {
+    "REJECTED_FILTER": [
+      {
+        "ts": "2026-04-24T16:55:15.647903+00:00",
+        "category": "REJECTED_FILTER",
+        "thread_id": "19d301711d3cbcab",
+        "invoice_number": "1496",
+        "filter_reason": "NO_LINE_ITEMS",
+        "subject": "Invoice [1496] from Norris Utilities, LLC",
+        "customer_hint": "Aerial Hydraulics, Inc."
+      },
+      {
+        "ts": "2026-04-24T16:55:13.609924+00:00",
+        "category": "REJECTED_FILTER",
+        "thread_id": "19d3017f78fbd36c",
+        "invoice_number": "1499",
+        "filter_reason": "NO_LINE_ITEMS",
+        "subject": "Invoice [1499] from Norris Utilities, LLC",
+        "customer_hint": "Aerial Hydraulics, Inc."
+      },
+      {
+        "ts": "2026-04-24T16:55:11.615579+00:00",
+        "category": "REJECTED_FILTER",
+        "thread_id": "19d52860d429fe10",
+        "invoice_number": "1508",
+        "filter_reason": "NO_FLEXPRO_LINES",
+        "subject": "Invoice 1508 from Norris Utilities, LLC",
+        "customer_hint": "Superior Pipeline Services, Inc."
+      }
+    ],
+    "NO_SD_MATCH": [],
+    "HIGH_VARIANCE": [],
+    "MISSING_CUSTOMER_TYPE": [],
+    "PARSE_FAIL": [],
+    "CUSTOMER_REPLY": []
+  }
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daemon Health — Norris Utilities®</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+body { font-family:'Lato',sans-serif; margin:0; background:#f5f5f7; color:#1a1a1a; }
+.hdr { background: linear-gradient(135deg,#0a0e5c,#0033cc,#0066ee,#00aaff,#06D0FF); color:#fff; padding:18px 22px; }
+.hdr h1 { margin:0; font-weight:900; font-size:22px; }
+.hdr p { margin:4px 0 0; font-size:13px; opacity:.9; }
+.wrap { padding:22px; max-width:1200px; margin:0 auto; }
+.grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin-bottom:22px; }
+.card { background:#fff; border-radius:8px; padding:16px; box-shadow:0 1px 3px rgba(0,0,0,.06); border-left:6px solid #ccc; }
+.card.ok { border-left-color:#00a86b; }
+.card.stale { border-left-color:#cc6600; }
+.card.error { border-left-color:#cc0000; }
+.card h3 { margin:0 0 6px; font-size:15px; font-weight:900; color:#0033cc; }
+.card .status { font-size:11px; font-weight:700; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:#eee; color:#555; }
+.card.ok .status { background:#d9f2e6; color:#00794d; }
+.card.stale .status { background:#ffe7d0; color:#6b3800; }
+.card.error .status { background:#f9d8d8; color:#8c0000; }
+.card p { margin:6px 0 0; font-size:13px; color:#555; }
+.card .age { font-family:monospace; font-size:11px; color:#888; }
+.summary { background:#fff; padding:12px 16px; border-radius:8px; margin-bottom:14px; display:flex; gap:18px; flex-wrap:wrap; }
+.summary span strong { color:#0033cc; font-weight:900; }
+.footer { padding:24px 22px; text-align:center; color:#777; font-size:12px; }
+.footer .legacy { font-family:'Playfair Display',serif; font-style:italic; color:#0033cc; font-size:14px; }
+#auth-gate { display:none; position:fixed; inset:0; background:rgba(10,14,92,.95); color:#fff; z-index:9999; align-items:center; justify-content:center; }
+#auth-gate.show { display:flex; }
+#auth-gate form { background:#fff; color:#000; padding:22px; border-radius:8px; width:320px; }
+#auth-gate input { width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; margin:6px 0; box-sizing:border-box; font:inherit; }
+#auth-gate .err { color:#c00; font-size:12px; display:none; margin:6px 0 0; }
+#auth-gate .err.show { display:block; }
+</style>
+</head>
+<body>
+<div id="auth-gate">
+  <form onsubmit="return doAuth(event)">
+    <h3>Norris Utilities Portal</h3>
+    <input type="password" id="auth-pw" placeholder="password" autocomplete="off" autofocus>
+    <div id="auth-err" class="err">Incorrect password.</div>
+    <button type="submit" style="background:#0033cc; color:#fff; border:none; padding:8px 14px; border-radius:4px; cursor:pointer; width:100%;">Unlock</button>
+  </form>
+</div>
+<header class="hdr">
+  <h1>Daemon Health</h1>
+  <p>V2.2 watchers and reconciliation jobs — <span id="updated">loading…</span></p>
+</header>
+<main class="wrap">
+  <div class="summary" id="summary"></div>
+  <div class="grid" id="grid"><p style="color:#777;">Loading…</p></div>
+</main>
+<footer class="footer">
+  <p>Norris Utilities<sup>®</sup> · <span class="legacy">A Legacy of Commitment<sup>®</sup></span></p>
+</footer>
+<script>
+(function() {
+  var PW = { legacy2026:'cb', norris2026:'aaron' };
+  var KEY='nu_auth', ROLE='nu_role';
+  function authed() { var t=parseInt(sessionStorage.getItem(KEY)||'0',10); return t>0 && Date.now()-t<28800000; }
+  if (!authed()) document.getElementById('auth-gate').classList.add('show');
+  window.doAuth = function(e) {
+    e.preventDefault();
+    var pw = document.getElementById('auth-pw').value, role = PW[pw];
+    if (!role) { document.getElementById('auth-err').classList.add('show'); return false; }
+    sessionStorage.setItem(KEY, Date.now().toString());
+    sessionStorage.setItem(ROLE, role);
+    document.getElementById('auth-gate').classList.remove('show');
+    load(); return false;
+  };
+  function cardClass(e) { return e.stale ? 'stale' : (e.status && e.status.endsWith('error') ? 'error' : 'ok'); }
+  function fmtAge(s) {
+    if (s == null) return '—';
+    if (s < 60) return s + 's ago';
+    if (s < 3600) return Math.round(s/60) + 'm ago';
+    if (s < 86400) return (s/3600).toFixed(1) + 'h ago';
+    return Math.round(s/86400) + 'd ago';
+  }
+  function load() {
+    fetch('/data/daemon_health.json?_=' + Date.now()).then(r=>r.json()).then(function(d) {
+      document.getElementById('updated').textContent = 'snapshot: ' + (d.generated_at||'').slice(0,19).replace('T',' ') + ' UTC';
+      var bar = document.getElementById('summary');
+      bar.innerHTML = '';
+      bar.appendChild(document.createElement('span')).innerHTML =
+        'Total: <strong>' + d.summary.total + '</strong>';
+      bar.appendChild(document.createElement('span')).innerHTML =
+        'Healthy: <strong>' + d.summary.healthy + '</strong>';
+      bar.appendChild(document.createElement('span')).innerHTML =
+        'Stale: <strong>' + d.summary.stale + '</strong>';
+      bar.appendChild(document.createElement('span')).innerHTML =
+        'Errors: <strong>' + d.summary.errors + '</strong>';
+      bar.appendChild(document.createElement('span')).innerHTML =
+        'Gmail quota today: <strong>' + d.gog_quota.count + '</strong> / ' + d.gog_quota.cap;
+      var grid = document.getElementById('grid');
+      grid.innerHTML = '';
+      (d.entries || []).forEach(function(e) {
+        var card = document.createElement('div');
+        card.className = 'card ' + cardClass(e);
+        card.innerHTML =
+          '<h3>' + e.name + ' <span class="status">' + (e.status||'?') + '</span></h3>' +
+          '<p>' + (e.detail || '—') + '</p>' +
+          '<p class="age">last heartbeat: ' + fmtAge(e.age_seconds) + '</p>';
+        grid.appendChild(card);
+      });
+      if (!d.entries || !d.entries.length) {
+        grid.innerHTML = '<p style="color:#777;">No daemon heartbeats yet. Watchers will appear here after their first run.</p>';
+      }
+    }).catch(function(err) {
+      document.getElementById('grid').innerHTML = '<p style="color:#c00;">Failed to load health: ' + err + '</p>';
+    });
+  }
+  if (authed()) load();
+})();
+</script>
+</body>
+</html>

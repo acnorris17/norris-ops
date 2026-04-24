@@ -343,7 +343,11 @@
       ? `<span class="canonical-name">${esc(r._canonical)}</span>`
       : `<span class="customer-warn" data-raw="${esc(r.customer || "")}" title="Below auto-apply threshold — hover for candidates">&#9888;</span> <span class="canonical-name review-needed">${esc(r.customer || "—")}</span>`;
     const poNum = r.po_number ? esc(r.po_number) : '<span class="muted">—</span>';
-    const invNum = r.qb_invoice_number ? esc(r.qb_invoice_number) : '<span class="muted">—</span>';
+    const invNum = r.qb_invoice_number
+      ? (r.qb_invoice_pdf
+          ? `<a href="${esc(r.qb_invoice_pdf)}" target="_blank" rel="noopener" class="inv-link" title="Open Invoice ${esc(r.qb_invoice_number)} PDF">${esc(r.qb_invoice_number)}</a>`
+          : `<span class="inv-num-plain" style="color:#777;" title="Invoice number present, PDF not yet archived">${esc(r.qb_invoice_number)}</span>`)
+      : '<span class="muted">—</span>';
     const shipping = r.customer_shipping_cost != null ? esc(fmtMoney(r.customer_shipping_cost)) : '<span class="muted">—</span>';
     const sdPath = r.sd_path || (r.sd_filename ? `shipping-docs/${r.sd_filename}` : "");
     const invoiceSent = isInvoicedSent(r);
