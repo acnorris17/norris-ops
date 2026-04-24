@@ -3,691 +3,888 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Follow-Up: Last PO Inventory Order — Norris Utilities®</title>
+<title>Follow Up: Last PO Inventory Order — Norris Utilities®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --nu-blue: #0000FF;
-    --nu-cyan: #06D0FF;
-    --nu-navy: #000033;
-    --nu-white: #FFFFFF;
-    --nu-light-gray: #F5F5F7;
-    --nu-medium-gray: #E8E8EC;
-    --nu-dark-text: #1A1A2E;
-    --nu-body-text: #333333;
-    --nu-accent-gold: #C9A84C;
-    --nu-success: #10B981;
-    --nu-warning: #F59E0B;
-    --nu-danger: #DC2626;
-    --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-  }
+:root {
+  --nu-blue: #0000FF;
+  --nu-cyan: #06D0FF;
+  --nu-navy: #000033;
+  --nu-white: #FFFFFF;
+  --nu-light-gray: #F5F5F7;
+  --nu-medium-gray: #E8E8EC;
+  --nu-dark-text: #1A1A2E;
+  --nu-body-text: #333333;
+  --nu-accent-gold: #C9A84C;
+  --nu-status-amber: #D97706;
+  --nu-status-green: #059669;
+  --nu-status-red: #DC2626;
+  --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-tagline: 'Playfair Display', Georgia, serif;
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { font-size: 16px; scroll-behavior: smooth; }
-  body {
-    font-family: var(--font-primary);
-    color: var(--nu-body-text);
-    background: var(--nu-light-gray);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-primary);
+  color: var(--nu-body-text);
+  background: var(--nu-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* ══ HEADER ══ */
-  .nu-header {
-    position: relative;
-    background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
-    padding: 70px 40px 90px;
-    text-align: center;
-    overflow: hidden;
-    min-height: 300px;
-  }
+/* HEADER */
+.nu-header {
+  position: relative;
+  background: linear-gradient(135deg, #0a0e5c 0%, #0033CC 30%, #0066EE 55%, #00AAFF 80%, var(--nu-cyan) 100%);
+  padding: 70px 40px 90px;
+  text-align: center;
+  overflow: hidden;
+  min-height: 320px;
+}
+.nu-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 60px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
+  z-index: 1;
+  opacity: 0.7;
+}
+.nu-header::after {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 80%; height: 200%;
+  background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+}
+.nu-header * { position: relative; z-index: 2; }
 
-  .nu-header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background:
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 60px),
-      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
-    z-index: 1;
-    opacity: 0.7;
-  }
+.nu-phoenix-icon {
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 18px;
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,0.3));
+}
+.nu-logo-text {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 3.2rem;
+  color: var(--nu-white);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.nu-logo-subtitle {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--nu-white);
+  letter-spacing: 0.8em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  opacity: 0.98;
+}
+.nu-tagline {
+  font-family: var(--font-tagline);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.35rem;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: 0.04em;
+}
 
-  .nu-header::after {
-    content: '';
-    position: absolute;
-    top: -30%; right: -15%;
-    width: 70%; height: 180%;
-    background: radial-gradient(ellipse, rgba(6, 208, 255, 0.2) 0%, transparent 70%);
-    z-index: 1;
-  }
+/* CHEVRON TRANSITION */
+.nu-chevron {
+  position: relative;
+  height: 54px;
+  margin-top: -54px;
+  z-index: 10;
+  line-height: 0;
+}
+.nu-chevron svg {
+  width: 100%;
+  height: 54px;
+  display: block;
+}
 
-  .nu-header-inner { position: relative; z-index: 2; }
+/* CONTENT AREA + GHOST PHOENIX */
+.nu-content-area {
+  position: relative;
+  background: var(--nu-white);
+  overflow: hidden;
+}
+.nu-content-area::before {
+  content: '';
+  position: absolute;
+  top: 40%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  max-width: 720px;
+  aspect-ratio: 1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 4 L56 20 L72 10 L62 26 L82 20 L66 36 L76 52 L56 42 L50 62 L44 42 L24 52 L34 36 L18 20 L38 26 L28 10 L44 20 Z M50 56 L53 70 L61 66 L56 76 L50 96 L44 76 L39 66 L47 70 Z' fill='%230000FF'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.07;
+  z-index: 0;
+  pointer-events: none;
+}
+.nu-content-area > * { position: relative; z-index: 1; }
 
-  /* Ghost phoenix watermark */
-  .nu-phoenix-watermark {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 65%;
-    max-width: 600px;
-    opacity: 0.07;
-    z-index: 1;
-    pointer-events: none;
-  }
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 40px 80px;
+}
 
-  .nu-logo-text {
-    font-family: var(--font-primary);
-    font-weight: 900;
-    font-size: 3.2rem;
-    color: var(--nu-white);
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-  }
-  .nu-logo-subtitle {
-    font-family: var(--font-primary);
-    font-weight: 900;
-    font-size: 1.4rem;
-    color: var(--nu-white);
-    letter-spacing: 0.8em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-  .nu-tagline {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.3rem;
-    color: rgba(255,255,255,0.95);
-    letter-spacing: 0.05em;
-  }
+/* STATUS BANNER */
+.status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: linear-gradient(135deg, #FFF7ED 0%, #FEF3C7 100%);
+  border-left: 6px solid var(--nu-status-amber);
+  padding: 20px 28px;
+  border-radius: 8px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.status-banner .status-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.status-pill {
+  display: inline-block;
+  background: var(--nu-status-amber);
+  color: var(--nu-white);
+  font-weight: 900;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.status-text {
+  font-weight: 700;
+  color: var(--nu-dark-text);
+  font-size: 0.98rem;
+}
+.status-meta {
+  font-size: 0.85rem;
+  color: #78350F;
+  font-weight: 700;
+}
 
-  .nu-doc-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.35);
-    color: var(--nu-white);
-    padding: 6px 18px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-top: 18px;
-  }
+/* PAGE TITLE */
+.page-eyebrow {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--nu-blue);
+  margin-bottom: 12px;
+}
+.page-title {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 2.8rem;
+  line-height: 1.15;
+  color: var(--nu-dark-text);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.page-title .accent { color: var(--nu-blue); }
+.page-subtitle {
+  font-size: 1.15rem;
+  color: #525266;
+  max-width: 780px;
+  line-height: 1.55;
+  margin-bottom: 44px;
+}
 
-  /* ══ CHEVRON TRANSITION ══ */
-  .nu-chevron {
-    position: relative;
-    height: 50px;
-    margin-top: -50px;
-    z-index: 10;
-  }
-  .nu-chevron svg {
-    width: 100%;
-    height: 50px;
-    display: block;
-  }
+/* SECTION */
+.section {
+  margin-bottom: 48px;
+}
+.nu-section-title {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--nu-blue);
+  margin-bottom: 18px;
+  letter-spacing: 0.01em;
+}
+.nu-section-title .after {
+  color: var(--nu-dark-text);
+  font-weight: 700;
+}
+.section-divider {
+  height: 3px;
+  width: 56px;
+  background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan));
+  border-radius: 2px;
+  margin-bottom: 22px;
+}
 
-  /* ══ CONTENT ══ */
-  .nu-content-area {
-    position: relative;
-    background: var(--nu-light-gray);
-    padding: 60px 40px 80px;
-  }
-  .nu-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-  }
+/* SUMMARY CARD */
+.summary-card {
+  background: var(--nu-white);
+  border-radius: 12px;
+  padding: 32px 36px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+  border: 1px solid var(--nu-medium-gray);
+  margin-bottom: 36px;
+}
+.summary-card p {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--nu-body-text);
+  margin-bottom: 14px;
+}
+.summary-card p:last-child { margin-bottom: 0; }
 
-  /* ══ SECTION HEADERS ══ */
-  .nu-section-title {
-    font-family: var(--font-primary);
-    font-weight: 900;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #0033cc;
-    letter-spacing: 0.01em;
-  }
-  .nu-section-title span {
-    color: var(--nu-dark-text);
-    font-weight: 700;
-  }
+/* METRICS GRID */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.metric {
+  background: var(--nu-white);
+  border: 1px solid var(--nu-medium-gray);
+  border-radius: 10px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.metric .label {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: var(--nu-blue);
+  margin-bottom: 10px;
+}
+.metric .value {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--nu-dark-text);
+  line-height: 1.25;
+}
+.metric .sub {
+  font-size: 0.82rem;
+  color: #6B7280;
+  margin-top: 6px;
+}
 
-  .nu-page-title {
-    font-family: var(--font-primary);
-    font-weight: 900;
-    font-size: 2.2rem;
-    color: var(--nu-dark-text);
-    margin-bottom: 8px;
-    line-height: 1.15;
-  }
-  .nu-page-title span { color: #0033cc; }
-  .nu-page-subtitle {
-    font-size: 1.05rem;
-    color: #5a5a6e;
-    margin-bottom: 36px;
-    font-weight: 400;
-  }
+/* CHEVRON BADGES (action steps) */
+.nu-badge {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+  color: var(--nu-white);
+  padding: 16px 32px 16px 20px;
+  margin-bottom: 14px;
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%, 22px 50%);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  gap: 14px;
+}
+.nu-badge .step-num {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--nu-cyan);
+  color: var(--nu-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.95rem;
+}
+.nu-badge .step-text { flex: 1; line-height: 1.45; }
+.nu-badge .step-owner {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nu-cyan);
+  white-space: nowrap;
+  padding-left: 12px;
+}
 
-  /* ══ STATUS STRIP ══ */
-  .nu-status-strip {
-    background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-    color: var(--nu-white);
-    border-radius: 10px;
-    padding: 22px 28px;
-    margin-bottom: 32px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    box-shadow: 0 4px 16px rgba(10,14,92,0.18);
-  }
-  .nu-status-item .label {
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--nu-cyan);
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .nu-status-item .value {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--nu-white);
-  }
+/* TABLE */
+.nu-table-wrap {
+  background: var(--nu-white);
+  border-radius: 10px;
+  border: 1px solid var(--nu-medium-gray);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+table.nu-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+table.nu-table thead {
+  background: var(--nu-light-gray);
+}
+table.nu-table th {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nu-blue);
+  text-align: left;
+  padding: 14px 18px;
+  border-bottom: 2px solid var(--nu-medium-gray);
+}
+table.nu-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--nu-medium-gray);
+  color: var(--nu-body-text);
+  vertical-align: top;
+}
+table.nu-table tr:last-child td { border-bottom: none; }
+table.nu-table tr:hover td { background: #FAFAFB; }
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.tag-open { background: #FEF3C7; color: #92400E; }
+.tag-ship { background: #DBEAFE; color: #1E40AF; }
+.tag-paid { background: #D1FAE5; color: #065F46; }
 
-  /* ══ CARDS ══ */
-  .nu-card {
-    background: var(--nu-white);
-    border-radius: 10px;
-    padding: 28px 30px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    border: 1px solid var(--nu-medium-gray);
-    margin-bottom: 24px;
-  }
+/* CONTACTS GRID */
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.contact-card {
+  background: var(--nu-white);
+  border: 1px solid var(--nu-medium-gray);
+  border-radius: 10px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+.contact-card .role {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: var(--nu-blue);
+  margin-bottom: 6px;
+}
+.contact-card .name {
+  font-size: 1.12rem;
+  font-weight: 900;
+  color: var(--nu-dark-text);
+  margin-bottom: 4px;
+}
+.contact-card .company {
+  font-size: 0.9rem;
+  color: #6B7280;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.contact-card .rule {
+  font-size: 0.82rem;
+  color: #92400E;
+  background: #FEF3C7;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+}
 
-  /* ══ BADGE ══ */
-  .nu-badge {
-    display: inline-flex;
-    align-items: center;
-    background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-    color: var(--nu-white);
-    padding: 12px 32px 12px 20px;
-    margin-bottom: 16px;
-    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
+/* TALKING POINTS */
+.talking-points {
+  background: linear-gradient(135deg, #F8FAFF 0%, #EEF4FF 100%);
+  border: 1px solid #DBE2F5;
+  border-radius: 12px;
+  padding: 28px 32px;
+}
+.talking-points ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.talking-points li {
+  padding-left: 28px;
+  position: relative;
+  margin-bottom: 14px;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--nu-dark-text);
+}
+.talking-points li:last-child { margin-bottom: 0; }
+.talking-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
 
-  /* ══ CHECKLIST ══ */
-  .nu-checklist {
-    list-style: none;
-    padding: 0;
-  }
-  .nu-checklist li {
-    display: flex;
-    align-items: flex-start;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--nu-medium-gray);
-  }
-  .nu-checklist li:last-child { border-bottom: none; }
-  .nu-checklist .check-box {
-    flex-shrink: 0;
-    width: 22px;
-    height: 22px;
-    border: 2px solid #0033cc;
-    border-radius: 4px;
-    margin-right: 14px;
-    margin-top: 2px;
-    background: var(--nu-white);
-  }
-  .nu-checklist .check-text {
-    flex: 1;
-    font-size: 0.98rem;
-    color: var(--nu-dark-text);
-    line-height: 1.5;
-  }
-  .nu-checklist .check-text strong {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 2px;
-    color: var(--nu-dark-text);
-  }
-  .nu-checklist .check-text .note {
-    font-size: 0.88rem;
-    color: #6b6b7e;
-    font-weight: 400;
-  }
+/* EMAIL DRAFT */
+.email-draft {
+  background: var(--nu-white);
+  border: 1px solid var(--nu-medium-gray);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.email-header {
+  background: var(--nu-light-gray);
+  padding: 18px 26px;
+  border-bottom: 1px solid var(--nu-medium-gray);
+  font-size: 0.9rem;
+}
+.email-header .row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.email-header .row:last-child { margin-bottom: 0; }
+.email-header .field {
+  font-weight: 900;
+  color: var(--nu-blue);
+  min-width: 72px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-top: 2px;
+}
+.email-header .val { color: var(--nu-dark-text); flex: 1; }
+.email-body {
+  padding: 28px 32px;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--nu-body-text);
+  white-space: pre-wrap;
+}
+.email-body .signoff {
+  margin-top: 22px;
+  font-style: italic;
+  color: var(--nu-dark-text);
+}
 
-  /* ══ INFO TABLE ══ */
-  .nu-info-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 8px;
-  }
-  .nu-info-table th,
-  .nu-info-table td {
-    text-align: left;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--nu-medium-gray);
-    font-size: 0.95rem;
-  }
-  .nu-info-table th {
-    background: var(--nu-light-gray);
-    font-weight: 700;
-    color: var(--nu-dark-text);
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .nu-info-table tr:last-child td { border-bottom: none; }
-  .nu-info-table td.label-cell {
-    font-weight: 700;
-    color: #0033cc;
-    width: 35%;
-  }
+/* CALLOUT */
+.callout {
+  background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 100%);
+  color: var(--nu-white);
+  padding: 26px 32px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.callout .icon {
+  width: 48px;
+  height: 48px;
+  background: var(--nu-cyan);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--nu-navy);
+  flex-shrink: 0;
+}
+.callout .text { flex: 1; min-width: 240px; }
+.callout .text strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+.callout .text span { font-size: 0.92rem; opacity: 0.9; }
 
-  /* ══ TWO COLUMN ══ */
-  .nu-two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
+/* FOOTER */
+.nu-footer {
+  background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+  color: rgba(255,255,255,0.85);
+  padding: 48px 40px;
+  text-align: center;
+  font-family: var(--font-primary);
+  position: relative;
+  overflow: hidden;
+}
+.nu-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan), var(--nu-blue));
+}
+.nu-footer-tagline {
+  font-family: var(--font-tagline);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--nu-cyan);
+  margin-bottom: 14px;
+}
+.nu-footer-contact {
+  font-size: 0.92rem;
+  line-height: 1.9;
+}
+.nu-footer-contact a {
+  color: var(--nu-cyan);
+  text-decoration: none;
+  font-weight: 700;
+}
+.nu-footer-contact a:hover { text-decoration: underline; }
+.nu-footer-meta {
+  margin-top: 20px;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  font-weight: 700;
+}
 
-  /* ══ ACTION BLOCK ══ */
-  .nu-action-block {
-    background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
-    border-left: 4px solid var(--nu-blue);
-    border-radius: 8px;
-    padding: 22px 26px;
-    margin: 20px 0;
-  }
-  .nu-action-block h4 {
-    font-size: 1rem;
-    font-weight: 900;
-    color: #0033cc;
-    margin-bottom: 8px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  .nu-action-block p {
-    font-size: 0.96rem;
-    color: var(--nu-dark-text);
-    line-height: 1.55;
-  }
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nu-header { padding: 46px 22px 70px; min-height: 240px; }
+  .nu-logo-text { font-size: 2.1rem; letter-spacing: 0.2em; }
+  .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+  .nu-tagline { font-size: 1.05rem; }
+  .container { padding: 44px 22px 60px; }
+  .page-title { font-size: 2rem; }
+  .nu-badge { clip-path: none; border-radius: 10px; padding: 14px 18px; flex-wrap: wrap; }
+  .nu-badge .step-owner { padding-left: 46px; padding-top: 2px; }
+  .summary-card { padding: 24px 22px; }
+  .email-body { padding: 22px 22px; }
+  table.nu-table { font-size: 0.88rem; }
+  table.nu-table th, table.nu-table td { padding: 10px 12px; }
+}
 
-  /* ══ EMAIL TEMPLATE ══ */
-  .nu-email-box {
-    background: #fafafc;
-    border: 1px solid var(--nu-medium-gray);
-    border-radius: 8px;
-    padding: 24px 28px;
-    font-family: Georgia, 'Times New Roman', serif;
-    color: var(--nu-dark-text);
-    font-size: 0.96rem;
-    line-height: 1.7;
-  }
-  .nu-email-box .hdr {
-    font-family: var(--font-primary);
-    font-size: 0.82rem;
-    color: #6b6b7e;
-    margin-bottom: 4px;
-  }
-  .nu-email-box .hdr strong { color: var(--nu-dark-text); margin-right: 6px; }
-  .nu-email-box .email-body {
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px solid var(--nu-medium-gray);
-  }
-  .nu-email-box .email-body p {
-    text-indent: 30px;
-    margin-bottom: 14px;
-  }
-  .nu-email-box .email-body p.no-indent { text-indent: 0; }
-  .nu-email-box .sig-block {
-    margin-top: 20px;
-    padding-left: 30px;
-    font-size: 0.92rem;
-    line-height: 1.5;
-    color: #4a4a5e;
-  }
-
-  /* ══ BULLETS ══ */
-  .nu-bullets {
-    list-style: none;
-    padding-left: 0;
-  }
-  .nu-bullets li {
-    position: relative;
-    padding-left: 22px;
-    margin-bottom: 10px;
-    font-size: 0.97rem;
-    color: var(--nu-dark-text);
-    line-height: 1.55;
-  }
-  .nu-bullets li::before {
-    content: '•';
-    position: absolute;
-    left: 4px;
-    color: var(--nu-blue);
-    font-weight: 900;
-    font-size: 1.2rem;
-    top: -2px;
-  }
-
-  /* ══ PILL ══ */
-  .nu-pill {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .nu-pill.open { background: #FEF3C7; color: #92400E; }
-  .nu-pill.action { background: #DBEAFE; color: #1E40AF; }
-
-  /* ══ FOOTER ══ */
-  .nu-footer {
-    background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-    color: rgba(255,255,255,0.85);
-    padding: 44px 40px;
-    text-align: center;
-    font-family: var(--font-primary);
-  }
-  .nu-footer-tagline {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.25rem;
-    color: var(--nu-cyan);
-    margin-bottom: 14px;
-  }
-  .nu-footer-contact {
-    font-size: 0.95rem;
-    line-height: 1.8;
-  }
-  .nu-footer-contact a {
-    color: var(--nu-cyan);
-    text-decoration: none;
-  }
-  .nu-footer-contact a:hover { text-decoration: underline; }
-
-  /* ══ RESPONSIVE ══ */
-  @media (max-width: 768px) {
-    .nu-header { padding: 50px 20px 70px; min-height: 240px; }
-    .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
-    .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.55em; }
-    .nu-tagline { font-size: 1.05rem; }
-    .nu-content-area { padding: 40px 20px 60px; }
-    .nu-page-title { font-size: 1.7rem; }
-    .nu-card { padding: 22px 20px; }
-    .nu-two-col { grid-template-columns: 1fr; }
-    .nu-badge { clip-path: none; border-radius: 6px; padding: 10px 18px; }
-  }
-
-  /* ══ PRINT ══ */
-  @media print {
-    body { background: white; }
-    .nu-header { background: #0033cc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .nu-card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
-    .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-  }
+@media print {
+  .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .nu-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .metric, .summary-card, .nu-table-wrap, .email-draft { box-shadow: none; border: 1px solid #ccc; }
+  .callout { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="nu-header">
-  <svg class="nu-phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
-    <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
-  </svg>
-  <div class="nu-header-inner">
-    <div class="nu-logo-text">NORRIS</div>
-    <div class="nu-logo-subtitle">UTILITIES</div>
-    <div class="nu-tagline">A Legacy of Commitment®</div>
-    <div class="nu-doc-badge">Internal Action Brief</div>
+  <div class="nu-phoenix-icon">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+    </svg>
   </div>
+  <div class="nu-logo-text">NORRIS</div>
+  <div class="nu-logo-subtitle">UTILITIES</div>
+  <div class="nu-tagline">A Legacy of Commitment®</div>
 </header>
 
-<!-- CHEVRON -->
 <div class="nu-chevron">
-  <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#F5F5F7"/>
+  <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 L547,54 L1440,0 L1440,54 L0,54 Z" fill="#ffffff"/>
   </svg>
 </div>
 
-<!-- CONTENT -->
 <main class="nu-content-area">
-  <div class="nu-container">
+  <div class="container">
 
-    <!-- TITLE -->
-    <h1 class="nu-page-title">Follow Up on <span>Last PO Inventory Order</span></h1>
-    <p class="nu-page-subtitle">reMarkable action item captured 2026-04-22 — verify status, confirm ETA, close the loop with the vendor and the tracker.</p>
+    <div class="status-banner">
+      <div class="status-left">
+        <span class="status-pill">Action Required</span>
+        <span class="status-text">Purchase Order Follow-Up — Awaiting Vendor Confirmation</span>
+      </div>
+      <div class="status-meta">Opened 2026-04-24 • reMarkable Capture</div>
+    </div>
 
-    <!-- STATUS STRIP -->
-    <div class="nu-status-strip">
-      <div class="nu-status-item">
-        <div class="label">Action Type</div>
-        <div class="value">Vendor Follow-Up</div>
-      </div>
-      <div class="nu-status-item">
-        <div class="label">Status</div>
-        <div class="value">Open — Needs Action</div>
-      </div>
-      <div class="nu-status-item">
-        <div class="label">Owner</div>
-        <div class="value">Aaron C. Norris</div>
-      </div>
-      <div class="nu-status-item">
-        <div class="label">Target Close</div>
-        <div class="value">End of Day Today</div>
+    <div class="page-eyebrow">Internal Action Item • Inventory Operations</div>
+    <h1 class="page-title">Follow Up on <span class="accent">Last PO Inventory Order</span></h1>
+    <p class="page-subtitle">
+      Aaron flagged this during morning reMarkable review. The most recent open inventory purchase order
+      needs a status confirmation from the vendor before the next sales cycle. This page tracks the ask,
+      the contact chain, the talking points, and a ready-to-send follow-up draft.
+    </p>
+
+    <div class="section">
+      <div class="nu-section-title">Why <span class="after">This Matters</span></div>
+      <div class="section-divider"></div>
+      <div class="summary-card">
+        <p>
+          Norris Utilities® runs a lean inventory posture. Every open PO represents committed capital and
+          committed customer promises. When a PO sits without confirmed ship dates, downstream commitments
+          — FlexPro Armor deliveries, Samson Rope pulls, and Skylift coordination — drift out of alignment.
+        </p>
+        <p>
+          The goal of this follow-up is simple: confirm the PO number on file with the vendor, verify what
+          has shipped versus what remains open, secure a firm expected-delivery window, and get any updated
+          tracking numbers into the shipments ledger. Once confirmed, the PO status moves from <em>Open — Awaiting</em>
+          to <em>Open — Confirmed</em> and the downstream customer timeline can be held with confidence.
+        </p>
       </div>
     </div>
 
-    <!-- STEP 1: IDENTIFY -->
-    <div class="nu-card">
-      <div class="nu-badge">Step 1 — Identify the PO</div>
-      <h3 class="nu-section-title">Pull <span>the last PO on file</span></h3>
-      <p style="margin-bottom: 14px; color: var(--nu-body-text);">Before reaching out, locate the most recent purchase order so the conversation has a specific reference. Check these sources in order:</p>
-      <ol class="nu-bullets" style="list-style: none;">
-        <li><strong>Master Tracker</strong> — <em>~/norris-agent/data/master_tracker</em> — filter by "PO Issued" status, sort descending by date.</li>
-        <li><strong>QuickBooks</strong> — Purchase Orders → sort by date → grab PO number, vendor, line items, total, and issue date.</li>
-        <li><strong>Gmail</strong> — search: <code style="background:#eef1f7;padding:2px 6px;border-radius:4px;">from:(vendor) subject:PO</code> — confirm the last outgoing PO email and any vendor acknowledgement.</li>
-        <li><strong>Palace / brain</strong> — <em>palace-deals</em> and <em>operations/open-invoices</em> wings carry supplemental context on outstanding orders.</li>
-      </ol>
-    </div>
-
-    <!-- STEP 2: CAPTURE FACTS -->
-    <div class="nu-card">
-      <div class="nu-badge">Step 2 — Capture the Facts</div>
-      <h3 class="nu-section-title">Fill in <span>the order details</span></h3>
-      <table class="nu-info-table">
-        <tr>
-          <td class="label-cell">PO Number</td>
-          <td>_______________________ (from QuickBooks)</td>
-        </tr>
-        <tr>
-          <td class="label-cell">Vendor</td>
-          <td>_______________________ (Skylift, Samson, Boss, Bay Shore, etc.)</td>
-        </tr>
-        <tr>
-          <td class="label-cell">Vendor Contact</td>
-          <td>_______________________ (primary + CC partner per contact rules)</td>
-        </tr>
-        <tr>
-          <td class="label-cell">Date Issued</td>
-          <td>_______________________</td>
-        </tr>
-        <tr>
-          <td class="label-cell">Total Value</td>
-          <td>$______________________</td>
-        </tr>
-        <tr>
-          <td class="label-cell">Line Items</td>
-          <td>_______________________ (SKU, qty, description)</td>
-        </tr>
-        <tr>
-          <td class="label-cell">Promised Ship Date</td>
-          <td>_______________________</td>
-        </tr>
-        <tr>
-          <td class="label-cell">Last Vendor Update</td>
-          <td>_______________________</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- STEP 3: CHECKLIST -->
-    <div class="nu-card">
-      <div class="nu-badge">Step 3 — Follow-Up Checklist</div>
-      <h3 class="nu-section-title">Work <span>the list top to bottom</span></h3>
-      <ul class="nu-checklist">
-        <li>
-          <div class="check-box"></div>
-          <div class="check-text">
-            <strong>Confirm order acknowledgement</strong>
-            <span class="note">Did the vendor send a PO acknowledgement email? If not, that is the first thing to ask for.</span>
-          </div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div class="check-text">
-            <strong>Request current production status</strong>
-            <span class="note">In production / in QC / packed / shipped / delivered. Ask for a dated status, not a generic "on track."</span>
-          </div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div class="check-text">
-            <strong>Get a firm ship date and carrier</strong>
-            <span class="note">Shipping carrier, tracking number if shipped, and BOL if LTL/freight.</span>
-          </div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div class="check-text">
-            <strong>Verify line-item count and SKUs match the PO</strong>
-            <span class="note">Quantity variances cause invoice disputes. Catch them before the truck leaves.</span>
-          </div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div class="check-text">
-            <strong>Capture any cost or freight change</strong>
-            <span class="note">If vendor cost shifted, update Ben's Formula: CustomerCost = ROUNDUP(ROUNDUP(RegCost, 0) × 1.10, 0).</span>
-          </div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div class="check-text">
-            <strong>Update Master Tracker</strong>
-            <span class="note">New status, new ETA, and the date of today's vendor contact. This is the single source of truth.</span>
-          </div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div class="check-text">
-            <strong>Notify the end customer (if the PO ships to a customer)</strong>
-            <span class="note">If this PO is attached to an outstanding customer order, forward the ETA so they can plan crew and install.</span>
-          </div>
-        </li>
-        <li>
-          <div class="check-box"></div>
-          <div class="check-text">
-            <strong>Close the loop in QuickBooks</strong>
-            <span class="note">Mark PO received when inventory lands. Match bill to PO. Reconcile against the invoice.</span>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <!-- STEP 4: EMAIL TEMPLATE -->
-    <div class="nu-card">
-      <div class="nu-badge">Step 4 — Send the Follow-Up Email</div>
-      <h3 class="nu-section-title">Vendor <span>email — ready to send</span></h3>
-      <p style="margin-bottom: 16px; color: var(--nu-body-text);">Replace the bracketed fields with the PO details captured in Step 2. Remember the CC rules on contacts: Boss (Troy + Thayne), Samson (Donna + Sarah), Skylift (Andrew, Dale, Nick Jr).</p>
-
-      <div class="nu-email-box">
-        <div class="hdr"><strong>To:</strong> [Primary Vendor Contact]</div>
-        <div class="hdr"><strong>CC:</strong> [Secondary Vendor Contact per CC rule]</div>
-        <div class="hdr"><strong>Subject:</strong> PO [Number] — Status Check &amp; Ship Date Confirmation</div>
-
-        <div class="email-body">
-          <p class="no-indent">[First Name] —</p>
-          <p>Following up on PO [Number] issued [Date] for [line-item summary]. Order total $[Amount].</p>
-          <p>Could you confirm the following, at your convenience:</p>
-          <p class="no-indent" style="padding-left: 30px;">
-            • Current production or packing status<br>
-            • Firm ship date and carrier<br>
-            • Tracking or BOL number if the order has shipped<br>
-            • Any changes to line quantities, pricing, or freight
-          </p>
-          <p>I have a customer waiting on this delivery and want to give them an accurate ETA today. Appreciate y'all getting back to me.</p>
-          <p class="no-indent">Sincerely,</p>
-          <div class="sig-block">
-            Aaron C. Norris<br>
-            Founder &amp; CEO<br>
-            Norris Utilities, LLC<br>
-            Cell: 205-500-1343<br>
-            acnorris@norrisutilities.com
-          </div>
+    <div class="section">
+      <div class="nu-section-title">Order <span class="after">Snapshot</span></div>
+      <div class="section-divider"></div>
+      <div class="metrics-grid">
+        <div class="metric">
+          <div class="label">Status</div>
+          <div class="value">Open</div>
+          <div class="sub">Awaiting vendor reply</div>
+        </div>
+        <div class="metric">
+          <div class="label">Priority</div>
+          <div class="value">High</div>
+          <div class="sub">Affects next sales cycle</div>
+        </div>
+        <div class="metric">
+          <div class="label">Owner</div>
+          <div class="value">Aaron C. Norris</div>
+          <div class="sub">CEO — Sole sales force</div>
+        </div>
+        <div class="metric">
+          <div class="label">Target Reply</div>
+          <div class="value">≤ 48 Hours</div>
+          <div class="sub">From outbound send</div>
         </div>
       </div>
     </div>
 
-    <!-- TWO COLUMN: RISKS + ESCALATION -->
-    <div class="nu-two-col">
-      <div class="nu-card">
-        <div class="nu-badge">Watch For</div>
-        <h3 class="nu-section-title">Common <span>slip points</span></h3>
-        <ul class="nu-bullets">
-          <li><strong>Silent delays.</strong> No news is not good news — if the vendor has not volunteered a status in 7+ days, assume slip.</li>
-          <li><strong>Freight surprises.</strong> LTL carriers change hands; confirm final-mile carrier and accessorial charges.</li>
-          <li><strong>Partial shipments.</strong> Ask explicitly: "Is this shipping complete, or partial?" Partial triggers a split invoice.</li>
-          <li><strong>Price creep.</strong> If vendor cost moved, margin moved. Re-run Ben's Formula on shipping before re-quoting the customer.</li>
-        </ul>
-      </div>
+    <div class="section">
+      <div class="nu-section-title">Action <span class="after">Sequence</span></div>
+      <div class="section-divider"></div>
 
-      <div class="nu-card">
-        <div class="nu-badge">Escalation Path</div>
-        <h3 class="nu-section-title">If <span>no response in 48 hours</span></h3>
-        <ul class="nu-bullets">
-          <li><strong>Day 2:</strong> Call the primary contact directly. Do not send another email.</li>
-          <li><strong>Day 3:</strong> Loop in the secondary contact on a new thread with a clear subject line.</li>
-          <li><strong>Day 5:</strong> If still silent, escalate to the vendor owner or sales manager — and flag the deal in the Master Tracker as at-risk.</li>
-          <li><strong>Every time:</strong> Log the outreach attempts in the tracker so the timeline is auditable.</li>
+      <div class="nu-badge">
+        <span class="step-num">1</span>
+        <span class="step-text">Pull the PO from records — confirm PO number, ship-to address, line items, and agreed unit costs before reaching out.</span>
+        <span class="step-owner">Aaron</span>
+      </div>
+      <div class="nu-badge">
+        <span class="step-num">2</span>
+        <span class="step-text">Cross-check against the shipments ledger to see what has already been received and what remains open.</span>
+        <span class="step-owner">Aaron</span>
+      </div>
+      <div class="nu-badge">
+        <span class="step-num">3</span>
+        <span class="step-text">Send the follow-up email (draft below). Copy both primary vendor contacts per the standing CC rule.</span>
+        <span class="step-owner">Aaron</span>
+      </div>
+      <div class="nu-badge">
+        <span class="step-num">4</span>
+        <span class="step-text">Log the outreach in the open-items tracker and set a 48-hour callback on the calendar.</span>
+        <span class="step-owner">Caroline Butler</span>
+      </div>
+      <div class="nu-badge">
+        <span class="step-num">5</span>
+        <span class="step-text">On reply, update PO status to Confirmed, record ship dates and tracking numbers, and notify any customer whose delivery depends on this PO.</span>
+        <span class="step-owner">Aaron + CB</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="nu-section-title">Line <span class="after">Items on the PO</span></div>
+      <div class="section-divider"></div>
+      <div class="nu-table-wrap">
+        <table class="nu-table">
+          <thead>
+            <tr>
+              <th style="width: 22%;">SKU / Item</th>
+              <th style="width: 34%;">Description</th>
+              <th style="width: 12%;">Qty</th>
+              <th style="width: 16%;">Status</th>
+              <th style="width: 16%;">Next Step</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>NU-BC-2851</strong></td>
+              <td>FlexPro Armor Bucket Cover — 2-Man, 28"×51"</td>
+              <td>Confirm with vendor</td>
+              <td><span class="tag tag-open">Awaiting</span></td>
+              <td>Verify ship date</td>
+            </tr>
+            <tr>
+              <td><strong>NU-BC-2834</strong></td>
+              <td>FlexPro Armor Bucket Cover — 1.5-Man, 28"×34"</td>
+              <td>Confirm with vendor</td>
+              <td><span class="tag tag-open">Awaiting</span></td>
+              <td>Verify ship date</td>
+            </tr>
+            <tr>
+              <td><strong>NU-BC-2851-C</strong></td>
+              <td>FlexPro Armor 2-Man Combo (cover + liner)</td>
+              <td>Confirm with vendor</td>
+              <td><span class="tag tag-open">Awaiting</span></td>
+              <td>Verify ship date</td>
+            </tr>
+            <tr>
+              <td><strong>NU-BC-2834-C</strong></td>
+              <td>FlexPro Armor 1.5-Man Combo (cover + liner)</td>
+              <td>Confirm with vendor</td>
+              <td><span class="tag tag-open">Awaiting</span></td>
+              <td>Verify ship date</td>
+            </tr>
+            <tr>
+              <td><strong>PO Totals</strong></td>
+              <td>Full line-item detail to be confirmed against the original PO document</td>
+              <td>—</td>
+              <td><span class="tag tag-ship">In Flight</span></td>
+              <td>Request ledger update</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="nu-section-title">Who <span class="after">To Contact</span></div>
+      <div class="section-divider"></div>
+      <div class="contacts-grid">
+        <div class="contact-card">
+          <div class="role">Primary — FlexPro Armor</div>
+          <div class="name">Troy Gongwer</div>
+          <div class="company">Boss Products</div>
+          <div class="rule">CC Thayne Grove on every email — standing rule</div>
+        </div>
+        <div class="contact-card">
+          <div class="role">Secondary — FlexPro Armor</div>
+          <div class="name">Thayne Grove</div>
+          <div class="company">Boss Products</div>
+          <div class="rule">CC together with Troy — standing rule</div>
+        </div>
+        <div class="contact-card">
+          <div class="role">Primary — Samson Rope</div>
+          <div class="name">Donna Poll</div>
+          <div class="company">Samson Rope</div>
+          <div class="rule">CC Sarah Daniels — standing rule</div>
+        </div>
+        <div class="contact-card">
+          <div class="role">Secondary — Samson Rope</div>
+          <div class="name">Sarah Daniels</div>
+          <div class="company">Samson Rope</div>
+          <div class="rule">CC together with Donna — standing rule</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="nu-section-title">Talking <span class="after">Points</span></div>
+      <div class="section-divider"></div>
+      <div class="talking-points">
+        <ul>
+          <li>Lead with the PO number and original order date — anchor the conversation in the paperwork.</li>
+          <li>Ask for a written confirmation of what has shipped versus what is still in production.</li>
+          <li>Request firm expected-ship dates, not windows — customers are committed to delivery timelines.</li>
+          <li>Confirm carrier and tracking numbers for anything already in transit so the shipments ledger stays current.</li>
+          <li>If there is a delay, ask what can be partially released now so the customer-facing pipeline is not blocked.</li>
+          <li>Close with a clean callback window: 48 hours for a reply, then escalate if needed.</li>
         </ul>
       </div>
     </div>
 
-    <!-- CLOSE-OUT -->
-    <div class="nu-action-block">
-      <h4>Close-Out Rule</h4>
-      <p>This action item stays open in the Master Tracker until three things are true: (1) vendor has confirmed a firm ship date in writing, (2) tracker reflects the updated ETA, and (3) if a customer order is tied to the PO, the customer has been notified. Only then mark this follow-up complete.</p>
+    <div class="section">
+      <div class="nu-section-title">Follow-Up <span class="after">Email Draft</span></div>
+      <div class="section-divider"></div>
+      <div class="email-draft">
+        <div class="email-header">
+          <div class="row">
+            <span class="field">To</span>
+            <span class="val">[Vendor Primary Contact]</span>
+          </div>
+          <div class="row">
+            <span class="field">CC</span>
+            <span class="val">[Vendor Secondary Contact per standing CC rule]</span>
+          </div>
+          <div class="row">
+            <span class="field">From</span>
+            <span class="val">Aaron C. Norris &lt;acnorris@norrisutilities.com&gt;</span>
+          </div>
+          <div class="row">
+            <span class="field">Subject</span>
+            <span class="val">Quick check on our last PO — status and ship dates</span>
+          </div>
+        </div>
+        <div class="email-body">[Name] —
+
+    Hope the week is treating y'all well. Wanted to follow up on our last PO and get a clean status on where we stand.
+
+    If it is easy, could you confirm back on the following:
+
+    • PO number and original order date on your end
+    • What has shipped to date versus what is still open
+    • Firm expected-ship dates on the remaining line items
+    • Carrier and tracking numbers for anything currently in transit
+
+    I have customer deliveries tied to this order, and a written confirmation helps me hold the line on those timelines. If there is any piece that can be partially released sooner, I would rather get that moving than wait on the full quantity.
+
+    Appreciate you pulling this together. Happy to get on a quick call if that is faster than email.
+
+<span class="signoff">    Sincerely,
+
+    Aaron C. Norris
+    Founder &amp; CEO, Norris Utilities, LLC
+    Cell: 205-500-1343
+    acnorris@norrisutilities.com</span></div>
+      </div>
     </div>
 
-    <!-- CONTEXT -->
-    <div class="nu-card" style="background: var(--nu-light-gray); border: 1px dashed #b5b5c4;">
-      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
-        <span class="nu-pill open">Open Action</span>
-        <span class="nu-pill action">reMarkable Capture</span>
+    <div class="section">
+      <div class="nu-section-title">When <span class="after">To Escalate</span></div>
+      <div class="section-divider"></div>
+      <div class="summary-card">
+        <p>
+          If there is no response within 48 hours of sending the follow-up, call the primary contact
+          directly and reference the email. If the primary contact is unreachable, go to the secondary
+          contact on the CC line — that is precisely why the standing CC rule exists.
+        </p>
+        <p>
+          If neither contact responds within 72 hours, treat it as a supply-chain risk and flag it on the
+          morning brief. A PO without confirmed dates is a customer-delivery risk, and customer-delivery
+          risks move to the top of the open-items tracker until resolved.
+        </p>
       </div>
-      <p style="font-size: 0.92rem; color: #5a5a6e;">Source: reMarkable action item, 2026-04-22. Routed through the Norris Utilities® Autonomous Build Engine and filed under internal action briefs. This document mirrors the printed Line Card design language for consistency across all internal and customer-facing materials.</p>
+    </div>
+
+    <div class="callout">
+      <div class="icon">!</div>
+      <div class="text">
+        <strong>Standing CC Rule Reminder</strong>
+        <span>Every email to Boss Products copies both Troy Gongwer and Thayne Grove. Every email to Samson Rope copies both Donna Poll and Sarah Daniels. No exceptions.</span>
+      </div>
     </div>
 
   </div>
 </main>
 
-<!-- FOOTER -->
 <footer class="nu-footer">
   <div class="nu-footer-tagline">A Legacy of Commitment®</div>
   <div class="nu-footer-contact">
@@ -696,6 +893,7 @@
     <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
     <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
   </div>
+  <div class="nu-footer-meta">Internal Action Item • reMarkable Capture • 2026-04-24</div>
 </footer>
 
 </body>
