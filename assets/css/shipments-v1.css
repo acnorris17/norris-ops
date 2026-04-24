@@ -624,6 +624,37 @@ html.reduced-motion .chip-row {
   border-color: var(--nu-blue-primary);
 }
 
+/* ── Payment badge + CC fee (Phase B §8) ── */
+.payment-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-left: 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  cursor: help;
+}
+.payment-net30    { color: #374151; background: rgba(156,163,175,0.20); }
+.payment-net60    { color: #1f2937; background: rgba(107,114,128,0.22); }
+.payment-cc       { color: #92400e; background: rgba(245,158,11,0.18); }
+.payment-ccfile   { color: #9a3412; background: rgba(249,115,22,0.22); font-weight: 900; }
+.payment-ach      { color: #065f46; background: rgba(16,185,129,0.18); }
+.payment-receipt  { color: #0e7490; background: rgba(6,208,255,0.18); }
+.payment-unknown  { color: #6b7280; background: rgba(156,163,175,0.12); font-style: italic; }
+
+.cc-fee-amount { font-family: 'Lato', Monaco, monospace; font-weight: 700; color: var(--nu-dark-text); }
+.cc-fee-info {
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--nu-blue-primary);
+  cursor: help;
+  font-size: 11px;
+}
+.cc-fee-dash { color: #bbb; }
+
 /* ── Notes cell + editor (Phase B §6) ── */
 .notes-cell {
   cursor: text;
