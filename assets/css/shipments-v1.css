@@ -677,7 +677,7 @@ html.reduced-motion .chip-row {
   outline: 2px solid var(--nu-cyan);
   outline-offset: -2px;
 }
-.notes-placeholder { color: #999; font-style: italic; }
+.notes-empty-hint { color: #999; font-style: italic; }
 .notes-text { white-space: normal; color: var(--nu-dark-text); }
 .notes-more { color: var(--nu-blue-primary); font-weight: 700; font-size: 10.5px; margin-left: 6px; }
 .notes-editor {

@@ -319,7 +319,7 @@
 
   // Phase B §6 — read-mode HTML for the Notes cell.
   function notesReadMode(notes) {
-    if (!notes) return '<span class="notes-placeholder">Click to add notes</span>';
+    if (!notes) return '<span class="notes-empty-hint">Click to add notes</span>';
     const short = notes.length > 80 ? notes.slice(0, 80) + "…" : notes;
     const more = notes.length > 80 ? '<span class="notes-more">(click to read)</span>' : "";
     return `<span class="notes-text">${esc(short)}</span>${more}`;

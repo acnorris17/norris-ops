@@ -25,7 +25,7 @@
   }
 
   function readModeHtml(notesText) {
-    if (!notesText) return '<span class="notes-placeholder">Click to add notes</span>';
+    if (!notesText) return '<span class="notes-empty-hint">Click to add notes</span>';
     const short = truncated(notesText, 80);
     const more = notesText.length > 80 ? '<span class="notes-more">(click to read)</span>' : "";
     return `<span class="notes-text">${esc(short)}</span>${more}`;
