@@ -4581,3 +4581,28 @@ Claude instances MUST NEVER ask "what would you like to do first?" on session op
 (c) Legacy memory update (this file — all 24 facts)
 (d) Session 8 Master Handoff: /mnt/user-data/outputs/MASTER_HANDOFF_Session7_to_Session8_2026-04-23.md
 (e) userMemories #29 replaced with Session 7 close (supersedes FIX 11 entry; Abide typo fixed as side-effect since #26 already holds correct spelling)
+
+---
+## Session 9 — V1 Click-Test FAIL → V2 Spec (2026-04-24)
+
+### EVENT SUMMARY
+V1 Phase B shipped clean from CC (1h 11m, 372 pytest, 4 judgment calls) → Aaron click-test FAIL → 41 defects → V2 CC prompt written (2,020 lines) → Master Handoff (651 lines) → V2 spec in NorrisPalace rules/SA_V5_V2_Master_Spec_2026-04-24 (UUID e471001c, MD5 e7edef32fa60c5c2604f3517e70672d9).
+
+**V1 SHIP FACTS:**
+- norris-ops HEAD: 9536d52 (build) / d8cadd5 (handoff)
+- norris-agent HEAD: b1fa954
+- 372 pytest passing (+103 over Phase A baseline 269)
+- 4 judgment calls logged in Phase_B_BUILD_JOURNAL.md
+- NorrisPalace V1 record: bf07fbd5
+
+**COLUMN ORDER LOCKED (D03):**
+Invoice Sent | Inv # | SD | Status | Order Date | Customer | P/N | Description | QTY | Ship To+POC | Tracking # | PO # | CC Fee | Shipping | Notes
+
+**D24 ★★★ HENKELS & McCOY SOURCE PRIORITY VIOLATION — MAJOR:**
+SD said NU-BC-BY2828. Aaron said NU-BC-BY2828. SA "EVIDENCE CONFLICT" overrode to 1.5-Man. WRONG. SD + Aaron = authoritative. SA must NEVER override SD + Aaron statement with a conflict flag. FIX: LOCK SOURCE PRIORITY IN CODE. Roll back to NU-BC-BY2828. This is a data integrity failure — the exact scenario the RECONCILE/REVIEW system exists to prevent, not cause.
+
+**41 DEFECTS (full list):**
+D01 Hero logo tiny/text huge — invert. D02 Ghost watermark missing — restore 7%. D03 Column order wrong — locked above. D04 Dead leftmost checkbox — remove. D05 Detail view missing P/N+Product+Desc+Rate+Qty+Subtotal+Shipping+CC+Totals+Audit. D06 CC marker missing + fee not calculating. D07 Dominion "NO FUZZY MATCH" — single-POC companies auto-resolve at 100. D08 "Canonical Name" → rename to "Customer Name". D09 Line items showing P/N only — add product+description from master xlsx. D10 Order date layout wrong. D11 Tracking not imported. D12 Terms "Direct" vs "Due on Receipt" collision — split into terms + customer_type enum (Direct/Indirect/Dealer). D13 Pricing not imported. D14 Add Qty + Rate copy buttons (16 total + Copy ALL TSV). D15 Status pill all "failed" — fix sa_v1_writer + CORS. D16 Shipping not imported + formula not applied. D17 "Child" → "Grouped" + visual indicator. D18 Frozen header needed. D19-D21 Column/row layout issues. D22 LineTec/LTS Power canonical wrong — normalize slash separators. D23 CC fee 4% auto-calc missing. D24 ★★★ Henkels R8 violation (see above). D25 Shipping manual edit/zero needed. D26 Row highlight for REVIEW rows. D27 Line item rate manual edit. D28 Invoice → SD reflection when invoice sent. D29 Totals not calculating. D30 Copy buttons fail (HTTP context) — execCommand fallback. D31 Dead leftmost column. D32 Invoice Sent not persisting. D33 Column widths/alignment off. D34 SD logos missing when opened. D35 Back button on SD page needed. D36 Invoice # not linked to PDF. D37 Post-invoice data not captured to SD. D38 Shipping Docs page empty. D39 Archived Invoices page empty. D40 4 KPI tiles missing (NU Shipping MTD, Customer Shipping Unbilled, Products Unbilled Revenue, Total Uninvoiced). D41 Chain Electric row messed up (screenshot pending).
+
+**V2 CC PROMPT:** 2,020 lines. Awaiting Aaron paste to CC.
+**V2 MASTER HANDOFF:** 651 lines.

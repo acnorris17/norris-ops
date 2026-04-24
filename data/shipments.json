@@ -1050,6 +1050,54 @@
           "to": "INVOICED",
           "source": "aaron_click",
           "notes": ""
+        },
+        {
+          "id": "audit_e3cc99f8dcbd409c8aab8e45ce52fbf1",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-24T09:03:40.703732-05:00",
+          "display_ts": "Apr 24 9:03 AM CT",
+          "event": "invoice_sent",
+          "from": "PROCESSING",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_f5a1d45ead8f4f0e96854be920d4bfb2",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-24T09:03:40.730898-05:00",
+          "display_ts": "Apr 24 9:03 AM CT",
+          "event": "invoice_sent_reverse",
+          "from": "INVOICED",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_a898edf7d4f84b90936f311864da1e3b",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-24T09:03:40.755625-05:00",
+          "display_ts": "Apr 24 9:03 AM CT",
+          "event": "invoice_sent",
+          "from": "PROCESSING",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_679adb42b7c0487a8a8563c588da3172",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-24T09:03:40.770718-05:00",
+          "display_ts": "Apr 24 9:03 AM CT",
+          "event": "invoice_sent_reverse",
+          "from": "INVOICED",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
         }
       ]
     }
