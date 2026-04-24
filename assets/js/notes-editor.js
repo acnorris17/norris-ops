@@ -88,6 +88,7 @@
       }, AUTOSAVE_MS);
     }
     async function commit() {
+      if (cancelled) return; // Esc path: do not persist
       clearTimeout(autosaveTimer);
       const newValue = textarea.value;
       if (newValue === original) {
@@ -118,10 +119,12 @@
       } else if (e.key === "Escape") {
         e.preventDefault();
         cancelled = true;
+        clearTimeout(autosaveTimer);
         close(original);
       }
     });
     textarea.addEventListener("blur", (e) => {
+      if (cancelled) return; // Esc path already handled
       // If focus moved to one of our buttons, let it handle.
       const to = e.relatedTarget;
       if (to && (to.classList.contains("notes-save") || to.classList.contains("notes-cancel"))) return;
