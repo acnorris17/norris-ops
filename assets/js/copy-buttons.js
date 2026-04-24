@@ -356,4 +356,13 @@
   } else {
     bindDelegated();
   }
+
+  // Phase B §5 — expose for detail-panel.js to mirror the 13 buttons.
+  window.NU = window.NU || {};
+  window.NU.copyButtons = {
+    buttonsFor,
+    renderPanel,
+    findRow,
+    copy,
+  };
 })();
