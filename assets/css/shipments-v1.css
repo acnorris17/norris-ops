@@ -624,6 +624,104 @@ html.reduced-motion .chip-row {
   border-color: var(--nu-blue-primary);
 }
 
+/* ── Notes cell + editor (Phase B §6) ── */
+.notes-cell {
+  cursor: text;
+  min-width: 140px;
+  font-size: 11.5px;
+  line-height: 1.4;
+  position: relative;
+  padding: 8px 10px;
+}
+.notes-cell:hover::after {
+  content: "✎";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  color: var(--nu-blue-primary);
+  opacity: 0.55;
+  font-size: 12px;
+}
+.notes-cell:focus-visible {
+  outline: 2px solid var(--nu-cyan);
+  outline-offset: -2px;
+}
+.notes-placeholder { color: #999; font-style: italic; }
+.notes-text { white-space: normal; color: var(--nu-dark-text); }
+.notes-more { color: var(--nu-blue-primary); font-weight: 700; font-size: 10.5px; margin-left: 6px; }
+.notes-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.notes-editor textarea {
+  width: 100%;
+  min-height: 72px;
+  resize: vertical;
+  border: 1px solid var(--nu-blue-primary);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-family: var(--font-primary);
+  font-size: 12px;
+  line-height: 1.4;
+  background: #fff;
+}
+.notes-editor-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: #666;
+}
+.notes-char-count { font-family: Monaco, monospace; }
+.notes-editor-actions { display: flex; gap: 6px; }
+.notes-save, .notes-cancel {
+  padding: 3px 8px;
+  border: 1px solid var(--nu-blue-primary);
+  background: #fff;
+  color: var(--nu-blue-primary);
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+.notes-save:hover { background: var(--nu-blue-primary); color: #fff; }
+.notes-cancel { border-color: #ccc; color: #666; }
+
+/* Invoice-sent checkbox (visual tick) */
+.invoice-sent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+.invoice-sent-box {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--nu-blue-primary);
+  border-radius: 3px;
+  cursor: pointer;
+  background: #fff;
+  transition: background 0.15s;
+}
+.invoice-sent-box:checked {
+  background: #10B981;
+  border-color: #10B981;
+}
+.invoice-sent-box:checked + .checkmark::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  color: #fff;
+  font-weight: 900;
+  font-size: 12px;
+  pointer-events: none;
+}
+
 /* ── Detail panel (Phase B §5) ── */
 .detail-panel-row td {
   padding: 0;

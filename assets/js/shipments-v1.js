@@ -317,6 +317,14 @@
     ).join("<br>");
   }
 
+  // Phase B §6 — read-mode HTML for the Notes cell.
+  function notesReadMode(notes) {
+    if (!notes) return '<span class="notes-placeholder">Click to add notes</span>';
+    const short = notes.length > 80 ? notes.slice(0, 80) + "…" : notes;
+    const more = notes.length > 80 ? '<span class="notes-more">(click to read)</span>' : "";
+    return `<span class="notes-text">${esc(short)}</span>${more}`;
+  }
+
   function renderTable() {
     const tbody = document.getElementById("shipments-tbody");
     const rows = state.filtered;
@@ -356,8 +364,8 @@
   <td class="col-ccfee detail-only"><span class="muted">—</span></td>
   <td class="col-shipping">${shipping}</td>
   <td class="col-invnum detail-only">${invNum}</td>
-  <td class="col-notes">${r.cb_internal_note ? `<span class="note-icon" title="${esc(r.cb_internal_note)}">&#128221;</span>` : '<span class="muted">—</span>'}</td>
-  <td class="col-invsent detail-only"><input type="checkbox" ${invoiceSent ? "checked" : ""} disabled aria-label="Invoice sent (Phase B)"></td>
+  <td class="col-notes notes-cell" data-sid="${esc(r.sid)}" data-notes="${esc(r.notes || r.cb_internal_note || '')}" tabindex="0" aria-label="Notes for ${esc(r.sid)}">${notesReadMode(r.notes || r.cb_internal_note)}</td>
+  <td class="col-invsent"><label class="invoice-sent"><input type="checkbox" class="invoice-sent-box" data-sid="${esc(r.sid)}" ${invoiceSent ? "checked" : ""} aria-label="Mark invoice sent — archive row"><span class="checkmark" aria-hidden="true"></span></label></td>
   <td class="col-copy detail-only"><button type="button" class="copy-trigger" data-sid="${esc(r.sid)}" aria-label="Copy for QB">&#128203;</button></td>
   <td class="col-expand"><button type="button" class="expand-trigger" data-sid="${esc(r.sid)}" aria-label="Expand detail">&#9660;</button></td>
 </tr>`;
@@ -594,5 +602,8 @@
     fmtMoney,
     fmtDate,
     DESCRIPTION_FALLBACK,
+    // Phase B §6: invoice-archive.js calls this after mutating a row
+    // out of the open queue so pulse tiles reflect the new state.
+    recomputePulse: renderPulse,
   };
 })();
