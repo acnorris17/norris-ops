@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Southern Company Standards Update — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Action Item — Southern Company Standards Update | Norris Utilities®</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400;1,700&display=swap');
+
     :root {
       --nu-blue: #0000FF;
+      --nu-blue-deep: #0033CC;
       --nu-cyan: #06D0FF;
       --nu-navy: #000033;
       --nu-white: #FFFFFF;
@@ -16,8 +20,8 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-alert-red: #C8102E;
-      --nu-success-green: #0A8754;
+      --nu-status-open: #E8901C;
+      --nu-status-red: #D93025;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -31,10 +35,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ═══ HEADER ═══ */
+    /* ══ HEADER ══ */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, #06D0FF 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, #06D0FF 100%);
       padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
@@ -45,10 +49,10 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.7;
+      opacity: 0.8;
     }
     .nu-header::after {
       content: '';
@@ -57,485 +61,417 @@
       width: 80%; height: 200%;
       background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
-    }
-    .nu-header * { position: relative; z-index: 2; }
-
-    /* Ghost Phoenix Watermark */
-    .nu-phoenix-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 65%;
-      height: 120%;
-      opacity: 0.07;
-      z-index: 1;
       pointer-events: none;
     }
-    .nu-phoenix-watermark svg {
-      width: 100%;
-      height: 100%;
-    }
+    .nu-header > * { position: relative; z-index: 2; }
 
+    .nu-phoenix-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.35));
+    }
     .nu-logo-text {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 3.2rem;
+      font-size: 3rem;
       color: var(--nu-white);
-      letter-spacing: 0.35em;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.4rem;
+      font-size: 1.15rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.75em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .nu-tagline {
-      font-family: var(--font-primary);
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.3rem;
+      font-weight: 400;
+      font-size: 1.25rem;
       color: rgba(255,255,255,0.95);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
 
-    /* ═══ CHEVRON TRANSITION ═══ */
+    /* ══ CHEVRON ══ */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg {
-      width: 100%;
-      height: 50px;
-      display: block;
-    }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
-    /* ═══ CONTENT AREA ═══ */
+    /* ══ CONTENT ══ */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
-      padding: 60px 0 80px;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 40%; left: 50%;
-      transform: translate(-50%, -50%);
+      top: 80px; left: 50%;
+      transform: translateX(-50%);
       width: 65%;
-      height: 500px;
-      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
+      max-width: 700px;
+      aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(0,0,255,0.035) 0%, transparent 65%);
       z-index: 0;
       pointer-events: none;
     }
-    .nu-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 40px;
+    .nu-wrap {
       position: relative;
       z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
     }
 
-    /* ═══ BREADCRUMB / META ═══ */
-    .nu-meta-bar {
-      display: flex;
-      justify-content: space-between;
+    /* ══ TASK HEADER ══ */
+    .task-eyebrow {
+      display: inline-flex;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      padding: 16px 24px;
-      background: linear-gradient(90deg, #f8f9fc 0%, #eef1f8 100%);
-      border-left: 4px solid var(--nu-cyan);
-      border-radius: 4px;
-      margin-bottom: 36px;
-      font-size: 0.9rem;
-    }
-    .nu-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--nu-dark-text);
+      gap: 10px;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-cyan);
+      padding: 8px 18px;
+      border-radius: 999px;
       font-weight: 700;
-    }
-    .nu-meta-item .label {
-      color: var(--nu-body-text);
-      font-weight: 400;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-    }
-    .nu-priority-pill {
-      display: inline-block;
-      padding: 4px 12px;
-      background: var(--nu-alert-red);
-      color: var(--nu-white);
-      border-radius: 20px;
-      font-weight: 900;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* ═══ SECTION TITLES ═══ */
-    .nu-section-title {
-      font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 1.5rem;
-      line-height: 1.2;
       margin-bottom: 20px;
-      color: var(--nu-dark-text);
     }
-    .nu-section-title .accent {
-      color: #0033cc;
+    .task-eyebrow::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--nu-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--nu-cyan);
     }
 
-    .nu-page-title {
-      font-family: var(--font-primary);
+    h1.task-title {
       font-weight: 900;
       font-size: 2.4rem;
       line-height: 1.15;
       color: var(--nu-dark-text);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    .nu-page-title .accent {
-      color: #0033cc;
-    }
-    .nu-page-subtitle {
+    h1.task-title span.accent { color: var(--nu-blue-deep); }
+
+    .task-sub {
       font-size: 1.1rem;
-      color: var(--nu-body-text);
-      font-weight: 400;
-      margin-bottom: 28px;
+      color: #555;
       max-width: 780px;
+      margin-bottom: 36px;
     }
 
-    /* ═══ ACTION CARD ═══ */
-    .nu-action-card {
-      background: var(--nu-white);
-      border-radius: 10px;
-      padding: 32px;
-      box-shadow: 0 4px 20px rgba(0, 0, 51, 0.08);
-      border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 32px;
-    }
-
-    /* ═══ BADGES ═══ */
-    .nu-badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .nu-badge {
-      display: inline-flex;
-      align-items: center;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      padding: 10px 22px 10px 16px;
-      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%);
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.02em;
-    }
-    .nu-badge.cyan {
-      background: linear-gradient(135deg, #0033cc 0%, #06D0FF 100%);
-    }
-    .nu-badge.gold {
-      background: linear-gradient(135deg, #8a6d2a 0%, #C9A84C 100%);
-    }
-
-    /* ═══ TWO-COLUMN LAYOUT ═══ */
-    .nu-grid-2 {
+    /* ══ META BAR ══ */
+    .meta-bar {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-    @media (max-width: 768px) {
-      .nu-grid-2 { grid-template-columns: 1fr; }
-    }
-
-    .nu-info-card {
-      background: var(--nu-white);
-      border-radius: 8px;
-      padding: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 44px;
+      padding: 22px 24px;
+      background: linear-gradient(180deg, #fafafd 0%, #f0f2f8 100%);
       border: 1px solid var(--nu-medium-gray);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 8px;
     }
-    .nu-info-card h3 {
+    .meta-cell .label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7a7a8a;
+      margin-bottom: 4px;
+    }
+    .meta-cell .value {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      font-size: 0.98rem;
+    }
+    .pill {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .pill-open { background: #FFF3E0; color: var(--nu-status-open); border: 1px solid #F8C98A; }
+    .pill-priority { background: #FCE8E6; color: var(--nu-status-red); border: 1px solid #F4B6B1; }
+    .pill-source { background: #E8F4FD; color: var(--nu-blue-deep); border: 1px solid #B8DCF5; }
+
+    /* ══ SECTION TITLES ══ */
+    .section {
+      margin-bottom: 40px;
+    }
+    .section-title {
       font-weight: 900;
-      font-size: 1.1rem;
-      color: #0033cc;
-      margin-bottom: 12px;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
       padding-bottom: 10px;
       border-bottom: 2px solid var(--nu-medium-gray);
     }
-    .nu-info-card ul {
-      list-style: none;
-      padding: 0;
-    }
-    .nu-info-card ul li {
-      padding: 8px 0;
-      padding-left: 22px;
-      position: relative;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-    .nu-info-card ul li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      top: 8px;
-      color: var(--nu-cyan);
-      font-weight: 900;
-    }
+    .section-title .first { color: var(--nu-blue-deep); }
+    .section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
 
-    /* ═══ STEP LIST ═══ */
-    .nu-steps {
-      list-style: none;
-      counter-reset: stepcounter;
-      padding: 0;
+    /* ══ CONTEXT BOX ══ */
+    .context-box {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 10px;
+      padding: 26px 28px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.04);
     }
-    .nu-steps li {
-      position: relative;
-      padding: 18px 20px 18px 72px;
-      margin-bottom: 12px;
-      background: linear-gradient(90deg, #f8f9fc 0%, #ffffff 100%);
-      border-left: 4px solid var(--nu-blue);
-      border-radius: 4px;
-      counter-increment: stepcounter;
+    .context-box p {
+      margin-bottom: 14px;
+      color: #3a3a4a;
+      font-size: 1rem;
     }
-    .nu-steps li::before {
-      content: counter(stepcounter);
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
-      color: var(--nu-white);
+    .context-box p:last-child { margin-bottom: 0; }
+    .context-box strong { color: var(--nu-dark-text); }
+
+    /* ══ STEP CARDS ══ */
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 18px;
+      align-items: flex-start;
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 10px;
+      padding: 20px 22px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    .step:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,0,255,0.08);
+      border-color: #cdd6f4;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-blue-deep) 70%, var(--nu-cyan) 130%);
+      color: var(--nu-white);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1rem;
+      font-size: 1.2rem;
+      box-shadow: 0 3px 10px rgba(0,0,255,0.25);
     }
-    .nu-steps li strong {
-      display: block;
-      color: var(--nu-dark-text);
+    .step-body h3 {
+      font-size: 1.08rem;
       font-weight: 900;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+    }
+    .step-body p {
+      color: #4a4a58;
+      font-size: 0.96rem;
+    }
+    .step-body ul {
+      margin-top: 8px;
+      padding-left: 0;
+      list-style: none;
+    }
+    .step-body ul li {
+      padding: 4px 0 4px 22px;
+      position: relative;
+      color: #4a4a58;
+      font-size: 0.94rem;
+    }
+    .step-body ul li::before {
+      content: '•';
+      color: var(--nu-blue);
+      font-weight: 900;
+      position: absolute;
+      left: 6px;
+      top: 3px;
+      font-size: 1.1rem;
+    }
+
+    /* ══ CONTACT CARD ══ */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .contact-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 10px;
+      padding: 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .contact-card .role {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
       margin-bottom: 4px;
     }
-    .nu-steps li p {
-      font-size: 0.95rem;
-      color: var(--nu-body-text);
+    .contact-card .name {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 8px;
+    }
+    .contact-card .detail {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.5;
     }
 
-    /* ═══ CONTACT TABLE ═══ */
-    .nu-contact-table {
-      width: 100%;
-      border-collapse: collapse;
+    /* ══ STANDARDS CHECKLIST ══ */
+    .check-list {
       background: var(--nu-white);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
       border: 1px solid var(--nu-medium-gray);
-    }
-    .nu-contact-table th {
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
-      color: var(--nu-white);
-      padding: 14px 16px;
-      text-align: left;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .nu-contact-table td {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      font-size: 0.95rem;
-      vertical-align: top;
-    }
-    .nu-contact-table tr:last-child td {
-      border-bottom: none;
-    }
-    .nu-contact-table tr:hover td {
-      background: #f8f9fc;
-    }
-
-    /* ═══ ALERT / CALLOUT ═══ */
-    .nu-callout {
-      background: linear-gradient(90deg, #fff8e6 0%, #fffbf0 100%);
-      border-left: 4px solid var(--nu-accent-gold);
-      padding: 18px 24px;
-      border-radius: 4px;
-      margin-bottom: 32px;
-    }
-    .nu-callout strong {
-      color: #8a6d2a;
-      font-weight: 900;
-    }
-    .nu-callout p {
-      font-size: 0.95rem;
-      margin-top: 6px;
-    }
-
-    /* ═══ TALKING POINTS ═══ */
-    .nu-talking-points {
-      background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
       border-radius: 10px;
-      padding: 28px 32px;
-      margin-bottom: 32px;
-      border: 1px solid rgba(0, 51, 204, 0.15);
+      padding: 8px 4px;
     }
-    .nu-talking-points h3 {
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: #0033cc;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .check-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--nu-medium-gray);
     }
-    .nu-talking-points ol {
-      padding-left: 22px;
+    .check-item:last-child { border-bottom: none; }
+    .check-box {
+      width: 26px;
+      height: 26px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 6px;
+      background: var(--nu-white);
+      margin-top: 2px;
+      position: relative;
     }
-    .nu-talking-points ol li {
-      margin-bottom: 10px;
-      font-size: 0.95rem;
-      line-height: 1.6;
+    .check-item h4 {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    .check-item p {
+      color: #5a5a6a;
+      font-size: 0.92rem;
     }
 
-    /* ═══ CTA ROW ═══ */
-    .nu-cta-row {
+    /* ══ CTA STRIP ══ */
+    .cta-strip {
+      margin-top: 20px;
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      margin-top: 12px;
     }
-    .nu-btn-primary {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033CC 100%);
-      color: var(--nu-white);
-      padding: 13px 28px;
-      border: none;
-      border-radius: 4px;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 26px;
+      border-radius: 6px;
       font-weight: 700;
       font-size: 0.95rem;
       letter-spacing: 0.02em;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.18s ease;
     }
-    .nu-btn-primary:hover {
+    .btn-primary {
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      box-shadow: 0 3px 12px rgba(0,0,255,0.25);
+    }
+    .btn-primary:hover {
+      background: var(--nu-blue-deep);
       transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(0, 0, 255, 0.25);
+      box-shadow: 0 6px 18px rgba(0,0,255,0.35);
     }
-    .nu-btn-secondary {
-      display: inline-block;
-      background: var(--nu-white);
+    .btn-secondary {
+      background: transparent;
       color: var(--nu-blue);
-      padding: 13px 28px;
       border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
     }
-    .nu-btn-secondary:hover {
+    .btn-secondary:hover {
       background: var(--nu-blue);
       color: var(--nu-white);
     }
 
-    /* ═══ STATUS STRIP ═══ */
-    .nu-status-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--nu-medium-gray);
+    /* ══ NOTES ══ */
+    .notes-block {
+      background: #FFFBEF;
+      border: 1px solid #F1E4B6;
+      border-left: 4px solid var(--nu-accent-gold);
       border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 32px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      padding: 20px 24px;
     }
-    .nu-status-cell {
-      background: var(--nu-white);
-      padding: 20px 16px;
-      text-align: center;
-    }
-    .nu-status-cell .label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--nu-body-text);
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-    .nu-status-cell .value {
-      font-size: 1.05rem;
+    .notes-block h4 {
       font-weight: 900;
       color: var(--nu-dark-text);
+      margin-bottom: 8px;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
     }
-    .nu-status-cell .value.highlight {
-      color: #0033cc;
-    }
-    @media (max-width: 768px) {
-      .nu-status-strip { grid-template-columns: repeat(2, 1fr); }
-    }
+    .notes-block p { color: #5a4e20; font-size: 0.95rem; }
 
-    /* ═══ FOOTER ═══ */
+    /* ══ FOOTER ══ */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 48px 40px;
+      padding: 44px 40px;
       text-align: center;
-      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
-      font-family: 'Lato', serif;
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.35rem;
+      font-weight: 400;
+      font-size: 1.2rem;
       color: var(--nu-cyan);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .nu-footer-contact {
-      font-size: 1rem;
-      line-height: 1.9;
+      font-size: 0.95rem;
+      line-height: 1.8;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
-      font-weight: 700;
     }
-    .nu-footer-contact a:hover {
-      text-decoration: underline;
-    }
-    .nu-footer-name {
-      font-weight: 900;
-      color: var(--nu-white);
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
+    .nu-footer-contact a:hover { text-decoration: underline; }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .nu-header { padding: 44px 20px 64px; min-height: 220px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 0.9rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1rem; }
+      .nu-wrap { padding: 44px 22px 60px; }
+      h1.task-title { font-size: 1.8rem; }
+      .step { grid-template-columns: 44px 1fr; gap: 14px; padding: 16px 18px; }
+      .step-num { width: 40px; height: 40px; font-size: 1rem; }
+      .meta-bar { padding: 18px; }
     }
 
-    @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
-      .nu-tagline { font-size: 1rem; }
-      .nu-page-title { font-size: 1.7rem; }
-      .nu-container { padding: 0 20px; }
-      .nu-action-card { padding: 22px; }
-      .nu-badge { clip-path: none; border-radius: 6px; }
+    @media print {
+      body { background: var(--nu-white); }
+      .nu-header, .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .step:hover { transform: none; box-shadow: none; }
+      .cta-strip { display: none; }
     }
   </style>
 </head>
@@ -543,10 +479,10 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <div class="nu-phoenix-watermark">
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <path d="M100 20 L110 45 L140 30 L120 55 L160 45 L130 75 L150 110 L115 90 L100 130 L85 90 L50 110 L70 75 L40 45 L80 55 L60 30 L90 45 Z" fill="white"/>
-        <path d="M100 120 L104 150 L120 140 L110 160 L100 195 L90 160 L80 140 L96 150 Z" fill="white"/>
+    <div class="nu-phoenix-icon" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
       </svg>
     </div>
     <div class="nu-logo-text">NORRIS</div>
@@ -561,196 +497,243 @@
     </svg>
   </div>
 
-  <!-- MAIN CONTENT -->
+  <!-- CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-container">
+    <div class="nu-wrap">
+
+      <div class="task-eyebrow">reMarkable Action Item</div>
+
+      <h1 class="task-title"><span class="accent">Southern Company</span> Standards Update</h1>
+      <p class="task-sub">
+        Confirm the current revision of Southern Company's material and construction
+        standards, document what has changed since our last pull, and align our
+        FlexPro Armor, Skylift, and Samson Rope offerings to the spec in use across
+        Alabama Power, Georgia Power, Mississippi Power, and Southern Company
+        Services.
+      </p>
 
       <!-- META BAR -->
-      <div class="nu-meta-bar">
-        <div class="nu-meta-item">
+      <div class="meta-bar">
+        <div class="meta-cell">
+          <span class="label">Status</span>
+          <span class="value"><span class="pill pill-open">Open</span></span>
+        </div>
+        <div class="meta-cell">
+          <span class="label">Priority</span>
+          <span class="value"><span class="pill pill-priority">High</span></span>
+        </div>
+        <div class="meta-cell">
           <span class="label">Source</span>
-          <span>reMarkable Action Item</span>
+          <span class="value"><span class="pill pill-source">reMarkable</span></span>
         </div>
-        <div class="nu-meta-item">
-          <span class="label">Captured</span>
-          <span>2026-04-22</span>
-        </div>
-        <div class="nu-meta-item">
+        <div class="meta-cell">
           <span class="label">Owner</span>
-          <span>Aaron C. Norris</span>
+          <span class="value">Aaron C. Norris</span>
         </div>
-        <div class="nu-meta-item">
-          <span class="nu-priority-pill">Open — Action Required</span>
-        </div>
-      </div>
-
-      <!-- PAGE TITLE -->
-      <h1 class="nu-page-title"><span class="accent">Southern Company</span> — Get Standards Update</h1>
-      <p class="nu-page-subtitle">Outreach brief for pulling the current Southern Company equipment standards (bucket trucks, digger derricks, bucket covers, rope, and rigging) so Norris Utilities® stays spec-aligned across its Southern Operating Company territories.</p>
-
-      <!-- BADGES -->
-      <div class="nu-badge-row">
-        <div class="nu-badge cyan">ACCOUNT INTELLIGENCE</div>
-        <div class="nu-badge">SPEC ALIGNMENT</div>
-        <div class="nu-badge gold">HIGH-VALUE ACCOUNT</div>
-      </div>
-
-      <!-- STATUS STRIP -->
-      <div class="nu-status-strip">
-        <div class="nu-status-cell">
-          <div class="label">Account Tier</div>
-          <div class="value highlight">Strategic</div>
-        </div>
-        <div class="nu-status-cell">
-          <div class="label">OpCo Count</div>
-          <div class="value">4 States</div>
-        </div>
-        <div class="nu-status-cell">
-          <div class="label">Last Standards Pull</div>
-          <div class="value">Needs Refresh</div>
-        </div>
-        <div class="nu-status-cell">
-          <div class="label">Target Close</div>
-          <div class="value highlight">30 Days</div>
+        <div class="meta-cell">
+          <span class="label">Logged</span>
+          <span class="value">2026-04-23</span>
         </div>
       </div>
 
       <!-- WHY THIS MATTERS -->
-      <div class="nu-action-card">
-        <h2 class="nu-section-title"><span class="accent">Why</span> This Matters</h2>
-        <p>Southern Company is one of the largest investor-owned utilities in the Southeast — the parent of Alabama Power, Georgia Power, Mississippi Power, and Southern Company Gas. Every unit, attachment, and safety product we sell into their operating companies has to match their current equipment and material standards. Spec documents get revised quarterly, and an out-of-date spec sheet on our end is how deals get bounced at the gate.</p>
-        <p style="margin-top: 12px;">Pulling a fresh standards package lets Norris Utilities® pre-qualify FlexPro Armor bucket covers, Skylift boom trucks, Samson Rope, and BSS drill rigs against Southern's current approved-materials list <em>before</em> we quote — not after a rejection.</p>
-      </div>
-
-      <!-- ALERT / CALLOUT -->
-      <div class="nu-callout">
-        <strong>⚡ Critical Detail</strong>
-        <p>Each operating company (Alabama Power, Georgia Power, Mississippi Power, Southern Company Gas) can carry <em>its own</em> supplement to the Southern Company master standard. Request the master plus each OpCo supplement — not just one.</p>
-      </div>
-
-      <!-- TWO-COLUMN: What to Request / What to Ask -->
-      <div class="nu-grid-2">
-        <div class="nu-info-card">
-          <h3>What to Request</h3>
-          <ul>
-            <li>Aerial Device / Bucket Truck Standard (current revision)</li>
-            <li>Digger Derrick Standard + preferred chassis list</li>
-            <li>Approved Materials List — Dielectric Covers &amp; Guards</li>
-            <li>Rigging &amp; Rope Standard (Samson Blue Streak, Nystron, AmSteel)</li>
-            <li>Insulating Liner / Bucket Cover test spec (ASTM F914 / F2575 applicable)</li>
-            <li>PPE &amp; Cover-Up compliance list</li>
-            <li>Vendor onboarding checklist / EHS requirements</li>
-            <li>Preferred purchasing channel (direct, distributor, or approved dealer)</li>
-          </ul>
+      <section class="section">
+        <h2 class="section-title"><span class="first">Why</span> <span class="rest">This Matters</span></h2>
+        <div class="context-box">
+          <p>
+            Southern Company's operating companies &mdash; <strong>Alabama Power,
+            Georgia Power, Mississippi Power,</strong> and Southern Company Services
+            &mdash; drive the bulk of utility equipment and PPE purchasing across our
+            core Southeast territory. Contractors working on Southern Co. projects
+            (Chain Electric, Irby, Linetec, Pike, and others) must buy to the
+            standard in force at the time of the award.
+          </p>
+          <p>
+            If our FlexPro Armor bucket cover dimensions, Skylift configurations, or
+            Samson Rope strength and splice callouts fall behind the current
+            revision, we lose bids on technicalities and we create rework risk for
+            customers already in the field.
+          </p>
+          <p>
+            This action pulls the latest revision on file, maps the deltas against
+            what we quoted in the last quarter, and pushes any required updates
+            into the line card, quote templates, and contractor-facing SKU
+            crosswalks.
+          </p>
         </div>
-        <div class="nu-info-card">
-          <h3>What to Ask About</h3>
-          <ul>
-            <li>Any revisions since the last published edition</li>
-            <li>Pending 2026 standard changes driven by OSHA 1910.269 interpretations</li>
-            <li>Whether bucket-cover approvals are OpCo-level or corporate-level</li>
-            <li>Who signs off on new-product evaluations (Engineering vs. Supply Chain)</li>
-            <li>Field-trial process for non-listed products</li>
-            <li>Whether FlexPro Armor is currently listed or needs re-submission</li>
-            <li>Preferred file format (PDF package, SharePoint access, or printed copy)</li>
-            <li>Any required NDA or supplier agreement to access the documents</li>
-          </ul>
-        </div>
-      </div>
+      </section>
 
       <!-- ACTION STEPS -->
-      <div class="nu-action-card">
-        <h2 class="nu-section-title"><span class="accent">Action</span> Plan</h2>
-        <ol class="nu-steps">
-          <li>
-            <strong>Identify the right gatekeeper</strong>
-            <p>Route the request through Supply Chain / Category Management first (bucket trucks, aerial devices, rigging). If the standard is engineering-owned, expect a warm hand-off to T&amp;D Engineering Standards.</p>
-          </li>
-          <li>
-            <strong>Send the written ask</strong>
-            <p>Short, direct email: who we are, what products we represent, which OpCos we serve, and the exact standards we need. Offer to sign a supplier NDA if required.</p>
-          </li>
-          <li>
-            <strong>Log the response in the master tracker</strong>
-            <p>Record the date received, the document revision number, and the internal contact. Add to the Norris Utilities® vendor standards library under <em>southern_company/</em>.</p>
-          </li>
-          <li>
-            <strong>Cross-check our SKUs against the approved list</strong>
-            <p>Run FlexPro Armor, NU-BC-2851, NU-BC-2834, Skylift SBA40i-LW / SBA47i-MH, and Samson Rope line items against the AML. Flag any gaps and open a submittal if needed.</p>
-          </li>
-          <li>
-            <strong>Set a standing quarterly refresh</strong>
-            <p>Calendar reminder every 90 days to check for new revisions. Standards change silently; the first person who notices wins the quote.</p>
-          </li>
-        </ol>
-      </div>
+      <section class="section">
+        <h2 class="section-title"><span class="first">Action</span> <span class="rest">Steps</span></h2>
+        <div class="steps">
 
-      <!-- TALKING POINTS -->
-      <div class="nu-talking-points">
-        <h3>Talking Points for the Call / Email</h3>
-        <ol>
-          <li>Norris Utilities®, LLC — 3rd-generation utility equipment dealer, Birmingham, Alabama. Authorized distributor for Samson Rope, SE territory rep for Bay Shore Systems, Skylift dealer, and manufacturer of FlexPro Armor bucket covers (handmade in the USA).</li>
-          <li>We currently serve 20+ states and actively quote Alabama Power, Georgia Power, and Mississippi Power cooperatives and contractors. We want to make sure every Norris Utilities® quote into Southern Company matches the current spec exactly — not last year's.</li>
-          <li>Request: the current aerial-device, digger-derrick, and approved-materials standards, plus any OpCo-level supplements. PDF or SharePoint link both work.</li>
-          <li>Offer: We'll sign any vendor or NDA paperwork needed, and we can come to Atlanta for an in-person product review if that's preferable.</li>
-          <li>Close with the ask: "Who is the best person on your side to keep us in the loop when these standards revise?"</li>
-        </ol>
-      </div>
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Request the current standards package</h3>
+              <p>Reach out to our Southern Co. contacts and confirm we have the active revision on file (document numbers, revision letter, and effective date).</p>
+              <ul>
+                <li>Target documents: Overhead Construction Standards, Substation Standards, PPE &amp; Fall Protection Standards, Line Tool Standards.</li>
+                <li>Confirm whether the package is public or requires a signed distribution agreement.</li>
+              </ul>
+            </div>
+          </div>
 
-      <!-- CONTACT TABLE -->
-      <h2 class="nu-section-title" style="margin-top: 16px;"><span class="accent">Target</span> Contacts &amp; Routes</h2>
-      <table class="nu-contact-table">
-        <thead>
-          <tr>
-            <th>Entity</th>
-            <th>Function</th>
-            <th>Route</th>
-            <th>Priority</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Southern Company Services</strong><br>Atlanta, GA</td>
-            <td>Corporate Supply Chain / Category Management</td>
-            <td>Direct outreach via supplier portal or category buyer</td>
-            <td>High</td>
-          </tr>
-          <tr>
-            <td><strong>Alabama Power</strong><br>Birmingham, AL</td>
-            <td>T&amp;D Engineering Standards &amp; Materials</td>
-            <td>Local — Aaron can meet in person in Birmingham</td>
-            <td>High</td>
-          </tr>
-          <tr>
-            <td><strong>Georgia Power</strong><br>Atlanta, GA</td>
-            <td>T&amp;D Standards, Distribution Engineering</td>
-            <td>Phone / email intro; tie to existing Atlanta travel with Andy Barron</td>
-            <td>Medium</td>
-          </tr>
-          <tr>
-            <td><strong>Mississippi Power</strong><br>Gulfport, MS</td>
-            <td>Distribution Standards / Materials</td>
-            <td>Phone intro; smaller OpCo, faster response</td>
-            <td>Medium</td>
-          </tr>
-          <tr>
-            <td><strong>Southern Company Gas</strong><br>Atlanta, GA</td>
-            <td>Field Operations / Fleet &amp; Equipment</td>
-            <td>Secondary — only if product fit applies</td>
-            <td>Low</td>
-          </tr>
-        </tbody>
-      </table>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Pull revision history since last quote cycle</h3>
+              <p>Identify what changed since our most recent pull. Flag anything that touches bucket truck, bucket cover, rope, or drill rig scope.</p>
+              <ul>
+                <li>Bucket cover material callouts and size language (NU-BC-2851 / NU-BC-2834 mapping).</li>
+                <li>Dielectric ratings, cover-up, and PPE categories.</li>
+                <li>Rope MBS, splice type, and rated-capacity labeling.</li>
+                <li>Platform and boom inspection criteria for Skylift units.</li>
+              </ul>
+            </div>
+          </div>
 
-      <!-- CTA BLOCK -->
-      <div class="nu-action-card" style="margin-top: 36px; text-align: center; background: linear-gradient(135deg, #f8f9fc 0%, #eef1f8 100%);">
-        <h2 class="nu-section-title" style="justify-content: center;"><span class="accent">Next</span> Move</h2>
-        <p style="max-width: 620px; margin: 0 auto 20px;">Draft the outreach email to Alabama Power Materials &amp; Standards first — it's the closest operating company and the fastest path into the rest of the Southern Company standards library.</p>
-        <div class="nu-cta-row" style="justify-content: center;">
-          <a href="mailto:acnorris@norrisutilities.com?subject=Southern%20Company%20Standards%20Update%20—%20Outreach%20Draft" class="nu-btn-primary">Draft Outreach Email</a>
-          <a href="tel:2055001343" class="nu-btn-secondary">Call to Discuss</a>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Cross-check against Norris Utilities® SKUs</h3>
+              <p>Walk each open opportunity through the updated spec and confirm our line card still matches. Note any SKU that needs a data-sheet update.</p>
+              <ul>
+                <li>FlexPro Armor: NU-BC-2851, NU-BC-2834, NU-BC-2851-C, NU-BC-2834-C.</li>
+                <li>Samson Rope &mdash; confirm Donna Poll and Sarah Daniels are copied when spec updates require new part numbers.</li>
+                <li>Skylift &mdash; loop in Nick Gordon on any aerial-device spec movement.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>Update customer-facing materials</h3>
+              <p>Push the confirmed language into the line card, quote template, and contractor crosswalks so every new proposal quotes to the current revision.</p>
+              <ul>
+                <li>Stamp revision number and effective date on the quote cover sheet.</li>
+                <li>Archive the prior revision into /norris-ops/internal/standards-archive/.</li>
+                <li>Post a one-page summary to the ops portal so CB can reference during customer calls.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <h3>Notify customers on open deals</h3>
+              <p>Send a short, direct note to every contractor with a Southern Co. job in the pipeline confirming the revision we are quoting to and asking them to flag any deviations.</p>
+              <ul>
+                <li>Chain Electric, Irby (Jared Lemoine), Linetec, Pike, Matthews Contracting.</li>
+                <li>Short paragraph format, no filler &mdash; Aaron's voice.</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
-      </div>
+      </section>
+
+      <!-- STANDARDS TO REFRESH -->
+      <section class="section">
+        <h2 class="section-title"><span class="first">Standards</span> <span class="rest">Targeted for Refresh</span></h2>
+        <div class="check-list">
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div>
+              <h4>Overhead Construction Standards</h4>
+              <p>Pole framing, cover-up placement, and rubber goods categories used on distribution builds.</p>
+            </div>
+          </div>
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div>
+              <h4>PPE &amp; Fall Protection</h4>
+              <p>Bucket cover dimensions, dielectric requirements, harness and lanyard spec &mdash; directly drives FlexPro Armor SKU selection.</p>
+            </div>
+          </div>
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div>
+              <h4>Line Tool &amp; Rope Standards</h4>
+              <p>Rope minimum breaking strength, splice type, rated capacity tags, and inspection cadence &mdash; Samson Rope line.</p>
+            </div>
+          </div>
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div>
+              <h4>Aerial Device Inspection Criteria</h4>
+              <p>Boom, platform, and dielectric test requirements that apply to Skylift bucket trucks in service on Southern Co. work.</p>
+            </div>
+          </div>
+          <div class="check-item">
+            <div class="check-box"></div>
+            <div>
+              <h4>Substation &amp; Underground Scope</h4>
+              <p>Confirm any spec overlap that would affect Bay Shore Systems drill rig quoting in the Southeast territory.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACTS -->
+      <section class="section">
+        <h2 class="section-title"><span class="first">Contacts</span> <span class="rest">to Work</span></h2>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="role">Contractor &mdash; Irby Construction</div>
+            <div class="name">Jared Lemoine</div>
+            <div class="detail">
+              Primary contact replacing Gary Wiggs and Scott Argyle (both retired April 2026). Works Southern Co. distribution jobs. Confirm which Southern Co. revision he is bidding to on current work.
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="role">Manufacturer &mdash; Skylift</div>
+            <div class="name">Nick Gordon</div>
+            <div class="detail">
+              Pricing and specs. Pull any bucket-truck compliance notes tied to Southern Co. aerial-device requirements.
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="role">Manufacturer &mdash; Samson Rope</div>
+            <div class="name">Donna Poll &amp; Sarah Daniels</div>
+            <div class="detail">
+              Always CC both. Verify current rope spec language matches the Southern Co. line-tool standard, especially MBS and splice callouts.
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="role">Utility &mdash; Southern Co. Operating</div>
+            <div class="name">Alabama Power / Georgia Power / Mississippi Power</div>
+            <div class="detail">
+              Purchasing and standards desks. Confirm revision in force, document number, and effective date. Request distribution agreement if required.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NOTES -->
+      <section class="section">
+        <div class="notes-block">
+          <h4>Field Notes</h4>
+          <p>
+            Southern Co. operating companies run separate purchasing desks but share
+            core standards through Southern Company Services. Pull from Southern
+            Company Services first for the authoritative revision, then confirm each
+            operating company has adopted it. Any lag between OpCo adoption is where
+            contractors get caught &mdash; flag the gap when it appears.
+          </p>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section">
+        <h2 class="section-title"><span class="first">Next</span> <span class="rest">Moves</span></h2>
+        <div class="cta-strip">
+          <a href="mailto:acnorris@norrisutilities.com?subject=Southern%20Co%20Standards%20Update%20%E2%80%94%20Action%20Item&amp;body=Aaron%20%E2%80%94%0A%0AStatus%20of%20the%20Southern%20Company%20standards%20pull%3A%0A%0A%E2%80%A2%20Revision%20confirmed%3A%0A%E2%80%A2%20Deltas%20vs%20last%20quote%20cycle%3A%0A%E2%80%A2%20SKU%20changes%20required%3A%0A%0ASincerely%2C%0A" class="btn btn-primary">Log Status Update</a>
+          <a href="tel:2055001343" class="btn btn-secondary">Call Aaron &mdash; 205-500-1343</a>
+        </div>
+      </section>
 
     </div>
   </main>
@@ -758,11 +741,10 @@
   <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
-    <div class="nu-footer-name">Aaron C. Norris, Founder &amp; CEO</div>
     <div class="nu-footer-contact">
-      Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a><br>
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>

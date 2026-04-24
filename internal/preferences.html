@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- nu-auth-gate-v2 -->
+<script>(function(){if(sessionStorage.getItem('nu_auth_2026')==='granted')return;var pw=prompt('Password required:');if(pw==='norris2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','aaron');}else if(pw==='legacy2026'){sessionStorage.setItem('nu_auth_2026','granted');sessionStorage.setItem('nu_role','cb');}else{window.location.replace('../index.html');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preferences — Norris Utilities®</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+body { font-family:'Lato',sans-serif; margin:0; background:#f5f5f7; color:#1a1a1a; }
+.hdr { background: linear-gradient(135deg,#0a0e5c,#0033cc,#0066ee,#00aaff,#06D0FF); color:#fff; padding:18px 22px; }
+.hdr h1 { margin:0; font-weight:900; font-size:22px; }
+.wrap { padding:22px; max-width:640px; margin:0 auto; }
+.card { background:#fff; padding:18px 22px; border-radius:8px; margin-bottom:18px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+.card h2 { margin:0 0 12px; font-size:17px; font-weight:900; }
+.card h2 .first { color:#0033cc; }
+.row { display:flex; align-items:center; padding:8px 0; gap:12px; }
+.row label { flex:1; font-size:14px; }
+.row input[type=range] { flex:1; }
+.row input[type=checkbox] { transform: scale(1.2); }
+.btn { background:#0033cc; color:#fff; border:none; padding:8px 14px; border-radius:4px; font:inherit; cursor:pointer; }
+.btn.secondary { background:#fff; color:#0033cc; border:1px solid #0033cc; }
+.hint { color:#777; font-size:12px; margin-top:4px; }
+.footer { padding:24px 22px; text-align:center; color:#777; font-size:12px; }
+.footer .legacy { font-family:'Playfair Display',serif; font-style:italic; color:#0033cc; font-size:14px; }
+</style>
+</head>
+<body>
+<header class="hdr"><h1>Preferences</h1></header>
+<main class="wrap">
+  <section class="card">
+    <h2><span class="first">Celebration</span> Sounds</h2>
+    <div class="row">
+      <label for="se">Enable sound on this browser</label>
+      <input type="checkbox" id="se">
+    </div>
+    <div class="row">
+      <label for="sv">Volume: <span id="sv-val">60</span>%</label>
+      <input type="range" id="sv" min="0" max="100" value="60">
+    </div>
+    <div id="per-sound"></div>
+    <div class="row" style="justify-content:flex-end;">
+      <button class="btn secondary" id="test">Test sound</button>
+      <button class="btn" id="save">Save</button>
+    </div>
+    <p class="hint">Your preferences are stored in this browser only. Sounds are
+       synthesized in-browser via Web Audio — no files are downloaded.</p>
+  </section>
+</main>
+<footer class="footer">
+  <p>Norris Utilities<sup>®</sup> · <span class="legacy">A Legacy of Commitment<sup>®</sup></span></p>
+</footer>
+
+<script src="/assets/js/sound-engine.js"></script>
+<script>
+(function() {
+  var prefs = window.SoundEngine.prefs.get();
+  document.getElementById('se').checked = !!prefs.soundEnabled;
+  document.getElementById('sv').value = prefs.soundVolume || 60;
+  document.getElementById('sv-val').textContent = prefs.soundVolume || 60;
+
+  var perSound = document.getElementById('per-sound');
+  window.SoundEngine.sounds.forEach(function(name) {
+    var row = document.createElement('div');
+    row.className = 'row';
+    var label = document.createElement('label');
+    label.textContent = 'Mute "' + name + '"';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.id = 'mute-' + name;
+    cb.checked = !!(prefs.muted && prefs.muted[name]);
+    row.appendChild(label); row.appendChild(cb);
+    perSound.appendChild(row);
+  });
+
+  document.getElementById('sv').addEventListener('input', function(e) {
+    document.getElementById('sv-val').textContent = e.target.value;
+  });
+
+  document.getElementById('test').addEventListener('click', function() {
+    window.SoundEngine.unlock();
+    window.SoundEngine.play('chime', { volume: document.getElementById('sv').value/100 });
+  });
+
+  document.getElementById('save').addEventListener('click', function() {
+    var muted = {};
+    window.SoundEngine.sounds.forEach(function(n) {
+      muted[n] = document.getElementById('mute-' + n).checked;
+    });
+    window.SoundEngine.prefs.set({
+      soundEnabled: document.getElementById('se').checked,
+      soundVolume: parseInt(document.getElementById('sv').value, 10),
+      muted: muted
+    });
+    alert('Preferences saved.');
+  });
+})();
+</script>
+</body>
+</html>

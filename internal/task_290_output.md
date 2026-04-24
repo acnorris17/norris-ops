@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Receiving Workflow — Last PO Order — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Receive &amp; Process Inventory — Last PO — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <style>
     :root {
       --nu-blue: #0000FF;
@@ -16,9 +16,9 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-success: #00A651;
-      --nu-warning: #F39C12;
-      --nu-danger: #E74C3C;
+      --nu-success: #1b8a3a;
+      --nu-warn: #c17a00;
+      --nu-danger: #b4251d;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -36,18 +36,18 @@
     .nu-header {
       position: relative;
       background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
-      padding: 60px 40px 80px;
+      padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 280px;
+      min-height: 300px;
     }
     .nu-header::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 80px);
       z-index: 1;
       opacity: 0.7;
     }
@@ -59,14 +59,15 @@
       background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
-    .nu-header * { position: relative; z-index: 2; }
+    .nu-header-inner { position: relative; z-index: 2; }
+
     .nu-phoenix-icon {
-      width: 80px; height: 80px;
-      margin: 0 auto 16px;
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 14px;
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
     .nu-logo-text {
-      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3.2rem;
       color: var(--nu-white);
@@ -76,21 +77,21 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
-      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.7em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      padding-left: 0.7em;
     }
     .nu-tagline {
-      font-family: var(--font-primary);
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.3rem;
+      font-weight: 400;
+      font-size: 1.25rem;
       color: rgba(255,255,255,0.95);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
     }
 
     /* CHEVRON */
@@ -106,369 +107,284 @@
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
+      overflow: hidden;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 200px; left: 50%;
-      transform: translateX(-50%);
-      width: 65%; max-width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
-      border-radius: 50%;
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%; height: 600px;
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z' fill='%230000FF' opacity='0.07'/><path d='M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z' fill='%230000FF' opacity='0.07'/></svg>") center/contain no-repeat;
+      opacity: 1;
       z-index: 0;
       pointer-events: none;
     }
     .nu-container {
       position: relative;
       z-index: 1;
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 60px 40px;
+      padding: 60px 40px 80px;
     }
 
-    /* PAGE TITLE */
-    .page-title-block {
-      text-align: center;
-      margin-bottom: 50px;
-      padding-bottom: 30px;
-      border-bottom: 3px solid var(--nu-medium-gray);
+    /* TITLE BLOCK */
+    .nu-title-block {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 3px solid var(--nu-blue);
     }
-    .page-eyebrow {
+    .nu-kicker {
       display: inline-block;
       background: var(--nu-blue);
       color: var(--nu-white);
-      padding: 6px 18px;
+      padding: 6px 14px;
       font-size: 0.75rem;
       font-weight: 900;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      margin-bottom: 20px;
-      border-radius: 3px;
-    }
-    .page-title {
-      font-weight: 900;
-      font-size: 2.5rem;
-      color: var(--nu-dark-text);
-      line-height: 1.2;
       margin-bottom: 14px;
     }
-    .page-title span { color: var(--nu-blue); }
-    .page-subtitle {
-      font-size: 1.1rem;
-      color: var(--nu-body-text);
-      max-width: 720px;
-      margin: 0 auto;
+    h1.nu-page-title {
+      font-weight: 900;
+      font-size: 2.3rem;
+      line-height: 1.15;
+      color: var(--nu-dark-text);
+      margin-bottom: 12px;
+    }
+    h1.nu-page-title span { color: var(--nu-blue); }
+    .nu-subtitle {
+      font-size: 1.05rem;
+      color: #555;
+      max-width: 780px;
+    }
+
+    /* STATUS BAR */
+    .nu-status-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+    .nu-status-tile {
+      background: var(--nu-light-gray);
+      border-left: 4px solid var(--nu-cyan);
+      padding: 16px 18px;
+      border-radius: 6px;
+    }
+    .nu-status-tile.priority { border-left-color: var(--nu-blue); }
+    .nu-status-tile.open { border-left-color: var(--nu-warn); }
+    .nu-status-label {
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      color: #6b6b7a;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .nu-status-value {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
     }
 
     /* SECTION */
-    .nu-section { margin-bottom: 50px; }
-    .nu-section-title {
-      font-family: var(--font-primary);
+    .nu-section { margin-bottom: 48px; }
+    h2.nu-section-title {
       font-weight: 900;
       font-size: 1.5rem;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--nu-medium-gray);
+      margin-bottom: 18px;
+      letter-spacing: 0.01em;
     }
-    .nu-section-title .first-word { color: var(--nu-blue); }
-    .nu-section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
+    h2.nu-section-title .first { color: #0033cc; }
+    h2.nu-section-title .rest { color: var(--nu-dark-text); }
 
-    /* STATUS BANNER */
-    .status-banner {
+    /* CHEVRON BADGE STEPS */
+    .nu-steps { display: grid; gap: 14px; }
+    .nu-step {
       display: flex;
-      align-items: center;
-      gap: 20px;
-      background: linear-gradient(135deg, #fff8e1 0%, #fffbf0 100%);
-      border-left: 5px solid var(--nu-warning);
-      padding: 22px 28px;
-      border-radius: 6px;
-      margin-bottom: 40px;
-    }
-    .status-banner-icon {
-      flex-shrink: 0;
-      width: 48px; height: 48px;
-      background: var(--nu-warning);
+      align-items: stretch;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
       color: var(--nu-white);
-      border-radius: 50%;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .nu-step-num {
+      flex-shrink: 0;
+      width: 70px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 50%, 100% 100%, 0 100%);
     }
-    .status-banner-text strong {
-      display: block;
-      color: var(--nu-dark-text);
-      font-size: 1.05rem;
+    .nu-step-body {
+      padding: 14px 20px 14px 8px;
+      flex-grow: 1;
+    }
+    .nu-step-title {
+      font-weight: 700;
+      font-size: 1rem;
       margin-bottom: 4px;
     }
-    .status-banner-text span {
-      font-size: 0.95rem;
-      color: var(--nu-body-text);
-    }
-
-    /* WORKFLOW STEPS */
-    .workflow-grid {
-      display: grid;
-      gap: 18px;
-    }
-    .workflow-step {
-      display: grid;
-      grid-template-columns: 60px 1fr;
-      gap: 20px;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 4px solid var(--nu-blue);
-      border-radius: 6px;
-      padding: 22px 26px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .workflow-step:hover {
-      transform: translateX(3px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-    .step-number {
-      width: 50px; height: 50px;
-      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
-      color: var(--nu-white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.3rem;
-    }
-    .step-content h3 {
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
-    }
-    .step-content p {
-      font-size: 0.96rem;
-      color: var(--nu-body-text);
-      margin-bottom: 10px;
-    }
-    .step-content ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .step-content ul li {
-      position: relative;
-      padding-left: 22px;
-      margin-bottom: 6px;
-      font-size: 0.94rem;
-    }
-    .step-content ul li::before {
-      content: '•';
-      position: absolute;
-      left: 6px;
-      color: var(--nu-cyan);
-      font-weight: 900;
-      font-size: 1.2rem;
-      line-height: 1;
+    .nu-step-desc {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.5;
     }
 
     /* CHECKLIST */
-    .checklist {
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      padding: 28px 32px;
-      border: 1px solid var(--nu-medium-gray);
+    .nu-checklist {
+      list-style: none;
+      display: grid;
+      gap: 10px;
     }
-    .checklist-item {
+    .nu-checklist li {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--nu-medium-gray);
+      gap: 12px;
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-left: 4px solid var(--nu-cyan);
+      padding: 14px 18px;
+      border-radius: 6px;
+      font-size: 0.95rem;
     }
-    .checklist-item:last-child { border-bottom: none; }
-    .check-box {
+    .nu-checklist li::before {
+      content: '';
       flex-shrink: 0;
-      width: 22px; height: 22px;
+      width: 18px;
+      height: 18px;
       border: 2px solid var(--nu-blue);
-      border-radius: 4px;
+      border-radius: 3px;
       margin-top: 2px;
       background: var(--nu-white);
     }
-    .check-text {
-      font-size: 0.97rem;
-      color: var(--nu-dark-text);
-    }
-    .check-text strong { color: var(--nu-blue); }
+    .nu-checklist li strong { color: var(--nu-dark-text); }
 
-    /* INFO CARDS */
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-    .info-card {
-      background: var(--nu-white);
+    /* TABLE */
+    .nu-table-wrap {
+      overflow-x: auto;
       border: 1px solid var(--nu-medium-gray);
-      border-top: 3px solid var(--nu-blue);
-      padding: 20px 22px;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-radius: 8px;
     }
-    .info-card-label {
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--nu-blue);
-      margin-bottom: 8px;
-    }
-    .info-card-value {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-      line-height: 1.4;
-    }
-    .info-card-sub {
-      font-size: 0.85rem;
-      color: var(--nu-body-text);
-      margin-top: 4px;
-    }
-
-    /* INSPECTION TABLE */
-    .inspection-table {
+    table.nu-table {
       width: 100%;
       border-collapse: collapse;
+      font-size: 0.93rem;
       background: var(--nu-white);
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      border: 1px solid var(--nu-medium-gray);
     }
-    .inspection-table thead {
-      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033cc 100%);
+    table.nu-table thead {
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: var(--nu-white);
     }
-    .inspection-table th {
+    table.nu-table th {
       padding: 14px 16px;
-      font-weight: 900;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       text-align: left;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      font-size: 0.82rem;
+      text-transform: uppercase;
     }
-    .inspection-table td {
-      padding: 14px 16px;
-      font-size: 0.93rem;
-      border-bottom: 1px solid var(--nu-medium-gray);
+    table.nu-table td {
+      padding: 12px 16px;
+      border-top: 1px solid var(--nu-medium-gray);
       vertical-align: top;
     }
-    .inspection-table tbody tr:nth-child(even) { background: var(--nu-light-gray); }
-    .inspection-table tbody tr:last-child td { border-bottom: none; }
-    .pill {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-    }
-    .pill-required {
-      background: #fde7e9;
-      color: var(--nu-danger);
-    }
-    .pill-recommended {
-      background: #e6f4ff;
-      color: var(--nu-blue);
-    }
+    table.nu-table tbody tr:nth-child(even) { background: var(--nu-light-gray); }
+    .nu-sku { font-weight: 700; color: var(--nu-blue); white-space: nowrap; }
 
-    /* BADGE ROW */
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 30px;
+    /* TWO-COL GRID */
+    .nu-twocol {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
     }
-    .nu-badge {
-      display: flex;
-      align-items: center;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      padding: 12px 26px 12px 18px;
-      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
+    .nu-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     }
-    .nu-badge-dot {
-      width: 10px; height: 10px;
-      background: var(--nu-cyan);
-      border-radius: 50%;
-      margin-right: 10px;
+    .nu-card h3 {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-blue);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--nu-medium-gray);
     }
+    .nu-card ul { list-style: none; }
+    .nu-card li {
+      padding: 6px 0;
+      font-size: 0.92rem;
+      border-bottom: 1px dotted var(--nu-medium-gray);
+    }
+    .nu-card li:last-child { border-bottom: none; }
+    .nu-card li strong { color: var(--nu-dark-text); }
 
     /* CALLOUT */
-    .callout {
-      background: linear-gradient(135deg, #f0f8ff 0%, #e6f4ff 100%);
-      border: 1px solid #b3d9ff;
-      border-left: 5px solid var(--nu-blue);
-      border-radius: 6px;
-      padding: 22px 28px;
-      margin: 30px 0;
+    .nu-callout {
+      background: linear-gradient(135deg, rgba(0,0,255,0.04) 0%, rgba(6,208,255,0.06) 100%);
+      border-left: 6px solid var(--nu-blue);
+      padding: 20px 24px;
+      border-radius: 4px;
+      margin: 20px 0 0;
     }
-    .callout-title {
+    .nu-callout-label {
+      font-size: 0.72rem;
       font-weight: 900;
+      letter-spacing: 0.2em;
       color: var(--nu-blue);
-      font-size: 1.05rem;
-      margin-bottom: 8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
-    .callout p {
-      font-size: 0.95rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
-    }
-    .callout p:last-child { margin-bottom: 0; }
+    .nu-callout p { font-size: 0.95rem; color: var(--nu-dark-text); }
 
     /* SIGN-OFF */
-    .signoff-block {
-      margin-top: 40px;
-      padding: 30px;
-      background: var(--nu-light-gray);
-      border-radius: 8px;
-      border: 1px solid var(--nu-medium-gray);
-    }
-    .signoff-row {
+    .nu-signoff {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-      margin-top: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
     }
-    .signoff-field {
-      border-bottom: 2px solid var(--nu-blue);
-      padding-bottom: 4px;
-      min-height: 38px;
+    .nu-signoff .field {
+      background: var(--nu-white);
+      border: 1px dashed #888;
+      border-radius: 6px;
+      padding: 18px;
+      text-align: center;
     }
-    .signoff-label {
-      display: block;
-      font-size: 0.78rem;
+    .nu-signoff .line {
+      border-bottom: 1.5px solid #333;
+      height: 28px;
+      margin-bottom: 8px;
+    }
+    .nu-signoff .lbl {
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--nu-blue);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-top: 6px;
+      color: #666;
     }
 
     /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 40px;
+      padding: 44px 40px;
       text-align: center;
     }
     .nu-footer-tagline {
-      font-family: 'Lato', serif;
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
@@ -476,31 +392,32 @@
       font-size: 0.92rem;
       line-height: 1.8;
     }
-    .nu-footer-contact a {
-      color: var(--nu-cyan);
-      text-decoration: none;
-    }
+    .nu-footer-contact a { color: var(--nu-cyan); text-decoration: none; }
     .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-meta {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.05em;
+    }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-header { padding: 44px 22px 66px; min-height: 220px; }
+      .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.45em; padding-left: 0.45em; }
       .nu-tagline { font-size: 1rem; }
-      .page-title { font-size: 1.7rem; }
-      .nu-container { padding: 40px 20px; }
-      .workflow-step { grid-template-columns: 1fr; gap: 14px; }
-      .step-number { margin: 0 auto; }
-      .nu-badge { clip-path: none; border-radius: 6px; }
-      .inspection-table { font-size: 0.85rem; }
-      .inspection-table th, .inspection-table td { padding: 10px 12px; }
+      h1.nu-page-title { font-size: 1.6rem; }
+      .nu-container { padding: 40px 22px 60px; }
+      .nu-twocol { grid-template-columns: 1fr; }
+      .nu-signoff { grid-template-columns: 1fr; }
+      .nu-step-num { width: 54px; font-size: 1.25rem; }
     }
 
     @media print {
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-      .workflow-step, .info-card, .callout { box-shadow: none; }
+      .nu-step, .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-card { box-shadow: none; }
     }
   </style>
 </head>
@@ -508,297 +425,279 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <div class="nu-phoenix-icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
+    <div class="nu-header-inner">
+      <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Phoenix Icon®">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
       </svg>
+      <div class="nu-logo-text">NORRIS</div>
+      <div class="nu-logo-subtitle">UTILITIES</div>
+      <div class="nu-tagline">A Legacy of Commitment®</div>
     </div>
-    <div class="nu-logo-text">NORRIS</div>
-    <div class="nu-logo-subtitle">UTILITIES</div>
-    <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
   <!-- CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#ffffff"/>
     </svg>
   </div>
 
-  <!-- MAIN -->
+  <!-- CONTENT -->
   <main class="nu-content-area">
     <div class="nu-container">
 
-      <!-- TITLE BLOCK -->
-      <div class="page-title-block">
-        <span class="page-eyebrow">Action Item — Inventory Receiving</span>
-        <h1 class="page-title">Receive &amp; Process Inventory<br><span>From Last PO Order</span></h1>
-        <p class="page-subtitle">Step-by-step receiving workflow for the most recent Purchase Order. Verify, inspect, log, stock, and reconcile so every unit is accounted for and ready to ship to a customer.</p>
+      <!-- TITLE -->
+      <div class="nu-title-block">
+        <span class="nu-kicker">reMarkable Action Item</span>
+        <h1 class="nu-page-title"><span>Receive &amp;</span> Process Inventory — Last PO Order</h1>
+        <p class="nu-subtitle">
+          Standard receiving workflow for the most recent purchase order. Verify quantities against the PO,
+          inspect condition, log serials and lot numbers, reconcile against the invoice, and release inventory
+          to the fulfillment queue so open customer orders can ship without delay.
+        </p>
       </div>
 
-      <!-- STATUS -->
-      <div class="status-banner">
-        <div class="status-banner-icon">!</div>
-        <div class="status-banner-text">
-          <strong>Status: Open Action Item</strong>
-          <span>Inventory from the last PO must be received, inspected, counted, and logged into the inventory tracker before any units are committed to open quotes or shipped to customers.</span>
+      <!-- STATUS BAR -->
+      <div class="nu-status-bar">
+        <div class="nu-status-tile priority">
+          <div class="nu-status-label">Priority</div>
+          <div class="nu-status-value">High — Blocks Shipments</div>
+        </div>
+        <div class="nu-status-tile open">
+          <div class="nu-status-label">Status</div>
+          <div class="nu-status-value">Open — In Transit / Received</div>
+        </div>
+        <div class="nu-status-tile">
+          <div class="nu-status-label">Owner</div>
+          <div class="nu-status-value">Aaron C. Norris</div>
+        </div>
+        <div class="nu-status-tile">
+          <div class="nu-status-label">Source</div>
+          <div class="nu-status-value">reMarkable Action Item</div>
         </div>
       </div>
 
-      <!-- BADGES -->
-      <div class="badge-row">
-        <div class="nu-badge"><span class="nu-badge-dot"></span>Owner: Aaron C. Norris</div>
-        <div class="nu-badge"><span class="nu-badge-dot"></span>Support: Caroline Butler</div>
-        <div class="nu-badge"><span class="nu-badge-dot"></span>Source: reMarkable Action Item</div>
-        <div class="nu-badge"><span class="nu-badge-dot"></span>Priority: High</div>
-      </div>
-
-      <!-- KEY INFO -->
+      <!-- RECEIVING WORKFLOW -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first-word">PO</span> <span class="rest">Reference Information</span></h2>
-        <div class="info-grid">
-          <div class="info-card">
-            <div class="info-card-label">PO Number</div>
-            <div class="info-card-value">Last PO on file</div>
-            <div class="info-card-sub">Pull exact PO# from QuickBooks before receiving</div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-label">Vendor</div>
-            <div class="info-card-value">Confirm at receipt</div>
-            <div class="info-card-sub">Match packing slip vendor to PO vendor</div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-label">Expected Items</div>
-            <div class="info-card-value">Per PO line items</div>
-            <div class="info-card-sub">FlexPro Armor SKUs and/or Samson Rope</div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-label">Receiving Location</div>
-            <div class="info-card-value">Birmingham, AL</div>
-            <div class="info-card-sub">130 Inverness Plaza #210</div>
-          </div>
-        </div>
-      </section>
+        <h2 class="nu-section-title"><span class="first">Receiving</span> <span class="rest">Workflow — 7 Steps</span></h2>
+        <div class="nu-steps">
 
-      <!-- WORKFLOW -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first-word">Receiving</span> <span class="rest">Workflow — 7 Steps</span></h2>
-        <div class="workflow-grid">
-
-          <div class="workflow-step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-              <h3>Pull the PO &amp; Match the Carrier Documents</h3>
-              <p>Before opening any boxes, pull the PO from QuickBooks and lay it next to the carrier's packing slip and bill of lading.</p>
-              <ul>
-                <li>Confirm PO number, vendor name, and ship-to address match</li>
-                <li>Confirm carton count on BOL matches what was physically delivered</li>
-                <li>Note any visible damage to cartons on the BOL <strong>before signing</strong></li>
-              </ul>
+          <div class="nu-step">
+            <div class="nu-step-num">1</div>
+            <div class="nu-step-body">
+              <div class="nu-step-title">Confirm Shipment &amp; PO Match</div>
+              <div class="nu-step-desc">
+                Pull the original PO from the Norris Utilities® purchasing folder. Verify carrier, PRO/tracking
+                number, and expected arrival against the packing list taped to the skid or attached to the box.
+                Flag any mismatch before signing for delivery.
+              </div>
             </div>
           </div>
 
-          <div class="workflow-step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-              <h3>Photograph Pallet &amp; Cartons On Arrival</h3>
-              <p>Take dated photos of the pallet as received and each carton individually. This is the only proof of condition we have if a freight claim is needed.</p>
-              <ul>
-                <li>Wide shot of full pallet (4 sides)</li>
-                <li>Close-up of any shrink wrap, strapping, or damage</li>
-                <li>Save photos to PO folder by PO number</li>
-              </ul>
+          <div class="nu-step">
+            <div class="nu-step-num">2</div>
+            <div class="nu-step-body">
+              <div class="nu-step-title">Visual Damage Inspection — Before Driver Leaves</div>
+              <div class="nu-step-desc">
+                Walk the skid. Photograph all four sides, the top, and any visible damage. If anything is torn,
+                crushed, or the pallet is leaning, write <strong>"Subject to Inspection — Damage Noted"</strong>
+                on the BOL before signing. Do not sign clean if it is not clean.
+              </div>
             </div>
           </div>
 
-          <div class="workflow-step">
-            <div class="step-number">3</div>
-            <div class="step-content">
-              <h3>Open &amp; Count Against the Packing Slip</h3>
-              <p>Open every carton and count each unit against the packing slip. Do not assume case quantities are correct.</p>
-              <ul>
-                <li>Count each SKU separately (NU-BC-2851, NU-BC-2834, NU-BC-2851-C, NU-BC-2834-C)</li>
-                <li>Mark slip with actual quantity received next to expected quantity</li>
-                <li>Flag overages, shortages, or substitutions immediately</li>
-              </ul>
+          <div class="nu-step">
+            <div class="nu-step-num">3</div>
+            <div class="nu-step-body">
+              <div class="nu-step-title">Count &amp; Verify Against PO Line Items</div>
+              <div class="nu-step-desc">
+                Open the shipment. Count each SKU and match to the PO quantity. Record actual-received in the
+                receiving log. Short, over, or substituted? Note it and hold product aside — do not shelve it
+                until variance is resolved with the vendor.
+              </div>
             </div>
           </div>
 
-          <div class="workflow-step">
-            <div class="step-number">4</div>
-            <div class="step-content">
-              <h3>Inspect Each Unit for Quality</h3>
-              <p>Pull every unit and run the quality checklist below. FlexPro Armor is hand-built USA — defects do happen and must be caught here, not by the customer.</p>
-              <ul>
-                <li>Check stitching, grommets, snaps, and webbing</li>
-                <li>Confirm correct size and color match PO specification</li>
-                <li>Set aside any defective units in a marked "HOLD" area</li>
-              </ul>
+          <div class="nu-step">
+            <div class="nu-step-num">4</div>
+            <div class="nu-step-body">
+              <div class="nu-step-title">Inspect Condition &amp; Log Serials / Lot Numbers</div>
+              <div class="nu-step-desc">
+                For FlexPro Armor covers: check stitching, Velcro, zipper seams, and fabric weave. For rope:
+                confirm tag reel length and splice quality. For equipment: record serials. Capture lot numbers
+                for anything warranty-tracked.
+              </div>
             </div>
           </div>
 
-          <div class="workflow-step">
-            <div class="step-number">5</div>
-            <div class="step-content">
-              <h3>Log Into Inventory Tracker</h3>
-              <p>Update the inventory tracker the same day items are received. No exceptions — un-logged inventory cannot be quoted or sold.</p>
-              <ul>
-                <li>Open <strong>~/norris-agent/data/remarkable_items.json</strong> and the inventory sheet</li>
-                <li>Enter PO#, vendor, date received, SKU, qty received, qty defective, qty available</li>
-                <li>Tag units with location code if multiple storage areas in use</li>
-              </ul>
+          <div class="nu-step">
+            <div class="nu-step-num">5</div>
+            <div class="nu-step-body">
+              <div class="nu-step-title">Reconcile Invoice vs. PO vs. Received</div>
+              <div class="nu-step-desc">
+                Pull the vendor invoice. All three documents — PO, packing list, invoice — must agree on SKU,
+                qty, and unit price. Any variance goes to the vendor same day. Do not pay or post to QuickBooks
+                until reconciled.
+              </div>
             </div>
           </div>
 
-          <div class="workflow-step">
-            <div class="step-number">6</div>
-            <div class="step-content">
-              <h3>Reconcile to QuickBooks &amp; Approve Vendor Invoice</h3>
-              <p>Match received quantities to the vendor's invoice. Do not pay until quantities, pricing, and condition all reconcile.</p>
-              <ul>
-                <li>Mark PO as "Received" in QuickBooks with actual quantities</li>
-                <li>Adjust invoice for any shortages, defects, or substitutions</li>
-                <li>Route approved invoice to A/P queue for payment</li>
-              </ul>
+          <div class="nu-step">
+            <div class="nu-step-num">6</div>
+            <div class="nu-step-body">
+              <div class="nu-step-title">Update Inventory System &amp; QuickBooks</div>
+              <div class="nu-step-desc">
+                Increment on-hand counts by the received qty. Post the vendor bill in QuickBooks against the
+                PO. Update the master tracker so CB and the fulfillment queue can see the inventory as
+                available.
+              </div>
             </div>
           </div>
 
-          <div class="workflow-step">
-            <div class="step-number">7</div>
-            <div class="step-content">
-              <h3>Release to Open Orders &amp; Notify Sales</h3>
-              <p>Once stock is logged and invoiced, allocate against any open quotes or back-orders waiting on this PO.</p>
-              <ul>
-                <li>Cross-check open quotes against newly available SKUs</li>
-                <li>Notify Aaron of any back-orders that can now ship</li>
-                <li>Send Telegram confirmation: "PO# [X] received, logged, available for sale"</li>
-              </ul>
+          <div class="nu-step">
+            <div class="nu-step-num">7</div>
+            <div class="nu-step-body">
+              <div class="nu-step-title">Release to Fulfillment — Notify Waiting Customers</div>
+              <div class="nu-step-desc">
+                Pull the list of open orders that were waiting on this PO. Trigger pick/pack for each. Send
+                a short status update to any customer whose order was held, so they know product is landing
+                and ship date is firm.
+              </div>
             </div>
           </div>
 
         </div>
-      </section>
 
-      <!-- INSPECTION TABLE -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first-word">Quality</span> <span class="rest">Inspection Checkpoints</span></h2>
-        <table class="inspection-table">
-          <thead>
-            <tr>
-              <th>Checkpoint</th>
-              <th>What to Verify</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>SKU &amp; Size</strong></td>
-              <td>Tag matches PO line item: NU-BC-2851 (28"×51"), NU-BC-2834 (28"×34"), or combo variant</td>
-              <td><span class="pill pill-required">Required</span></td>
-            </tr>
-            <tr>
-              <td><strong>Stitching</strong></td>
-              <td>All seams continuous, no skipped stitches, bar-tacked at stress points</td>
-              <td><span class="pill pill-required">Required</span></td>
-            </tr>
-            <tr>
-              <td><strong>Grommets &amp; Hardware</strong></td>
-              <td>Grommets seated, snaps engage, webbing tight, no rust or burrs</td>
-              <td><span class="pill pill-required">Required</span></td>
-            </tr>
-            <tr>
-              <td><strong>Material Condition</strong></td>
-              <td>No tears, abrasions, oil staining, or fade — fabric uniform across the cover</td>
-              <td><span class="pill pill-required">Required</span></td>
-            </tr>
-            <tr>
-              <td><strong>Combo Components</strong></td>
-              <td>Combo SKUs include both top cover and floor; serial numbers match if applicable</td>
-              <td><span class="pill pill-required">Required</span></td>
-            </tr>
-            <tr>
-              <td><strong>Packaging</strong></td>
-              <td>Each unit folded and bagged, ready for direct ship to customer without rework</td>
-              <td><span class="pill pill-recommended">Recommended</span></td>
-            </tr>
-            <tr>
-              <td><strong>Lot / Batch Tag</strong></td>
-              <td>Manufacturing lot or build date visible — recorded with inventory log entry</td>
-              <td><span class="pill pill-recommended">Recommended</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- COMPLETION CHECKLIST -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first-word">Completion</span> <span class="rest">Checklist</span></h2>
-        <div class="checklist">
-          <div class="checklist-item">
-            <div class="check-box"></div>
-            <div class="check-text"><strong>PO pulled</strong> from QuickBooks and matched to packing slip + BOL</div>
-          </div>
-          <div class="checklist-item">
-            <div class="check-box"></div>
-            <div class="check-text"><strong>Photos taken</strong> of pallet, cartons, and any damage prior to opening</div>
-          </div>
-          <div class="checklist-item">
-            <div class="check-box"></div>
-            <div class="check-text"><strong>Physical count</strong> completed for each SKU and recorded on packing slip</div>
-          </div>
-          <div class="checklist-item">
-            <div class="check-box"></div>
-            <div class="check-text"><strong>Quality inspection</strong> run on every unit; defects pulled and tagged HOLD</div>
-          </div>
-          <div class="checklist-item">
-            <div class="check-box"></div>
-            <div class="check-text"><strong>Inventory tracker</strong> updated with PO#, date, SKU, qty received, qty available</div>
-          </div>
-          <div class="checklist-item">
-            <div class="check-box"></div>
-            <div class="check-text"><strong>QuickBooks PO</strong> marked received and vendor invoice reconciled</div>
-          </div>
-          <div class="checklist-item">
-            <div class="check-box"></div>
-            <div class="check-text"><strong>Open quotes</strong> reviewed and back-orders released as stock allows</div>
-          </div>
-          <div class="checklist-item">
-            <div class="check-box"></div>
-            <div class="check-text"><strong>Telegram confirmation</strong> sent to Aaron — PO closed and stock available</div>
-          </div>
+        <div class="nu-callout">
+          <div class="nu-callout-label">Rule</div>
+          <p>No inventory is counted "on-hand" until Steps 1–6 are complete. Do not promise ship dates to
+          customers off product that is physically here but not yet reconciled and entered. Verified stock only.</p>
         </div>
       </section>
 
-      <!-- CALLOUT -->
-      <div class="callout">
-        <div class="callout-title">Discrepancy Protocol</div>
-        <p>If any shortage, overage, defect, or substitution is found, do <strong>not</strong> mark the PO complete in QuickBooks. Open a discrepancy note in the PO folder, photograph the affected units, and email the vendor the same day. Hold payment on the disputed line until resolution is confirmed in writing.</p>
-        <p>For FlexPro Armor builds, document the lot/build date and the specific defect type so the manufacturer can trace the issue back to a production run.</p>
-      </div>
+      <!-- RECEIVING CHECKLIST -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Receiving</span> <span class="rest">Day Checklist</span></h2>
+        <ul class="nu-checklist">
+          <li><div><strong>PO document in hand</strong> — printed or on screen, with vendor name, PO #, and line-item expected qty.</div></li>
+          <li><div><strong>Camera ready</strong> — phone photos of the skid pre-breakdown, any damage, and serial plates.</div></li>
+          <li><div><strong>Packing list verified</strong> against the physical count before signing BOL.</div></li>
+          <li><div><strong>Damage noted on BOL</strong> if anything is off — never sign "clean" on a damaged shipment.</div></li>
+          <li><div><strong>All SKUs counted</strong> and actual-received written down next to expected-qty.</div></li>
+          <li><div><strong>Serials / lot numbers</strong> captured for anything warranty-tracked (equipment, rope reels, Phoenix Icon® branded product).</div></li>
+          <li><div><strong>Invoice pulled</strong> and cross-checked to PO + packing list before posting to QuickBooks.</div></li>
+          <li><div><strong>Variance resolved</strong> with vendor — email sent, confirmation received, notes in tracker.</div></li>
+          <li><div><strong>Inventory updated</strong> in master tracker and QuickBooks.</div></li>
+          <li><div><strong>Open orders released</strong> to fulfillment queue; customers updated where ship-dates shifted.</div></li>
+        </ul>
+      </section>
+
+      <!-- SKU REFERENCE -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Product</span> <span class="rest">Reference — Common Received SKUs</span></h2>
+        <div class="nu-table-wrap">
+          <table class="nu-table">
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Product</th>
+                <th>Size</th>
+                <th>Receiving Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nu-sku">NU-BC-2851</td>
+                <td>FlexPro Armor — 2-Man Bucket Cover</td>
+                <td>28" × 51"</td>
+                <td>Inspect stitching, Velcro closures, and zipper seams. Handmade USA — expect variation within tolerance.</td>
+              </tr>
+              <tr>
+                <td class="nu-sku">NU-BC-2834</td>
+                <td>FlexPro Armor — 1.5-Man Bucket Cover</td>
+                <td>28" × 34"</td>
+                <td>Same inspection as 2851. Most common OEM replacement size.</td>
+              </tr>
+              <tr>
+                <td class="nu-sku">NU-BC-2851-C</td>
+                <td>FlexPro Armor — 2-Man Combo Kit</td>
+                <td>28" × 51"</td>
+                <td>Verify all combo components present (cover, tie-downs, storage bag).</td>
+              </tr>
+              <tr>
+                <td class="nu-sku">NU-BC-2834-C</td>
+                <td>FlexPro Armor — 1.5-Man Combo Kit</td>
+                <td>28" × 34"</td>
+                <td>Verify all combo components present.</td>
+              </tr>
+              <tr>
+                <td class="nu-sku">Samson Rope</td>
+                <td>Samson Rope — Authorized Distributor stock</td>
+                <td>Per PO spec</td>
+                <td>Confirm tag reel length and splice. CC Donna Poll + Sarah Daniels on any variance claim.</td>
+              </tr>
+              <tr>
+                <td class="nu-sku">Boss Products</td>
+                <td>Boss Products — tooling &amp; accessories</td>
+                <td>Per PO spec</td>
+                <td>CC Troy Gongwer + Thayne Grove on any claim or short-ship.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CONTACTS + DOCS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Vendor</span> <span class="rest">Contacts &amp; Document Trail</span></h2>
+        <div class="nu-twocol">
+
+          <div class="nu-card">
+            <h3>Vendor Contacts — CC Protocol</h3>
+            <ul>
+              <li><strong>Boss Products:</strong> Troy Gongwer + Thayne Grove — CC both, always.</li>
+              <li><strong>Samson Rope:</strong> Donna Poll + Sarah Daniels — CC both, always.</li>
+              <li><strong>Skylift:</strong> Andrew Jarmoszuk, Dale Williams, Nick Jarmoszuk Jr.</li>
+              <li><strong>Bay Shore Systems:</strong> Herb Minatre (owner) / Andy Barron (primary).</li>
+              <li><strong>Irby Construction:</strong> Jared Lemoine (new primary).</li>
+            </ul>
+          </div>
+
+          <div class="nu-card">
+            <h3>Documents to File on Every Receive</h3>
+            <ul>
+              <li><strong>Signed BOL</strong> — with damage notes if applicable.</li>
+              <li><strong>Packing list</strong> — annotated with actual-received counts.</li>
+              <li><strong>Vendor invoice</strong> — cross-checked and marked reconciled.</li>
+              <li><strong>Damage photos</strong> — if applicable, filed by PO number.</li>
+              <li><strong>Serial / lot log</strong> — for warranty-tracked product.</li>
+              <li><strong>Open-order release list</strong> — who got notified, when.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
 
       <!-- SIGN-OFF -->
       <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first-word">Receiving</span> <span class="rest">Sign-Off</span></h2>
-        <div class="signoff-block">
-          <p style="margin-bottom: 8px; color: var(--nu-body-text);">Once all checklist items above are complete, sign and date below. Scan or photograph the completed sheet and file it in the PO folder.</p>
-          <div class="signoff-row">
-            <div>
-              <div class="signoff-field"></div>
-              <span class="signoff-label">Received By</span>
-            </div>
-            <div>
-              <div class="signoff-field"></div>
-              <span class="signoff-label">Date Received</span>
-            </div>
-            <div>
-              <div class="signoff-field"></div>
-              <span class="signoff-label">PO Number</span>
-            </div>
-            <div>
-              <div class="signoff-field"></div>
-              <span class="signoff-label">Approved By (Aaron)</span>
-            </div>
+        <h2 class="nu-section-title"><span class="first">Receiving</span> <span class="rest">Sign-Off</span></h2>
+        <p style="font-size:0.95rem; color:#555;">
+          Complete after Steps 1–7 are verified. Sign-off closes the receiving event and releases product to
+          inventory and fulfillment.
+        </p>
+        <div class="nu-signoff">
+          <div class="field">
+            <div class="line"></div>
+            <div class="lbl">Received By</div>
+          </div>
+          <div class="field">
+            <div class="line"></div>
+            <div class="lbl">Date Received</div>
+          </div>
+          <div class="field">
+            <div class="line"></div>
+            <div class="lbl">PO Number</div>
           </div>
         </div>
       </section>
@@ -815,6 +714,7 @@
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
+    <div class="nu-footer-meta">Birmingham, Alabama · Serving 20+ states · Phoenix Icon® registered trademark</div>
   </footer>
 
 </body>

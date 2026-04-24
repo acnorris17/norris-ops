@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item — 2018 Compass Bank → McKnight Deed Pull — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <title>Action Item: Pull 2018 Compass Bank → McKnight Deed — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
   <style>
     :root {
       --nu-blue: #0000FF;
@@ -16,7 +16,7 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-alert-red: #CC1F1F;
+      --nu-alert-red: #C0392B;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -30,7 +30,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HEADER */
+    /* ══ HEADER ══ */
     .nu-header {
       position: relative;
       background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
@@ -44,27 +44,36 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
-        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
         repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
         repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
-      background-size: 40px 40px, 40px 40px, 60px 60px, 80px 80px;
-      opacity: 0.6;
       z-index: 1;
+      opacity: 0.6;
     }
     .nu-header::after {
       content: '';
       position: absolute;
       top: -50%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
     .nu-header * { position: relative; z-index: 2; }
 
+    /* Ghost phoenix watermark */
+    .nu-header .phoenix-watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      max-width: 400px;
+      opacity: 0.07;
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .nu-phoenix-icon {
-      width: 70px;
-      height: 70px;
+      width: 72px;
+      height: 72px;
       margin: 0 auto 16px;
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
@@ -79,49 +88,46 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
+      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 1.2rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.75em;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      padding-left: 0.75em;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 400;
       font-size: 1.25rem;
-      color: var(--nu-cyan);
-      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.95);
+      letter-spacing: 0.03em;
     }
 
-    /* CHEVRON TRANSITION */
+    /* ══ CHEVRON ══ */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg {
-      width: 100%;
-      height: 50px;
-      display: block;
-    }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
-    /* CONTENT */
+    /* ══ CONTENT ══ */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
-      padding-bottom: 60px;
+      padding-bottom: 40px;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 40%; left: 50%;
+      top: 30%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 65%;
-      aspect-ratio: 1 / 1;
-      background: radial-gradient(circle, rgba(0,0,255,0.04) 0%, transparent 70%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
       border-radius: 50%;
       z-index: 0;
       pointer-events: none;
@@ -129,230 +135,227 @@
     .nu-container {
       max-width: 960px;
       margin: 0 auto;
-      padding: 50px 40px;
+      padding: 60px 40px 20px;
       position: relative;
       z-index: 1;
     }
 
-    /* ACTION BAR */
-    .action-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      background: var(--nu-navy);
+    /* ══ TASK BANNER ══ */
+    .task-banner {
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
       color: var(--nu-white);
-      padding: 18px 28px;
-      border-radius: 8px;
-      margin-bottom: 40px;
-      border-left: 6px solid var(--nu-cyan);
-    }
-    .action-bar-label {
-      font-weight: 900;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--nu-cyan);
-    }
-    .action-bar-title {
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--nu-white);
-    }
-    .action-bar-priority {
-      background: var(--nu-alert-red);
-      color: var(--nu-white);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 900;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* SECTION HEADERS */
-    .nu-section-title {
-      font-weight: 900;
-      font-size: 1.65rem;
-      margin-bottom: 18px;
-      line-height: 1.25;
-    }
-    .nu-section-title .accent { color: var(--nu-blue); }
-    .nu-section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
-
-    .nu-section {
-      margin-bottom: 44px;
-    }
-
-    /* DEED SUMMARY CARD */
-    .deed-card {
-      background: linear-gradient(135deg, #fafbff 0%, #f1f4ff 100%);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 6px solid var(--nu-blue);
-      border-radius: 10px;
       padding: 28px 32px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-      margin-bottom: 32px;
-    }
-    .deed-card h3 {
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 18px;
-      letter-spacing: 0.02em;
-    }
-    .deed-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px 28px;
-    }
-    .deed-field {
+      border-radius: 6px;
+      margin-bottom: 40px;
       display: flex;
-      flex-direction: column;
-      gap: 4px;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,51,0.18);
     }
-    .deed-label {
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--nu-blue);
-    }
-    .deed-value {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-      font-variant-numeric: tabular-nums;
-      word-break: break-word;
-    }
-    .deed-value.mono {
-      font-family: 'SF Mono', Menlo, Consolas, monospace;
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    /* STEP LIST */
-    .step-list {
-      counter-reset: step;
-      list-style: none;
-      padding: 0;
-    }
-    .step-item {
-      counter-increment: step;
-      position: relative;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 22px 26px 22px 78px;
-      margin-bottom: 14px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-    .step-item:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    }
-    .step-item::before {
-      content: counter(step);
-      position: absolute;
-      top: 22px;
-      left: 22px;
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
-      color: var(--nu-white);
-      font-weight: 900;
-      font-size: 1.1rem;
+    .task-banner-icon {
+      flex-shrink: 0;
+      width: 56px; height: 56px;
+      background: var(--nu-cyan);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
-      box-shadow: 0 2px 6px rgba(0,0,255,0.25);
-    }
-    .step-title {
+      color: var(--nu-navy);
       font-weight: 900;
-      font-size: 1.05rem;
-      color: var(--nu-dark-text);
+      font-size: 1.5rem;
+    }
+    .task-banner-text .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .task-banner-text h1 {
+      font-weight: 900;
+      font-size: 1.35rem;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+    }
+
+    /* ══ SECTION HEADERS ══ */
+    .nu-section {
+      margin-bottom: 36px;
+    }
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .nu-section-title .first { color: #0033cc; }
+    .nu-section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
+    .nu-section-rule {
+      height: 3px;
+      width: 48px;
+      background: var(--nu-cyan);
+      margin-bottom: 20px;
+    }
+
+    /* ══ DETAIL CARDS ══ */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .detail-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 4px;
+      padding: 18px 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .detail-card .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #0033cc;
+      font-weight: 700;
       margin-bottom: 6px;
     }
-    .step-detail {
-      font-size: 0.96rem;
-      color: var(--nu-body-text);
-      line-height: 1.55;
-    }
-    .step-detail a {
-      color: var(--nu-blue);
+    .detail-card .value {
+      font-size: 1rem;
+      color: var(--nu-dark-text);
       font-weight: 700;
-      text-decoration: none;
-      border-bottom: 1px dotted var(--nu-blue);
+      line-height: 1.4;
+      word-break: break-word;
     }
-    .step-detail a:hover {
-      color: #0000CC;
+    .detail-card .value.mono {
+      font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
     }
 
-    /* CHEVRON BADGE */
-    .nu-badge {
+    /* ══ PRIORITY BADGE ══ */
+    .priority-badge {
       display: inline-flex;
       align-items: center;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      gap: 8px;
+      background: var(--nu-alert-red);
       color: var(--nu-white);
-      padding: 12px 28px 12px 18px;
-      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 14px 50%);
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      margin-bottom: 18px;
-    }
-    .nu-badge-icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
-      fill: var(--nu-cyan);
-    }
-
-    /* WHY PANEL */
-    .why-panel {
-      background: var(--nu-navy);
-      color: var(--nu-white);
-      padding: 28px 32px;
-      border-radius: 10px;
-      border-left: 6px solid var(--nu-cyan);
-    }
-    .why-panel h3 {
+      padding: 6px 14px;
+      border-radius: 3px;
+      font-size: 0.78rem;
       font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--nu-cyan);
-      margin-bottom: 10px;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-    .why-panel p {
-      color: rgba(255,255,255,0.92);
-      font-size: 0.98rem;
-      line-height: 1.65;
-      margin-bottom: 10px;
+    .priority-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--nu-white);
+      border-radius: 50%;
     }
-    .why-panel p:last-child { margin-bottom: 0; }
 
-    /* ACTIONS ROW */
-    .actions-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 10px;
+    /* ══ CHECKLIST ══ */
+    .checklist {
+      list-style: none;
+      padding: 0;
     }
-    .nu-btn-primary {
+    .checklist li {
+      position: relative;
+      padding: 14px 16px 14px 52px;
+      background: var(--nu-light-gray);
+      border-radius: 4px;
+      margin-bottom: 10px;
+      border-left: 3px solid var(--nu-cyan);
+      font-size: 0.98rem;
+      color: var(--nu-dark-text);
+      transition: background 0.15s ease;
+    }
+    .checklist li:hover { background: #EEF2FF; }
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 22px; height: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 3px;
+      background: var(--nu-white);
+    }
+    .checklist li .step-number {
       display: inline-block;
-      background: var(--nu-blue);
+      color: var(--nu-blue);
+      font-weight: 900;
+      margin-right: 8px;
+    }
+
+    /* ══ CONTEXT BOX ══ */
+    .context-box {
+      background: linear-gradient(135deg, #F8F9FF 0%, #EEF2FF 100%);
+      border: 1px solid #C7D2FE;
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+    .context-box p {
+      color: var(--nu-dark-text);
+      font-size: 0.98rem;
+      margin-bottom: 12px;
+    }
+    .context-box p:last-child { margin-bottom: 0; }
+    .context-box strong { color: #0033cc; font-weight: 700; }
+
+    /* ══ INSTRUMENT NUMBER CALLOUT ══ */
+    .instrument-callout {
+      background: var(--nu-navy);
       color: var(--nu-white);
-      padding: 13px 28px;
+      padding: 20px 28px;
+      border-radius: 6px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .instrument-callout .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .instrument-callout .number {
+      font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--nu-white);
+    }
+
+    /* ══ ACTION BAR ══ */
+    .action-bar {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .nu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
       border-radius: 4px;
       font-weight: 700;
       font-size: 0.92rem;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       text-decoration: none;
+      cursor: pointer;
       transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+    .nu-btn-primary {
+      background: var(--nu-blue);
+      color: var(--nu-white);
     }
     .nu-btn-primary:hover {
       background: #0000CC;
@@ -360,62 +363,28 @@
       box-shadow: 0 4px 12px rgba(0,0,255,0.3);
     }
     .nu-btn-secondary {
-      display: inline-block;
       background: transparent;
       color: var(--nu-blue);
-      padding: 13px 28px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.92rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      border-color: var(--nu-blue);
     }
     .nu-btn-secondary:hover {
       background: var(--nu-blue);
       color: var(--nu-white);
     }
 
-    /* STATUS ROW */
-    .status-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-    }
-    .status-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 20px;
-      padding: 8px 16px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--nu-accent-gold);
-    }
-    .status-dot.open { background: var(--nu-accent-gold); }
-    .status-dot.priority { background: var(--nu-alert-red); }
-
-    /* FOOTER */
+    /* ══ FOOTER ══ */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 44px 40px;
+      padding: 40px;
       text-align: center;
+      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
@@ -427,36 +396,26 @@
       color: var(--nu-cyan);
       text-decoration: none;
     }
-    .nu-footer-contact a:hover {
-      text-decoration: underline;
-    }
-    .nu-footer-meta {
-      margin-top: 18px;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 0.05em;
-    }
+    .nu-footer-contact a:hover { text-decoration: underline; }
 
-    /* RESPONSIVE */
+    /* ══ RESPONSIVE ══ */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 220px; }
+      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 0.9rem; letter-spacing: 0.5em; }
+      .nu-logo-subtitle { font-size: 0.9rem; letter-spacing: 0.45em; }
       .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 36px 22px; }
-      .step-item { padding: 60px 18px 18px; }
-      .step-item::before { top: 16px; left: 18px; width: 34px; height: 34px; font-size: 1rem; }
-      .action-bar { padding: 14px 18px; }
-      .deed-card { padding: 22px 20px; }
-      .why-panel { padding: 22px 20px; }
+      .nu-container { padding: 40px 20px 20px; }
+      .task-banner { flex-direction: column; text-align: center; padding: 20px; }
+      .task-banner-icon { margin: 0 auto; }
+      .instrument-callout .number { font-size: 1.2rem; }
+      .detail-grid { grid-template-columns: 1fr; }
     }
 
     @media print {
-      body { background: var(--nu-white); }
+      body { background: white; }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-      .step-item:hover, .step-item { transform: none; box-shadow: none; border: 1px solid #ccc; }
-      .actions-row { display: none; }
+      .action-bar { display: none; }
     }
   </style>
 </head>
@@ -464,159 +423,165 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <div class="nu-phoenix-icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.8"/>
-      </svg>
-    </div>
+    <svg class="phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
+    </svg>
+    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+    </svg>
     <div class="nu-logo-text">NORRIS</div>
-    <div class="nu-logo-subtitle">U T I L I T I E S</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
-  <!-- WHITE CHEVRON TRANSITION -->
+  <!-- CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#FFFFFF"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- MAIN CONTENT -->
+  <!-- CONTENT -->
   <main class="nu-content-area">
     <div class="nu-container">
 
-      <!-- ACTION BAR -->
-      <div class="action-bar">
-        <div>
-          <div class="action-bar-label">reMarkable Action Item</div>
-          <div class="action-bar-title">Pull 2018 Compass Bank → McKnight Deed</div>
-        </div>
-        <div class="action-bar-priority">Open</div>
-      </div>
-
-      <!-- TITLE -->
-      <div class="nu-section">
-        <h1 class="nu-section-title">
-          <span class="accent">Deed</span> <span class="rest">Retrieval — Probate Court Pull</span>
-        </h1>
-        <p style="font-size: 1.05rem; color: var(--nu-body-text); max-width: 720px;">
-          Retrieve the 2018 Compass Bank to McKnight warranty deed from the Jefferson County Probate Court records. Document is needed from the probate file for title chain verification and reference.
-        </p>
-        <div class="status-row">
-          <span class="status-tag"><span class="status-dot priority"></span>Priority</span>
-          <span class="status-tag"><span class="status-dot open"></span>Status: Open</span>
-          <span class="status-tag"><span class="status-dot" style="background: var(--nu-cyan);"></span>Source: reMarkable</span>
+      <!-- TASK BANNER -->
+      <div class="task-banner">
+        <div class="task-banner-icon">📜</div>
+        <div class="task-banner-text">
+          <div class="eyebrow">reMarkable Action Item</div>
+          <h1>Pull the 2018 Compass Bank → McKnight Deed</h1>
         </div>
       </div>
 
-      <!-- DEED SUMMARY -->
-      <div class="nu-section">
-        <div class="nu-badge">
-          <svg class="nu-badge-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-          </svg>
-          Document Particulars
-        </div>
-        <div class="deed-card">
-          <h3>Deed Identification</h3>
-          <div class="deed-grid">
-            <div class="deed-field">
-              <span class="deed-label">Grantor</span>
-              <span class="deed-value">Compass Bank</span>
-            </div>
-            <div class="deed-field">
-              <span class="deed-label">Grantee</span>
-              <span class="deed-value">McKnight</span>
-            </div>
-            <div class="deed-field">
-              <span class="deed-label">Year Recorded</span>
-              <span class="deed-value">2018</span>
-            </div>
-            <div class="deed-field">
-              <span class="deed-label">Instrument Number</span>
-              <span class="deed-value mono">201804260001417600</span>
-            </div>
-            <div class="deed-field">
-              <span class="deed-label">Record Type</span>
-              <span class="deed-value">Warranty Deed (Probate File)</span>
-            </div>
-            <div class="deed-field">
-              <span class="deed-label">Recording Date (Implied)</span>
-              <span class="deed-value">April 26, 2018</span>
-            </div>
+      <!-- PRIORITY + METADATA CARDS -->
+      <section class="nu-section">
+        <div class="detail-grid">
+          <div class="detail-card">
+            <div class="label">Priority</div>
+            <div class="value"><span class="priority-badge">High</span></div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Status</div>
+            <div class="value">Open — Not Yet Pulled</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Source</div>
+            <div class="value">reMarkable Notebook</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Logged</div>
+            <div class="value">2026-04-24</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Document Type</div>
+            <div class="value">Recorded Deed</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Recording Year</div>
+            <div class="value">2018</div>
           </div>
         </div>
+      </section>
+
+      <!-- INSTRUMENT CALLOUT -->
+      <div class="instrument-callout">
+        <div class="label">Instrument Number</div>
+        <div class="number">20180426000141760</div>
       </div>
 
-      <!-- RETRIEVAL STEPS -->
-      <div class="nu-section">
-        <div class="nu-badge">
-          <svg class="nu-badge-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-          </svg>
-          Retrieval Checklist
+      <!-- ACTION DETAIL -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Action</span> <span class="rest">Required</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="context-box">
+          <p><strong>Pull the 2018 Compass Bank → McKnight deed</strong> recorded under <strong>Instrument 20180426000141760</strong> from probate court records.</p>
+          <p>This is a recorded document search. The instrument number encodes the recording date <strong>2018-04-26</strong>, which identifies the deed conveying title from Compass Bank to McKnight.</p>
+          <p>Retrieve a certified or certified-copy-ready PDF and file it in the deed research folder for review alongside the 4505 Butterwood estate negotiation file.</p>
         </div>
+      </section>
 
-        <ol class="step-list">
-          <li class="step-item">
-            <div class="step-title">Open Jefferson County Probate Court online records</div>
-            <div class="step-detail">
-              Go to the Jefferson County, Alabama Probate Court public records search. Select the "Real Property Records" or "Land Records" search tool.
-            </div>
-          </li>
-          <li class="step-item">
-            <div class="step-title">Search by Instrument Number</div>
-            <div class="step-detail">
-              Enter Instrument Number <strong>201804260001417600</strong> in the search field. This is the fastest, most precise path to the exact document.
-            </div>
-          </li>
-          <li class="step-item">
-            <div class="step-title">Verify the match before paying</div>
-            <div class="step-detail">
-              Confirm Grantor shows "Compass Bank" and Grantee shows "McKnight." Verify the 2018 recording year. If any field mismatches, stop and double-check the instrument number on the reMarkable source note.
-            </div>
-          </li>
-          <li class="step-item">
-            <div class="step-title">Purchase and download the certified copy</div>
-            <div class="step-detail">
-              Pay the copy fee (typically $1 per page online). Download the PDF directly from the records portal. Save it as <strong>2018_CompassBank_McKnight_Deed_201804260001417600.pdf</strong>.
-            </div>
-          </li>
-          <li class="step-item">
-            <div class="step-title">File in the Norris Utilities® records system</div>
-            <div class="step-detail">
-              Save the PDF to <strong>~/norris-agent/output/deeds/</strong> and copy to <strong>~/norris-ops/internal/deeds/</strong>. Add an entry to the records index with retrieval date and instrument number.
-            </div>
-          </li>
-          <li class="step-item">
-            <div class="step-title">Close the reMarkable action item</div>
-            <div class="step-detail">
-              Mark the reMarkable action item complete. Log the filing path in the daily journal so the deed is traceable from the original action note.
-            </div>
-          </li>
-        </ol>
-      </div>
-
-      <!-- WHY PANEL -->
-      <div class="nu-section">
-        <div class="why-panel">
-          <h3>Why This Matters</h3>
-          <p>
-            The 2018 Compass Bank → McKnight deed sits in the probate chain for a property Aaron C. Norris flagged on his reMarkable. Pulling the certified instrument now — rather than reconstructing from memory or third-party summaries — puts the primary source document in Aaron's hands for any legal, title, or advisory conversation that follows.
-          </p>
-          <p>
-            Compass Bank was absorbed into BBVA and then PNC; original deed records from the 2018 era are held by the Jefferson County Probate Court, not the bank. The probate court instrument number is the authoritative handle.
-          </p>
+      <!-- WHERE TO PULL -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Where</span> <span class="rest">to Pull It From</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="detail-grid">
+          <div class="detail-card">
+            <div class="label">Primary Source</div>
+            <div class="value">Jefferson County AL Probate Court — Land Records</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Online Portal</div>
+            <div class="value mono">jeffconline.jccal.org</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Search By</div>
+            <div class="value">Instrument Number</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Fallback Source</div>
+            <div class="value">Shelby County Probate (if parcel falls outside Jefferson)</div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- ACTIONS -->
-      <div class="nu-section" style="margin-bottom: 0;">
-        <div class="actions-row">
-          <a href="tel:2055001343" class="nu-btn-primary">Call Aaron — 205-500-1343</a>
-          <a href="mailto:acnorris@norrisutilities.com?subject=2018%20Compass%20Bank%20%E2%86%92%20McKnight%20Deed%20Pulled&body=Aaron%20%E2%80%94%0A%0AThe%202018%20Compass%20Bank%20to%20McKnight%20deed%20(Instrument%20201804260001417600)%20has%20been%20pulled%20from%20Jefferson%20County%20Probate%20Court%20and%20filed.%0A%0ASincerely%2C%0A" class="nu-btn-secondary">Email Confirmation</a>
+      <!-- STEPS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Step-by-Step</span> <span class="rest">Retrieval</span></h2>
+        <div class="nu-section-rule"></div>
+        <ul class="checklist">
+          <li><span class="step-number">01.</span>Open Jefferson County Probate Court online land-records portal.</li>
+          <li><span class="step-number">02.</span>Select "Search by Instrument Number" and enter <strong>20180426000141760</strong>.</li>
+          <li><span class="step-number">03.</span>Confirm the grantor reads "Compass Bank" and grantee reads "McKnight" before purchasing the copy.</li>
+          <li><span class="step-number">04.</span>Download the PDF of the recorded deed (all pages, including any exhibits or legal description).</li>
+          <li><span class="step-number">05.</span>Save to the deed research folder as <strong>2018-04-26_CompassBank-to-McKnight_Inst-20180426000141760.pdf</strong>.</li>
+          <li><span class="step-number">06.</span>Cross-reference the legal description against the 4505 Butterwood estate parcel.</li>
+          <li><span class="step-number">07.</span>Flag any encumbrances, easements, or reservations in the deed for Aaron's review.</li>
+          <li><span class="step-number">08.</span>Log completion in the master tracker and close this action item.</li>
+        </ul>
+      </section>
+
+      <!-- WHY THIS MATTERS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Why</span> <span class="rest">This Matters</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="context-box">
+          <p>The 2018 Compass Bank → McKnight deed is a <strong>title-history link</strong> in the chain of ownership being evaluated for the 7,098 sq ft estate negotiation at 4505 Butterwood.</p>
+          <p>Pulling the actual recorded instrument — rather than relying on a title summary — surfaces the <strong>exact legal description, easements, and any reservations</strong> that carry forward to the current title. Gaps or defects found here directly affect the purchase price and closing conditions.</p>
+          <p>This action is <strong>blocking</strong> for any formal offer or counter-offer tied to the Butterwood estate review.</p>
         </div>
+      </section>
+
+      <!-- RELATED -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Related</span> <span class="rest">Items</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="detail-grid">
+          <div class="detail-card">
+            <div class="label">Linked Deal</div>
+            <div class="value">4505 Butterwood Estate — Negotiate Purchase</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Parent Notebook</div>
+            <div class="value">reMarkable — Real Estate / Title Research</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Owner</div>
+            <div class="value">Aaron C. Norris</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Next Review</div>
+            <div class="value">Upon retrieval — same day</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACTION BAR -->
+      <div class="action-bar">
+        <a href="https://jeffconline.jccal.org" target="_blank" rel="noopener" class="nu-btn nu-btn-primary">Open Probate Portal</a>
+        <a href="mailto:acnorris@norrisutilities.com?subject=Deed%20Retrieved%20%E2%80%94%20Inst%2020180426000141760" class="nu-btn nu-btn-secondary">Email Aaron When Pulled</a>
       </div>
 
     </div>
@@ -630,9 +595,6 @@
       <a href="tel:2055001343">205-500-1343</a> |
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
-    </div>
-    <div class="nu-footer-meta">
-      Internal Action Record • Generated by the Norris Utilities® Autonomous Build Engine
     </div>
   </footer>
 

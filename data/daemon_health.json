@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-04-24T20:04:25.580443+00:00",
+  "entries": [
+    {
+      "name": "delivery-watcher",
+      "ts": "2026-04-24T20:01:10.024153+00:00",
+      "status": "ok",
+      "detail": "processed=4 dt=1046ms",
+      "age_seconds": 195,
+      "stale": false
+    },
+    {
+      "name": "invoice-watcher",
+      "ts": "2026-04-24T20:01:12.003371+00:00",
+      "status": "ok",
+      "detail": "processed=0 dt=791ms",
+      "age_seconds": 193,
+      "stale": false
+    }
+  ],
+  "gog_quota": {
+    "date": "2026-04-24",
+    "count": 120,
+    "cap": 1000
+  },
+  "summary": {
+    "total": 2,
+    "healthy": 2,
+    "stale": 0,
+    "errors": 0
+  }
+}

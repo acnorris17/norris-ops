@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peace of Mind Maintenance Program — Verification Required — Norris Utilities®</title>
+  <title>Peace of Mind Program Verification — Norris Utilities®</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -16,9 +16,9 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-warn-amber: #F59E0B;
-      --nu-success: #10B981;
-      --nu-danger: #DC2626;
+      --nu-alert-red: #C8102E;
+      --nu-success-green: #1A7F37;
+      --nu-warning-amber: #D97706;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -32,10 +32,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HEADER */
+    /* ══ HEADER ══ */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033CC 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
       padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
@@ -56,22 +56,34 @@
       position: absolute;
       top: -50%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
       z-index: 1;
     }
     .nu-header * { position: relative; z-index: 2; }
 
+    /* Ghost phoenix watermark */
+    .nu-header-watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      max-width: 600px;
+      opacity: 0.12;
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .nu-phoenix-icon {
-      width: 72px; height: 72px;
-      margin: 0 auto 16px;
-      opacity: 0.95;
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 14px;
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
     .nu-logo-text {
       font-weight: 900;
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: var(--nu-white);
-      letter-spacing: 0.32em;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
       margin-bottom: 4px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
@@ -82,366 +94,475 @@
       color: var(--nu-white);
       letter-spacing: 0.7em;
       text-transform: uppercase;
-      margin-bottom: 18px;
-      padding-left: 0.7em;
+      margin-bottom: 22px;
     }
     .nu-tagline {
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-weight: 300;
-      font-size: 1.2rem;
-      color: rgba(255,255,255,0.92);
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.95);
+      letter-spacing: 0.05em;
     }
-    .nu-doc-type {
+    .nu-doc-label {
       display: inline-block;
-      margin-top: 22px;
-      padding: 6px 18px;
+      margin-top: 20px;
+      padding: 8px 22px;
       background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 4px;
-      color: var(--nu-white);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 30px;
+      font-size: 0.78rem;
       font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
+      color: var(--nu-white);
+      letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
-    /* CHEVRON */
+    /* ══ CHEVRON ══ */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
 
-    /* CONTENT */
+    /* ══ CONTENT ══ */
     .nu-content-area {
       position: relative;
-      background: var(--nu-light-gray);
+      background: var(--nu-white);
+      overflow: hidden;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 80px; left: 50%;
+      top: 25%; left: 50%;
       transform: translateX(-50%);
-      width: 65%; max-width: 700px;
+      width: 65%;
+      max-width: 700px;
       height: 700px;
-      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
-      border-radius: 50%;
+      background-image: radial-gradient(circle, rgba(0,51,204,0.05) 0%, transparent 70%);
       z-index: 0;
       pointer-events: none;
     }
     .nu-container {
       position: relative;
-      z-index: 1;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 40px 80px;
+      padding: 60px 40px 40px;
+      z-index: 1;
     }
 
-    /* TITLE BLOCK */
-    .nu-title-block {
-      margin-bottom: 40px;
-      padding-bottom: 24px;
-      border-bottom: 3px solid var(--nu-blue);
-    }
-    .nu-title-block h1 {
+    /* ══ PAGE TITLE ══ */
+    .nu-page-title {
       font-weight: 900;
-      font-size: 2.25rem;
+      font-size: 2.3rem;
       color: var(--nu-dark-text);
-      line-height: 1.15;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      line-height: 1.2;
     }
-    .nu-title-block h1 .accent {
-      color: var(--nu-blue);
+    .nu-page-title .nu-accent-word {
+      color: #0033cc;
     }
-    .nu-title-block .meta {
+    .nu-page-subtitle {
+      font-size: 1.05rem;
+      color: #5a5a6e;
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+    .nu-meta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
-      font-size: 0.85rem;
-      color: var(--nu-body-text);
-      margin-top: 14px;
+      gap: 20px;
+      padding: 14px 0;
+      border-top: 1px solid var(--nu-medium-gray);
+      border-bottom: 1px solid var(--nu-medium-gray);
+      margin-bottom: 40px;
+      font-size: 0.82rem;
+      color: #666;
     }
-    .nu-title-block .meta span strong {
+    .nu-meta-row strong {
       color: var(--nu-dark-text);
       font-weight: 700;
-      margin-right: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
     }
 
-    /* STATUS BANNER */
+    /* ══ STATUS BANNER ══ */
     .nu-status-banner {
       display: flex;
       align-items: center;
       gap: 18px;
-      padding: 20px 26px;
-      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-      border-left: 6px solid var(--nu-warn-amber);
+      background: linear-gradient(135deg, #FFF4E5 0%, #FFE8CC 100%);
+      border-left: 5px solid var(--nu-warning-amber);
+      padding: 20px 24px;
       border-radius: 6px;
-      margin-bottom: 36px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
     }
-    .nu-status-banner .status-icon {
-      width: 44px; height: 44px;
+    .nu-status-icon {
       flex-shrink: 0;
-      background: var(--nu-warn-amber);
-      color: var(--nu-white);
+      width: 48px;
+      height: 48px;
+      background: var(--nu-warning-amber);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: white;
       font-weight: 900;
       font-size: 1.5rem;
     }
-    .nu-status-banner .status-text h3 {
-      font-weight: 900;
-      color: var(--nu-dark-text);
-      margin-bottom: 2px;
+    .nu-status-text h3 {
       font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      font-weight: 900;
+      margin-bottom: 2px;
     }
-    .nu-status-banner .status-text p {
-      font-size: 0.92rem;
-      color: #78350F;
+    .nu-status-text p {
+      font-size: 0.9rem;
+      color: #704000;
+      margin: 0;
     }
 
-    /* SECTION */
+    /* ══ SECTION HEADER ══ */
     .nu-section {
-      background: var(--nu-white);
-      border-radius: 8px;
-      padding: 32px;
-      margin-bottom: 28px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-      border: 1px solid var(--nu-medium-gray);
+      margin-bottom: 44px;
+    }
+    .nu-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--nu-medium-gray);
+    }
+    .nu-section-number {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-cyan);
+      font-family: 'Courier New', monospace;
     }
     .nu-section-title {
       font-weight: 900;
-      font-size: 1.35rem;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-size: 1.5rem;
+      color: #0033cc;
     }
-    .nu-section-title .first { color: var(--nu-blue); }
-    .nu-section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
-    .nu-section-title .num {
-      display: inline-flex;
+    .nu-section-title span {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    /* ══ QUESTIONS CARD ══ */
+    .nu-question-list {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .nu-question {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 16px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      align-items: start;
+    }
+    .nu-question:last-child { border-bottom: none; }
+    .nu-q-number {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033cc 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 32px; height: 32px;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      border-radius: 50%;
-      font-size: 0.85rem;
       font-weight: 900;
+      font-size: 0.85rem;
       flex-shrink: 0;
     }
-    .nu-section p { margin-bottom: 12px; }
-    .nu-section p:last-child { margin-bottom: 0; }
-
-    /* FACT GRID */
-    .nu-fact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-top: 18px;
+    .nu-q-body {
+      padding-top: 4px;
     }
-    .nu-fact {
-      padding: 18px 20px;
-      background: var(--nu-light-gray);
-      border-left: 4px solid var(--nu-cyan);
-      border-radius: 0 6px 6px 0;
-    }
-    .nu-fact .label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--nu-blue);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .nu-fact .value {
-      font-size: 0.98rem;
+    .nu-q-title {
       font-weight: 700;
       color: var(--nu-dark-text);
+      font-size: 1.02rem;
+      margin-bottom: 4px;
     }
-    .nu-fact .sub {
-      font-size: 0.82rem;
-      color: var(--nu-body-text);
-      font-weight: 400;
-      margin-top: 2px;
+    .nu-q-detail {
+      font-size: 0.9rem;
+      color: #5a5a6e;
+      line-height: 1.5;
     }
 
-    /* CHECKLIST */
+    /* ══ OPTIONS GRID ══ */
+    .nu-options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .nu-option-card {
+      background: var(--nu-white);
+      border: 2px solid var(--nu-medium-gray);
+      border-radius: 10px;
+      padding: 24px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .nu-option-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-color: var(--nu-cyan);
+    }
+    .nu-option-card.is-required { border-color: var(--nu-alert-red); }
+    .nu-option-card.is-optional { border-color: var(--nu-success-green); }
+    .nu-option-card.is-investigate { border-color: var(--nu-warning-amber); }
+
+    .nu-option-flag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .nu-option-card.is-required .nu-option-flag { background: #FDECEF; color: var(--nu-alert-red); }
+    .nu-option-card.is-optional .nu-option-flag { background: #E7F5EC; color: var(--nu-success-green); }
+    .nu-option-card.is-investigate .nu-option-flag { background: #FFF4E5; color: var(--nu-warning-amber); }
+
+    .nu-option-title {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 8px;
+    }
+    .nu-option-desc {
+      font-size: 0.9rem;
+      color: #5a5a6e;
+      margin-bottom: 12px;
+    }
+    .nu-option-impact {
+      padding-top: 12px;
+      border-top: 1px dashed var(--nu-medium-gray);
+      font-size: 0.82rem;
+      color: #666;
+    }
+    .nu-option-impact strong {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+
+    /* ══ CHECKLIST ══ */
     .nu-checklist {
       list-style: none;
-      margin-top: 10px;
+      padding: 0;
     }
     .nu-checklist li {
-      display: flex;
+      display: grid;
+      grid-template-columns: 28px 1fr;
       gap: 14px;
       padding: 14px 0;
       border-bottom: 1px solid var(--nu-medium-gray);
+      align-items: start;
     }
     .nu-checklist li:last-child { border-bottom: none; }
-    .nu-checklist .box {
-      flex-shrink: 0;
-      width: 22px; height: 22px;
+    .nu-check-box {
+      width: 22px;
+      height: 22px;
       border: 2px solid var(--nu-blue);
       border-radius: 4px;
+      flex-shrink: 0;
       margin-top: 2px;
     }
-    .nu-checklist .content strong {
+    .nu-check-content strong {
       display: block;
       color: var(--nu-dark-text);
       font-weight: 700;
       margin-bottom: 2px;
     }
-    .nu-checklist .content span {
-      font-size: 0.9rem;
-      color: var(--nu-body-text);
+    .nu-check-content span {
+      font-size: 0.88rem;
+      color: #5a5a6e;
     }
 
-    /* QUESTIONS TABLE */
-    .nu-q-list { counter-reset: qnum; }
-    .nu-q-item {
-      counter-increment: qnum;
-      position: relative;
-      padding: 18px 20px 18px 64px;
-      margin-bottom: 12px;
-      background: var(--nu-light-gray);
-      border-radius: 6px;
-      border-left: 4px solid var(--nu-blue);
+    /* ══ DECISION TABLE ══ */
+    .nu-decision-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--nu-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
-    .nu-q-item::before {
-      content: "Q" counter(qnum);
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      font-weight: 900;
-      color: var(--nu-blue);
-      font-size: 0.95rem;
-      letter-spacing: 0.05em;
-    }
-    .nu-q-item .q {
+    .nu-decision-table th {
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
+      color: white;
+      padding: 14px 18px;
+      text-align: left;
       font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nu-decision-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 0.92rem;
+      vertical-align: top;
+    }
+    .nu-decision-table tr:last-child td { border-bottom: none; }
+    .nu-decision-table tr:nth-child(even) td { background: #FAFAFD; }
+    .nu-decision-table .nu-outcome-yes { color: var(--nu-alert-red); font-weight: 700; }
+    .nu-decision-table .nu-outcome-no { color: var(--nu-success-green); font-weight: 700; }
+    .nu-decision-table .nu-outcome-maybe { color: var(--nu-warning-amber); font-weight: 700; }
+
+    /* ══ CONTACT CARD ══ */
+    .nu-contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 8px;
+    }
+    .nu-contact-card {
+      background: linear-gradient(135deg, #F8F9FC 0%, var(--nu-white) 100%);
+      border-left: 4px solid var(--nu-cyan);
+      padding: 18px 20px;
+      border-radius: 0 6px 6px 0;
+    }
+    .nu-contact-role {
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--nu-blue);
+      margin-bottom: 6px;
+    }
+    .nu-contact-name {
+      font-weight: 900;
+      font-size: 1.05rem;
       color: var(--nu-dark-text);
       margin-bottom: 4px;
     }
-    .nu-q-item .hint {
-      font-size: 0.86rem;
-      color: var(--nu-body-text);
-      font-style: italic;
+    .nu-contact-detail {
+      font-size: 0.85rem;
+      color: #5a5a6e;
+      line-height: 1.5;
     }
 
-    /* DECISION MATRIX */
-    .nu-matrix {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 16px;
-      font-size: 0.92rem;
+    /* ══ NEXT ACTION ══ */
+    .nu-next-action {
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 50%, #0066ee 100%);
+      color: white;
+      padding: 32px 36px;
+      border-radius: 12px;
+      margin-top: 40px;
+      position: relative;
+      overflow: hidden;
     }
-    .nu-matrix th {
-      background: var(--nu-navy);
-      color: var(--nu-white);
-      padding: 12px 14px;
-      text-align: left;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
+    .nu-next-action::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -10%;
+      width: 50%; height: 180%;
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.2) 0%, transparent 70%);
+    }
+    .nu-next-action > * { position: relative; z-index: 2; }
+    .nu-next-label {
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      color: var(--nu-cyan);
       text-transform: uppercase;
-    }
-    .nu-matrix td {
-      padding: 14px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      vertical-align: top;
-    }
-    .nu-matrix tr:last-child td { border-bottom: none; }
-    .nu-matrix tr:nth-child(even) td { background: var(--nu-light-gray); }
-    .nu-matrix .outcome {
-      font-weight: 700;
-      color: var(--nu-blue);
-    }
-    .nu-matrix .outcome.yes { color: var(--nu-success); }
-    .nu-matrix .outcome.no { color: var(--nu-danger); }
-
-    /* NEXT STEPS */
-    .nu-next-steps {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: var(--nu-white);
-      padding: 36px;
-      border-radius: 8px;
-      margin-top: 32px;
-    }
-    .nu-next-steps h2 {
-      font-weight: 900;
-      font-size: 1.4rem;
-      margin-bottom: 18px;
-      color: var(--nu-cyan);
-    }
-    .nu-next-steps ol {
-      margin-left: 20px;
-      padding-left: 10px;
-    }
-    .nu-next-steps li {
       margin-bottom: 10px;
-      line-height: 1.6;
     }
-    .nu-next-steps li::marker {
-      color: var(--nu-cyan);
+    .nu-next-title {
+      font-size: 1.5rem;
       font-weight: 900;
+      margin-bottom: 10px;
     }
-    .nu-next-steps a {
-      color: var(--nu-cyan);
+    .nu-next-body {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+    }
+    .nu-next-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: var(--nu-white);
+      color: #0033cc;
+      font-weight: 900;
+      font-size: 0.9rem;
       text-decoration: none;
-      font-weight: 700;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s ease;
     }
+    .nu-next-cta:hover { transform: translateY(-2px); }
 
-    /* FOOTER */
+    /* ══ FOOTER ══ */
     .nu-footer {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 60%, #0a0e5c 100%);
       color: rgba(255,255,255,0.85);
-      padding: 40px 30px;
+      padding: 50px 40px;
       text-align: center;
     }
     .nu-footer-tagline {
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-weight: 300;
-      font-size: 1.15rem;
+      font-size: 1.3rem;
       color: var(--nu-cyan);
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
     .nu-footer-contact {
-      font-size: 0.92rem;
-      line-height: 1.8;
+      font-size: 0.95rem;
+      line-height: 1.9;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
-      font-weight: 700;
     }
     .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-meta {
+      margin-top: 18px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+    }
 
-    /* RESPONSIVE */
+    /* ══ RESPONSIVE ══ */
     @media (max-width: 768px) {
       .nu-header { padding: 40px 20px 60px; min-height: 220px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; padding-left: 0.5em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.45em; }
       .nu-tagline { font-size: 1rem; }
-      .nu-container { padding: 40px 20px 60px; }
-      .nu-title-block h1 { font-size: 1.6rem; }
-      .nu-section { padding: 22px; }
-      .nu-section-title { font-size: 1.15rem; }
-      .nu-status-banner { flex-direction: column; align-items: flex-start; padding: 18px; }
-      .nu-next-steps { padding: 24px; }
-      .nu-matrix { font-size: 0.82rem; }
-      .nu-matrix th, .nu-matrix td { padding: 10px 8px; }
+      .nu-container { padding: 40px 20px 20px; }
+      .nu-page-title { font-size: 1.6rem; }
+      .nu-section-title { font-size: 1.2rem; }
+      .nu-question { grid-template-columns: 36px 1fr; padding: 16px; }
+      .nu-next-action { padding: 24px; }
+      .nu-next-title { font-size: 1.2rem; }
+      .nu-decision-table th, .nu-decision-table td { padding: 10px 12px; font-size: 0.8rem; }
     }
 
     @media print {
-      body { background: var(--nu-white); }
+      body { background: white; }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-section { box-shadow: none; break-inside: avoid; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .nu-next-action, .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-option-card, .nu-question-list { box-shadow: none; }
     }
   </style>
 </head>
@@ -449,252 +570,319 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
-      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
-    </svg>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+      </svg>
+    </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
-    <div class="nu-doc-type">Internal Verification Brief</div>
+    <div class="nu-doc-label">Action Item · Verification Brief</div>
   </header>
 
-  <!-- CHEVRON -->
+  <!-- WHITE CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#F5F5F7"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- CONTENT -->
+  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
     <div class="nu-container">
 
-      <!-- TITLE -->
-      <div class="nu-title-block">
-        <h1><span class="accent">Peace of Mind</span> Maintenance Program — Verification Required</h1>
-        <div class="meta">
-          <span><strong>Action Item:</strong> reMarkable capture</span>
-          <span><strong>Date Captured:</strong> 2026-04-22</span>
-          <span><strong>Owner:</strong> Aaron C. Norris</span>
-          <span><strong>Status:</strong> Open — verification pending</span>
+      <!-- TITLE BLOCK -->
+      <div>
+        <h1 class="nu-page-title"><span class="nu-accent-word">Peace of Mind</span> Maintenance Program — Requirement Verification</h1>
+        <p class="nu-page-subtitle">Determine whether the Peace of Mind maintenance program is required on active and pending equipment orders, who it applies to, and how it affects price, warranty, and customer terms.</p>
+        <div class="nu-meta-row">
+          <div><strong>Source</strong><br>reMarkable Action Item</div>
+          <div><strong>Owner</strong><br>Aaron C. Norris</div>
+          <div><strong>Opened</strong><br>April 24, 2026</div>
+          <div><strong>Priority</strong><br>Medium — Verify within 72 hours</div>
+          <div><strong>Status</strong><br>Open — Awaiting supplier confirmation</div>
         </div>
       </div>
 
       <!-- STATUS BANNER -->
       <div class="nu-status-banner">
-        <div class="status-icon">?</div>
-        <div class="status-text">
-          <h3>Verification Required: Is a Peace of Mind maintenance program required?</h3>
-          <p>Determine whether a Peace of Mind (PoM) maintenance program is contractually, warranty-based, or customer-driven required for the affected equipment, and document the obligation before any further action.</p>
+        <div class="nu-status-icon">!</div>
+        <div class="nu-status-text">
+          <h3>Pending Verification</h3>
+          <p>Aaron flagged this on the reMarkable — the "Peace of Mind" program has surfaced on a supplier quote or customer conversation. Root question: is it required, optional, or already bundled? Resolve before the next quote or invoice goes out.</p>
         </div>
       </div>
 
-      <!-- SECTION 1: WHAT WE KNOW -->
-      <div class="nu-section">
-        <div class="nu-section-title">
-          <span class="num">1</span>
-          <span><span class="first">What</span> <span class="rest">we know (captured from reMarkable)</span></span>
+      <!-- SECTION 1 — WHY THIS MATTERS -->
+      <section class="nu-section">
+        <div class="nu-section-header">
+          <div class="nu-section-number">01</div>
+          <div class="nu-section-title"><span>Why This</span> Verification Matters</div>
         </div>
-        <p>The action item reads: <em>"Verify if Peace of Mind maintenance program is required for …"</em> — the specific equipment, customer, or contract reference was truncated in the capture and must be reconstructed before the verification is complete.</p>
-        <p>A "Peace of Mind" program in utility equipment typically refers to a bundled preventive-maintenance and inspection offering (commonly annual or semi-annual service, DOT inspections, dielectric testing for aerial devices, and vendor-certified parts). Each manufacturer wraps the label around slightly different deliverables.</p>
-
-        <div class="nu-fact-grid">
-          <div class="nu-fact">
-            <div class="label">Capture Source</div>
-            <div class="value">reMarkable Tablet</div>
-            <div class="sub">Aaron's daily handwritten queue</div>
+        <div class="nu-options-grid">
+          <div class="nu-option-card is-investigate">
+            <span class="nu-option-flag">Pricing Impact</span>
+            <div class="nu-option-title">Affects customer price</div>
+            <div class="nu-option-desc">If Peace of Mind is a line-item add-on, it shifts quoted totals. Customers may already have costs locked in — a retroactive add-on damages trust.</div>
+            <div class="nu-option-impact"><strong>Risk:</strong> Quoting a unit without the program when it is mandatory = margin loss or broken quote.</div>
           </div>
-          <div class="nu-fact">
-            <div class="label">Capture Date</div>
-            <div class="value">2026-04-22</div>
-            <div class="sub">Synced via reMarkable pipeline</div>
+          <div class="nu-option-card is-investigate">
+            <span class="nu-option-flag">Warranty Exposure</span>
+            <div class="nu-option-title">Changes warranty posture</div>
+            <div class="nu-option-desc">Maintenance programs often gate extended warranty coverage. Skipping a required program can void manufacturer support downstream.</div>
+            <div class="nu-option-impact"><strong>Risk:</strong> Customer claim denied 18 months out — Norris Utilities® left covering the gap.</div>
           </div>
-          <div class="nu-fact">
-            <div class="label">Item Type</div>
-            <div class="value">Verification Task</div>
-            <div class="sub">Requires yes/no determination</div>
-          </div>
-          <div class="nu-fact">
-            <div class="label">Blocking</div>
-            <div class="value">Equipment/Customer Reference</div>
-            <div class="sub">Truncated in reMarkable note</div>
+          <div class="nu-option-card is-investigate">
+            <span class="nu-option-flag">Contract Terms</span>
+            <div class="nu-option-title">May appear in T&Cs</div>
+            <div class="nu-option-desc">Supplier order acknowledgments sometimes list "required service programs" in boilerplate. Easy to miss; binding if signed.</div>
+            <div class="nu-option-impact"><strong>Risk:</strong> Exposure to recurring service fees we never factored into margin.</div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- SECTION 2: RECONSTRUCT THE "FOR …" -->
-      <div class="nu-section">
-        <div class="nu-section-title">
-          <span class="num">2</span>
-          <span><span class="first">Reconstruct</span> <span class="rest">the missing reference</span></span>
+      <!-- SECTION 2 — QUESTIONS TO ANSWER -->
+      <section class="nu-section">
+        <div class="nu-section-header">
+          <div class="nu-section-number">02</div>
+          <div class="nu-section-title"><span>Questions to</span> Answer</div>
         </div>
-        <p>The verification can't be answered until we recover what the program is "required for." Walk these sources in order:</p>
+        <div class="nu-question-list">
+          <div class="nu-question">
+            <div class="nu-q-number">1</div>
+            <div class="nu-q-body">
+              <div class="nu-q-title">Which supplier's Peace of Mind program is this?</div>
+              <div class="nu-q-detail">Skylift, Bay Shore Systems (BSS), Terex, or another? Each manufacturer has its own maintenance/service bundle and its own rules. Identify the source quote, PO, or email where the term appeared.</div>
+            </div>
+          </div>
+          <div class="nu-question">
+            <div class="nu-q-number">2</div>
+            <div class="nu-q-body">
+              <div class="nu-q-title">Is the program mandatory, optional, or auto-bundled?</div>
+              <div class="nu-q-detail">"Required" means the unit cannot ship without it. "Optional" means we can offer it or decline. "Bundled" means it is already inside the quoted unit price — no action needed.</div>
+            </div>
+          </div>
+          <div class="nu-question">
+            <div class="nu-q-number">3</div>
+            <div class="nu-q-body">
+              <div class="nu-q-title">What is the cost, term length, and scope?</div>
+              <div class="nu-q-detail">One-time fee or recurring annual? Covers what — inspections, parts, labor, travel? Is there a deductible? Who performs the service (dealer vs. manufacturer)?</div>
+            </div>
+          </div>
+          <div class="nu-question">
+            <div class="nu-q-number">4</div>
+            <div class="nu-q-body">
+              <div class="nu-q-title">Does it affect the warranty?</div>
+              <div class="nu-q-detail">Some programs are prerequisite to extended warranty or to fleet-grade terms. Confirm whether enrollment or non-enrollment modifies the base warranty.</div>
+            </div>
+          </div>
+          <div class="nu-question">
+            <div class="nu-q-number">5</div>
+            <div class="nu-q-body">
+              <div class="nu-q-title">Which customers/orders are affected?</div>
+              <div class="nu-q-detail">Skylift PO from 1/12/26 (5× SBA40i-LW + 1× SBA47i-MH)? Pending Bill Kugler / Terex deal? Any outstanding quotes? Map the exposure before answering customers.</div>
+            </div>
+          </div>
+          <div class="nu-question">
+            <div class="nu-q-number">6</div>
+            <div class="nu-q-body">
+              <div class="nu-q-title">How do we pass it through — and at what margin?</div>
+              <div class="nu-q-detail">If required and added to cost, apply standard 12-15% equipment margin unless the program is a pure pass-through. Confirm the supplier's published pricing versus Norris's quote.</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- SECTION 3 — POSSIBLE OUTCOMES -->
+      <section class="nu-section">
+        <div class="nu-section-header">
+          <div class="nu-section-number">03</div>
+          <div class="nu-section-title"><span>Possible</span> Outcomes &amp; Response</div>
+        </div>
+        <div class="nu-options-grid">
+          <div class="nu-option-card is-required">
+            <span class="nu-option-flag">Outcome A — Required</span>
+            <div class="nu-option-title">Mandatory on all new units</div>
+            <div class="nu-option-desc">Supplier will not release the unit unless the program is enrolled. Standard practice on some lift/crane lines to maintain certification.</div>
+            <div class="nu-option-impact"><strong>Action:</strong> Add as separate line item on every quote going forward. Update master tracker. Re-quote any open deals that did not include it.</div>
+          </div>
+          <div class="nu-option-card is-optional">
+            <span class="nu-option-flag">Outcome B — Optional</span>
+            <div class="nu-option-title">Customer-elect add-on</div>
+            <div class="nu-option-desc">Offered at customer discretion. Norris earns margin when attached but no deal breaks if declined.</div>
+            <div class="nu-option-impact"><strong>Action:</strong> Build standard "Peace of Mind" line-item sheet with price, term, scope. Offer on every quote. Log attach rate in CRM.</div>
+          </div>
+          <div class="nu-option-card is-investigate">
+            <span class="nu-option-flag">Outcome C — Bundled</span>
+            <div class="nu-option-title">Already inside unit price</div>
+            <div class="nu-option-desc">No separate charge — program is part of what the customer already paid for. Most customer-friendly outcome.</div>
+            <div class="nu-option-impact"><strong>Action:</strong> Document on internal one-pager so Aaron and CB can reference when customers ask. No quote changes needed.</div>
+          </div>
+          <div class="nu-option-card is-required">
+            <span class="nu-option-flag">Outcome D — Not Applicable</span>
+            <div class="nu-option-title">Does not apply to Norris's channel</div>
+            <div class="nu-option-desc">Program exists but only applies to direct-manufacturer customers, not dealer/distributor sales. Confirm in writing.</div>
+            <div class="nu-option-impact"><strong>Action:</strong> File confirmation email. Add note to supplier profile. No further action unless policy changes.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4 — VERIFICATION CHECKLIST -->
+      <section class="nu-section">
+        <div class="nu-section-header">
+          <div class="nu-section-number">04</div>
+          <div class="nu-section-title"><span>Verification</span> Checklist</div>
+        </div>
         <ul class="nu-checklist">
           <li>
-            <div class="box"></div>
-            <div class="content">
-              <strong>Check original reMarkable page.</strong>
-              <span>Pull the source notebook page — the "for …" continuation is likely written on the next line or margin.</span>
+            <div class="nu-check-box"></div>
+            <div class="nu-check-content">
+              <strong>1. Identify the source document</strong>
+              <span>Find where "Peace of Mind" first appeared — reMarkable note, supplier quote, customer email, or PO acknowledgment. Save the exact reference in the master tracker.</span>
             </div>
           </li>
           <li>
-            <div class="box"></div>
-            <div class="content">
-              <strong>Check Skylift PO SBA40i-LW / SBA47i-MH file (PO 1/12/26).</strong>
-              <span>Skylift offers a factory maintenance plan — the 5 × SBA40i-LW + 1 × SBA47i-MH order totaling $1,091,402.50 is the most likely PoM candidate in the active pipeline.</span>
+            <div class="nu-check-box"></div>
+            <div class="nu-check-content">
+              <strong>2. Email the manufacturer directly</strong>
+              <span>Contact the relevant rep with a written question. Request a written answer — not a phone response — so the reply is filed. If Skylift: Nick Jarmoszuk Jr, Andrew Jarmoszuk, or Dale Williams. If BSS: Andy Barron (primary) with Herb Minatre on CC.</span>
             </div>
           </li>
           <li>
-            <div class="box"></div>
-            <div class="content">
-              <strong>Check Bay Shore Systems drill rig files.</strong>
-              <span>BSS drill rigs frequently ship with an optional maintenance/inspection package. Confirm with Andy Barron if one was quoted.</span>
+            <div class="nu-check-box"></div>
+            <div class="nu-check-content">
+              <strong>3. Request the program spec sheet in writing</strong>
+              <span>Ask for the one-page description: cost, term, what is covered, what is excluded, dealer responsibilities. Without documentation, Norris cannot quote it consistently.</span>
             </div>
           </li>
           <li>
-            <div class="box"></div>
-            <div class="content">
-              <strong>Check Terex Commander open item (Bill Kugler).</strong>
-              <span>Terex branded "Peace of Mind" service plans exist — verify if this opportunity is tied to one.</span>
+            <div class="nu-check-box"></div>
+            <div class="nu-check-content">
+              <strong>4. Map exposure across open deals</strong>
+              <span>Cross-check the active deals pipeline — Skylift 1/12/26 PO, pending Terex / Bill Kugler opportunity, any Samson or BOSS orders — to confirm where this might apply.</span>
             </div>
           </li>
           <li>
-            <div class="box"></div>
-            <div class="content">
-              <strong>Check recent Telegram and Gmail threads for "peace of mind", "PM plan", "maintenance agreement".</strong>
-              <span>Search last 45 days. A customer may have requested it directly.</span>
+            <div class="nu-check-box"></div>
+            <div class="nu-check-content">
+              <strong>5. Update the master tracker with the answer</strong>
+              <span>Record: (a) which program, (b) required / optional / bundled, (c) cost and margin treatment, (d) date confirmed, (e) who confirmed. Flag any re-quotes needed.</span>
+            </div>
+          </li>
+          <li>
+            <div class="nu-check-box"></div>
+            <div class="nu-check-content">
+              <strong>6. Brief CB and adjust quote templates</strong>
+              <span>If program is required or routinely offered, update Norris quote templates so CB can attach it automatically. Confirm language matches supplier's official description.</span>
+            </div>
+          </li>
+          <li>
+            <div class="nu-check-box"></div>
+            <div class="nu-check-content">
+              <strong>7. Notify affected customers (only if changes apply)</strong>
+              <span>If an open quote needs correction, Aaron contacts the customer personally — not CB. Explain the change, give the customer the option, re-issue the quote.</span>
             </div>
           </li>
         </ul>
-      </div>
+      </section>
 
-      <!-- SECTION 3: QUESTIONS TO ANSWER -->
-      <div class="nu-section">
-        <div class="nu-section-title">
-          <span class="num">3</span>
-          <span><span class="first">Questions</span> <span class="rest">to answer before closing this item</span></span>
+      <!-- SECTION 5 — DECISION MATRIX -->
+      <section class="nu-section">
+        <div class="nu-section-header">
+          <div class="nu-section-number">05</div>
+          <div class="nu-section-title"><span>Decision</span> Matrix — What Triggers Required Status</div>
         </div>
-
-        <div class="nu-q-list">
-          <div class="nu-q-item">
-            <div class="q">Which piece of equipment or which customer account is this Peace of Mind program tied to?</div>
-            <div class="hint">The answer defines whether this is a vendor program (Skylift/Terex/BSS) or a customer-facing Norris Utilities® offering.</div>
-          </div>
-          <div class="nu-q-item">
-            <div class="q">Is the program required by contract, by warranty, or requested by the customer?</div>
-            <div class="hint">Contract/warranty → mandatory. Customer-requested → discretionary, becomes a revenue line.</div>
-          </div>
-          <div class="nu-q-item">
-            <div class="q">Who is the program administered by — OEM, third-party service, or Norris Utilities® directly?</div>
-            <div class="hint">Determines who invoices and who performs the inspections.</div>
-          </div>
-          <div class="nu-q-item">
-            <div class="q">What is the annual cost, and what margin applies?</div>
-            <div class="hint">Equipment-related services typically follow the 12–15% equipment margin band.</div>
-          </div>
-          <div class="nu-q-item">
-            <div class="q">Is there a start-of-service trigger (delivery, commissioning, PO date)?</div>
-            <div class="hint">Skylift PO (1/12/26) delivery is ~3 weeks from ship — clock may already be running.</div>
-          </div>
-          <div class="nu-q-item">
-            <div class="q">Does it require DOT inspection, dielectric testing, or crane annual certification?</div>
-            <div class="hint">Aerial devices and cranes fall under ANSI/OSHA annual inspection regulations regardless of OEM program.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 4: DECISION MATRIX -->
-      <div class="nu-section">
-        <div class="nu-section-title">
-          <span class="num">4</span>
-          <span><span class="first">Decision</span> <span class="rest">matrix — required vs. optional</span></span>
-        </div>
-        <p>Once the questions in Section 3 are answered, use this matrix to determine whether the PoM program is required:</p>
-
-        <table class="nu-matrix">
+        <table class="nu-decision-table">
           <thead>
             <tr>
-              <th>Condition</th>
-              <th>Outcome</th>
-              <th>Next Action</th>
+              <th>Scenario</th>
+              <th>Required?</th>
+              <th>Norris Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>PO or contract explicitly includes PoM as a line item</td>
-              <td class="outcome yes">REQUIRED</td>
-              <td>Schedule program, add to invoicing calendar, notify customer of coverage start.</td>
+              <td>Supplier quote lists program as a separate line with the word "required" or "mandatory"</td>
+              <td class="nu-outcome-yes">YES</td>
+              <td>Pass through on every customer quote. Apply standard equipment margin unless supplier stipulates pass-through pricing.</td>
             </tr>
             <tr>
-              <td>OEM warranty voids without enrolled maintenance plan</td>
-              <td class="outcome yes">REQUIRED</td>
-              <td>Enroll equipment; document enrollment in QuickBooks note.</td>
+              <td>Supplier quote lists program as "recommended" or "optional"</td>
+              <td class="nu-outcome-no">NO</td>
+              <td>Offer to the customer as an add-on. Track attach rate. Do not re-quote existing deals without customer consent.</td>
             </tr>
             <tr>
-              <td>Federal/state regulation (DOT, OSHA, ANSI) mandates annual inspection</td>
-              <td class="outcome yes">REQUIRED</td>
-              <td>Bundle mandatory inspection; confirm PoM is the vehicle (vs. standalone inspection).</td>
+              <td>Program appears only in boilerplate T&Cs, not on pricing</td>
+              <td class="nu-outcome-maybe">MAYBE</td>
+              <td>Email the rep for written clarification before the next quote goes out. Do not sign until resolved.</td>
             </tr>
             <tr>
-              <td>Customer verbally asked about the program; not in any contract</td>
-              <td class="outcome">OPTIONAL — QUOTE IT</td>
-              <td>Prepare quote at 12–15% margin; follow up for written approval.</td>
+              <td>Program is named but Norris cannot find pricing or scope</td>
+              <td class="nu-outcome-maybe">MAYBE</td>
+              <td>Treat as unverified. Do not offer to customers. Request spec sheet in writing.</td>
             </tr>
             <tr>
-              <td>Neither contract, warranty, regulation, nor customer request applies</td>
-              <td class="outcome no">NOT REQUIRED</td>
-              <td>Document the determination; close the action item with reasoning.</td>
+              <td>Manufacturer confirms program is bundled in unit cost</td>
+              <td class="nu-outcome-no">NO</td>
+              <td>Document once. Use as selling point: "Your unit already includes manufacturer's Peace of Mind program."</td>
+            </tr>
+            <tr>
+              <td>Manufacturer confirms program applies to direct sales only, not dealer channel</td>
+              <td class="nu-outcome-no">NO</td>
+              <td>Save the confirmation email. No customer-facing change.</td>
             </tr>
           </tbody>
         </table>
-      </div>
+      </section>
 
-      <!-- SECTION 5: CONTACTS -->
-      <div class="nu-section">
-        <div class="nu-section-title">
-          <span class="num">5</span>
-          <span><span class="first">Vendor</span> <span class="rest">contacts to confirm program terms</span></span>
+      <!-- SECTION 6 — WHO TO CONTACT -->
+      <section class="nu-section">
+        <div class="nu-section-header">
+          <div class="nu-section-number">06</div>
+          <div class="nu-section-title"><span>Who to</span> Contact (By Supplier)</div>
         </div>
-        <p>Depending on which equipment the program is tied to, these are the contacts to reach with the verification question:</p>
-
-        <div class="nu-fact-grid">
-          <div class="nu-fact">
-            <div class="label">Skylift</div>
-            <div class="value">Andrew Jarmoszuk</div>
-            <div class="sub">Dale Williams · Nick Jarmoszuk Jr · Nick Gordon (pricing/specs)</div>
+        <div class="nu-contact-grid">
+          <div class="nu-contact-card">
+            <div class="nu-contact-role">Skylift (Most Likely Source)</div>
+            <div class="nu-contact-name">Nick Jarmoszuk Jr / Andrew Jarmoszuk / Dale Williams</div>
+            <div class="nu-contact-detail">Pricing and specs — request written confirmation of whether Peace of Mind applies to the 1/12/26 PO (5× SBA40i-LW + 1× SBA47i-MH).</div>
           </div>
-          <div class="nu-fact">
-            <div class="label">Bay Shore Systems</div>
-            <div class="value">Andy Barron (primary)</div>
-            <div class="sub">Herb Minatre (owner)</div>
+          <div class="nu-contact-card">
+            <div class="nu-contact-role">Bay Shore Systems</div>
+            <div class="nu-contact-name">Andy Barron (primary)</div>
+            <div class="nu-contact-detail">CC Herb Minatre (owner). Ask whether BSS drill rigs in the Southeast territory are subject to any required maintenance enrollment.</div>
           </div>
-          <div class="nu-fact">
-            <div class="label">Terex</div>
-            <div class="value">Bill Kugler</div>
-            <div class="sub">Active opportunity</div>
+          <div class="nu-contact-card">
+            <div class="nu-contact-role">Terex</div>
+            <div class="nu-contact-name">Bill Kugler</div>
+            <div class="nu-contact-detail">Confirm before the pending opportunity closes. Peace of Mind may surface inside Terex fleet support bundles.</div>
           </div>
-          <div class="nu-fact">
-            <div class="label">Boss Products</div>
-            <div class="value">Troy Gongwer + Thayne Grove</div>
-            <div class="sub">CC both on all correspondence</div>
+          <div class="nu-contact-card">
+            <div class="nu-contact-role">BOSS Products</div>
+            <div class="nu-contact-name">Troy Gongwer + Thayne Grove</div>
+            <div class="nu-contact-detail">CC both on any inquiry. Confirm whether their accessory/warranty programs carry a Peace of Mind designation.</div>
+          </div>
+          <div class="nu-contact-card">
+            <div class="nu-contact-role">Samson Rope</div>
+            <div class="nu-contact-name">Donna Poll + Sarah Daniels</div>
+            <div class="nu-contact-detail">CC both. Unlikely to apply — rope is consumable — but confirm for completeness since Norris is authorized distributor.</div>
+          </div>
+          <div class="nu-contact-card">
+            <div class="nu-contact-role">Internal — Admin Review</div>
+            <div class="nu-contact-name">Caroline Butler (CB)</div>
+            <div class="nu-contact-detail">Once answer confirmed, brief CB on quote template change. Any customer-facing correspondence still routes through Aaron for review (Tier 1 trust rule).</div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- SECTION 6: NEXT STEPS -->
-      <div class="nu-next-steps">
-        <h2>Next Steps — Aaron's Action Path</h2>
-        <ol>
-          <li><strong>Recover the "for …" reference.</strong> Pull the reMarkable page and reread the next line/margin. Set a 10-minute limit.</li>
-          <li><strong>If still unclear</strong>, default to the most likely candidate: Skylift PO (5 × SBA40i-LW + 1 × SBA47i-MH, $1,091,402.50, dated 1/12/26).</li>
-          <li><strong>Email Andrew Jarmoszuk at Skylift.</strong> Ask: "Is a Peace of Mind maintenance program required on the 6-unit order PO'd 1/12/26, or is it an optional add-on?" CC Nick Gordon for pricing/specs.</li>
-          <li><strong>Run the decision matrix</strong> (Section 4) using the vendor's answer.</li>
-          <li><strong>Document the determination</strong> in the open-items tracker with the answer, the date verified, and the source (vendor email, contract line, or regulation citation).</li>
-          <li><strong>If required:</strong> add to invoicing calendar at appropriate margin. <strong>If optional:</strong> prepare a customer quote. <strong>If not required:</strong> close the item.</li>
-          <li><strong>Close the loop</strong> — send Aaron a one-line Telegram confirmation that the item is resolved.</li>
-        </ol>
+      <!-- NEXT ACTION -->
+      <div class="nu-next-action">
+        <div class="nu-next-label">Next Action — This Week</div>
+        <div class="nu-next-title">Send one email to each active supplier asking the same four questions.</div>
+        <div class="nu-next-body">Same email, different recipients: (1) Is Peace of Mind required or optional on current Norris Utilities® orders? (2) What does it cost and what does it cover? (3) Does it affect warranty? (4) Please confirm in writing. File all replies in the supplier folders, then update the master tracker before the next quote is sent.</div>
+        <a href="mailto:acnorris@norrisutilities.com?subject=Peace%20of%20Mind%20Program%20Verification%20%E2%80%94%20Draft%20Email%20Review" class="nu-next-cta">Draft the Email → acnorris@norrisutilities.com</a>
       </div>
 
     </div>
@@ -708,6 +896,9 @@
       <a href="tel:2055001343">205-500-1343</a> |
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+    <div class="nu-footer-meta">
+      Internal verification brief · Generated 2026-04-24 · reMarkable Action Item
     </div>
   </footer>
 
