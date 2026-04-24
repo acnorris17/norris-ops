@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>4505 Buttewoods Estate Acquisition — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <title>Estate Acquisition Brief — 4505 Buttewoods — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
   <style>
     :root {
       --nu-blue: #0000FF;
@@ -24,19 +24,19 @@
     body {
       font-family: var(--font-primary);
       color: var(--nu-body-text);
-      background: var(--nu-light-gray);
+      background: var(--nu-white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ══ HEADER ══ */
+    /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 50%, #00aaff 75%, var(--nu-cyan) 100%);
-      padding: 60px 40px 80px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
+      padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 280px;
+      min-height: 300px;
     }
     .nu-header::before {
       content: '';
@@ -58,11 +58,22 @@
     }
     .nu-header * { position: relative; z-index: 2; }
 
+    /* Ghost phoenix watermark */
+    .nu-ghost-phoenix {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      height: auto;
+      opacity: 0.07;
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .nu-phoenix-icon {
       width: 72px;
       height: 72px;
-      margin: 0 auto 16px;
-      opacity: 0.95;
+      margin: 0 auto 14px;
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
     }
     .nu-logo-text {
@@ -71,391 +82,379 @@
       color: var(--nu-white);
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
       font-weight: 900;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: var(--nu-white);
       letter-spacing: 0.75em;
       text-transform: uppercase;
-      margin-bottom: 20px;
-      padding-left: 0.75em;
+      margin-bottom: 18px;
     }
     .nu-tagline {
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 400;
       font-size: 1.25rem;
-      color: rgba(255,255,255,0.95);
-      letter-spacing: 0.04em;
+      color: var(--nu-cyan);
+      letter-spacing: 0.03em;
     }
 
-    /* Ghost phoenix watermark */
-    .nu-header-watermark {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 65%; max-width: 520px;
-      opacity: 0.07;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* ══ CHEVRON ══ */
+    /* CHEVRON */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg { width: 100%; height: 50px; display: block; }
-
-    /* ══ PAGE BANNER ══ */
-    .page-banner {
-      background: var(--nu-white);
-      padding: 40px 40px 20px;
-      text-align: center;
-      border-bottom: 1px solid var(--nu-medium-gray);
-    }
-    .page-banner .eyebrow {
-      display: inline-block;
-      background: var(--nu-navy);
-      color: var(--nu-cyan);
-      padding: 6px 16px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      border-radius: 2px;
-      margin-bottom: 16px;
-    }
-    .page-banner h1 {
-      font-weight: 900;
-      font-size: 2.25rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
-      line-height: 1.15;
-    }
-    .page-banner h1 span { color: var(--nu-blue); }
-    .page-banner .subhead {
-      font-size: 1.05rem;
-      color: var(--nu-body-text);
-      max-width: 760px;
-      margin: 0 auto;
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
     }
 
-    /* ══ MAIN CONTENT ══ */
+    /* CONTENT */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
     }
-    .content-wrap {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 50px 40px 60px;
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.02) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
     }
+    .nu-content-area > * { position: relative; z-index: 1; }
 
-    /* ══ PROPERTY FACT BAR ══ */
-    .fact-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0;
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      border-radius: 10px;
-      overflow: hidden;
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 60px 40px; }
+
+    /* DOC META STRIP */
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding: 16px 22px;
+      background: var(--nu-light-gray);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 4px;
       margin-bottom: 40px;
-      box-shadow: 0 4px 20px rgba(0,0,51,0.15);
+      font-size: 0.85rem;
     }
-    .fact-cell {
-      padding: 22px 20px;
-      text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.08);
-      color: var(--nu-white);
-    }
-    .fact-cell:last-child { border-right: none; }
-    .fact-cell .label {
-      font-size: 0.7rem;
+    .doc-meta .label {
+      display: block;
+      color: var(--nu-blue);
       font-weight: 700;
-      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--nu-cyan);
-      margin-bottom: 6px;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      margin-bottom: 4px;
     }
-    .fact-cell .value {
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: var(--nu-white);
-    }
-    .fact-cell .suffix {
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.7);
-      margin-top: 2px;
+    .doc-meta .value {
+      color: var(--nu-dark-text);
+      font-weight: 700;
     }
 
-    /* ══ SECTION TITLE ══ */
-    .section-title {
+    /* SECTION TITLES */
+    .nu-section-title {
       font-weight: 900;
       font-size: 1.5rem;
-      margin-bottom: 18px;
-      padding-bottom: 12px;
-      border-bottom: 3px solid var(--nu-blue);
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-    }
-    .section-title .num {
       color: var(--nu-blue);
-      font-size: 1rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
     }
-    .section-title .main { color: var(--nu-dark-text); }
-
-    /* ══ TWO COLUMN ══ */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      margin-bottom: 40px;
-    }
-
-    /* ══ CARDS ══ */
-    .card {
-      background: var(--nu-white);
-      border-radius: 8px;
-      padding: 26px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      border: 1px solid var(--nu-medium-gray);
-      border-top: 4px solid var(--nu-blue);
-    }
-    .card h3 {
-      font-weight: 900;
-      font-size: 1.15rem;
+    .nu-section-title span {
       color: var(--nu-dark-text);
-      margin-bottom: 14px;
+      font-weight: 700;
     }
-    .card h3 span { color: var(--nu-blue); }
-    .card p { margin-bottom: 10px; }
-    .card ul { list-style: none; padding: 0; }
-    .card li {
-      padding: 8px 0 8px 22px;
-      position: relative;
-      border-bottom: 1px solid var(--nu-light-gray);
+    .nu-section-rule {
+      height: 3px;
+      width: 64px;
+      background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan));
+      margin-bottom: 22px;
     }
-    .card li:last-child { border-bottom: none; }
-    .card li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: var(--nu-blue);
-      font-weight: 900;
-    }
-    .card li strong { color: var(--nu-dark-text); }
+    section { margin-bottom: 48px; }
 
-    /* ══ STRATEGY TABLE ══ */
-    .strategy-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--nu-white);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 40px;
-    }
-    .strategy-table thead {
-      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033cc 100%);
+    /* BADGE */
+    .nu-badge {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
       color: var(--nu-white);
-    }
-    .strategy-table th {
-      padding: 14px 16px;
-      text-align: left;
+      padding: 12px 30px 12px 18px;
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
       font-weight: 700;
       font-size: 0.85rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-    }
-    .strategy-table td {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      vertical-align: top;
-      font-size: 0.95rem;
-    }
-    .strategy-table tr:last-child td { border-bottom: none; }
-    .strategy-table tr:nth-child(even) td { background: var(--nu-light-gray); }
-    .strategy-table .tier-label {
-      font-weight: 900;
-      color: var(--nu-blue);
-      white-space: nowrap;
-    }
-    .strategy-table .price {
-      font-weight: 900;
-      color: var(--nu-dark-text);
-      white-space: nowrap;
+      margin-bottom: 18px;
     }
 
-    /* ══ TIMELINE ══ */
-    .timeline {
-      position: relative;
-      padding-left: 32px;
-      margin-bottom: 40px;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 10px;
-      top: 8px;
-      bottom: 8px;
-      width: 3px;
-      background: linear-gradient(180deg, var(--nu-blue), var(--nu-cyan));
-      border-radius: 2px;
-    }
-    .timeline-item {
-      position: relative;
-      padding: 10px 0 20px 18px;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -28px;
-      top: 14px;
-      width: 16px;
-      height: 16px;
-      background: var(--nu-white);
-      border: 3px solid var(--nu-blue);
-      border-radius: 50%;
-    }
-    .timeline-item .phase {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--nu-blue);
-      margin-bottom: 4px;
-    }
-    .timeline-item .title {
-      font-weight: 900;
-      font-size: 1.05rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 6px;
-    }
-    .timeline-item .desc {
-      font-size: 0.95rem;
-      color: var(--nu-body-text);
-    }
-
-    /* ══ CALLOUT ══ */
-    .callout {
-      background: linear-gradient(135deg, #f5f9ff 0%, #e8f4ff 100%);
-      border-left: 5px solid var(--nu-blue);
-      padding: 22px 26px;
-      border-radius: 6px;
-      margin-bottom: 40px;
-    }
-    .callout h4 {
-      font-weight: 900;
-      font-size: 1.05rem;
-      color: var(--nu-blue);
-      margin-bottom: 8px;
-      letter-spacing: 0.02em;
-    }
-    .callout p { color: var(--nu-dark-text); font-size: 0.98rem; }
-
-    /* ══ RISK MATRIX ══ */
-    .risk-grid {
+    /* KEY FACTS GRID */
+    .facts-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 10px;
     }
-    .risk-item {
+    .fact-card {
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
-      border-radius: 6px;
-      padding: 18px;
-      border-left: 4px solid var(--nu-accent-gold);
+      border-top: 3px solid var(--nu-cyan);
+      padding: 18px 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-    .risk-item h4 {
-      font-weight: 900;
-      font-size: 1rem;
-      color: var(--nu-dark-text);
+    .fact-card .k {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--nu-blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
       margin-bottom: 6px;
     }
-    .risk-item .mitigation {
-      font-size: 0.88rem;
-      color: var(--nu-body-text);
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px dashed var(--nu-medium-gray);
+    .fact-card .v {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--nu-dark-text);
     }
-    .risk-item .mitigation strong { color: var(--nu-blue); }
+    .fact-card .v.big {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--nu-blue);
+    }
 
-    /* ══ CTA BOX ══ */
-    .cta-box {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: var(--nu-white);
-      padding: 38px 32px;
-      border-radius: 10px;
-      text-align: center;
-      margin-bottom: 40px;
+    /* TABLE */
+    .nu-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      background: var(--nu-white);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    .cta-box h3 {
-      font-weight: 900;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+    .nu-table thead th {
+      background: linear-gradient(135deg, var(--nu-blue) 0%, #0033cc 100%);
       color: var(--nu-white);
-    }
-    .cta-box p { color: rgba(255,255,255,0.85); margin-bottom: 20px; }
-    .cta-btn {
-      display: inline-block;
-      background: var(--nu-cyan);
-      color: var(--nu-navy);
-      padding: 14px 32px;
-      border-radius: 4px;
-      font-weight: 900;
-      text-decoration: none;
-      letter-spacing: 0.05em;
+      font-weight: 700;
+      padding: 14px 18px;
+      text-align: left;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+    }
+    .nu-table tbody td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      vertical-align: top;
+    }
+    .nu-table tbody tr:nth-child(even) { background: var(--nu-light-gray); }
+    .nu-table tbody tr:last-child td { border-bottom: none; }
+    .nu-table td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+
+    /* LIST */
+    .nu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nu-list li {
+      position: relative;
+      padding: 10px 0 10px 30px;
+      border-bottom: 1px dashed var(--nu-medium-gray);
+    }
+    .nu-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 18px;
+      width: 14px; height: 14px;
+      background: linear-gradient(135deg, var(--nu-blue), var(--nu-cyan));
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+    .nu-list li:last-child { border-bottom: none; }
+    .nu-list li strong { color: var(--nu-dark-text); display: block; margin-bottom: 3px; }
+
+    /* STEP ROW */
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 14px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 18px;
+      padding: 18px 20px;
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 4px;
+      align-items: flex-start;
+    }
+    .step .num {
+      counter-increment: step;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
+      color: var(--nu-white);
+      font-weight: 900;
+      font-size: 1.1rem;
+      border-radius: 50%;
+    }
+    .step .num::before { content: counter(step); }
+    .step h4 {
+      color: var(--nu-dark-text);
+      font-size: 1.05rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .step p { font-size: 0.95rem; }
+
+    /* NOTE BOX */
+    .note-box {
+      background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
+      border: 1px solid #d0d9ff;
+      border-left: 4px solid var(--nu-cyan);
+      padding: 20px 24px;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+    .note-box .lbl {
+      font-size: 0.7rem;
+      color: var(--nu-blue);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+    .note-box p { font-size: 0.95rem; color: var(--nu-dark-text); }
+
+    /* TWO-COL */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .panel {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      padding: 22px 24px;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .panel h3 {
+      color: var(--nu-blue);
+      font-weight: 900;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--nu-cyan);
+    }
+    .panel ul { list-style: none; }
+    .panel ul li {
+      padding: 6px 0 6px 20px;
+      position: relative;
+      font-size: 0.93rem;
+    }
+    .panel ul li::before {
+      content: '•';
+      position: absolute; left: 6px; top: 6px;
+      color: var(--nu-blue); font-weight: 900;
+    }
+
+    /* BUTTONS */
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .nu-btn-primary {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      padding: 14px 30px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      text-decoration: none;
       transition: all 0.2s ease;
     }
-    .cta-btn:hover { background: var(--nu-white); transform: translateY(-1px); }
+    .nu-btn-primary:hover {
+      background: #0000CC;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0,0,255,0.3);
+    }
+    .nu-btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--nu-blue);
+      padding: 14px 30px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .nu-btn-secondary:hover {
+      background: var(--nu-blue);
+      color: var(--nu-white);
+    }
 
-    /* ══ FOOTER ══ */
+    /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 40px;
+      padding: 44px 40px;
       text-align: center;
     }
     .nu-footer-tagline {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: 1.2rem;
+      font-weight: 400;
+      font-size: 1.25rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
-    .nu-footer-contact { font-size: 0.95rem; line-height: 1.9; }
-    .nu-footer-contact a { color: var(--nu-cyan); text-decoration: none; }
+    .nu-footer-contact {
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .nu-footer-contact a {
+      color: var(--nu-cyan);
+      text-decoration: none;
+    }
     .nu-footer-contact a:hover { text-decoration: underline; }
 
-    /* ══ RESPONSIVE ══ */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
+      .nu-header { padding: 40px 20px 60px; min-height: 220px; }
       .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
       .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1rem; }
-      .page-banner { padding: 30px 20px 16px; }
-      .page-banner h1 { font-size: 1.7rem; }
-      .content-wrap { padding: 36px 20px 40px; }
-      .two-col { grid-template-columns: 1fr; gap: 20px; }
-      .fact-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-      .fact-cell:last-child { border-bottom: none; }
-      .strategy-table { font-size: 0.85rem; }
-      .strategy-table th, .strategy-table td { padding: 10px 10px; }
+      .wrap { padding: 40px 22px; }
+      .two-col { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 1fr; }
+      .doc-meta { flex-direction: column; gap: 12px; }
+      .nu-table { font-size: 0.85rem; }
+      .nu-table thead th, .nu-table tbody td { padding: 10px 12px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .panel, .fact-card, .step { box-shadow: none; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .actions { display: none; }
     }
   </style>
 </head>
@@ -463,14 +462,12 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-header-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
-      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
-    </svg>
-    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
-      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
-    </svg>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+      </svg>
+    </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
@@ -479,314 +476,310 @@
   <!-- CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#ffffff"/>
     </svg>
   </div>
 
-  <!-- PAGE BANNER -->
-  <div class="page-banner">
-    <span class="eyebrow">Action Item — Personal / Confidential</span>
-    <h1><span>4505 Buttewoods</span> — Estate Acquisition Strategy</h1>
-    <p class="subhead">7,098 sq ft estate property. Negotiation playbook, valuation framework, offer ladder, and execution timeline prepared for Aaron C. Norris.</p>
-  </div>
-
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <main class="nu-content-area">
-    <div class="content-wrap">
+    <div class="wrap">
 
-      <!-- FACT BAR -->
-      <div class="fact-bar">
-        <div class="fact-cell">
-          <div class="label">Address</div>
-          <div class="value">4505 Buttewoods</div>
+      <div class="nu-badge">Internal Brief — Confidential</div>
+
+      <h1 class="nu-section-title" style="font-size:2.1rem; line-height:1.2;">
+        Estate Acquisition <span>— 4505 Buttewoods</span>
+      </h1>
+      <div class="nu-section-rule"></div>
+
+      <p style="font-size:1.05rem; max-width: 780px; margin-bottom: 28px;">
+        Negotiation brief for the proposed purchase of a 7,098 sq ft estate located at
+        <strong>4505 Buttewoods</strong>. This document captures the property profile,
+        preparation checklist, negotiation strategy, and decision framework to guide
+        Aaron C. Norris through offer, counter-offer, and close.
+      </p>
+
+      <div class="doc-meta">
+        <div>
+          <span class="label">Prepared For</span>
+          <span class="value">Aaron C. Norris, Founder &amp; CEO</span>
         </div>
-        <div class="fact-cell">
-          <div class="label">Size</div>
-          <div class="value">7,098</div>
-          <div class="suffix">Square Feet</div>
+        <div>
+          <span class="label">Subject Property</span>
+          <span class="value">4505 Buttewoods — 7,098 sq ft estate</span>
         </div>
-        <div class="fact-cell">
-          <div class="label">Classification</div>
-          <div class="value">Estate</div>
+        <div>
+          <span class="label">Action Origin</span>
+          <span class="value">reMarkable action item</span>
         </div>
-        <div class="fact-cell">
-          <div class="label">Status</div>
-          <div class="value">Negotiation</div>
-          <div class="suffix">Open</div>
-        </div>
-        <div class="fact-cell">
-          <div class="label">Source</div>
-          <div class="value">reMarkable</div>
-          <div class="suffix">Action Item</div>
+        <div>
+          <span class="label">Status</span>
+          <span class="value">Negotiation — Preparation Phase</span>
         </div>
       </div>
 
-      <!-- SECTION 1: SITUATION -->
-      <div class="section-title">
-        <span class="num">§ 01</span>
-        <span class="main">Situation Summary</span>
-      </div>
-
-      <div class="callout">
-        <h4>THE OBJECTIVE</h4>
-        <p>Negotiate and close on the 7,098 sq ft estate at 4505 Buttewoods at a price that preserves cash position, protects borrowing capacity for Norris Utilities®, and delivers a defensible long-term asset. This is a personal acquisition — it must not distract from Phase B or impair the company balance sheet.</p>
-      </div>
-
-      <div class="two-col">
-        <div class="card">
-          <h3><span>Why</span> This Matters</h3>
-          <ul>
-            <li><strong>Asset base.</strong> A 7,098 sq ft estate is a generational holding, not a turn-over property.</li>
-            <li><strong>Legacy alignment.</strong> Fits the "A Legacy of Commitment®" posture — build, hold, pass down.</li>
-            <li><strong>Leverage ratio.</strong> Any mortgage directly affects debt-to-income for future equipment financing and line-of-credit headroom at Renasant.</li>
-            <li><strong>Time cost.</strong> Negotiations can consume 3–8 weeks of focus. That window overlaps open deals with Bill Kugler (Terex), Coy Crosby (Dominion), and Chain Electric reconciliation.</li>
-          </ul>
+      <!-- KEY FACTS -->
+      <section>
+        <h2 class="nu-section-title">Property <span>Snapshot</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="facts-grid">
+          <div class="fact-card">
+            <span class="k">Address</span>
+            <span class="v">4505 Buttewoods</span>
+          </div>
+          <div class="fact-card">
+            <span class="k">Total Interior</span>
+            <span class="v big">7,098 sq ft</span>
+          </div>
+          <div class="fact-card">
+            <span class="k">Asset Class</span>
+            <span class="v">Luxury Estate</span>
+          </div>
+          <div class="fact-card">
+            <span class="k">Transaction Type</span>
+            <span class="v">Private Negotiation</span>
+          </div>
+          <div class="fact-card">
+            <span class="k">Intended Use</span>
+            <span class="v">Primary Residence</span>
+          </div>
+          <div class="fact-card">
+            <span class="k">Timeline</span>
+            <span class="v">Aaron-directed</span>
+          </div>
         </div>
 
-        <div class="card">
-          <h3><span>What</span> We Know So Far</h3>
-          <ul>
-            <li><strong>Property:</strong> 4505 Buttewoods — 7,098 sq ft estate class.</li>
-            <li><strong>Seller:</strong> To be confirmed (direct or listed).</li>
-            <li><strong>Asking price:</strong> To be gathered — do not proceed without it.</li>
-            <li><strong>Comps:</strong> Pull 3 sold comps within 12 months, same zip code, 6,500–7,500 sq ft band.</li>
-            <li><strong>Inspection status:</strong> Not started. Required before any binding offer.</li>
-          </ul>
+        <div class="note-box">
+          <div class="lbl">Missing Data — To Confirm with Seller / Listing</div>
+          <p>
+            List price, lot acreage, bed/bath count, year built, HOA or covenant terms,
+            current tax assessment, and most recent comparable sales within a 1-mile
+            radius. These must be pulled before offer is finalized so the negotiation
+            anchors to verifiable numbers rather than assumptions.
+          </p>
         </div>
-      </div>
+      </section>
 
-      <!-- SECTION 2: PRE-NEGOTIATION CHECKLIST -->
-      <div class="section-title">
-        <span class="num">§ 02</span>
-        <span class="main">Pre-Negotiation Checklist — Complete Before First Offer</span>
-      </div>
+      <!-- PRE-NEGOTIATION CHECKLIST -->
+      <section>
+        <h2 class="nu-section-title">Pre-Negotiation <span>Checklist</span></h2>
+        <div class="nu-section-rule"></div>
+        <ul class="nu-list">
+          <li>
+            <strong>Pull comparable sales (last 12 months, 1-mile radius)</strong>
+            Compare price-per-square-foot against the asking price to establish a
+            defensible ceiling. 7,098 sq ft places this in the upper-tier bracket,
+            so comp pool may be thin — expand radius if fewer than five matches.
+          </li>
+          <li>
+            <strong>Confirm financing posture with Patrick Lavette (Renasant Bank)</strong>
+            Pre-qualification or proof-of-funds letter strengthens the offer and
+            short-circuits seller objections. Aaron should coordinate directly.
+          </li>
+          <li>
+            <strong>Independent appraisal scheduled before earnest money</strong>
+            Do not accept the seller's appraisal. Use an independent, third-party
+            appraiser familiar with Birmingham luxury inventory.
+          </li>
+          <li>
+            <strong>Title, lien, and encumbrance search</strong>
+            Verify clean title, no outstanding mechanic's liens, no unrecorded
+            easements or shared-driveway agreements that could affect use.
+          </li>
+          <li>
+            <strong>Structural, roof, HVAC, and foundation inspection</strong>
+            7,098 sq ft is substantial — a full four-system inspection is required,
+            not a standard single-family walkthrough. Add pool/landscape if applicable.
+          </li>
+          <li>
+            <strong>Tax history and assessment review</strong>
+            Three-year tax trend indicates both assessor behavior and potential
+            post-sale tax reassessment exposure.
+          </li>
+          <li>
+            <strong>Insurance quote secured before close</strong>
+            Luxury insurance carriers require bindable quotes. Secure early to avoid
+            close-day surprises.
+          </li>
+        </ul>
+      </section>
 
-      <div class="two-col">
-        <div class="card">
-          <h3><span>Information</span> Gathering</h3>
-          <ul>
-            <li>Pull current listing (MLS, Zillow, Redfin) and screenshot listing history.</li>
-            <li>Pull 5-year tax record — verify assessed value vs. asking.</li>
-            <li>Pull deed history — flag prior owner holding period and last sale price.</li>
-            <li>Pull 3 sold comps (6,500–7,500 sq ft, within 12 months, same submarket).</li>
-            <li>Pull 3 active comps still on market — days-on-market average.</li>
-            <li>Check permit history for additions, renovations, roof, HVAC.</li>
-            <li>Run flood zone, easement, and setback check.</li>
-          </ul>
-        </div>
+      <!-- NEGOTIATION STRATEGY -->
+      <section>
+        <h2 class="nu-section-title">Negotiation <span>Strategy</span></h2>
+        <div class="nu-section-rule"></div>
 
-        <div class="card">
-          <h3><span>Financial</span> Preparation</h3>
-          <ul>
-            <li>Confirm cash-on-hand reserve separate from NU operating account.</li>
-            <li>Get written pre-approval (Patrick Lavette, Renasant Bank) before first offer.</li>
-            <li>Model three financing stacks: 20% down, 25% down, all-cash.</li>
-            <li>Calculate monthly carry at each scenario (PITI + utilities + upkeep).</li>
-            <li>Set walk-away price before first conversation. Write it down. Do not move.</li>
-            <li>Confirm no new personal debt taken on between pre-approval and close.</li>
-          </ul>
+        <div class="steps">
+          <div class="step">
+            <div class="num"></div>
+            <div>
+              <h4>Open Below Asking with a Defensible Anchor</h4>
+              <p>
+                Submit initial offer at <strong>88–92% of asking price</strong>, referenced
+                directly to verified comps and a written appraisal range. An anchored
+                offer signals seriousness and keeps the ceiling intact without offending
+                the seller.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num"></div>
+            <div>
+              <h4>Isolate Seller Motivation Early</h4>
+              <p>
+                Ask the listing agent three questions before any price talk:
+                why is the seller moving, how long has the property been on market,
+                and are there competing offers. The answers dictate leverage and pace.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num"></div>
+            <div>
+              <h4>Structure Contingencies as Value, Not Barriers</h4>
+              <p>
+                Inspection, appraisal, and financing contingencies are standard.
+                Present them as routine protections, not bargaining leverage — saves
+                leverage for price and concession discussions.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num"></div>
+            <div>
+              <h4>Bundle Concessions in the Counter-Offer</h4>
+              <p>
+                If the seller counters, respond with a <strong>single bundled counter</strong>:
+                price, closing date, repairs, and included personal property all in one
+                round. Multiple small rounds erode goodwill and invite competing offers.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num"></div>
+            <div>
+              <h4>Hold the Walk-Away Number in Writing</h4>
+              <p>
+                Before negotiation begins, write down the maximum price Aaron will pay
+                and put it somewhere outside the room. That number does not move
+                during negotiation — it only moves with new verified information.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num"></div>
+            <div>
+              <h4>Close Fast Once Terms Align</h4>
+              <p>
+                Target a <strong>30-day close</strong> once price is agreed. Longer
+                windows invite seller's remorse, competing backup offers, and
+                market-timing risk.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- SECTION 3: VALUATION & OFFER LADDER -->
-      <div class="section-title">
-        <span class="num">§ 03</span>
-        <span class="main">Valuation Framework &amp; Offer Ladder</span>
-      </div>
+      <!-- DECISION FRAMEWORK -->
+      <section>
+        <h2 class="nu-section-title">Decision <span>Framework</span></h2>
+        <div class="nu-section-rule"></div>
 
-      <div class="callout">
-        <h4>RULE OF THUMB</h4>
-        <p>On a 7,098 sq ft estate, every $10/sq ft shift in price = $70,980. Small concessions move real money. Never negotiate off-the-cuff. Every counter-offer goes back to this spreadsheet first.</p>
-      </div>
+        <table class="nu-table">
+          <thead>
+            <tr>
+              <th>Signal</th>
+              <th>Green Light</th>
+              <th>Yellow Light</th>
+              <th>Red Light — Walk Away</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Price vs. Comps</td>
+              <td>Within 5% of median $/sqft</td>
+              <td>5–12% above median</td>
+              <td>More than 12% above median</td>
+            </tr>
+            <tr>
+              <td>Inspection Findings</td>
+              <td>Minor cosmetic items</td>
+              <td>Single major system needs repair</td>
+              <td>Two or more major systems failing</td>
+            </tr>
+            <tr>
+              <td>Title &amp; Liens</td>
+              <td>Clean title, no encumbrances</td>
+              <td>Minor easement, disclosed</td>
+              <td>Unresolved lien or dispute</td>
+            </tr>
+            <tr>
+              <td>Seller Behavior</td>
+              <td>Transparent, responsive</td>
+              <td>Slow responses, incomplete disclosures</td>
+              <td>Misrepresentation or evasion</td>
+            </tr>
+            <tr>
+              <td>Financing Terms</td>
+              <td>Rate and LTV pre-confirmed</td>
+              <td>Conditional approval pending</td>
+              <td>Denial or material rate change</td>
+            </tr>
+            <tr>
+              <td>Market Timing</td>
+              <td>Days-on-market under 30</td>
+              <td>30–90 DOM</td>
+              <td>90+ DOM with no price drop</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-      <table class="strategy-table">
-        <thead>
-          <tr>
-            <th style="width: 14%;">Tier</th>
-            <th style="width: 22%;">Offer Position</th>
-            <th style="width: 32%;">Rationale</th>
-            <th style="width: 32%;">Terms / Leverage</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="tier-label">Anchor</td>
-            <td class="price">85% of fair-market comp value</td>
-            <td>Establishes reference point below asking. Seller knows you've done the work.</td>
-            <td>Short inspection window (10 days), proof of funds attached, 30-day close.</td>
-          </tr>
-          <tr>
-            <td class="tier-label">Opening</td>
-            <td class="price">88–90% of comp value</td>
-            <td>First written offer. Leaves room for 2 counters before hitting target.</td>
-            <td>Earnest money at 1%, standard contingencies, escalation language held back.</td>
-          </tr>
-          <tr>
-            <td class="tier-label">Target</td>
-            <td class="price">92–94% of comp value</td>
-            <td>This is where a good deal lives. Signed papers by this number = win.</td>
-            <td>Waive nothing material. Keep inspection &amp; financing contingencies intact.</td>
-          </tr>
-          <tr>
-            <td class="tier-label">Ceiling</td>
-            <td class="price">96% of comp value</td>
-            <td>Absolute maximum — only if inspection clean &amp; property is rare-to-market.</td>
-            <td>Add escalation clause capped here. Require seller concessions on closing costs.</td>
-          </tr>
-          <tr>
-            <td class="tier-label">Walk</td>
-            <td class="price">Above 96% of comp value</td>
-            <td>Leave. Another property will come. Do not chase.</td>
-            <td>Polite exit — keep relationship open, property may re-list in 60–90 days.</td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- RISK + OPPORTUNITY -->
+      <section>
+        <h2 class="nu-section-title">Risk &amp; <span>Opportunity</span></h2>
+        <div class="nu-section-rule"></div>
+        <div class="two-col">
+          <div class="panel">
+            <h3>Risks to Flag</h3>
+            <ul>
+              <li>Property has been improved beyond neighborhood comps, making resale a function of a narrow buyer pool</li>
+              <li>Carrying cost on 7,098 sq ft (utilities, insurance, maintenance) runs materially higher than a standard home</li>
+              <li>Luxury tier can face slower sales cycles — exit liquidity lower than starter/mid-market inventory</li>
+              <li>Any undisclosed structural, foundation, or water-intrusion issue scales with square footage</li>
+              <li>Tax reassessment post-sale may spike property tax liability</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Opportunity Angles</h3>
+            <ul>
+              <li>Motivated seller or extended DOM opens meaningful discount room</li>
+              <li>Cash or fast-close posture is often worth a 3–5% price concession to a tired seller</li>
+              <li>Seller-paid repairs or closing-cost credits preserve cash reserves at close</li>
+              <li>Bundled personal property (furnishings, equipment) can offset price on a second counter</li>
+              <li>Appraisal gap clause — if well-structured — removes a common deal-killer</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-      <!-- SECTION 4: NEGOTIATION PLAYBOOK -->
-      <div class="section-title">
-        <span class="num">§ 04</span>
-        <span class="main">Negotiation Playbook — Aaron's Voice</span>
-      </div>
+      <!-- NEXT STEPS -->
+      <section>
+        <h2 class="nu-section-title">Immediate <span>Next Steps</span></h2>
+        <div class="nu-section-rule"></div>
+        <ul class="nu-list">
+          <li><strong>Aaron</strong> — Confirm list price, lot size, and key property data; forward listing to this file</li>
+          <li><strong>Financing</strong> — Contact Patrick Lavette at Renasant Bank to secure proof-of-funds or pre-qualification letter</li>
+          <li><strong>Comps</strong> — Pull three-year sales history within 1-mile radius for properties 5,000+ sq ft</li>
+          <li><strong>Inspection</strong> — Line up independent inspector with luxury-tier experience; schedule before earnest money</li>
+          <li><strong>Walk-Away Number</strong> — Aaron sets the maximum price in writing before first counter-offer is submitted</li>
+          <li><strong>Legal</strong> — Route offer letter through attorney review before transmission</li>
+        </ul>
 
-      <div class="two-col">
-        <div class="card">
-          <h3><span>Opening</span> Moves</h3>
-          <ul>
-            <li><strong>Lead with the ask.</strong> No small talk. "I'm prepared to move on 4505 Buttewoods at the right number."</li>
-            <li><strong>Name the homework.</strong> "I've pulled 3 recent comps and the tax record. Here's what I'm seeing."</li>
-            <li><strong>State the terms, not just price.</strong> Close date, inspection window, earnest deposit — these move sellers as much as price.</li>
-            <li><strong>Silence is a tool.</strong> Make the offer, stop talking. Let them respond first.</li>
-          </ul>
+        <div class="actions">
+          <a href="tel:2055001343" class="nu-btn-primary">Call Aaron — 205-500-1343</a>
+          <a href="mailto:acnorris@norrisutilities.com?subject=4505%20Buttewoods%20%E2%80%94%20Acquisition%20Discussion" class="nu-btn-secondary">Email on 4505 Buttewoods</a>
         </div>
-
-        <div class="card">
-          <h3><span>Counter</span> Discipline</h3>
-          <ul>
-            <li><strong>Never counter on the phone in-the-moment.</strong> "Let me look at that and come back to you by end of day." Always.</li>
-            <li><strong>Write every counter down before sending.</strong> If it feels good in your head but bad on paper — trust the paper.</li>
-            <li><strong>Concede on terms before concessing on price.</strong> Close date flexibility costs nothing. Price concession costs real dollars.</li>
-            <li><strong>Two-counter rule.</strong> After the seller has moved twice toward you, you've found the zone. Close it.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- SECTION 5: TIMELINE -->
-      <div class="section-title">
-        <span class="num">§ 05</span>
-        <span class="main">Execution Timeline</span>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="phase">Week 1 — Due Diligence</div>
-          <div class="title">Data gathering &amp; financial readiness</div>
-          <div class="desc">Pull listing, comps, tax record, deed history, permit file. Confirm Renasant pre-approval letter in hand. Set walk-away price and commit it to writing.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="phase">Week 2 — First Contact</div>
-          <div class="title">Seller or listing agent conversation</div>
-          <div class="desc">Introduce yourself, state serious intent, ask questions about seller motivation and timing. No offer yet. Listen. Take notes. Identify what seller values beyond price (close date, post-close occupancy, personal property).</div>
-        </div>
-        <div class="timeline-item">
-          <div class="phase">Week 3 — Opening Offer</div>
-          <div class="title">Written offer at Opening tier (88–90% of comp value)</div>
-          <div class="desc">Submit written offer with proof of funds. Include 10-day inspection window, 30-day close, 1% earnest money. No escalation clause yet. Wait 48–72 hours for response.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="phase">Week 4 — Counter Round One</div>
-          <div class="title">Respond to seller's first counter</div>
-          <div class="desc">Adjust price modestly (1–2%), hold terms firm. Signal that price improvements will now require seller concessions (closing costs, home warranty, appliance inclusion).</div>
-        </div>
-        <div class="timeline-item">
-          <div class="phase">Week 5 — Close the Gap</div>
-          <div class="title">Target tier engagement</div>
-          <div class="desc">If seller is within 2% of Target tier — sign. If seller is above Ceiling tier — walk politely. Never split the difference out of fatigue; split it because the math supports it.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="phase">Week 6–7 — Inspection &amp; Financing</div>
-          <div class="title">Verify what you're buying</div>
-          <div class="desc">Full inspection (foundation, roof, HVAC, electrical, plumbing, septic/sewer, pool if applicable). Finalize loan with Renasant. Renegotiate for material defects only — do not nickel-and-dime cosmetic findings.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="phase">Week 8 — Close</div>
-          <div class="title">Final walk-through &amp; funding</div>
-          <div class="desc">Morning walk-through, confirm property matches contract condition. Sign. Fund. File deed. Send thank-you note to seller regardless of how hard negotiations got — relationships matter.</div>
-        </div>
-      </div>
-
-      <!-- SECTION 6: RISK MATRIX -->
-      <div class="section-title">
-        <span class="num">§ 06</span>
-        <span class="main">Risk Matrix &amp; Mitigations</span>
-      </div>
-
-      <div class="risk-grid">
-        <div class="risk-item">
-          <h4>Over-paying against comps</h4>
-          <p>Emotional attachment drives price above defensible value.</p>
-          <div class="mitigation"><strong>Mitigation:</strong> Walk-away price committed to paper before first call. Spouse or trusted advisor reviews any move above Target tier.</div>
-        </div>
-        <div class="risk-item">
-          <h4>Financing disruption</h4>
-          <p>Credit pull shifts, new debt during contract, or rate lock expiration.</p>
-          <div class="mitigation"><strong>Mitigation:</strong> No new credit lines or large purchases from pre-approval through close. Rate lock for 60 days at contract signing.</div>
-        </div>
-        <div class="risk-item">
-          <h4>Hidden property defects</h4>
-          <p>Foundation, roof, septic, or structural surprise post-close.</p>
-          <div class="mitigation"><strong>Mitigation:</strong> Full inspection. Specialist follow-up (foundation engineer, septic pump/dye test) for any flagged item. Never waive inspection.</div>
-        </div>
-        <div class="risk-item">
-          <h4>Title or easement surprise</h4>
-          <p>Unrecorded easement, boundary dispute, or lien discovered late.</p>
-          <div class="mitigation"><strong>Mitigation:</strong> Title commitment reviewed within 5 business days of receipt. Survey ordered on any estate-class property regardless of cost.</div>
-        </div>
-        <div class="risk-item">
-          <h4>Business focus erosion</h4>
-          <p>Negotiation consumes attention needed for active NU deals.</p>
-          <div class="mitigation"><strong>Mitigation:</strong> Block one fixed hour per day for property matters. CB handles routine email triage during weeks 3–5 crunch.</div>
-        </div>
-        <div class="risk-item">
-          <h4>Seller backs out</h4>
-          <p>Seller re-lists higher or pulls property mid-negotiation.</p>
-          <div class="mitigation"><strong>Mitigation:</strong> Keep 2 backup properties on watchlist. Do not let loss of one deal force a bad deal on this one.</div>
-        </div>
-      </div>
-
-      <!-- SECTION 7: SUCCESS METRICS -->
-      <div class="section-title">
-        <span class="num">§ 07</span>
-        <span class="main">Success Metrics — How We'll Know We Won</span>
-      </div>
-
-      <div class="two-col">
-        <div class="card">
-          <h3><span>Quantitative</span> Wins</h3>
-          <ul>
-            <li><strong>Final price at or below Target tier</strong> (92–94% of comp value).</li>
-            <li><strong>Monthly carry ≤ 28%</strong> of Aaron's personal take-home, not NU revenue.</li>
-            <li><strong>Zero material surprises</strong> in first 90 days post-close.</li>
-            <li><strong>Renasant line of credit preserved</strong> — no reduction in NU borrowing capacity.</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3><span>Qualitative</span> Wins</h3>
-          <ul>
-            <li><strong>Relationship preserved.</strong> Seller would recommend Aaron to a friend even if they negotiated hard.</li>
-            <li><strong>No regret.</strong> Both over-paying and walking away carry regret — the Target zone carries neither.</li>
-            <li><strong>No disruption to Norris Utilities® operations</strong> during the negotiation window.</li>
-            <li><strong>Property serves its purpose</strong> — the reason for buying is still true a year later.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="cta-box">
-        <h3>Next Action — This Week</h3>
-        <p>Complete the pre-negotiation checklist in Section 2. Do not make contact with the seller until every line item is checked.</p>
-        <a href="tel:2055001343" class="cta-btn">Aaron — 205-500-1343</a>
-      </div>
+      </section>
 
     </div>
   </main>
