@@ -38,14 +38,6 @@ body { font-family:'Lato',sans-serif; margin:0; background:#f5f5f7; color:#1a1a1
 </style>
 </head>
 <body>
-<div id="auth-gate">
-  <form onsubmit="return doAuth(event)">
-    <h3>Norris Utilities Portal</h3>
-    <input type="password" id="auth-pw" placeholder="password" autocomplete="off" autofocus>
-    <div id="auth-err" class="err">Incorrect password.</div>
-    <button type="submit" style="background:#0033cc; color:#fff; border:none; padding:8px 14px; border-radius:4px; cursor:pointer; width:100%;">Unlock</button>
-  </form>
-</div>
 <header class="hdr">
   <h1>Daemon Health</h1>
   <p>V2.2 watchers and reconciliation jobs — <span id="updated">loading…</span></p>
@@ -59,19 +51,8 @@ body { font-family:'Lato',sans-serif; margin:0; background:#f5f5f7; color:#1a1a1
 </footer>
 <script>
 (function() {
-  var PW = { legacy2026:'cb', norris2026:'aaron' };
-  var KEY='nu_auth', ROLE='nu_role';
-  function authed() { var t=parseInt(sessionStorage.getItem(KEY)||'0',10); return t>0 && Date.now()-t<28800000; }
-  if (!authed()) document.getElementById('auth-gate').classList.add('show');
-  window.doAuth = function(e) {
-    e.preventDefault();
-    var pw = document.getElementById('auth-pw').value, role = PW[pw];
-    if (!role) { document.getElementById('auth-err').classList.add('show'); return false; }
-    sessionStorage.setItem(KEY, Date.now().toString());
-    sessionStorage.setItem(ROLE, role);
-    document.getElementById('auth-gate').classList.remove('show');
-    load(); return false;
-  };
+  // Auth is enforced by the inline nu-auth-gate-v2 script at top of <head>.
+  // This script just drives the data surface.
   function cardClass(e) { return e.stale ? 'stale' : (e.status && e.status.endsWith('error') ? 'error' : 'ok'); }
   function fmtAge(s) {
     if (s == null) return '—';
@@ -113,7 +94,7 @@ body { font-family:'Lato',sans-serif; margin:0; background:#f5f5f7; color:#1a1a1
       document.getElementById('grid').innerHTML = '<p style="color:#c00;">Failed to load health: ' + err + '</p>';
     });
   }
-  if (authed()) load();
+  load();
 })();
 </script>
 </body>
