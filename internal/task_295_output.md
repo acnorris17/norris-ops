@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Action Item — H2O Waterproofing Transfer Process &amp; Fees — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -16,10 +18,10 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-warning: #D9822B;
-      --nu-success: #2E7D32;
+      --nu-amber: #F59E0B;
+      --nu-red: #DC2626;
+      --nu-green: #059669;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-tagline: 'Playfair Display', Georgia, serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,8 +37,8 @@
     /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
-      padding: 60px 40px 90px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033CC 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      padding: 60px 40px 80px;
       text-align: center;
       overflow: hidden;
       min-height: 280px;
@@ -46,8 +48,8 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
       z-index: 1;
       opacity: 0.6;
     }
@@ -56,7 +58,7 @@
       position: absolute;
       top: -50%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
       z-index: 1;
     }
     .nu-header > * { position: relative; z-index: 2; }
@@ -64,11 +66,11 @@
     .nu-phoenix-icon {
       width: 72px;
       height: 72px;
-      margin: 0 auto 14px;
+      margin: 0 auto 16px;
       filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
-      opacity: 0.95;
     }
     .nu-logo-text {
+      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3rem;
       color: var(--nu-white);
@@ -78,312 +80,317 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
+      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 1.3rem;
       color: var(--nu-white);
-      letter-spacing: 0.7em;
+      letter-spacing: 0.8em;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .nu-tagline {
-      font-family: var(--font-tagline);
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
+      font-weight: 400;
       font-size: 1.25rem;
-      color: rgba(255,255,255,0.95);
-      letter-spacing: 0.03em;
+      color: var(--nu-cyan);
+      letter-spacing: 0.05em;
     }
 
-    /* CHEVRON TRANSITION (asymmetric, apex ~38%) */
+    /* CHEVRON */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
-      line-height: 0;
     }
-    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
 
-    /* PAGE SHELL */
-    .page-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 24px 60px;
+    /* CONTENT AREA */
+    .nu-content-area {
       position: relative;
+      background: var(--nu-white);
     }
-    .page-wrap::before {
+    .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 80px; left: 50%;
-      transform: translateX(-50%);
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(0,0,255,0.03) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(0,0,255,0.07) 0%, transparent 65%);
       border-radius: 50%;
       z-index: 0;
       pointer-events: none;
     }
-    .page-wrap > * { position: relative; z-index: 1; }
+    .nu-content-area > * { position: relative; z-index: 1; }
 
-    /* BREADCRUMB */
-    .breadcrumb {
-      font-size: 0.82rem;
-      color: #6b7280;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      font-weight: 700;
+    .nu-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
     }
-    .breadcrumb span { color: var(--nu-blue); }
 
-    /* ACTION ITEM CARD */
-    .action-card {
-      background: var(--nu-white);
-      border-radius: 10px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-      overflow: hidden;
-      border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 28px;
+    /* ACTION HERO */
+    .action-hero {
+      background: linear-gradient(135deg, var(--nu-white) 0%, #f8fbff 100%);
+      border-left: 6px solid var(--nu-blue);
+      padding: 32px 36px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      margin-bottom: 40px;
     }
-    .action-card-header {
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 100%);
-      color: var(--nu-white);
-      padding: 22px 32px;
+    .action-meta {
       display: flex;
-      align-items: center;
-      gap: 18px;
       flex-wrap: wrap;
-    }
-    .action-id {
-      display: inline-block;
-      background: rgba(6, 208, 255, 0.18);
-      color: var(--nu-cyan);
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid rgba(6, 208, 255, 0.4);
-    }
-    .action-priority {
-      display: inline-block;
-      background: var(--nu-warning);
-      color: var(--nu-white);
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .action-title {
-      font-weight: 900;
-      font-size: 1.7rem;
-      line-height: 1.25;
-      color: var(--nu-white);
-      flex: 1 1 100%;
-      margin-top: 6px;
-    }
-    .action-title .accent { color: var(--nu-cyan); }
-
-    .action-body {
-      padding: 32px;
-    }
-
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 28px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-    }
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .meta-label {
-      font-size: 0.72rem;
-      font-weight: 900;
-      color: #6b7280;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .meta-value {
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-
-    /* SECTION HEADERS */
-    .section-title {
-      font-weight: 900;
-      font-size: 1.35rem;
-      margin: 28px 0 14px;
-      line-height: 1.3;
-    }
-    .section-title .first { color: var(--nu-blue); }
-    .section-title .rest { color: var(--nu-dark-text); }
-
-    .lead {
-      font-size: 1.02rem;
-      color: var(--nu-body-text);
+      gap: 12px;
       margin-bottom: 18px;
     }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .pill-action { background: rgba(0,0,255,0.1); color: var(--nu-blue); }
+    .pill-source { background: rgba(6,208,255,0.15); color: #005566; }
+    .pill-open { background: rgba(245,158,11,0.15); color: #9A6500; }
+    .pill-priority { background: rgba(220,38,38,0.1); color: var(--nu-red); }
 
-    /* CHECKLIST */
-    .checklist {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .action-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.9rem;
+      line-height: 1.2;
+      color: var(--nu-dark-text);
+      margin-bottom: 12px;
+    }
+    .action-title .blue { color: var(--nu-blue); }
+    .action-subtitle {
+      font-size: 1.05rem;
+      color: var(--nu-body-text);
       margin-bottom: 8px;
     }
-    .checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 16px;
-      background: var(--nu-light-gray);
-      border-left: 4px solid var(--nu-cyan);
-      border-radius: 4px;
-      font-size: 0.98rem;
-    }
-    .checklist .box {
-      width: 20px; height: 20px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 3px;
-      flex-shrink: 0;
-      margin-top: 2px;
-      background: var(--nu-white);
-    }
-    .checklist strong { color: var(--nu-dark-text); font-weight: 900; }
 
-    /* INFO REQUESTED TABLE */
-    .info-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 10px 0 20px;
+    /* SECTION */
+    .nu-section {
+      margin-bottom: 42px;
+    }
+    .nu-section-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+      border-bottom: 2px solid var(--nu-medium-gray);
+      padding-bottom: 8px;
+    }
+    .nu-section-title .blue { color: var(--nu-blue); }
+    .nu-section-title .dark { color: var(--nu-dark-text); font-weight: 700; }
+
+    /* CARD GRID */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .nu-card {
+      background: var(--nu-white);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nu-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .nu-card h3 {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nu-card h3::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--nu-cyan);
+    }
+    .nu-card p {
+      font-size: 0.93rem;
+      color: var(--nu-body-text);
+    }
+
+    /* QUESTION LIST */
+    .questions {
+      background: #fafbff;
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 24px 28px;
+      counter-reset: q;
+    }
+    .questions li {
+      list-style: none;
+      padding: 14px 0 14px 44px;
+      position: relative;
+      border-bottom: 1px dashed var(--nu-medium-gray);
+      counter-increment: q;
+    }
+    .questions li:last-child { border-bottom: none; }
+    .questions li::before {
+      content: counter(q);
+      position: absolute;
+      left: 0; top: 14px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      font-weight: 900;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .questions li strong {
+      display: block;
+      color: var(--nu-dark-text);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .questions li span {
+      font-size: 0.9rem;
+      color: var(--nu-body-text);
+    }
+
+    /* STEPS */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .step {
+      display: flex;
+      gap: 16px;
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
+      border-left: 4px solid var(--nu-cyan);
       border-radius: 6px;
-      overflow: hidden;
+      padding: 18px 22px;
     }
-    .info-table th {
+    .step-num {
+      flex-shrink: 0;
+      width: 34px; height: 34px;
+      background: var(--nu-navy);
+      color: var(--nu-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.95rem;
+    }
+    .step-body h4 {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .step-body p {
+      font-size: 0.93rem;
+    }
+
+    /* EMAIL DRAFT */
+    .email-draft {
+      background: #fbfbfd;
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 28px 32px;
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1.7;
+    }
+    .email-meta {
+      font-family: var(--font-primary);
+      font-size: 0.85rem;
+      color: var(--nu-body-text);
+      border-bottom: 1px solid var(--nu-medium-gray);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+    .email-meta div { margin-bottom: 4px; }
+    .email-meta strong { color: var(--nu-dark-text); width: 70px; display: inline-block; }
+    .email-body p { margin-bottom: 14px; padding-left: 20px; }
+    .email-body ul { padding-left: 56px; margin-bottom: 14px; list-style: none; }
+    .email-body ul li { position: relative; margin-bottom: 6px; }
+    .email-body ul li::before {
+      content: '•';
+      position: absolute;
+      left: -18px;
+      color: var(--nu-blue);
+      font-weight: 700;
+    }
+    .email-sig { padding-left: 20px; margin-top: 18px; }
+
+    /* INFO BOX */
+    .info-box {
+      background: linear-gradient(135deg, rgba(0,0,255,0.04) 0%, rgba(6,208,255,0.06) 100%);
+      border: 1px solid rgba(0,0,255,0.12);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 18px;
+    }
+    .info-box strong { color: var(--nu-blue); }
+
+    /* STATUS TABLE */
+    .status-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--nu-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .status-table th {
       background: var(--nu-navy);
       color: var(--nu-white);
       text-align: left;
-      padding: 12px 16px;
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
+      padding: 14px 18px;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
-    .info-table td {
-      padding: 14px 16px;
-      font-size: 0.94rem;
-      border-top: 1px solid var(--nu-medium-gray);
-      vertical-align: top;
+    .status-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 0.93rem;
     }
-    .info-table tr:nth-child(even) td { background: var(--nu-light-gray); }
-    .info-table .q { font-weight: 700; color: var(--nu-dark-text); width: 42%; }
-    .info-table .why { color: #555; font-style: italic; font-size: 0.88rem; }
-
-    /* CONTACT PANEL */
-    .contact-panel {
-      background: linear-gradient(135deg, #f8fafd 0%, #eef5ff 100%);
-      border: 1px solid #d6e4ff;
-      border-radius: 8px;
-      padding: 22px 26px;
-      margin-bottom: 24px;
-    }
-    .contact-panel h3 {
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--nu-blue);
-      margin-bottom: 10px;
-      letter-spacing: 0.02em;
-    }
-    .contact-row {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 8px 18px;
-      font-size: 0.95rem;
-    }
-    .contact-row dt {
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .contact-row dd { color: var(--nu-body-text); }
-
-    /* TALKING POINTS */
-    .talking-points {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 5px solid var(--nu-blue);
-      border-radius: 6px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
-    }
-    .talking-points p { margin-bottom: 10px; }
-    .talking-points p:last-child { margin-bottom: 0; }
-
-    /* CALLOUT */
-    .callout {
-      background: #fff8e6;
-      border: 1px solid #f0d27a;
-      border-left: 5px solid var(--nu-accent-gold);
-      border-radius: 6px;
-      padding: 16px 20px;
-      font-size: 0.94rem;
-      color: #5a4a1a;
-      margin: 20px 0;
-    }
-    .callout strong { color: var(--nu-dark-text); }
-
-    /* NEXT STEPS BADGES */
-    .next-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px;
-      margin-top: 8px;
-    }
-    .step-badge {
-      display: flex;
-      align-items: center;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      padding: 14px 18px 14px 14px;
-      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-    .step-badge .num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px; height: 28px;
-      background: var(--nu-cyan);
-      color: var(--nu-navy);
-      border-radius: 50%;
-      font-weight: 900;
-      font-size: 0.9rem;
-      margin-right: 12px;
-      flex-shrink: 0;
-    }
+    .status-table tr:last-child td { border-bottom: none; }
+    .status-table tr:nth-child(even) td { background: #fafbff; }
 
     /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 40px 24px;
+      padding: 44px 40px;
       text-align: center;
-      margin-top: 40px;
     }
     .nu-footer-tagline {
-      font-family: var(--font-tagline);
+      font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
-      font-size: 1.15rem;
+      font-weight: 400;
+      font-size: 1.25rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
@@ -397,25 +404,21 @@
     }
     .nu-footer-contact a:hover { text-decoration: underline; }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 70px; min-height: 220px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.45em; }
-      .nu-tagline { font-size: 1rem; }
-      .action-title { font-size: 1.3rem; }
-      .action-body { padding: 22px; }
-      .action-card-header { padding: 18px 22px; }
-      .contact-row { grid-template-columns: 1fr; gap: 2px; }
-      .contact-row dt { font-size: 0.8rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; }
-      .step-badge { clip-path: none; border-radius: 6px; }
+      .nu-header { padding: 40px 20px 60px; min-height: 220px; }
+      .nu-logo-text { font-size: 2.1rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-wrap { padding: 40px 20px 60px; }
+      .action-title { font-size: 1.5rem; }
+      .action-hero { padding: 22px; }
+      .email-draft { padding: 20px; }
+      .email-body ul { padding-left: 32px; }
     }
 
     @media print {
       body { background: var(--nu-white); }
-      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .action-card, .info-table, .contact-panel, .talking-points { box-shadow: none; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-header, .nu-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-card { box-shadow: none; }
     }
   </style>
 </head>
@@ -423,7 +426,7 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Phoenix Icon">
       <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
       <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
     </svg>
@@ -432,163 +435,240 @@
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
-  <!-- CHEVRON (asymmetric, apex ~38% from left) -->
-  <div class="nu-chevron" aria-hidden="true">
+  <!-- CHEVRON -->
+  <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#F5F5F7"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
   <!-- MAIN -->
-  <main class="page-wrap">
+  <main class="nu-content-area">
+    <div class="nu-wrap">
 
-    <div class="breadcrumb">Internal &nbsp;›&nbsp; Action Items &nbsp;›&nbsp; <span>Vendor Diligence</span></div>
-
-    <!-- ACTION CARD -->
-    <section class="action-card">
-      <div class="action-card-header">
-        <span class="action-id">Action · reMarkable</span>
-        <span class="action-priority">Priority · Medium</span>
-        <h1 class="action-title">Get <span class="accent">Transfer Process &amp; Fees</span> Information from H2O Waterproofing</h1>
+      <!-- HERO -->
+      <div class="action-hero">
+        <div class="action-meta">
+          <span class="pill pill-action">Action Item</span>
+          <span class="pill pill-source">reMarkable Capture</span>
+          <span class="pill pill-open">Open</span>
+          <span class="pill pill-priority">Vendor Follow-Up</span>
+        </div>
+        <h1 class="action-title">
+          <span class="blue">H2O Waterproofing</span> — Transfer Process &amp; Fees
+        </h1>
+        <p class="action-subtitle">
+          Obtain the complete transfer process documentation and full fee schedule from H2O Waterproofing so Norris Utilities® can evaluate, quote, and move product accurately for customers.
+        </p>
+        <p class="action-subtitle" style="color: var(--nu-blue); font-weight: 700; margin-top: 10px;">
+          Captured 2026-04-24 — Owner: Aaron C. Norris
+        </p>
       </div>
 
-      <div class="action-body">
-
-        <!-- META GRID -->
-        <div class="meta-grid">
-          <div class="meta-item">
-            <div class="meta-label">Owner</div>
-            <div class="meta-value">Aaron C. Norris</div>
+      <!-- WHY THIS MATTERS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="blue">Why</span> <span class="dark">This Matters</span></h2>
+        <div class="card-grid">
+          <div class="nu-card">
+            <h3>Accurate Customer Quoting</h3>
+            <p>Without the fee schedule, we cannot price H2O Waterproofing transfers into quotes. Every quote delivered without verified fees is margin risk.</p>
           </div>
-          <div class="meta-item">
-            <div class="meta-label">Vendor</div>
-            <div class="meta-value">H2O Waterproofing</div>
+          <div class="nu-card">
+            <h3>Clean Handoffs</h3>
+            <p>The transfer process must be documented step-by-step so Caroline Butler can execute without Aaron's direct supervision — consistent with the autonomous operations model.</p>
           </div>
-          <div class="meta-item">
-            <div class="meta-label">Captured</div>
-            <div class="meta-value">reMarkable · 2026-04-22</div>
-          </div>
-          <div class="meta-item">
-            <div class="meta-label">Target</div>
-            <div class="meta-value">Response within 5 business days</div>
-          </div>
-          <div class="meta-item">
-            <div class="meta-label">Status</div>
-            <div class="meta-value" style="color: var(--nu-warning);">Open — awaiting outreach</div>
-          </div>
-          <div class="meta-item">
-            <div class="meta-label">Channel</div>
-            <div class="meta-value">Phone + Email (CC Caroline)</div>
+          <div class="nu-card">
+            <h3>Vendor Relationship</h3>
+            <p>Getting this on record strengthens the relationship and positions Norris Utilities® as a professional, prepared channel partner rather than an ad-hoc buyer.</p>
           </div>
         </div>
+      </section>
 
-        <!-- OBJECTIVE -->
-        <h2 class="section-title"><span class="first">Objective.</span> <span class="rest">Understand the full transfer process and all associated fees from H2O Waterproofing.</span></h2>
-        <p class="lead">
-          Before committing any customer cover, warranty, or active shipment to a transfer involving H2O Waterproofing,
-          Norris Utilities® needs a written, itemized explanation of how the transfer works and what it costs end-to-end.
-          The goal of this action item is to obtain that information in writing from the appropriate contact at H2O Waterproofing,
-          file it to the vendor record, and bring it back for an internal decision before any dollars or covers move.
-        </p>
+      <!-- QUESTIONS TO ASK -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="blue">Questions</span> <span class="dark">to Confirm with H2O</span></h2>
+        <ol class="questions">
+          <li>
+            <strong>What is the step-by-step transfer process?</strong>
+            <span>From quote request to completed transfer — who initiates, what documents are required, what approvals, what timelines at each stage.</span>
+          </li>
+          <li>
+            <strong>What is the full fee schedule?</strong>
+            <span>Base transfer fee, per-unit fees, minimums, expedited/rush surcharges, after-hours charges, re-quote fees, cancellation fees.</span>
+          </li>
+          <li>
+            <strong>What are the payment terms on transfers?</strong>
+            <span>Net 30? Prepaid? Deposit required? Wire only, or ACH/check accepted? Any credit application requirement before transfers begin?</span>
+          </li>
+          <li>
+            <strong>Who is the primary contact for transfer requests?</strong>
+            <span>Name, direct line, email, backup contact. Cutoff time for same-day processing.</span>
+          </li>
+          <li>
+            <strong>What documentation does H2O provide at completion?</strong>
+            <span>Transfer confirmation, warranty transfer letter, proof of title clearing — and in what format (PDF, portal, paper).</span>
+          </li>
+          <li>
+            <strong>Are there volume tiers or discounts on fees?</strong>
+            <span>If Norris Utilities® brings a consistent stream of transfers, does the per-transfer fee drop at a threshold?</span>
+          </li>
+          <li>
+            <strong>Are there any geographic or product restrictions?</strong>
+            <span>States they will not transfer into; product categories excluded; any restricted handling/permit considerations.</span>
+          </li>
+        </ol>
+      </section>
 
-        <!-- CONTACT PANEL -->
-        <div class="contact-panel">
-          <h3>Vendor — H2O Waterproofing</h3>
-          <dl class="contact-row">
-            <dt>Primary Contact</dt><dd>To be confirmed on first call — ask for account / transfers department lead.</dd>
-            <dt>Preferred Channel</dt><dd>Phone first (to confirm the right person), immediate written email follow-up to lock answers in writing.</dd>
-            <dt>CC Internally</dt><dd>Caroline Butler (CB) — for filing under vendor record.</dd>
-            <dt>Reference</dt><dd>Norris Utilities®, LLC · Aaron C. Norris · 205-500-1343 · acnorris@norrisutilities.com</dd>
-          </dl>
+      <!-- EXECUTION STEPS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="blue">Execution</span> <span class="dark">Plan</span></h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Pull Contact on File</h4>
+              <p>Check ~/norris-agent/ contacts directory and QuickBooks vendor records for existing H2O Waterproofing point-of-contact, phone, and email. If none exists, confirm current contact via the H2O Waterproofing website.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Send the Written Request</h4>
+              <p>Email the rep using Aaron's voice (see draft below). Email is preferred so the response is in writing and can be filed as a reference document.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Follow Up by Phone at 48 Hours</h4>
+              <p>If no response within two business days, call directly. Vendors move faster when a voice is attached to the request.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h4>File the Response</h4>
+              <p>Once received, save the fee schedule and transfer process under ~/norris-ops/internal/ as <em>h2o_waterproofing_transfer_reference.html</em> and update the master tracker.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <h4>Bake Fees Into Pricing Sheet</h4>
+              <p>Add the H2O transfer fee line to the Norris Utilities® pricing reference so quotes pull the correct number without manual lookup.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-body">
+              <h4>Close the Action Item</h4>
+              <p>Mark this reMarkable action as complete in the palace/master tracker. Any open questions that remain get logged as a fresh follow-up.</p>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <!-- CHECKLIST -->
-        <h2 class="section-title"><span class="first">Execute.</span> <span class="rest">The four-step path to close this action.</span></h2>
-        <ul class="checklist">
-          <li><span class="box" aria-hidden="true"></span><div><strong>Step 1 — Make the call.</strong> Phone H2O Waterproofing. Identify yourself as Aaron C. Norris with Norris Utilities®. Ask to speak with whoever owns the transfer process (operations, account services, or owner).</div></li>
-          <li><span class="box" aria-hidden="true"></span><div><strong>Step 2 — Ask the questions below.</strong> Work through the itemized list of questions. Take notes. Do not accept approximations — ask for exact dollar figures and exact lead times.</div></li>
-          <li><span class="box" aria-hidden="true"></span><div><strong>Step 3 — Follow up in writing.</strong> Within the same business day, send a recap email to the contact asking them to confirm each answer in writing. CC Caroline Butler. Use Aaron's standard email voice.</div></li>
-          <li><span class="box" aria-hidden="true"></span><div><strong>Step 4 — File and decide.</strong> Save the written response to the H2O Waterproofing vendor record. Review fees against current Norris Utilities® margin structure (FlexPro Armor 50%, shipping per Ben's formula) before quoting or committing to any customer.</div></li>
-        </ul>
+      <!-- EMAIL DRAFT -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="blue">Email</span> <span class="dark">Draft — Ready to Send</span></h2>
+        <div class="email-draft">
+          <div class="email-meta">
+            <div><strong>To:</strong> [H2O Waterproofing rep — insert name and email]</div>
+            <div><strong>From:</strong> Aaron C. Norris &lt;acnorris@norrisutilities.com&gt;</div>
+            <div><strong>Subject:</strong> Transfer Process &amp; Fee Schedule Request — Norris Utilities</div>
+          </div>
+          <div class="email-body">
+            <p>[Name] —</p>
+            <p>I'd like to get your full transfer process and fee schedule on file so we can quote and execute accurately on our end.</p>
+            <p>Specifically, I'd like to confirm the following:</p>
+            <ul>
+              <li>Step-by-step transfer process, start to finish</li>
+              <li>Full fee schedule — base fee, per-unit, minimums, rush/expedited, cancellation</li>
+              <li>Payment terms and whether a credit application is required up front</li>
+              <li>Primary contact for transfer requests and cutoff times</li>
+              <li>Documentation you provide at completion</li>
+              <li>Volume tiers or discounts, if applicable</li>
+              <li>Any geographic or product restrictions</li>
+            </ul>
+            <p>A PDF or a quick write-up works — whatever is easiest on your side. If it's cleaner to walk through on the phone, my direct line is 205-500-1343.</p>
+            <p>I appreciate y'all getting this over so we can earn the business cleanly.</p>
+            <p>Sincerely,</p>
+            <div class="email-sig">
+              Aaron C. Norris<br>
+              Founder &amp; CEO<br>
+              Norris Utilities, LLC<br>
+              Cell: 205-500-1343<br>
+              acnorris@norrisutilities.com
+            </div>
+          </div>
+        </div>
+        <div class="info-box">
+          <strong>Voice check:</strong> Em-dash greeting, indented paragraphs, bullets with •, "y'all" and "earn the business" retained. No filler. Direct ask in the first sentence.
+        </div>
+      </section>
 
-        <!-- INFO REQUESTED -->
-        <h2 class="section-title"><span class="first">Request.</span> <span class="rest">The itemized information we need back from H2O Waterproofing.</span></h2>
-        <table class="info-table">
+      <!-- STATUS -->
+      <section class="nu-section">
+        <h2 class="nu-section-title"><span class="blue">Status</span> <span class="dark">Tracker</span></h2>
+        <table class="status-table">
           <thead>
             <tr>
-              <th>Question</th>
-              <th>What We Need Answered</th>
+              <th style="width: 22%;">Milestone</th>
+              <th style="width: 18%;">Owner</th>
+              <th style="width: 20%;">Target</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="q">Transfer scope</td>
-              <td>What exactly does H2O Waterproofing transfer — the physical bucket cover, the waterproofing treatment, the warranty, or all three? <span class="why">Defines what we are actually buying or handing off.</span></td>
+              <td>Locate H2O contact on file</td>
+              <td>Aaron C. Norris</td>
+              <td>Day 0 — 2026-04-24</td>
+              <td>In progress</td>
             </tr>
             <tr>
-              <td class="q">Step-by-step process</td>
-              <td>From the moment Norris Utilities® initiates a transfer to the moment it is complete, what are the sequential steps H2O Waterproofing performs? <span class="why">So Aaron can quote realistic customer timelines.</span></td>
+              <td>Send written request email</td>
+              <td>Aaron C. Norris</td>
+              <td>Day 0 — 2026-04-24</td>
+              <td>Draft ready above</td>
             </tr>
             <tr>
-              <td class="q">Who ships what, where</td>
-              <td>Does the cover ship to H2O Waterproofing, back to Norris Utilities®, or direct to the end customer? Who pays inbound and outbound freight? <span class="why">Drives the final shipping line on the customer invoice.</span></td>
+              <td>Phone follow-up if no reply</td>
+              <td>Aaron C. Norris</td>
+              <td>Day 2 — 2026-04-27</td>
+              <td>Pending trigger</td>
             </tr>
             <tr>
-              <td class="q">Base transfer fee</td>
-              <td>Exact dollar amount for the standard transfer. Flat fee or per-unit? <span class="why">The headline number Aaron must mark up or absorb.</span></td>
+              <td>File response in ~/norris-ops/internal/</td>
+              <td>Aaron C. Norris</td>
+              <td>Upon receipt</td>
+              <td>Not started</td>
             </tr>
             <tr>
-              <td class="q">Additional fees</td>
-              <td>Itemize every add-on: inspection, cleaning, re-treatment, re-certification, expedite, handling, disposal, restocking, minimum-order surcharges. <span class="why">Hidden fees destroy margin if not captured up front.</span></td>
+              <td>Update pricing reference with fees</td>
+              <td>Aaron C. Norris</td>
+              <td>Same day as filing</td>
+              <td>Not started</td>
             </tr>
             <tr>
-              <td class="q">Turnaround time</td>
-              <td>Standard lead time in business days, expedited option and its cost, and typical queue length today. <span class="why">Customers ask "when will I get it back?" on every call.</span></td>
-            </tr>
-            <tr>
-              <td class="q">Warranty handling</td>
-              <td>Does a transfer void, preserve, extend, or reset any existing H2O Waterproofing warranty? Written warranty terms, please. <span class="why">Needed before Norris Utilities® can make any promise to the end customer.</span></td>
-            </tr>
-            <tr>
-              <td class="q">Documentation</td>
-              <td>What paperwork does H2O Waterproofing require from Norris Utilities® to initiate a transfer (bill of sale, serial number, prior invoice, etc.)? What paperwork do they return upon completion? <span class="why">So Caroline can build a repeatable intake checklist.</span></td>
-            </tr>
-            <tr>
-              <td class="q">Payment terms</td>
-              <td>Is payment due up front, on completion, or Net 30? Accepted payment methods? Any dealer/distributor pricing for Norris Utilities®? <span class="why">Determines cash flow impact and whether we qualify for a better rate.</span></td>
-            </tr>
-            <tr>
-              <td class="q">Volume pricing</td>
-              <td>Is there a break for 5, 10, or 25 units at a time? <span class="why">Relevant if we route multiple customers through a single pipeline.</span></td>
+              <td>Close action item in master tracker</td>
+              <td>Aaron C. Norris</td>
+              <td>Upon pricing update</td>
+              <td>Not started</td>
             </tr>
           </tbody>
         </table>
+      </section>
 
-        <!-- TALKING POINTS -->
-        <h2 class="section-title"><span class="first">Script.</span> <span class="rest">Opening language for the phone call — Aaron's voice.</span></h2>
-        <div class="talking-points">
-          <p><strong>Greeting (phone):</strong> "Hi — Aaron Norris with Norris Utilities out of Birmingham, Alabama. I'm a third-generation utility equipment dealer and I'm working through how your transfer program could fit into what we offer our customers. Who's the right person for me to talk to about your transfer process and fees?"</p>
-          <p><strong>The ask:</strong> "I'd like to understand, in writing, exactly how the transfer works — start to finish — and every fee that hits on a typical job. That way I can quote customers cleanly and we don't have surprises on either side."</p>
-          <p><strong>Close:</strong> "Appreciate it. I'll send a quick recap email today so we have everything on paper. Who's the best email address to send it to?"</p>
+      <!-- NEXT ACTION -->
+      <section class="nu-section" style="margin-bottom: 0;">
+        <h2 class="nu-section-title"><span class="blue">Next</span> <span class="dark">Action</span></h2>
+        <div class="info-box">
+          <p style="font-size: 1rem;"><strong>Right now:</strong> Confirm the current H2O Waterproofing contact and send the email draft above today. This item stays open on the master tracker until the full fee schedule and transfer process are filed and the pricing reference is updated.</p>
         </div>
+      </section>
 
-        <!-- CALLOUT -->
-        <div class="callout">
-          <strong>Pricing guardrail.</strong> Any number H2O Waterproofing provides must be run through the Norris Utilities® margin model before it becomes a customer-facing quote. Customer Price = Cost ÷ (1 − Margin%). Shipping to customer uses Ben's formula: CustomerCost = ROUNDUP(ROUNDUP(RegCost, 0) × 1.10, 0). Do not verbally commit a customer price on the same call that H2O Waterproofing gives us their fees.
-        </div>
-
-        <!-- NEXT STEPS -->
-        <h2 class="section-title"><span class="first">Next.</span> <span class="rest">Sequenced steps after the information is in hand.</span></h2>
-        <div class="next-steps">
-          <div class="step-badge"><span class="num">1</span>File written response to the H2O Waterproofing vendor record.</div>
-          <div class="step-badge"><span class="num">2</span>Update the master tracker and close this action item.</div>
-          <div class="step-badge"><span class="num">3</span>Decide: route customers to H2O or handle in-house.</div>
-          <div class="step-badge"><span class="num">4</span>If routing — build the intake checklist with Caroline.</div>
-        </div>
-
-      </div>
-    </section>
-
+    </div>
   </main>
 
   <!-- FOOTER -->
