@@ -234,14 +234,19 @@
   }
 
   function onKey(e) {
+    // Escape must close panels regardless of focus target.
+    if (e.key === "Escape") {
+      if (document.querySelector(".detail-panel-row")) {
+        closeOpenPanels(null);
+      }
+      return;
+    }
     const tr = e.target.closest && e.target.closest("tr[data-sid]");
     if (!tr) return;
     if (e.key === "Enter" || e.key === " ") {
       if (isActionCell(e.target)) return;
       e.preventDefault();
       togglePanel(tr);
-    } else if (e.key === "Escape") {
-      closeOpenPanels(null);
     }
   }
 
