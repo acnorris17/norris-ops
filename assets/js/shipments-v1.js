@@ -344,7 +344,7 @@
 <tr data-sid="${esc(r.sid)}" class="ship-row">
   <td class="col-checkbox"><input type="checkbox" disabled aria-label="Select row (Phase D)"></td>
   <td class="col-icon">${sdPath ? `<a href="/${esc(sdPath)}" target="_blank" rel="noopener" title="Open SD" aria-label="Open SD">&#128230;</a>` : "—"}</td>
-  <td class="col-status"><span class="status-pill status-${esc(display.cls)}" data-status="${esc(display.cls)}">${esc(display.label)}</span></td>
+  <td class="col-status"><button type="button" class="status-pill status-${esc(display.cls)}" data-shipment-id="${esc(r.sid)}" data-status="${esc(display.cls)}" aria-haspopup="listbox" aria-expanded="false" tabindex="0"><span class="status-label">${esc(display.label)}</span><span class="status-caret" aria-hidden="true">&#9662;</span></button></td>
   <td class="col-date">${esc(fmtDate(r.order_date))}</td>
   <td class="col-customer">${canonicalBadge}</td>
   <td class="col-po">${poNum}</td>

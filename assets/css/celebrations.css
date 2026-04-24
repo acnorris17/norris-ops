@@ -1,0 +1,205 @@
+/* ══════════════════════════════════════════════════════════════════
+   CELEBRATIONS + STATUS PILL INTERACTIVITY — Phase B §3
+   Paired with /celebrations.js (existing SVG engine) and
+   status-pill.js / audit-log-client.js.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Make pill feel like a button */
+button.status-pill {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+button.status-pill:focus-visible {
+  outline: 2px solid var(--nu-cyan);
+  outline-offset: 2px;
+}
+button.status-pill[aria-expanded="true"] {
+  box-shadow: 0 0 0 2px var(--nu-cyan);
+}
+.status-caret {
+  font-size: 9px;
+  opacity: 0.75;
+}
+
+/* Blocked "red flash" */
+@keyframes status-flash-red-kf {
+  0%   { background: #f8d7da; box-shadow: 0 0 0 0 rgba(220,38,38,0); }
+  50%  { background: #fecaca; box-shadow: 0 0 0 6px rgba(220,38,38,0.35); }
+  100% { background: #f8d7da; box-shadow: 0 0 0 0 rgba(220,38,38,0); }
+}
+.status-pill.status-flash-red {
+  animation: status-flash-red-kf 0.5s ease-in-out 1;
+}
+
+/* REVIEW amber pulse */
+@keyframes status-pulse-amber-kf {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251,146,60,0); }
+  50%      { box-shadow: 0 0 0 6px rgba(251,146,60,0.35); }
+}
+.status-pill.status-pulse-amber {
+  animation: status-pulse-amber-kf 1s ease-in-out 2;
+}
+
+/* Dropdown listbox */
+.status-dropdown {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  min-width: 180px;
+  z-index: 1200;
+}
+.status-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--nu-dark-text);
+  outline: none;
+}
+.status-option:hover,
+.status-option:focus-visible {
+  background: rgba(0, 51, 204, 0.06);
+}
+.status-option[aria-selected="true"] {
+  background: rgba(6, 208, 255, 0.12);
+}
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  background: currentColor;
+}
+.status-option.status-pending    .status-dot { background: #6B7280; }
+.status-option.status-processing .status-dot { background: #F59E0B; }
+.status-option.status-shipped    .status-dot { background: #0066EE; }
+.status-option.status-invoiced   .status-dot { background: #10B981; }
+.status-option.status-cc         .status-dot { background: #06D0FF; }
+.status-option.status-blocked    .status-dot { background: #DC2626; }
+.status-option.status-review     .status-dot { background: #FB923C; }
+
+/* Status tooltip */
+.status-tooltip-wrap {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 150ms ease, transform 150ms ease;
+  pointer-events: none;
+  max-width: 340px;
+}
+.status-tooltip-wrap.tooltip-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.status-tooltip {
+  background: rgba(10, 14, 92, 0.96);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  font-size: 0.875rem;
+  font-family: var(--font-primary);
+  line-height: 1.5;
+}
+.status-tooltip .tt-line { color: #fff; margin-bottom: 4px; }
+.status-tooltip .view-full-history {
+  color: var(--nu-cyan);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 12px;
+  display: inline-block;
+  margin-top: 6px;
+}
+.status-tooltip .view-full-history:hover { text-decoration: underline; }
+
+/* Audit modal */
+.audit-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 92, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99998;
+  font-family: var(--font-primary);
+}
+.audit-modal {
+  background: #fff;
+  border-radius: 10px;
+  width: min(90vw, 720px);
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+}
+.audit-modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  border-bottom: 1px solid #eaeaea;
+}
+.audit-modal header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: var(--nu-blue-primary);
+}
+.audit-modal-close {
+  background: transparent;
+  border: 0;
+  font-size: 28px;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+}
+.audit-modal-close:hover { color: #111; }
+.audit-modal-body {
+  overflow: auto;
+  padding: 16px 22px;
+}
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.audit-table th, .audit-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+.audit-table thead th {
+  background: #f8f9fb;
+  font-weight: 900;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+html.reduced-motion .status-pill.status-flash-red,
+html.reduced-motion .status-pill.status-pulse-amber,
+html.reduced-motion .status-tooltip-wrap { animation: none; transition: none; }

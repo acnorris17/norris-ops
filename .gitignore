@@ -1,2 +1,6 @@
 .claude/worktrees/
 .wrangler/
+
+# Phase B file-lock artifacts
+*.lock
+

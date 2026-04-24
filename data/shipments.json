@@ -34,7 +34,8 @@
       "po_number": "0330-PRIMORIS W6237",
       "po_required": false,
       "parent_sd_id": null,
-      "last_updated": "2026-04-23T10:23:59.535360+00:00"
+      "last_updated": "2026-04-23T10:23:59.535360+00:00",
+      "audit_trail": []
     },
     {
       "sid": "S-2026-008",
