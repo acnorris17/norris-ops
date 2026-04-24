@@ -548,10 +548,40 @@
     }
   }
 
+  // Phase B §1.5 — page-load entrance cascade + reduced-motion + scroll-shrink
+  function initVisualPolish() {
+    // reduced-motion: add class to html element so CSS can opt out
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.add("reduced-motion");
+    }
+    // page-loaded: triggers entrance cascade
+    setTimeout(() => document.body.classList.add("page-loaded"), 100);
+    // Chip click scale pulse
+    document.addEventListener("click", (e) => {
+      const chip = e.target.closest(".chip");
+      if (chip) {
+        chip.classList.remove("clicked");
+        // next frame to re-trigger animation
+        requestAnimationFrame(() => chip.classList.add("clicked"));
+      }
+    }, true);
+    // Scroll-shrink for logo (>100px)
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        document.body.classList.toggle("scrolled", window.scrollY > 100);
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
+    document.addEventListener("DOMContentLoaded", () => { boot(); initVisualPolish(); });
   } else {
     boot();
+    initVisualPolish();
   }
 
   // Expose for Section 4 (copy buttons) to hook into.

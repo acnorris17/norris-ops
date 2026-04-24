@@ -1,20 +1,28 @@
 # Phase B Build Journal — CC Session 7
 Started: 2026-04-23 | Branch: feature/sa-v5-completion
 
-## F.29 — Defensive grep blast-radius scoping (2026-04-23)
-Aaron override directive, Session 7:
+## F.29 (revised) — Defensive grep blast-radius scoping (2026-04-23)
+Aaron override directive + final refinement, Session 7:
 
-> Defensive greps scope to the phase's blast radius — files the phase
-> TOUCHES — not the full repo tree. Cross-phase coverage is a phase-
-> independent cleanup initiative, not a per-phase gate.
+> Defensive greps scope to the phase's blast radius (phase target
+> paths only), AND exclude:
+>   - `test_*.py` files (rule-enforcement test fixtures contain
+>     forbidden strings as assertion inputs by design)
+>   - HTML attribute `placeholder=` (standard form spec, not content
+>     placeholder)
+>   - Comments documenting historical typos / corrections (QB typo
+>     handling, audit trail explanations)
+>   - Pre-commit hooks / portal_audit.sh / enforcement scripts
+>     (must contain forbidden strings as grep targets)
 
 Rationale: spec §0.7/§9.3 swept full `~/norris-ops/` tree and caught
-pre-existing legacy artifacts (historical SD HTML files, immutable
-audit trails, enforcement scripts that must contain forbidden strings
-as grep targets, main-portal pages outside Phase B scope, README docs).
+pre-existing legacy artifacts + rule-enforcement infrastructure.
 Phase B mandate is "do not introduce new violations in Phase B work"
 — not retroactively clean four years of history. Legacy SKU / Abadie /
 FlexPro Armor Guard cleanup tracked separately under F.1 / F.20.
+
+If ANY grep still > 0 inside refined scope, those ARE real
+violations — HALT + Tier 1 with file:line list.
 
 Applies to: §0.7 baseline + §9.3 final gauntlet.
 
