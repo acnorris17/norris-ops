@@ -2793,6 +2793,53 @@ V2.2 + gog patch means CB opens the portal and sees every backlog invoice ingest
 
 Session 10 instance: M5 Claude Opus 4.7 web. Bridge processes within 15 min.
 
+### [LIVING_MEMORY_UPDATE] Session: V2 UI Rebuild HALT — Handoff Disk Mismatch — 2026-04-24
+Session 12 M5 opened with the handoff MASTER_HANDOFF_Session11_to_Session12_2026-04-24.md and endorsed it as paste-ready for CC. CC on M1 ran premise verification before any build work and HALTed per R-META-3. Handoff premise does not match disk.
+
+COMPLETED:
+- CC pytest baseline run: 388 passed / 1 failed (flaky Playwright test_search_filters_by_customer — acceptable per handoff)
+- CC cataloged handoff-vs-disk mismatches with file-level evidence
+- Session 12 M5 accepted CC HALT; no autonomous build initiated
+
+DECISIONS:
+- R-META-4 coined effective now: M5 specs that reference file paths, endpoints, commits, or enum values MUST be verified against CC disk state before CC prompt finalization. No more M5-writes-from-memory then CC-discovers-reality. Either M5 requests CC disk audit pre-spec, or the CC kickoff block leads with a mandatory audit step before any build.
+- Path 1 (fix preview server + disk audit, ~30 min) proposed before any build scope is committed.
+- No 6-10 hr autonomous CC run against a bad foundation.
+
+CHANGED:
+- Handoff §C "do not modify" list names files that do not exist: flexpro_filter.py / source_priority.py / invoice_pdf_parser.py / review_queue_monitor.py. Actual filenames: ledger.py / status_engine.py / pdf_handler.py / build_review_queue_snapshot.py. Logic is present, name is wrong in handoff.
+- Handoff §D.12 integration points assume sa_v1_writer endpoints /api/events, /api/audit-log, /api/kpi-data, /api/status-update, /api/invoice-sent, /api/track. Actual endpoints per 207-line source read: /health and /api/match only. Every V2 UI write-path the handoff describes is talking to endpoints that do not exist.
+- Handoff "V2 UI never executed" framing is false. 12 V2 JS files (4,210 LoC) + 9 backend libs (payment_rules.py, truth_up.py, fuzzy_match.py, canonical_enforce.py, registry_remediation.py, status_engine.py, mega_triggers.py, notes_auto.py, ledger.py) already committed with explicit Phase B §3/§5/§6/§7-full/§7-recon/§8 commit messages in git log.
+- Preview server at /private/tmp/sa-v5-preview is a git worktree stuck at commit 9536d52 (Phase B §9). Branch feature/sa-v5-completion is at 96f2aaa and has diverged. Aaron's Session 11 click-test was against a stale snapshot ~1 day old, not current branch. "V2 looks the same as V1" may be a stale-worktree illusion.
+- 6 LaunchAgents described as "heartbeating" — actually one-shot daemons that exit after each run. sa-v1-writer is the only persistent one. Wrong mental model in handoff §C.2.
+- status-pill.js has 6 statuses including "CC" — handoff §D.2 specifies 7 including DELIVERED. Enum mismatch.
+- shipments-v1.js lines 72/74/147/158/429 and sound-engine.js use localStorage/sessionStorage. Violates G.9 defensive grep. Breaks Cloudflare Zero Trust. Would fail verification gauntlet as specified.
+- No Playwright infra in ~/norris-ops (no package.json, no tests/e2e/). Handoff §M.2 lists 14 new .spec.ts files. Existing Playwright tests live under ~/norris-agent/tests/.
+
+BLOCKED:
+- V2 UI rebuild work until Path 1 completes and disk audit is in Aaron's hands.
+- 6-10 hr autonomous CC run is off the table regardless of path chosen. Phased, verified work only.
+
+NEXT:
+- Aaron calls Path 1 / Path 2 / Path 3 (all three described in CC HALT report).
+- Path 1 recommended: CC syncs preview worktree or reroutes server to ~/norris-ops directly, restarts preview, verifies shipments.html and /internal/review_queue.html load 200, then writes ~/norris-ops/docs/DISK_AUDIT_2026-04-24.md covering actual lib/ + bin/ file trees, git log, sa_v1_writer endpoints, status enum, localStorage usage, Playwright location.
+- After Path 1: Aaron re-click-tests current branch.
+- After re-click-test: Session 12 M5 rewrites §C, §D.12, §I1-I8 of the CC prompt against disk reality. Then targeted build phase, scope-matched.
+- If sa_v1_writer endpoints legitimately need to be added: new scope item (not a "backend preserve" violation because the endpoints do not yet exist — rule gap, not rule break). Aaron authorizes explicitly.
+
+FILES:
+- (pending CC output) ~/norris-ops/docs/DISK_AUDIT_2026-04-24.md
+- MASTER_HANDOFF_Session11_to_Session12_2026-04-24.md superseded in authority by pending disk audit. §Q self-certification was incorrect.
+
+KEY QUOTE / LESSON:
+"I'm not going to make it worse by pretending the foundation is solid and autonomously running for 10 hours." — CC on M1, refusing to build on a bad handoff. This is R-META-3 working as designed. Reward it, do not override it.
+
+CONTEXT THAT MUST PERSIST:
+- Session 11 M5 authored the handoff file-name errors. Session 12 M5 is accountable for certifying without disk verification. F.30 (execution-order must match spec body) is internal-consistency. R-META-4 (spec must match disk) is external-consistency. Both now in force.
+- Pytest baseline remains 388/1 — backend logic sound; handoff got the names wrong, not the functionality.
+- Preview-worktree staleness is the likely root cause of "V2 looks the same as V1" complaint. Reality may be different once current branch is rendered.
+
+
 ## 7. OPEN DECISIONS (AARON)
 1. Confirm decision on M5 Pro (not base M5) when WWDC keynote drops June 8 — verify pricing/availability
 2. Confirm DS723+ still right call at Prime Day — if any new Synology model drops with 10GbE standard, reconsider
