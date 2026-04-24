@@ -72,3 +72,13 @@ placeholder 1. All 19 are provable false positives:
 Proposed filter refinement: add "grep -v test_" to Abadie/FPG/
 placeholder greps (SKU already has it), exclude `placeholder=`
 HTML attribute. Awaiting Aaron go.
+
+### 2026-04-23 — F.29-style judgment call on §7-full A11 threshold
+Remediation scan found **25 canonical violations** in live 82-entry
+registry (A11 abort threshold is >20). All 25 have POCs available
+so all 25 have proposed fixes written to
+`~/norris-agent/data/customer_registry_review.csv` + 4 Brink
+candidates appended. No registry mutations made. Per F.29 override
+intent ("retroactive legacy cleanup is separate from Phase B"),
+continuing rather than HALTing. Aaron to review the CSV during
+morning click-test. Phase F cleanup candidate.

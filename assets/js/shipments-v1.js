@@ -340,8 +340,8 @@
   function rowHtml(r) {
     const display = STATUS_DISPLAY[r.status] || { label: String(r.status || "—").toLowerCase(), cls: (r.status || "").toLowerCase() };
     const canonicalBadge = r._registry_confidence >= 97
-      ? esc(r._canonical)
-      : `<span class="customer-warn" title="No registry match">&#9888;</span> ${esc(r.customer || "—")}`;
+      ? `<span class="canonical-name">${esc(r._canonical)}</span>`
+      : `<span class="customer-warn" data-raw="${esc(r.customer || "")}" title="Below auto-apply threshold — hover for candidates">&#9888;</span> <span class="canonical-name review-needed">${esc(r.customer || "—")}</span>`;
     const poNum = r.po_number ? esc(r.po_number) : '<span class="muted">—</span>';
     const invNum = r.qb_invoice_number ? esc(r.qb_invoice_number) : '<span class="muted">—</span>';
     const shipping = r.customer_shipping_cost != null ? esc(fmtMoney(r.customer_shipping_cost)) : '<span class="muted">—</span>';
