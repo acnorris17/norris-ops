@@ -578,11 +578,12 @@ html.reduced-motion .chip-row {
   text-transform: uppercase;
   white-space: nowrap;
 }
+/* §S.3 7-state color map: gray / yellow / blue / teal / green / orange / red */
 .status-pending    { background: #e2e3e5; color: #383d41; }
 .status-processing { background: #fff3cd; color: #856404; }
 .status-shipped    { background: #d1ecf1; color: #0c5460; }
+.status-delivered  { background: #b2dfdb; color: #004d40; }
 .status-invoiced   { background: #d4edda; color: #155724; }
-.status-cc         { background: #ffe5b4; color: #7a4f00; }
 .status-blocked    { background: #f8d7da; color: #721c24; }
 @keyframes review-pulse {
   0%, 100% { background: #ffd9b3; }

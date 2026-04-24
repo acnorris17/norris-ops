@@ -11,11 +11,10 @@
   const SHIPMENTS_URL = "/data/shipments.json";
   const CATALOG_URL = "/data/product_catalog.json";
 
-  const LS_KEYS = {
-    pulseCollapsed: "invoicing_pulse_collapsed",
-    filters: "shipments_filters_selected",
-    viewMode: "shipments_view_mode",
-  };
+  // §S.2 — removed localStorage/sessionStorage. UI prefs (viewMode,
+  // pulseCollapsed, selected filters) are now module-scoped and reset
+  // on each page load. Cloudflare Zero Trust identity is the only
+  // persistence boundary; per-tab state stays per-tab.
 
   const DESCRIPTION_FALLBACK = {
     "NU-BC-2851": "2-Man BC",
@@ -29,15 +28,17 @@
     "NU-BCB-2851-SL": "2-Man Shield",
   };
 
+  // §S.3 — 7-state enum (PENDING / PROCESSING / SHIPPED / DELIVERED / INVOICED / REVIEW / BLOCKED).
+  // RECONCILE kept as a legacy data alias → REVIEW until the agent pipeline stops emitting it.
   const STATUS_DISPLAY = {
-    PENDING: { label: "pending", cls: "pending" },
+    PENDING:    { label: "pending",    cls: "pending" },
     PROCESSING: { label: "processing", cls: "processing" },
-    SHIPPED: { label: "shipped", cls: "shipped" },
-    INVOICED: { label: "invoiced", cls: "invoiced" },
-    CC: { label: "cc", cls: "cc" },
-    BLOCKED: { label: "blocked", cls: "blocked" },
-    RECONCILE: { label: "REVIEW", cls: "review" },
-    REVIEW: { label: "REVIEW", cls: "review" },
+    SHIPPED:    { label: "shipped",    cls: "shipped" },
+    DELIVERED:  { label: "delivered",  cls: "delivered" },
+    INVOICED:   { label: "invoiced",   cls: "invoiced" },
+    REVIEW:     { label: "REVIEW",     cls: "review" },
+    BLOCKED:    { label: "blocked",    cls: "blocked" },
+    RECONCILE:  { label: "REVIEW",     cls: "review" },
   };
 
   const FILTER_DEFS = [
@@ -67,11 +68,11 @@
     rows: [],
     filtered: [],
     catalog: {},
-    filters: loadFilters(),
+    filters: new Set(["all"]),
     search: "",
-    viewMode: localStorage.getItem(LS_KEYS.viewMode) || "default",
+    viewMode: "default",
     sort: { key: "order-date", dir: "desc" },
-    pulseCollapsed: localStorage.getItem(LS_KEYS.pulseCollapsed) === "1",
+    pulseCollapsed: false,
   };
 
   // ── Helpers ───────────────────────────────────────────────────────
@@ -142,21 +143,10 @@
     return !!r.qb_invoice_number;
   }
 
-  function loadFilters() {
-    try {
-      const raw = localStorage.getItem(LS_KEYS.filters);
-      if (!raw) return new Set(["all"]);
-      const arr = JSON.parse(raw);
-      if (!Array.isArray(arr) || arr.length === 0) return new Set(["all"]);
-      return new Set(arr);
-    } catch {
-      return new Set(["all"]);
-    }
-  }
-
-  function saveFilters() {
-    localStorage.setItem(LS_KEYS.filters, JSON.stringify([...state.filters]));
-  }
+  // §S.2 — filter state is module-scoped (state.filters). No persistence.
+  // Kept saveFilters() as a no-op to preserve existing call sites; Phase 3
+  // can delete the callsites once validated.
+  function saveFilters() { /* noop — see §S.2 */ }
 
   // ── Data pipeline ─────────────────────────────────────────────────
 
@@ -426,7 +416,7 @@
     applyViewMode();
     btn.addEventListener("click", () => {
       state.viewMode = state.viewMode === "default" ? "detailed" : "default";
-      localStorage.setItem(LS_KEYS.viewMode, state.viewMode);
+      // §S.2 — no persistence; module-scoped only.
       applyViewMode();
     });
   }
@@ -451,9 +441,8 @@
     if (state.pulseCollapsed) strip.classList.add("collapsed");
     chev.addEventListener("click", () => {
       strip.classList.toggle("collapsed");
-      const collapsed = strip.classList.contains("collapsed");
-      state.pulseCollapsed = collapsed;
-      localStorage.setItem(LS_KEYS.pulseCollapsed, collapsed ? "1" : "0");
+      state.pulseCollapsed = strip.classList.contains("collapsed");
+      // §S.2 — no persistence; module-scoped only.
     });
   }
 

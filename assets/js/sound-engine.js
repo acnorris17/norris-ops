@@ -12,11 +12,13 @@
  *   window.SoundEngine.isUnlocked() -> bool
  *   window.SoundEngine.prefs.get() / .set(obj)
  *
- * User prefs (sessionStorage, auto-pushed to localStorage per-user):
+ * User prefs (§S.2 — module-scoped only, no persistence):
  *   soundEnabled: bool (default: role==='aaron' ? true : false)
  *   soundVolume: 0..100 (default 60)
  *   muted: { chime: bool, 'cha-ching': bool, delivered: bool,
  *            'mark-shipped': bool, mega: bool }
+ *
+ * Role hint is read once from window.NU.role if set by auth, else 'cb'.
  */
 (function () {
   'use strict';
@@ -24,28 +26,24 @@
   var AC = window.AudioContext || window.webkitAudioContext;
   var ctx = null;
   var unlocked = false;
-  var PREFS_KEY = 'nu_sound_prefs_v1';
 
-  function role() {
-    try { return sessionStorage.getItem('nu_role') || 'cb'; }
-    catch (e) { return 'cb'; }
+  // §S.2 — no storage. Module-scoped prefs; reset on page load.
+  function currentRole() {
+    return (window.NU && window.NU.role) || 'cb';
   }
 
-  function loadPrefs() {
-    try {
-      var raw = localStorage.getItem(PREFS_KEY);
-      if (raw) return JSON.parse(raw);
-    } catch (e) { /* ignore */ }
-    return {
-      soundEnabled: role() === 'aaron',
-      soundVolume: 60,
-      muted: {}
-    };
-  }
+  var _prefs = {
+    soundEnabled: currentRole() === 'aaron',
+    soundVolume: 60,
+    muted: {}
+  };
+
+  function loadPrefs() { return _prefs; }
 
   function savePrefs(p) {
-    try { localStorage.setItem(PREFS_KEY, JSON.stringify(p)); }
-    catch (e) { /* ignore */ }
+    if (p && typeof p === 'object') {
+      _prefs = Object.assign({}, _prefs, p);
+    }
   }
 
   function ensureContext() {
@@ -68,7 +66,7 @@
       src.connect(c.destination);
       src.start(0);
       unlocked = true;
-      try { sessionStorage.setItem('nu_audio_unlocked', '1'); } catch (e) { /* ignore */ }
+      // §S.2 — no sessionStorage; the `unlocked` module flag is enough.
     } catch (e) { /* ignore */ }
   }
 

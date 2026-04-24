@@ -9,14 +9,16 @@
 
   const API_BASE = "http://127.0.0.1:8766";
 
+  // §S.3 — Phase B V2 UI canonical 7-state enum.
+  // Order is the dropdown order (operational lifecycle), NOT alphabetical.
   const STATUSES = [
     { value: "pending",    label: "PENDING",    cls: "pending" },
     { value: "processing", label: "PROCESSING", cls: "processing" },
     { value: "shipped",    label: "SHIPPED",    cls: "shipped" },
+    { value: "delivered",  label: "DELIVERED",  cls: "delivered" },
     { value: "invoiced",   label: "INVOICED",   cls: "invoiced" },
-    { value: "cc",         label: "CC",         cls: "cc" },
+    { value: "review",     label: "REVIEW",     cls: "review" },
     { value: "blocked",    label: "BLOCKED",    cls: "blocked" },
-    { value: "REVIEW",     label: "REVIEW",     cls: "review" },
   ];
 
   let openDropdown = null;

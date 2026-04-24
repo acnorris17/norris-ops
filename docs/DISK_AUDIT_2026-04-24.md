@@ -626,6 +626,37 @@ Target after Phase 3 per prompt §3.Y: ≥ 425 passing. Current floor: 388.
 | Preview server | 3 URL probes above | ✅ all 200 |
 | GitHub | tag push to both repos | ✅ `pre-v2-ui-completion-2026-04-24` landed on both |
 
+## Appendix A.5 — Auto-Deploy Pause (Aaron's Phase 1 constraint)
+
+### Verified deploy topology
+
+- `ops.norrisutilities.com` is served by CF Pages, **production branch = `main`**. Confirmed via `CNAME` (`ops.norrisutilities.com`), absence of any `.github/workflows/` or `wrangler.toml`, and project memory "norrisops.com on CF Pages + CF Access identity, auto-synced from main 2026-04-20".
+- `feature/sa-v5-completion` pushes trigger only **CF Pages preview deployments** (URL pattern `<sha>.norris-ops.pages.dev`), which are CF Access identity-gated. These do NOT serve `ops.norrisutilities.com`.
+- No custom `feature → production` rule exists — so there is no such rule to pause. **No CF-side action required** to satisfy Aaron's constraint "DO NOT push to public norrisops.com".
+
+### LaunchAgent paused for duration of Phase 1-3 (not a deploy rule, but a code-churn source)
+
+The autonomous agent `com.norrisutilities.agent-v4` commits "Auto-deploy: task_NNN_output.md" artifacts to `feature/sa-v5-completion` every ~30 minutes. During Phase 0 it fired twice (15:03 + 15:05 CT) and moved norris-ops HEAD from `5d32c313` to `46f6a7c`. To prevent race conditions with my Phase 1-3 commits:
+
+```bash
+launchctl bootout gui/501/com.norrisutilities.agent-v4
+mv ~/Library/LaunchAgents/com.norrisutilities.agent-v4.plist \
+   ~/Library/LaunchAgents/com.norrisutilities.agent-v4.plist.PAUSED_FOR_V2_UI_BUILD_2026-04-24
+```
+
+**Re-enable (post-Phase 5 after Aaron's click-test PASS):**
+
+```bash
+mv ~/Library/LaunchAgents/com.norrisutilities.agent-v4.plist.PAUSED_FOR_V2_UI_BUILD_2026-04-24 \
+   ~/Library/LaunchAgents/com.norrisutilities.agent-v4.plist
+launchctl bootstrap gui/501 ~/Library/LaunchAgents/com.norrisutilities.agent-v4.plist
+launchctl list | grep agent-v4   # verify present
+```
+
+**Side effects of the pause:** any 30-min agent tasks Aaron normally gets (task rollups, follow-up drafting) won't fire. Tier 2 Telegrams during phases will cover what's relevant.
+
+---
+
 ## Appendix B — Files / paths worth knowing
 
 - **Data root (web-served):** `~/norris-ops/data/` — shipments.json, customer_registry.json, product_catalog.json, daemon_health.json, review_queue.json

@@ -4,3 +4,13 @@
 # Phase B file-lock artifacts
 *.lock
 
+# Playwright (Phase B V2 UI §S.4)
+node_modules/
+playwright-report/
+test-results/
+.playwright/
+
+# Data files symlinked from ~/norris-agent/data for LAN preview only
+# (Real files live in the agent repo; symlinks are for local dev, not deploy.)
+data/customer_registry.json
+data/product_catalog.json

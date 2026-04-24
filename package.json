@@ -1,0 +1,21 @@
+{
+  "name": "norris-ops",
+  "version": "1.0.0",
+  "description": "Ops portal for Norris Utilities®. Live at ops.norrisutilities.com (CF Pages from main).",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:list": "playwright test --list",
+    "test:ui": "playwright test --ui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acnorris17/norris-ops.git"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.3"
+  }
+}
