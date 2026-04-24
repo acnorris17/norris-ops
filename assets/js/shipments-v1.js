@@ -73,7 +73,13 @@
     viewMode: "default",
     sort: { key: "order-date", dir: "desc" },
     pulseCollapsed: false,
+    // §D.9 — 4 KPI tiles + time-window toggle. Server-computed via
+    // /api/kpi-data?window=<w>. Falls back to local compute if fetch fails.
+    kpiWindow: "month",
+    kpiData: null,
   };
+
+  const API_BASE = "http://127.0.0.1:8766";
 
   // ── Helpers ───────────────────────────────────────────────────────
 
@@ -150,12 +156,21 @@
 
   // ── Data pipeline ─────────────────────────────────────────────────
 
+  // §D.5 — Phase B tier map: >=95 auto_apply / 80-94 flag / <80 review.
+  // Client-side match is exact (100/99/97); for 80-94 "flag" tier we rely on
+  // the warn-tooltip hitting /api/match (rapidfuzz) on hover. Rendering
+  // tier is set here so canonicalHtml() can show the correct badge.
   function attachCanonical(rows) {
     const reg = window.NU && window.NU.registry;
     if (!reg) return rows;
     for (const r of rows) {
       const { entry, confidence } = reg.match(r.customer || "");
-      if (entry && confidence >= 97) {
+      if (entry && confidence >= 95) {
+        r._canonical = entry.canonical_name;
+        r._registry_id = entry.id;
+        r._registry_confidence = confidence;
+      } else if (entry && confidence >= 80) {
+        // flag tier — apply canonical but mark for review
         r._canonical = entry.canonical_name;
         r._registry_id = entry.id;
         r._registry_confidence = confidence;
@@ -227,9 +242,18 @@
     state.filtered = rows;
   }
 
-  // ── Rendering: PULSE ──────────────────────────────────────────────
+  // ── Rendering: PULSE (§D.9 KPI tiles backed by /api/kpi-data) ─────────
 
   function renderPulse() {
+    // Server-provided KPI wins; fall back to local compute.
+    if (state.kpiData) {
+      const k = state.kpiData;
+      setTileValue("open-sds", k.t1.value, k.t1.delta_pct);
+      setTileValue("ready",    k.t2.value, k.t2.delta_pct);
+      setTileValue("blocked",  k.t3.value, k.t3.delta_pct);
+      setTileValue("unbilled", k.t4.value, k.t4.delta_pct, /*money*/ true);
+      return;
+    }
     const rows = state.rows;
     const openSDs = rows.filter(isOpenSD);
     const ready = rows.filter(readyToInvoicePred);
@@ -238,11 +262,99 @@
       (sum, r) => sum + rowSubtotal(r) + (r.customer_shipping_cost || 0),
       0
     );
+    setTileValue("open-sds", openSDs.length);
+    setTileValue("ready",    ready.length);
+    setTileValue("blocked",  blocked.length);
+    setTileValue("unbilled", unbilled, null, /*money*/ true);
+  }
 
-    document.querySelector('[data-pulse="open-sds"]').textContent = openSDs.length;
-    document.querySelector('[data-pulse="ready"]').textContent = ready.length;
-    document.querySelector('[data-pulse="blocked"]').textContent = blocked.length;
-    document.querySelector('[data-pulse="unbilled"]').textContent = fmtMoneyLarge(unbilled);
+  function setTileValue(key, value, deltaPct, isMoney) {
+    const vEl = document.querySelector(`[data-pulse="${key}"]`);
+    if (vEl) vEl.textContent = isMoney ? fmtMoneyLarge(value) : String(value);
+    const dEl = document.querySelector(`[data-pulse-delta="${key}"]`);
+    if (dEl) {
+      if (deltaPct == null) {
+        dEl.textContent = "";
+        dEl.className = "pulse-delta";
+      } else {
+        const arrow = deltaPct > 0 ? "↑" : (deltaPct < 0 ? "↓" : "");
+        dEl.textContent = arrow + " " + Math.abs(deltaPct).toFixed(1) + "%";
+        dEl.className = "pulse-delta " + (deltaPct > 0 ? "delta-up" : deltaPct < 0 ? "delta-down" : "delta-flat");
+      }
+    }
+  }
+
+  async function fetchReviewQueueBadge() {
+    try {
+      const resp = await fetch("/data/review_queue.json", { cache: "no-cache" });
+      if (!resp.ok) return;
+      const data = await resp.json();
+      const total = Number(data.total || 0);
+      const link = document.querySelector('.nu-topnav-row-2 a[href="/shipments.html"]');
+      if (!link) return;
+      // Clear any existing badge before appending a new one.
+      const existing = link.querySelector(".review-queue-badge");
+      if (existing) existing.remove();
+      if (total > 0) {
+        const badge = document.createElement("span");
+        badge.className = "review-queue-badge";
+        badge.textContent = String(total);
+        badge.setAttribute("aria-label", `${total} items in review queue`);
+        badge.title = `${total} items waiting in the review queue`;
+        link.appendChild(badge);
+      }
+    } catch (e) { /* silent; badge is non-essential */ }
+  }
+
+  async function fetchKpi(windowName) {
+    try {
+      const resp = await fetch(`${API_BASE}/api/kpi-data?window=${encodeURIComponent(windowName)}`, { cache: "no-cache" });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      if (data && data.ok) {
+        state.kpiData = data;
+        renderPulse();
+      }
+    } catch (e) {
+      console.warn("[kpi] fetch failed, falling back to local:", e);
+    }
+  }
+
+  function bindKpiWindow() {
+    document.querySelectorAll(".kpi-window-pill").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const w = btn.dataset.window;
+        if (!w) return;
+        state.kpiWindow = w;
+        document.querySelectorAll(".kpi-window-pill").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        fetchKpi(w);
+      });
+    });
+  }
+
+  function bindKpiTileClick() {
+    // Click a tile → apply the corresponding filter chip.
+    const mapping = {
+      "open-sds": null,       // no single filter captures "open"; use "all" as no-op
+      "ready":    "ready",
+      "blocked":  "blocked",
+      "unbilled": null,       // unbilled = all non-invoiced; no specific chip
+    };
+    document.querySelectorAll(".pulse-tile[data-pulse-key]").forEach((tile) => {
+      tile.addEventListener("click", () => {
+        const key = tile.dataset.pulseKey;
+        const chip = mapping[key];
+        if (!chip) return;
+        // Swap filter to just this chip.
+        state.filters = new Set([chip]);
+        renderChips();
+        recomputeVisible();
+        renderTable();
+      });
+      tile.setAttribute("role", "button");
+      tile.setAttribute("tabindex", "0");
+    });
   }
 
   // ── Rendering: filter chips ───────────────────────────────────────
@@ -319,7 +431,7 @@
     const tbody = document.getElementById("shipments-tbody");
     const rows = state.filtered;
     if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="18" class="empty-row">No shipments match the current filters.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="15" class="empty-row">No shipments match the current filters.</td></tr>';
       renderPulse();
       return;
     }
@@ -327,41 +439,67 @@
     renderPulse();
   }
 
+  // §D.5 — confidence tiers (auto_apply >= 95, flag 80-94, review <80)
+  function canonicalHtml(r) {
+    const conf = r._registry_confidence || 0;
+    if (conf >= 95) {
+      return `<span class="canonical-name">${esc(r._canonical || r.customer || "—")}</span>`;
+    }
+    if (conf >= 80) {
+      return `<span class="customer-warn customer-warn-flag" data-raw="${esc(r.customer || "")}" title="Applied with flag (80–94% confidence)">&#9888;</span> <span class="canonical-name canonical-flag">${esc(r._canonical || r.customer || "—")}</span>`;
+    }
+    return `<span class="customer-warn" data-raw="${esc(r.customer || "")}" title="Below auto-apply threshold — hover for candidates">&#9888;</span> <span class="canonical-name review-needed">${esc(r.customer || "—")}</span>`;
+  }
+
+  function invoiceNumberHtml(r) {
+    if (!r.qb_invoice_number) return '<span class="muted">—</span>';
+    // I3: prefer /internal/invoices/<n>.pdf if archived, fall back to raw PDF if present.
+    const internalHref = `/internal/invoices/${encodeURIComponent(r.qb_invoice_number)}.pdf`;
+    const href = r.qb_invoice_pdf || internalHref;
+    return `<a href="${esc(href)}" target="_blank" rel="noopener" class="inv-link" title="Open Invoice ${esc(r.qb_invoice_number)} PDF">${esc(r.qb_invoice_number)}</a>`;
+  }
+
+  // §D.8 — 15-column layout, Invoice Sent leftmost, dead row-selector removed.
+  // Column order: Invoice Sent | Inv. # | SD | Status | Order Date | Customer
+  //            | P/N | Description | QTY | Ship To+POC | Tracking # | PO #
+  //            | CC Fee | Shipping | Notes
+  // Row-level Copy / Expand buttons removed — click anywhere on the row (outside
+  // interactive cells) or press Enter to open the detail panel (detail-panel.js).
+  //
+  // §I7 Source Priority row highlighting: red for BLOCKED, orange for REVIEW/
+  // RECONCILE, green for INVOICED rows with an invoice number (reconciled).
+  function rowTintClass(r) {
+    const st = (r.status || "").toUpperCase();
+    if (st === "BLOCKED") return "row-tint-blocked";
+    if (st === "REVIEW" || st === "RECONCILE") return "row-tint-review";
+    if (st === "INVOICED" && r.qb_invoice_number) return "row-tint-invoiced";
+    return "";
+  }
+
   function rowHtml(r) {
     const display = STATUS_DISPLAY[r.status] || { label: String(r.status || "—").toLowerCase(), cls: (r.status || "").toLowerCase() };
-    const canonicalBadge = r._registry_confidence >= 97
-      ? `<span class="canonical-name">${esc(r._canonical)}</span>`
-      : `<span class="customer-warn" data-raw="${esc(r.customer || "")}" title="Below auto-apply threshold — hover for candidates">&#9888;</span> <span class="canonical-name review-needed">${esc(r.customer || "—")}</span>`;
-    const poNum = r.po_number ? esc(r.po_number) : '<span class="muted">—</span>';
-    const invNum = r.qb_invoice_number
-      ? (r.qb_invoice_pdf
-          ? `<a href="${esc(r.qb_invoice_pdf)}" target="_blank" rel="noopener" class="inv-link" title="Open Invoice ${esc(r.qb_invoice_number)} PDF">${esc(r.qb_invoice_number)}</a>`
-          : `<span class="inv-num-plain" style="color:#777;" title="Invoice number present, PDF not yet archived">${esc(r.qb_invoice_number)}</span>`)
-      : '<span class="muted">—</span>';
-    const shipping = r.customer_shipping_cost != null ? esc(fmtMoney(r.customer_shipping_cost)) : '<span class="muted">—</span>';
     const sdPath = r.sd_path || (r.sd_filename ? `shipping-docs/${r.sd_filename}` : "");
     const invoiceSent = isInvoicedSent(r);
+    const shipping = r.customer_shipping_cost != null ? esc(fmtMoney(r.customer_shipping_cost)) : '<span class="muted">—</span>';
+    const tint = rowTintClass(r);
 
     return `
-<tr data-sid="${esc(r.sid)}" class="ship-row">
-  <td class="col-checkbox"><input type="checkbox" disabled aria-label="Select row (Phase D)"></td>
-  <td class="col-icon">${sdPath ? `<a href="/${esc(sdPath)}" target="_blank" rel="noopener" title="Open SD" aria-label="Open SD">&#128230;</a>` : "—"}</td>
+<tr data-sid="${esc(r.sid)}" class="ship-row${tint ? " " + tint : ""}" tabindex="0">
+  <td class="col-invsent"><label class="invoice-sent"><input type="checkbox" class="invoice-sent-box" data-sid="${esc(r.sid)}" ${invoiceSent ? "checked" : ""} aria-label="Mark invoice sent — archive row"><span class="checkmark" aria-hidden="true"></span></label></td>
+  <td class="col-invnum">${invoiceNumberHtml(r)}</td>
+  <td class="col-sd">${sdPath ? `<a href="/${esc(sdPath)}" target="_blank" rel="noopener" title="Open SD" aria-label="Open SD">&#128230;</a>` : '<span class="muted">—</span>'}</td>
   <td class="col-status"><button type="button" class="status-pill status-${esc(display.cls)}" data-shipment-id="${esc(r.sid)}" data-status="${esc(display.cls)}" aria-haspopup="listbox" aria-expanded="false" tabindex="0"><span class="status-label">${esc(display.label)}</span><span class="status-caret" aria-hidden="true">&#9662;</span></button></td>
   <td class="col-date">${esc(fmtDate(r.order_date))}</td>
-  <td class="col-customer">${canonicalBadge}</td>
-  <td class="col-po">${poNum}</td>
+  <td class="col-customer">${canonicalHtml(r)}</td>
   <td class="col-pn">${stackedPN(r.line_items)}</td>
   <td class="col-desc detail-only">${stackedDesc(r.line_items)}</td>
   <td class="col-qty">${stackedQty(r.line_items)}</td>
   <td class="col-shipto detail-only">${shipToBlock(r.ship_to_address)}${r.poc ? `<div class="poc">POC: ${esc(r.poc)}</div>` : ""}</td>
   <td class="col-tracking">${trackingLinks(r.tracking_numbers)}</td>
-  <td class="col-ccfee detail-only"><span class="muted">—</span></td>
+  <td class="col-po">${r.po_number ? esc(r.po_number) : '<span class="muted">—</span>'}</td>
+  <td class="col-ccfee"><span class="cc-fee-dash">—</span></td>
   <td class="col-shipping">${shipping}</td>
-  <td class="col-invnum detail-only">${invNum}</td>
   <td class="col-notes notes-cell" data-sid="${esc(r.sid)}" data-notes="${esc(r.notes || r.cb_internal_note || '')}" tabindex="0" aria-label="Notes for ${esc(r.sid)}">${notesReadMode(r.notes || r.cb_internal_note)}</td>
-  <td class="col-invsent"><label class="invoice-sent"><input type="checkbox" class="invoice-sent-box" data-sid="${esc(r.sid)}" ${invoiceSent ? "checked" : ""} aria-label="Mark invoice sent — archive row"><span class="checkmark" aria-hidden="true"></span></label></td>
-  <td class="col-copy detail-only"><button type="button" class="copy-trigger" data-sid="${esc(r.sid)}" aria-label="Copy for QB">&#128203;</button></td>
-  <td class="col-expand"><button type="button" class="expand-trigger" data-sid="${esc(r.sid)}" aria-label="Expand detail">&#9660;</button></td>
 </tr>`;
   }
 
@@ -451,23 +589,36 @@
   function mountChrome() {
     const main = document.getElementById("shipments-main");
     main.innerHTML = `
-<section id="invoicing-pulse" class="nu-pulse-strip" aria-label="Invoicing Pulse">
+<!-- §D.9 — time-window toggle feeds /api/kpi-data; Month is default. -->
+<div id="kpi-window-toggle" class="kpi-window-toggle" role="tablist" aria-label="KPI time window">
+  <button type="button" class="kpi-window-pill" data-window="today">Today</button>
+  <button type="button" class="kpi-window-pill" data-window="week">Week</button>
+  <button type="button" class="kpi-window-pill active" data-window="month">Month</button>
+  <button type="button" class="kpi-window-pill" data-window="quarter">Quarter</button>
+  <button type="button" class="kpi-window-pill" data-window="ytd">YTD</button>
+</div>
+
+<section id="invoicing-pulse" class="nu-pulse-strip" aria-label="Invoicing Pulse / KPI">
   <button id="pulse-chev" type="button" class="pulse-chev" aria-label="Collapse Invoicing Pulse">&#9660;</button>
-  <div class="pulse-tile">
+  <div class="pulse-tile" data-pulse-key="open-sds">
     <div class="pulse-value" data-pulse="open-sds">0</div>
     <div class="pulse-label">Open SDs</div>
+    <div class="pulse-delta" data-pulse-delta="open-sds"></div>
   </div>
-  <div class="pulse-tile">
+  <div class="pulse-tile" data-pulse-key="ready">
     <div class="pulse-value" data-pulse="ready">0</div>
     <div class="pulse-label">Ready to Invoice</div>
+    <div class="pulse-delta" data-pulse-delta="ready"></div>
   </div>
-  <div class="pulse-tile pulse-blocked">
+  <div class="pulse-tile pulse-blocked" data-pulse-key="blocked">
     <div class="pulse-value" data-pulse="blocked">0</div>
     <div class="pulse-label">Blocked</div>
+    <div class="pulse-delta" data-pulse-delta="blocked"></div>
   </div>
-  <div class="pulse-tile pulse-revenue">
+  <div class="pulse-tile pulse-revenue" data-pulse-key="unbilled">
     <div class="pulse-value" data-pulse="unbilled">$0.00</div>
     <div class="pulse-label">Unbilled Revenue</div>
+    <div class="pulse-delta" data-pulse-delta="unbilled"></div>
   </div>
 </section>
 
@@ -481,29 +632,28 @@
 <div class="table-wrap">
   <table class="shipments-table">
     <thead>
+      <!-- §D.8 — 15-column order, exact. Invoice Sent leftmost; no row-selector;
+           no per-row Copy / Expand (detail panel opens on row-click). -->
       <tr>
-        <th class="col-checkbox"></th>
-        <th class="col-icon"></th>
+        <th class="col-invsent">Invoice Sent</th>
+        <th class="col-invnum sortable" data-sort="inv-num">Inv. #</th>
+        <th class="col-sd">SD</th>
         <th class="col-status">Status</th>
         <th class="col-date sortable" data-sort="order-date">Order Date</th>
         <th class="col-customer sortable" data-sort="customer">Customer</th>
-        <th class="col-po">PO #</th>
         <th class="col-pn sortable" data-sort="pn">P/N</th>
         <th class="col-desc detail-only">Description</th>
-        <th class="col-qty sortable" data-sort="qty">Qty</th>
+        <th class="col-qty sortable" data-sort="qty">QTY</th>
         <th class="col-shipto detail-only">Ship To + POC</th>
         <th class="col-tracking">Tracking #</th>
-        <th class="col-ccfee detail-only">CC Fee</th>
-        <th class="col-shipping sortable" data-sort="cust-shipping">Cust. Shipping</th>
-        <th class="col-invnum detail-only sortable" data-sort="inv-num">Inv #</th>
+        <th class="col-po">PO #</th>
+        <th class="col-ccfee">CC Fee</th>
+        <th class="col-shipping sortable" data-sort="cust-shipping">Shipping</th>
         <th class="col-notes">Notes</th>
-        <th class="col-invsent detail-only">Invoice Sent</th>
-        <th class="col-copy detail-only">Copy</th>
-        <th class="col-expand detail-only"></th>
       </tr>
     </thead>
     <tbody id="shipments-tbody">
-      <tr><td colspan="18" class="empty-row">Loading…</td></tr>
+      <tr><td colspan="15" class="empty-row">Loading…</td></tr>
     </tbody>
   </table>
 </div>
@@ -519,6 +669,8 @@
     bindViewToggle();
     bindHeaderSort();
     renderChips();
+    bindKpiWindow();
+    bindKpiTileClick();
   }
 
   // ── Boot ──────────────────────────────────────────────────────────
@@ -539,6 +691,10 @@
       state.rows = attachCanonical(shipJson.records || []);
       recomputeVisible();
       renderTable();
+      // §D.9 — fire KPI fetch (non-blocking); Month default.
+      fetchKpi(state.kpiWindow);
+      // §I4 — review queue nav badge (non-blocking).
+      fetchReviewQueueBadge();
       document.body.setAttribute("data-shipments-ready", "1");
     } catch (e) {
       console.error("[shipments-v1] boot failed:", e);

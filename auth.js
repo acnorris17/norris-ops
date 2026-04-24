@@ -17,9 +17,22 @@
   };
 
   /**
+   * §D.10 — LAN password bypass.
+   * When loaded from 192.168.1.184 / localhost / 127.0.0.1 the portal password
+   * is skipped and the caller is treated as 'aaron'. Cloudflare Access + the
+   * portal password tier filter are both intact for norrisops.com (they run
+   * when isLanHost() returns false).
+   */
+  function isLanHost() {
+    var h = location.hostname;
+    return h === '192.168.1.184' || h === 'localhost' || h === '127.0.0.1';
+  }
+
+  /**
    * Check if session is valid
    */
   function isAuthenticated() {
+    if (isLanHost()) return true;
     var token = sessionStorage.getItem(SESSION_KEY);
     if (!token) return false;
     var timestamp = parseInt(token, 10);
@@ -31,6 +44,7 @@
    * Get current user role
    */
   function getRole() {
+    if (isLanHost()) return 'aaron';  // §D.10 LAN bypass
     return sessionStorage.getItem(ROLE_KEY) || null;
   }
 
@@ -91,6 +105,12 @@
     logout: logout,
     refreshSession: refreshSession,
     getRole: getRole,
-    applyRole: applyRole
+    applyRole: applyRole,
+    isLanHost: isLanHost
   };
+  // Make role available as a plain property for sound-engine.js, etc.
+  try {
+    window.NU = window.NU || {};
+    window.NU.role = getRole();
+  } catch (e) { /* ignore */ }
 })();

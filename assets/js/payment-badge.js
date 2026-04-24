@@ -13,13 +13,15 @@
     })[c]);
   }
 
+  // §D.7 canonical 6 + Net 60 back-compat. CSS classes map 1:1.
   const LABEL_META = {
     "Net 30":      { cls: "net30",    tooltip: "Net 30 terms. Payment due 30 days from invoice date." },
-    "Net 60":      { cls: "net60",    tooltip: "Net 60 terms." },
+    "Net 60":      { cls: "net60",    tooltip: "Net 60 terms (legacy)." },
     "CC":          { cls: "cc",       tooltip: "Pays by credit card. 4% convenience fee applies." },
     "CC on file":  { cls: "ccfile",   tooltip: "Card on file. Charge at invoice send. 4% fee applies." },
     "ACH":         { cls: "ach",      tooltip: "Bank ACH. No card fee." },
     "On Receipt":  { cls: "receipt",  tooltip: "Due on receipt." },
+    "FREE":        { cls: "free",     tooltip: "No charge — internal / comp'd by Norris." },
     "—":           { cls: "unknown",  tooltip: "No payment preference on record; ask customer." },
   };
 
@@ -35,16 +37,21 @@
       if (s === "cconfile") return "CC on file";
       if (s === "ach") return "ACH";
       if (s === "onreceipt" || s === "dueonreceipt" || s === "receipt") return "On Receipt";
+      if (s === "free" || s === "comp" || s === "nocharge") return "FREE";
       return "—";
     }
     const method = (payment.method || "").toLowerCase().replace(/\s+/g, "");
     const ccOnFile = !!payment.cc_on_file;
+    const ccFeeApplies = payment.cc_fee_applies;
     if (method === "cc" && ccOnFile) return "CC on file";
     if (method === "cc") return "CC";
     if (method === "net30") return "Net 30";
     if (method === "net60") return "Net 60";
     if (method === "ach") return "ACH";
     if (method === "onreceipt" || method === "dueonreceipt" || method === "receipt") return "On Receipt";
+    if (method === "free" || method === "comp" || method === "nocharge") return "FREE";
+    // Implicit FREE: explicit `cc_fee_applies: false` with no method set
+    if (method === "" && ccFeeApplies === false) return "FREE";
     return "—";
   }
 

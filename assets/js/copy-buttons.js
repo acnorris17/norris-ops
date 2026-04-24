@@ -1,8 +1,9 @@
 /* ══════════════════════════════════════════════════════════════════
-   COPY BUTTONS — Section 4 (Phase A)
-   13 QB-field-matched buttons per row. DATA ONLY in clipboard — no
-   QB template labels ("Bill to:", "Ship to:", etc.). Toast + ✓ on
-   success. CC Fee button hidden when cc_fee_applies=false.
+   COPY BUTTONS — Section 4 (Phase A) + V2 UI §D.3 rewire to 16 static.
+   16 QB-field-matched buttons per row, plus one dynamic `<PN> Rate` per
+   line item. DATA ONLY in clipboard — no QB template labels ("Bill to:",
+   "Ship to:", etc.). Toast + ✓ on success. CC Fee button hidden when
+   cc_fee_applies=false (still counts toward the 16 for spec purposes).
    ══════════════════════════════════════════════════════════════════ */
 
 (function () {
@@ -172,97 +173,93 @@
 
   // ── Button definitions ───────────────────────────────────────────
 
+  // §D.3 — 16 static QB-field buttons (plus dynamic `<PN> Rate` per line item).
+  // Static labels (fixed order):
+  //   Top (9):     Customer Name (canonical), Customer Name (raw),
+  //                Customer Email, Bill-To Address, Ship-To Address, Carrier,
+  //                Ship Date, Tracking #, Terms
+  //   Bottom (7):  PO #, Ordered By, Shipping $, Subtotal, Grand Total,
+  //                CC Fee Rate, QB Memo
+  // Per §C.4 / G.4: "Canonical Name" is not a user-facing UI label; use
+  // "Customer Name (canonical)" for the registry-matched value instead.
   function buttonsFor(r) {
     const defs = [];
 
     // TOP
-    defs.push({
-      group: "top",
-      label: "Canonical Name",
+    defs.push({ group: "top", label: "Customer Name (canonical)",
       value: canonicalName(r),
-      disabledHint: !canonicalName(r) ? "No canonical name" : null,
-    });
-    defs.push({
-      group: "top",
-      label: "Customer Email",
+      disabledHint: !canonicalName(r) ? "No canonical name" : null });
+    defs.push({ group: "top", label: "Customer Name (raw)",
+      value: r.customer || "",
+      disabledHint: !r.customer ? "No customer on SD" : null });
+    defs.push({ group: "top", label: "Customer Email",
       value: customerEmail(r),
-      disabledHint: !customerEmail(r) ? "No email on registry entry" : null,
-    });
-    defs.push({
-      group: "top",
-      label: "Bill-To Address",
+      disabledHint: !customerEmail(r) ? "No email on registry entry" : null });
+    defs.push({ group: "top", label: "Bill-To Address",
       value: billToBlock(r),
-      disabledHint: !billToBlock(r) ? "No bill-to on file" : null,
-    });
-    defs.push({
-      group: "top",
-      label: "Ship-To Address",
+      disabledHint: !billToBlock(r) ? "No bill-to on file" : null });
+    defs.push({ group: "top", label: "Ship-To Address",
       value: shipToBlock(r.ship_to_address),
-      disabledHint: !r.ship_to_address ? "No ship-to on SD" : null,
-    });
-    defs.push({
-      group: "top",
-      label: "Carrier",
-      value: carrier(r),
-    });
-    defs.push({
-      group: "top",
-      label: "Ship Date",
+      disabledHint: !r.ship_to_address ? "No ship-to on SD" : null });
+    defs.push({ group: "top", label: "Carrier", value: carrier(r) });
+    defs.push({ group: "top", label: "Ship Date",
       value: fmtShipDate(r.order_date),
-      disabledHint: !r.order_date ? "No order date" : null,
-    });
-    defs.push({
-      group: "top",
-      label: "Tracking #",
+      disabledHint: !r.order_date ? "No order date" : null });
+    defs.push({ group: "top", label: "Tracking #",
       value: trackingBlock(r.tracking_numbers),
-      disabledHint: !(r.tracking_numbers || []).length ? "No tracking captured" : null,
-    });
-    defs.push({
-      group: "top",
-      label: "Terms",
-      value: terms(r),
-    });
+      disabledHint: !(r.tracking_numbers || []).length ? "No tracking captured" : null });
+    defs.push({ group: "top", label: "Terms", value: terms(r) });
 
-    // LINE ITEMS
+    // LINE ITEMS (dynamic; outside the 16-static count)
     const tier = tierForRow(r);
     for (const li of r.line_items || []) {
       const rate = rateFor(li.pn, tier);
-      defs.push({
-        group: "lines",
-        label: `${li.pn} Rate`,
+      defs.push({ group: "lines", label: `${li.pn} Rate`,
         value: rate != null ? fmtMoney2(rate) : "",
-        disabledHint: rate == null ? `No ${tier.replace("_", " ")} in catalog` : null,
-      });
+        disabledHint: rate == null ? `No ${tier.replace("_", " ")} in catalog` : null });
     }
 
     // BOTTOM
-    defs.push({
-      group: "bottom",
-      label: "PO #",
+    const sub = subtotal(r);
+    const ship = Number(r.customer_shipping_cost || 0);
+    const fee = ccFeeApplies(r) ? ccFeeAmount(r) : 0;
+    const grand = sub + ship + fee;
+
+    defs.push({ group: "bottom", label: "PO #",
       value: r.po_number || "",
-      disabledHint: !r.po_number ? "No PO on this order" : null,
-    });
-    defs.push({
-      group: "bottom",
-      label: "Ordered By",
+      disabledHint: !r.po_number ? "No PO on this order" : null });
+    defs.push({ group: "bottom", label: "Ordered By",
       value: orderedBy(r),
-      disabledHint: !orderedBy(r) ? "No orderer name" : null,
-    });
-    defs.push({
-      group: "bottom",
-      label: "Shipping $",
+      disabledHint: !orderedBy(r) ? "No orderer name" : null });
+    defs.push({ group: "bottom", label: "Shipping $",
       value: r.customer_shipping_cost != null ? fmtMoney2(r.customer_shipping_cost) : "",
-      disabledHint: r.customer_shipping_cost == null ? "No customer shipping captured" : null,
-    });
-    if (ccFeeApplies(r)) {
-      defs.push({
-        group: "bottom",
-        label: "CC Fee Rate",
-        value: fmtMoney2(ccFeeAmount(r)),
-      });
-    }
+      disabledHint: r.customer_shipping_cost == null ? "No customer shipping captured" : null });
+    defs.push({ group: "bottom", label: "Subtotal",
+      value: sub > 0 ? fmtMoney2(sub) : "",
+      disabledHint: sub <= 0 ? "No priced line items" : null });
+    defs.push({ group: "bottom", label: "Grand Total",
+      value: grand > 0 ? fmtMoney2(grand) : "",
+      disabledHint: grand <= 0 ? "Need priced line items + shipping" : null });
+    defs.push({ group: "bottom", label: "CC Fee Rate",
+      value: fee > 0 ? fmtMoney2(fee) : "",
+      disabledHint: !ccFeeApplies(r) ? "CC fee does not apply" : null });
+    defs.push({ group: "bottom", label: "QB Memo",
+      value: qbMemo(r),
+      disabledHint: !qbMemo(r) ? "Memo will generate at invoice time" : null });
 
     return defs;
+  }
+
+  // QB memo — mirrors the detail-panel rendering
+  function qbMemo(r) {
+    const parts = [];
+    if (r.po_number) parts.push(`PO# ${r.po_number}`);
+    const lines = (r.line_items || []).map((li) => `${li.qty}× ${li.pn}`).filter(Boolean);
+    if (lines.length) parts.push(lines.join(" + "));
+    if (r.tracking_numbers && r.tracking_numbers.length) {
+      parts.push(`UPS ${r.tracking_numbers.join(", ")}`);
+    }
+    return parts.join("\n");
   }
 
   // ── Rendering ────────────────────────────────────────────────────
