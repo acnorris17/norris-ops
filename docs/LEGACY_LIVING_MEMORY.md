@@ -4606,3 +4606,54 @@ D01 Hero logo tiny/text huge — invert. D02 Ghost watermark missing — restore
 
 **V2 CC PROMPT:** 2,020 lines. Awaiting Aaron paste to CC.
 **V2 MASTER HANDOFF:** 651 lines.
+
+### Session 9 — V2 Spec Locked Decisions + M1 State
+
+**SOURCE PRIORITY HARD-CODED (lib/source_priority.py — LOCKED):**
+Ranks: SA_AUTO=10, UPS_RECEIPT=20, QB_SNAPSHOT=30, QB_LIVE=40, REGISTRY=50, CB_TELEGRAM=60, AARON_TELEGRAM=70, AARON_INTAKE=80, SD_DOCUMENT=85, AARON_CONFIRMED=90, QB_LIVE_INVOICE=100 (financial only). SA NEVER overrides higher rank — emits note for CB/Aaron review only.
+
+**V2 SPEC LOCKED DECISIONS (12):**
+1. Source priority hard-coded via apply_update() function (see above).
+2. Customer Type enum: Direct / Indirect / Dealer. Aerial Hydraulics = Dealer. Primoris via Aerial = Indirect. All others = Direct.
+3. Hero logo: clamp(200px, 28vw, 360px) — MUCH LARGER than V1 120px.
+4. Hero text: clamp(1.8rem, 4vw, 3.2rem) — shrunk so logo dominates.
+5. Ghost watermark 7% opacity RESTORED.
+6. "Customer Name" replaces "Canonical Name" in UI.
+7. "Grouped" replaces "Child"; parent rows show "GROUPED (N)" badge.
+8. 16 copy buttons (V1 13 + Qty + Rate + Copy ALL TSV).
+9. 4 KPI tiles with click-to-filter behavior.
+10. Celebration sounds DEFERRED to V3 (browser audio unlock fragile).
+11. Live Gmail OAuth invoice ingest DEFERRED to Phase C. V2 uses offline ~/inbox-invoices/ folder.
+12. Google Apps Script failure = parallel scope, NOT in V2.
+
+**V2 INGEST PIPELINE (6 modules):**
+ingest_master_pricelist.py (FlexPro xlsx → pricelist.json), ingest_qb_contacts.py (registry bootstrap), ingest_qb_sales.py (historical sales for canaries), ingest_sd_html.py (shipments.json primary), ingest_ups_shipping_log.py (tracking + shipping costs), ingest_qb_invoices.py (invoice PDF → financial truth-up). Master driver: bin/run_all_ingest.py.
+
+**V2 CANARIES (MUST PASS before V2 DONE):**
+- Chain Electric $8,930.48
+- Pickle $1,834
+- Crosby Mar 20 6× NU-BC-2834 = $1,590 + $146
+- FIX 9: 5/5 tombstoned
+- FIX 10: S-2026-023 Lidia Turner / Henkels
+- FIX 11: S-2026-024 + S-2026-025 DEALER Aerial Hydraulics
+- NEW R8 regression: Henkels P/N must remain NU-BC-BY2828. Any SA override attempt rejected at function-call level.
+
+**CURRENT M1 STATE (2026-04-24 morning):**
+- feature/sa-v5-completion on both repos
+- agent-v4 + boot-recovery LaunchAgents DEAD (Session 8 recovery) — DO NOT reload during V2 build
+- sa-v1-writer LaunchAgent LIVE port 8766 — extend, don't rename
+- stash@{0} agent_runner_work_pre_phase_b_2026-04-23 possibly present — DO NOT pop until V2 PASS
+- Preview :8765 running
+- V2 CC prompt: /Users/acnorris1/norris-ops/docs/PHASE_B_V2_CC_PROMPT.md (2,020 lines, MD5 e7edef32fa60c5c2604f3517e70672d9)
+- V2 spec NorrisPalace: rules/SA_V5_V2_Master_Spec_2026-04-24 (UUID e471001c)
+
+**BLOCKED UNTIL V2 PASS:**
+- 25 V1 canonical violations + 4 Brink candidates in customer_registry_review.csv
+- CB silent-draft backlog $3,685.15 (6 invoices)
+- Phase C planning (Gmail OAuth, QB webhook, UPS API daemons)
+- agent-v4 + boot-recovery reload
+- stash pop
+
+**NEXT ACTION:** Aaron firing V2 CC on M1. Tier 1 ping "PHASE V2 READY" expected. V2 runtime 8-12 hr, abort threshold 16 hr.
+
+**WAYNE STANDARD:** When CB opens V2 and invoices six backlog customers without friction — "would Wayne be proud" answers yes.
