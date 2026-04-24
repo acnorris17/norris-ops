@@ -359,7 +359,7 @@
   <td class="col-notes">${r.cb_internal_note ? `<span class="note-icon" title="${esc(r.cb_internal_note)}">&#128221;</span>` : '<span class="muted">—</span>'}</td>
   <td class="col-invsent detail-only"><input type="checkbox" ${invoiceSent ? "checked" : ""} disabled aria-label="Invoice sent (Phase B)"></td>
   <td class="col-copy detail-only"><button type="button" class="copy-trigger" data-sid="${esc(r.sid)}" aria-label="Copy for QB">&#128203;</button></td>
-  <td class="col-expand detail-only"><button type="button" class="expand-trigger" data-sid="${esc(r.sid)}" aria-label="Expand detail" disabled title="Phase B">&#9660;</button></td>
+  <td class="col-expand"><button type="button" class="expand-trigger" data-sid="${esc(r.sid)}" aria-label="Expand detail">&#9660;</button></td>
 </tr>`;
   }
 
