@@ -2897,6 +2897,224 @@ CONTEXT THAT MUST PERSIST
 - Until V2.3_M1_EVIDENCE_BUNDLE exists in project knowledge, no Claude.ai session should attempt §1.2
 - This decomposition pattern (CC collection bundle → Claude.ai synthesis → Aaron sign-off) is reusable for any future heavy-collection task where M1-disk content + conversation_search + project_knowledge all need to converge
 
+### [LIVING_MEMORY_UPDATE] Session: V2.3 Phase 2 Prompt Dispatched to Fresh Session — 2026-04-25
+SESSION CHECKPOINT — V2.3 Phase 2 Dispatched
+Date: 2026-04-25
+Tool: Claude.ai (Opus 4.7)
+Project: Legacy Bot
+
+ONE-LINE SUMMARY
+Phase 2 evidence package synthesis prompt delivered to Aaron as one full combined paste-ready block; he will execute in fresh Claude.ai session in this project to preserve context budget.
+
+COMPLETED THIS TURN
+- Confirmed both foundation files uploaded to project knowledge:
+  1. CLAUDE_PROJECT_BUNDLE_2026-04-25.md (~12,252 lines)
+  2. MASTER_HANDOFF_Session11_to_Session12_2026-04-24.md
+- Defaulted git push decision to "skip" (Aaron didn't specify; project knowledge is canonical archive; can push later for GitHub backup if needed)
+- Confirmed canonical URL is norrisops.com (apex), www.norrisops.com is NXDOMAIN per Aaron's Safari screenshots — apex-only Cloudflare config, NOT a customer-impact issue
+- Delivered Phase 2 prompt as ONE FULL COMBINED block (per locked HARD RULE) — covers Steps 1-5: foundation reads, 10 surgical conversation_search queries, evidence package §A-G + §H completeness checklist, stop-and-present discipline
+
+DECISIONS
+- Phase 2 runs in FRESH Claude.ai session (not this current chat) to give synthesis full 200K context budget
+- 10 surgical conversation_search queries (NOT 26 from original §1.2) — established as sufficient by Phase 1 evidence
+- Evidence package structure §A-G mandates verbatim source labeling (HIGH/MEDIUM/LOW/GAP confidence) per R-META rules
+- Completeness checklist (§H) is mandatory final step — explicit verification or gap-flag per category
+- Phase 2 stops at "EVIDENCE PACKAGE ACCEPTED" — no spec writing, no CC build prompt until Aaron signs
+
+CHANGED
+- Default behavior on git pushes when Aaron doesn't specify: skip if non-blocking
+- norrisops.com canonical URL: confirmed apex-only (no www subdomain)
+
+BLOCKED
+- Cannot proceed to Phase 3 (V2.3 spec writing) until Aaron signs "EVIDENCE PACKAGE ACCEPTED" on Phase 2 output
+
+NEXT
+1. Aaron opens fresh Claude.ai chat in this project (Opus 4.7)
+2. Pastes Phase 2 prompt, walks away (~8-15 min runtime)
+3. Reviews §H completeness checklist + executive summary
+4. Either signs "EVIDENCE PACKAGE ACCEPTED" in fresh session OR comes back to this Claude with gaps to address
+5. Phase 3 (spec writing) begins after sign-off
+
+KEY DESIGN DECISIONS BAKED INTO PHASE 2 PROMPT
+- R-META-1/2/3 anti-assumption + honest gap rules embedded throughout
+- F.1 vocabulary lock: zero SKU references mandatory + checklist verified
+- F.30 spec-before-CC discipline: prompt explicitly forbids spec writing or CC prompt generation
+- Source-quality labeling: every claim tagged verbatim/reconstructed/gap
+- 19-defect reconstruction handles partial recovery honestly (e.g. "12 of 19 found, 7 gap")
+- V1 SPEC sections E.1-E.22+E.13.5 reconstructed from LIVING_MEMORY + Session 11→12 handoff + conversation_search where standalone file doesn't exist on disk
+- Conflicts list explicitly hunts CB visibility, distributor tier, LineTec 4th branch (Travis Collins Rougon LA), URL canonical
+- Completeness checklist makes coverage gaps explicit rather than implicit
+
+FILES
+- Created/dispatched: Phase 2 paste-ready prompt (in chat as code block to Aaron)
+- Pending creation: /mnt/user-data/outputs/V2.3_EVIDENCE_PACKAGE_2026-04-25.md (by fresh Claude.ai session)
+- In project knowledge (foundation): CLAUDE_PROJECT_BUNDLE_2026-04-25.md, MASTER_HANDOFF_Session11_to_Session12_2026-04-24.md, LEGACY_LIVING_MEMORY.md
+
+KEY LESSON
+Decomposition pattern proven end-to-end through Phase 1. Phase 2 dispatched in fresh session (not current) because synthesis needs full token budget. The HARD RULE (one full combined prompt) operationalized — Aaron pastes once, walks away. No fragments to stitch.
+
+CONTEXT THAT MUST PERSIST
+- Phase 2 runs in a SEPARATE Claude.ai session — current session does NOT execute it
+- Two foundation files in project knowledge are the inputs
+- Aaron's home is /Users/acnorris1 (NOT /Users/aaron)
+- norrisops.com is canonical apex URL; www subdomain does not exist
+- Bundle script alias `bundle` on M1 regenerates fresh evidence bundle on demand
+- Phase 3 (spec writing) is BLOCKED until "EVIDENCE PACKAGE ACCEPTED"
+- HARD RULE locked: one full combined prompt always, never split
+
+### [LIVING_MEMORY_UPDATE] Session: V2.3 Phase 2 COMPREHENSIVE Prompt Dispatched — 2026-04-25
+SESSION CHECKPOINT — V2.3 Phase 2 COMPREHENSIVE Dispatched
+Date: 2026-04-25
+Tool: Claude.ai (Opus 4.7)
+Project: Legacy Bot
+
+ONE-LINE SUMMARY
+Replaced 10-query surgical Phase 2 prompt with comprehensive full-coverage version per Aaron's mandate "leave NO CRITICAL data or details out"; new prompt uses smart execution strategy (project_knowledge_search vs view, iterative file writes, three-pass completeness verification, §Z resilience contract for context-limit recovery).
+
+WHY THIS REPLACEMENT
+Aaron explicitly rejected the surgical 10-query approach — wants nothing critical missed. Context overflow risk addressed via:
+1. project_knowledge_search for chunked bundle reads (not full view of 12,252-line bundle)
+2. Iterative file writes (each step writes to output file as completed; partial progress survives crash)
+3. §Z continuation contract (if context tight, write status block listing what's done vs remaining; next session picks up cleanly)
+4. ~30 conversation_search queries (vs 10 surgical or 26 redundant)
+5. recent_chats pagination for full session catalog
+
+COMPLETED THIS TURN
+- Delivered comprehensive Phase 2 prompt as ONE FULL COMBINED block (per locked HARD RULE)
+- Prompt covers: §0 metadata + §0a session catalog + §0b foundation reads summary + §0c conversation search summary + §A V1 SPEC + §A.1-A.5 sub-sections + §B 19 defects + §C V2.2 spec extension + §D production delta + §E conflicts (8 named hunts) + §F gap report + §G recommended V2.3 scope + §H three-pass completeness + §Z resilience
+- Included explicit gap-flagging discipline per R-META rules
+- Included resilience contract so partial work is never lost
+
+DECISIONS
+- Comprehensive coverage over surgical scope (Aaron's call)
+- Smart execution patterns (chunked reads, iterative writes, three-pass verification) replace brute-force "do everything in one synthesis pass"
+- §Z continuation status block ensures multi-session recovery if needed
+
+CHANGED
+- Phase 2 prompt scope: 10 queries → 30 queries + 17 project_knowledge_searches + recent_chats pagination
+- Output structure: 8 sections (§A-G + §H) → 13+ sections (§0-§0c + §A-G with sub-sections + §H + §Z)
+- Resilience model: prior version assumed single-session completion; new version explicitly supports multi-session continuation
+
+BLOCKED
+- Cannot proceed to Phase 3 spec writing until Aaron signs "EVIDENCE PACKAGE ACCEPTED" on Phase 2 output
+- Phase 2 itself may need 1-2 continuation sessions if context fills before §H complete
+
+NEXT
+1. Aaron opens fresh Claude.ai chat in this project (Opus 4.7)
+2. Pastes comprehensive Phase 2 prompt, walks away (~25-45 min runtime)
+3. Reviews §H completeness verification + §Z continuation status (if any)
+4. Either signs "EVIDENCE PACKAGE ACCEPTED" OR Aaron returns here to dispatch continuation
+5. Phase 3 (spec writing) begins after sign-off
+
+KEY DESIGN ELEMENTS BAKED INTO COMPREHENSIVE PROMPT
+- R-META-1/2/3 anti-assumption + honest gap rules embedded throughout
+- F.1 vocabulary lock: zero SKU references mandatory + checklist verified in Pass 3
+- F.30 spec-before-CC discipline: prompt explicitly forbids spec writing or CC prompt generation
+- Source-quality labeling: every claim tagged VERBATIM | RECONSTRUCTED | INFERRED | GAP
+- 19-defect reconstruction handles partial recovery honestly
+- 8 explicit conflict hunts (CB visibility, distributor tier, LineTec branches, URL canonical, MSP pricing, FlexPro branding, vocabulary lock, plus open §E.8 for additional)
+- Three-pass completeness verification (category coverage / source-quality audit / critical rules audit)
+- Resilience contract §Z handles context-limit gracefully
+
+FILES
+- Created/dispatched: comprehensive Phase 2 paste-ready prompt (in chat as code block)
+- Pending creation: /mnt/user-data/outputs/V2.3_EVIDENCE_PACKAGE_2026-04-25.md (by fresh Claude.ai session, possibly across continuation sessions)
+- In project knowledge (foundation): CLAUDE_PROJECT_BUNDLE_2026-04-25.md, MASTER_HANDOFF_Session11_to_Session12, MASTER_HANDOFF_Session12_to_Session13, LEGACY_LIVING_MEMORY.md, plus all April-3 historical files and product/pricing data
+
+KEY LESSON
+"Comprehensive" doesn't have to mean "context-overflow." Smart execution patterns (chunked reads via project_knowledge_search, iterative file writes, multi-pass verification, resilience contracts) enable full coverage without the brute-force single-pass synthesis that killed the original §1.2 three times.
+
+CONTEXT THAT MUST PERSIST
+- Comprehensive Phase 2 prompt is in chat output — Aaron has it
+- Two foundation files in project knowledge are inputs
+- Aaron's home is /Users/acnorris1
+- norrisops.com is canonical apex URL; www subdomain is NXDOMAIN
+- Bundle script alias `bundle` on M1 regenerates evidence bundle on demand
+- Phase 3 BLOCKED until "EVIDENCE PACKAGE ACCEPTED"
+- HARD RULE locked: one full combined prompt, never split
+- §Z continuation pattern is reusable for any future multi-session work
+
+### [LIVING_MEMORY_UPDATE] Session: V2.3 Phase 2 COMPREHENSIVE V2 Total Capture Dispatched — 2026-04-25
+SESSION CHECKPOINT — V2.3 Phase 2 COMPREHENSIVE V2 (TOTAL CAPTURE) Dispatched
+Date: 2026-04-25
+Tool: Claude.ai (Opus 4.7)
+Project: Legacy Bot
+
+ONE-LINE SUMMARY
+Updated comprehensive Phase 2 prompt re-issued per HARD RULE (one full combined prompt, never split) after Aaron escalated needing total capture: every edit, failure, update, feature, tool, file for SA + Shipping & Invoicing Page. Added 7 new evidence package sections (§I through §O) plus expanded §H completeness checklist.
+
+WHY THIS RE-ISSUE
+Aaron has invested 200+ hours into the SA portion of the portal alone. Original comprehensive prompt covered spec/decision/defect evidence well but did NOT explicitly mandate:
+- §I Complete commit/edit history
+- §J Complete failure catalog (HALTs + defects + infra + process failures)
+- §K Complete version progression (V1→V2→V2.2→V2.3→V3)
+- §L Complete feature inventory with built/partial/broken status per feature
+- §M Complete tool/integration inventory with status
+- §N Files needed by SA + Shipping & Invoicing Page
+- §O Aaron's 200+ hour investment audit (what survived vs lost)
+
+Per HARD RULE: cannot deliver as supplement (would force Aaron to stitch). Must re-issue entire updated prompt as single block. Done.
+
+COMPLETED THIS TURN
+- Re-issued comprehensive Phase 2 prompt as ONE FULL COMBINED block with:
+  - Steps 1-7 unchanged in flow
+  - Step 3 conversation_search expanded from 30 to ~40 queries (added 8 for features/tools/files; added 1 for failure rollbacks)
+  - Step 5 evidence package structure expanded from §A-G to §A-O (added §I through §O)
+  - Step 6 §H completeness checklist expanded from 12 to 19 category coverage items
+  - Mandatory feature/tool/file lists embedded in §L/§M/§N to ensure exhaustive inventory
+  - §O investment audit gives Aaron one place to see what survived/what didn't
+  - Resilience contract §Z preserved
+- Honest gap flag for §I: bundle §8 only has last 10 commits per repo; full git log REQUIRES CC SUPPLEMENT if Aaron wants total commit history. Will send 1-line CC prompt after Phase 2 if needed.
+
+DECISIONS
+- Total capture > surgical (Aaron's explicit mandate)
+- Per HARD RULE: re-issue full updated prompt rather than supplement
+- Mandatory feature/tool/file lists baked in to prevent inventory gaps
+- §O investment audit added to make 200+ hours accountable
+
+CHANGED
+- Phase 2 prompt scope: ~30 queries → ~40 queries; output sections §A-G+§H → §A-O+§H+§Z
+- Completeness checklist: 12 items → 19 items in Pass 1 alone
+
+BLOCKED
+- Cannot proceed to Phase 3 spec writing until Aaron signs "EVIDENCE PACKAGE ACCEPTED"
+- May need 1 CC supplement for full commit history if §I.5 flags it
+
+NEXT
+1. Aaron opens fresh Claude.ai chat in this project (Opus 4.7)
+2. Pastes COMPREHENSIVE V2 prompt (NOT the previous version)
+3. If previous version was already started in another fresh chat, abandon that and start fresh with this version
+4. Walks away (~30-60 min runtime estimated for expanded scope)
+5. Reviews §H completeness + §Z continuation status if any
+6. If §I flags REQUIRES CC SUPPLEMENT, dispatches one-line CC prompt to dump full git log
+7. Signs "EVIDENCE PACKAGE ACCEPTED" → Phase 3 spec writing unlocks
+
+KEY DESIGN ELEMENTS
+- All R-META rules + F.1 + F.30 preserved
+- 8 mandatory feature inventory items in §L (Shipments, INVOICING PULSE, celebrations, payment badges, FlexPro filter, review queue, etc.)
+- 22+ mandatory tool/integration items in §M (sa_v1_writer, agent-v4, CF Access, QB MCP, Gmail OAuth, Telegram, Discord, NorrisPalace, G Brain, etc.)
+- 6 file categories in §N (templates, brand, pricing, customer, spec, fixtures)
+- §O investment audit shows preservation state per major investment area
+- §Z resilience preserved
+- HARD RULE honored: one full combined block
+
+FILES
+- Created/dispatched: Phase 2 COMPREHENSIVE V2 paste-ready prompt (in chat as code block)
+- Pending creation: /mnt/user-data/outputs/V2.3_EVIDENCE_PACKAGE_2026-04-25.md (by fresh Claude.ai session)
+- Possibly pending: CC supplement for full commit history if §I flags it
+
+KEY LESSON
+When user mandate expands ("everything captured"), the right move per HARD RULE is to re-issue the entire updated prompt, NOT deliver a supplement to be stitched. The HARD RULE I locked earlier today already pre-empted this exact failure mode. Working as designed.
+
+CONTEXT THAT MUST PERSIST
+- Phase 2 COMPREHENSIVE V2 is the canonical prompt — discard prior versions
+- Aaron has invested 200+ hours specifically in SA + Shipping & Invoicing Page; §O makes this accountable
+- §I commit history may need CC supplement after Phase 2 (bundle has only -10 per repo)
+- All other foundation files in project knowledge unchanged
+- norrisops.com apex is canonical
+- HARD RULE locked: one full combined prompt, never supplement
+- §Z resilience pattern reusable for future multi-session work
+
 ## 7. OPEN DECISIONS (AARON)
 1. Confirm decision on M5 Pro (not base M5) when WWDC keynote drops June 8 — verify pricing/availability
 2. Confirm DS723+ still right call at Prime Day — if any new Synology model drops with 10GbE standard, reconsider
