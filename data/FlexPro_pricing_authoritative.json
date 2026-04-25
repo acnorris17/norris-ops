@@ -1,0 +1,155 @@
+{
+  "_built_at": "2026-04-25T20:11:47Z",
+  "_priority_order": [
+    "Bucket_Cover_Pricing_xlsx",
+    "FlexPro_Armor_Master_xlsx",
+    "memory_fallback"
+  ],
+  "_summary": {
+    "total_pns": 24,
+    "fallback_full_added": 0,
+    "fallback_field_filled": 0
+  },
+  "_source_log": [
+    "Bucket_Cover_Pricing_xlsx/Master Pricing: skipped (no P/N header)",
+    "FlexPro_Armor_Master_xlsx/Direct Price List: 19 P/Ns touched (cols={'pn': 0, 'desc': 1, 'direct': 3})",
+    "FlexPro_Armor_Master_xlsx/Dealer Price List: 18 P/Ns touched (cols={'pn': 0, 'product': 1, 'direct': 3, 'dealer': 4})",
+    "FlexPro_Armor_Master_xlsx/Internal Master: 24 P/Ns touched (cols={'pn': 0, 'product': 1, 'direct': 5, 'dealer': 6})",
+    "FlexPro_Armor_Master_xlsx/Samson Rope Pricing: skipped (no P/N header)"
+  ],
+  "pricing": {
+    "NU-BC-2828": {
+      "direct": 235.0,
+      "description": "FlexPro Armor Bucket Cover for 1-Man Bucket",
+      "dealer": 195.0,
+      "product": "1-Man BC"
+    },
+    "NU-BC-2834": {
+      "direct": 265.0,
+      "description": "FlexPro Armor Bucket Cover for 1.5-Man Bucket",
+      "dealer": 205.0,
+      "product": "1.5-Man BC"
+    },
+    "NU-BC-2842": {
+      "direct": 265.0,
+      "description": "FlexPro Armor Bucket Cover for 1.5-Man (Large) Bucket",
+      "dealer": 210.0,
+      "product": "1.5-Man (Large) BC"
+    },
+    "NU-BC-2844": {
+      "direct": 295.0,
+      "description": "FlexPro Armor Bucket Cover for 1.5-Man Bucket (Specialty)",
+      "dealer": 235.0,
+      "product": "1.5-Man BC (Specialty)"
+    },
+    "NU-BC-2851": {
+      "direct": 305.0,
+      "description": "FlexPro Armor Bucket Cover for 2-Man Bucket",
+      "dealer": 235.0,
+      "product": "2-Man BC"
+    },
+    "NU-BC-CC2834": {
+      "direct": 285.0,
+      "description": "FlexPro Armor Bucket Cover for 1.5-Man with Upper Control Cover",
+      "dealer": 225.0,
+      "product": "1.5-Man w/ Upper Control"
+    },
+    "NU-BC-2834-F": {
+      "direct": 305.0,
+      "description": "FlexPro Armor ARCH Bucket Cover for 1.5-Man Bucket",
+      "dealer": 245.0,
+      "product": "ARCH 1.5-Man"
+    },
+    "NU-BC-2851-F": {
+      "direct": 345.0,
+      "description": "FlexPro Armor ARCH Bucket Cover for 2-Man Bucket",
+      "dealer": 275.0,
+      "product": "ARCH 2-Man"
+    },
+    "NU-BC-2834-C": {
+      "direct": 305.0,
+      "description": "FlexPro Armor 1.5-Man Bucket Cover + Shield Combo",
+      "dealer": 245.0,
+      "product": "1.5-Man + Shield Combo"
+    },
+    "NU-BC-2851-C": {
+      "direct": 345.0,
+      "description": "FlexPro Armor 2-Man Bucket Cover + Shield Combo",
+      "dealer": 275.0,
+      "product": "2-Man + Shield Combo"
+    },
+    "NU-BC-2834-FC": {
+      "direct": 345.0,
+      "description": "FlexPro Armor ARCH 1.5-Man + Shield Combo",
+      "dealer": 275.0,
+      "product": "ARCH 1.5-Man + Shield"
+    },
+    "NU-BC-2851-FC": {
+      "direct": 385.0,
+      "description": "FlexPro Armor ARCH 2-Man + Shield Combo",
+      "dealer": 305.0,
+      "product": "ARCH 2-Man + Shield"
+    },
+    "NU-BC-D4577": {
+      "direct": 1050.0,
+      "description": "FlexPro Armor D-Shape Transmission BC with Upper Control Cover",
+      "dealer": 850.0,
+      "product": "D-Shape Transmission w/ Upper Control"
+    },
+    "NU-BC-D4577-MSP": {
+      "direct": 1100.0,
+      "description": "FlexPro Armor D-Shape MSP Spec (wide opening)",
+      "product": "D-Shape MSP Spec"
+    },
+    "NU-BC-BY2828": {
+      "direct": 275.0,
+      "description": "FlexPro Armor BC for SDP & Pin-On Buckets with Bracket Relief",
+      "dealer": 225.0,
+      "product": "SDP Pin-On w/ Bracket Relief"
+    },
+    "NU-BC-2945-EPBC": {
+      "direct": 325.0,
+      "description": "FlexPro Armor Bucket Cover for EPBC ETI Buckets",
+      "dealer": 265.0,
+      "product": "EPBC ETI BC"
+    },
+    "NU-BCB-2834-SL": {
+      "direct": 45.0,
+      "description": "FlexPro Armor 1.5-Man Shield with Snap & Lanyard",
+      "dealer": 38.0,
+      "product": "1.5-Man Shield"
+    },
+    "NU-BCB-2851-SL": {
+      "direct": 55.0,
+      "description": "FlexPro Armor 2-Man Shield with Snap & Lanyard",
+      "dealer": 45.0,
+      "product": "2-Man Shield"
+    },
+    "NU-TB2524-M": {
+      "direct": 195.0,
+      "description": "Magnetic Tool Board, by Norris Utilities",
+      "dealer": 160.0,
+      "product": "Magnetic Tool Board"
+    },
+    "NU-BC-CC2834G": {
+      "direct": 230.0,
+      "product": "1.5-Man Upper Control V2 (AT40G)"
+    },
+    "NU-BCB-2834-S": {
+      "direct": 40.0,
+      "product": "1.5-Man Shield w/ Snap"
+    },
+    "NU-BCB-2851-S": {
+      "direct": 50.0,
+      "product": "2-Man Shield w/ Snap"
+    },
+    "NU-BC-2834-T": {
+      "direct": 270.0,
+      "product": "Terex 1.5-Man (Red)"
+    },
+    "NU-BC-2851-T": {
+      "direct": 310.0,
+      "product": "Terex 2-Man (Red)"
+    }
+  }
+}

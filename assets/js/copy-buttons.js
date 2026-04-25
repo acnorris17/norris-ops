@@ -247,7 +247,40 @@
       value: qbMemo(r),
       disabledHint: !qbMemo(r) ? "Memo will generate at invoice time" : null });
 
+    // V2.3 §F.2 — 17th button: Copy ALL as TSV (whole row tab-separated
+    // for QB bulk-paste). Goes in its own "all" group below the bottom
+    // section so detail-panel.js can render it visually distinct.
+    defs.push({ group: "all", label: "Copy ALL (TSV)",
+      value: rowAsTsv(r, defs),
+      disabledHint: null });
+
     return defs;
+  }
+
+  // V2.3 §F.2 — assemble a tab-separated dump of every column value on
+  // the row, including a header row so QB paste-into-grid stays aligned.
+  function rowAsTsv(r, defs) {
+    const fields = (defs || []).filter((d) => d.group !== "all" && d.group !== "lines");
+    const headers = fields.map((d) => d.label);
+    const values  = fields.map((d) => (d.value == null ? "" : String(d.value).replace(/\t/g, " ").replace(/\n/g, " ")));
+    // Plus per-line-item rows
+    const tier = tierForRow(r);
+    const lineRows = (r.line_items || []).map((li) => {
+      const rate = rateFor(li.pn, tier);
+      return [
+        "LINE",
+        li.pn || "",
+        String(li.qty || 0),
+        rate != null ? fmtMoney2(rate) : "",
+        rate != null ? fmtMoney2(rate * (li.qty || 0)) : "",
+      ].join("\t");
+    });
+    let out = headers.join("\t") + "\n" + values.join("\t");
+    if (lineRows.length) {
+      out += "\n\n" + ["TYPE","P/N","QTY","RATE","SUBTOTAL"].join("\t");
+      out += "\n" + lineRows.join("\n");
+    }
+    return out;
   }
 
   // QB memo — mirrors the detail-panel rendering
@@ -272,15 +305,15 @@
 
   function renderPanel(row) {
     const defs = buttonsFor(row);
-    const byGroup = { top: [], lines: [], bottom: [] };
-    for (const d of defs) byGroup[d.group].push(d);
+    const byGroup = { top: [], lines: [], bottom: [], all: [] };
+    for (const d of defs) (byGroup[d.group] || byGroup.bottom).push(d);
 
-    function section(title, items) {
+    function section(title, items, extraClass) {
       if (!items.length) return "";
       const btns = items.map((d, i) => {
         const disabled = d.disabledHint ? " disabled" : "";
         const title = d.disabledHint ? ` title="${escAttr(d.disabledHint)}"` : "";
-        return `<button type="button" class="copy-field-btn"${disabled} data-label="${escAttr(d.label)}" data-idx="${i}"${title}>&#128203; ${esc(d.label)}</button>`;
+        return `<button type="button" class="copy-field-btn${extraClass ? ' ' + extraClass : ''}"${disabled} data-label="${escAttr(d.label)}" data-idx="${i}"${title}>&#128203; ${esc(d.label)}</button>`;
       }).join("");
       return `<div class="copy-group"><div class="copy-group-label">${esc(title)}</div><div class="copy-group-btns">${btns}</div></div>`;
     }
@@ -290,6 +323,7 @@
   ${section("Top", byGroup.top)}
   ${section("Line Items", byGroup.lines)}
   ${section("Bottom", byGroup.bottom)}
+  ${section("Whole Row", byGroup.all, "copy-all-tsv")}
 </div>`;
   }
 

@@ -721,9 +721,9 @@
       "customer_id": "Henkels & McCoy",
       "line_items": [
         {
-          "pn": "NU-BC-2834",
-          "description_short": "1.5-Man BC",
-          "description_full": "FlexPro Armor 1.5-Man Bucket Cover",
+          "pn": "NU-BC-BY2828",
+          "description_short": "1-Man Bucket Cover (Backyard)",
+          "description_full": "FlexPro Armor Bucket for SDP's & other 1-Man Pin-On Buckets with Bracket Relief (28\" x 28\")",
           "qty": 1
         }
       ],
@@ -748,7 +748,17 @@
       "po_number": "Verbal",
       "po_required": false,
       "parent_sd_id": null,
-      "last_updated": "2026-04-23T10:23:59.546046+00:00"
+      "last_updated": "2026-04-23T10:23:59.546046+00:00",
+      "aaron_verified_pn_override": true,
+      "pn__source_rank": 90,
+      "pn__source_name": "AARON_CONFIRMED",
+      "notes": [
+        {
+          "ts": "2026-04-25T20:19:04.186577+00:00",
+          "author": "v23_henkels_fix",
+          "note": "V1 R8 violation corrected during V2.3 build: SA had assigned NU-BC-2834; SD + Aaron intent was NU-BC-BY2828. Corrected per Source Priority hierarchy (AARON_CONFIRMED rank 90 > SD_DOCUMENT rank 85)."
+        }
+      ]
     },
     {
       "sid": "S-2026-024",
@@ -859,102 +869,6 @@
       "last_updated": "2026-04-23T10:23:59.547477+00:00",
       "invoice_sent": false,
       "audit_trail": [
-        {
-          "id": "audit_4391e723e0c64b1ba18097bd56abf92a",
-          "shipment_id": "S-2026-026",
-          "actor": "aaron",
-          "iso_ts": "2026-04-24T11:46:48.104390-05:00",
-          "display_ts": "Apr 24 11:46 AM CT",
-          "event": "invoice_sent",
-          "from": "PROCESSING",
-          "to": "INVOICED",
-          "source": "aaron_click",
-          "notes": ""
-        },
-        {
-          "id": "audit_a7d1376663a64c1390e5c59c4ef55ef9",
-          "shipment_id": "S-2026-026",
-          "actor": "aaron",
-          "iso_ts": "2026-04-24T11:46:48.131888-05:00",
-          "display_ts": "Apr 24 11:46 AM CT",
-          "event": "invoice_sent_reverse",
-          "from": "INVOICED",
-          "to": "INVOICED",
-          "source": "aaron_click",
-          "notes": ""
-        },
-        {
-          "id": "audit_641e58f9e1d142dca8aaa1aee42c8e4b",
-          "shipment_id": "S-2026-026",
-          "actor": "aaron",
-          "iso_ts": "2026-04-24T11:46:48.149746-05:00",
-          "display_ts": "Apr 24 11:46 AM CT",
-          "event": "invoice_sent",
-          "from": "PROCESSING",
-          "to": "INVOICED",
-          "source": "aaron_click",
-          "notes": ""
-        },
-        {
-          "id": "audit_2b87f594ee9448eba4a7fa39d33235ec",
-          "shipment_id": "S-2026-026",
-          "actor": "aaron",
-          "iso_ts": "2026-04-24T11:46:48.173377-05:00",
-          "display_ts": "Apr 24 11:46 AM CT",
-          "event": "invoice_sent_reverse",
-          "from": "INVOICED",
-          "to": "INVOICED",
-          "source": "aaron_click",
-          "notes": ""
-        },
-        {
-          "id": "audit_72b34800e810495c971db16afa8ebd9c",
-          "shipment_id": "S-2026-026",
-          "actor": "aaron",
-          "iso_ts": "2026-04-24T11:49:21.811507-05:00",
-          "display_ts": "Apr 24 11:49 AM CT",
-          "event": "invoice_sent",
-          "from": "PROCESSING",
-          "to": "INVOICED",
-          "source": "aaron_click",
-          "notes": ""
-        },
-        {
-          "id": "audit_ed03208d7dd240dfba2ba4663e4598d6",
-          "shipment_id": "S-2026-026",
-          "actor": "aaron",
-          "iso_ts": "2026-04-24T11:49:21.843948-05:00",
-          "display_ts": "Apr 24 11:49 AM CT",
-          "event": "invoice_sent_reverse",
-          "from": "INVOICED",
-          "to": "INVOICED",
-          "source": "aaron_click",
-          "notes": ""
-        },
-        {
-          "id": "audit_a0f2e4e61ab1414888ec53b684cf3960",
-          "shipment_id": "S-2026-026",
-          "actor": "aaron",
-          "iso_ts": "2026-04-24T11:49:21.864607-05:00",
-          "display_ts": "Apr 24 11:49 AM CT",
-          "event": "invoice_sent",
-          "from": "PROCESSING",
-          "to": "INVOICED",
-          "source": "aaron_click",
-          "notes": ""
-        },
-        {
-          "id": "audit_f45f93c289c44e5cae2e2bb3e5d63a49",
-          "shipment_id": "S-2026-026",
-          "actor": "aaron",
-          "iso_ts": "2026-04-24T11:49:21.881489-05:00",
-          "display_ts": "Apr 24 11:49 AM CT",
-          "event": "invoice_sent_reverse",
-          "from": "INVOICED",
-          "to": "INVOICED",
-          "source": "aaron_click",
-          "notes": ""
-        },
         {
           "id": "audit_dd1557a7ca5a44cd8a7f544e61c29592",
           "shipment_id": "S-2026-026",
@@ -1093,6 +1007,102 @@
           "actor": "aaron",
           "iso_ts": "2026-04-24T14:52:30.176869-05:00",
           "display_ts": "Apr 24 2:52 PM CT",
+          "event": "invoice_sent_reverse",
+          "from": "INVOICED",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_a5c8bf77cbe648e3a5abccb218be4c7d",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-25T15:02:14.980198-05:00",
+          "display_ts": "Apr 25 3:02 PM CT",
+          "event": "invoice_sent",
+          "from": "PROCESSING",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_00cce418ba7441589e94ff8a924c4d90",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-25T15:02:15.006660-05:00",
+          "display_ts": "Apr 25 3:02 PM CT",
+          "event": "invoice_sent_reverse",
+          "from": "INVOICED",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_9bd875e180af46a1803fa51e21a0ffe0",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-25T15:02:15.025226-05:00",
+          "display_ts": "Apr 25 3:02 PM CT",
+          "event": "invoice_sent",
+          "from": "PROCESSING",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_484e220bc4d544969740acaab43a478d",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-25T15:02:15.050070-05:00",
+          "display_ts": "Apr 25 3:02 PM CT",
+          "event": "invoice_sent_reverse",
+          "from": "INVOICED",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_e18e5ce310b64d4abc6913b57344c9c4",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-25T15:31:43.352120-05:00",
+          "display_ts": "Apr 25 3:31 PM CT",
+          "event": "invoice_sent",
+          "from": "PROCESSING",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_e69db120bd834dd0a4efd01a896741bf",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-25T15:31:43.376150-05:00",
+          "display_ts": "Apr 25 3:31 PM CT",
+          "event": "invoice_sent_reverse",
+          "from": "INVOICED",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_b2228fb1dbd04193bc15e9b86f0c54d3",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-25T15:31:43.399418-05:00",
+          "display_ts": "Apr 25 3:31 PM CT",
+          "event": "invoice_sent",
+          "from": "PROCESSING",
+          "to": "INVOICED",
+          "source": "aaron_click",
+          "notes": ""
+        },
+        {
+          "id": "audit_b9409300dca3447d96597626162311a8",
+          "shipment_id": "S-2026-026",
+          "actor": "aaron",
+          "iso_ts": "2026-04-25T15:31:43.414153-05:00",
+          "display_ts": "Apr 25 3:31 PM CT",
           "event": "invoice_sent_reverse",
           "from": "INVOICED",
           "to": "INVOICED",

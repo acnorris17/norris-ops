@@ -14,3 +14,10 @@ test-results/
 # (Real files live in the agent repo; symlinks are for local dev, not deploy.)
 data/customer_registry.json
 data/product_catalog.json
+
+# V2.3 build state files (per-session, not source)
+.v2.3-*
+
+# Pre-build backups (the 'pre_<date>' suffix is the convention)
+*.bak_pre_*
+*.json.bak_pre_*
