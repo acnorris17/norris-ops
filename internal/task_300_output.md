@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>H2O Waterproofing — Pre-Closing Call Checklist — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <title>H2O Waterproofing — Pre-Closing Action Item — Norris Utilities®</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap');
+
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -16,8 +17,9 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-warning: #D84315;
-      --nu-success: #2E7D32;
+      --nu-alert-red: #C62828;
+      --nu-alert-amber: #F57C00;
+      --nu-success-green: #2E7D32;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -34,21 +36,24 @@
     /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
       padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 300px;
+      min-height: 320px;
     }
+
     .nu-header::before {
       content: '';
       position: absolute;
-      inset: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 80px);
       z-index: 1;
+      opacity: 0.7;
     }
+
     .nu-header::after {
       content: '';
       position: absolute;
@@ -57,51 +62,68 @@
       background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
-    .nu-header > * { position: relative; z-index: 2; }
 
-    .nu-phoenix-icon {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 18px;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+    .nu-header-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
     }
+
+    .nu-phoenix-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      max-width: 600px;
+      opacity: 0.07;
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .nu-logo-text {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 3rem;
+      font-size: 3.4rem;
       color: var(--nu-white);
-      letter-spacing: 0.35em;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
-      margin-bottom: 4px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+      margin-bottom: 6px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.35);
     }
+
     .nu-logo-subtitle {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.78em;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
+
     .nu-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.25rem;
+      font-weight: 400;
+      font-size: 1.35rem;
       color: rgba(255,255,255,0.95);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
-    .nu-doc-banner {
-      margin-top: 28px;
+
+    .nu-doc-label {
       display: inline-block;
-      padding: 10px 28px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 4px;
-      color: var(--nu-white);
+      margin-top: 22px;
+      padding: 8px 22px;
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(6, 208, 255, 0.55);
+      color: var(--nu-cyan);
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
+      font-size: 0.78rem;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
+      border-radius: 2px;
     }
 
     /* CHEVRON */
@@ -110,355 +132,474 @@
       height: 50px;
       margin-top: -50px;
       z-index: 10;
-      line-height: 0;
     }
     .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
-    /* CONTENT */
-    .nu-content-area {
+    /* MAIN */
+    main.nu-content-area {
       position: relative;
       background: var(--nu-white);
-      padding: 60px 40px 80px;
+      padding-bottom: 60px;
     }
-    .nu-content-area::before {
-      content: '';
-      position: absolute;
-      top: 60px; left: 50%;
-      transform: translateX(-50%);
-      width: 65%; max-width: 700px;
-      aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(0,0,255,0.035) 0%, transparent 65%);
-      z-index: 0;
-      pointer-events: none;
-    }
+
     .nu-wrap {
       max-width: 1100px;
       margin: 0 auto;
-      position: relative;
-      z-index: 1;
+      padding: 50px 40px 20px;
     }
 
-    /* DOC HEAD */
-    .nu-doc-title {
+    /* TITLE BLOCK */
+    .nu-title-block {
+      border-left: 6px solid var(--nu-blue);
+      padding: 4px 0 4px 22px;
+      margin-bottom: 14px;
+    }
+    .nu-section-title {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 2.2rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
+      font-size: 2rem;
+      color: var(--nu-blue);
+      letter-spacing: -0.01em;
       line-height: 1.2;
     }
-    .nu-doc-title span { color: var(--nu-blue); }
-    .nu-doc-subtitle {
-      font-size: 1.05rem;
-      color: var(--nu-body-text);
-      margin-bottom: 24px;
-    }
-    .nu-doc-meta {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      padding: 20px 24px;
-      background: var(--nu-light-gray);
-      border-left: 4px solid var(--nu-blue);
-      border-radius: 4px;
-      margin-bottom: 40px;
-    }
-    .nu-meta-item { font-size: 0.9rem; }
-    .nu-meta-label {
-      display: block;
-      font-weight: 700;
-      color: var(--nu-blue);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.72rem;
-      margin-bottom: 4px;
-    }
-    .nu-meta-value {
+    .nu-section-title span {
       color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+    .nu-subtitle {
+      font-size: 1rem;
+      color: var(--nu-body-text);
+      margin-top: 6px;
       font-weight: 400;
     }
 
-    /* SECTION */
-    .nu-section {
-      margin-bottom: 44px;
+    /* META BAR */
+    .nu-meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 22px 0 36px;
+      padding: 16px 20px;
+      background: var(--nu-light-gray);
+      border-radius: 6px;
+      border: 1px solid var(--nu-medium-gray);
     }
-    .nu-section-title {
-      font-weight: 900;
-      font-size: 1.5rem;
+    .nu-meta-item {
+      font-size: 0.85rem;
       color: var(--nu-dark-text);
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 3px solid var(--nu-cyan);
     }
-    .nu-section-title span:first-child {
+    .nu-meta-item strong {
       color: var(--nu-blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.75rem;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .nu-meta-item .val {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .nu-meta-divider {
+      width: 1px;
+      background: var(--nu-medium-gray);
     }
 
     /* PRIORITY BANNER */
-    .priority-banner {
-      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-      border-left: 6px solid var(--nu-warning);
-      padding: 18px 24px;
-      border-radius: 4px;
-      margin-bottom: 36px;
+    .nu-priority-banner {
       display: flex;
       align-items: center;
       gap: 16px;
+      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+      color: var(--nu-white);
+      padding: 18px 26px;
+      margin-bottom: 36px;
+      border-radius: 6px;
+      border-left: 6px solid var(--nu-cyan);
     }
-    .priority-banner-icon {
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
-      background: var(--nu-warning);
-      color: white;
+    .nu-priority-banner .icon {
+      font-size: 1.6rem;
+      color: var(--nu-cyan);
+      font-weight: 900;
+    }
+    .nu-priority-banner .label {
+      font-weight: 900;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--nu-cyan);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .nu-priority-banner .text {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* SECTION HEADERS */
+    .nu-h2 {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin: 38px 0 16px;
+      color: var(--nu-dark-text);
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--nu-medium-gray);
+    }
+    .nu-h2 .first {
+      color: var(--nu-blue);
+    }
+
+    /* CALL CARD */
+    .nu-call-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 28px 30px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .nu-call-card h3 {
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--nu-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+    .nu-call-card .vendor-name {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .nu-call-card .vendor-role {
+      font-size: 0.95rem;
+      color: var(--nu-body-text);
+      margin-bottom: 14px;
+    }
+    .nu-call-card .contact-block {
+      background: var(--nu-light-gray);
+      padding: 14px 16px;
+      border-radius: 6px;
+      border-left: 4px solid var(--nu-cyan);
+    }
+    .nu-call-card .contact-block .ln {
+      font-size: 0.92rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+    }
+    .nu-call-card .contact-block .ln:last-child { margin-bottom: 0; }
+    .nu-call-card .contact-block strong {
+      color: var(--nu-blue);
+      font-weight: 700;
+    }
+    .nu-call-card .contact-block a {
+      color: var(--nu-blue);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .nu-call-card .contact-block a:hover { text-decoration: underline; }
+
+    /* CHECKLIST */
+    .nu-checklist {
+      list-style: none;
+      counter-reset: chk;
+      margin: 18px 0 28px;
+    }
+    .nu-checklist li {
+      counter-increment: chk;
+      position: relative;
+      padding: 18px 22px 18px 64px;
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 6px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .nu-checklist li::before {
+      content: counter(chk);
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      background: var(--nu-blue);
+      color: var(--nu-white);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1.2rem;
+      font-size: 0.95rem;
     }
-    .priority-banner-text {
-      flex: 1;
-    }
-    .priority-banner-text strong {
+    .nu-checklist li strong {
       display: block;
-      color: var(--nu-warning);
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      font-size: 1rem;
+      color: var(--nu-dark-text);
+      font-weight: 700;
       margin-bottom: 4px;
     }
-
-    /* CHECKLIST */
-    .checklist {
-      list-style: none;
-      margin-bottom: 20px;
+    .nu-checklist li .detail {
+      font-size: 0.92rem;
+      color: var(--nu-body-text);
+      line-height: 1.5;
     }
-    .checklist li {
-      display: flex;
-      align-items: flex-start;
+    .nu-checklist li .verify {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 10px;
+      background: rgba(6, 208, 255, 0.12);
+      color: var(--nu-blue);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 3px;
+    }
+
+    /* QUESTIONS GRID */
+    .nu-questions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 14px;
-      padding: 14px 18px;
+      margin: 18px 0 28px;
+    }
+    .nu-question {
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
       border-radius: 6px;
-      margin-bottom: 10px;
-      transition: all 0.2s ease;
+      padding: 18px 20px;
+      position: relative;
+      padding-left: 48px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
-    .checklist li:hover {
-      border-color: var(--nu-blue);
-      box-shadow: 0 2px 8px rgba(0,0,255,0.08);
-    }
-    .checklist-box {
-      width: 22px;
-      height: 22px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .checklist-content {
-      flex: 1;
-    }
-    .checklist-label {
-      font-weight: 700;
-      color: var(--nu-dark-text);
-      display: block;
-      margin-bottom: 4px;
-    }
-    .checklist-detail {
-      font-size: 0.92rem;
-      color: var(--nu-body-text);
-    }
-
-    /* QUESTIONS TABLE */
-    .qa-grid {
-      display: grid;
-      gap: 14px;
-    }
-    .qa-item {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 4px solid var(--nu-blue);
-      border-radius: 4px;
-      padding: 18px 22px;
-    }
-    .qa-number {
-      display: inline-block;
-      background: var(--nu-blue);
-      color: var(--nu-white);
+    .nu-question::before {
+      content: 'Q';
+      position: absolute;
+      left: 14px;
+      top: 16px;
+      width: 24px;
+      height: 24px;
+      background: var(--nu-cyan);
+      color: var(--nu-navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 900;
-      font-size: 0.78rem;
-      padding: 4px 10px;
-      border-radius: 3px;
-      margin-bottom: 8px;
-      letter-spacing: 0.08em;
+      font-size: 0.85rem;
     }
-    .qa-question {
+    .nu-question .q-text {
       font-weight: 700;
       color: var(--nu-dark-text);
-      font-size: 1rem;
+      font-size: 0.95rem;
       margin-bottom: 6px;
     }
-    .qa-note {
-      font-size: 0.88rem;
+    .nu-question .q-why {
+      font-size: 0.84rem;
       color: var(--nu-body-text);
       font-style: italic;
     }
-    .qa-answer-line {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px dashed var(--nu-medium-gray);
-      font-size: 0.82rem;
-      color: #888;
-    }
-    .qa-answer-line::before {
-      content: 'Answer: ';
-      font-weight: 700;
-      color: var(--nu-blue);
-      letter-spacing: 0.05em;
-    }
 
-    /* WRITING REQUIREMENT BOX */
-    .writing-box {
-      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-      border: 2px solid var(--nu-blue);
-      border-radius: 8px;
-      padding: 24px 28px;
-      margin-bottom: 24px;
-    }
-    .writing-box-title {
-      font-weight: 900;
-      color: var(--nu-blue);
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .writing-box-title::before {
-      content: '✎';
-      font-size: 1.4rem;
-    }
-    .writing-box ul {
-      list-style: none;
-      padding: 0;
-    }
-    .writing-box li {
-      padding: 6px 0 6px 22px;
-      position: relative;
-      color: var(--nu-dark-text);
-    }
-    .writing-box li::before {
-      content: '•';
-      color: var(--nu-blue);
-      font-weight: 900;
-      position: absolute;
-      left: 8px;
-    }
-
-    /* CONTACT CARDS */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .contact-card {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
+    /* WRITING REQUIREMENTS */
+    .nu-writing-box {
+      background: linear-gradient(135deg, #fff8e1 0%, #fff3d6 100%);
+      border: 1px solid #f0d99c;
+      border-left: 6px solid var(--nu-accent-gold);
       border-radius: 6px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      padding: 22px 26px;
+      margin: 18px 0 28px;
     }
-    .contact-card-role {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
+    .nu-writing-box h4 {
+      font-weight: 900;
+      color: #6b4f00;
+      font-size: 1rem;
+      margin-bottom: 10px;
       text-transform: uppercase;
-      color: var(--nu-blue);
-      font-weight: 700;
-      margin-bottom: 6px;
+      letter-spacing: 0.08em;
     }
-    .contact-card-name {
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 10px;
-    }
-    .contact-card-line {
-      font-size: 0.9rem;
-      margin-bottom: 4px;
-      color: var(--nu-body-text);
-    }
-    .contact-card-line strong {
-      color: var(--nu-dark-text);
-    }
-
-    /* ACTION ROW */
-    .action-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-top: 14px;
-    }
-    .action-tile {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #001166 100%);
-      color: var(--nu-white);
-      padding: 22px 20px;
-      border-radius: 6px;
-      text-align: center;
-    }
-    .action-tile-num {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--nu-cyan);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .action-tile-label {
-      font-weight: 700;
-      font-size: 0.92rem;
-      letter-spacing: 0.04em;
-    }
-
-    /* RED FLAGS */
-    .red-flag-list {
+    .nu-writing-box ul {
       list-style: none;
       padding: 0;
     }
-    .red-flag-list li {
-      background: #ffebee;
-      border-left: 4px solid #c62828;
-      padding: 12px 18px;
-      margin-bottom: 8px;
-      border-radius: 3px;
-      color: var(--nu-dark-text);
+    .nu-writing-box ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      color: #4a3800;
       font-size: 0.95rem;
     }
-    .red-flag-list li::before {
-      content: '⚑ ';
-      color: #c62828;
+    .nu-writing-box ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      color: #8b6900;
       font-weight: 900;
-      margin-right: 4px;
+    }
+
+    /* CALL SCRIPT */
+    .nu-script {
+      background: var(--nu-navy);
+      color: var(--nu-white);
+      padding: 26px 30px;
+      border-radius: 8px;
+      margin: 18px 0 28px;
+      position: relative;
+    }
+    .nu-script::before {
+      content: '"';
+      position: absolute;
+      top: -12px;
+      left: 22px;
+      font-size: 5rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--nu-cyan);
+      line-height: 1;
+    }
+    .nu-script .script-label {
+      font-size: 0.78rem;
+      color: var(--nu-cyan);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-left: 30px;
+    }
+    .nu-script p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.92);
+      padding-left: 30px;
+      margin-bottom: 12px;
+    }
+    .nu-script p:last-child { margin-bottom: 0; }
+
+    /* DEADLINE BAR */
+    .nu-deadline-bar {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 24px;
+      background: linear-gradient(90deg, rgba(198,40,40,0.08) 0%, rgba(198,40,40,0.02) 100%);
+      border: 1px solid rgba(198,40,40,0.25);
+      border-left: 6px solid var(--nu-alert-red);
+      border-radius: 6px;
+      margin: 18px 0 28px;
+    }
+    .nu-deadline-bar .badge {
+      flex-shrink: 0;
+      background: var(--nu-alert-red);
+      color: var(--nu-white);
+      padding: 8px 14px;
+      font-weight: 900;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 3px;
+    }
+    .nu-deadline-bar .text {
+      font-size: 0.98rem;
+      color: var(--nu-dark-text);
+    }
+    .nu-deadline-bar .text strong { color: var(--nu-alert-red); }
+
+    /* OUTCOME GRID */
+    .nu-outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 18px 0 28px;
+    }
+    .nu-outcome {
+      padding: 18px 20px;
+      border-radius: 6px;
+      border: 1px solid var(--nu-medium-gray);
+      background: var(--nu-white);
+    }
+    .nu-outcome.green { border-left: 6px solid var(--nu-success-green); }
+    .nu-outcome.amber { border-left: 6px solid var(--nu-alert-amber); }
+    .nu-outcome.red { border-left: 6px solid var(--nu-alert-red); }
+    .nu-outcome h5 {
+      font-weight: 900;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .nu-outcome.green h5 { color: var(--nu-success-green); }
+    .nu-outcome.amber h5 { color: var(--nu-alert-amber); }
+    .nu-outcome.red h5 { color: var(--nu-alert-red); }
+    .nu-outcome p {
+      font-size: 0.92rem;
+      color: var(--nu-body-text);
+      line-height: 1.5;
+    }
+
+    /* SIGN OFF */
+    .nu-signoff {
+      margin: 36px 0 12px;
+      padding: 22px 26px;
+      background: var(--nu-light-gray);
+      border-radius: 6px;
+      border: 1px dashed var(--nu-medium-gray);
+    }
+    .nu-signoff h4 {
+      font-weight: 900;
+      color: var(--nu-blue);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .nu-signoff-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .nu-signoff-line {
+      flex: 1;
+      min-width: 220px;
+    }
+    .nu-signoff-line .lbl {
+      font-size: 0.78rem;
+      color: var(--nu-body-text);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .nu-signoff-line .ln {
+      border-bottom: 1.5px solid var(--nu-dark-text);
+      height: 28px;
     }
 
     /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 50px 40px;
+      padding: 44px 40px;
       text-align: center;
+      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: 1.3rem;
+      font-weight: 400;
+      font-size: 1.25rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
     .nu-footer-contact {
-      font-size: 0.95rem;
-      line-height: 1.9;
+      font-size: 0.92rem;
+      line-height: 1.85;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
@@ -469,33 +610,31 @@
       width: 60px;
       height: 2px;
       background: var(--nu-cyan);
-      margin: 14px auto;
+      margin: 16px auto;
       opacity: 0.5;
     }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 50px 20px 70px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
-      .nu-tagline { font-size: 1rem; }
-      .nu-content-area { padding: 40px 20px 60px; }
-      .nu-doc-title { font-size: 1.6rem; }
-      .nu-section-title { font-size: 1.25rem; }
+      .nu-header { padding: 50px 20px 70px; min-height: 240px; }
+      .nu-logo-text { font-size: 2.1rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1.05rem; }
+      .nu-wrap { padding: 36px 22px 12px; }
+      .nu-section-title { font-size: 1.5rem; }
+      .nu-call-card { grid-template-columns: 1fr; padding: 22px; }
+      .nu-meta-bar { flex-direction: column; gap: 14px; }
+      .nu-meta-divider { display: none; }
+      .nu-script { padding: 22px 22px 22px 22px; }
+      .nu-script .script-label, .nu-script p { padding-left: 0; }
+      .nu-script::before { display: none; }
     }
 
     @media print {
-      body { background: white; }
-      .nu-header {
-        background: var(--nu-blue) !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      .checklist li, .qa-item, .contact-card { box-shadow: none; break-inside: avoid; }
-      .nu-footer {
-        background: var(--nu-navy) !important;
-        -webkit-print-color-adjust: exact;
-      }
+      body { background: var(--nu-white); }
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .nu-call-card, .nu-checklist li, .nu-question { box-shadow: none; }
     }
   </style>
 </head>
@@ -503,277 +642,235 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <div class="nu-phoenix-icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.9"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
-      </svg>
+    <div class="nu-header-inner">
+      <div class="nu-logo-text">NORRIS</div>
+      <div class="nu-logo-subtitle">UTILITIES</div>
+      <div class="nu-tagline">A Legacy of Commitment®</div>
+      <div class="nu-doc-label">Pre-Closing Action Item</div>
     </div>
-    <div class="nu-logo-text">NORRIS</div>
-    <div class="nu-logo-subtitle">UTILITIES</div>
-    <div class="nu-tagline">A Legacy of Commitment®</div>
-    <div class="nu-doc-banner">Pre-Closing Due Diligence</div>
   </header>
 
-  <!-- CHEVRON -->
+  <!-- CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
+      <path d="M0,0 L548,50 L1440,0 L1440,50 L0,50 Z" fill="#FFFFFF"/>
     </svg>
   </div>
 
-  <!-- CONTENT -->
+  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
     <div class="nu-wrap">
 
-      <h1 class="nu-doc-title">H2O Waterproofing — <span>Pre-Closing Call Checklist</span></h1>
-      <p class="nu-doc-subtitle">Verification call and written confirmation required before closing on 4505 Butterworth Estate.</p>
+      <!-- TITLE -->
+      <div class="nu-title-block">
+        <div class="nu-section-title">Call <span>H2O Waterproofing — Pre-Closing Verification</span></div>
+        <div class="nu-subtitle">Confirm scope, warranty, and transferability in writing before the property closes.</div>
+      </div>
 
-      <div class="nu-doc-meta">
+      <!-- META BAR -->
+      <div class="nu-meta-bar">
         <div class="nu-meta-item">
-          <span class="nu-meta-label">Action Source</span>
-          <span class="nu-meta-value">reMarkable Task Capture</span>
+          <strong>Owner</strong>
+          <div class="val">Aaron C. Norris</div>
         </div>
+        <div class="nu-meta-divider"></div>
         <div class="nu-meta-item">
-          <span class="nu-meta-label">Priority</span>
-          <span class="nu-meta-value">HIGH — Blocks Closing</span>
+          <strong>Property</strong>
+          <div class="val">4505 Buttewoods Lane</div>
         </div>
+        <div class="nu-meta-divider"></div>
         <div class="nu-meta-item">
-          <span class="nu-meta-label">Deadline</span>
-          <span class="nu-meta-value">Before Closing Date</span>
+          <strong>Source</strong>
+          <div class="val">reMarkable Action Item</div>
         </div>
+        <div class="nu-meta-divider"></div>
         <div class="nu-meta-item">
-          <span class="nu-meta-label">Prepared For</span>
-          <span class="nu-meta-value">Aaron C. Norris</span>
+          <strong>Status</strong>
+          <div class="val">Open — Action Required</div>
+        </div>
+        <div class="nu-meta-divider"></div>
+        <div class="nu-meta-item">
+          <strong>Generated</strong>
+          <div class="val">2026-04-25</div>
         </div>
       </div>
 
       <!-- PRIORITY BANNER -->
-      <div class="priority-banner">
-        <div class="priority-banner-icon">!</div>
-        <div class="priority-banner-text">
-          <strong>Written Confirmation Required</strong>
-          Do not accept verbal assurances. Every response must be documented in writing via email from H2O Waterproofing on company letterhead or from a verified company email address. Save copies to the property closing file.
+      <div class="nu-priority-banner">
+        <div class="icon">!</div>
+        <div>
+          <span class="label">Why this matters</span>
+          <div class="text">Verbal assurances disappear at the closing table. Anything H2O Waterproofing has promised about scope, materials, warranty length, and transferability must be confirmed in writing while we are still pre-closing — once title transfers, leverage drops to zero.</div>
         </div>
       </div>
 
-      <!-- SECTION 1 — BEFORE THE CALL -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span>Before</span> <span>the Call — Preparation</span></h2>
-        <ul class="checklist">
-          <li>
-            <span class="checklist-box"></span>
-            <div class="checklist-content">
-              <span class="checklist-label">Pull the H2O Waterproofing paperwork</span>
-              <span class="checklist-detail">Gather original contract, invoices, any warranty documents, and receipts from seller disclosures on 4505 Butterworth Estate.</span>
-            </div>
-          </li>
-          <li>
-            <span class="checklist-box"></span>
-            <div class="checklist-content">
-              <span class="checklist-label">Confirm H2O Waterproofing phone number and company contact</span>
-              <span class="checklist-detail">Verify against official H2O website or Better Business Bureau listing — do not rely solely on seller-provided numbers.</span>
-            </div>
-          </li>
-          <li>
-            <span class="checklist-box"></span>
-            <div class="checklist-content">
-              <span class="checklist-label">Identify who signed the original work order</span>
-              <span class="checklist-detail">Know the customer of record so H2O can pull the job file quickly.</span>
-            </div>
-          </li>
-          <li>
-            <span class="checklist-box"></span>
-            <div class="checklist-content">
-              <span class="checklist-label">Have closing date and property address ready</span>
-              <span class="checklist-detail">4505 Butterworth Estate — confirm full legal address on call.</span>
-            </div>
-          </li>
+      <!-- VENDOR CARD -->
+      <h2 class="nu-h2"><span class="first">Vendor</span> Contact</h2>
+      <div class="nu-call-card">
+        <div>
+          <h3>Call This Vendor</h3>
+          <div class="vendor-name">H2O Waterproofing</div>
+          <div class="vendor-role">Waterproofing contractor on file for 4505 Buttewoods Lane</div>
+          <div class="contact-block">
+            <div class="ln"><strong>When:</strong> Before closing — sooner is better</div>
+            <div class="ln"><strong>Who:</strong> Owner / project manager (whoever signed the original work order)</div>
+            <div class="ln"><strong>Caller:</strong> Aaron C. Norris — <a href="tel:2055001343">205-500-1343</a></div>
+            <div class="ln"><strong>Mode:</strong> Phone first — follow with email confirming what was discussed</div>
+          </div>
+        </div>
+        <div>
+          <h3>Goal of the Call</h3>
+          <div class="vendor-role" style="margin-bottom:12px;">Walk away with a written record — emailed PDF or signed letter — covering everything below. Nothing verbal, nothing implied.</div>
+          <div class="contact-block">
+            <div class="ln"><strong>Format accepted:</strong> Signed letter, scope-of-work doc, or email reply quoting the points back</div>
+            <div class="ln"><strong>Deliver to:</strong> <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a></div>
+            <div class="ln"><strong>Save copy to:</strong> Closing file + property folder</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEADLINE -->
+      <div class="nu-deadline-bar">
+        <div class="badge">Deadline</div>
+        <div class="text">Get the written confirmation in hand <strong>before closing day</strong>. Aim for at least 5 business days of cushion so corrections or clarifications can be made without delaying the closing.</div>
+      </div>
+
+      <!-- CHECKLIST -->
+      <h2 class="nu-h2"><span class="first">Confirm</span> in Writing — Required Items</h2>
+      <ol class="nu-checklist">
+        <li>
+          <strong>Scope of work performed</strong>
+          <div class="detail">Exactly what was waterproofed — basement walls, foundation, crawl space, exterior membrane, interior drainage, sump system. Listed by area, not generic language.</div>
+          <span class="verify">Must be in writing</span>
+        </li>
+        <li>
+          <strong>Materials and methods used</strong>
+          <div class="detail">Specific products applied (membrane brand, sealant type, drain tile spec) so any future contractor can match or extend the system.</div>
+          <span class="verify">Must be in writing</span>
+        </li>
+        <li>
+          <strong>Warranty term and start date</strong>
+          <div class="detail">How many years, what date the clock started, and what the warranty actually covers (water intrusion only, materials, labor, both).</div>
+          <span class="verify">Must be in writing</span>
+        </li>
+        <li>
+          <strong>Transferability to new owner</strong>
+          <div class="detail">Critical. Confirm the warranty transfers to Aaron C. Norris as new owner — and whether a transfer fee, paperwork, or notification window applies.</div>
+          <span class="verify">Must be in writing</span>
+        </li>
+        <li>
+          <strong>Exclusions and conditions</strong>
+          <div class="detail">What voids the warranty — landscaping changes, additions, gutter neglect, hydrostatic pressure events, anything the homeowner is responsible for maintaining.</div>
+          <span class="verify">Must be in writing</span>
+        </li>
+        <li>
+          <strong>Service call procedure</strong>
+          <div class="detail">How to file a claim, expected response time, who to call, and any annual inspection requirement to keep the warranty active.</div>
+          <span class="verify">Must be in writing</span>
+        </li>
+        <li>
+          <strong>Outstanding work or open items</strong>
+          <div class="detail">Confirm there is no unfinished work, no unpaid balance, and no liens tied to the H2O Waterproofing job.</div>
+          <span class="verify">Must be in writing</span>
+        </li>
+      </ol>
+
+      <!-- WRITING REQUIREMENTS -->
+      <div class="nu-writing-box">
+        <h4>What "In Writing" means here</h4>
+        <ul>
+          <li>Signed letter on H2O Waterproofing letterhead, OR</li>
+          <li>Email from a verifiable company address summarizing each of the seven points above, OR</li>
+          <li>Original work order/warranty document plus an email confirming transfer to Aaron C. Norris</li>
+          <li>Sticky notes, text messages, and "I'll vouch for it" do not count</li>
         </ul>
-      </section>
+      </div>
 
-      <!-- SECTION 2 — QUESTIONS -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span>Questions</span> <span>— Ask Each One, Record Answer</span></h2>
-
-        <div class="qa-grid">
-
-          <div class="qa-item">
-            <span class="qa-number">Q1</span>
-            <div class="qa-question">Is the warranty transferable to a new owner?</div>
-            <div class="qa-note">If yes, what is the exact transfer process and is there a fee?</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
-          <div class="qa-item">
-            <span class="qa-number">Q2</span>
-            <div class="qa-question">What is the full remaining term of the warranty?</div>
-            <div class="qa-note">Request original warranty start date, expiration, and any pro-rated coverage schedule.</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
-          <div class="qa-item">
-            <span class="qa-number">Q3</span>
-            <div class="qa-question">What exactly does the warranty cover — and what is excluded?</div>
-            <div class="qa-note">Get coverage scope in writing: leaks, cracks, interior damage, basement, crawlspace, foundation, etc.</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
-          <div class="qa-item">
-            <span class="qa-number">Q4</span>
-            <div class="qa-question">Are there any open or prior claims on this property?</div>
-            <div class="qa-note">Claim history is a key indicator of unresolved moisture or foundation issues.</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
-          <div class="qa-item">
-            <span class="qa-number">Q5</span>
-            <div class="qa-question">What was the scope of the original waterproofing work performed?</div>
-            <div class="qa-note">Interior drain tile, exterior membrane, sump pump install, crack injection, etc. Request full job specifications.</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
-          <div class="qa-item">
-            <span class="qa-number">Q6</span>
-            <div class="qa-question">Is there an annual inspection or maintenance requirement to keep the warranty valid?</div>
-            <div class="qa-note">If yes, what does it cost, who performs it, and when is it next due?</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
-          <div class="qa-item">
-            <span class="qa-number">Q7</span>
-            <div class="qa-question">What actions void the warranty?</div>
-            <div class="qa-note">Common voids: grading changes, additions, unauthorized repairs, failure to maintain sump pump.</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
-          <div class="qa-item">
-            <span class="qa-number">Q8</span>
-            <div class="qa-question">Is the warranty backed by a third-party insurer or only by H2O Waterproofing directly?</div>
-            <div class="qa-note">Third-party backing protects coverage if the contractor goes out of business.</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
-          <div class="qa-item">
-            <span class="qa-number">Q9</span>
-            <div class="qa-question">What is the response time commitment if a warranty claim is filed?</div>
-            <div class="qa-note">Get service-level expectations in writing.</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
-          <div class="qa-item">
-            <span class="qa-number">Q10</span>
-            <div class="qa-question">Can you provide a written confirmation letter covering the answers above?</div>
-            <div class="qa-note">This is the non-negotiable ask. No written letter, no closing.</div>
-            <div class="qa-answer-line"></div>
-          </div>
-
+      <!-- QUESTIONS -->
+      <h2 class="nu-h2"><span class="first">Specific</span> Questions to Ask</h2>
+      <div class="nu-questions">
+        <div class="nu-question">
+          <div class="q-text">When was the work completed?</div>
+          <div class="q-why">Anchors the warranty start date.</div>
         </div>
-      </section>
-
-      <!-- SECTION 3 — WRITTEN CONFIRMATION -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span>Required</span> <span>in Writing — Before Closing</span></h2>
-
-        <div class="writing-box">
-          <div class="writing-box-title">Letter or email from H2O Waterproofing must include:</div>
-          <ul>
-            <li>Property address: 4505 Butterworth Estate</li>
-            <li>Original customer of record and job number</li>
-            <li>Warranty start date, expiration date, and remaining term</li>
-            <li>Confirmation that warranty transfers to new owner (Aaron C. Norris) at closing</li>
-            <li>Exact transfer procedure, required documentation, and any transfer fees</li>
-            <li>Full scope of work originally performed</li>
-            <li>Complete list of warranty coverage and exclusions</li>
-            <li>List of any past or open claims on the property</li>
-            <li>Maintenance requirements that keep the warranty in force</li>
-            <li>Conditions or actions that void coverage</li>
-            <li>Signature of an authorized H2O Waterproofing representative and date</li>
-          </ul>
+        <div class="nu-question">
+          <div class="q-text">Is the warranty fully paid?</div>
+          <div class="q-why">Some warranties require a paid-in-full status to remain in force.</div>
         </div>
-      </section>
+        <div class="nu-question">
+          <div class="q-text">Does the warranty transfer automatically?</div>
+          <div class="q-why">Or does it require notification, a fee, or new paperwork?</div>
+        </div>
+        <div class="nu-question">
+          <div class="q-text">What is the transfer deadline?</div>
+          <div class="q-why">Some companies require notification within 30 days of closing.</div>
+        </div>
+        <div class="nu-question">
+          <div class="q-text">Are there any open service tickets?</div>
+          <div class="q-why">Anything pending that the seller never had completed.</div>
+        </div>
+        <div class="nu-question">
+          <div class="q-text">Annual inspection required?</div>
+          <div class="q-why">Missing one can void coverage on some warranties.</div>
+        </div>
+        <div class="nu-question">
+          <div class="q-text">Who do I call for a service issue?</div>
+          <div class="q-why">Direct line, name, response window.</div>
+        </div>
+        <div class="nu-question">
+          <div class="q-text">Can you email me everything you have on the property?</div>
+          <div class="q-why">Original contract, invoices, warranty doc, photos of work.</div>
+        </div>
+      </div>
 
-      <!-- SECTION 4 — RED FLAGS -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span>Red</span> <span>Flags — Pause Closing If Any Apply</span></h2>
-        <ul class="red-flag-list">
-          <li>Warranty is non-transferable or transfer requires lengthy re-inspection at buyer cost.</li>
-          <li>H2O refuses to provide written confirmation of coverage details.</li>
-          <li>Prior claims exist that were denied or resolved with recurring issues.</li>
-          <li>Warranty is expired or close to expiring with no renewal option.</li>
-          <li>Annual inspection has been missed, voiding coverage.</li>
-          <li>Original scope of work is narrower than seller disclosure implied.</li>
-          <li>H2O is no longer in business, unresponsive, or cannot locate the job file.</li>
-          <li>Warranty is contractor-backed only with no third-party insurer.</li>
-        </ul>
-      </section>
+      <!-- SCRIPT -->
+      <h2 class="nu-h2"><span class="first">Phone</span> Script — Opening Lines</h2>
+      <div class="nu-script">
+        <div class="script-label">Use as a starting point</div>
+        <p>"Hi, this is Aaron Norris. I am closing on a property at 4505 Buttewoods Lane, and your company performed waterproofing work there. Before we close, I want to confirm a few things in writing so the warranty transfers cleanly to me as the new owner."</p>
+        <p>"Could you pull the file on that address? I would like a written summary of the scope of work, the warranty term and start date, what is covered, what voids it, and the transfer process. An email back to me would be perfect."</p>
+        <p>"I would also like to know if there are any open service items, an annual inspection requirement, or a transfer fee I need to budget for. Once I have that in hand, we can finalize closing."</p>
+      </div>
 
-      <!-- SECTION 5 — POST-CALL ACTIONS -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span>After</span> <span>the Call — Five Actions</span></h2>
-        <div class="action-row">
-          <div class="action-tile">
-            <div class="action-tile-num">1</div>
-            <div class="action-tile-label">Save written confirmation to closing file</div>
+      <!-- OUTCOMES -->
+      <h2 class="nu-h2"><span class="first">Possible</span> Outcomes & Next Move</h2>
+      <div class="nu-outcome-grid">
+        <div class="nu-outcome green">
+          <h5>Green Light</h5>
+          <p>Written confirmation received, warranty transfers, no open items, clear service path. Save to closing file. Proceed to close.</p>
+        </div>
+        <div class="nu-outcome amber">
+          <h5>Yellow Flag</h5>
+          <p>Warranty transfers but requires a fee, notification within 30 days, or annual inspection. Document the requirements, set calendar reminders, budget any fee.</p>
+        </div>
+        <div class="nu-outcome red">
+          <h5>Red Flag</h5>
+          <p>Warranty does not transfer, scope is unclear, open service items, or unpaid balance. Raise with closing attorney before signing — may require seller credit or repair commitment.</p>
+        </div>
+      </div>
+
+      <!-- SIGN OFF -->
+      <div class="nu-signoff">
+        <h4>Verification Log</h4>
+        <div class="nu-signoff-row">
+          <div class="nu-signoff-line">
+            <div class="lbl">Call Date</div>
+            <div class="ln"></div>
           </div>
-          <div class="action-tile">
-            <div class="action-tile-num">2</div>
-            <div class="action-tile-label">Forward to closing attorney and title company</div>
+          <div class="nu-signoff-line">
+            <div class="lbl">Spoke With</div>
+            <div class="ln"></div>
           </div>
-          <div class="action-tile">
-            <div class="action-tile-num">3</div>
-            <div class="action-tile-label">Log call notes in property due diligence binder</div>
+          <div class="nu-signoff-line">
+            <div class="lbl">Written Confirmation Received</div>
+            <div class="ln"></div>
           </div>
-          <div class="action-tile">
-            <div class="action-tile-num">4</div>
-            <div class="action-tile-label">Initiate warranty transfer paperwork</div>
-          </div>
-          <div class="action-tile">
-            <div class="action-tile-num">5</div>
-            <div class="action-tile-label">Calendar the first maintenance or inspection date</div>
+          <div class="nu-signoff-line">
+            <div class="lbl">Saved To</div>
+            <div class="ln"></div>
           </div>
         </div>
-      </section>
-
-      <!-- SECTION 6 — CONTACTS -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span>Contacts</span> <span>— Keep on Hand During the Call</span></h2>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <div class="contact-card-role">Buyer</div>
-            <div class="contact-card-name">Aaron C. Norris</div>
-            <div class="contact-card-line"><strong>Cell:</strong> 205-500-1343</div>
-            <div class="contact-card-line"><strong>Email:</strong> acnorris@norrisutilities.com</div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-role">Property</div>
-            <div class="contact-card-name">4505 Butterworth Estate</div>
-            <div class="contact-card-line"><strong>Size:</strong> 7,098 sq ft estate</div>
-            <div class="contact-card-line"><strong>Status:</strong> Under negotiation, pre-closing</div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-role">Vendor on Call</div>
-            <div class="contact-card-name">H2O Waterproofing</div>
-            <div class="contact-card-line"><strong>Confirm phone:</strong> per original contract</div>
-            <div class="contact-card-line"><strong>Verify via:</strong> company website / BBB</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 7 — DECISION RULE -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span>Decision</span> <span>Rule</span></h2>
-        <div class="writing-box" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-color: #2E7D32;">
-          <div class="writing-box-title" style="color: #2E7D32;">Proceed to closing only if:</div>
-          <ul>
-            <li>Written confirmation received from H2O Waterproofing covering every item above.</li>
-            <li>Warranty confirmed transferable to Aaron C. Norris.</li>
-            <li>No unresolved prior claims affecting the property.</li>
-            <li>Remaining warranty term is documented and substantial.</li>
-            <li>Coverage scope meaningfully protects the buyer.</li>
-          </ul>
-        </div>
-      </section>
+      </div>
 
     </div>
   </main>
@@ -784,8 +881,8 @@
     <div class="nu-footer-divider"></div>
     <div class="nu-footer-contact">
       Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> |
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>
