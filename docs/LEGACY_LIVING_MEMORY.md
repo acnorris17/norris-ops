@@ -3115,6 +3115,81 @@ CONTEXT THAT MUST PERSIST
 - HARD RULE locked: one full combined prompt, never supplement
 - §Z resilience pattern reusable for future multi-session work
 
+### [LIVING_MEMORY_UPDATE] Session: V2.3 Continuation Handoff Generated for Fresh Session — 2026-04-25
+SESSION CHECKPOINT — V2.3 Continuation Handoff Generated
+Date: 2026-04-25
+Tool: Claude.ai (Opus 4.7)
+Project: Legacy Bot
+
+ONE-LINE SUMMARY
+Generated comprehensive handoff prompt for fresh Claude.ai session to continue SA V5 V2.3 work after Phase 2 completed and Aaron flagged context compaction risk in current session.
+
+WHY THIS HANDOFF
+Current Claude.ai session has run long (V1.2 diagnosis → Phase 1 dispatch → bundle review → Phase 2 dispatch x2 (initial + comprehensive total-capture) → handoff request). Aaron correctly anticipated context compaction. Per HARD RULE: deliver one full combined handoff prompt that orients new session completely, never split, never make him stitch.
+
+COMPLETED THIS TURN
+- Delivered comprehensive handoff prompt as ONE FULL COMBINED block
+- Handoff covers: who Aaron is + journey context (3 §1.2 failures → decomposition pattern) + locked rules (HARD RULE, R-META, F.1, F.30, process rules, paths, URLs, brand) + session summary protocol + sequential STEP A through STEP G workflow + what NOT to do + context-must-persist
+- Sequential workflow walks new Claude through: receive evidence package → assess completeness/gaps → recommend (sign-off / CC supplement / additional session) → on sign-off proceed to Phase 3 spec writing → on SPEC LOCKED proceed to Phase 4 CC build prompt → on build complete iterate click-test
+- Aaron told to either accept evidence package in current Phase 2 session or just close it; if pasting evidence to new session and it's too long, recommended pasting §H + §Z + §F + §0 first
+
+DECISIONS
+- Handoff is comprehensive and self-contained — new Claude can pick up cold
+- Path forward through Phases 3-4 documented so new session knows full sequence
+- All locked rules transferred including the path correction (acnorris1 not aaron) and URL correction (apex not www)
+- Default behaviors documented (skip git push if unspecified, never ask "what first")
+
+CHANGED
+- Working session model: single long session → handoff to fresh session at major milestones
+- Aaron now has a reusable handoff template if future sessions need similar continuation
+
+BLOCKED
+- New Claude.ai session must be started with handoff prompt + evidence package paste before Phase 3 begins
+- Phase 3 spec writing blocked on EVIDENCE PACKAGE ACCEPTED sign-off
+
+NEXT (from new session perspective)
+1. Aaron opens fresh Claude.ai chat in this project (Opus 4.7)
+2. Pastes handoff prompt
+3. New Claude acknowledges in one sentence
+4. Aaron pastes Phase 2 evidence package (or selected sections)
+5. New Claude assesses completeness, presents gap report, recommends path
+6. Aaron signs EVIDENCE PACKAGE ACCEPTED (or closes gaps first)
+7. Phase 3: V2.3 spec extension written by new Claude
+8. Aaron signs SPEC LOCKED
+9. Phase 4: CC build prompt written
+10. Aaron pastes to CC, build runs
+11. Aaron click-tests in browser preview (canonical pre-merge gate)
+12. Iterate FIX prompts as needed until pass
+
+KEY DESIGN ELEMENTS IN HANDOFF
+- All rules pre-loaded so new Claude operates correctly from message 1
+- Workflow STEPS A-G prevent new Claude from improvising or skipping phases
+- Resilience built in: even if Phase 2 hit §Z continuation, new session can pick up
+- Investment context (200+ hours) included so new Claude understands stakes
+- Brand/path/URL/vocab traps all flagged explicitly so new Claude doesn't repeat prior mistakes
+- Session summary protocol included so Living Memory continues to update
+
+FILES
+- Created/dispatched: V2.3 continuation handoff prompt (in chat as code block to Aaron)
+- Pending creation by new session:
+  - Phase 3: V2.3_SPEC_EXTENSION_<date>.md
+  - Phase 4: V2.3_CC_BUILD_PROMPT_<date>.md
+- Possibly pending: CC supplement for full git history if §I.5 flagged it
+
+KEY LESSON
+The phased decomposition model now handles its own continuity — when one Claude.ai session approaches context limit, the next session inherits via a comprehensive handoff that captures journey + rules + workflow + context. This pattern is reusable for any future long-running multi-session work.
+
+CONTEXT THAT MUST PERSIST
+- Continuation handoff is the canonical orientation document for new V2.3 session
+- Phase 2 evidence package may be partial (§Z continuation) or complete — handoff handles both
+- All foundation files in project knowledge unchanged
+- norrisops.com apex canonical
+- /Users/acnorris1 home path
+- HARD RULE: one full combined prompt always
+- F.30: spec before CC, evidence before spec
+- 200+ hour investment in SA must be honored at every decision point
+- Aaron will accept the evidence package in current Phase 2 session OR via new session — both paths work
+
 ## 7. OPEN DECISIONS (AARON)
 1. Confirm decision on M5 Pro (not base M5) when WWDC keynote drops June 8 — verify pricing/availability
 2. Confirm DS723+ still right call at Prime Day — if any new Synology model drops with 10GbE standard, reconsider
