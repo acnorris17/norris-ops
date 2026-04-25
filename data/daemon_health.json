@@ -1,26 +1,26 @@
 {
-  "generated_at": "2026-04-25T05:09:45.566645+00:00",
+  "generated_at": "2026-04-25T05:14:45.765714+00:00",
   "entries": [
     {
       "name": "delivery-watcher",
-      "ts": "2026-04-25T05:09:02.851572+00:00",
+      "ts": "2026-04-25T05:14:04.608130+00:00",
       "status": "ok",
-      "detail": "processed=4 dt=1035ms",
-      "age_seconds": 42,
+      "detail": "processed=4 dt=1165ms",
+      "age_seconds": 41,
       "stale": false
     },
     {
       "name": "invoice-watcher",
-      "ts": "2026-04-25T05:09:04.185652+00:00",
+      "ts": "2026-04-25T05:14:05.852117+00:00",
       "status": "ok",
-      "detail": "processed=0 dt=890ms",
-      "age_seconds": 41,
+      "detail": "processed=0 dt=748ms",
+      "age_seconds": 39,
       "stale": false
     }
   ],
   "gog_quota": {
     "date": "2026-04-25",
-    "count": 124,
+    "count": 126,
     "cap": 1000
   },
   "summary": {
