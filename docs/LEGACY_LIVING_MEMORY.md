@@ -2840,6 +2840,63 @@ CONTEXT THAT MUST PERSIST:
 - Preview-worktree staleness is the likely root cause of "V2 looks the same as V1" complaint. Reality may be different once current branch is rendered.
 
 
+### [LIVING_MEMORY_UPDATE] Session: V2.3 §1.2 Decomposition Strategy after 3 Failed Attempts — 2026-04-25
+SESSION SUMMARY — V2.3 §1.2 Decomposition Strategy
+Date: 2026-04-25
+Tool: Claude.ai (Opus)
+Project: Legacy Bot
+
+ONE-LINE SUMMARY
+Aaron asked Claude to diagnose why MASTER_HANDOFF_Session12_to_Session13 §1.2 EXHAUSTIVE REVIEW PROTOCOL has failed 3 consecutive Claude.ai sessions, and to design a decomposition that actually fits inside real session windows.
+
+WHY THIS SESSION EXISTED
+Three prior sessions all died mid-execution attempting §1.2. Aaron needed root cause + a working plan, not another failed attempt.
+
+COMPLETED
+- Root cause diagnosis delivered: §1.2 requires ~100+ tool calls and ~800K-1.2M tokens of intermediate context to synthesize against, vs Claude.ai's 200K window. Mathematically impossible in one session.
+- Identified 3 specific failure modes: (1) token budget overflow, (2) ~80% of project_knowledge_search budget burned re-retrieving the handoff itself because handoff enumerates query strings verbatim, (3) §3.4/§3.5/§3.6 require M1 disk + CC tools that Claude.ai cannot access.
+- Designed 3-phase decomposition:
+  Phase 1 (CC on M1): Collect all M1-disk content (V1 SPEC, 19 defects, V2 UI docs, V2.2 spec extension, live norrisops.com state, agent code status) into single bundle file V2.3_M1_EVIDENCE_BUNDLE_2026-04-25.md
+  Phase 2 (Claude.ai): Read bundle + LIVING_MEMORY + 10 targeted conversation_search queries (not 26) → produce V2.3_EVIDENCE_PACKAGE_2026-04-25.md
+  Phase 3 (Aaron sign-off): "EVIDENCE PACKAGE ACCEPTED" → spec → CC build prompt
+- Delivered paste-ready prompt for Phase 1 CC and Phase 2 Claude.ai.
+
+DECISIONS
+- §1.2 as originally written is permanently retired in favor of phased version. Original protocol is not executable in Claude.ai.
+- Conversation_search query count reduced from 26 to 10 specifically named queries.
+- Bundle artifact pattern (CC produces file → Aaron uploads to project knowledge → next Claude.ai session reads it) becomes the standard for any future cross-window heavy-collection task.
+
+CHANGED
+- Approach to V2.3 evidence gathering: from "one-shot exhaustive" to "phased with handoff bundle"
+- Search-budget rule: project_knowledge_search is poor for content the handoff itself enumerates; pivot to LIVING_MEMORY + conversation_search + M1 bundle
+
+BLOCKED
+- Cannot proceed to Phase 2 until Phase 1 CC bundle exists in project knowledge.
+- Aaron must run Phase 1 CC prompt on M1 to unblock.
+
+NEXT
+1. Aaron pastes Phase 1 prompt into fresh CC terminal on M1
+2. CC produces V2.3_M1_EVIDENCE_BUNDLE_2026-04-25.md (~5-15 min)
+3. Aaron drags bundle into Claude project knowledge
+4. Aaron starts fresh Claude.ai session, pastes Phase 2 prompt
+5. Claude.ai produces V2.3_EVIDENCE_PACKAGE_2026-04-25.md
+6. Aaron reviews, signs "EVIDENCE PACKAGE ACCEPTED"
+7. Phase 3 (spec writing) begins next session
+
+FILES
+- No files created in this session (meta-strategy session)
+- Will be created in Phase 1: /Users/aaron/norris-ops/docs/V2.3_M1_EVIDENCE_BUNDLE_2026-04-25.md
+- Will be created in Phase 2: /mnt/user-data/outputs/V2.3_EVIDENCE_PACKAGE_2026-04-25.md
+
+KEY LESSON
+Any §1.2-style "exhaustive review" protocol that mandates 50+ tool calls in one session will fail in Claude.ai regardless of effort. Decomposition with CC-produced bundle artifacts is the working pattern. The bundle file is what makes the next session viable.
+
+CONTEXT THAT MUST PERSIST
+- Three Claude.ai sessions died on §1.2 before this one diagnosed why
+- Phase 1 CC prompt and Phase 2 Claude.ai prompt are documented in this session's chat output (Aaron has them)
+- Until V2.3_M1_EVIDENCE_BUNDLE exists in project knowledge, no Claude.ai session should attempt §1.2
+- This decomposition pattern (CC collection bundle → Claude.ai synthesis → Aaron sign-off) is reusable for any future heavy-collection task where M1-disk content + conversation_search + project_knowledge all need to converge
+
 ## 7. OPEN DECISIONS (AARON)
 1. Confirm decision on M5 Pro (not base M5) when WWDC keynote drops June 8 — verify pricing/availability
 2. Confirm DS723+ still right call at Prime Day — if any new Synology model drops with 10GbE standard, reconsider
