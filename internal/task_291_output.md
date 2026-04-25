@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item — H2O Waterproofing Written Confirmation | Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <title>H2O Waterproofing — Written Confirmation Follow-Up — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -16,9 +18,9 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-alert-red: #D0342C;
-      --nu-alert-amber: #E8A317;
-      --nu-success-green: #2E7D32;
+      --nu-success: #10B981;
+      --nu-warning: #F59E0B;
+      --nu-danger: #EF4444;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -32,44 +34,58 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HEADER — Line Card Gradient */
+    /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
-      padding: 60px 40px 80px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033CC 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 280px;
+      min-height: 320px;
     }
     .nu-header::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.6;
+      opacity: 0.7;
     }
     .nu-header::after {
       content: '';
       position: absolute;
       top: -50%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
     .nu-header * { position: relative; z-index: 2; }
 
+    /* GHOST PHOENIX WATERMARK */
+    .nu-ghost-phoenix {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      max-width: 600px;
+      opacity: 0.07;
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .nu-phoenix-icon {
       width: 72px;
       height: 72px;
-      margin: 0 auto 14px;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+      margin: 0 auto 18px;
+      filter: drop-shadow(0 2px 14px rgba(0,0,0,0.35));
     }
+
     .nu-logo-text {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: var(--nu-white);
       letter-spacing: 0.35em;
       text-transform: uppercase;
@@ -77,23 +93,25 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.7em;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
+      padding-left: 0.7em;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', 'Lato', serif;
       font-style: italic;
-      font-weight: 400;
-      font-size: 1.3rem;
+      font-weight: 300;
+      font-size: 1.25rem;
       color: rgba(255,255,255,0.95);
-      letter-spacing: 0.03em;
+      letter-spacing: 0.05em;
     }
 
-    /* CHEVRON */
+    /* WHITE CHEVRON */
     .nu-chevron {
       position: relative;
       height: 50px;
@@ -105,383 +123,410 @@
     /* CONTENT */
     .nu-content-area {
       position: relative;
-      background: var(--nu-white);
+      background: var(--nu-light-gray);
+      padding: 50px 0 70px;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 120px; left: 50%;
+      top: 200px; left: 50%;
       transform: translateX(-50%);
-      width: 650px; height: 650px;
-      background: radial-gradient(circle, rgba(0,0,255,0.035) 0%, transparent 70%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
       border-radius: 50%;
       z-index: 0;
       pointer-events: none;
     }
-    .nu-content-area > * { position: relative; z-index: 1; }
-
     .nu-container {
-      max-width: 1080px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 50px 40px 70px;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* PRIORITY BANNER */
-    .priority-banner {
-      background: linear-gradient(135deg, var(--nu-alert-amber) 0%, #D99113 100%);
+    /* PAGE TITLE */
+    .nu-page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .nu-eyebrow {
+      display: inline-block;
+      background: var(--nu-blue);
       color: var(--nu-white);
-      padding: 16px 24px;
-      border-radius: 8px;
+      padding: 6px 16px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      margin-bottom: 16px;
+    }
+    .nu-page-title {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      font-size: 2.4rem;
+      color: var(--nu-dark-text);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .nu-page-title .nu-blue-word { color: var(--nu-blue); }
+    .nu-page-subtitle {
+      font-size: 1.05rem;
+      color: var(--nu-body-text);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* PRIORITY STRIP */
+    .nu-priority-strip {
+      background: linear-gradient(135deg, var(--nu-warning) 0%, #D97706 100%);
+      color: var(--nu-white);
+      padding: 14px 24px;
+      border-radius: 6px;
+      margin-bottom: 32px;
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 32px;
-      box-shadow: 0 4px 14px rgba(232,163,23,0.25);
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
     }
-    .priority-banner-icon {
-      width: 28px; height: 28px;
+    .nu-priority-strip-icon {
+      font-size: 1.4rem;
       flex-shrink: 0;
-      fill: var(--nu-white);
     }
-    .priority-banner-text {
-      font-weight: 700;
-      font-size: 0.98rem;
-      letter-spacing: 0.02em;
-    }
-    .priority-banner-text span {
-      opacity: 0.9;
-      font-weight: 400;
-      margin-left: 8px;
+    .nu-priority-strip-text {
+      flex: 1;
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
     }
 
-    /* TITLE BLOCK */
+    /* SECTION TITLE */
     .nu-section-title {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.9rem;
-      margin-bottom: 10px;
-      line-height: 1.2;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
     }
-    .nu-section-title .first {
-      color: #0033cc;
-    }
-    .nu-section-title .rest {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-    .nu-section-subtitle {
-      font-size: 1.05rem;
-      color: #555;
-      margin-bottom: 36px;
-      max-width: 760px;
-      line-height: 1.65;
-    }
+    .nu-section-title .first { color: var(--nu-blue); }
+    .nu-section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
 
-    /* CARD GRID */
-    .nu-card-grid {
+    /* TWO-COLUMN GRID */
+    .nu-two-col {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 24px;
       margin-bottom: 32px;
     }
+    @media (max-width: 860px) {
+      .nu-two-col { grid-template-columns: 1fr; }
+    }
 
+    /* CARD */
     .nu-card {
       background: var(--nu-white);
       border-radius: 10px;
-      padding: 28px 30px;
+      padding: 28px;
       box-shadow: 0 2px 14px rgba(0,0,0,0.06);
       border: 1px solid var(--nu-medium-gray);
     }
-
-    .card-label {
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      color: var(--nu-cyan);
+    .nu-card h3 {
       font-weight: 900;
-      margin-bottom: 8px;
-    }
-    .card-h {
-      font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.15rem;
       color: var(--nu-dark-text);
-      margin-bottom: 16px;
-      border-bottom: 2px solid var(--nu-medium-gray);
+      margin-bottom: 14px;
       padding-bottom: 10px;
+      border-bottom: 2px solid var(--nu-cyan);
     }
-    .card-h span.accent { color: #0033cc; }
+    .nu-card h3 .blue { color: var(--nu-blue); }
 
-    /* META STRIP */
-    .meta-strip {
+    /* CALL DETAILS */
+    .nu-detail-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--nu-medium-gray);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 28px;
-    }
-    .meta-cell {
-      background: var(--nu-white);
-      padding: 18px 20px;
-    }
-    .meta-cell-label {
-      font-size: 0.7rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #0033cc;
-      margin-bottom: 6px;
-    }
-    .meta-cell-value {
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-      line-height: 1.35;
-    }
-    .meta-cell-sub {
-      font-size: 0.82rem;
-      font-weight: 400;
-      color: #666;
-      margin-top: 2px;
-    }
-
-    /* ACTION LIST */
-    .action-list {
-      list-style: none;
-      counter-reset: step;
-    }
-    .action-list li {
-      counter-increment: step;
-      position: relative;
-      padding: 16px 18px 16px 62px;
-      margin-bottom: 10px;
-      background: var(--nu-light-gray);
-      border-left: 4px solid var(--nu-blue);
-      border-radius: 6px;
-      line-height: 1.55;
-    }
-    .action-list li::before {
-      content: counter(step);
-      position: absolute;
-      left: 14px; top: 50%;
-      transform: translateY(-50%);
-      width: 34px; height: 34px;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
+      grid-template-columns: 160px 1fr;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
       font-size: 0.95rem;
     }
-    .action-list li strong {
-      color: var(--nu-dark-text);
-      display: block;
-      margin-bottom: 4px;
-      font-size: 1rem;
-    }
-    .action-list li span {
-      color: #555;
-      font-size: 0.92rem;
-    }
-
-    /* BADGE CHEVRONS */
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 22px;
-    }
-    .nu-badge {
-      display: inline-flex;
-      align-items: center;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      padding: 10px 24px 10px 16px;
-      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%, 16px 50%);
+    .nu-detail-row:last-child { border-bottom: none; }
+    .nu-detail-label {
       font-weight: 700;
-      font-size: 0.82rem;
+      color: var(--nu-blue);
+      text-transform: uppercase;
       letter-spacing: 0.04em;
-      padding-left: 28px;
+      font-size: 0.78rem;
+      padding-top: 2px;
     }
-    .nu-badge.cyan {
-      background: linear-gradient(135deg, #0033cc 0%, var(--nu-cyan) 100%);
+    .nu-detail-value {
+      color: var(--nu-body-text);
     }
 
     /* CALL SCRIPT */
-    .script-box {
-      background: linear-gradient(180deg, #f8fafe 0%, #eef3fb 100%);
-      border: 1px solid #d4def0;
+    .nu-script {
+      background: var(--nu-light-gray);
       border-left: 4px solid var(--nu-cyan);
-      padding: 22px 26px;
-      border-radius: 8px;
-      margin-bottom: 14px;
-    }
-    .script-box p {
-      margin-bottom: 12px;
+      padding: 18px 22px;
+      border-radius: 0 6px 6px 0;
+      margin: 16px 0;
       font-size: 0.95rem;
-      color: #222;
       line-height: 1.65;
     }
-    .script-box p:last-child { margin-bottom: 0; }
-    .script-box em {
-      color: #0033cc;
+    .nu-script-label {
+      display: block;
       font-weight: 700;
-      font-style: normal;
-    }
-    .script-label {
+      color: var(--nu-blue);
       text-transform: uppercase;
-      font-weight: 900;
+      letter-spacing: 0.05em;
       font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      color: #0033cc;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+    }
+    .nu-script p { margin-bottom: 12px; }
+    .nu-script p:last-child { margin-bottom: 0; }
+    .nu-script em {
+      color: var(--nu-dark-text);
+      font-style: normal;
+      font-weight: 700;
+      background: rgba(6, 208, 255, 0.18);
+      padding: 1px 6px;
+      border-radius: 3px;
     }
 
-    /* CONFIRMATION CHECKLIST */
-    .confirm-list {
+    /* CHECKLIST */
+    .nu-checklist {
       list-style: none;
+      padding: 0;
     }
-    .confirm-list li {
-      padding: 12px 0 12px 36px;
+    .nu-checklist li {
       position: relative;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      font-size: 0.95rem;
-      color: var(--nu-dark-text);
+      padding: 12px 14px 12px 44px;
+      margin-bottom: 8px;
+      background: var(--nu-light-gray);
+      border-radius: 6px;
+      font-size: 0.94rem;
+      border-left: 3px solid var(--nu-cyan);
+      transition: background 0.15s ease;
     }
-    .confirm-list li:last-child { border-bottom: none; }
-    .confirm-list li::before {
+    .nu-checklist li::before {
       content: '';
       position: absolute;
-      left: 0; top: 14px;
-      width: 22px; height: 22px;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      width: 18px; height: 18px;
       border: 2px solid var(--nu-blue);
       border-radius: 4px;
       background: var(--nu-white);
     }
-    .confirm-list li::after {
-      content: '';
-      position: absolute;
-      left: 5px; top: 17px;
-      width: 12px; height: 7px;
-      border-left: 2.5px solid var(--nu-cyan);
-      border-bottom: 2.5px solid var(--nu-cyan);
-      transform: rotate(-45deg);
-      opacity: 0;
-    }
-    .confirm-list li strong { color: #0033cc; }
+    .nu-checklist li strong { color: var(--nu-dark-text); }
 
-    /* BACKGROUND / WHY */
-    .context-block {
-      background: var(--nu-white);
-      border-radius: 10px;
-      padding: 28px 30px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 28px;
+    /* CONFIRMATION FIELDS */
+    .nu-confirm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
-    .context-block p {
-      margin-bottom: 12px;
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: #333;
+    @media (max-width: 600px) {
+      .nu-confirm-grid { grid-template-columns: 1fr; }
     }
-    .context-block p:last-child { margin-bottom: 0; }
-
-    /* BUTTONS */
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 28px;
-      padding-top: 26px;
-      border-top: 2px solid var(--nu-medium-gray);
-    }
-    .nu-btn-primary, .nu-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 28px;
+    .nu-confirm-field {
+      background: var(--nu-light-gray);
+      padding: 12px 14px;
       border-radius: 6px;
+      border-left: 3px solid var(--nu-blue);
+    }
+    .nu-confirm-field label {
+      display: block;
+      font-size: 0.7rem;
       font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-    .nu-btn-primary {
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      border: 2px solid var(--nu-blue);
-    }
-    .nu-btn-primary:hover {
-      background: #0000CC;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(0,0,255,0.3);
-    }
-    .nu-btn-secondary {
-      background: var(--nu-white);
       color: var(--nu-blue);
-      border: 2px solid var(--nu-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
     }
-    .nu-btn-secondary:hover {
-      background: var(--nu-blue);
-      color: var(--nu-white);
+    .nu-confirm-field .blank {
+      display: block;
+      height: 22px;
+      border-bottom: 1.5px dotted #999;
+    }
+
+    /* INFO BOX */
+    .nu-info-box {
+      background: linear-gradient(135deg, rgba(0,0,255,0.04) 0%, rgba(6,208,255,0.06) 100%);
+      border: 1px solid rgba(0,0,255,0.15);
+      padding: 18px 22px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .nu-info-box-title {
+      font-weight: 900;
+      font-size: 0.95rem;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .nu-info-box p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* WHY-IT-MATTERS */
+    .nu-why-list {
+      list-style: none;
+      padding: 0;
+    }
+    .nu-why-list li {
+      padding-left: 28px;
+      position: relative;
+      margin-bottom: 12px;
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+    .nu-why-list li::before {
+      content: '•';
+      position: absolute;
+      left: 8px; top: -2px;
+      color: var(--nu-blue);
+      font-size: 1.6rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    /* EMAIL TEMPLATE */
+    .nu-email {
+      background: var(--nu-light-gray);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 22px 26px;
+      font-size: 0.93rem;
+      line-height: 1.65;
+      font-family: 'Georgia', 'Times New Roman', serif;
+    }
+    .nu-email-header {
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-family: var(--font-primary);
+      font-size: 0.85rem;
+    }
+    .nu-email-header div {
+      padding: 3px 0;
+    }
+    .nu-email-header .label {
+      display: inline-block;
+      width: 70px;
+      font-weight: 700;
+      color: var(--nu-blue);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .nu-email-body p {
+      margin-bottom: 12px;
+      padding-left: 20px;
+    }
+    .nu-email-body .greeting {
+      padding-left: 0;
+    }
+    .nu-email-body .signature {
+      padding-left: 0;
+      margin-top: 14px;
+    }
+    .nu-email-body .signature-name {
+      padding-left: 20px;
+      margin-top: 0;
+    }
+    .nu-email .bullet {
+      padding-left: 36px;
+    }
+
+    /* OUTCOMES */
+    .nu-outcomes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 760px) {
+      .nu-outcomes { grid-template-columns: 1fr; }
+    }
+    .nu-outcome {
+      padding: 18px;
+      border-radius: 8px;
+      border-top: 4px solid;
+      background: var(--nu-white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .nu-outcome.success { border-top-color: var(--nu-success); }
+    .nu-outcome.warning { border-top-color: var(--nu-warning); }
+    .nu-outcome.escalate { border-top-color: var(--nu-danger); }
+    .nu-outcome-title {
+      font-weight: 900;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: var(--nu-dark-text);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .nu-outcome-title.success { color: var(--nu-success); }
+    .nu-outcome-title.warning { color: var(--nu-warning); }
+    .nu-outcome-title.escalate { color: var(--nu-danger); }
+    .nu-outcome-text {
+      font-size: 0.88rem;
+      line-height: 1.55;
     }
 
     /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 44px 40px;
+      padding: 44px 32px;
       text-align: center;
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', 'Lato', serif;
       font-style: italic;
-      font-weight: 400;
+      font-weight: 300;
       font-size: 1.2rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
+      letter-spacing: 0.02em;
     }
     .nu-footer-contact {
-      font-size: 0.95rem;
-      line-height: 1.8;
+      font-size: 0.92rem;
+      line-height: 1.85;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
     }
     .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-meta {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.03em;
+    }
 
     /* RESPONSIVE */
-    @media (max-width: 860px) {
-      .nu-card-grid { grid-template-columns: 1fr; }
-      .meta-strip { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .nu-header { padding: 44px 20px 64px; min-height: 220px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.22em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
+    @media (max-width: 768px) {
+      .nu-header { padding: 50px 24px 70px; min-height: 240px; }
+      .nu-logo-text { font-size: 2.2rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
       .nu-tagline { font-size: 1.05rem; }
-      .nu-container { padding: 36px 20px 56px; }
-      .nu-section-title { font-size: 1.5rem; }
-      .meta-strip { grid-template-columns: 1fr; }
-      .nu-card, .context-block { padding: 22px; }
-      .action-list li { padding-left: 56px; }
-      .nu-badge { clip-path: none; border-radius: 6px; padding: 10px 18px; }
-      .cta-row { flex-direction: column; }
-      .nu-btn-primary, .nu-btn-secondary { justify-content: center; }
+      .nu-page-title { font-size: 1.7rem; }
+      .nu-detail-row { grid-template-columns: 1fr; gap: 4px; }
+      .nu-detail-label { padding-top: 0; }
+      .nu-container { padding: 0 20px; }
     }
 
     @media print {
       body { background: var(--nu-white); }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-card, .context-block { box-shadow: none; border: 1px solid #ccc; }
-      .cta-row { display: none; }
+      .nu-card, .nu-outcome { box-shadow: none; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
     }
   </style>
@@ -490,212 +535,240 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <div class="nu-phoenix-icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Phoenix Icon">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
-      </svg>
-    </div>
+    <svg class="nu-ghost-phoenix" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
+    </svg>
+    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+    </svg>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
-  <!-- CHEVRON -->
+  <!-- WHITE CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#ffffff"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#F5F5F7"/>
     </svg>
   </div>
 
-  <!-- MAIN -->
+  <!-- MAIN CONTENT -->
   <main class="nu-content-area">
     <div class="nu-container">
 
-      <!-- PRIORITY BANNER -->
-      <div class="priority-banner" role="alert">
-        <svg class="priority-banner-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M12 2L1 21h22L12 2zm0 4.5L19.5 19h-15L12 6.5zM11 10v5h2v-5h-2zm0 6v2h2v-2h-2z"/>
-        </svg>
-        <div class="priority-banner-text">
-          ACTION REQUIRED — OPEN ITEM
-          <span>Source: reMarkable action list · Owner: Aaron C. Norris</span>
-        </div>
+      <!-- PAGE HEADER -->
+      <div class="nu-page-header">
+        <div class="nu-eyebrow">Action Item • reMarkable Capture</div>
+        <h1 class="nu-page-title">
+          <span class="nu-blue-word">Call</span> H2O Waterproofing<br>
+          for Written Confirmation of Work
+        </h1>
+        <p class="nu-page-subtitle">
+          Phone-then-email follow-up to convert verbal commitments into a written, signed scope of work that protects Norris Utilities® and clarifies expectations on both sides.
+        </p>
       </div>
 
-      <!-- TITLE -->
-      <h1 class="nu-section-title">
-        <span class="first">Call</span> <span class="rest">H2O Waterproofing</span>
-      </h1>
-      <p class="nu-section-subtitle">
-        Get written confirmation of the work that was performed. A phone call opens the conversation; a written document (email with attached invoice, scope-of-work letter, or signed job sheet) is what we need on file for records, warranty tracking, and downstream reference on the FlexPro Armor waterproofing program.
-      </p>
-
-      <!-- BADGE ROW -->
-      <div class="badge-row">
-        <span class="nu-badge">OPEN ACTION ITEM</span>
-        <span class="nu-badge cyan">WRITTEN CONFIRMATION REQUIRED</span>
-        <span class="nu-badge">VENDOR · H2O WATERPROOFING</span>
+      <!-- PRIORITY STRIP -->
+      <div class="nu-priority-strip">
+        <span class="nu-priority-strip-icon">▲</span>
+        <span class="nu-priority-strip-text">
+          OPEN ITEM — verbal-only confirmation. No paper trail exists yet. Resolve before any further work proceeds or invoice is paid.
+        </span>
       </div>
 
-      <!-- META STRIP -->
-      <div class="meta-strip">
-        <div class="meta-cell">
-          <div class="meta-cell-label">Vendor</div>
-          <div class="meta-cell-value">H2O Waterproofing</div>
-          <div class="meta-cell-sub">Service provider</div>
-        </div>
-        <div class="meta-cell">
-          <div class="meta-cell-label">Channel</div>
-          <div class="meta-cell-value">Phone → Email</div>
-          <div class="meta-cell-sub">Call first, then get it in writing</div>
-        </div>
-        <div class="meta-cell">
-          <div class="meta-cell-label">Outcome</div>
-          <div class="meta-cell-value">Written Doc on File</div>
-          <div class="meta-cell-sub">Invoice or scope letter</div>
-        </div>
-        <div class="meta-cell">
-          <div class="meta-cell-label">Priority</div>
-          <div class="meta-cell-value">Open — Follow Up</div>
-          <div class="meta-cell-sub">Close this week</div>
-        </div>
-      </div>
-
-      <!-- CARD GRID -->
-      <div class="nu-card-grid">
-
-        <!-- LEFT: ACTION STEPS -->
+      <!-- DETAILS + WHY -->
+      <div class="nu-two-col">
         <div class="nu-card">
-          <div class="card-label">Execution Plan</div>
-          <div class="card-h"><span class="accent">Steps</span> to Close This Item</div>
-
-          <ol class="action-list">
-            <li>
-              <strong>Place the call to H2O Waterproofing</strong>
-              <span>Ask for the representative who handled the recent job. Identify yourself as Aaron Norris with Norris Utilities®.</span>
-            </li>
-            <li>
-              <strong>Confirm the scope verbally</strong>
-              <span>Walk through what was done, where, and when. Get the tech's name, the date(s) of service, and any materials or product they used.</span>
-            </li>
-            <li>
-              <strong>Request written documentation</strong>
-              <span>Ask them to email a completion letter, invoice, or signed job sheet describing the work performed. Provide acnorris@norrisutilities.com as the delivery address.</span>
-            </li>
-            <li>
-              <strong>Set a clear deadline</strong>
-              <span>Ask for it by end of business the next day. Offer to send a follow-up email summarizing the call so they have a written request in hand.</span>
-            </li>
-            <li>
-              <strong>File and log when received</strong>
-              <span>Save the document to Norris Utilities® vendor records. Log the closure under the reMarkable action list and update Legacy with the completion date.</span>
-            </li>
-          </ol>
-        </div>
-
-        <!-- RIGHT: CONTACT + OWNERSHIP -->
-        <div class="nu-card">
-          <div class="card-label">Owner & Contact</div>
-          <div class="card-h"><span class="accent">Who</span> Handles This</div>
-
-          <p style="font-size: 0.95rem; line-height: 1.7; color: #333; margin-bottom: 14px;">
-            <strong style="color: var(--nu-dark-text);">Aaron C. Norris</strong><br>
-            Founder &amp; CEO, Norris Utilities®, LLC<br>
-            <a href="tel:2055001343" style="color: #0033cc; text-decoration: none; font-weight: 700;">205-500-1343</a><br>
-            <a href="mailto:acnorris@norrisutilities.com" style="color: #0033cc; text-decoration: none; font-weight: 700;">acnorris@norrisutilities.com</a>
-          </p>
-
-          <div style="background: var(--nu-light-gray); padding: 14px 16px; border-radius: 6px; border-left: 3px solid var(--nu-cyan); margin-top: 12px;">
-            <div style="font-size: 0.72rem; font-weight: 900; letter-spacing: 0.14em; color: #0033cc; text-transform: uppercase; margin-bottom: 6px;">Delivery Address</div>
-            <div style="font-size: 0.92rem; color: var(--nu-dark-text); font-weight: 700;">
-              acnorris@norrisutilities.com
-            </div>
-            <div style="font-size: 0.82rem; color: #666; margin-top: 4px;">
-              Written confirmation should arrive here.
-            </div>
+          <h3><span class="blue">Call</span> Details</h3>
+          <div class="nu-detail-row">
+            <div class="nu-detail-label">Vendor</div>
+            <div class="nu-detail-value">H2O Waterproofing</div>
           </div>
-
-          <div style="background: var(--nu-light-gray); padding: 14px 16px; border-radius: 6px; border-left: 3px solid var(--nu-blue); margin-top: 12px;">
-            <div style="font-size: 0.72rem; font-weight: 900; letter-spacing: 0.14em; color: #0033cc; text-transform: uppercase; margin-bottom: 6px;">Backup Owner</div>
-            <div style="font-size: 0.92rem; color: var(--nu-dark-text); font-weight: 700;">
-              Caroline Butler (CB)
-            </div>
-            <div style="font-size: 0.82rem; color: #666; margin-top: 4px;">
-              Admin — can log receipt and file the document upon review by Aaron.
-            </div>
+          <div class="nu-detail-row">
+            <div class="nu-detail-label">Caller</div>
+            <div class="nu-detail-value">Aaron C. Norris, Founder &amp; CEO</div>
+          </div>
+          <div class="nu-detail-row">
+            <div class="nu-detail-label">Best Time</div>
+            <div class="nu-detail-value">Tuesday – Thursday, 9:00 AM – 11:00 AM CT</div>
+          </div>
+          <div class="nu-detail-row">
+            <div class="nu-detail-label">Channel</div>
+            <div class="nu-detail-value">Voice call first → email written confirmation immediately after</div>
+          </div>
+          <div class="nu-detail-row">
+            <div class="nu-detail-label">Goal</div>
+            <div class="nu-detail-value">Receive a written, signed scope-of-work and price confirmation in writing — email or PDF acceptable.</div>
+          </div>
+          <div class="nu-detail-row">
+            <div class="nu-detail-label">Status</div>
+            <div class="nu-detail-value">Open — verbal commitment only, no paperwork on file</div>
           </div>
         </div>
 
-      </div>
-
-      <!-- WHY / CONTEXT -->
-      <div class="context-block">
-        <div class="card-label" style="color: var(--nu-cyan);">Why This Matters</div>
-        <div class="card-h" style="margin-bottom: 18px;"><span class="accent">The</span> Case for Written Confirmation</div>
-        <p>
-          A verbal conversation captures the relationship. A written document captures the record. For Norris Utilities®, every vendor transaction needs a paper trail — especially anything that touches warranty coverage, quality control on FlexPro Armor materials, or transfer/fee information being gathered from H2O Waterproofing for the ongoing review.
-        </p>
-        <p>
-          Without written confirmation, there is no enforceable reference for what was agreed, what was delivered, or what was charged. If a follow-up question arises six months from now — from a customer, an auditor, or our insurance carrier — Aaron needs to open one email and see the full scope in H2O Waterproofing's own words.
-        </p>
-        <p>
-          This request is routine, professional, and expected of any reputable service provider. Getting it in writing is the default, not the exception.
-        </p>
+        <div class="nu-card">
+          <h3><span class="blue">Why</span> This Matters</h3>
+          <ul class="nu-why-list">
+            <li>Verbal-only agreements create scope drift and price disputes.</li>
+            <li>Aaron needs the paper trail before approving payment or scheduling next steps.</li>
+            <li>Written confirmation locks in pricing, materials, and warranty terms.</li>
+            <li>Protects Norris Utilities® from change-order surprises.</li>
+            <li>Files cleanly into the open-items tracker once received.</li>
+          </ul>
+        </div>
       </div>
 
       <!-- CALL SCRIPT -->
       <div class="nu-card" style="margin-bottom: 28px;">
-        <div class="card-label">Phone Script</div>
-        <div class="card-h"><span class="accent">What</span> to Say on the Call</div>
+        <h3><span class="blue">Phone</span> Script</h3>
 
-        <div class="script-box">
-          <div class="script-label">Opening</div>
-          <p>"Hi, this is <em>Aaron Norris with Norris Utilities®</em>. I'm following up on the work your team recently completed for us. I wanted to confirm the scope and ask that you send over a written summary for our records."</p>
+        <div class="nu-script">
+          <span class="nu-script-label">Opener</span>
+          <p>"Hey, this is Aaron Norris with Norris Utilities. I'm following up on the waterproofing work we discussed — I want to make sure we're on the same page in writing before things move forward."</p>
         </div>
 
-        <div class="script-box">
-          <div class="script-label">The Ask</div>
-          <p>"Could you email me a completion letter or invoice that lists <em>the date of service, the technician's name, the scope of work performed, and any materials used</em>? Please send it to <em>acnorris@norrisutilities.com</em>."</p>
+        <div class="nu-script">
+          <span class="nu-script-label">The Ask</span>
+          <p>"Could you send me a written confirmation of the work — <em>scope</em>, <em>price</em>, <em>materials</em>, <em>start date</em>, and <em>warranty</em>? Email is fine. I just need it on paper so I can file it on my end."</p>
         </div>
 
-        <div class="script-box">
-          <div class="script-label">Set the Deadline</div>
-          <p>"I'd like to have that on file by <em>end of business tomorrow</em>. I'll send you a short follow-up email right after this call summarizing what we discussed, so you have the request in writing on your end as well."</p>
+        <div class="nu-script">
+          <span class="nu-script-label">If They Push Back</span>
+          <p>"I appreciate that. We always run everything through written documentation — it's how we protect both sides. Even a short email summary works for me."</p>
         </div>
 
-        <div class="script-box">
-          <div class="script-label">Close</div>
-          <p>"Appreciate it. If anything else comes up on your end, call or text me directly at <em>205-500-1343</em>. Thanks."</p>
+        <div class="nu-script">
+          <span class="nu-script-label">Close</span>
+          <p>"Send it to <em>acnorris@norrisutilities.com</em>. Once I've got it in hand, we're good to keep moving. Appreciate y'all."</p>
         </div>
       </div>
 
-      <!-- CONFIRMATION CHECKLIST -->
+      <!-- CHECKLIST -->
       <div class="nu-card" style="margin-bottom: 28px;">
-        <div class="card-label">What the Document Must Contain</div>
-        <div class="card-h"><span class="accent">Confirmation</span> Requirements</div>
-
-        <ul class="confirm-list">
-          <li><strong>Vendor name and contact:</strong> H2O Waterproofing letterhead, address, phone, and tech's name.</li>
-          <li><strong>Date(s) of service:</strong> When the work was performed on site.</li>
-          <li><strong>Scope of work:</strong> Clear description of what was done and where.</li>
-          <li><strong>Materials and products used:</strong> Product names, quantities, and any warranty information.</li>
-          <li><strong>Pricing / invoice:</strong> Total charged, payment terms, and payment status.</li>
-          <li><strong>Transfer process and fees:</strong> Written confirmation of the transfer process and associated fees being reviewed.</li>
-          <li><strong>Signature or authorized sender:</strong> Email from a company address or signed PDF.</li>
+        <h3><span class="blue">Confirmation</span> Must Include</h3>
+        <ul class="nu-checklist">
+          <li><strong>Scope of work</strong> — exactly what is being waterproofed (location, square footage, surfaces).</li>
+          <li><strong>Materials and method</strong> — product names, application process, number of coats.</li>
+          <li><strong>Total price</strong> — itemized if possible (labor, materials, mobilization, taxes).</li>
+          <li><strong>Payment terms</strong> — deposit required, balance schedule, net days.</li>
+          <li><strong>Start and completion dates</strong> — firm dates, not "next week-ish."</li>
+          <li><strong>Warranty</strong> — duration, what is covered, what voids it.</li>
+          <li><strong>Insurance &amp; license</strong> — current COI naming Norris Utilities®, LLC if applicable.</li>
+          <li><strong>Signature</strong> — H2O Waterproofing principal signed; Aaron countersigns on receipt.</li>
         </ul>
       </div>
 
-      <!-- CTA ROW -->
-      <div class="cta-row">
-        <a href="tel:2055001343" class="nu-btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.21 2.2z"/></svg>
-          Call Aaron — 205-500-1343
-        </a>
-        <a href="mailto:acnorris@norrisutilities.com?subject=H2O%20Waterproofing%20%E2%80%94%20Written%20Confirmation%20Follow-Up&amp;body=Following%20our%20call%20today%2C%20please%20send%20a%20written%20confirmation%20of%20the%20work%20performed%20(scope%2C%20date%2C%20technician%2C%20materials%2C%20invoice)%20to%20acnorris%40norrisutilities.com.%20Also%20please%20include%20the%20transfer%20process%20and%20fees%20information%20we%20discussed.%20%0A%0AThanks%2C%0AAaron%20C.%20Norris%0ANorris%20Utilities%2C%20LLC%0A205-500-1343" class="nu-btn-secondary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          Draft Follow-Up Email
-        </a>
+      <!-- INFO BOX + CONFIRM FIELDS -->
+      <div class="nu-two-col">
+        <div class="nu-card">
+          <h3><span class="blue">Capture</span> on the Call</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 14px; color: var(--nu-body-text);">
+            Fill these in during the call so the email follow-up writes itself.
+          </p>
+          <div class="nu-confirm-grid">
+            <div class="nu-confirm-field">
+              <label>Spoke With</label>
+              <span class="blank"></span>
+            </div>
+            <div class="nu-confirm-field">
+              <label>Direct Phone / Cell</label>
+              <span class="blank"></span>
+            </div>
+            <div class="nu-confirm-field">
+              <label>Email for Confirmation</label>
+              <span class="blank"></span>
+            </div>
+            <div class="nu-confirm-field">
+              <label>Promised Send-By</label>
+              <span class="blank"></span>
+            </div>
+            <div class="nu-confirm-field">
+              <label>Quoted Price</label>
+              <span class="blank"></span>
+            </div>
+            <div class="nu-confirm-field">
+              <label>Start Date</label>
+              <span class="blank"></span>
+            </div>
+            <div class="nu-confirm-field">
+              <label>Warranty Term</label>
+              <span class="blank"></span>
+            </div>
+            <div class="nu-confirm-field">
+              <label>Call Date / Time</label>
+              <span class="blank"></span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="nu-info-box">
+            <div class="nu-info-box-title">Tone Reminder</div>
+            <p>Direct, warm, confident. Never apologetic. The written confirmation isn't a favor — it's how Norris Utilities® does business with every vendor. Y'all-friendly is fine; pushy is not.</p>
+          </div>
+          <div class="nu-info-box">
+            <div class="nu-info-box-title">Documentation Path</div>
+            <p>Once received, save the confirmation to <strong>~/norris-ops/internal/vendors/h2o-waterproofing/</strong>, log the date in the open-items tracker, and remove this action item from the reMarkable list.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOLLOW-UP EMAIL -->
+      <h2 class="nu-section-title" style="margin-top: 12px;">
+        <span class="first">Follow-Up</span> <span class="rest">Email Template</span>
+      </h2>
+      <div class="nu-email">
+        <div class="nu-email-header">
+          <div><span class="label">From:</span> Aaron C. Norris &lt;acnorris@norrisutilities.com&gt;</div>
+          <div><span class="label">To:</span> H2O Waterproofing</div>
+          <div><span class="label">Subject:</span> Written confirmation — waterproofing scope &amp; pricing</div>
+        </div>
+        <div class="nu-email-body">
+          <p class="greeting">Name —</p>
+          <p>Good talking with you today. As we discussed, I'd like to get the waterproofing work confirmed in writing so we both have a clean record before we move forward.</p>
+          <p>When you have a minute, please send over a short confirmation that covers:</p>
+          <p class="bullet">• Scope of work (location and surfaces)</p>
+          <p class="bullet">• Materials and method</p>
+          <p class="bullet">• Total price and payment terms</p>
+          <p class="bullet">• Start and completion dates</p>
+          <p class="bullet">• Warranty term</p>
+          <p>Email reply is fine — no formal contract needed unless you prefer one. Once I have it in hand, we are good to keep moving.</p>
+          <p>Appreciate y'all and the work you've put in so far.</p>
+          <p class="signature">Sincerely,</p>
+          <p class="signature-name">Aaron C. Norris<br>
+          Founder &amp; CEO<br>
+          Norris Utilities, LLC<br>
+          Cell: 205-500-1343<br>
+          acnorris@norrisutilities.com</p>
+        </div>
+      </div>
+
+      <!-- OUTCOMES -->
+      <h2 class="nu-section-title" style="margin-top: 36px;">
+        <span class="first">Possible</span> <span class="rest">Outcomes &amp; Next Steps</span>
+      </h2>
+      <div class="nu-outcomes">
+        <div class="nu-outcome success">
+          <div class="nu-outcome-title success">✓ Confirmation Received</div>
+          <div class="nu-outcome-text">
+            File under H2O Waterproofing vendor folder. Update open-items tracker. Authorize payment / next milestone. Close this action item.
+          </div>
+        </div>
+        <div class="nu-outcome warning">
+          <div class="nu-outcome-title warning">◐ Promised but Not Sent</div>
+          <div class="nu-outcome-text">
+            48-hour follow-up by phone. If still nothing, second email with deadline: "If I do not have it by [date], we'll need to pause work until I do."
+          </div>
+        </div>
+        <div class="nu-outcome escalate">
+          <div class="nu-outcome-title escalate">✕ Refusal or No Response</div>
+          <div class="nu-outcome-text">
+            Pause all work. Do not authorize payment. Document the refusal. Decide whether to source a new waterproofing vendor before resuming.
+          </div>
+        </div>
       </div>
 
     </div>
@@ -709,6 +782,9 @@
       <a href="tel:2055001343">205-500-1343</a> |
       <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+    <div class="nu-footer-meta">
+      Internal action sheet • Generated for reMarkable open-item resolution • Birmingham, Alabama
     </div>
   </footer>
 
