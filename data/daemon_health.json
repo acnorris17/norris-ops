@@ -1,32 +1,40 @@
 {
-  "generated_at": "2026-04-25T08:44:53.759591+00:00",
+  "generated_at": "2026-04-25T09:19:55.116324+00:00",
   "entries": [
     {
       "name": "delivery-watcher",
-      "ts": "2026-04-25T08:40:10.215360+00:00",
+      "ts": "2026-04-25T09:15:20.486153+00:00",
       "status": "ok",
-      "detail": "processed=4 dt=922ms",
-      "age_seconds": 283,
+      "detail": "processed=4 dt=942ms",
+      "age_seconds": 274,
       "stale": false
     },
     {
       "name": "invoice-watcher",
-      "ts": "2026-04-25T08:40:12.255014+00:00",
+      "ts": "2026-04-25T09:15:23.666440+00:00",
       "status": "ok",
-      "detail": "processed=0 dt=777ms",
-      "age_seconds": 281,
+      "detail": "processed=0 dt=743ms",
+      "age_seconds": 271,
       "stale": false
+    },
+    {
+      "name": "qb-reconcile",
+      "ts": "2026-04-25T09:00:03.927644+00:00",
+      "status": "ok",
+      "detail": "ingested=1 mismatches=0 voids=0",
+      "age_seconds": 1191,
+      "stale": true
     }
   ],
   "gog_quota": {
     "date": "2026-04-25",
-    "count": 208,
+    "count": 223,
     "cap": 1000
   },
   "summary": {
-    "total": 2,
+    "total": 3,
     "healthy": 2,
-    "stale": 0,
+    "stale": 1,
     "errors": 0
   }
 }
