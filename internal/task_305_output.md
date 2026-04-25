@@ -1,915 +1,826 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>V5 to Production — Final Release Plan — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --nu-blue: #0000FF;
-      --nu-cyan: #06D0FF;
-      --nu-navy: #000033;
-      --nu-white: #FFFFFF;
-      --nu-light-gray: #F5F5F7;
-      --nu-medium-gray: #E8E8EC;
-      --nu-dark-text: #1A1A2E;
-      --nu-body-text: #333333;
-      --nu-accent-gold: #C9A84C;
-      --nu-success: #0a7c3f;
-      --nu-warning: #b8870f;
-      --nu-danger: #b42318;
-      --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-display: 'Playfair Display', Georgia, serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V5 Production Launch Plan — Norris Utilities®</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nu-blue: #0000FF;
+  --nu-cyan: #06D0FF;
+  --nu-navy: #000033;
+  --nu-white: #FFFFFF;
+  --nu-light-gray: #F5F5F7;
+  --nu-medium-gray: #E8E8EC;
+  --nu-dark-text: #1A1A2E;
+  --nu-body-text: #333333;
+  --nu-accent-gold: #C9A84C;
+  --nu-success: #2D7D46;
+  --nu-warn: #C8782B;
+  --nu-danger: #B83227;
+  --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-italic: 'Playfair Display', Georgia, serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-primary);
+  color: var(--nu-body-text);
+  background: var(--nu-white);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { font-size: 16px; scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-primary);
-      color: var(--nu-body-text);
-      background: var(--nu-white);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+/* HEADER */
+.nu-header {
+  position: relative;
+  background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+  padding: 70px 40px 90px;
+  text-align: center;
+  overflow: hidden;
+  min-height: 320px;
+}
+.nu-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 70px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 90px);
+  z-index: 1;
+  opacity: 0.7;
+}
+.nu-header::after {
+  content: '';
+  position: absolute;
+  top: -40%; right: -20%;
+  width: 75%; height: 200%;
+  background: radial-gradient(ellipse, rgba(6,208,255,0.18) 0%, transparent 70%);
+  z-index: 1;
+}
+.nu-header > * { position: relative; z-index: 2; }
+.nu-watermark {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  max-width: 600px;
+  opacity: 0.07;
+  z-index: 1;
+  pointer-events: none;
+}
+.nu-logo-text {
+  font-weight: 900;
+  font-size: 3.4rem;
+  color: var(--nu-white);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+}
+.nu-logo-subtitle {
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--nu-white);
+  letter-spacing: 0.8em;
+  margin-bottom: 22px;
+}
+.nu-tagline {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: 0.04em;
+}
+.nu-doc-title {
+  margin-top: 28px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--nu-white);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.92;
+  border-top: 1px solid rgba(255,255,255,0.35);
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+  padding: 10px 0;
+  display: inline-block;
+  padding-left: 24px;
+  padding-right: 24px;
+}
 
-    /* HEADER */
-    .nu-header {
-      position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
-      padding: 70px 40px 90px;
-      text-align: center;
-      overflow: hidden;
-      min-height: 300px;
-    }
-    .nu-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
-      z-index: 1;
-    }
-    .nu-header::after {
-      content: '';
-      position: absolute;
-      top: -50%; right: -20%;
-      width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
-      z-index: 1;
-    }
-    .nu-header * { position: relative; z-index: 2; }
+/* CHEVRON */
+.nu-chevron {
+  position: relative;
+  height: 50px;
+  margin-top: -50px;
+  z-index: 10;
+}
+.nu-chevron svg { width: 100%; height: 50px; display: block; }
 
-    .nu-phoenix-icon {
-      width: 78px;
-      height: 78px;
-      margin: 0 auto 16px;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
-    }
-    .nu-logo-text {
-      font-weight: 900;
-      font-size: 3.2rem;
-      color: var(--nu-white);
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-    }
-    .nu-logo-subtitle {
-      font-weight: 900;
-      font-size: 1.3rem;
-      color: var(--nu-white);
-      letter-spacing: 0.8em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      padding-left: 0.8em;
-    }
-    .nu-tagline {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 400;
-      font-size: 1.25rem;
-      color: rgba(255,255,255,0.95);
-      letter-spacing: 0.03em;
-    }
-    .nu-eyebrow {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 6px 18px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 999px;
-      color: var(--nu-white);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-    }
+/* CONTENT */
+.nu-content-area {
+  position: relative;
+  background: var(--nu-white);
+}
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 60px 40px 40px;
+}
 
-    /* CHEVRON */
-    .nu-chevron {
-      position: relative;
-      height: 50px;
-      margin-top: -50px;
-      z-index: 10;
-    }
-    .nu-chevron svg {
-      width: 100%;
-      height: 50px;
-      display: block;
-    }
+/* SECTION HEADERS */
+.nu-section-title {
+  font-weight: 900;
+  font-size: 1.55rem;
+  color: var(--nu-dark-text);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--nu-medium-gray);
+}
+.nu-section-title .first {
+  color: #0033cc;
+}
+.section { margin-bottom: 56px; }
 
-    /* CONTENT */
-    .nu-content-area {
-      position: relative;
-      background: var(--nu-white);
-      overflow: hidden;
-    }
-    .nu-content-area::before {
-      content: '';
-      position: absolute;
-      top: 360px; left: 50%;
-      transform: translateX(-50%);
-      width: 65%;
-      max-width: 820px;
-      aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(0,0,255,0.07) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
-      opacity: 0.7;
-      pointer-events: none;
-    }
-    .nu-content-area > * { position: relative; z-index: 1; }
+/* MISSION CARD */
+.mission-card {
+  background: linear-gradient(135deg, var(--nu-light-gray) 0%, #ffffff 100%);
+  border-left: 6px solid var(--nu-blue);
+  padding: 28px 32px;
+  margin-bottom: 48px;
+  border-radius: 4px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+}
+.mission-card .label {
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  color: var(--nu-blue);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.mission-card h2 {
+  font-weight: 900;
+  font-size: 1.7rem;
+  color: var(--nu-dark-text);
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.mission-card p {
+  font-size: 1rem;
+  color: var(--nu-body-text);
+}
 
-    .nu-container {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 60px 40px 80px;
-    }
+/* STATUS GRID */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 12px;
+}
+.status-tile {
+  background: var(--nu-white);
+  border: 1px solid var(--nu-medium-gray);
+  border-radius: 6px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  transition: transform 0.18s ease;
+}
+.status-tile:hover { transform: translateY(-2px); }
+.status-tile .num {
+  font-weight: 900;
+  font-size: 2.4rem;
+  color: var(--nu-blue);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.status-tile .lbl {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--nu-body-text);
+}
+.status-tile.success .num { color: var(--nu-success); }
+.status-tile.warn .num { color: var(--nu-warn); }
+.status-tile.cyan .num { color: #0066ee; }
 
-    /* TITLE BLOCK */
-    .nu-title-block {
-      margin-bottom: 48px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-    }
-    .nu-page-kicker {
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--nu-blue);
-      margin-bottom: 10px;
-    }
-    .nu-page-title {
-      font-weight: 900;
-      font-size: 2.6rem;
-      line-height: 1.15;
-      color: var(--nu-dark-text);
-      margin-bottom: 12px;
-      letter-spacing: -0.01em;
-    }
-    .nu-page-title span {
-      color: var(--nu-blue);
-    }
-    .nu-page-lede {
-      font-size: 1.12rem;
-      color: var(--nu-body-text);
-      max-width: 880px;
-      line-height: 1.65;
-    }
+/* PHASES */
+.phase {
+  background: var(--nu-white);
+  border: 1px solid var(--nu-medium-gray);
+  border-radius: 6px;
+  margin-bottom: 22px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.phase-head {
+  background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
+  color: var(--nu-white);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.phase-head .pname {
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+.phase-head .pname .num {
+  color: var(--nu-cyan);
+  margin-right: 10px;
+}
+.pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.pill.done { background: var(--nu-success); color: var(--nu-white); }
+.pill.active { background: var(--nu-cyan); color: var(--nu-navy); }
+.pill.next { background: rgba(255,255,255,0.18); color: var(--nu-white); border: 1px solid rgba(255,255,255,0.4); }
+.phase-body { padding: 22px 28px; }
+.phase-body ul { list-style: none; padding: 0; }
+.phase-body li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 10px;
+  font-size: 0.96rem;
+}
+.phase-body li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 900;
+  color: var(--nu-success);
+  font-size: 1.05rem;
+}
+.phase-body li.todo::before {
+  content: '○';
+  color: var(--nu-blue);
+}
+.phase-body li.risk::before {
+  content: '!';
+  color: var(--nu-warn);
+  font-weight: 900;
+  background: rgba(200,120,43,0.12);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 18px;
+  font-size: 0.78rem;
+  top: 3px;
+}
 
-    /* METADATA STRIP */
-    .nu-meta-strip {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1px;
-      background: var(--nu-medium-gray);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 48px;
-    }
-    .nu-meta-cell {
-      background: var(--nu-white);
-      padding: 18px 20px;
-    }
-    .nu-meta-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--nu-body-text);
-      opacity: 0.7;
-      margin-bottom: 4px;
-    }
-    .nu-meta-value {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .nu-meta-value.accent { color: var(--nu-blue); }
+/* GO/NO-GO */
+.gono-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--nu-white);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.gono-table thead {
+  background: linear-gradient(135deg, #0a0e5c, #0033cc);
+  color: var(--nu-white);
+}
+.gono-table th {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.gono-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--nu-medium-gray);
+  font-size: 0.94rem;
+  vertical-align: top;
+}
+.gono-table tr:last-child td { border-bottom: none; }
+.gono-table tr:nth-child(even) td { background: var(--nu-light-gray); }
+.check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+.check.pass { background: var(--nu-success); color: var(--nu-white); }
+.check.pending { background: #E2B33C; color: var(--nu-navy); }
+.check.fail { background: var(--nu-danger); color: var(--nu-white); }
 
-    /* SECTION */
-    .nu-section {
-      margin-bottom: 52px;
-    }
-    .nu-section-title {
-      font-weight: 900;
-      font-size: 1.55rem;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-    }
-    .nu-section-title .word-1 { color: var(--nu-blue); }
-    .nu-section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
-    .nu-section-rule {
-      height: 3px;
-      width: 60px;
-      background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan));
-      margin-bottom: 24px;
-      border-radius: 2px;
-    }
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: linear-gradient(180deg, var(--nu-blue), var(--nu-cyan));
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  padding-bottom: 24px;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 6px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--nu-white);
+  border: 4px solid var(--nu-blue);
+  box-shadow: 0 0 0 3px rgba(0,0,255,0.12);
+}
+.tl-item.now::before { border-color: var(--nu-cyan); background: var(--nu-cyan); }
+.tl-item .when {
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nu-blue);
+  margin-bottom: 4px;
+}
+.tl-item .what {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--nu-dark-text);
+  margin-bottom: 4px;
+}
+.tl-item .desc {
+  font-size: 0.92rem;
+  color: var(--nu-body-text);
+}
 
-    /* CHEVRON BADGES */
-    .nu-badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-    .nu-badge {
-      display: inline-flex;
-      align-items: center;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      padding: 12px 28px 12px 18px;
-      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
-      font-weight: 700;
-      font-size: 0.88rem;
-      letter-spacing: 0.02em;
-    }
-    .nu-badge.cyan {
-      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
-    }
+/* ACTIONS */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+.action-card {
+  background: var(--nu-white);
+  border-top: 4px solid var(--nu-blue);
+  border-radius: 4px;
+  padding: 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.action-card h4 {
+  font-weight: 900;
+  font-size: 1.02rem;
+  color: var(--nu-dark-text);
+  margin-bottom: 8px;
+}
+.action-card .owner {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--nu-blue);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.action-card p {
+  font-size: 0.93rem;
+  color: var(--nu-body-text);
+}
 
-    /* STATUS CARDS */
-    .nu-status-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .nu-status-card {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-top: 4px solid var(--nu-blue);
-      border-radius: 8px;
-      padding: 22px 22px 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .nu-status-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.09);
-    }
-    .nu-status-card.go { border-top-color: var(--nu-success); }
-    .nu-status-card.watch { border-top-color: var(--nu-warning); }
-    .nu-status-card.gate { border-top-color: var(--nu-blue); }
+/* SIGN-OFF */
+.signoff {
+  background: linear-gradient(135deg, var(--nu-light-gray) 0%, #ffffff 100%);
+  border: 2px solid var(--nu-blue);
+  border-radius: 6px;
+  padding: 32px;
+  margin-top: 40px;
+}
+.signoff h3 {
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--nu-blue);
+  margin-bottom: 16px;
+}
+.sig-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 18px;
+}
+.sig-block {
+  border-bottom: 2px solid var(--nu-dark-text);
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  height: 48px;
+}
+.sig-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--nu-body-text);
+  text-transform: uppercase;
+}
 
-    .nu-card-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .nu-status-card.go .nu-card-label { color: var(--nu-success); }
-    .nu-status-card.watch .nu-card-label { color: var(--nu-warning); }
-    .nu-status-card.gate .nu-card-label { color: var(--nu-blue); }
+/* FOOTER */
+.nu-footer {
+  background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
+  color: rgba(255,255,255,0.85);
+  padding: 44px 40px;
+  text-align: center;
+  margin-top: 40px;
+}
+.nu-footer-tagline {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--nu-cyan);
+  margin-bottom: 14px;
+  letter-spacing: 0.03em;
+}
+.nu-footer-contact {
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+.nu-footer-contact a {
+  color: var(--nu-cyan);
+  text-decoration: none;
+}
+.nu-footer-contact a:hover { text-decoration: underline; }
+.doc-meta {
+  margin-top: 18px;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
 
-    .nu-card-title {
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
-    }
-    .nu-card-body {
-      font-size: 0.95rem;
-      color: var(--nu-body-text);
-      line-height: 1.55;
-    }
-    .nu-card-metric {
-      font-weight: 900;
-      font-size: 1.7rem;
-      color: var(--nu-blue);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nu-header { padding: 50px 20px 70px; min-height: 240px; }
+  .nu-logo-text { font-size: 2.1rem; letter-spacing: 0.22em; }
+  .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+  .nu-tagline { font-size: 1.05rem; }
+  .nu-doc-title { font-size: 0.8rem; letter-spacing: 0.18em; padding-left: 14px; padding-right: 14px; }
+  .container { padding: 40px 20px 20px; }
+  .nu-section-title { font-size: 1.25rem; }
+  .mission-card { padding: 22px; }
+  .mission-card h2 { font-size: 1.35rem; }
+  .phase-head { padding: 14px 18px; }
+  .phase-body { padding: 18px 20px; }
+  .gono-table th, .gono-table td { padding: 10px 12px; font-size: 0.85rem; }
+}
 
-    /* PHASE TIMELINE */
-    .nu-timeline {
-      position: relative;
-      padding-left: 28px;
-    }
-    .nu-timeline::before {
-      content: '';
-      position: absolute;
-      left: 8px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(var(--nu-blue), var(--nu-cyan));
-    }
-    .nu-phase {
-      position: relative;
-      margin-bottom: 28px;
-      padding: 0 0 0 4px;
-    }
-    .nu-phase::before {
-      content: '';
-      position: absolute;
-      left: -28px;
-      top: 4px;
-      width: 18px;
-      height: 18px;
-      background: var(--nu-white);
-      border: 3px solid var(--nu-blue);
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(0,0,255,0.08);
-    }
-    .nu-phase.done::before {
-      background: var(--nu-success);
-      border-color: var(--nu-success);
-    }
-    .nu-phase.current::before {
-      background: var(--nu-cyan);
-      border-color: var(--nu-blue);
-      box-shadow: 0 0 0 4px rgba(6,208,255,0.28), 0 0 0 8px rgba(0,0,255,0.08);
-    }
-    .nu-phase-heading {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: baseline;
-      margin-bottom: 6px;
-    }
-    .nu-phase-name {
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--nu-dark-text);
-    }
-    .nu-phase-tag {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 4px;
-    }
-    .nu-phase-tag.done {
-      background: rgba(10,124,63,0.12);
-      color: var(--nu-success);
-    }
-    .nu-phase-tag.current {
-      background: rgba(0,0,255,0.1);
-      color: var(--nu-blue);
-    }
-    .nu-phase-tag.next {
-      background: var(--nu-light-gray);
-      color: var(--nu-body-text);
-    }
-    .nu-phase-body {
-      color: var(--nu-body-text);
-      font-size: 0.96rem;
-      line-height: 1.6;
-    }
-    .nu-phase-body ul {
-      margin-top: 8px;
-      padding-left: 20px;
-    }
-    .nu-phase-body li { margin-bottom: 4px; }
-
-    /* CHECKLIST */
-    .nu-checklist {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 14px;
-    }
-    .nu-checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      background: var(--nu-light-gray);
-      border-left: 4px solid var(--nu-blue);
-      padding: 14px 18px;
-      border-radius: 4px;
-      font-size: 0.96rem;
-      color: var(--nu-dark-text);
-    }
-    .nu-checklist li.done { border-left-color: var(--nu-success); }
-    .nu-checkbox {
-      flex-shrink: 0;
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      border: 2px solid var(--nu-blue);
-      background: var(--nu-white);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1px;
-      font-weight: 900;
-      font-size: 0.85rem;
-      color: var(--nu-blue);
-    }
-    .nu-checklist li.done .nu-checkbox {
-      background: var(--nu-success);
-      border-color: var(--nu-success);
-      color: var(--nu-white);
-    }
-
-    /* GATES TABLE */
-    .nu-gate-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      overflow: hidden;
-      font-size: 0.95rem;
-    }
-    .nu-gate-table th {
-      background: linear-gradient(135deg, var(--nu-navy), #000066);
-      color: var(--nu-white);
-      font-weight: 700;
-      text-align: left;
-      padding: 12px 16px;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .nu-gate-table td {
-      padding: 14px 16px;
-      border-top: 1px solid var(--nu-medium-gray);
-      vertical-align: top;
-    }
-    .nu-gate-table tr:nth-child(even) td { background: var(--nu-light-gray); }
-    .nu-gate-name {
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .nu-pill {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-    .nu-pill.pass { background: rgba(10,124,63,0.12); color: var(--nu-success); }
-    .nu-pill.gate { background: rgba(0,0,255,0.1); color: var(--nu-blue); }
-    .nu-pill.watch { background: rgba(184,135,15,0.14); color: var(--nu-warning); }
-
-    /* CALLOUT */
-    .nu-callout {
-      background: linear-gradient(135deg, rgba(0,0,255,0.04) 0%, rgba(6,208,255,0.06) 100%);
-      border: 1px solid rgba(0,0,255,0.15);
-      border-left: 5px solid var(--nu-blue);
-      border-radius: 6px;
-      padding: 22px 26px;
-      margin-top: 12px;
-    }
-    .nu-callout-title {
-      font-weight: 900;
-      font-size: 1.05rem;
-      color: var(--nu-navy);
-      margin-bottom: 6px;
-      letter-spacing: 0.02em;
-    }
-    .nu-callout-body {
-      color: var(--nu-body-text);
-      font-size: 0.96rem;
-      line-height: 1.6;
-    }
-
-    /* GO/NO-GO */
-    .nu-go-block {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      background: linear-gradient(135deg, #0a0e5c 0%, var(--nu-blue) 60%, #0066ee 100%);
-      color: var(--nu-white);
-      padding: 28px 32px;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,255,0.25);
-    }
-    .nu-go-left {
-      flex: 1 1 320px;
-    }
-    .nu-go-kicker {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--nu-cyan);
-      margin-bottom: 6px;
-    }
-    .nu-go-title {
-      font-weight: 900;
-      font-size: 1.8rem;
-      line-height: 1.2;
-    }
-    .nu-go-body {
-      margin-top: 6px;
-      font-size: 0.98rem;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.55;
-    }
-    .nu-go-stamp {
-      flex-shrink: 0;
-      background: var(--nu-white);
-      color: var(--nu-blue);
-      font-weight: 900;
-      padding: 14px 24px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      font-size: 0.9rem;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-    }
-
-    /* FOOTER */
-    .nu-footer {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
-      color: rgba(255,255,255,0.85);
-      padding: 44px 40px;
-      text-align: center;
-    }
-    .nu-footer-tagline {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 400;
-      font-size: 1.2rem;
-      color: var(--nu-cyan);
-      margin-bottom: 14px;
-    }
-    .nu-footer-contact {
-      font-size: 0.98rem;
-      line-height: 1.9;
-    }
-    .nu-footer-contact a {
-      color: var(--nu-cyan);
-      text-decoration: none;
-    }
-    .nu-footer-contact a:hover { text-decoration: underline; }
-
-    @media (max-width: 768px) {
-      .nu-header { padding: 50px 20px 70px; min-height: 240px; }
-      .nu-logo-text { font-size: 2.1rem; letter-spacing: 0.22em; }
-      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.55em; }
-      .nu-tagline { font-size: 1.05rem; }
-      .nu-container { padding: 40px 22px 60px; }
-      .nu-page-title { font-size: 1.9rem; }
-      .nu-badge { clip-path: none; border-radius: 6px; padding: 10px 16px; }
-      .nu-go-block { padding: 22px; }
-      .nu-go-title { font-size: 1.4rem; }
-    }
-
-    @media print {
-      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-status-card, .nu-gate-table { box-shadow: none; }
-      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-    }
-  </style>
+@media print {
+  .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .phase, .status-tile, .gono-table, .action-card { box-shadow: none; }
+  .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+}
+</style>
 </head>
 <body>
 
-  <header class="nu-header">
-    <div class="nu-phoenix-icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
-      </svg>
-    </div>
-    <div class="nu-logo-text">NORRIS</div>
-    <div class="nu-logo-subtitle">UTILITIES</div>
-    <div class="nu-tagline">A Legacy of Commitment&reg;</div>
-    <div class="nu-eyebrow">Internal Release Plan</div>
-  </header>
+<header class="nu-header">
+  <svg class="nu-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="#FFFFFF"/>
+    <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="#FFFFFF"/>
+  </svg>
+  <div class="nu-logo-text">NORRIS</div>
+  <div class="nu-logo-subtitle">UTILITIES</div>
+  <div class="nu-tagline">A Legacy of Commitment®</div>
+  <div class="nu-doc-title">V5 Production Launch Plan</div>
+</header>
 
-  <div class="nu-chevron">
-    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L550,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
-    </svg>
+<div class="nu-chevron">
+  <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#FFFFFF"/>
+  </svg>
+</div>
+
+<main class="nu-content-area">
+  <div class="container">
+
+    <div class="mission-card">
+      <div class="label">reMarkable Action — Owner: Aaron C. Norris</div>
+      <h2>Take V5 to production as the final, locked version of the Sales Automation engine.</h2>
+      <p>V5 has cleared the post-completion queue (Q1–Q15), the 23 V5 Order Rules are locked, and Phase B V2 UI is merged. This document defines what "production" means, what must be true before we flip the switch, and the cutover sequence — so V5 ships as the version we run the business on, not the next checkpoint on the way to V6.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="nu-section-title"><span class="first">Production</span> Readiness Snapshot</h2>
+      <div class="status-grid">
+        <div class="status-tile success">
+          <div class="num">23/23</div>
+          <div class="lbl">V5 Order Rules Locked</div>
+        </div>
+        <div class="status-tile success">
+          <div class="num">15/15</div>
+          <div class="lbl">Post-Completion Queue Cleared</div>
+        </div>
+        <div class="status-tile cyan">
+          <div class="num">7/7</div>
+          <div class="lbl">sa_v1_writer Endpoints</div>
+        </div>
+        <div class="status-tile warn">
+          <div class="num">3</div>
+          <div class="lbl">Cutover Items Remaining</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="nu-section-title"><span class="first">Phased</span> Path to Final Production</h2>
+
+      <div class="phase">
+        <div class="phase-head">
+          <div class="pname"><span class="num">Phase 1.</span> Foundation Lock</div>
+          <span class="pill done">Complete</span>
+        </div>
+        <div class="phase-body">
+          <ul>
+            <li>status_engine 7-state model with INVOICED immutability — merged.</li>
+            <li>Phase B §1.5 phoenix opacity assertion accepts pulse window [0.10, 0.14] — merged.</li>
+            <li>23 V5 Order Rules ratified during Chain Electric reconciliation (Rulings 1–23).</li>
+            <li>V1 → V2.2 migration script run; legacy data reconciled against new state machine.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <div class="pname"><span class="num">Phase 2.</span> V2 UI &amp; Writer API</div>
+          <span class="pill done">Complete</span>
+        </div>
+        <div class="phase-body">
+          <ul>
+            <li>sa_v1_writer §1, §2, §3 — 7 endpoints shipped with library backing and full test suite.</li>
+            <li>Email automation, FlexPro Armor filter, and review queue live in V2.2.</li>
+            <li>Payment rules engine wired through V2 UI (no double-pay, no out-of-order INVOICED writes).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <div class="pname"><span class="num">Phase 3.</span> Production Cutover</div>
+          <span class="pill active">In Progress</span>
+        </div>
+        <div class="phase-body">
+          <ul>
+            <li class="todo">Tag <strong>v5.0.0-final</strong> on the green main, with release notes referencing every locked ruling.</li>
+            <li class="todo">Promote V5 to the default code path — remove "V5 (beta)" labels from the Ops Portal and rename routes.</li>
+            <li class="todo">Disable V4 fallbacks; preserve read-only V4 archive for audit only.</li>
+            <li class="risk">Hold a 24-hour soak window after cutover before tagging final — silent draft regressions surface inside that window.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <div class="pname"><span class="num">Phase 4.</span> Final Lock &amp; Stewardship</div>
+          <span class="pill next">Next</span>
+        </div>
+        <div class="phase-body">
+          <ul>
+            <li class="todo">Freeze V5 ruleset — any future change is V6, not "V5 patch."</li>
+            <li class="todo">Publish the V5 Operator Runbook to <strong>ops.norrisutilities.com/internal/</strong> for Caroline Butler (Tier 1).</li>
+            <li class="todo">Schedule weekly KPI pulse against V5 invoicing tiles (Today / Week / Month / Quarter / YTD).</li>
+            <li class="todo">Commission V6 backlog file — V6 begins at the first deviation request, not before.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="nu-section-title"><span class="first">Go</span> / No-Go Checklist</h2>
+      <table class="gono-table">
+        <thead>
+          <tr>
+            <th style="width: 60px;">Status</th>
+            <th>Gate</th>
+            <th>Evidence</th>
+            <th style="width: 140px;">Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="check pass">✓</span></td>
+            <td>All 23 V5 Order Rules ratified and frozen</td>
+            <td>process-rules/v5-order-rules-2026-04-18</td>
+            <td>Aaron</td>
+          </tr>
+          <tr>
+            <td><span class="check pass">✓</span></td>
+            <td>Phase B V2.2 merged with Phase 1 tests green</td>
+            <td>Commit aab7530 on main</td>
+            <td>Aaron</td>
+          </tr>
+          <tr>
+            <td><span class="check pass">✓</span></td>
+            <td>Post-completion queue Q1–Q15 cleared</td>
+            <td>post-completion-queue-q1-q15</td>
+            <td>Aaron</td>
+          </tr>
+          <tr>
+            <td><span class="check pending">!</span></td>
+            <td>v5.0.0-final tag cut on main and pushed to GitHub</td>
+            <td>Pending — see Phase 3 cutover</td>
+            <td>Aaron</td>
+          </tr>
+          <tr>
+            <td><span class="check pending">!</span></td>
+            <td>V4 routes disabled; archive preserved read-only</td>
+            <td>Pending — Ops Portal flag flip</td>
+            <td>Aaron</td>
+          </tr>
+          <tr>
+            <td><span class="check pending">!</span></td>
+            <td>V5 Operator Runbook published for Caroline Butler</td>
+            <td>Pending — ops.norrisutilities.com/internal/</td>
+            <td>Aaron + CB</td>
+          </tr>
+          <tr>
+            <td><span class="check pass">✓</span></td>
+            <td>Invoicing pulse KPI spec ready (6 live tiles)</td>
+            <td>palace/invoicing-pulse-kpi-spec</td>
+            <td>Aaron</td>
+          </tr>
+          <tr>
+            <td><span class="check pass">✓</span></td>
+            <td>QB invoice PDF auto-capture pipeline defined</td>
+            <td>palace/qb-invoice-pdf-auto-capture (7 steps)</td>
+            <td>Aaron</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2 class="nu-section-title"><span class="first">Cutover</span> Timeline</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="when">Day 0 — 4:00 AM</div>
+          <div class="what">Final Pre-Flight</div>
+          <div class="desc">Run full Phase 1 test suite against main. Confirm zero failures. Snapshot the database. Send Telegram all-clear.</div>
+        </div>
+        <div class="tl-item now">
+          <div class="when">Day 0 — 5:00 AM</div>
+          <div class="what">Tag v5.0.0-rc.final &amp; Promote</div>
+          <div class="desc">Cut release candidate, push to GitHub (acnorris17/norris-ops), promote V5 to default route, retire V5-beta labels.</div>
+        </div>
+        <div class="tl-item">
+          <div class="when">Day 0 — 6:00 AM</div>
+          <div class="what">Disable V4 Fallbacks</div>
+          <div class="desc">Set V4 routes read-only. Update Ops Portal navigation. Confirm sa_v1_writer endpoints remain reachable.</div>
+        </div>
+        <div class="tl-item">
+          <div class="when">Day 0 + 24 Hours</div>
+          <div class="what">Soak Window Review</div>
+          <div class="desc">Review email automation, review queue, FlexPro Armor filter behavior, INVOICED-state writes, and silent-draft alerts. Zero regressions = proceed.</div>
+        </div>
+        <div class="tl-item">
+          <div class="when">Day 1</div>
+          <div class="what">Tag v5.0.0-final</div>
+          <div class="desc">Promote rc.final → final. Lock the V5 ruleset. Open V6 backlog file. Send Telegram confirmation: "V5 in production."</div>
+        </div>
+        <div class="tl-item">
+          <div class="when">Day 2</div>
+          <div class="what">Caroline Butler Handoff</div>
+          <div class="desc">Walk Caroline through the V5 Operator Runbook in person. Confirm she can clear silent drafts, mark INVOICED, and run the daily pulse.</div>
+        </div>
+        <div class="tl-item">
+          <div class="when">Day 7</div>
+          <div class="what">First Weekly Pulse</div>
+          <div class="desc">First KPI review against the 6 invoicing pulse tiles. Establishes the post-V5 baseline for Norris Utilities® operations.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="nu-section-title"><span class="first">Owner</span> Actions</h2>
+      <div class="action-grid">
+        <div class="action-card">
+          <div class="owner">Aaron C. Norris</div>
+          <h4>Cut and push v5.0.0-final tag</h4>
+          <p>From ~/norris-ops, tag main, push tags to GitHub, verify ops.norrisutilities.com reflects the new build.</p>
+        </div>
+        <div class="action-card">
+          <div class="owner">Aaron C. Norris</div>
+          <h4>Retire V4 surface area</h4>
+          <p>Switch V4 routes to read-only archive. Remove "V5 (beta)" labels. Confirm sa_v1_writer is the only writer path live.</p>
+        </div>
+        <div class="action-card">
+          <div class="owner">Caroline Butler</div>
+          <h4>Operator runbook walkthrough</h4>
+          <p>Receive runbook from Aaron. Practice the silent-draft clear, INVOICED transition, and pulse KPI read against a sandbox order.</p>
+        </div>
+        <div class="action-card">
+          <div class="owner">Aaron C. Norris</div>
+          <h4>Open V6 backlog file</h4>
+          <p>Create the file the day V5 ships. Anything that was "V5 plus one more thing" lands there — V5 stays frozen.</p>
+        </div>
+        <div class="action-card">
+          <div class="owner">Aaron C. Norris</div>
+          <h4>Telegram launch broadcast</h4>
+          <p>Send the production confirmation through the standard Telegram alert channel after the 24-hour soak passes clean.</p>
+        </div>
+        <div class="action-card">
+          <div class="owner">Aaron C. Norris</div>
+          <h4>Update master tracker</h4>
+          <p>Mark the V5-to-production action item complete in sources/workspace/master_tracker and archive the post-completion queue file.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="nu-section-title"><span class="first">Risk</span> Register &amp; Rollback Plan</h2>
+      <table class="gono-table">
+        <thead>
+          <tr>
+            <th>Risk</th>
+            <th>Mitigation</th>
+            <th>Rollback Trigger</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Silent-draft regression — Q1 issue resurfaces post-cutover</td>
+            <td>24-hour soak window with manual review queue check before final tag</td>
+            <td>Any silent draft &gt; 1 hour old without alert → revert to V4 read paths</td>
+          </tr>
+          <tr>
+            <td>INVOICED immutability bypass</td>
+            <td>status_engine guard + Phase 1 invariant tests in CI</td>
+            <td>Any successful write to an INVOICED record → immediate revert and patch</td>
+          </tr>
+          <tr>
+            <td>QuickBooks PDF auto-capture lag</td>
+            <td>Watcher on quickbooks@notification.intuit.com + Sent folder fallback</td>
+            <td>Capture lag &gt; 24h on any invoice → manual capture and ticket the watcher</td>
+          </tr>
+          <tr>
+            <td>Caroline Butler operating without runbook</td>
+            <td>Runbook published before V4 archive flip; in-person walkthrough on Day 2</td>
+            <td>Runbook gap blocks customer-facing work → halt cutover until resolved</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="signoff">
+      <h3>V5 Production Sign-Off</h3>
+      <p style="font-size: 0.95rem; margin-bottom: 6px;">By signing below, the named owner confirms the gates above are met and authorizes V5 as the production version of the Norris Utilities® Sales Automation engine — frozen until V6 is formally opened.</p>
+      <div class="sig-row">
+        <div>
+          <div class="sig-block"></div>
+          <div class="sig-label">Aaron C. Norris — Founder &amp; CEO</div>
+        </div>
+        <div>
+          <div class="sig-block"></div>
+          <div class="sig-label">Date</div>
+        </div>
+        <div>
+          <div class="sig-block"></div>
+          <div class="sig-label">v5.0.0-final Tag SHA</div>
+        </div>
+      </div>
+    </div>
+
   </div>
+</main>
 
-  <main class="nu-content-area">
-    <div class="nu-container">
-
-      <section class="nu-title-block">
-        <div class="nu-page-kicker">SA V5 &middot; Production Cutover</div>
-        <h1 class="nu-page-title">Take V5 to Production <span>as the Final Version</span></h1>
-        <p class="nu-page-lede">
-          Lock V5 as the canonical Shipping Agent release across Norris Utilities&reg; operations. Phase A is live. Phase B is
-          closed. The remaining work is a controlled, reversible cutover: retire legacy paths, freeze the schema, publish the
-          runbook, and put V5 behind a single named gate so the whole shop operates on one version of the truth.
-        </p>
-      </section>
-
-      <section class="nu-meta-strip">
-        <div class="nu-meta-cell">
-          <div class="nu-meta-label">Decision Date</div>
-          <div class="nu-meta-value accent">2026-04-24</div>
-        </div>
-        <div class="nu-meta-cell">
-          <div class="nu-meta-label">Owner</div>
-          <div class="nu-meta-value">Aaron C. Norris</div>
-        </div>
-        <div class="nu-meta-cell">
-          <div class="nu-meta-label">Current Branch</div>
-          <div class="nu-meta-value">feature/sa-v5-completion</div>
-        </div>
-        <div class="nu-meta-cell">
-          <div class="nu-meta-label">Target State</div>
-          <div class="nu-meta-value accent">V5 = main</div>
-        </div>
-        <div class="nu-meta-cell">
-          <div class="nu-meta-label">Rollback Window</div>
-          <div class="nu-meta-value">72 hours</div>
-        </div>
-      </section>
-
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="word-1">Status</span> <span class="rest">at a Glance</span></h2>
-        <div class="nu-section-rule"></div>
-        <div class="nu-status-grid">
-          <div class="nu-status-card go">
-            <div class="nu-card-label">Phase A &mdash; Live</div>
-            <div class="nu-card-metric">76 / 76</div>
-            <div class="nu-card-title">Tests passing on norris-ops</div>
-            <div class="nu-card-body">NU brand shipped. Gate A preserved. HEAD 1d86e5a. Live at ops.norrisutilities.com.</div>
-          </div>
-          <div class="nu-status-card go">
-            <div class="nu-card-label">Phase B &mdash; Closed 2026-04-23</div>
-            <div class="nu-card-title">Backend truth-up complete</div>
-            <div class="nu-card-body">Fuzzy match + canonical enforcement, add_alias, morning brief, remediation scan, payment_rules, notes_auto, email automation, FlexPro filter, review queue, V1&rarr;V2.2 migration all merged.</div>
-          </div>
-          <div class="nu-status-card gate">
-            <div class="nu-card-label">Phase C &mdash; Cutover</div>
-            <div class="nu-card-title">This document</div>
-            <div class="nu-card-body">Merge feature/sa-v5-completion to main, retire V1&ndash;V4 code paths, publish the runbook, tag v5.0.0.</div>
-          </div>
-          <div class="nu-status-card watch">
-            <div class="nu-card-label">Watch Item</div>
-            <div class="nu-card-title">Phoenix opacity pulse</div>
-            <div class="nu-card-body">Assertion now accepts pulse window [0.10, 0.14] rather than exact 0.10. Hold across cutover; revisit only if renders drift.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="word-1">Release</span> <span class="rest">Timeline</span></h2>
-        <div class="nu-section-rule"></div>
-        <div class="nu-timeline">
-
-          <div class="nu-phase done">
-            <div class="nu-phase-heading">
-              <span class="nu-phase-name">Phase A &mdash; Frame &amp; Brand</span>
-              <span class="nu-phase-tag done">Shipped</span>
-            </div>
-            <div class="nu-phase-body">
-              NU brand system, Line Card design language, Gate A preservation. 76 tests green on norris-ops HEAD 1d86e5a.
-            </div>
-          </div>
-
-          <div class="nu-phase done">
-            <div class="nu-phase-heading">
-              <span class="nu-phase-name">Phase B &mdash; Backend Truth-Up</span>
-              <span class="nu-phase-tag done">Closed 2026-04-23</span>
-            </div>
-            <div class="nu-phase-body">
-              <ul>
-                <li>&sect;7-full: fuzzy match, canonical enforcement, add_alias, morning brief, remediation scan.</li>
-                <li>&sect;7-recon: data truth-up reconciliation across shipments and customers.</li>
-                <li>&sect;8 backend: payment_rules + notes_auto with tests.</li>
-                <li>&sect;1.5: phoenix opacity assertion widened to pulse window [0.10, 0.14].</li>
-                <li>V2.2: email automation, FlexPro filter, review queue, V1&rarr;V2.2 migration.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="nu-phase current">
-            <div class="nu-phase-heading">
-              <span class="nu-phase-name">Phase C &mdash; Production Cutover</span>
-              <span class="nu-phase-tag current">In Progress &middot; Today</span>
-            </div>
-            <div class="nu-phase-body">
-              Merge feature/sa-v5-completion into main, retire V1&ndash;V4 code paths, tag release v5.0.0, publish the
-              cutover runbook, and point every operator-facing reference at V5 as the only supported version.
-            </div>
-          </div>
-
-          <div class="nu-phase">
-            <div class="nu-phase-heading">
-              <span class="nu-phase-name">Phase D &mdash; Stabilization (72 hr)</span>
-              <span class="nu-phase-tag next">Next</span>
-            </div>
-            <div class="nu-phase-body">
-              Invoicing pulse KPI tiles watched on ops portal. Morning brief reviewed daily at 4:00 AM CT. Any
-              anomaly triggers the documented rollback &mdash; not an ad-hoc patch.
-            </div>
-          </div>
-
-          <div class="nu-phase">
-            <div class="nu-phase-heading">
-              <span class="nu-phase-name">Phase E &mdash; Freeze &amp; Handoff</span>
-              <span class="nu-phase-tag next">After 72 hr clean</span>
-            </div>
-            <div class="nu-phase-body">
-              V5 declared final. Schema frozen. Post-completion queue (Q1&ndash;Q15) released from block. CB silent-draft
-              backlog ($3,685.15) and QB 150-series items enter normal operating cadence.
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="word-1">Pre-Flight</span> <span class="rest">Checklist</span></h2>
-        <div class="nu-section-rule"></div>
-        <div class="nu-badge-row">
-          <div class="nu-badge">CODE &middot; TESTS &middot; DATA</div>
-          <div class="nu-badge cyan">GREEN ACROSS THE BOARD</div>
-        </div>
-        <ul class="nu-checklist" style="margin-top:18px;">
-          <li class="done"><span class="nu-checkbox">&check;</span><span>All 76 tests green on feature/sa-v5-completion.</span></li>
-          <li class="done"><span class="nu-checkbox">&check;</span><span>Phase B backend merged: &sect;7-full, &sect;7-recon, &sect;8, V2.2.</span></li>
-          <li class="done"><span class="nu-checkbox">&check;</span><span>Phoenix opacity pulse window [0.10, 0.14] accepted by brand test.</span></li>
-          <li class="done"><span class="nu-checkbox">&check;</span><span>V1&rarr;V2.2 migration verified on ops.norrisutilities.com.</span></li>
-          <li><span class="nu-checkbox">1</span><span>Diff review of feature/sa-v5-completion vs main &mdash; no stray V1&ndash;V4 imports.</span></li>
-          <li><span class="nu-checkbox">2</span><span>Schema snapshot committed as schemas/v5-final.json (frozen reference).</span></li>
-          <li><span class="nu-checkbox">3</span><span>Invoicing pulse KPI tiles smoke-tested on staging copy of ops portal.</span></li>
-          <li><span class="nu-checkbox">4</span><span>Morning brief dry-run at 4:00 AM CT, Aaron confirms output is readable.</span></li>
-          <li><span class="nu-checkbox">5</span><span>Rollback command rehearsed: <code>git revert</code> path + portal redeploy.</span></li>
-          <li><span class="nu-checkbox">6</span><span>Telegram alert channel verified with a test ping.</span></li>
-        </ul>
-      </section>
-
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="word-1">Cutover</span> <span class="rest">Steps</span></h2>
-        <div class="nu-section-rule"></div>
-        <table class="nu-gate-table">
-          <thead>
-            <tr>
-              <th style="width:56px;">#</th>
-              <th>Step</th>
-              <th style="width:30%;">What It Does</th>
-              <th style="width:110px;">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td class="nu-gate-name">Merge feature/sa-v5-completion &rarr; main</td>
-              <td>Single-commit PR with full Phase C diff. Aaron approves, squash-merges.</td>
-              <td><span class="nu-pill gate">Gate</span></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td class="nu-gate-name">Tag release v5.0.0</td>
-              <td>Annotated tag on main. Marks the final version &mdash; no further V-number rev.</td>
-              <td><span class="nu-pill gate">Gate</span></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td class="nu-gate-name">Retire V1&ndash;V4 code paths</td>
-              <td>Delete legacy handlers, routers, and templates. Keep read-only archive in /legacy/.</td>
-              <td><span class="nu-pill gate">Gate</span></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td class="nu-gate-name">Freeze schema</td>
-              <td>schemas/v5-final.json becomes the canonical reference. Migrations lock-down.</td>
-              <td><span class="nu-pill gate">Gate</span></td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td class="nu-gate-name">Publish operator runbook</td>
-              <td>One page on ops.norrisutilities.com describing daily flow, alerts, and rollback.</td>
-              <td><span class="nu-pill gate">Gate</span></td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td class="nu-gate-name">Push to ops.norrisutilities.com</td>
-              <td>Follow permanent GitHub push rule. Telegram alert on push failure.</td>
-              <td><span class="nu-pill gate">Gate</span></td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td class="nu-gate-name">72-hour stabilization watch</td>
-              <td>Daily morning brief review. Invoicing pulse KPI tiles monitored.</td>
-              <td><span class="nu-pill watch">Watch</span></td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td class="nu-gate-name">Declare V5 Final</td>
-              <td>Post-completion queue Q1&ndash;Q15 unblocked. V5 becomes the baseline for all future work.</td>
-              <td><span class="nu-pill pass">Close</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="word-1">Risk</span> <span class="rest">&amp; Rollback</span></h2>
-        <div class="nu-section-rule"></div>
-        <div class="nu-callout">
-          <div class="nu-callout-title">If anything breaks within 72 hours&hellip;</div>
-          <div class="nu-callout-body">
-            Do not patch in place. Execute the rehearsed rollback: <code>git revert</code> the v5.0.0 merge commit on main,
-            redeploy ops.norrisutilities.com from the prior tag, and send a Telegram alert so the operator (Aaron) knows V5
-            was reverted and why. Treat the incident with Rule&nbsp;1 &mdash; honesty. No silent fixes, no &ldquo;probably
-            nothing.&rdquo; Capture the failure signature, then plan a Phase&nbsp;C.1 before re-attempting cutover.
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:22px;">
-          <div class="nu-status-card watch">
-            <div class="nu-card-label">Risk &middot; Data Drift</div>
-            <div class="nu-card-title">Shipments not invoiced</div>
-            <div class="nu-card-body">March 20 shipments (~$5,760+) remain uninvoiced in QuickBooks. Reconciliation is Phase E work &mdash; not a cutover blocker, but tracked on the open-invoices truth file.</div>
-          </div>
-          <div class="nu-status-card watch">
-            <div class="nu-card-label">Risk &middot; Brand Render</div>
-            <div class="nu-card-title">Phoenix pulse window</div>
-            <div class="nu-card-body">Assertion widened from 0.10 exact to [0.10, 0.14]. If visual regression appears, narrow the window back and investigate renderer, do not disable the test.</div>
-          </div>
-          <div class="nu-status-card gate">
-            <div class="nu-card-label">Control</div>
-            <div class="nu-card-title">Morning brief at 4:00 AM CT</div>
-            <div class="nu-card-body">First 72 hours, Aaron reads the brief daily on Telegram. Any anomaly &rarr; rollback first, diagnose second.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="word-1">Post-Cutover</span> <span class="rest">&mdash; What Unlocks</span></h2>
-        <div class="nu-section-rule"></div>
-        <div class="nu-status-grid">
-          <div class="nu-status-card go">
-            <div class="nu-card-label">Q1 Unblocks</div>
-            <div class="nu-card-title">CB silent-draft backlog</div>
-            <div class="nu-card-body">$3,685.15 across QB 150-series items can be reviewed and released through the normal review queue.</div>
-          </div>
-          <div class="nu-status-card go">
-            <div class="nu-card-label">Ops Portal</div>
-            <div class="nu-card-title">Invoicing pulse KPI live</div>
-            <div class="nu-card-body">Six live tiles above the Shipments table. Time-window toggle: Today / Week / Month / Quarter / YTD.</div>
-          </div>
-          <div class="nu-status-card go">
-            <div class="nu-card-label">Automation</div>
-            <div class="nu-card-title">Email + FlexPro filter + Morning brief</div>
-            <div class="nu-card-body">V2.2 automations run against V5 as the single source of truth &mdash; no legacy fallbacks reachable.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="word-1">Go</span> <span class="rest">/ No-Go</span></h2>
-        <div class="nu-section-rule"></div>
-        <div class="nu-go-block">
-          <div class="nu-go-left">
-            <div class="nu-go-kicker">Decision &middot; 2026-04-24</div>
-            <div class="nu-go-title">V5 is the final version. Ship it to production.</div>
-            <div class="nu-go-body">
-              Phase A is live. Phase B is closed. Phase C is ready to merge with a rehearsed rollback. Approval is Aaron&rsquo;s,
-              executed under the permanent GitHub push rule to ops.norrisutilities.com.
-            </div>
-          </div>
-          <div class="nu-go-stamp">Approved &middot; GO</div>
-        </div>
-      </section>
-
-    </div>
-  </main>
-
-  <footer class="nu-footer">
-    <div class="nu-footer-tagline">A Legacy of Commitment&reg;</div>
-    <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO &middot; Norris Utilities&reg;, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &middot;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &middot;
-      <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
-    </div>
-  </footer>
+<footer class="nu-footer">
+  <div class="nu-footer-tagline">A Legacy of Commitment®</div>
+  <div class="nu-footer-contact">
+    Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+    <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
+    <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
+    <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+  </div>
+  <div class="doc-meta">V5 Production Launch Plan · Internal Document · 2026-04-25</div>
+</footer>
 
 </body>
 </html>

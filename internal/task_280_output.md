@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Action Item — Pull 2018 Compass Bank → McKnight Deed — Norris Utilities®</title>
+  <title>Action Item — 2018 Compass Bank → McKnight Deed Pull — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
     :root {
       --nu-blue: #0000FF;
@@ -17,9 +18,10 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-alert-red: #B00020;
-      --nu-success-green: #0A7A3B;
+      --nu-priority-red: #C00000;
+      --nu-success-green: #008060;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-tagline: 'Playfair Display', Georgia, serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,459 +29,584 @@
     body {
       font-family: var(--font-primary);
       color: var(--nu-body-text);
-      background: var(--nu-light-gray);
+      background: var(--nu-white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HEADER — gradient with infrastructure overlay */
+    /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 30%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
-      padding: 60px 40px 80px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
+      padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 280px;
+      min-height: 300px;
     }
     .nu-header::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 60px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px);
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 80px);
       z-index: 1;
-      opacity: 0.6;
+      opacity: 0.7;
     }
     .nu-header::after {
       content: '';
       position: absolute;
       top: -50%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
     .nu-header * { position: relative; z-index: 2; }
 
     .nu-phoenix-icon {
-      width: 72px;
-      height: 72px;
+      width: 70px;
+      height: 70px;
       margin: 0 auto 14px;
-      opacity: 0.95;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.35));
     }
     .nu-logo-text {
       font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3rem;
       color: var(--nu-white);
-      letter-spacing: 0.35em;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
-      margin-bottom: 4px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+      margin-bottom: 6px;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.3);
     }
     .nu-logo-subtitle {
       font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: var(--nu-white);
-      letter-spacing: 0.8em;
+      letter-spacing: 0.7em;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
+      padding-left: 0.7em;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: rgba(255,255,255,0.95);
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
 
-    /* ASYMMETRIC WHITE CHEVRON */
+    /* CHEVRON */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg { width: 100%; height: 50px; display: block; }
+    .nu-chevron svg {
+      width: 100%;
+      height: 50px;
+      display: block;
+    }
 
-    /* CONTENT AREA with ghost phoenix watermark */
-    .nu-content-wrap {
+    /* MAIN */
+    .nu-content-area {
       position: relative;
       background: var(--nu-white);
-      overflow: hidden;
     }
-    .nu-content-wrap::before {
+    .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 40%; left: 50%;
-      transform: translate(-50%, -50%);
+      top: 200px; left: 50%;
+      transform: translateX(-50%);
       width: 65%;
-      padding-bottom: 65%;
-      background: radial-gradient(circle, rgba(0,51,204,0.05) 0%, rgba(0,51,204,0.02) 40%, transparent 70%);
+      max-width: 700px;
+      aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
       border-radius: 50%;
-      opacity: 0.7;
       z-index: 0;
       pointer-events: none;
     }
-    .nu-content-inner {
-      position: relative;
-      z-index: 1;
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .nu-container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 60px 40px 80px;
     }
 
-    /* BREADCRUMB / META BAR */
-    .nu-meta-bar {
+    /* PRIORITY BANNER */
+    .priority-banner {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
       align-items: center;
-      margin-bottom: 28px;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #555;
+      gap: 14px;
+      background: linear-gradient(135deg, #fff8e6 0%, #fff2cc 100%);
+      border-left: 5px solid var(--nu-accent-gold);
+      padding: 18px 24px;
+      border-radius: 4px;
+      margin-bottom: 32px;
     }
-    .nu-meta-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-    }
-    .nu-meta-tag.priority {
-      background: var(--nu-alert-red);
-      border-color: var(--nu-alert-red);
+    .priority-banner .badge {
+      background: var(--nu-accent-gold);
       color: var(--nu-white);
+      font-weight: 900;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      padding: 5px 12px;
+      border-radius: 3px;
+      text-transform: uppercase;
     }
-    .nu-meta-tag.source {
-      background: #1a1a3e;
-      border-color: #1a1a3e;
-      color: var(--nu-cyan);
-    }
-    .nu-meta-tag.status-open {
-      background: #FFF4DC;
-      border-color: var(--nu-accent-gold);
-      color: #7a5c10;
+    .priority-banner .text {
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+      font-weight: 700;
     }
 
-    /* PAGE TITLE BLOCK */
-    .nu-action-eyebrow {
+    /* PAGE TITLE */
+    .page-title-block {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--nu-medium-gray);
+    }
+    .page-eyebrow {
       font-family: var(--font-primary);
-      font-weight: 900;
-      font-size: 0.85rem;
-      letter-spacing: 0.25em;
-      color: #0033cc;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--nu-blue);
       margin-bottom: 10px;
     }
-    .nu-action-title {
+    .page-title {
       font-family: var(--font-primary);
       font-weight: 900;
       font-size: 2.4rem;
-      line-height: 1.15;
       color: var(--nu-dark-text);
-      margin-bottom: 18px;
-      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 12px;
     }
-    .nu-action-title .accent { color: #0033cc; }
-    .nu-action-summary {
-      font-size: 1.1rem;
-      color: #4a4a55;
-      max-width: 820px;
+    .page-title .first-word {
+      color: #0033cc;
+    }
+    .page-subtitle {
+      font-size: 1.05rem;
+      color: var(--nu-body-text);
+      max-width: 800px;
+    }
+
+    /* META GRID */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
       margin-bottom: 40px;
-      line-height: 1.55;
+    }
+    .meta-card {
+      background: var(--nu-light-gray);
+      padding: 18px 20px;
+      border-radius: 6px;
+      border-left: 3px solid var(--nu-cyan);
+    }
+    .meta-card .label {
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--nu-blue);
+      margin-bottom: 6px;
+    }
+    .meta-card .value {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--nu-dark-text);
     }
 
     /* SECTION HEADERS */
-    .nu-section {
-      margin-top: 48px;
-    }
     .nu-section-title {
       font-family: var(--font-primary);
       font-weight: 900;
       font-size: 1.5rem;
-      margin-bottom: 20px;
       color: var(--nu-dark-text);
-      border-bottom: 3px solid var(--nu-medium-gray);
+      margin: 36px 0 16px;
       padding-bottom: 10px;
+      border-bottom: 2px solid var(--nu-medium-gray);
     }
-    .nu-section-title .first { color: #0033cc; }
-
-    /* FACT GRID */
-    .nu-fact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-    .nu-fact {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 4px solid var(--nu-blue);
-      padding: 18px 20px;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    .nu-fact-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    .nu-section-title .first {
       color: #0033cc;
-      margin-bottom: 6px;
     }
-    .nu-fact-value {
-      font-size: 1.05rem;
-      font-weight: 700;
+
+    /* CONTEXT BOX */
+    .context-box {
+      background: var(--nu-light-gray);
+      padding: 24px 28px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--nu-blue);
+    }
+    .context-box p {
+      margin-bottom: 12px;
+    }
+    .context-box p:last-child {
+      margin-bottom: 0;
+    }
+    .context-box strong {
       color: var(--nu-dark-text);
     }
-    .nu-fact-sub {
-      font-size: 0.85rem;
-      color: #666;
-      font-weight: 400;
-      margin-top: 3px;
-    }
 
-    /* CHEVRON BADGE (step list) */
-    .nu-steps {
+    /* STEPS */
+    .step-list {
       list-style: none;
-      counter-reset: stepcounter;
+      counter-reset: step-counter;
     }
-    .nu-step {
-      display: flex;
-      gap: 20px;
-      padding: 20px 24px;
-      margin-bottom: 14px;
+    .step-list li {
+      counter-increment: step-counter;
+      padding: 20px 24px 20px 72px;
       background: var(--nu-white);
       border: 1px solid var(--nu-medium-gray);
       border-radius: 8px;
+      margin-bottom: 14px;
       position: relative;
-      counter-increment: stepcounter;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .nu-step:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(0,0,255,0.08);
+    .step-list li:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
-    .nu-step::before {
-      content: counter(stepcounter);
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
+    .step-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
       background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
       color: var(--nu-white);
+      font-weight: 900;
+      font-size: 1.05rem;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      font-weight: 900;
-      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,255,0.3);
     }
-    .nu-step-body {
-      flex: 1;
-    }
-    .nu-step-title {
+    .step-list .step-title {
       font-weight: 900;
-      color: var(--nu-dark-text);
       font-size: 1.05rem;
-      margin-bottom: 4px;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
     }
-    .nu-step-detail {
-      color: #555;
+    .step-list .step-desc {
       font-size: 0.95rem;
-      line-height: 1.55;
+      color: var(--nu-body-text);
     }
-    .nu-step-detail a {
-      color: #0033cc;
+    .step-list .step-desc a {
+      color: var(--nu-blue);
       font-weight: 700;
-      text-decoration: none;
-      border-bottom: 1px dashed #0033cc;
     }
 
-    /* DEED CARD (hero fact block) */
-    .nu-deed-card {
-      background: linear-gradient(135deg, #f7f9ff 0%, #eef3ff 100%);
-      border: 1px solid #c8d4f5;
-      border-radius: 12px;
+    /* INSTRUMENT REFERENCE */
+    .instrument-card {
+      background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
+      border: 2px solid var(--nu-blue);
+      border-radius: 10px;
       padding: 28px 32px;
-      margin-bottom: 32px;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 24px;
-      align-items: center;
+      margin-bottom: 24px;
     }
-    .nu-deed-icon {
-      width: 72px;
-      height: 72px;
-      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 18px rgba(0,0,255,0.25);
-    }
-    .nu-deed-icon svg { width: 40px; height: 40px; fill: var(--nu-white); }
-    .nu-deed-head {
-      font-size: 0.8rem;
+    .instrument-card .doc-label {
+      font-size: 0.75rem;
       font-weight: 900;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #0033cc;
-      margin-bottom: 6px;
+      color: var(--nu-blue);
+      margin-bottom: 12px;
     }
-    .nu-deed-title {
-      font-size: 1.4rem;
+    .instrument-card .doc-id {
+      font-family: 'Courier New', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      background: var(--nu-white);
+      padding: 12px 20px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .instrument-card .doc-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .instrument-card .doc-meta div {
+      font-size: 0.92rem;
+    }
+    .instrument-card .doc-meta strong {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--nu-blue);
+      margin-bottom: 4px;
+    }
+
+    /* PARTIES BLOCK */
+    .parties-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 20px;
+      align-items: center;
+      margin: 20px 0;
+    }
+    .party-card {
+      background: var(--nu-white);
+      border: 2px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 20px 22px;
+      text-align: center;
+    }
+    .party-card.grantor {
+      border-color: var(--nu-blue);
+    }
+    .party-card.grantee {
+      border-color: var(--nu-cyan);
+    }
+    .party-role {
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--nu-blue);
+      margin-bottom: 8px;
+    }
+    .party-name {
+      font-size: 1.1rem;
       font-weight: 900;
       color: var(--nu-dark-text);
-      margin-bottom: 6px;
-      line-height: 1.25;
     }
-    .nu-deed-meta {
-      font-size: 0.95rem;
-      color: #555;
+    .party-arrow {
+      font-size: 2rem;
+      color: var(--nu-blue);
+      font-weight: 900;
+    }
+
+    /* SOURCE LIST */
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .source-card {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 8px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .source-card h4 {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 6px;
+    }
+    .source-card .source-tag {
+      display: inline-block;
+      background: var(--nu-blue);
+      color: var(--nu-white);
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+    .source-card .source-tag.fee { background: var(--nu-priority-red); }
+    .source-card .source-tag.free { background: var(--nu-success-green); }
+    .source-card .source-tag.phone { background: var(--nu-blue); }
+    .source-card p {
+      font-size: 0.9rem;
+      color: var(--nu-body-text);
+      margin-bottom: 8px;
+    }
+    .source-card .contact {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--nu-blue);
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      padding: 12px 14px 12px 44px;
+      position: relative;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 0.97rem;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 3px;
+      background: var(--nu-white);
+    }
+    .checklist li strong {
+      color: var(--nu-dark-text);
     }
 
     /* CALLOUT */
-    .nu-callout {
-      background: #fffaf2;
-      border-left: 4px solid var(--nu-accent-gold);
-      padding: 18px 22px;
-      border-radius: 6px;
+    .callout {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
+      border-left: 4px solid var(--nu-priority-red);
+      padding: 20px 24px;
+      border-radius: 4px;
       margin: 24px 0;
-      font-size: 0.98rem;
-      color: #3d3220;
     }
-    .nu-callout strong { color: #7a5c10; }
+    .callout .callout-title {
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--nu-priority-red);
+      margin-bottom: 8px;
+    }
+    .callout p {
+      font-size: 0.95rem;
+      color: var(--nu-dark-text);
+    }
 
-    /* CTA BUTTONS */
-    .nu-cta-row {
+    /* WHY IT MATTERS */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin: 20px 0;
+    }
+    .why-card {
+      background: var(--nu-navy);
+      color: var(--nu-white);
+      padding: 24px 26px;
+      border-radius: 8px;
+    }
+    .why-card h4 {
+      color: var(--nu-cyan);
+      font-weight: 900;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+    .why-card p {
+      font-size: 0.93rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ACTIONS BAR */
+    .actions-bar {
       display: flex;
+      gap: 14px;
       flex-wrap: wrap;
-      gap: 12px;
       margin-top: 32px;
+      padding: 24px;
+      background: var(--nu-light-gray);
+      border-radius: 8px;
     }
     .nu-btn-primary, .nu-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 26px;
-      border-radius: 5px;
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 4px;
       font-family: var(--font-primary);
       font-weight: 700;
       font-size: 0.95rem;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
       cursor: pointer;
       transition: all 0.2s ease;
       text-decoration: none;
-      border: 2px solid var(--nu-blue);
     }
     .nu-btn-primary {
       background: var(--nu-blue);
       color: var(--nu-white);
+      border: 2px solid var(--nu-blue);
     }
     .nu-btn-primary:hover {
       background: #0000CC;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
       box-shadow: 0 4px 14px rgba(0,0,255,0.35);
     }
     .nu-btn-secondary {
       background: transparent;
       color: var(--nu-blue);
+      border: 2px solid var(--nu-blue);
     }
     .nu-btn-secondary:hover {
       background: var(--nu-blue);
       color: var(--nu-white);
     }
 
-    /* SIGNATURE / OWNER */
-    .nu-owner-block {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      align-items: center;
-      padding: 20px 24px;
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      margin-top: 24px;
-    }
-    .nu-owner-avatar {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
-      color: var(--nu-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.1rem;
-      letter-spacing: 0.05em;
-    }
-    .nu-owner-name { font-weight: 900; color: var(--nu-dark-text); font-size: 1.05rem; }
-    .nu-owner-role { font-size: 0.85rem; color: #666; }
-
     /* FOOTER */
     .nu-footer {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 50%, #001a99 100%);
+      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
       padding: 50px 40px;
       text-align: center;
       font-family: var(--font-primary);
     }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       color: var(--nu-cyan);
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
     .nu-footer-contact {
-      font-size: 0.95rem;
+      font-size: 1rem;
       line-height: 1.85;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
     }
-    .nu-footer-contact a:hover { text-decoration: underline; }
-    .nu-footer-divider {
-      width: 60px;
-      height: 2px;
-      background: var(--nu-cyan);
-      margin: 0 auto 18px;
-      opacity: 0.6;
+    .nu-footer-contact a:hover {
+      text-decoration: underline;
+    }
+    .nu-footer-meta {
+      margin-top: 18px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.05em;
     }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 40px 20px 60px; min-height: 200px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-header { padding: 50px 24px 70px; min-height: 240px; }
+      .nu-logo-text { font-size: 2.2rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.45em; }
       .nu-tagline { font-size: 1.05rem; }
-      .nu-content-inner { padding: 40px 22px 60px; }
-      .nu-action-title { font-size: 1.75rem; }
-      .nu-deed-card { grid-template-columns: 1fr; text-align: center; padding: 24px 20px; }
-      .nu-deed-icon { margin: 0 auto; }
-      .nu-step { padding: 16px 18px; gap: 14px; }
+      .nu-container { padding: 40px 22px 60px; }
+      .page-title { font-size: 1.7rem; }
+      .parties-row { grid-template-columns: 1fr; }
+      .party-arrow { transform: rotate(90deg); }
+      .instrument-card .doc-id { font-size: 1.15rem; }
+      .step-list li { padding-left: 64px; }
     }
 
     @media print {
-      body { background: var(--nu-white); }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .nu-step, .nu-fact, .nu-deed-card { box-shadow: none; page-break-inside: avoid; }
+      .actions-bar { display: none; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-      .nu-cta-row { display: none; }
     }
   </style>
 </head>
@@ -487,214 +614,224 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Phoenix Icon">
-      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
-      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
-    </svg>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.82"/>
+      </svg>
+    </div>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
-  <!-- ASYMMETRIC WHITE CHEVRON -->
+  <!-- CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#ffffff"/>
+      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
-  <!-- CONTENT -->
-  <main class="nu-content-wrap">
-    <div class="nu-content-inner">
+  <!-- MAIN -->
+  <main class="nu-content-area">
+    <div class="nu-container">
 
-      <!-- META -->
-      <div class="nu-meta-bar">
-        <span class="nu-meta-tag source">reMarkable Action Item</span>
-        <span class="nu-meta-tag priority">Priority: Research</span>
-        <span class="nu-meta-tag status-open">Status: Open</span>
-        <span class="nu-meta-tag">Captured: 2026-04-23</span>
+      <!-- PRIORITY BANNER -->
+      <div class="priority-banner">
+        <span class="badge">Action Item</span>
+        <span class="text">reMarkable capture — Pull Compass Bank → McKnight 2018 deed for chain-of-title verification</span>
       </div>
 
       <!-- TITLE -->
-      <div class="nu-action-eyebrow">Title Research / Estate Due Diligence</div>
-      <h1 class="nu-action-title">Pull the <span class="accent">2018 Compass Bank → McKnight</span> Deed</h1>
-      <p class="nu-action-summary">
-        Retrieve the recorded deed filed in Jefferson County, Alabama that documents the 2018 conveyance of the
-        4505 Butterworth estate from Compass Bank to the McKnight party. Instrument number begins
-        <strong>20180…</strong> (full digits to be confirmed at the courthouse index). The document is required
-        to advance negotiation on the 7,098 sq ft Buttewood property tie-in (ref. Task 239).
-      </p>
+      <div class="page-title-block">
+        <div class="page-eyebrow">Real Estate Due Diligence · Title Research</div>
+        <h1 class="page-title"><span class="first-word">Pull</span> the 2018 Compass Bank → McKnight Deed</h1>
+        <p class="page-subtitle">Locate, retrieve, and file Instrument 20180-series deed (Compass Bank, N.A. as grantor → McKnight as grantee, Jefferson County, Alabama probate records, 2018) in support of the active chain-of-title workup on the 4505 Butterworth estate review.</p>
+      </div>
 
-      <!-- DEED HERO CARD -->
-      <div class="nu-deed-card">
-        <div class="nu-deed-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-          </svg>
+      <!-- META -->
+      <div class="meta-grid">
+        <div class="meta-card">
+          <div class="label">Captured From</div>
+          <div class="value">reMarkable Tablet — Aaron's Notes</div>
         </div>
-        <div>
-          <div class="nu-deed-head">Document of Record</div>
-          <div class="nu-deed-title">Grantor: Compass Bank &nbsp;→&nbsp; Grantee: McKnight</div>
-          <div class="nu-deed-meta">Recording Year: 2018 &nbsp;•&nbsp; Instrument #: 20180__________ (to confirm) &nbsp;•&nbsp; County: Jefferson, AL</div>
+        <div class="meta-card">
+          <div class="label">Date Logged</div>
+          <div class="value">2026-04-24</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Owner</div>
+          <div class="value">Aaron C. Norris</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Status</div>
+          <div class="value">Open — Action Required</div>
         </div>
       </div>
 
-      <!-- KEY FACTS -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Key</span> Facts</h2>
-        <div class="nu-fact-grid">
-          <div class="nu-fact">
-            <div class="nu-fact-label">Grantor</div>
-            <div class="nu-fact-value">Compass Bank</div>
-            <div class="nu-fact-sub">Predecessor to BBVA / PNC; record may be filed under either name</div>
+      <!-- INSTRUMENT REFERENCE -->
+      <h2 class="nu-section-title"><span class="first">Document</span> Reference</h2>
+      <div class="instrument-card">
+        <div class="doc-label">Target Instrument Number</div>
+        <div class="doc-id">20180_____ (Series)</div>
+        <p style="font-size: 0.95rem; color: var(--nu-body-text); margin-bottom: 4px;">
+          The reMarkable note captured the 2018 series prefix. The full instrument number must be confirmed at the Jefferson County Probate Court records system before retrieval. Once confirmed, record the full number on this sheet for permanent reference.
+        </p>
+        <div class="doc-meta">
+          <div>
+            <strong>Document Type</strong>
+            Deed (Warranty / Statutory / Foreclosure — confirm)
           </div>
-          <div class="nu-fact">
-            <div class="nu-fact-label">Grantee</div>
-            <div class="nu-fact-value">McKnight</div>
-            <div class="nu-fact-sub">Confirm full legal name (individual vs. trust vs. LLC) on index</div>
+          <div>
+            <strong>Recording Year</strong>
+            2018
           </div>
-          <div class="nu-fact">
-            <div class="nu-fact-label">Recording Year</div>
-            <div class="nu-fact-value">2018</div>
-            <div class="nu-fact-sub">Instrument prefix: 20180…</div>
+          <div>
+            <strong>County</strong>
+            Jefferson County, Alabama
           </div>
-          <div class="nu-fact">
-            <div class="nu-fact-label">Likely Recording Office</div>
-            <div class="nu-fact-value">Jefferson County Probate</div>
-            <div class="nu-fact-sub">716 Richard Arrington Jr. Blvd N, Birmingham, AL 35203</div>
-          </div>
-          <div class="nu-fact">
-            <div class="nu-fact-label">Linked Matter</div>
-            <div class="nu-fact-value">4505 Butterworth Estate</div>
-            <div class="nu-fact-sub">7,098 sq ft — ref. Task 239 negotiation</div>
-          </div>
-          <div class="nu-fact">
-            <div class="nu-fact-label">Document Type</div>
-            <div class="nu-fact-value">Deed (conveyance)</div>
-            <div class="nu-fact-sub">Likely special warranty or foreclosure / REO deed given bank as grantor</div>
+          <div>
+            <strong>Court</strong>
+            Probate Court — Real Property Records
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- STEPS -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">How</span> To Pull It</h2>
-        <ol class="nu-steps">
-          <li class="nu-step">
-            <div class="nu-step-body">
-              <div class="nu-step-title">Confirm the property and county of record</div>
-              <div class="nu-step-detail">
-                Verify the physical address tied to the deed (expected: 4505 Butterworth, Birmingham, AL area).
-                If the property sits outside Jefferson County, pivot to the correct probate court (Shelby, St. Clair, etc.).
-              </div>
-            </div>
-          </li>
-          <li class="nu-step">
-            <div class="nu-step-body">
-              <div class="nu-step-title">Search the online probate index</div>
-              <div class="nu-step-detail">
-                Open the Jefferson County Probate Court Recording Index
-                (<a href="https://probate.jccal.org" target="_blank" rel="noopener">probate.jccal.org</a>). Search
-                by grantor <strong>“Compass Bank”</strong> with date range 01/01/2018 – 12/31/2018. Cross-search
-                grantee <strong>“McKnight”</strong> if the grantor search returns too many hits.
-              </div>
-            </div>
-          </li>
-          <li class="nu-step">
-            <div class="nu-step-body">
-              <div class="nu-step-title">Capture the full instrument number</div>
-              <div class="nu-step-detail">
-                Write down the complete 14-digit instrument number (format: 2018YYYYMMDDNNN).
-                Screenshot the index entry so the book/page and recording date are preserved.
-              </div>
-            </div>
-          </li>
-          <li class="nu-step">
-            <div class="nu-step-body">
-              <div class="nu-step-title">Pay for the certified PDF</div>
-              <div class="nu-step-detail">
-                Online copy fee in Jefferson County is typically $1.00 per page plus a small credit-card
-                convenience fee. Download the PDF and save as:
-                <strong>~/norris-agent/legal/deeds/2018-compass-bank-mcknight.pdf</strong>.
-              </div>
-            </div>
-          </li>
-          <li class="nu-step">
-            <div class="nu-step-body">
-              <div class="nu-step-title">If online image is illegible — walk it in</div>
-              <div class="nu-step-detail">
-                Go to the Jefferson County Courthouse Records Room, 716 Richard Arrington Jr. Blvd N,
-                2nd floor. Hand the clerk the instrument number and request a certified copy. Cost is
-                ~$5.00 certification + per-page fee.
-              </div>
-            </div>
-          </li>
-          <li class="nu-step">
-            <div class="nu-step-body">
-              <div class="nu-step-title">Read for the following items</div>
-              <div class="nu-step-detail">
-                • Legal description (lot, block, subdivision — must match Butterworth parcel). <br>
-                • Consideration amount (tells us 2018 REO basis). <br>
-                • Any reservations, easements, or deed restrictions carried forward. <br>
-                • Signature blocks (was it Compass Bank or already BBVA by closing date?).
-              </div>
-            </div>
-          </li>
-          <li class="nu-step">
-            <div class="nu-step-body">
-              <div class="nu-step-title">File and cross-reference</div>
-              <div class="nu-step-detail">
-                Add a summary row to the estate-negotiation workbook, link the PDF in the Task 239 record, and
-                flag any cloud on title for attorney review before any offer moves forward.
-              </div>
-            </div>
-          </li>
-        </ol>
-      </section>
+      <!-- PARTIES -->
+      <h2 class="nu-section-title"><span class="first">Parties</span> on the Deed</h2>
+      <div class="parties-row">
+        <div class="party-card grantor">
+          <div class="party-role">Grantor</div>
+          <div class="party-name">Compass Bank, N.A.</div>
+          <div style="font-size: 0.85rem; color: var(--nu-body-text); margin-top: 6px;">(Acquired by BBVA; later merged into PNC Bank — relevant for any successor verification)</div>
+        </div>
+        <div class="party-arrow">→</div>
+        <div class="party-card grantee">
+          <div class="party-role">Grantee</div>
+          <div class="party-name">McKnight</div>
+          <div style="font-size: 0.85rem; color: var(--nu-body-text); margin-top: 6px;">(Confirm full legal name — individual or entity — at retrieval)</div>
+        </div>
+      </div>
+
+      <!-- WHY IT MATTERS -->
+      <h2 class="nu-section-title"><span class="first">Why</span> This Document Matters</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <h4>Chain of Title</h4>
+          <p>Establishes the bank-to-individual transfer in 2018, a critical link between the prior mortgagee and the current ownership history of the parcel.</p>
+        </div>
+        <div class="why-card">
+          <h4>Foreclosure Indicator</h4>
+          <p>Compass Bank as grantor in 2018 strongly suggests a foreclosure or post-default conveyance. The deed reveals whether title passed clean or with reservations.</p>
+        </div>
+        <div class="why-card">
+          <h4>Legal Description</h4>
+          <p>Locks in the precise legal description of the parcel — needed to cross-check against any current listing, plat, or survey before a purchase decision.</p>
+        </div>
+        <div class="why-card">
+          <h4>Encumbrance Reference</h4>
+          <p>Often references the original mortgage instrument number, allowing lookup of the recorded mortgage and any subsequent satisfactions or releases.</p>
+        </div>
+      </div>
+
+      <!-- HOW TO PULL -->
+      <h2 class="nu-section-title"><span class="first">How</span> to Pull This Deed — Step by Step</h2>
+
+      <div class="context-box">
+        <p><strong>Three retrieval paths are available.</strong> Path 1 (online) is fastest if the full instrument number is already known. Path 2 (in-person at Jefferson County Probate Court) is the most reliable when the instrument number is partial. Path 3 (title company assist) is appropriate if the deed is buried in a longer chain that needs full abstracting.</p>
+      </div>
+
+      <ol class="step-list">
+        <li>
+          <div class="step-title">Confirm the Full Instrument Number</div>
+          <div class="step-desc">Search the Jefferson County Probate online records portal at <a href="https://probatesearch.jccal.org" target="_blank" rel="noopener">probatesearch.jccal.org</a> using grantor "Compass Bank" and grantee "McKnight" with date range 01/01/2018 to 12/31/2018. Record the full instrument number when the match is identified.</div>
+        </li>
+        <li>
+          <div class="step-title">Run the Online Image Pull</div>
+          <div class="step-desc">If the online portal allows image download (per-page fee typically applies), retrieve the PDF directly. Save as <em>Compass-McKnight-Deed-2018-INST20180______.pdf</em> in <em>~/norris-ops/operations/title-research/</em>.</div>
+        </li>
+        <li>
+          <div class="step-title">If Online Pull Fails — Visit Probate Court</div>
+          <div class="step-desc">Drive to Jefferson County Courthouse, 716 Richard Arrington Jr. Blvd N, Birmingham, AL 35203. Real Property Records counter is on the Probate Court floor. Request the instrument by number; certified copy fee is $1 per page plus a $5 certification stamp. Same-day pickup.</div>
+        </li>
+        <li>
+          <div class="step-title">Capture Backside / Continuation Pages</div>
+          <div class="step-desc">Verify the deed is complete — many warranty and foreclosure deeds run 4–8 pages with attached legal descriptions and exhibits. Confirm every page is captured before leaving the counter.</div>
+        </li>
+        <li>
+          <div class="step-title">Cross-Reference the Mortgage</div>
+          <div class="step-desc">If the deed cites a prior mortgage instrument number (typical for foreclosure deeds), pull that mortgage as well to complete the picture. Stash both documents together.</div>
+        </li>
+        <li>
+          <div class="step-title">File and Index in NU Brain</div>
+          <div class="step-desc">Add the deed to <em>~/norris-ops/operations/title-research/</em>, log it in <em>master_tracker.md</em> under the Buttesworth/4505 estate workup, and update the chain-of-title summary. Mark this action item complete.</div>
+        </li>
+      </ol>
+
+      <!-- SOURCES -->
+      <h2 class="nu-section-title"><span class="first">Where</span> to Get the Deed</h2>
+      <div class="source-grid">
+        <div class="source-card">
+          <span class="source-tag fee">Primary · Online</span>
+          <h4>Jefferson County Probate Search</h4>
+          <p>Online deed image search and retrieval. Fee per page applies; some indexes go back to the 1990s, deeds back further.</p>
+          <p class="contact">probatesearch.jccal.org</p>
+        </div>
+        <div class="source-card">
+          <span class="source-tag">In-Person</span>
+          <h4>Jefferson County Probate Court</h4>
+          <p>716 Richard Arrington Jr. Blvd N, Birmingham, AL 35203. Real Property Records counter. Open Mon–Fri, 8:00 AM – 5:00 PM.</p>
+          <p class="contact">205-325-5411</p>
+        </div>
+        <div class="source-card">
+          <span class="source-tag phone">Phone</span>
+          <h4>Probate Records Help Desk</h4>
+          <p>Confirms instrument number ranges and verifies a record exists before trip. Identify yourself as a recorded-document requester.</p>
+          <p class="contact">205-325-5411</p>
+        </div>
+        <div class="source-card">
+          <span class="source-tag free">Free Preview</span>
+          <h4>Alabama Title Company Network</h4>
+          <p>If the deed is part of a broader title workup, a contracted title company can pull as part of a full abstract. Free preview if a closing is anticipated.</p>
+          <p class="contact">Contact via Renasant — Patrick Lavette</p>
+        </div>
+      </div>
 
       <!-- CALLOUT -->
-      <div class="nu-callout">
-        <strong>Why this matters:</strong> The 2018 deed is the anchor document in the chain of title.
-        Without it, any offer on the 4505 Butterworth estate rests on second-hand assumptions — and Compass
-        Bank / McKnight is the inflection point where a foreclosure may sit in the chain. Pulling it now
-        prevents a surprise at closing.
+      <div class="callout">
+        <div class="callout-title">Critical — Confirm Before Acting</div>
+        <p>Compass Bank, N.A. was acquired by BBVA in 2007 and BBVA USA was subsequently acquired by PNC Bank in 2021. If contacting any party listed on the deed (e.g., for clarification on encumbrances or releases), route current inquiries through PNC Bank, not Compass — the Compass entity no longer exists as a chartered bank.</p>
       </div>
 
-      <!-- OUTPUT -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Expected</span> Output</h2>
-        <div class="nu-fact-grid">
-          <div class="nu-fact">
-            <div class="nu-fact-label">Deliverable 1</div>
-            <div class="nu-fact-value">Certified Deed PDF</div>
-            <div class="nu-fact-sub">Saved to ~/norris-agent/legal/deeds/</div>
-          </div>
-          <div class="nu-fact">
-            <div class="nu-fact-label">Deliverable 2</div>
-            <div class="nu-fact-value">One-Page Summary</div>
-            <div class="nu-fact-sub">Grantor, grantee, legal description, consideration, any clouds</div>
-          </div>
-          <div class="nu-fact">
-            <div class="nu-fact-label">Deliverable 3</div>
-            <div class="nu-fact-value">Task 239 Update</div>
-            <div class="nu-fact-sub">Link the PDF and summary into the Butterworth negotiation record</div>
-          </div>
-        </div>
-      </section>
+      <!-- WORKING CHECKLIST -->
+      <h2 class="nu-section-title"><span class="first">Working</span> Checklist</h2>
+      <ul class="checklist">
+        <li><strong>Identify full instrument number.</strong> Confirm the trailing six or seven digits via online portal.</li>
+        <li><strong>Pull deed image.</strong> PDF saved locally and to <em>norris-ops/operations/title-research/</em>.</li>
+        <li><strong>Verify all pages captured.</strong> Including the legal description exhibit and any continuation sheets.</li>
+        <li><strong>Read deed for foreclosure language.</strong> Note whether it is a foreclosure, warranty, or quitclaim conveyance.</li>
+        <li><strong>Capture referenced prior instruments.</strong> Mortgage number, prior deed numbers, any cross-referenced filings.</li>
+        <li><strong>Pull successor deeds (post-2018).</strong> Trace forward from McKnight to the present record owner.</li>
+        <li><strong>Update master_tracker.md.</strong> Log the deed reference, file path, and finding summary.</li>
+        <li><strong>Notify if anomaly found.</strong> Telegram alert to Aaron if title shows a defect, encumbrance, or unexpected party.</li>
+      </ul>
 
-      <!-- CTAs -->
-      <div class="nu-cta-row">
-        <a class="nu-btn-primary" href="https://probate.jccal.org" target="_blank" rel="noopener">Open Jefferson County Probate Index</a>
-        <a class="nu-btn-secondary" href="mailto:acnorris@norrisutilities.com?subject=Deed%20Pulled%20%E2%80%94%20Compass%20Bank%20to%20McKnight%202018&body=Deed%20retrieved.%20Summary%20attached.">Email Completion to Aaron</a>
+      <!-- WHAT TO LOOK FOR -->
+      <h2 class="nu-section-title"><span class="first">What</span> to Look For When You Read It</h2>
+      <div class="context-box">
+        <p><strong>Type of conveyance:</strong> Warranty deed, statutory warranty deed, special warranty, quitclaim, or foreclosure deed. Each carries different warranties of title.</p>
+        <p><strong>Consideration recited:</strong> The dollar amount stated, even if nominal, indicates whether this was a sale, gift, or post-foreclosure transfer at credit-bid value.</p>
+        <p><strong>Legal description:</strong> Lot/block, metes and bounds, or reference to a recorded plat. Compare against the parcel currently of interest.</p>
+        <p><strong>Reservations and exceptions:</strong> Any mineral, easement, or right-of-way reservations carried forward affect current ownership.</p>
+        <p><strong>Recording date and book/page:</strong> Confirm proper recording in 2018 with no gaps in the chain.</p>
+        <p><strong>Notarization and witness block:</strong> Confirm proper execution — particularly important for foreclosure deeds where execution defects can void title.</p>
       </div>
 
-      <!-- OWNER -->
-      <div class="nu-owner-block">
-        <div class="nu-owner-avatar">ACN</div>
-        <div>
-          <div class="nu-owner-name">Owner: Aaron C. Norris</div>
-          <div class="nu-owner-role">Founder &amp; CEO, Norris Utilities, LLC &nbsp;•&nbsp; Cell: 205-500-1343</div>
-        </div>
+      <!-- ACTIONS -->
+      <div class="actions-bar">
+        <a href="https://probatesearch.jccal.org" target="_blank" rel="noopener" class="nu-btn-primary">Open Probate Search Portal</a>
+        <a href="tel:2053255411" class="nu-btn-secondary">Call Probate Records — 205-325-5411</a>
+        <a href="mailto:acnorris@norrisutilities.com?subject=Deed%20Pulled%20—%20Compass%20Bank%20to%20McKnight%202018" class="nu-btn-secondary">Mark Complete via Email</a>
       </div>
 
     </div>
@@ -702,13 +839,15 @@
 
   <!-- FOOTER -->
   <footer class="nu-footer">
-    <div class="nu-footer-divider"></div>
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
+      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> |
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+    <div class="nu-footer-meta">
+      Internal Action Sheet · Generated 2026-04-24 · Norris Utilities® Autonomous Build Engine
     </div>
   </footer>
 

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Follow-Up — Awaiting Inventory — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <title>Open PO Follow-Up — Inventory Status — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
   <style>
     :root {
       --nu-blue: #0000FF;
+      --nu-blue-deep: #0033CC;
       --nu-cyan: #06D0FF;
       --nu-navy: #000033;
       --nu-white: #FFFFFF;
@@ -17,9 +17,11 @@
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
       --nu-accent-gold: #C9A84C;
-      --nu-alert-red: #C8102E;
-      --nu-alert-amber: #F2A900;
+      --nu-warning: #C8102E;
+      --nu-success: #2E7D32;
+      --nu-pending: #ED6C02;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-tagline: 'Playfair Display', Georgia, serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,14 +34,14 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ══ HEADER ══ */
+    /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, var(--nu-cyan) 100%);
-      padding: 60px 40px 80px;
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, #06D0FF 100%);
+      padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 280px;
+      min-height: 300px;
     }
     .nu-header::before {
       content: '';
@@ -54,22 +56,19 @@
     .nu-header::after {
       content: '';
       position: absolute;
-      top: -50%; right: -20%;
+      top: -40%; right: -20%;
       width: 80%; height: 200%;
-      background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(6,208,255,0.18) 0%, transparent 70%);
       z-index: 1;
-      pointer-events: none;
     }
-    .nu-header > * { position: relative; z-index: 2; }
+    .nu-header * { position: relative; z-index: 2; }
 
-    /* Ghost phoenix watermark in header */
     .nu-phoenix-watermark {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       width: 65%;
-      max-width: 520px;
+      max-width: 600px;
       opacity: 0.07;
       z-index: 1;
       pointer-events: none;
@@ -79,43 +78,54 @@
       width: 72px;
       height: 72px;
       margin: 0 auto 14px;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.35));
     }
     .nu-logo-text {
-      font-family: var(--font-primary);
       font-weight: 900;
       font-size: 3rem;
       color: var(--nu-white);
       letter-spacing: 0.32em;
       text-transform: uppercase;
       margin-bottom: 4px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 20px rgba(0,0,0,0.35);
     }
     .nu-logo-subtitle {
       font-weight: 900;
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       color: var(--nu-white);
-      letter-spacing: 0.7em;
+      letter-spacing: 0.75em;
       text-transform: uppercase;
-      margin-bottom: 16px;
-      padding-left: 0.7em;
+      margin-bottom: 18px;
+      padding-left: 0.75em;
     }
     .nu-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: rgba(255,255,255,0.95);
       letter-spacing: 0.04em;
     }
+    .nu-doc-label {
+      margin-top: 22px;
+      display: inline-block;
+      padding: 6px 18px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--nu-white);
+      font-weight: 700;
+    }
 
-    /* ══ CHEVRON TRANSITION ══ */
+    /* CHEVRON TRANSITION */
     .nu-chevron {
       position: relative;
       height: 50px;
       margin-top: -50px;
       z-index: 10;
-      line-height: 0;
     }
     .nu-chevron svg {
       width: 100%;
@@ -123,379 +133,477 @@
       display: block;
     }
 
-    /* ══ CONTENT AREA ══ */
+    /* CONTENT */
     .nu-content-area {
       position: relative;
       background: var(--nu-white);
-      padding: 48px 0 64px;
+      padding: 50px 0 70px;
     }
     .nu-content-area::before {
       content: '';
       position: absolute;
-      top: 40%; left: 50%;
+      top: 30%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
-      border-radius: 50%;
+      width: 65%;
+      height: 65%;
+      max-width: 700px;
+      max-height: 700px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L55 22 L72 12 L60 28 L82 22 L65 38 L78 52 L55 42 L50 62 L45 42 L22 52 L35 38 L18 22 L40 28 L28 12 L45 22 Z M50 58 L52 72 L62 67 L55 78 L50 96 L45 78 L38 67 L48 72 Z' fill='%230033cc' opacity='0.07'/></svg>");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
       z-index: 0;
+      pointer-events: none;
     }
-    .nu-container {
-      max-width: 1100px;
+    .nu-content-area > * { position: relative; z-index: 1; }
+
+    .container {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 32px;
-      position: relative;
-      z-index: 1;
+      padding: 0 40px;
     }
 
-    /* ══ PAGE TITLE ══ */
-    .nu-page-title {
-      font-weight: 900;
-      font-size: 2.3rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 8px;
-      line-height: 1.15;
-    }
-    .nu-page-title .nu-blue-word {
-      color: var(--nu-blue);
-    }
-    .nu-page-subtitle {
-      font-size: 1.05rem;
-      color: #555;
-      margin-bottom: 32px;
-      max-width: 780px;
-    }
-
-    /* ══ PRIORITY BANNER ══ */
-    .priority-banner {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%);
-      color: var(--nu-white);
-      padding: 18px 26px;
-      border-radius: 8px;
-      margin-bottom: 32px;
-      border-left: 6px solid var(--nu-cyan);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    }
-    .priority-banner .pb-icon {
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
-      fill: var(--nu-cyan);
-    }
-    .priority-banner .pb-text { flex: 1; }
-    .priority-banner .pb-label {
-      font-size: 0.75rem;
-      font-weight: 900;
-      letter-spacing: 0.2em;
-      color: var(--nu-cyan);
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-    .priority-banner .pb-headline {
-      font-size: 1.1rem;
-      font-weight: 700;
-      line-height: 1.35;
-    }
-
-    /* ══ SECTION HEADERS ══ */
-    .nu-section {
-      margin-bottom: 36px;
-    }
-    .nu-section-title {
-      font-weight: 900;
-      font-size: 1.5rem;
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--nu-medium-gray);
-    }
-    .nu-section-title .first-word {
-      color: var(--nu-blue);
-    }
-    .nu-section-title .rest {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-
-    /* ══ ACTION CARD ══ */
-    .action-card {
-      background: var(--nu-white);
-      border-radius: 10px;
-      padding: 28px 30px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.07);
-      border: 1px solid var(--nu-medium-gray);
-      margin-bottom: 20px;
-    }
-    .action-card h3 {
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--nu-dark-text);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .action-card h3 .step-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: var(--nu-blue);
-      color: var(--nu-white);
-      border-radius: 50%;
-      font-size: 0.95rem;
-      font-weight: 900;
-      flex-shrink: 0;
-    }
-    .action-card p {
-      font-size: 0.98rem;
-      color: var(--nu-body-text);
-      margin-bottom: 10px;
-    }
-    .action-card ul {
-      padding-left: 0;
-      list-style: none;
-    }
-    .action-card ul li {
-      padding: 6px 0 6px 22px;
-      position: relative;
-      font-size: 0.97rem;
-    }
-    .action-card ul li::before {
-      content: '•';
-      color: var(--nu-blue);
-      font-weight: 900;
-      position: absolute;
-      left: 6px;
-      font-size: 1.3rem;
-      line-height: 1;
-      top: 8px;
-    }
-
-    /* ══ INFO GRID ══ */
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .info-tile {
-      background: linear-gradient(135deg, var(--nu-light-gray) 0%, #fdfdff 100%);
-      border: 1px solid var(--nu-medium-gray);
-      border-left: 4px solid var(--nu-blue);
-      border-radius: 6px;
-      padding: 16px 18px;
-    }
-    .info-tile .it-label {
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.15em;
-      color: var(--nu-blue);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .info-tile .it-value {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--nu-dark-text);
-      line-height: 1.4;
-    }
-
-    /* ══ EMAIL DRAFT ══ */
-    .email-draft {
-      background: #fdfdfd;
-      border: 1px solid var(--nu-medium-gray);
-      border-top: 4px solid var(--nu-blue);
-      border-radius: 8px;
-      padding: 28px 32px;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 1rem;
-      color: #222;
-      line-height: 1.75;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    }
-    .email-draft .email-meta {
-      font-family: var(--font-primary);
-      font-size: 0.85rem;
-      color: #666;
-      border-bottom: 1px dashed var(--nu-medium-gray);
-      padding-bottom: 14px;
-      margin-bottom: 18px;
-    }
-    .email-draft .email-meta div {
-      margin-bottom: 4px;
-    }
-    .email-draft .email-meta strong {
-      color: var(--nu-dark-text);
-      display: inline-block;
-      min-width: 70px;
-    }
-    .email-draft .email-body p {
-      margin-bottom: 14px;
-      text-indent: 1.5em;
-    }
-    .email-draft .email-body p.no-indent {
-      text-indent: 0;
-    }
-    .email-draft .email-body ul {
-      list-style: none;
-      padding-left: 1.8em;
-      margin-bottom: 14px;
-    }
-    .email-draft .email-body ul li {
-      padding: 3px 0;
-      position: relative;
-    }
-    .email-draft .email-body ul li::before {
-      content: '•';
-      position: absolute;
-      left: -1em;
-    }
-    .email-draft .email-sig {
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px dashed var(--nu-medium-gray);
-      font-family: var(--font-primary);
-      font-size: 0.92rem;
-      color: #444;
-      line-height: 1.55;
-    }
-    .email-draft .email-sig strong {
-      color: var(--nu-dark-text);
-    }
-
-    /* ══ CHECKLIST ══ */
-    .checklist {
-      background: var(--nu-white);
-      border: 1px solid var(--nu-medium-gray);
-      border-radius: 8px;
-      padding: 22px 26px;
-    }
-    .checklist li {
-      list-style: none;
-      padding: 10px 0 10px 36px;
-      position: relative;
-      border-bottom: 1px solid var(--nu-light-gray);
-      font-size: 0.97rem;
-    }
-    .checklist li:last-child { border-bottom: none; }
-    .checklist li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 22px;
-      height: 22px;
-      border: 2px solid var(--nu-blue);
-      border-radius: 4px;
-      background: var(--nu-white);
-    }
-
-    /* ══ CALLOUT ══ */
-    .callout {
-      background: linear-gradient(135deg, rgba(6,208,255,0.08) 0%, rgba(0,0,255,0.04) 100%);
-      border-left: 5px solid var(--nu-cyan);
-      padding: 18px 22px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      font-size: 0.97rem;
-    }
-    .callout strong {
-      color: var(--nu-blue);
-      font-weight: 900;
-    }
-
-    /* ══ BUTTON ROW ══ */
-    .button-row {
+    /* META BAR */
+    .meta-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin: 24px 0 8px;
-    }
-    .nu-btn-primary,
-    .nu-btn-secondary {
-      display: inline-block;
-      padding: 13px 28px;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      background: linear-gradient(90deg, var(--nu-light-gray) 0%, var(--nu-white) 100%);
+      border-left: 4px solid var(--nu-blue);
       border-radius: 4px;
-      font-family: var(--font-primary);
+      margin-bottom: 36px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .meta-bar .meta-item {
+      font-size: 0.85rem;
+    }
+    .meta-bar .meta-label {
+      display: block;
       font-weight: 700;
-      font-size: 0.95rem;
+      color: var(--nu-blue-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      margin-bottom: 2px;
+    }
+    .meta-bar .meta-value {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+    .priority-pill {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--nu-warning);
+      color: var(--nu-white);
+      border-radius: 20px;
+      font-weight: 900;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* SECTION TITLE */
+    .nu-section-title {
+      font-weight: 900;
+      font-size: 1.75rem;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+    .nu-section-title .first { color: var(--nu-blue-deep); }
+    .nu-section-title .rest { color: var(--nu-dark-text); }
+    .section-sub {
+      color: var(--nu-body-text);
+      font-size: 0.98rem;
+      margin-bottom: 24px;
+    }
+    .section { margin-bottom: 48px; }
+
+    /* PO TABLE / CARDS */
+    .po-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 20px;
+    }
+    .po-card {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+      border: 1px solid var(--nu-medium-gray);
+      border-top: 4px solid var(--nu-blue);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .po-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.10);
+    }
+    .po-card.urgent { border-top-color: var(--nu-warning); }
+    .po-card.pending { border-top-color: var(--nu-pending); }
+    .po-card.confirmed { border-top-color: var(--nu-success); }
+
+    .po-vendor {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--nu-blue-deep);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .po-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .po-number {
+      font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: var(--nu-body-text);
+      margin-bottom: 14px;
+    }
+    .po-meta-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      font-size: 0.88rem;
+    }
+    .po-meta-row:last-of-type { border-bottom: none; }
+    .po-meta-row .label {
+      color: var(--nu-body-text);
+      font-weight: 400;
+    }
+    .po-meta-row .value {
+      color: var(--nu-dark-text);
+      font-weight: 700;
+    }
+    .po-status {
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .po-status.warning {
+      background: rgba(200,16,46,0.08);
+      color: var(--nu-warning);
+      border-left: 3px solid var(--nu-warning);
+    }
+    .po-status.pending {
+      background: rgba(237,108,2,0.08);
+      color: var(--nu-pending);
+      border-left: 3px solid var(--nu-pending);
+    }
+    .po-status.success {
+      background: rgba(46,125,50,0.08);
+      color: var(--nu-success);
+      border-left: 3px solid var(--nu-success);
+    }
+    .po-actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* BUTTONS */
+    .nu-btn-primary, .nu-btn-secondary {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.85rem;
       letter-spacing: 0.03em;
       cursor: pointer;
-      transition: all 0.2s ease;
       text-decoration: none;
-      text-align: center;
+      transition: all 0.2s ease;
+      border: 2px solid var(--nu-blue);
     }
     .nu-btn-primary {
       background: var(--nu-blue);
       color: var(--nu-white);
-      border: 2px solid var(--nu-blue);
     }
     .nu-btn-primary:hover {
-      background: #0000CC;
+      background: var(--nu-blue-deep);
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(0,0,255,0.3);
     }
     .nu-btn-secondary {
       background: transparent;
       color: var(--nu-blue);
-      border: 2px solid var(--nu-blue);
     }
     .nu-btn-secondary:hover {
       background: var(--nu-blue);
       color: var(--nu-white);
     }
 
-    /* ══ FOOTER ══ */
+    /* EMAIL DRAFT BLOCKS */
+    .draft-block {
+      background: var(--nu-light-gray);
+      border-radius: 10px;
+      padding: 28px;
+      margin-bottom: 24px;
+      border: 1px solid var(--nu-medium-gray);
+      border-left: 4px solid var(--nu-cyan);
+    }
+    .draft-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      align-items: baseline;
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--nu-medium-gray);
+    }
+    .draft-vendor {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--nu-blue-deep);
+    }
+    .draft-fields {
+      font-size: 0.88rem;
+      color: var(--nu-body-text);
+    }
+    .draft-fields div { margin-bottom: 4px; }
+    .draft-fields strong {
+      display: inline-block;
+      width: 60px;
+      color: var(--nu-dark-text);
+    }
+    .draft-body {
+      background: var(--nu-white);
+      padding: 22px 26px;
+      border-radius: 6px;
+      border: 1px solid var(--nu-medium-gray);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--nu-dark-text);
+      white-space: pre-wrap;
+      font-family: var(--font-primary);
+    }
+    .draft-body p { margin-bottom: 14px; }
+    .draft-body .indent { padding-left: 1.5em; }
+
+    /* CHECKLIST */
+    .checklist {
+      background: var(--nu-white);
+      border-radius: 10px;
+      padding: 28px 32px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+      border: 1px solid var(--nu-medium-gray);
+    }
+    .checklist h3 {
+      font-weight: 900;
+      color: var(--nu-blue-deep);
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--nu-medium-gray);
+      gap: 14px;
+    }
+    .checklist-item:last-child { border-bottom: none; }
+    .check-box {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--nu-blue);
+      border-radius: 4px;
+      margin-top: 2px;
+      background: var(--nu-white);
+    }
+    .check-text {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .check-text strong { color: var(--nu-dark-text); }
+    .check-text small {
+      display: block;
+      color: var(--nu-body-text);
+      margin-top: 2px;
+      font-size: 0.82rem;
+    }
+
+    /* TIMELINE */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-top: 8px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--nu-blue) 0%, var(--nu-cyan) 100%);
+    }
+    .timeline-item {
+      position: relative;
+      padding: 12px 0 12px 12px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 18px;
+      width: 14px;
+      height: 14px;
+      background: var(--nu-blue);
+      border: 3px solid var(--nu-white);
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--nu-blue);
+    }
+    .timeline-item.now::before {
+      background: var(--nu-warning);
+      box-shadow: 0 0 0 2px var(--nu-warning), 0 0 0 6px rgba(200,16,46,0.2);
+    }
+    .timeline-date {
+      font-weight: 900;
+      color: var(--nu-blue-deep);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+    }
+    .timeline-title {
+      font-weight: 700;
+      color: var(--nu-dark-text);
+      margin: 2px 0 4px;
+    }
+    .timeline-detail {
+      font-size: 0.9rem;
+      color: var(--nu-body-text);
+    }
+
+    /* CONTACT GRID */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .contact-chip {
+      background: var(--nu-white);
+      padding: 16px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--nu-medium-gray);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .contact-name {
+      font-weight: 900;
+      color: var(--nu-dark-text);
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    .contact-role {
+      font-size: 0.78rem;
+      color: var(--nu-blue-deep);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .contact-line {
+      font-size: 0.85rem;
+      color: var(--nu-body-text);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .contact-line a {
+      color: var(--nu-blue);
+      text-decoration: none;
+    }
+    .contact-line a:hover { text-decoration: underline; }
+
+    /* CALL-OUT */
+    .callout {
+      background: linear-gradient(135deg, #fff8e6 0%, #fff3d0 100%);
+      border: 1px solid #f0d77a;
+      border-left: 5px solid var(--nu-accent-gold);
+      padding: 22px 26px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    .callout strong { color: var(--nu-dark-text); }
+    .callout p { color: var(--nu-body-text); font-size: 0.95rem; }
+
+    /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 44px 40px;
+      padding: 50px 40px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
+    .nu-footer::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -10%;
+      width: 60%; height: 200%;
+      background: radial-gradient(ellipse, rgba(6,208,255,0.08) 0%, transparent 70%);
+    }
+    .nu-footer * { position: relative; }
     .nu-footer-tagline {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-tagline);
       font-style: italic;
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--nu-cyan);
       margin-bottom: 14px;
     }
     .nu-footer-contact {
       font-size: 0.92rem;
       line-height: 1.85;
+      color: rgba(255,255,255,0.85);
+    }
+    .nu-footer-contact strong {
+      color: var(--nu-white);
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 900;
+      font-size: 1rem;
     }
     .nu-footer-contact a {
       color: var(--nu-cyan);
       text-decoration: none;
-      transition: opacity 0.2s ease;
     }
-    .nu-footer-contact a:hover {
-      opacity: 0.75;
+    .nu-footer-contact a:hover { text-decoration: underline; }
+    .nu-footer-meta {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.05em;
     }
 
-    /* ══ RESPONSIVE ══ */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nu-header { padding: 44px 20px 70px; min-height: 220px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 0.9rem; letter-spacing: 0.5em; padding-left: 0.5em; }
-      .nu-tagline { font-size: 1rem; }
-      .nu-page-title { font-size: 1.7rem; }
-      .nu-container { padding: 0 20px; }
-      .email-draft { padding: 20px 22px; }
-      .action-card { padding: 22px 20px; }
-      .priority-banner { flex-direction: column; text-align: center; }
+      .nu-header { padding: 50px 24px 70px; min-height: 240px; }
+      .nu-logo-text { font-size: 2.1rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1.05rem; }
+      .container { padding: 0 22px; }
+      .meta-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .nu-section-title { font-size: 1.4rem; }
+      .draft-fields strong { width: 55px; }
     }
 
     @media print {
       body { background: white; }
       .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .action-card, .email-draft { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
       .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
-      .button-row { display: none; }
+      .po-card, .draft-block, .checklist { box-shadow: none; break-inside: avoid; }
     }
   </style>
 </head>
@@ -503,23 +611,20 @@
 
   <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix-watermark" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M100 10 L115 35 L140 20 L125 50 L160 40 L135 70 L170 85 L130 85 L140 115 L110 95 L100 130 L90 95 L60 115 L70 85 L30 85 L65 70 L40 40 L75 50 L60 20 L85 35 Z" fill="#ffffff"/>
-      <path d="M100 125 L105 150 L120 140 L112 160 L100 210 L88 160 L80 140 L95 150 Z" fill="#ffffff"/>
+    <svg class="nu-phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M50 5 L55 22 L72 12 L60 28 L82 22 L65 38 L78 52 L55 42 L50 62 L45 42 L22 52 L35 38 L18 22 L40 28 L28 12 L45 22 Z M50 58 L52 72 L62 67 L55 78 L50 96 L45 78 L38 67 L48 72 Z" fill="white"/>
     </svg>
-
-    <div class="nu-phoenix-icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
-        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
-      </svg>
-    </div>
+    <svg class="nu-phoenix-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Phoenix Icon">
+      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.95"/>
+      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+    </svg>
     <div class="nu-logo-text">NORRIS</div>
     <div class="nu-logo-subtitle">UTILITIES</div>
     <div class="nu-tagline">A Legacy of Commitment®</div>
+    <div class="nu-doc-label">Internal Action Item · Open PO Follow-Up</div>
   </header>
 
-  <!-- WHITE CHEVRON TRANSITION -->
+  <!-- CHEVRON TRANSITION -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
@@ -528,189 +633,352 @@
 
   <!-- MAIN CONTENT -->
   <main class="nu-content-area">
-    <div class="nu-container">
+    <div class="container">
 
-      <h1 class="nu-page-title"><span class="nu-blue-word">Order</span> Follow-Up — Awaiting Inventory</h1>
-      <p class="nu-page-subtitle">
-        Action item from reMarkable: follow up on the order placed against the last PO. Customer is anxiously waiting on inventory. Confirm status, surface any vendor-side delays, and set a realistic delivery window.
-      </p>
-
-      <!-- PRIORITY BANNER -->
-      <div class="priority-banner">
-        <svg class="pb-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2 L1 21 H23 Z M12 9 V14 M12 17 V17.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="pb-text">
-          <div class="pb-label">High Priority — Customer Expectation</div>
-          <div class="pb-headline">Customer is anxiously waiting. A check-in today — even without a delivery date — preserves trust.</div>
+      <!-- META BAR -->
+      <div class="meta-bar">
+        <div class="meta-item">
+          <span class="meta-label">Action Item</span>
+          <span class="meta-value">Follow up on order from last PO — anxiously waiting on inventory</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Source</span>
+          <span class="meta-value">reMarkable Capture</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Captured</span>
+          <span class="meta-value">2026-04-24</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Owner</span>
+          <span class="meta-value">Aaron C. Norris</span>
+        </div>
+        <div class="meta-item">
+          <span class="priority-pill">Priority · High</span>
         </div>
       </div>
 
-      <!-- WHAT WE KNOW -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first-word">What</span> <span class="rest">We Know</span></h2>
-
-        <div class="info-grid">
-          <div class="info-tile">
-            <div class="it-label">Source</div>
-            <div class="it-value">reMarkable action item (handwritten)</div>
-          </div>
-          <div class="info-tile">
-            <div class="it-label">Action Type</div>
-            <div class="it-value">Vendor + Customer Follow-Up</div>
-          </div>
-          <div class="info-tile">
-            <div class="it-label">Status</div>
-            <div class="it-value">Awaiting Inventory Confirmation</div>
-          </div>
-          <div class="info-tile">
-            <div class="it-label">Owner</div>
-            <div class="it-value">Aaron C. Norris</div>
-          </div>
-          <div class="info-tile">
-            <div class="it-label">Customer Sentiment</div>
-            <div class="it-value">Anxious — wants visibility</div>
-          </div>
-          <div class="info-tile">
-            <div class="it-label">Trigger Date</div>
-            <div class="it-value">2026-04-23</div>
-          </div>
-        </div>
+      <!-- SECTION 1: SITUATION -->
+      <section class="section">
+        <h2 class="nu-section-title"><span class="first">Situation.</span> <span class="rest">What this action covers</span></h2>
+        <p class="section-sub">Aaron flagged on reMarkable that he is anxiously waiting on inventory from the last open POs. Three POs are currently outstanding across our top three vendor relationships. Each one has a customer commitment behind it. This page consolidates ETA, contact, and a ready-to-send follow-up draft for each so the calls and emails can be cleared in one sitting.</p>
 
         <div class="callout">
-          <strong>Context needed before sending:</strong> confirm which customer PO this references (likely from master_tracker), the vendor on the back-end (Skylift, BOSS, or Samson Rope), and whether the order is equipment, FlexPro Armor, or rope. If the PO number or line items are unclear, pull the last three open POs from QuickBooks and cross-check against recent Telegram traffic before calling the customer.
+          <p><strong>Why this matters now.</strong> Customer-side commitments are stacked behind each open PO — Skylift trucks against the 1/12 PO, FlexPro Armor reorders against the BOSS Products production line, and Samson Rope inventory replenishment against active dealer/distributor demand. The longer ETA confirmation slips, the more exposure on follow-through promises Aaron has already made to the field.</p>
         </div>
       </section>
 
-      <!-- STEP-BY-STEP PLAYBOOK -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first-word">Action</span> <span class="rest">Playbook</span></h2>
+      <!-- SECTION 2: OPEN POs -->
+      <section class="section">
+        <h2 class="nu-section-title"><span class="first">Open</span> <span class="rest">Purchase Orders</span></h2>
+        <p class="section-sub">Three POs awaiting inventory confirmation, ranked by dollar exposure and customer urgency.</p>
 
-        <div class="action-card">
-          <h3><span class="step-num">1</span> Identify the exact PO and customer</h3>
-          <p>Before touching the phone or keyboard, confirm which order this refers to.</p>
-          <ul>
-            <li>Open the master tracker and filter for status = "Ordered, awaiting delivery"</li>
-            <li>Cross-reference the most recent PO issued (QuickBooks → Purchase Orders → sort by date)</li>
-            <li>Note the customer contact, SKU(s), quantity, and ship-to address</li>
-            <li>Pull any prior Telegram or email threads on this specific PO for tone context</li>
-          </ul>
-        </div>
+        <div class="po-grid">
 
-        <div class="action-card">
-          <h3><span class="step-num">2</span> Contact the vendor for real status</h3>
-          <p>Get the truth before you talk to the customer. Never guess a delivery date.</p>
-          <ul>
-            <li><strong>If Skylift:</strong> call Nick Gordon or Andrew Jarmoszuk for a build/ship update</li>
-            <li><strong>If BOSS Products:</strong> email Troy Gongwer and Thayne Grove (CC both) — ask for PO status and revised ETA</li>
-            <li><strong>If Samson Rope:</strong> email Donna Poll and Sarah Daniels (CC both) — request inventory confirmation and ship date</li>
-            <li><strong>If FlexPro Armor (handmade):</strong> confirm with the Foley, AL fabrication team — production queue position and expected completion date</li>
-            <li><strong>If Bay Shore Systems:</strong> contact Andy Barron (primary) or Herb Minatre — request drill rig build status</li>
-            <li>Ask specifically: "Is it on the floor, on the truck, or still in the queue?"</li>
-          </ul>
-        </div>
+          <!-- SKYLIFT PO -->
+          <div class="po-card urgent">
+            <div class="po-vendor">Skylift</div>
+            <div class="po-title">5× SBA40i-LW + 1× SBA47i-MH</div>
+            <div class="po-number">PO Issued · 2026-01-12</div>
 
-        <div class="action-card">
-          <h3><span class="step-num">3</span> Call the customer personally</h3>
-          <p>A phone call beats an email when the customer is anxious. Voice carries commitment.</p>
-          <ul>
-            <li>Open with: "I wanted to give you a direct update on your order before you had to ask again."</li>
-            <li>Share the vendor-confirmed status — be specific, not vague</li>
-            <li>Give the best-known delivery window; if you don't know, say so and commit to a follow-up date</li>
-            <li>Ask: "Is there anything pressing on your end that changes the urgency?"</li>
-            <li>End with: "I'll text/email you the tracking number the moment it ships."</li>
-          </ul>
-        </div>
+            <div class="po-meta-row"><span class="label">PO Total</span><span class="value">$1,091,402.50</span></div>
+            <div class="po-meta-row"><span class="label">Quoted Lead</span><span class="value">~3 weeks (per Nick Gordon)</span></div>
+            <div class="po-meta-row"><span class="label">Time Elapsed</span><span class="value">14+ weeks since PO</span></div>
+            <div class="po-meta-row"><span class="label">Primary Contact</span><span class="value">Nick Gordon</span></div>
 
-        <div class="action-card">
-          <h3><span class="step-num">4</span> Follow the call with a written confirmation</h3>
-          <p>Every verbal update gets documented in writing within 30 minutes.</p>
-          <ul>
-            <li>Send the email draft below (customize to match the specific PO)</li>
-            <li>Copy Caroline Butler (CB) so she has the commitment on file</li>
-            <li>Log the interaction in the master tracker with today's date and the next check-in date</li>
-            <li>Set a calendar reminder for the promised follow-up date — do not miss it</li>
-          </ul>
-        </div>
+            <div class="po-status warning">
+              Significantly past the original 3-week build window. Customer-side delivery commitments at risk. Need a hard chassis-by-chassis status and confirmed ship dates.
+            </div>
 
-        <div class="action-card">
-          <h3><span class="step-num">5</span> Update internal systems</h3>
-          <p>Close the loop so the team can pick it up without asking.</p>
-          <ul>
-            <li>Update master_tracker.md with: last contact date, vendor status, promised delivery window, next action</li>
-            <li>If delivery is materially delayed, flag it in the next daily summary</li>
-            <li>If this customer has an open invoice too, note that separately — do not combine the conversations</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- EMAIL DRAFT TEMPLATE -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first-word">Customer</span> <span class="rest">Email Draft</span></h2>
-
-        <div class="callout">
-          <strong>Voice check:</strong> em dash after the greeting, indented paragraphs, blank line between each, bullets with •, "Sincerely," close. No filler words. Lead with the status — do not bury it.
-        </div>
-
-        <div class="email-draft">
-          <div class="email-meta">
-            <div><strong>To:</strong> [Customer contact name and email]</div>
-            <div><strong>CC:</strong> Caroline Butler — cb@norrisutilities.com</div>
-            <div><strong>Subject:</strong> Your Order — Status Update from Norris Utilities</div>
+            <div class="po-actions">
+              <a href="#draft-skylift" class="nu-btn-primary">Open Draft</a>
+              <a href="tel:+1" class="nu-btn-secondary">Call Skylift</a>
+            </div>
           </div>
-          <div class="email-body">
-            <p class="no-indent">[First name] —</p>
 
-            <p>I wanted to reach out directly with an update on your recent PO before you had to ask again. I know waiting on inventory without visibility is the worst part of any order, and I appreciate your patience.</p>
+          <!-- BOSS / FLEXPRO ARMOR PO -->
+          <div class="po-card pending">
+            <div class="po-vendor">BOSS Products · FlexPro Armor</div>
+            <div class="po-title">FlexPro Armor Bucket Cover Reorder</div>
+            <div class="po-number">SKUs: NU-BC-2851 · NU-BC-2834 · NU-BC-2851-C · NU-BC-2834-C</div>
 
-            <p>Here is where we stand today:</p>
+            <div class="po-meta-row"><span class="label">Margin Lock</span><span class="value">50% (per pricing rule)</span></div>
+            <div class="po-meta-row"><span class="label">Production Status</span><span class="value">Awaiting confirmation</span></div>
+            <div class="po-meta-row"><span class="label">Primary Contacts</span><span class="value">Troy Gongwer · Thayne Grove</span></div>
+            <div class="po-meta-row"><span class="label">CC Rule</span><span class="value">Always CC both</span></div>
 
-            <ul>
-              <li>PO #[number] — [SKU / item description, quantity]</li>
-              <li>Current status: [confirmed with vendor — production / shipped / in transit]</li>
-              <li>Expected delivery window: [date range]</li>
-              <li>Tracking: [will be provided the moment it leaves the dock / tracking # here]</li>
-            </ul>
+            <div class="po-status pending">
+              Need confirmed production ship date by SKU. Active demand: Dominion Energy (Coy Crosby), Linetec, plus open dealer pipeline. Inventory shortfall delays March-shipment invoicing follow-through.
+            </div>
 
-            <p>If anything shifts on the vendor side between now and delivery, you will hear from me first — not after the fact. My goal is to earn your next order, and that means keeping you informed on this one.</p>
-
-            <p>Please call or text me directly at 205-500-1343 if anything on your end has changed — timing, ship-to location, or quantity. Y'all have been advantageous partners and I want to make sure we land this one clean.</p>
-
-            <p class="no-indent">Sincerely,</p>
-            <p class="no-indent" style="margin-left: 1.5em;">Aaron C. Norris</p>
+            <div class="po-actions">
+              <a href="#draft-boss" class="nu-btn-primary">Open Draft</a>
+              <a href="#contacts" class="nu-btn-secondary">View Contacts</a>
+            </div>
           </div>
-          <div class="email-sig">
-            <strong>Aaron C. Norris</strong><br>
-            Founder &amp; CEO<br>
-            Norris Utilities, LLC<br>
-            Cell: 205-500-1343<br>
-            acnorris@norrisutilities.com
+
+          <!-- SAMSON ROPE PO -->
+          <div class="po-card pending">
+            <div class="po-vendor">Samson Rope</div>
+            <div class="po-title">Authorized Distributor Replenishment</div>
+            <div class="po-number">Margin Locked · 30%</div>
+
+            <div class="po-meta-row"><span class="label">Order Status</span><span class="value">Open · awaiting ETA</span></div>
+            <div class="po-meta-row"><span class="label">Primary Contacts</span><span class="value">Donna Poll · Sarah Daniels</span></div>
+            <div class="po-meta-row"><span class="label">CC Rule</span><span class="value">Always CC both</span></div>
+            <div class="po-meta-row"><span class="label">Channel</span><span class="value">Distributor (40% off list)</span></div>
+
+            <div class="po-status pending">
+              Need shipment tracking + ETA breakdown by line item to clear distributor commitments. Confirm whether any line items are on backorder so we can pre-warn customers rather than miss promises.
+            </div>
+
+            <div class="po-actions">
+              <a href="#draft-samson" class="nu-btn-primary">Open Draft</a>
+              <a href="#contacts" class="nu-btn-secondary">View Contacts</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 3: EMAIL DRAFTS -->
+      <section class="section">
+        <h2 class="nu-section-title"><span class="first">Follow-Up</span> <span class="rest">Drafts (Aaron's voice)</span></h2>
+        <p class="section-sub">Three drafts written in Aaron's voice — em-dash greeting, indented paragraphs, no filler words, no apology. Send as-is or edit and send.</p>
+
+        <!-- SKYLIFT DRAFT -->
+        <div class="draft-block" id="draft-skylift">
+          <div class="draft-header">
+            <div class="draft-vendor">Skylift — Truck PO Status</div>
+            <div class="draft-fields">
+              <div><strong>To:</strong> Nick Gordon — Skylift</div>
+              <div><strong>CC:</strong> Andrew Jarmoszuk · Dale Williams · Nick Jarmoszuk Jr</div>
+              <div><strong>Subject:</strong> 1/12 PO — Status check on the five SBA40i-LW and the SBA47i-MH</div>
+            </div>
+          </div>
+          <div class="draft-body">
+<p>Nick —</p>
+<p class="indent">Following up on the PO we issued 1/12 — five SBA40i-LW units plus the one SBA47i-MH. Total of $1,091,402.50.</p>
+<p class="indent">When we placed the order, the lead time you quoted was around three weeks. We're well past that window now and I have customer-side delivery commitments riding on these chassis.</p>
+<p class="indent">Two things I need from you to get straight on:</p>
+<p class="indent">• A unit-by-unit production status — what stage each truck is in today<br>
+• A confirmed ship date for each, even if staggered</p>
+<p class="indent">If anything is sliding I'd rather know now so I can manage expectations on this end. Appreciate a quick reply on these — happy to jump on a call this week if it's easier.</p>
+<p>Sincerely,</p>
+<p class="indent">Aaron C. Norris<br>
+Founder &amp; CEO<br>
+Norris Utilities, LLC<br>
+Cell: 205-500-1343<br>
+acnorris@norrisutilities.com</p>
+          </div>
+        </div>
+
+        <!-- BOSS / FLEXPRO ARMOR DRAFT -->
+        <div class="draft-block" id="draft-boss">
+          <div class="draft-header">
+            <div class="draft-vendor">BOSS Products — FlexPro Armor Production Status</div>
+            <div class="draft-fields">
+              <div><strong>To:</strong> Troy Gongwer · Thayne Grove</div>
+              <div><strong>CC:</strong> (always CC both)</div>
+              <div><strong>Subject:</strong> FlexPro Armor Reorder — Need confirmed ship dates by SKU</div>
+            </div>
+          </div>
+          <div class="draft-body">
+<p>Troy, Thayne —</p>
+<p class="indent">Checking in on the open FlexPro Armor PO. I have active demand pulling against this inventory and need to lock down production status by SKU.</p>
+<p class="indent">Specifically, can y'all confirm the current build status and confirmed ship date on each of the following:</p>
+<p class="indent">• NU-BC-2851 — 2-Man, 28"×51"<br>
+• NU-BC-2834 — 1.5-Man, 28"×34"<br>
+• NU-BC-2851-C — 2-Man Combo<br>
+• NU-BC-2834-C — 1.5-Man Combo</p>
+<p class="indent">If any of these are on hold for material or labor, that's the first thing I need flagged so I can pre-warn the customer side. Coy Crosby at Dominion is one of the orders riding behind this and I'd rather give him a real date than a soft one.</p>
+<p class="indent">Whatever the status — just give it to me straight and I'll work it from there.</p>
+<p>Sincerely,</p>
+<p class="indent">Aaron C. Norris<br>
+Founder &amp; CEO<br>
+Norris Utilities, LLC<br>
+Cell: 205-500-1343<br>
+acnorris@norrisutilities.com</p>
+          </div>
+        </div>
+
+        <!-- SAMSON ROPE DRAFT -->
+        <div class="draft-block" id="draft-samson">
+          <div class="draft-header">
+            <div class="draft-vendor">Samson Rope — Distributor Replenishment ETA</div>
+            <div class="draft-fields">
+              <div><strong>To:</strong> Donna Poll · Sarah Daniels</div>
+              <div><strong>CC:</strong> (always CC both)</div>
+              <div><strong>Subject:</strong> Open PO — ETA and tracking by line item</div>
+            </div>
+          </div>
+          <div class="draft-body">
+<p>Donna, Sarah —</p>
+<p class="indent">Following up on our open Samson Rope PO. I'm anxiously waiting on this inventory to clear active distributor commitments on this end.</p>
+<p class="indent">Can y'all send over:</p>
+<p class="indent">• Confirmed ETA for the shipment<br>
+• Tracking once it cuts<br>
+• Any line items on backorder, with a realistic restock date</p>
+<p class="indent">If there's anything sliding, the earlier I know the better — I'd rather adjust on the dealer side than miss a date. Appreciate the quick turn.</p>
+<p>Sincerely,</p>
+<p class="indent">Aaron C. Norris<br>
+Founder &amp; CEO<br>
+Norris Utilities, LLC<br>
+Cell: 205-500-1343<br>
+acnorris@norrisutilities.com</p>
           </div>
         </div>
       </section>
 
-      <!-- CHECKLIST -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first-word">Pre-Call</span> <span class="rest">Checklist</span></h2>
-        <ul class="checklist">
-          <li>Confirm which PO this action item refers to (master_tracker cross-check)</li>
-          <li>Pull the customer's recent order history and any open invoices</li>
-          <li>Contact the vendor for a real, dated status — not a guess</li>
-          <li>Write down the ETA window before dialing the customer</li>
-          <li>Call the customer personally (do not lead with email)</li>
-          <li>Send written confirmation within 30 minutes of the call</li>
-          <li>CC Caroline Butler on the confirmation email</li>
-          <li>Update master_tracker with today's contact and next follow-up date</li>
-          <li>Set a calendar reminder for the promised check-in</li>
-          <li>If material delay: flag in the next daily summary</li>
-        </ul>
+      <!-- SECTION 4: ACTION CHECKLIST -->
+      <section class="section">
+        <h2 class="nu-section-title"><span class="first">Today's</span> <span class="rest">Action Checklist</span></h2>
+        <p class="section-sub">Run top to bottom. Each item is one phone call or one email. Whole list should clear in under 30 minutes.</p>
+
+        <div class="checklist">
+          <h3>Order of operations</h3>
+
+          <div class="checklist-item">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>1. Call Nick Gordon — Skylift truck PO.</strong>
+              <small>Get unit-by-unit status on the five SBA40i-LW + one SBA47i-MH. Highest dollar exposure ($1.09M) and longest elapsed time. Lead with the call, follow with the email if no answer.</small>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>2. Send the BOSS / FlexPro Armor draft.</strong>
+              <small>To Troy Gongwer + Thayne Grove (always CC both). Need confirmed ship dates per SKU. Coy Crosby / Dominion sits behind this — flag if any SKU slides.</small>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>3. Send the Samson Rope draft.</strong>
+              <small>To Donna Poll + Sarah Daniels (always CC both). Ask for ETA, tracking number once cut, and any backorder flags.</small>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>4. Update Master Tracker.</strong>
+              <small>Once each vendor responds, log confirmed ship date and updated status against the open PO row in <code>master_tracker</code>. Roll any slipped dates forward to customer commitments.</small>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>5. Pre-warn affected customers.</strong>
+              <small>If any vendor slips, send proactive heads-up to the affected customer (Coy Crosby / Dominion is the most exposed). One short email — better to set the right expectation now than miss a promise.</small>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>6. Close the loop with CB.</strong>
+              <small>Caroline gets the updated ship dates so she can adjust internal scheduling and any pending invoice prep against the March-shipment follow-through.</small>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- BUTTON ROW -->
-      <div class="button-row">
-        <a href="tel:2055001343" class="nu-btn-primary">Call Aaron — 205-500-1343</a>
-        <a href="mailto:acnorris@norrisutilities.com?subject=Order%20Status%20Update" class="nu-btn-secondary">Email Aaron</a>
-      </div>
+      <!-- SECTION 5: CONTACTS -->
+      <section class="section" id="contacts">
+        <h2 class="nu-section-title"><span class="first">Vendor</span> <span class="rest">Contacts</span></h2>
+        <p class="section-sub">Quick-reference contacts for the three vendors with open POs.</p>
+
+        <div class="contact-grid">
+
+          <div class="contact-chip">
+            <div class="contact-name">Nick Gordon</div>
+            <div class="contact-role">Skylift · Pricing &amp; Specs</div>
+            <span class="contact-line">Primary contact for the 1/12 truck PO</span>
+            <span class="contact-line">CC: Andrew Jarmoszuk, Dale Williams, Nick Jarmoszuk Jr</span>
+          </div>
+
+          <div class="contact-chip">
+            <div class="contact-name">Troy Gongwer</div>
+            <div class="contact-role">BOSS Products · FlexPro Armor</div>
+            <span class="contact-line">Primary on FlexPro Armor production</span>
+            <span class="contact-line">Always CC: Thayne Grove</span>
+          </div>
+
+          <div class="contact-chip">
+            <div class="contact-name">Thayne Grove</div>
+            <div class="contact-role">BOSS Products · FlexPro Armor</div>
+            <span class="contact-line">Always CC alongside Troy Gongwer</span>
+            <span class="contact-line">No solo emails to either</span>
+          </div>
+
+          <div class="contact-chip">
+            <div class="contact-name">Donna Poll</div>
+            <div class="contact-role">Samson Rope</div>
+            <span class="contact-line">Primary distributor contact</span>
+            <span class="contact-line">Always CC: Sarah Daniels</span>
+          </div>
+
+          <div class="contact-chip">
+            <div class="contact-name">Sarah Daniels</div>
+            <div class="contact-role">Samson Rope</div>
+            <span class="contact-line">Always CC alongside Donna Poll</span>
+            <span class="contact-line">No solo emails to either</span>
+          </div>
+
+          <div class="contact-chip">
+            <div class="contact-name">Caroline Butler (CB)</div>
+            <div class="contact-role">Norris Utilities · Admin</div>
+            <span class="contact-line">Tier 1 trust · loop in on confirmed ship dates</span>
+            <span class="contact-line">Customer-facing replies need Aaron's review</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 6: TIMELINE -->
+      <section class="section">
+        <h2 class="nu-section-title"><span class="first">Timeline.</span> <span class="rest">From PO to today</span></h2>
+        <p class="section-sub">Where each open PO sits against today's date.</p>
+
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-date">2026-01-12</div>
+            <div class="timeline-title">Skylift PO issued</div>
+            <div class="timeline-detail">5× SBA40i-LW + 1× SBA47i-MH. Total $1,091,402.50. Lead time quoted ~3 weeks by Nick Gordon.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2026-02-02</div>
+            <div class="timeline-title">Original Skylift ship window</div>
+            <div class="timeline-detail">3-week mark from PO. Ship date passed without confirmation.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2026-03-20</div>
+            <div class="timeline-title">FlexPro Armor March shipment dispatched</div>
+            <div class="timeline-detail">Bucket covers shipped — invoicing follow-through pending. Demand on the next production run is already stacked.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2026-04-13</div>
+            <div class="timeline-title">Last invoice / status audit</div>
+            <div class="timeline-detail">Open invoices flagged. Skylift, BOSS, and Samson POs all logged as still-open against active customer demand.</div>
+          </div>
+
+          <div class="timeline-item now">
+            <div class="timeline-date">2026-04-24 — Today</div>
+            <div class="timeline-title">Aaron flags it on reMarkable</div>
+            <div class="timeline-detail">"Follow up on order from last PO — anxiously waiting on inventory." This action page resolves it.</div>
+          </div>
+
+        </div>
+      </section>
 
     </div>
   </main>
@@ -719,11 +987,14 @@
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
-      130 Inverness Plaza #210, Birmingham, AL 35242<br>
-      <a href="tel:2055001343">205-500-1343</a> |
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      <strong>Aaron C. Norris — Founder &amp; CEO</strong>
+      Norris Utilities®, LLC · Birmingham, Alabama<br>
+      <a href="tel:2055001343">205-500-1343</a> ·
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> ·
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
+    </div>
+    <div class="nu-footer-meta">
+      Internal action page · generated 2026-04-24 · reMarkable action item · Norris Utilities®, A Legacy of Commitment®, and Phoenix Icon® are registered trademarks of Norris Utilities, LLC.
     </div>
   </footer>
 

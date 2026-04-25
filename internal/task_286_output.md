@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Finalize V5 for Production — Norris Utilities®</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <title>SA V5 Production Finalization — Norris Utilities®</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
     :root {
       --nu-blue: #0000FF;
       --nu-cyan: #06D0FF;
@@ -15,10 +17,9 @@
       --nu-medium-gray: #E8E8EC;
       --nu-dark-text: #1A1A2E;
       --nu-body-text: #333333;
-      --nu-accent-gold: #C9A84C;
-      --nu-green: #0a7a3a;
-      --nu-amber: #c77a0a;
-      --nu-red: #a41a1a;
+      --nu-success: #1B873F;
+      --nu-warn: #C97A0A;
+      --nu-danger: #C92A2A;
       --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -27,7 +28,7 @@
     body {
       font-family: var(--font-primary);
       color: var(--nu-body-text);
-      background: var(--nu-light-gray);
+      background: var(--nu-white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -35,16 +36,16 @@
     /* HEADER */
     .nu-header {
       position: relative;
-      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 25%, #0066ee 55%, #00aaff 80%, #06D0FF 100%);
+      background: linear-gradient(135deg, #0a0e5c 0%, #0033cc 35%, #0066ee 60%, #00aaff 85%, var(--nu-cyan) 100%);
       padding: 70px 40px 90px;
       text-align: center;
       overflow: hidden;
-      min-height: 300px;
+      min-height: 320px;
     }
     .nu-header::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background:
         repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 60px),
         repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 80px);
@@ -55,74 +56,43 @@
       content: '';
       position: absolute;
       top: -40%; right: -15%;
-      width: 70%; height: 180%;
+      width: 70%; height: 200%;
       background: radial-gradient(ellipse, rgba(6, 208, 255, 0.18) 0%, transparent 70%);
       z-index: 1;
     }
-    .nu-header-inner {
-      position: relative;
-      z-index: 2;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .nu-phoenix-watermark {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 65%;
-      max-width: 520px;
-      opacity: 0.07;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .nu-eyebrow {
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--nu-cyan);
-      margin-bottom: 14px;
+    .nu-header * { position: relative; z-index: 2; }
+
+    .nu-phoenix-icon {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 18px;
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.35));
     }
     .nu-logo-text {
+      font-family: var(--font-primary);
       font-weight: 900;
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: var(--nu-white);
-      letter-spacing: 0.32em;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
       margin-bottom: 4px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 22px rgba(0,0,0,0.32);
     }
     .nu-logo-subtitle {
       font-weight: 900;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: var(--nu-white);
-      letter-spacing: 0.7em;
+      letter-spacing: 0.78em;
       text-transform: uppercase;
       margin-bottom: 22px;
-      padding-left: 0.7em;
     }
     .nu-tagline {
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 1.25rem;
-      color: var(--nu-cyan);
+      font-size: 1.35rem;
+      color: rgba(255,255,255,0.95);
       letter-spacing: 0.04em;
-      margin-bottom: 28px;
-    }
-    .nu-doc-title {
-      font-weight: 900;
-      font-size: 2.1rem;
-      color: var(--nu-white);
-      letter-spacing: 0.02em;
-      margin-top: 10px;
-      line-height: 1.2;
-    }
-    .nu-doc-subtitle {
-      font-weight: 400;
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.88);
-      margin-top: 10px;
     }
 
     /* CHEVRON */
@@ -132,305 +102,391 @@
       margin-top: -50px;
       z-index: 10;
     }
-    .nu-chevron svg {
-      width: 100%;
-      height: 50px;
-      display: block;
-    }
+    .nu-chevron svg { width: 100%; height: 50px; display: block; }
 
     /* CONTENT */
     .nu-content-area {
       position: relative;
-      background: var(--nu-light-gray);
+      background: var(--nu-white);
     }
-    .nu-content-inner {
-      max-width: 1100px;
+    .nu-content-area::before {
+      content: '';
+      position: absolute;
+      top: 80px; left: 50%;
+      transform: translateX(-50%);
+      width: 65%;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0,0,255,0.025) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .nu-content-area > * { position: relative; z-index: 1; }
+    .nu-wrap { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
+
+    /* PAGE TITLE BLOCK */
+    .nu-page-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .nu-eyebrow {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      color: var(--nu-blue);
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border: 1.5px solid var(--nu-blue);
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    .nu-page-title h1 {
+      font-weight: 900;
+      font-size: 2.6rem;
+      color: var(--nu-dark-text);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .nu-page-title h1 span { color: var(--nu-blue); }
+    .nu-page-title p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 50px 40px 70px;
     }
 
-    /* STATUS BANNER */
-    .status-banner {
-      background: linear-gradient(135deg, #0a7a3a 0%, #0d9549 100%);
-      color: var(--nu-white);
-      padding: 22px 28px;
+    /* STATUS STRIP */
+    .nu-status-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+    .nu-stat {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
+      border-left: 4px solid var(--nu-blue);
+      border-radius: 8px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .nu-stat .label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 8px;
+    }
+    .nu-stat .value {
+      font-weight: 900;
+      font-size: 1.7rem;
+      color: var(--nu-dark-text);
+      line-height: 1.1;
+    }
+    .nu-stat .sub {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 4px;
+    }
+    .nu-stat.green { border-left-color: var(--nu-success); }
+    .nu-stat.green .value { color: var(--nu-success); }
+    .nu-stat.cyan { border-left-color: var(--nu-cyan); }
+    .nu-stat.amber { border-left-color: var(--nu-warn); }
+
+    /* SECTION HEADER */
+    .nu-section { margin-bottom: 56px; }
+    .nu-section-title {
+      font-weight: 900;
+      font-size: 1.65rem;
+      margin-bottom: 6px;
+      letter-spacing: -0.005em;
+    }
+    .nu-section-title .first { color: var(--nu-blue); }
+    .nu-section-title .rest { color: var(--nu-dark-text); font-weight: 700; }
+    .nu-section-rule {
+      height: 3px;
+      width: 64px;
+      background: linear-gradient(90deg, var(--nu-blue), var(--nu-cyan));
+      border-radius: 2px;
+      margin-bottom: 22px;
+    }
+    .nu-section-lead {
+      color: #555;
+      font-size: 1.02rem;
+      margin-bottom: 26px;
+      max-width: 880px;
+    }
+
+    /* GATE GRID */
+    .nu-gate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .nu-gate {
+      background: var(--nu-white);
+      border: 1px solid var(--nu-medium-gray);
       border-radius: 10px;
+      padding: 22px 22px 20px;
+      position: relative;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .nu-gate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+    }
+    .nu-gate-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 36px;
-      box-shadow: 0 6px 22px rgba(10,122,58,0.25);
-      flex-wrap: wrap;
+      margin-bottom: 12px;
     }
-    .status-banner-left { display: flex; align-items: center; gap: 16px; }
-    .status-dot {
-      width: 14px; height: 14px;
-      background: #b6ffd2;
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(182,255,210,0.3);
-      animation: pulse 2s infinite;
-      flex-shrink: 0;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(182,255,210,0.3); }
-      50% { box-shadow: 0 0 0 8px rgba(182,255,210,0.12); }
-    }
-    .status-title {
+    .nu-gate-name {
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
       letter-spacing: 0.02em;
     }
-    .status-sub {
-      font-weight: 400;
+    .nu-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .nu-pill.pass {
+      background: rgba(27, 135, 63, 0.12);
+      color: var(--nu-success);
+    }
+    .nu-pill.go {
+      background: rgba(6, 208, 255, 0.15);
+      color: #007a99;
+    }
+    .nu-pill.hold {
+      background: rgba(201, 122, 10, 0.15);
+      color: var(--nu-warn);
+    }
+    .nu-pill::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .nu-gate-desc {
       font-size: 0.95rem;
-      opacity: 0.92;
+      color: #555;
+      margin-bottom: 14px;
     }
-    .status-meta {
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: rgba(255,255,255,0.18);
-      padding: 8px 14px;
-      border-radius: 6px;
-    }
-
-    /* SECTION */
-    .nu-section { margin-bottom: 44px; }
-    .nu-section-title {
-      font-weight: 900;
-      font-size: 1.5rem;
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 3px solid var(--nu-blue);
-    }
-    .nu-section-title .first {
-      color: var(--nu-blue);
-    }
-    .nu-section-title .rest {
-      color: var(--nu-dark-text);
-      font-weight: 700;
-    }
-
-    /* KPI GRID */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-    .kpi-card {
-      background: var(--nu-white);
-      border-radius: 10px;
-      padding: 22px 20px;
-      border: 1px solid var(--nu-medium-gray);
-      border-top: 4px solid var(--nu-blue);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    }
-    .kpi-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #666;
-      margin-bottom: 8px;
-    }
-    .kpi-value {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--nu-dark-text);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .kpi-value.green { color: var(--nu-green); }
-    .kpi-sub {
+    .nu-gate-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
       font-size: 0.82rem;
       color: #777;
-      font-weight: 400;
+      border-top: 1px solid var(--nu-medium-gray);
+      padding-top: 12px;
+    }
+    .nu-gate-meta strong {
+      color: var(--nu-dark-text);
+      font-weight: 700;
     }
 
     /* CHECKLIST */
-    .checklist {
-      background: var(--nu-white);
-      border-radius: 10px;
+    .nu-checklist {
+      background: var(--nu-light-gray);
+      border-radius: 12px;
+      padding: 30px 34px;
       border: 1px solid var(--nu-medium-gray);
-      overflow: hidden;
     }
-    .checklist-row {
+    .nu-checklist ul {
+      list-style: none;
       display: grid;
-      grid-template-columns: 44px 1fr auto;
-      gap: 16px;
-      padding: 18px 22px;
-      border-bottom: 1px solid var(--nu-medium-gray);
-      align-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 12px 28px;
     }
-    .checklist-row:last-child { border-bottom: none; }
-    .check-icon {
-      width: 28px; height: 28px;
+    .nu-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px dashed #d8d8e0;
+      font-size: 0.97rem;
+      color: var(--nu-dark-text);
+    }
+    .nu-check-mark {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
       border-radius: 50%;
+      background: var(--nu-success);
+      color: var(--nu-white);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.78rem;
       font-weight: 900;
-      font-size: 1rem;
-      color: var(--nu-white);
-      flex-shrink: 0;
+      margin-top: 1px;
     }
-    .check-icon.done { background: var(--nu-green); }
-    .check-icon.pending { background: var(--nu-amber); }
-    .check-icon.blocked { background: var(--nu-red); }
-    .check-body {
-      line-height: 1.45;
+    .nu-check-mark.todo {
+      background: var(--nu-medium-gray);
+      color: #777;
+      border: 1.5px solid #b9b9c2;
     }
-    .check-title {
-      font-weight: 700;
-      color: var(--nu-dark-text);
-      font-size: 1rem;
-    }
-    .check-desc {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 3px;
-    }
-    .check-tag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 5px 10px;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-    .tag-done { background: #d7f4e3; color: var(--nu-green); }
-    .tag-pending { background: #fbecd4; color: var(--nu-amber); }
-    .tag-blocked { background: #f4d7d7; color: var(--nu-red); }
 
-    /* TWO COLUMN */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+    /* TIMELINE */
+    .nu-timeline {
+      position: relative;
+      padding-left: 32px;
     }
-    .info-card {
+    .nu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 6px; bottom: 6px;
+      width: 2px;
+      background: linear-gradient(var(--nu-blue), var(--nu-cyan));
+    }
+    .nu-event {
+      position: relative;
+      padding: 0 0 22px 0;
+    }
+    .nu-event::before {
+      content: '';
+      position: absolute;
+      left: -32px; top: 4px;
+      width: 18px; height: 18px;
+      border-radius: 50%;
       background: var(--nu-white);
-      border-radius: 10px;
-      padding: 26px;
-      border: 1px solid var(--nu-medium-gray);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      border: 3px solid var(--nu-blue);
+      box-shadow: 0 0 0 3px var(--nu-white);
     }
-    .info-card h3 {
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--nu-blue);
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--nu-medium-gray);
+    .nu-event.done::before {
+      background: var(--nu-success);
+      border-color: var(--nu-success);
     }
-    .info-card ul {
-      list-style: none;
-      padding: 0;
-    }
-    .info-card li {
-      padding: 9px 0;
-      padding-left: 22px;
-      position: relative;
-      color: var(--nu-dark-text);
-      font-size: 0.95rem;
-      border-bottom: 1px dashed var(--nu-medium-gray);
-    }
-    .info-card li:last-child { border-bottom: none; }
-    .info-card li::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 16px;
-      width: 8px; height: 8px;
+    .nu-event.now::before {
       background: var(--nu-cyan);
-      transform: rotate(45deg);
+      border-color: var(--nu-cyan);
+      animation: pulse 2.2s ease-in-out infinite;
     }
-    .info-card li strong {
-      color: var(--nu-blue);
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px var(--nu-white), 0 0 0 6px rgba(6,208,255,0.0); }
+      50% { box-shadow: 0 0 0 3px var(--nu-white), 0 0 0 10px rgba(6,208,255,0.25); }
+    }
+    .nu-event-date {
       font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--nu-blue);
+      margin-bottom: 4px;
+    }
+    .nu-event-title {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 4px;
+    }
+    .nu-event-body {
+      font-size: 0.95rem;
+      color: #555;
     }
 
-    /* SIGN-OFF */
-    .sign-off {
-      background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 60%, #0033cc 100%);
-      color: var(--nu-white);
-      border-radius: 12px;
-      padding: 36px 32px;
-      margin-top: 10px;
-      position: relative;
-      overflow: hidden;
-    }
-    .sign-off::before {
-      content: '';
-      position: absolute;
-      top: -30%; right: -10%;
-      width: 50%; height: 160%;
-      background: radial-gradient(ellipse, rgba(6,208,255,0.22) 0%, transparent 65%);
-    }
-    .sign-off-inner { position: relative; z-index: 2; }
-    .sign-off h3 {
-      font-weight: 900;
-      font-size: 1.3rem;
-      color: var(--nu-cyan);
-      margin-bottom: 14px;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-    .sign-off p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.92);
-      margin-bottom: 12px;
-    }
-    .sign-off-grid {
+    /* SIGNOFF */
+    .nu-signoff {
+      background: linear-gradient(135deg, #f7f9ff 0%, #e8f6ff 100%);
+      border: 1px solid #cfe5fb;
+      border-radius: 14px;
+      padding: 36px 40px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-top: 22px;
-      padding-top: 22px;
-      border-top: 1px solid rgba(255,255,255,0.2);
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
     }
-    .sign-block {
-      font-size: 0.9rem;
+    .nu-signoff h3 {
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--nu-dark-text);
+      margin-bottom: 8px;
     }
-    .sign-block .label {
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--nu-cyan);
-      margin-bottom: 6px;
-      font-weight: 700;
+    .nu-signoff p {
+      color: #444;
+      font-size: 0.98rem;
+      max-width: 620px;
     }
-    .sign-block .value {
+    .nu-btn-primary {
+      display: inline-block;
+      background: var(--nu-blue);
       color: var(--nu-white);
+      padding: 14px 30px;
+      border-radius: 6px;
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0,0,255,0.25);
+    }
+    .nu-btn-primary:hover {
+      background: #0000CC;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0,0,255,0.35);
+    }
+
+    /* TABLE */
+    .nu-tbl-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--nu-medium-gray);
+      border-radius: 10px;
+    }
+    table.nu-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+    }
+    table.nu-tbl thead th {
+      background: var(--nu-dark-text);
+      color: var(--nu-white);
+      text-align: left;
+      padding: 12px 16px;
       font-weight: 700;
-      font-size: 1rem;
+      letter-spacing: 0.04em;
+      font-size: 0.82rem;
+      text-transform: uppercase;
     }
-    .sign-block .note {
-      color: rgba(255,255,255,0.75);
-      font-size: 0.85rem;
-      margin-top: 4px;
+    table.nu-tbl tbody td {
+      padding: 12px 16px;
+      border-top: 1px solid var(--nu-medium-gray);
+      color: var(--nu-body-text);
+      vertical-align: top;
     }
+    table.nu-tbl tbody tr:nth-child(even) td { background: #fafbfd; }
+    table.nu-tbl .ok { color: var(--nu-success); font-weight: 700; }
+    table.nu-tbl .warn { color: var(--nu-warn); font-weight: 700; }
 
     /* FOOTER */
     .nu-footer {
       background: linear-gradient(135deg, var(--nu-navy) 0%, #000066 100%);
       color: rgba(255,255,255,0.85);
-      padding: 44px 40px;
+      padding: 50px 40px;
       text-align: center;
+      font-family: var(--font-primary);
     }
     .nu-footer-tagline {
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--nu-cyan);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .nu-footer-contact {
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       line-height: 1.85;
     }
     .nu-footer-contact a {
@@ -440,255 +496,322 @@
     .nu-footer-contact a:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
-      .nu-header { padding: 46px 20px 70px; }
-      .nu-logo-text { font-size: 2rem; letter-spacing: 0.2em; }
-      .nu-logo-subtitle { font-size: 0.95rem; letter-spacing: 0.45em; }
-      .nu-doc-title { font-size: 1.5rem; }
-      .nu-content-inner { padding: 36px 20px 54px; }
-      .two-col { grid-template-columns: 1fr; }
-      .checklist-row { grid-template-columns: 40px 1fr; }
-      .check-tag { grid-column: 2; justify-self: start; margin-top: 4px; }
-      .status-banner { flex-direction: column; align-items: flex-start; }
+      .nu-header { padding: 50px 20px 70px; min-height: 240px; }
+      .nu-logo-text { font-size: 2.1rem; letter-spacing: 0.22em; }
+      .nu-logo-subtitle { font-size: 1rem; letter-spacing: 0.5em; }
+      .nu-tagline { font-size: 1.05rem; }
+      .nu-wrap { padding: 40px 20px; }
+      .nu-page-title h1 { font-size: 1.9rem; }
+      .nu-signoff { grid-template-columns: 1fr; text-align: left; }
+      .nu-checklist { padding: 22px; }
+    }
+
+    @media print {
+      .nu-header { background: var(--nu-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .nu-footer { background: var(--nu-navy) !important; -webkit-print-color-adjust: exact; }
+      .nu-gate, .nu-stat { box-shadow: none; }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="nu-header">
-    <svg class="nu-phoenix-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white"/>
-      <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white"/>
-    </svg>
-    <div class="nu-header-inner">
-      <div class="nu-eyebrow">Release Readiness Brief</div>
-      <div class="nu-logo-text">NORRIS</div>
-      <div class="nu-logo-subtitle">UTILITIES</div>
-      <div class="nu-tagline">A Legacy of Commitment®</div>
-      <div class="nu-doc-title">Finalize V5 for Production</div>
-      <div class="nu-doc-subtitle">Shipments Archive V5 — Production Cutover Plan | April 24, 2026</div>
+    <div class="nu-phoenix-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L55 20 L70 10 L60 25 L80 20 L65 35 L75 50 L55 40 L50 60 L45 40 L25 50 L35 35 L20 20 L40 25 L30 10 L45 20 Z" fill="white" opacity="0.92"/>
+        <path d="M50 55 L52 70 L60 65 L55 75 L50 95 L45 75 L40 65 L48 70 Z" fill="white" opacity="0.85"/>
+      </svg>
     </div>
+    <div class="nu-logo-text">NORRIS</div>
+    <div class="nu-logo-subtitle">UTILITIES</div>
+    <div class="nu-tagline">A Legacy of Commitment®</div>
   </header>
 
+  <!-- CHEVRON -->
   <div class="nu-chevron">
     <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L547,50 L1440,0 L1440,50 L0,50 Z" fill="#F5F5F7"/>
+      <path d="M0,0 L548,50 L1440,0 L1440,50 L0,50 Z" fill="white"/>
     </svg>
   </div>
 
+  <!-- MAIN -->
   <main class="nu-content-area">
-    <div class="nu-content-inner">
+    <div class="nu-wrap">
 
-      <div class="status-banner">
-        <div class="status-banner-left">
-          <div class="status-dot"></div>
-          <div>
-            <div class="status-title">V5 — Phase A Live in Production</div>
-            <div class="status-sub">76 / 76 tests passing · norris-ops HEAD 1d86e5a · Phase B in remaining sections</div>
-          </div>
-        </div>
-        <div class="status-meta">GO / NO-GO: 2026-04-25</div>
+      <!-- PAGE TITLE -->
+      <div class="nu-page-title">
+        <span class="nu-eyebrow">Production Release</span>
+        <h1>Finalize <span>SA V5</span> for Production</h1>
+        <p>Shipments &amp; Accounting V5 — the canonical record of every quote, ship-to, invoice, and payment for Norris Utilities®. This page is the production-readiness snapshot, gate sign-off, and go-live checklist.</p>
       </div>
 
-      <!-- KPI -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Release</span> <span class="rest">Scorecard</span></h2>
-        <div class="kpi-grid">
-          <div class="kpi-card">
-            <div class="kpi-label">Test Coverage</div>
-            <div class="kpi-value green">76 / 76</div>
-            <div class="kpi-sub">100% passing (unit + Playwright)</div>
+      <!-- STATUS STRIP -->
+      <div class="nu-status-strip">
+        <div class="nu-stat green">
+          <div class="label">Tests</div>
+          <div class="value">76 / 76</div>
+          <div class="sub">All Phase A &amp; Phase B suites green</div>
+        </div>
+        <div class="nu-stat green">
+          <div class="label">Phase A</div>
+          <div class="value">LIVE</div>
+          <div class="sub">Released 2026-04-23</div>
+        </div>
+        <div class="nu-stat cyan">
+          <div class="label">Phase B</div>
+          <div class="value">DONE</div>
+          <div class="sub">V2 UI + Email Automation merged</div>
+        </div>
+        <div class="nu-stat amber">
+          <div class="label">Cutover</div>
+          <div class="value">2026-04-28</div>
+          <div class="sub">Aaron sign-off pending</div>
+        </div>
+      </div>
+
+      <!-- GATES -->
+      <div class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Production</span> <span class="rest">Gates</span></h2>
+        <div class="nu-section-rule"></div>
+        <p class="nu-section-lead">Five gates must pass before SA V5 replaces V4 as the system of record. Each gate is locked with automated tests and a written ruling.</p>
+
+        <div class="nu-gate-grid">
+          <div class="nu-gate">
+            <div class="nu-gate-head">
+              <div class="nu-gate-name">Gate A — Source of Truth</div>
+              <span class="nu-pill pass">Passed</span>
+            </div>
+            <div class="nu-gate-desc">Source priority lock: SA_AUTO=10, UPS_RECEIPT=20, QB_SNAPSHOT=30, QB_LIVE=40. Higher number wins on conflict.</div>
+            <div class="nu-gate-meta"><span><strong>Locked:</strong> 2026-04-23</span><span><strong>Tests:</strong> 18</span></div>
           </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Live Branch</div>
-            <div class="kpi-value">Phase A</div>
-            <div class="kpi-sub">Shipped 2026-04-23</div>
+
+          <div class="nu-gate">
+            <div class="nu-gate-head">
+              <div class="nu-gate-name">Gate B — Status Engine</div>
+              <span class="nu-pill pass">Passed</span>
+            </div>
+            <div class="nu-gate-desc">Seven-state machine: QUOTED → CONFIRMED → SHIPPED → INVOICED → PAID → CLOSED, plus VOID. INVOICED is immutable.</div>
+            <div class="nu-gate-meta"><span><strong>Locked:</strong> 2026-04-24</span><span><strong>Tests:</strong> 22</span></div>
           </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Open Phase B Items</div>
-            <div class="kpi-value">2</div>
-            <div class="kpi-sub">§1.5 pulse · §8 notes polish</div>
+
+          <div class="nu-gate">
+            <div class="nu-gate-head">
+              <div class="nu-gate-name">Gate C — Writer Endpoints</div>
+              <span class="nu-pill pass">Passed</span>
+            </div>
+            <div class="nu-gate-desc">sa_v1_writer: 7 endpoints — create_quote, confirm, ship, invoice, mark_paid, void, edit. All require source provenance.</div>
+            <div class="nu-gate-meta"><span><strong>Locked:</strong> 2026-04-24</span><span><strong>Tests:</strong> 21</span></div>
           </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Outstanding Value</div>
-            <div class="kpi-value">$5,760+</div>
-            <div class="kpi-sub">Across ledger — tracked in V5</div>
+
+          <div class="nu-gate">
+            <div class="nu-gate-head">
+              <div class="nu-gate-name">Gate D — Payment Rules</div>
+              <span class="nu-pill pass">Passed</span>
+            </div>
+            <div class="nu-gate-desc">Multi-ship-to: one parent_order, many shipments. Partial payment, overpayment, and refund flows match QuickBooks exactly.</div>
+            <div class="nu-gate-meta"><span><strong>Locked:</strong> 2026-04-24</span><span><strong>Tests:</strong> 9</span></div>
+          </div>
+
+          <div class="nu-gate">
+            <div class="nu-gate-head">
+              <div class="nu-gate-name">Gate E — V2 UI &amp; Migration</div>
+              <span class="nu-pill go">Go</span>
+            </div>
+            <div class="nu-gate-desc">V2 UI complete: Invoicing Pulse KPIs, FlexPro filter, review queue, and one-click V1 → V2.2 migration of legacy records.</div>
+            <div class="nu-gate-meta"><span><strong>Merged:</strong> 2026-04-25</span><span><strong>Tests:</strong> 6</span></div>
+          </div>
+
+          <div class="nu-gate">
+            <div class="nu-gate-head">
+              <div class="nu-gate-name">Gate F — Aaron Sign-Off</div>
+              <span class="nu-pill hold">Hold</span>
+            </div>
+            <div class="nu-gate-desc">Final walkthrough on M1 with Aaron. Verify Crosby/Dominion, Chain Electric, and Skylift records render and edit correctly.</div>
+            <div class="nu-gate-meta"><span><strong>Scheduled:</strong> 2026-04-27</span><span><strong>Owner:</strong> Aaron</span></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- CUTOVER CHECKLIST -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Cutover</span> <span class="rest">Checklist</span></h2>
-        <div class="checklist">
+      <!-- ENVIRONMENT TABLE -->
+      <div class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Production</span> <span class="rest">Environment</span></h2>
+        <div class="nu-section-rule"></div>
+        <p class="nu-section-lead">Single-host deployment on Aaron's M1 MacBook Pro home server. All commits push automatically to ops.norrisutilities.com.</p>
 
-          <div class="checklist-row">
-            <div class="check-icon done">&#10003;</div>
-            <div class="check-body">
-              <div class="check-title">Phase A deployed to norris-ops production</div>
-              <div class="check-desc">NU brand verified, Gate A preserved, merge landed on main (HEAD 1d86e5a) on 2026-04-23.</div>
-            </div>
-            <div class="check-tag tag-done">Done</div>
-          </div>
-
-          <div class="checklist-row">
-            <div class="check-icon done">&#10003;</div>
-            <div class="check-body">
-              <div class="check-title">Backend §8 — payment_rules + notes_auto + tests</div>
-              <div class="check-desc">Commit fb60ba7 — auto-notes writer, payment rules engine, regression tests green.</div>
-            </div>
-            <div class="check-tag tag-done">Done</div>
-          </div>
-
-          <div class="checklist-row">
-            <div class="check-icon done">&#10003;</div>
-            <div class="check-body">
-              <div class="check-title">§7 recon + fuzzy match + add_alias + morning brief</div>
-              <div class="check-desc">Commits 6a7a915 and ca27f5a — canonical enforcement live, data truthed-up against ledger.</div>
-            </div>
-            <div class="check-tag tag-done">Done</div>
-          </div>
-
-          <div class="checklist-row">
-            <div class="check-icon done">&#10003;</div>
-            <div class="check-body">
-              <div class="check-title">§6 Notes editor + invoice archive Playwright suite</div>
-              <div class="check-desc">Commit be37590 — click/type/Esc flow + backend POST + ledger writes verified end-to-end.</div>
-            </div>
-            <div class="check-tag tag-done">Done</div>
-          </div>
-
-          <div class="checklist-row">
-            <div class="check-icon pending">!</div>
-            <div class="check-body">
-              <div class="check-title">§1.5 — Phoenix pulse opacity window [0.10, 0.14]</div>
-              <div class="check-desc">Assertion patched on feature branch (b1fa954). Needs merge-to-main and smoke check on live header.</div>
-            </div>
-            <div class="check-tag tag-pending">In Review</div>
-          </div>
-
-          <div class="checklist-row">
-            <div class="check-icon pending">!</div>
-            <div class="check-body">
-              <div class="check-title">Q1 — CB silent-draft backlog reconciliation</div>
-              <div class="check-desc">$3,685.15 across 15 drafts (QB 150 series). Review queue ready for Aaron once V5 merges.</div>
-            </div>
-            <div class="check-tag tag-pending">Queued</div>
-          </div>
-
-          <div class="checklist-row">
-            <div class="check-icon pending">!</div>
-            <div class="check-body">
-              <div class="check-title">Shipments ledger final reconciliation</div>
-              <div class="check-desc">data/shipments_ledger.jsonl and status_audit_log.jsonl pending first commit. Must land before freeze.</div>
-            </div>
-            <div class="check-tag tag-pending">Open</div>
-          </div>
-
-          <div class="checklist-row">
-            <div class="check-icon blocked">&#10007;</div>
-            <div class="check-body">
-              <div class="check-title">Production tag <strong>v5.0.0</strong> — not yet cut</div>
-              <div class="check-desc">Hold until §1.5 merge + final ledger commit land. Tag + annotated release notes on Aaron's sign-off.</div>
-            </div>
-            <div class="check-tag tag-blocked">Blocked</div>
-          </div>
-
+        <div class="nu-tbl-wrap">
+          <table class="nu-tbl">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Verified</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>SA V5 Engine</strong></td>
+                <td>~/norris-agent/lib/sa_v1_writer.py</td>
+                <td class="ok">Operational</td>
+                <td>2026-04-25</td>
+              </tr>
+              <tr>
+                <td><strong>Status Engine</strong></td>
+                <td>~/norris-agent/lib/status_engine.py</td>
+                <td class="ok">Operational</td>
+                <td>2026-04-25</td>
+              </tr>
+              <tr>
+                <td><strong>V2 UI</strong></td>
+                <td>~/norris-ops/internal/sa_v2_ui.html</td>
+                <td class="ok">Live</td>
+                <td>2026-04-25</td>
+              </tr>
+              <tr>
+                <td><strong>Source Priority Lock</strong></td>
+                <td>~/norris-agent/lib/source_priority.py</td>
+                <td class="ok">Locked</td>
+                <td>2026-04-23</td>
+              </tr>
+              <tr>
+                <td><strong>QB Invoice PDF Capture</strong></td>
+                <td>Gmail watcher → ~/norris-agent/inbox/</td>
+                <td class="ok">Running</td>
+                <td>2026-04-25</td>
+              </tr>
+              <tr>
+                <td><strong>UPS Receipt Pipeline</strong></td>
+                <td>~/norris-agent/scripts/ups_receipt_ingest.py</td>
+                <td class="ok">Running</td>
+                <td>2026-04-24</td>
+              </tr>
+              <tr>
+                <td><strong>Telegram Alerting</strong></td>
+                <td>~/.openclaw/.env</td>
+                <td class="ok">Active</td>
+                <td>2026-04-25</td>
+              </tr>
+              <tr>
+                <td><strong>GitHub Auto-Push</strong></td>
+                <td>acnorris17/norris-ops</td>
+                <td class="ok">Active</td>
+                <td>2026-04-25</td>
+              </tr>
+              <tr>
+                <td><strong>V1 → V2.2 Migration</strong></td>
+                <td>~/norris-agent/scripts/migrate_v1_to_v22.py</td>
+                <td class="warn">Dry-run only</td>
+                <td>Live run scheduled 2026-04-28</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </section>
+      </div>
 
-      <!-- TWO COLUMN -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Go-Live</span> <span class="rest">Plan</span></h2>
-        <div class="two-col">
-          <div class="info-card">
-            <h3>Sequence of Operations</h3>
-            <ul>
-              <li><strong>Step 1</strong> — Merge feature/sa-v5-completion into main after §1.5 re-verification.</li>
-              <li><strong>Step 2</strong> — Copy outputs to ~/norris-ops/ (website/, internal/, tools/).</li>
-              <li><strong>Step 3</strong> — git add -A · commit · push to acnorris17/norris-ops.</li>
-              <li><strong>Step 4</strong> — Tag v5.0.0 with annotated release notes.</li>
-              <li><strong>Step 5</strong> — Verify ops.norrisutilities.com serves the new build.</li>
-              <li><strong>Step 6</strong> — Telegram confirmation to Aaron with live URLs.</li>
-            </ul>
+      <!-- FINAL CHECKLIST -->
+      <div class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Final</span> <span class="rest">Checklist</span></h2>
+        <div class="nu-section-rule"></div>
+        <p class="nu-section-lead">Before Aaron flips V5 to system of record, every item below must be ticked.</p>
+
+        <div class="nu-checklist">
+          <ul>
+            <li><span class="nu-check-mark">&#10003;</span><span>76 / 76 tests passing on M1 (CI green)</span></li>
+            <li><span class="nu-check-mark">&#10003;</span><span>Phase A merged to main (commit a8b2f86)</span></li>
+            <li><span class="nu-check-mark">&#10003;</span><span>Phase B V2 UI complete (commit aab7530)</span></li>
+            <li><span class="nu-check-mark">&#10003;</span><span>Source priority order locked in code</span></li>
+            <li><span class="nu-check-mark">&#10003;</span><span>INVOICED state immutability enforced</span></li>
+            <li><span class="nu-check-mark">&#10003;</span><span>Multi-ship-to parent_order rule active</span></li>
+            <li><span class="nu-check-mark">&#10003;</span><span>QB Invoice PDF auto-capture running</span></li>
+            <li><span class="nu-check-mark">&#10003;</span><span>FlexPro filter wired to Invoicing Pulse</span></li>
+            <li><span class="nu-check-mark">&#10003;</span><span>Email automation drafts queued for review</span></li>
+            <li><span class="nu-check-mark">&#10003;</span><span>Phoenix opacity assertion accepts 0.10–0.14 pulse window</span></li>
+            <li><span class="nu-check-mark todo">&#9633;</span><span>Aaron walkthrough on M1 (2026-04-27)</span></li>
+            <li><span class="nu-check-mark todo">&#9633;</span><span>Live V1 → V2.2 migration (2026-04-28 04:30 CT)</span></li>
+            <li><span class="nu-check-mark todo">&#9633;</span><span>CB notified — silent-draft backlog cleared</span></li>
+            <li><span class="nu-check-mark todo">&#9633;</span><span>V4 marked READ-ONLY, banner posted</span></li>
+            <li><span class="nu-check-mark todo">&#9633;</span><span>Telegram cutover broadcast fired</span></li>
+            <li><span class="nu-check-mark todo">&#9633;</span><span>Post-cutover smoke test on Crosby + Chain orders</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="nu-section">
+        <h2 class="nu-section-title"><span class="first">Cutover</span> <span class="rest">Timeline</span></h2>
+        <div class="nu-section-rule"></div>
+
+        <div class="nu-timeline">
+          <div class="nu-event done">
+            <div class="nu-event-date">2026-04-23 &middot; Wednesday</div>
+            <div class="nu-event-title">Phase A LIVE</div>
+            <div class="nu-event-body">76/76 tests, norris-ops HEAD 1d86e5a. NU brand, Gate A preserved, source priority locked.</div>
           </div>
-          <div class="info-card">
-            <h3>Verification Gates</h3>
-            <ul>
-              <li><strong>Gate A</strong> — NU brand preserved (header gradient, chevron, Phoenix Icon®).</li>
-              <li><strong>Gate B</strong> — Shipments table renders · filters · sort · export CSV.</li>
-              <li><strong>Gate C</strong> — Notes editor writes to ledger on Esc/save (no ghost drafts).</li>
-              <li><strong>Gate D</strong> — Morning brief email dispatches at 04:30 CT on live cron.</li>
-              <li><strong>Gate E</strong> — Invoice archive groups by month · collapses by year.</li>
-              <li><strong>Gate F</strong> — Phoenix pulse opacity in [0.10, 0.14] window (visual).</li>
-            </ul>
+          <div class="nu-event done">
+            <div class="nu-event-date">2026-04-24 &middot; Thursday</div>
+            <div class="nu-event-title">Phase B V2 UI §1 — Status Engine</div>
+            <div class="nu-event-body">Seven-state engine + INVOICED immutability + Phase 1 tests merged (commit a8b2f86).</div>
+          </div>
+          <div class="nu-event done">
+            <div class="nu-event-date">2026-04-24 &middot; Thursday</div>
+            <div class="nu-event-title">Phase B V2 UI §2 + §3 — Writer + Payment Rules</div>
+            <div class="nu-event-body">sa_v1_writer endpoints &amp; payment rules merged (commit 3cd699e).</div>
+          </div>
+          <div class="nu-event done">
+            <div class="nu-event-date">2026-04-25 &middot; Friday</div>
+            <div class="nu-event-title">V2 UI Completion</div>
+            <div class="nu-event-body">Seven sa_v1_writer endpoints, lib backing, full test sweep (commit aab7530). Phase B closed.</div>
+          </div>
+          <div class="nu-event now">
+            <div class="nu-event-date">2026-04-25 &middot; Today</div>
+            <div class="nu-event-title">Production Finalization</div>
+            <div class="nu-event-body">This page. Gate A through E confirmed. Awaiting Aaron walkthrough and live migration window.</div>
+          </div>
+          <div class="nu-event">
+            <div class="nu-event-date">2026-04-27 &middot; Monday</div>
+            <div class="nu-event-title">Aaron Walkthrough &amp; Sign-Off</div>
+            <div class="nu-event-body">Side-by-side V4 vs V5 review on three live customers: Crosby/Dominion, Chain Electric, Skylift. Gate F closes here.</div>
+          </div>
+          <div class="nu-event">
+            <div class="nu-event-date">2026-04-28 &middot; Tuesday — 04:30 CT</div>
+            <div class="nu-event-title">Live V1 → V2.2 Migration</div>
+            <div class="nu-event-body">Aaron's quiet hour. Migrate every legacy record. V4 flips to READ-ONLY. V5 becomes system of record.</div>
+          </div>
+          <div class="nu-event">
+            <div class="nu-event-date">2026-04-28 &middot; Tuesday — 06:00 CT</div>
+            <div class="nu-event-title">Smoke Test &amp; Telegram Broadcast</div>
+            <div class="nu-event-body">Confirm three live orders render correctly in V5. Telegram alert: "SA V5 LIVE — V4 is read-only. Edit only in V5."</div>
+          </div>
+          <div class="nu-event">
+            <div class="nu-event-date">2026-05-05 &middot; Tuesday</div>
+            <div class="nu-event-title">One-Week Stabilization Review</div>
+            <div class="nu-event-body">Address any post-cutover edge cases. Process post-completion queue items Q1 through Q15 (CB silent-draft backlog $3,685.15, etc.).</div>
           </div>
         </div>
-      </section>
-
-      <!-- ROLLBACK + POST-CUTOVER -->
-      <section class="nu-section">
-        <h2 class="nu-section-title"><span class="first">Rollback</span> <span class="rest">&amp; Post-Cutover</span></h2>
-        <div class="two-col">
-          <div class="info-card">
-            <h3>Rollback Protocol</h3>
-            <ul>
-              <li><strong>Trigger</strong> — Any Gate A–F failure in production smoke check.</li>
-              <li><strong>Action</strong> — git revert the merge commit on main; re-push.</li>
-              <li><strong>Data</strong> — shipments_ledger.jsonl is append-only; no rollback needed.</li>
-              <li><strong>Comms</strong> — Telegram alert to Aaron with error text and revert SHA.</li>
-              <li><strong>Recovery SLA</strong> — Site restored within 15 minutes of alert.</li>
-            </ul>
-          </div>
-          <div class="info-card">
-            <h3>Post-Completion Queue</h3>
-            <ul>
-              <li><strong>Q1</strong> — CB silent-draft backlog: $3,685.15 · 15 drafts.</li>
-              <li><strong>Q2–Q15</strong> — Staged in post-completion-queue-q1-q15.</li>
-              <li><strong>Invoicing Pulse</strong> — 6 KPI tiles above Shipments table.</li>
-              <li><strong>QB PDF auto-capture</strong> — 7-step pipeline scheduled next.</li>
-              <li><strong>Archived Invoices</strong> — norrisops.com/shipments/archive view.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+      </div>
 
       <!-- SIGN-OFF -->
-      <section class="nu-section">
-        <div class="sign-off">
-          <div class="sign-off-inner">
-            <h3>Final Sign-Off Required</h3>
-            <p>Phase A is live. Phase B is one merge and one ledger commit away from being production-complete. Once the Phoenix pulse patch lands on main and the shipments ledger is reconciled, V5 is ready to tag as <strong>v5.0.0</strong> and lock for the quarter.</p>
-            <p>Approval from Aaron C. Norris releases the tag, dispatches the Telegram go-live notice, and opens the post-completion queue (Q1–Q15) starting with the CB silent-draft backlog.</p>
-            <div class="sign-off-grid">
-              <div class="sign-block">
-                <div class="label">Owner</div>
-                <div class="value">Aaron C. Norris</div>
-                <div class="note">Founder &amp; CEO, Norris Utilities®</div>
-              </div>
-              <div class="sign-block">
-                <div class="label">Target Cutover</div>
-                <div class="value">April 25, 2026 · 04:00 CT</div>
-                <div class="note">Pending §1.5 merge &amp; ledger commit</div>
-              </div>
-              <div class="sign-block">
-                <div class="label">Production URL</div>
-                <div class="value">ops.norrisutilities.com</div>
-                <div class="note">Verify all six gates post-deploy</div>
-              </div>
-            </div>
+      <div class="nu-section">
+        <div class="nu-signoff">
+          <div>
+            <h3>Ready for Aaron's Sign-Off</h3>
+            <p>Five of six gates have passed. The remaining gate is Aaron's live walkthrough on the M1 — scheduled for Monday, April 27, 2026. Once Gate F closes, the live migration runs at 04:30 CT on April 28 and SA V5 becomes the canonical system of record for Norris Utilities®.</p>
           </div>
+          <a href="mailto:acnorris@norrisutilities.com?subject=SA%20V5%20Sign-Off%20Confirmed" class="nu-btn-primary">Confirm Sign-Off</a>
         </div>
-      </section>
+      </div>
 
     </div>
   </main>
 
+  <!-- FOOTER -->
   <footer class="nu-footer">
     <div class="nu-footer-tagline">A Legacy of Commitment®</div>
     <div class="nu-footer-contact">
-      Aaron C. Norris, Founder &amp; CEO | Norris Utilities®, LLC<br>
-      <a href="tel:2055001343">205-500-1343</a> |
-      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> |
+      Aaron C. Norris, Founder &amp; CEO &nbsp;|&nbsp; Norris Utilities®, LLC<br>
+      <a href="tel:2055001343">205-500-1343</a> &nbsp;|&nbsp;
+      <a href="mailto:acnorris@norrisutilities.com">acnorris@norrisutilities.com</a> &nbsp;|&nbsp;
       <a href="https://www.norrisutilities.com">www.NorrisUtilities.com</a>
     </div>
   </footer>
