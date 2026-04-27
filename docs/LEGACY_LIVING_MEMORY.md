@@ -5382,3 +5382,55 @@ Tests verify function-level behavior (data layer correct). UI render layer ignor
 
 ### sa_v1_writer Push Pending
 HOTFIX 4 changes (bin/sa_v1_writer.py + LaunchAgent plist) NOT pushed. Session 14 CC must push before merge.
+
+
+## SA V5 V2.3 — Session 14 Fix Sweep (2026-04-27)
+
+### Defects Closed
+- **D42** [object Object] in Notes — `coerceNotesText()` helper handles string/array/object/null
+- **D18** Frozen header — `position:sticky top:41px z-index:50` with opaque flat gradient + `.table-wrap overflow-y:clip`
+- **D43 PARTIAL** ⚠ over-application — single-POC company_root short-circuit in `registry-client.js`; multi-POC POC-aware match deferred to V2.4
+- **D46** Aaron-verified P/N override badge in detail panel
+- **FIX 6** `SA_V1_WRITER_HOST` env-var read pushed to GitHub + documented in `~/norris-agent/docs/sa_v1_writer.md`
+
+### HALT H11 — D22 / AEP/SWEPCO consolidation
+Registry has 4 distinct AEP/SWEPCO POCs at 4 locations (Riley-Shreveport, Benz-Fayetteville, Bedwell-Tulsa, Rice-Fayetteville) plus 3 separate "American Electric Power (AEP)" entries (Bruns/Myers/Lee). Consolidating to a single "AEP-SWEPCO - Riley" canonical (per spec literally) would delete 3 valid POC records and orphan S-2026-013 (POC=Benz) + S-2026-015 (POC=Myers). Aaron must pick option 1 (preserve all + slash → hyphen) / 2 (true consolidate, destructive) / 3 (don't touch, slash is data) — see `docs/handoffs/V2_3_FIX_PASS_2026-04-27.md` §10.
+
+### Verify-Only Results (D44–D50)
+| D | Status |
+|---|---|
+| D44 17 copy buttons | PASS (9 top + 7 bottom + 1 ALL = 17) |
+| D45 Product Name + Description split | PARTIAL — defer V2.4 |
+| D46 override audit visible | FIXED (new green badge in detail panel) |
+| D47 Chain Electric $8,930.48 | PASS (canary 3/3) |
+| D48 5 time-window pills | PASS |
+| D49 invoice flow | PARTIAL — reverse-confirm wording differs from spec, defer V2.4 |
+| D50 SD page brand framework | FAIL — every SD HTML lacks Full_Logo_White + Phoenix + back buttons; defer V2.4 |
+
+### Files Touched
+- `~/norris-ops/assets/{js/shipments-v1,js/registry-client,js/detail-panel,css/shipments-v1}.{js,css}`
+- `~/norris-ops/docs/handoffs/V2_3_FIX_PASS_2026-04-27.md` (NEW)
+- `~/norris-agent/{bin/sa_v1_writer.py, docs/sa_v1_writer.md (NEW), tests/test_{notes_render,warn_icon_logic,frozen_header}_v23.py (NEW)}`
+
+### New SHAs
+- norris-ops: **2d3fa9b**
+- norris-agent: **1a4f99f**
+- branch: feature/sa-v5-completion (NOT merged to main)
+
+### Test Status
+- Full pytest: 518 passed, 19 failed (3.5%, below H6 5% threshold), 1 skipped
+- 19 fails: 2 stale "16 buttons" assertions (tests out of date vs 17-button impl) + 17 Playwright env/timing fails (the new sticky thead causes some `scroll_into_view` clicks to land under the sticky bar — Aaron's UI works, tests need scroll-offset compensation)
+- Canary suite: 58/58 PASS including all 26 new V2.3 tests
+- Defensive greps: clean (SKU 0, FlexPro Armor® 0, Abadie 0 file content, Canonical Name 1 explanatory comment, Child 0 business-logic, [object Object] 0 rendered)
+
+### Phase 9 Gate (still active)
+Phase 9 (merge feature → main + agent-v4 re-enable + retirement banner + CB notification) STILL gated on Aaron's literal Telegram "V2.3 PASS" to chat 8758078447. **Not sent yet.** M5 click-test pending.
+
+### V2.4 Backlog from this Session
+1. POC-aware client-side match (call `POST /api/match` for ambiguous multi-POC rows)
+2. Detail panel split P/N + Product Name + Description + Edit-per-line
+3. Reverse-archive confirm wording per spec
+4. SD page brand-framework migration (every individual SD)
+5. Wrangler sync script: `~/norris-agent/data/customer_registry.json` → `~/norris-ops/data/` on every registry write (the file is gitignored — PII — and was missing on M1 today; that 404 was the actual root cause of universal ⚠)
+6. Update Playwright tests' `scroll_into_view` to offset for sticky thead
+7. Rename legacy SD filenames containing "ABADIE" → "Abide"
