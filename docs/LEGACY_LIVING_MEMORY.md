@@ -5331,3 +5331,54 @@ ingest_master_pricelist.py (FlexPro xlsx → pricelist.json), ingest_qb_contacts
 ### Notes
 - gbrain timeline-add confirmed broken (PGLite lock timeout on 0.9.2) — fallback log written to ~/nu-brain/logs/
 - NorrisPalace `np` CLI not found in PATH at time of update — ingest attempted via direct file if found
+
+---
+## 2026-04-27 Session 13 PM — Crisis Hotfix Session + Handoff to Session 14
+
+**TAGS:** v2_3_crisis_session13pm, handoff, session13pm
+
+### Hotfixes Completed This Session
+- **HOTFIX 1:** sa_v1_writer not running on :8766 → started via `nohup python3 -m bin.sa_v1_writer` → /health ok, 39 ledger entries
+- **HOTFIX 2:** shipments-v1.js boot() fetching /data/product_catalog.json → file missing from ~/norris-ops/data/ → copied from ~/norris-agent/data/ (34 products, 12,524 bytes)
+- **HOTFIX 3:** product_catalog.json blocked by .gitignore line 16 → Aaron approved `git add -f` → commit 3c67db3 pushed to feature/sa-v5-completion. customer_registry.json gitignore preserved.
+- **HOTFIX 4:** sa_v1_writer bound to 127.0.0.1, blocking M5 LAN access → bin/sa_v1_writer.py:459 now reads SA_V1_WRITER_HOST env var (default 127.0.0.1); LaunchAgent plist updated SA_V1_WRITER_HOST=0.0.0.0 → PID 79222 on *:8766 → M5 LAN confirmed. **NOT YET PUSHED TO GITHUB.**
+
+### CF Pages Deploy — BLOCKED
+No CLOUDFLARE_API_TOKEN or CF Access service-token. CC honesty rule: refused to fire Tier 2 falsely.
+
+### Defects PERSISTING (Session 14 must fix in CODE, not test fixtures)
+- **D42 NEW** — Notes column "[object Object]" — JS object.toString() instead of object.text in notes render path (shipments-v1.js). Likely affects multiple rows. Grep render path.
+- **D43 / B1** — ⚠ icon over-applies on customer cells including single-POC + canonical. D07 spec: single-POC ≥85 = auto-resolve, NO ⚠. F.5: known-canonical entries = NO ⚠.
+- **D22 / B3** — Slash separator in canonical_name persists: "AEP / SWEPCO", "LineTec Services / LTS Power". Spec: no slashes; use alias map instead.
+- **D18 / A1** — Frozen header NOT sticky on scroll. Headers disappear. Spec: `thead { position:sticky; top:0; z-index:50 }`.
+
+### Defects to VERIFY in Session 14 (D44–D50)
+D44: Detail panel has 17 copy buttons (16 field + 1 Copy ALL TSV)
+D45: Detail panel line items show P/N + Product Name + Description
+D46: Henkels detail panel shows aaron_verified_pn_override=true in audit
+D47: Chain Electric row total renders $8,930.48 (canary)
+D48: Time-window pills render above KPI tiles
+D49: Invoice Sent flow end-to-end: tick → confetti → slide → archive → persist on reload
+D50: SD page logos present (NU_Brand_CSS_Framework.css inheritance)
+
+### What Works (Verified on M5 Screenshots)
+- localhost:8765/shipments.html + 192.168.1.184:8765/shipments.html both load
+- Norris Utilities header, ghost phoenix watermark, filter pills all render
+- KPI tiles: 23 OPEN SDS / 8 READY TO INVOICE / 0 BLOCKED / $21,185.00 UNBILLED
+- Critical reminder banner, LIVE UPS Shipping Log embed
+- Henkels row shows NU-BC-BY2828 (D24 R8 anchor PRESERVED)
+- LineTec branches as separate rows, tracking numbers visible
+
+### Why CC Said "Build Complete" With Defects
+Tests verify function-level behavior (data layer correct). UI render layer ignores/misuses flags. Tests pass, UI broken. Aaron's browser click-test is canonical pre-merge gate — not pytest.
+
+### Session 14 Next Actions
+1. Read MASTER_HANDOFF_Session13PM_CRISIS_to_Session14_2026-04-27.md in full
+2. Deliver CC fix prompt for D42/D43/D22/D18 + verify D44-D50
+3. CC fixes in CODE with regression tests; commits + pushes feature/sa-v5-completion
+4. CC Tier 2 per fix, Tier 1 on complete or HALT
+5. Aaron hard-refresh re-click-test at 192.168.1.184:8765/shipments.html
+6. If clean → Aaron sends "V2.3 PASS" → Phase 9: merge, unpause agents, CB notified, $3,685.15 backlog released
+
+### sa_v1_writer Push Pending
+HOTFIX 4 changes (bin/sa_v1_writer.py + LaunchAgent plist) NOT pushed. Session 14 CC must push before merge.
