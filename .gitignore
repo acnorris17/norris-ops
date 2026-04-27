@@ -13,7 +13,6 @@ test-results/
 # Data files symlinked from ~/norris-agent/data for LAN preview only
 # (Real files live in the agent repo; symlinks are for local dev, not deploy.)
 data/customer_registry.json
-data/product_catalog.json
 
 # V2.3 build state files (per-session, not source)
 .v2.3-*
