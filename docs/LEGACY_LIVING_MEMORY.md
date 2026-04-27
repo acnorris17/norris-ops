@@ -5295,3 +5295,39 @@ ingest_master_pricelist.py (FlexPro xlsx → pricelist.json), ingest_qb_contacts
 **D24 R8 ANCHOR PRESERVED:** NU-BC-BY2828 with aaron_verified_pn_override. Source priority locked in lib/source_priority.py. SA never overrides SD + Aaron simultaneously.
 
 **SESSION 14 KICKOFF:** Paste from MASTER_HANDOFF §15. New Claude reads handoff, asks 5-option status question (A/B/C/D/E for CC build state), branches on Aaron's answer.
+
+---
+## 2026-04-27 Session — V2.3 Build State Snapshot (~06:55 AM CT)
+
+**TAGS:** v2_3_crisis_session13pm, handoff
+
+### Build SHAs (current as of snapshot)
+- norris-ops feature SHA: **3c67db3** (after product_catalog hotfix)
+- norris-agent feature SHA: **d8ac62d**
+- Branch: `feature/sa-v5-completion` — **NOT merged to main**
+- Backup tag: `pre-v2.3-build-2026-04-25` on both repos
+
+### Agent / LaunchAgent State
+- agent-v4 + boot-recovery LaunchAgents **PAUSED** (plists renamed with `.PAUSED_FOR_V2_UI_BUILD_2026-04-24` suffix)
+- MUST stay paused until Aaron sends Telegram "V2.3 PASS" → fires Phase 9
+- 2 stashes on norris-agent:
+  - `stash@{0}` — agent-v4 runtime state pre-V2.3 build (2026-04-25)
+  - `stash@{1}` — agent_runner_work_pre_phase_b_2026-04-23
+  - **Phase 9 must pop stashes in REVERSE order (stash@{1} first, then stash@{0})**
+
+### Test Results (pytest run at snapshot time)
+| Suite | Result |
+|-------|--------|
+| Pytest overall | 432 passed / 2 skipped / 78 errors (Playwright env-only, not real fails) |
+| Henkels R8 canary | 10/10 |
+| Henkels record state (S-2026-023) | 3/3 — pn=NU-BC-BY2828, aaron_verified_pn_override=True, pn_source_rank=AARON_CONFIRMED(90) |
+| Single-POC auto-resolve (D07) | 6/6 |
+| Aerial recovery (1496+1499 parsed) | 5/5 |
+| tracking_web_lookup | 13/13 |
+| FlexPro filter (Inv 1439 REJECTED canary) | 6/6 |
+| Chain Electric | 2 + 1 xfail (legacy_orders state) |
+| LineTec branches | 3 + 2 xfail (Thornhill 'LTS Power' alias missing) |
+
+### Notes
+- gbrain timeline-add confirmed broken (PGLite lock timeout on 0.9.2) — fallback log written to ~/nu-brain/logs/
+- NorrisPalace `np` CLI not found in PATH at time of update — ingest attempted via direct file if found
