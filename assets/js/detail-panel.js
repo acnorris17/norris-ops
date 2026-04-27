@@ -149,10 +149,19 @@
       ? window.NU.copyButtons.renderPanel(row)
       : "<p class='muted'>(copy buttons unavailable)</p>";
 
+    // V2.3 D46 — Aaron-verified P/N override visible in detail panel.
+    // Source Priority rank 90 = AARON_CONFIRMED (lib/source_priority.py).
+    const aaronOverrideBadge = row.aaron_verified_pn_override
+      ? `<div class="aaron-pn-override" title="Aaron manually verified this P/N. Locked above SD/legacy rank.">
+           &#10003; P/N verified by Aaron (Source Priority rank ${esc(row.pn__source_rank ?? 90)} = AARON_CONFIRMED)
+         </div>`
+      : "";
+
     return `
       <div class="detail-right">
         <section class="line-items">
           <h4>Line Items</h4>
+          ${aaronOverrideBadge}
           <table>
             <thead><tr><th>P/N</th><th>Description</th><th>Qty</th><th>Rate</th><th>Total</th></tr></thead>
             <tbody>${lines || '<tr><td colspan="5" class="muted"><em>No items</em></td></tr>'}</tbody>

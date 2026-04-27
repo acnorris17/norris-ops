@@ -16,6 +16,9 @@
     byIdMap: Object.create(null),
     canonicalMap: Object.create(null),
     aliasMap: Object.create(null),
+    // V2.3 §F.3 D07 — normalized company_root → [entry_id] map for the
+    // single-POC short-circuit that mirrors lib/fuzzy_match.match_customer.
+    companyRootMap: Object.create(null),
     error: null,
   };
 
@@ -33,6 +36,7 @@
     state.byIdMap = Object.create(null);
     state.canonicalMap = Object.create(null);
     state.aliasMap = Object.create(null);
+    state.companyRootMap = Object.create(null);
 
     for (const e of entries) state.byIdMap[e.id] = e;
 
@@ -55,6 +59,15 @@
           state.aliasMap[pk] = e.id;
         }
       }
+    }
+
+    // V2.3 §F.3 D07 — index every entry by its normalized company_root so
+    // we can detect single-POC companies in match() and auto-resolve them.
+    for (const e of entries) {
+      const rootKey = normalize(e.company_root || "");
+      if (!rootKey) continue;
+      if (!state.companyRootMap[rootKey]) state.companyRootMap[rootKey] = [];
+      state.companyRootMap[rootKey].push(e.id);
     }
   }
 
@@ -110,6 +123,22 @@
         return {
           entry: state.byIdMap[state.aliasMap[alias]],
           confidence: 97,
+        };
+      }
+    }
+
+    // V2.3 §F.3 D07 — single-POC company_root short-circuit. Mirror of
+    // lib/fuzzy_match.match_customer's exact_company_matches early-return
+    // when raw equals a company_root with exactly one registry entry.
+    // Closes the Aerial Hydraulics / Henkels & McCoy / Florence Electricity
+    // false-positive ⚠ cases. Multi-POC roots (Dominion, Chain, AEP/SWEPCO,
+    // LineTec) still need POC-aware matching — that is V2.4 scope.
+    if (normKey in state.companyRootMap) {
+      const ids = state.companyRootMap[normKey];
+      if (ids.length === 1) {
+        return {
+          entry: state.byIdMap[ids[0]],
+          confidence: 100,
         };
       }
     }

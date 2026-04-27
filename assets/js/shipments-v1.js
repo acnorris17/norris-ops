@@ -89,6 +89,26 @@
     })[c]);
   }
 
+  // V2.3 D42 — Notes can arrive as string, array of {note,text,body,message,...},
+  // single object, or null. Anything else collapses to "[object Object]" via
+  // String(), which is the literal defect Aaron caught on Henkels & McCoy.
+  function coerceNotesText(value) {
+    if (value == null) return "";
+    if (typeof value === "string") return value;
+    if (Array.isArray(value)) {
+      return value
+        .map((n) => (typeof n === "string"
+          ? n
+          : (n && (n.note || n.text || n.body || n.message)) || ""))
+        .filter(Boolean)
+        .join(" · ");
+    }
+    if (typeof value === "object") {
+      return value.note || value.text || value.body || value.message || "";
+    }
+    try { return String(value); } catch (e) { return ""; }
+  }
+
   function parseOrderDate(raw) {
     if (!raw || raw === "—") return null;
     const d = new Date(raw);
@@ -163,6 +183,16 @@
   function attachCanonical(rows) {
     const reg = window.NU && window.NU.registry;
     if (!reg) return rows;
+    // V2.3 D43 — defensive: the registry is gitignored (PII) and may not
+    // be present on every deploy target. If the fetch failed or returned
+    // an empty list, skip the canonical/⚠ decoration entirely so we don't
+    // tag every customer with a false-positive warn icon.
+    const entries = reg.entries || [];
+    if (entries.length === 0) {
+      // eslint-disable-next-line no-console
+      console.warn("[shipments] registry empty — canonical decoration skipped");
+      return rows;
+    }
     for (const r of rows) {
       const { entry, confidence } = reg.match(r.customer || "");
       if (entry && confidence >= 95) {
@@ -420,10 +450,12 @@
   }
 
   // Phase B §6 — read-mode HTML for the Notes cell.
+  // V2.3 D42 — input may be string, array, or object; coerce first.
   function notesReadMode(notes) {
-    if (!notes) return '<span class="notes-empty-hint">Click to add notes</span>';
-    const short = notes.length > 80 ? notes.slice(0, 80) + "…" : notes;
-    const more = notes.length > 80 ? '<span class="notes-more">(click to read)</span>' : "";
+    const text = coerceNotesText(notes);
+    if (!text) return '<span class="notes-empty-hint">Click to add notes</span>';
+    const short = text.length > 80 ? text.slice(0, 80) + "…" : text;
+    const more = text.length > 80 ? '<span class="notes-more">(click to read)</span>' : "";
     return `<span class="notes-text">${esc(short)}</span>${more}`;
   }
 
@@ -499,7 +531,7 @@
   <td class="col-po">${r.po_number ? esc(r.po_number) : '<span class="muted">—</span>'}</td>
   <td class="col-ccfee"><span class="cc-fee-dash">—</span></td>
   <td class="col-shipping">${shipping}</td>
-  <td class="col-notes notes-cell" data-sid="${esc(r.sid)}" data-notes="${esc(r.notes || r.cb_internal_note || '')}" tabindex="0" aria-label="Notes for ${esc(r.sid)}">${notesReadMode(r.notes || r.cb_internal_note)}</td>
+  <td class="col-notes notes-cell" data-sid="${esc(r.sid)}" data-notes="${esc(coerceNotesText(r.notes) || r.cb_internal_note || '')}" tabindex="0" aria-label="Notes for ${esc(r.sid)}">${notesReadMode(coerceNotesText(r.notes) || r.cb_internal_note || '')}</td>
 </tr>`;
   }
 
@@ -750,6 +782,7 @@
     rowSubtotal,
     fmtMoney,
     fmtDate,
+    coerceNotesText,
     DESCRIPTION_FALLBACK,
     // Phase B §6: invoice-archive.js calls this after mutating a row
     // out of the open queue so pulse tiles reflect the new state.
