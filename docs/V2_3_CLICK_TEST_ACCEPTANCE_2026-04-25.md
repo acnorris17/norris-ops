@@ -2,10 +2,16 @@
 ## Aaron's single click-test against the V2.3 build
 ### 2026-04-25 evening CT, Birmingham AL — Session 13
 
-> **URL:** _to be filled by Phase 8.5 CF Pages preview discovery, or merge to main →_
-> https://norrisops.com/shipments.html (after `V2.3 PASS` signal)
-> **Login:** norris2026 (Aaron full view, all elements including class="aaron-only")
+> **Click-test URL:** https://feature-sa-v5-completion.norris-ops.pages.dev/shipments.html
+> CF Pages branch preview · CF Access gated · Project `norris-ops` (account `da38bf5f...`)
+> **Alt SHA URL** (same content, more specific): https://0f4ec64.norris-ops.pages.dev/shipments.html
+> **Post-merge prod URL** (live after `V2.3 PASS`): https://norrisops.com/shipments.html
+> **Login:** **norris2026** (Aaron full view, all elements including `class="aaron-only"`)
 > **Sign-off line:** _at bottom of doc_
+
+> **HEAD probe** confirmed 2026-04-27: both branch + SHA URLs return HTTP 302
+> redirect to `norrisops.cloudflareaccess.com/cdn-cgi/access/login/...`
+> (expected CF Access gate). Once authenticated, content resolves.
 
 ---
 
